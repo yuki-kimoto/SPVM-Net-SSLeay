@@ -3,7 +3,20 @@
 
 #include "spvm_native.h"
 
-
+#include <openssl/err.h>
+#include <openssl/lhash.h>
+#include <openssl/rand.h>
+#include <openssl/buffer.h>
+#include <openssl/ssl.h>
+#include <openssl/pkcs12.h>
+#include <openssl/comp.h>
+#include <openssl/md4.h>
+#include <openssl/md5.h>
+#include <openssl/ripemd.h>
+#include <openssl/x509.h>
+#include <openssl/x509v3.h>
+#include <openssl/engine.h>
+#include <openssl/ocsp.h>
 
 static const char* FILE_NAME = "Net/SSLeay/Constant.c";
 
