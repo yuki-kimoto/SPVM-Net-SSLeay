@@ -1,4 +1,4 @@
-// Copyright (c) 2023 [--user-name]
+// Copyright (c) 2023 Yuki Kimoto
 // MIT License
 
 #include "spvm_native.h"
