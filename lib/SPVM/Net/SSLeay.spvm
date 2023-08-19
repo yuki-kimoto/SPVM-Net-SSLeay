@@ -3,4 +3,6 @@
 
 class Net::SSLeay {
   version "0.001";
+  use Net::SSLeay::Constant;
+  
 }

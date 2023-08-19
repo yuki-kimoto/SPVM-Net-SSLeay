@@ -1,23 +1,3 @@
-package SPVM::Net::SSLeay::Constant;
-
-
-
-1;
-
-=head1 Name
-
-SPVM::Net::SSLeay::Constant - Short Description
-
-=head1 Description
-
-The Net::SSLeay::Constant class of L<SPVM> has methods for someting.
-
-=head1 Usage
-
-  use Net::SSLeay::Constant;
-
-=head1 Class Methods
-
 =head2 ASN1_STRFLGS_ESC_CTRL
 
   static method ASN1_STRFLGS_ESC_CTRL : int ();
@@ -3647,10 +3627,4 @@ Gets the value of C<XN_FLAG_SEP_SPLUS_SPC>. If this constant value is not define
   static method XN_FLAG_SPC_EQ : int ();
 
 Gets the value of C<XN_FLAG_SPC_EQ>. If this constant value is not defined on this system, an exception is thrown with the error id set to the basic type ID of the L<Error::NotSupported|SPVM::Error::NotSupported> class.
-
-=head1 Copyright & License
-
-Copyright (c) 2023 Yuki Kimoto
-
-MIT License
 
