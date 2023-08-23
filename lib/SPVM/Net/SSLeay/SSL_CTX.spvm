@@ -2,5 +2,12 @@
 # MIT License
 
 class Net::SSLeay::SSL_CTX {
+  use Net::SSLeay::SSL_METHOD;
+  
+  # Class Methods
+  native static method new : Net::SSLeay::SSL_CTX ($method : Net::SSLeay::SSL_METHOD);
+  
+  # Instance Methods
+  native method DESTROY : void ();
   
 }

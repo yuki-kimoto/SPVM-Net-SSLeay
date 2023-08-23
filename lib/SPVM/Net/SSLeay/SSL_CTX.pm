@@ -6,36 +6,27 @@ package SPVM::Net::SSLeay::SSL_CTX;
 
 =head1 Name
 
-SPVM::Net::SSLeay::SSL_CTX - Short Description
+SPVM::Net::SSLeay::SSL_CTX - SSL/TLS Contexts
 
 =head1 Description
 
-The Net::SSLeay::SSL_CTX class of L<SPVM> has methods for someting.
+The Net::SSLeay::SSL_CTX class of L<SPVM> has methods to manipulate SSL/TLS contexts.
 
 =head1 Usage
 
   use Net::SSLeay::SSL_CTX;
 
-=head1 Fields
-
-
-
 =head1 Class Methods
 
+=head2 new
 
+  static method new : Net::SSLeay::SSL_CTX ($method : Net::SSLeay::SSL_METHOD);
 
 =head1 Instance Methods
 
+=head2 DESTROY
 
-
-
-=head1 Repository
-
-
-
-=head1 Author
-
-Yuki Kimoto C<kimoto.yuki@gmail.com>
+  method DESTROY : void ();
 
 =head1 Copyright & License
 
