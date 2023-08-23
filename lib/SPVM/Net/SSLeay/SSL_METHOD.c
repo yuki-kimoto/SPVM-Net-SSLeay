@@ -9,7 +9,7 @@ static const char* FILE_NAME = "Net/SSLeay/SSL_METHOD.c";
 
 
 
-int32_t SPVM__Net__SSLeay__SSL_METHOD__SSLv23_client_method_method(SPVM_ENV* env, SPVM_VALUE* stack) {
+int32_t SPVM__Net__SSLeay__SSL_METHOD__SSLv23_client_method(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   

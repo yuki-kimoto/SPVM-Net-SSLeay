@@ -3,8 +3,27 @@
 
 class Net::SSLeay {
   version "0.001";
+  
   use Net::SSLeay::Constant;
   
+  use Net::SSLeay::SSL_CTX;
+  
+  # Fields
+  has ssl_ctx : Net::SSLeay::SSL_CTX;
+  
+  # Class Methods
   native static method foo : void ();
   
+  native static method new : Net::SSLeay ($ssl_ctx : Net::SSLeay::SSL_CTX);
+  
+  # Instance Methods
+  native method DESTROY : void ();
+  
+  native method set_fd : int ($fd : int);
+  
+  native method connect : int ();
+  
+  native method accept : int ();
+  
+  native method shutdown : int ();
 }
