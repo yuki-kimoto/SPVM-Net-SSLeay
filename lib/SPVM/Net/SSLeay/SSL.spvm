@@ -16,6 +16,8 @@ class Net::SSLeay::SSL {
   
   native method set_fd : int ($fd : int);
   
+  native method set_verify : int ($mode : int);
+
   native method connect : int ();
   
   native method accept : int ();
