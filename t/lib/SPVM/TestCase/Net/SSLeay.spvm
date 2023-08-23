@@ -1,6 +1,7 @@
 class TestCase::Net::SSLeay {
   use Net::SSLeay;
   static method test : int () {
+    Net::SSLeay->foo;
     
     return 1;
   }

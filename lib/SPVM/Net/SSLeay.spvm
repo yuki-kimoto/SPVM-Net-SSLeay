@@ -5,4 +5,6 @@ class Net::SSLeay {
   version "0.001";
   use Net::SSLeay::Constant;
   
+  native static method foo : void ();
+  
 }
