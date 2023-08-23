@@ -25,6 +25,21 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__new(SPVM_ENV* env, SPVM_VALUE* stack) {
   return 0;
 }
 
+int32_t SPVM__Net__SSLeay__SSL_CTX__set_verify(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  int32_t mode = stack[1].ival;
+  
+  SSL_CTX* ssl_ctx = env->get_pointer(env, stack, obj_self);
+  
+  SSL_CTX_set_verify(ssl_ctx, mode, NULL);
+  
+  return 0;
+}
+
 int32_t SPVM__Net__SSLeay__SSL_CTX__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;

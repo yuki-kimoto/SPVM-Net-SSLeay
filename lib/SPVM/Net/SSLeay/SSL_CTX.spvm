@@ -10,4 +10,5 @@ class Net::SSLeay::SSL_CTX {
   # Instance Methods
   native method DESTROY : void ();
   
+  native method set_verify : int ($mode : int);
 }
