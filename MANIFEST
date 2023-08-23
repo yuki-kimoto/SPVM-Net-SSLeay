@@ -18,10 +18,6 @@ lib/SPVM/Net/SSLeay/PEM.c
 lib/SPVM/Net/SSLeay/PEM.config
 lib/SPVM/Net/SSLeay/PEM.pm
 lib/SPVM/Net/SSLeay/PEM.spvm
-lib/SPVM/Net/SSLeay/SSL.c
-lib/SPVM/Net/SSLeay/SSL.config
-lib/SPVM/Net/SSLeay/SSL.pm
-lib/SPVM/Net/SSLeay/SSL.spvm
 lib/SPVM/Net/SSLeay/SSL_CTX.c
 lib/SPVM/Net/SSLeay/SSL_CTX.config
 lib/SPVM/Net/SSLeay/SSL_CTX.pm
@@ -38,6 +34,12 @@ lib/SPVM/Net/SSLeay/X509_NAME.c
 lib/SPVM/Net/SSLeay/X509_NAME.config
 lib/SPVM/Net/SSLeay/X509_NAME.pm
 lib/SPVM/Net/SSLeay/X509_NAME.spvm
+lib/SPVM/Net/SSLeay/X509_VERIFY_PARAM.c
+lib/SPVM/Net/SSLeay/X509_VERIFY_PARAM.config
+lib/SPVM/Net/SSLeay/X509_VERIFY_PARAM.native/include/.gitkeep
+lib/SPVM/Net/SSLeay/X509_VERIFY_PARAM.native/src/.gitkeep
+lib/SPVM/Net/SSLeay/X509_VERIFY_PARAM.pm
+lib/SPVM/Net/SSLeay/X509_VERIFY_PARAM.spvm
 LICENSE
 Makefile.PL
 MANIFEST			This list of files
