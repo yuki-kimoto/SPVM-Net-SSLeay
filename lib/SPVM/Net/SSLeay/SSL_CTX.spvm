@@ -16,6 +16,15 @@ class Net::SSLeay::SSL_CTX {
   native method set_verify : int ($mode : int);
   
   native method get0_param : Net::SSLeay::X509_VERIFY_PARAM ();
-
+  
   native method set_default_verify_paths : int ();
+  
+  native method use_certificate_file : int ($file : string, $type : int);
+  
+  native method use_certificate_chain_file : int ($file : string);
+  
+  native method use_PrivateKey_file : int ($file : string, $type : int);
+  
+  native method set_cipher_list : int ($str : string);
+  
 }
