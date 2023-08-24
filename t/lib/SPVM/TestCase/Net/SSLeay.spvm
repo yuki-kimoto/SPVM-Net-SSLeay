@@ -3,8 +3,10 @@ class TestCase::Net::SSLeay {
   use Net::SSLeay;
   use Net::SSLeay::SSL_CTX;
   use Net::SSLeay::SSL_METHOD;
+  use Net::SSLeay::Constant as SSL;
   
   static method test : int () {
+    
     Net::SSLeay->foo;
     
     # Socket
@@ -16,9 +18,21 @@ class TestCase::Net::SSLeay {
     
     my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
     
+    $ssl_ctx->set_verify(SSL->SSL_VERIFY_PEER);
+    
+    my $verify_param = $ssl_ctx->get0_param;
+    
+    $verify_param->set_hostflags(SSL->X509_CHECK_FLAG_NO_PARTIAL_WILDCARDS);
+    
+    $verify_param->set1_host($host);
+    
     my $ssl = Net::SSLeay->new($ssl_ctx);
     
     my $socket_fileno = $socket->fileno;
+    
+    $ssl->set_fd($socket_fileno);
+    
+    $ssl->set_tlsext_host_name($host);
     
     my $send_buffer = "GET / HTTP/1.0\r\n\r\n";
     $socket->send($send_buffer);
