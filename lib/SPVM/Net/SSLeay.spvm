@@ -26,4 +26,7 @@ class Net::SSLeay {
   native method accept : int ();
   
   native method shutdown : int ();
+  
+  native method set_tlsext_host_name : int ($name : string);
+  
 }
