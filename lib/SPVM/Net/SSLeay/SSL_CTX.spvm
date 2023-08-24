@@ -11,6 +11,8 @@ class Net::SSLeay::SSL_CTX {
   # Instance Methods
   native method DESTROY : void ();
   
+  native method set_mode : long ($mode : long);
+  
   native method set_verify : int ($mode : int);
   
   native method get0_param : Net::SSLeay::X509_VERIFY_PARAM ();
