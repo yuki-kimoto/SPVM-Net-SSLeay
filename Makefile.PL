@@ -64,6 +64,7 @@ sub MY::postamble {
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::SSL_METHOD');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::SSL_CTX');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::X509_VERIFY_PARAM');
+    $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::ERR');
     
   }
   

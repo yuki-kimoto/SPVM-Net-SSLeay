@@ -8,6 +8,8 @@ class Net::SSLeay {
   
   use Net::SSLeay::SSL_CTX;
   
+  use Net::SSLeay::ERR;
+  
   INIT {
     &init();
   }
