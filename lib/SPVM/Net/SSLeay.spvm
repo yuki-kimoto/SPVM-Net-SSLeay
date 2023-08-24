@@ -31,4 +31,6 @@ class Net::SSLeay {
   
   native method set_tlsext_host_name : int ($name : string);
   
+  native method read : int ($buf : mutable string, $num : int = -1, $offset : int = 0);
+  
 }
