@@ -39,6 +39,8 @@ class Net::SSLeay {
   
   native method read : int ($buf : mutable string, $num : int = -1, $offset : int = 0);
   
+  native method peek : int ($buf : mutable string, $num : int = -1, $offset : int = 0);
+  
   native method write : int ($buf : string, $num : int = -1, $offset : int = 0);
   
 }
