@@ -2,5 +2,8 @@
 # MIT License
 
 class Net::SSLeay::X509_VERIFY_PARAM {
+
+  native method set_hostflags : void ($flags : int);
   
+  native method set1_host : int ($name : string, $namelen : int = 0);
 }

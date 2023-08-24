@@ -6,36 +6,25 @@ package SPVM::Net::SSLeay::X509_VERIFY_PARAM;
 
 =head1 Name
 
-SPVM::Net::SSLeay::X509_VERIFY_PARAM - Short Description
+SPVM::Net::SSLeay::X509_VERIFY_PARAM - X509_VERIFY_PARAM
 
 =head1 Description
 
-The Net::SSLeay::X509_VERIFY_PARAM class of L<SPVM> has methods for someting.
+The Net::SSLeay::X509_VERIFY_PARAM class of L<SPVM> has methods to manipulate the X509_VERIFY_PARAM structure.
 
 =head1 Usage
 
   use Net::SSLeay::X509_VERIFY_PARAM;
 
-=head1 Fields
-
-
-
-=head1 Class Methods
-
-
-
 =head1 Instance Methods
 
+=head2 set_hostflags
 
+  method set_hostflags : void ($flags : int);
 
+=head2 set1_host
 
-=head1 Repository
-
-
-
-=head1 Author
-
-Yuki Kimoto C<kimoto.yuki@gmail.com>
+  method set1_host : int ($name : string, $namelen : int = 0);
 
 =head1 Copyright & License
 

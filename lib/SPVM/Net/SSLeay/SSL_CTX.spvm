@@ -3,6 +3,7 @@
 
 class Net::SSLeay::SSL_CTX {
   use Net::SSLeay::SSL_METHOD;
+  use Net::SSLeay::X509_VERIFY_PARAM;
   
   # Class Methods
   native static method new : Net::SSLeay::SSL_CTX ($method : Net::SSLeay::SSL_METHOD);
