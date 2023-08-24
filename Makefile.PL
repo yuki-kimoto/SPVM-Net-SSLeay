@@ -49,7 +49,7 @@ WriteMakefile(
     %configure_and_runtime_requires,
   },
   TEST_REQUIRES => {
-    
+    'SPVM::IO' => '0.204003',
   },
 );
 
