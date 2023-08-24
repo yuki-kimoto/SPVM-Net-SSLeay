@@ -23,7 +23,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__new(SPVM_ENV* env, SPVM_VALUE* stack) {
   void* obj_ssl_ctx = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::SSL_CTX", ssl_ctx, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   
-  stack[0].oval = obj_ssl_method;
+  stack[0].oval = obj_ssl_ctx;
   
   return 0;
 }
