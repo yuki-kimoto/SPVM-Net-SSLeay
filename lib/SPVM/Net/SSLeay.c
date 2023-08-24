@@ -5,6 +5,7 @@
 
 #include <openssl/ssl.h>
 
+#include <openssl/err.h>
 
 static const char* FILE_NAME = "Net/SSLeay.c";
 
@@ -19,11 +20,11 @@ int32_t SPVM__Net__SSLeay__foo(SPVM_ENV* env, SPVM_VALUE* stack) {
 int32_t SPVM__Net__SSLeay__init(SPVM_ENV* env, SPVM_VALUE* stack) {
 
 #if !(defined(OPENSSL_VERSION_NUMBER) && OPENSSL_VERSION_NUMBER >= 0x10100000)
-  // SSL_load_error_strings is deprecated OpenSSL in 1.1+.
-  SSL_load_error_strings();
-  
   // SSL_library_init is deprecated in OpenSSL 1.1+.
   SSL_library_init();
+  
+  // SSL_load_error_strings is deprecated OpenSSL in 1.1+.
+  SSL_load_error_strings();
   
   // OpenSSL_add_all_algorithms is deprecated in OpenSSL 1.1+.
   OpenSSL_add_all_algorithms();
@@ -78,6 +79,16 @@ int32_t SPVM__Net__SSLeay__connect(SPVM_ENV* env, SPVM_VALUE* stack) {
   int32_t status = SSL_connect(ssl);
   
   if (!(status == 1)) {
+    
+    int32_t ssl_error = SSL_get_error(ssl, status);
+    
+    const char* ssl_error_string = ERR_error_string(ssl_error, NULL);
+    
+    env->set_field_int_by_name(env, stack, obj_self, "return_code", status, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) { return error_id; }
+    
+    ERR_print_errors_fp(stderr);
+    
     env->die(env, stack, "[System Error]SSL_connect failed.", __func__, FILE_NAME, __LINE__);
     return SPVM_NATIVE_C_BASIC_TYPE_ID_ERROR_SYSTEM_CLASS;
   }
@@ -96,6 +107,9 @@ int32_t SPVM__Net__SSLeay__accept(SPVM_ENV* env, SPVM_VALUE* stack) {
   int32_t status = SSL_accept(ssl);
   
   if (!(status == 1)) {
+    env->set_field_int_by_name(env, stack, obj_self, "return_code", status, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) { return error_id; }
+    
     env->die(env, stack, "[System Error]SSL_accept failed.", __func__, FILE_NAME, __LINE__);
     return SPVM_NATIVE_C_BASIC_TYPE_ID_ERROR_SYSTEM_CLASS;
   }
@@ -114,9 +128,22 @@ int32_t SPVM__Net__SSLeay__shutdown(SPVM_ENV* env, SPVM_VALUE* stack) {
   int32_t status = SSL_shutdown(ssl);
   
   if (!(status == 1)) {
-    env->die(env, stack, "[System Error]SSL_shutdown failed.", __func__, FILE_NAME, __LINE__);
-    return SPVM_NATIVE_C_BASIC_TYPE_ID_ERROR_SYSTEM_CLASS;
+    if (status == 0) {
+      char* buf[256] = {0};
+      SSL_read(ssl, buf, 1);
+    }
+    else {
+      env->set_field_int_by_name(env, stack, obj_self, "return_code", status, &error_id, __func__, FILE_NAME, __LINE__);
+      if (error_id) { return error_id; }
+      
+      ERR_print_errors_fp(stderr);
+      
+      env->die(env, stack, "[System Error]SSL_shutdown failed.", __func__, FILE_NAME, __LINE__);
+      return SPVM_NATIVE_C_BASIC_TYPE_ID_ERROR_SYSTEM_CLASS;
+    }
   }
+  
+  stack[0].ival = status;
   
   return 0;
 }
@@ -134,6 +161,9 @@ int32_t SPVM__Net__SSLeay__set_fd(SPVM_ENV* env, SPVM_VALUE* stack) {
   int32_t status = SSL_set_fd(ssl, fd);
   
   if (!(status == 1)) {
+    env->set_field_int_by_name(env, stack, obj_self, "return_code", status, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) { return error_id; }
+    
     env->die(env, stack, "[System Error]SSL_set_fd failed.", __func__, FILE_NAME, __LINE__);
     return SPVM_NATIVE_C_BASIC_TYPE_ID_ERROR_SYSTEM_CLASS;
   }
@@ -160,6 +190,9 @@ int32_t SPVM__Net__SSLeay__set_tlsext_host_name(SPVM_ENV* env, SPVM_VALUE* stack
   int32_t status = SSL_set_tlsext_host_name(ssl, name);
   
   if (!(status == 1)) {
+    env->set_field_int_by_name(env, stack, obj_self, "return_code", status, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) { return error_id; }
+    
     env->die(env, stack, "[System Error]SSL_set_tlsext_host_name failed.", __func__, FILE_NAME, __LINE__);
     return SPVM_NATIVE_C_BASIC_TYPE_ID_ERROR_SYSTEM_CLASS;
   }

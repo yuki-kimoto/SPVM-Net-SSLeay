@@ -34,8 +34,6 @@ int32_t SPVM__Net__SSLeay__ERR__error_string_n(SPVM_ENV* env, SPVM_VALUE* stack)
     return env->die(env, stack, "The $len must be less than or equal to the length of the $buf.", __func__, FILE_NAME, __LINE__);
   }
   
-  ERR_error_string(e, buf);
-  
   ERR_error_string_n(e, buf, len);
   
   return 0;

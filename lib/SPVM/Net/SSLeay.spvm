@@ -17,14 +17,14 @@ class Net::SSLeay {
   # Fields
   has ssl_ctx : Net::SSLeay::SSL_CTX;
   
+  has return_code : ro int;
+  
   # Class Methods
   native static method foo : void ();
   
   native static method init : void ();
   
   native static method new : Net::SSLeay ($ssl_ctx : Net::SSLeay::SSL_CTX);
-  
-  native static method get_error : int ($ret : int);
   
   # Instance Methods
   native method DESTROY : void ();
@@ -44,5 +44,7 @@ class Net::SSLeay {
   native method peek : int ($buf : mutable string, $num : int = -1, $offset : int = 0);
   
   native method write : int ($buf : string, $num : int = -1, $offset : int = 0);
+  
+  native method get_error : int ($ret : int);
   
 }
