@@ -25,7 +25,7 @@ WriteMakefile(
   LICENSE => 'mit',
   ($] >= 5.005 ?
     (ABSTRACT_FROM => 'lib/SPVM/Net/SSLeay.pm',
-     AUTHOR => '[--user-name]<[--user-email]>') : ()),
+     AUTHOR => 'Yuki Kimoto<kimoto.yuki@gmail.com>') : ()),
   test => {TESTS => 't/*.t t/*/*.t t/*/*/*.t'},
   clean => {FILES => ['.spvm_build', 't/.spvm_build']},
   META_MERGE => {
