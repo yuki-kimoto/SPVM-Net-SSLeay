@@ -20,7 +20,9 @@ class TestCase::Net::SSLeay {
     
     my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
     
-    $ssl_ctx->set_verify(SSL->SSL_VERIFY_NONE);
+    $ssl_ctx->set_verify(SSL->SSL_VERIFY_PEER);
+    
+    $ssl_ctx->set_default_verify_paths;
     
     my $verify_param = $ssl_ctx->get0_param;
     
@@ -71,7 +73,7 @@ class TestCase::Net::SSLeay {
         last;
       }
     }
-
+    
     $ssl->shutdown;
     
     $socket->close;
