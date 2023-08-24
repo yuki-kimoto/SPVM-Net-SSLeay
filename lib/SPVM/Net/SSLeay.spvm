@@ -16,6 +16,8 @@ class Net::SSLeay {
   
   native static method new : Net::SSLeay ($ssl_ctx : Net::SSLeay::SSL_CTX);
   
+  native static method get_error : int ($ret : int);
+  
   # Instance Methods
   native method DESTROY : void ();
   

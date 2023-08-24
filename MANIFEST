@@ -36,8 +36,6 @@ lib/SPVM/Net/SSLeay/X509_NAME.pm
 lib/SPVM/Net/SSLeay/X509_NAME.spvm
 lib/SPVM/Net/SSLeay/X509_VERIFY_PARAM.c
 lib/SPVM/Net/SSLeay/X509_VERIFY_PARAM.config
-lib/SPVM/Net/SSLeay/X509_VERIFY_PARAM.native/include/.gitkeep
-lib/SPVM/Net/SSLeay/X509_VERIFY_PARAM.native/src/.gitkeep
 lib/SPVM/Net/SSLeay/X509_VERIFY_PARAM.pm
 lib/SPVM/Net/SSLeay/X509_VERIFY_PARAM.spvm
 LICENSE
