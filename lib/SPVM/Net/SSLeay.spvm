@@ -8,11 +8,17 @@ class Net::SSLeay {
   
   use Net::SSLeay::SSL_CTX;
   
+  INIT {
+    &init();
+  }
+  
   # Fields
   has ssl_ctx : Net::SSLeay::SSL_CTX;
   
   # Class Methods
   native static method foo : void ();
+  
+  native static method init : void ();
   
   native static method new : Net::SSLeay ($ssl_ctx : Net::SSLeay::SSL_CTX);
   
