@@ -214,3 +214,50 @@ int32_t SPVM__Net__SSLeay__read(SPVM_ENV* env, SPVM_VALUE* stack) {
   return 0;
 }
 
+int32_t SPVM__Net__SSLeay__write(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  void* obj_buf = stack[1].oval;
+  
+  if (!obj_buf) {
+    return env->die(env, stack, "The $buf must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  char* buf = (char*)env->get_chars(env, stack, obj_buf);
+  int32_t buf_length = env->length(env, stack, obj_buf);
+  
+  int32_t num = stack[2].ival;
+  
+  if (num < 0) {
+    num = buf_length;
+  }
+  
+  int32_t offset = stack[3].ival;
+  
+  if (!(offset >= 0)) {
+    return env->die(env, stack, "The $offset must be greater than or equal to 0.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  if (!(offset + num <= buf_length)) {
+    return env->die(env, stack, "The $offset + $num must be lower than or equal to the length of the $buf.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  SSL* ssl = env->get_pointer(env, stack, obj_self);
+  
+  int32_t write_length = SSL_write(ssl, buf + offset, num);
+  
+  if (!(write_length > 0)) {
+    int32_t ssl_error = SSL_get_error(ssl, write_length);
+    if (!(ssl_error == SSL_ERROR_ZERO_RETURN)) {
+      env->die(env, stack, "[System Error]SSL_write failed.", __func__, FILE_NAME, __LINE__);
+    }
+  }
+  
+  stack[0].ival = write_length;
+  
+  return 0;
+}
+
