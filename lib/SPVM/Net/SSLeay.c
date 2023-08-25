@@ -79,10 +79,10 @@ int32_t SPVM__Net__SSLeay__connect(SPVM_ENV* env, SPVM_VALUE* stack) {
   ERR_clear_error();
   
   int32_t status = SSL_connect(ssl);
+  int32_t ssl_operation_error = SSL_get_error(ssl, status);
   
-  if (!(status == 1)) {
+  if (!(ssl_operation_error == SSL_ERROR_NONE)) {
     
-    int32_t ssl_operation_error = SSL_get_error(ssl, status);
     env->set_field_int_by_name(env, stack, obj_self, "operation_error", ssl_operation_error, &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
     
