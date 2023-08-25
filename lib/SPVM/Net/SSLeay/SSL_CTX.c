@@ -248,3 +248,38 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_cipher_list(SPVM_ENV* env, SPVM_VALUE* s
   return 0;
 }
 
+int32_t SPVM__Net__SSLeay__SSL_CTX__set_ciphersuites(SPVM_ENV* env, SPVM_VALUE* stack) {
+#if !(OPENSSL_VERSION_NUMBER >= 0x10100000)
+  env->die(env, stack, "The set_ciphersuites method in the Net::SSLeay::SSL_CTX class is not supported in this system(!(OPENSSL_VERSION_NUMBER >= 0x10100000))", __func__, FILE_NAME, __LINE__);
+  return SPVM_NATIVE_C_BASIC_TYPE_ID_ERROR_NOT_SUPPORTED_CLASS;
+#else
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  void* obj_str = stack[1].oval;
+  
+  if (!obj_str) {
+    return env->die(env, stack, "The $str must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  char* str = (char*)env->get_chars(env, stack, obj_str);
+  int32_t str_length = env->length(env, stack, obj_str);
+  
+  int32_t type = stack[2].ival;
+  
+  SSL_CTX* ssl_ctx = env->get_pointer(env, stack, obj_self);
+  
+  int32_t status = SSL_CTX_set_ciphersuites(ssl_ctx, str);
+  
+  if (!(status == 1)) {
+    env->die(env, stack, "[System Error]SSL_CTX_set_ciphersuites failed.", __func__, FILE_NAME, __LINE__);
+    return SPVM_NATIVE_C_BASIC_TYPE_ID_ERROR_SYSTEM_CLASS;
+  }
+  
+  stack[0].ival = status;
+  
+  return 0;
+#endif
+}
+

@@ -27,4 +27,6 @@ class Net::SSLeay::SSL_CTX {
   
   native method set_cipher_list : int ($str : string);
   
+  native method set_ciphersuites : int ($str : string);
+  
 }
