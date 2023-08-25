@@ -7,6 +7,8 @@
 
 #include <openssl/err.h>
 
+#include <assert.h>
+
 static const char* FILE_NAME = "Net/SSLeay.c";
 
 int32_t SPVM__Net__SSLeay__foo(SPVM_ENV* env, SPVM_VALUE* stack) {
@@ -141,25 +143,21 @@ int32_t SPVM__Net__SSLeay__shutdown(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t status = SSL_shutdown(ssl);
   
-  if (!(status == 1)) {
-    if (status == 0) {
-      char* buf[256] = {0};
-      SSL_read(ssl, buf, 1);
-    }
-    else {
-      int32_t ssl_operation_error = SSL_get_error(ssl, status);
-      env->set_field_int_by_name(env, stack, obj_self, "operation_error", ssl_operation_error, &error_id, __func__, FILE_NAME, __LINE__);
-      if (error_id) { return error_id; }
-      
-      int64_t ssl_error = ERR_get_error();
-      env->set_field_long_by_name(env, stack, obj_self, "error", ssl_error, &error_id, __func__, FILE_NAME, __LINE__);
-      if (error_id) { return error_id; }
-      
-      char ssl_error_string[256] = {0};
-      ERR_error_string_n(ssl_error, ssl_error_string, sizeof(ssl_error_string));
-      env->die(env, stack, "[System Error]SSL_shutdown failed.", __func__, FILE_NAME, __LINE__);
-      return SPVM_NATIVE_C_BASIC_TYPE_ID_ERROR_SYSTEM_CLASS;
-    }
+  if (status < 0) {
+    int32_t ssl_operation_error = SSL_get_error(ssl, status);
+    env->set_field_int_by_name(env, stack, obj_self, "operation_error", ssl_operation_error, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) { return error_id; }
+    
+    assert(ssl_operation_error != SSL_ERROR_NONE);
+    
+    int64_t ssl_error = ERR_get_error();
+    env->set_field_long_by_name(env, stack, obj_self, "error", ssl_error, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) { return error_id; }
+    
+    char ssl_error_string[256] = {0};
+    ERR_error_string_n(ssl_error, ssl_error_string, sizeof(ssl_error_string));
+    env->die(env, stack, "[System Error]SSL_shutdown failed.", __func__, FILE_NAME, __LINE__);
+    return SPVM_NATIVE_C_BASIC_TYPE_ID_ERROR_SYSTEM_CLASS;
   }
   
   stack[0].ival = status;
