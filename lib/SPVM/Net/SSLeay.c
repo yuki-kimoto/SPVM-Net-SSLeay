@@ -227,23 +227,6 @@ int32_t SPVM__Net__SSLeay__set_tlsext_host_name(SPVM_ENV* env, SPVM_VALUE* stack
   return 0;
 }
 
-int32_t SPVM__Net__SSLeay__get_error(SPVM_ENV* env, SPVM_VALUE* stack) {
-  
-  int32_t error_id = 0;
-  
-  void* obj_self = stack[0].oval;
-  
-  int32_t ret = stack[1].ival;
-  
-  SSL* ssl = env->get_pointer(env, stack, obj_self);
-  
-  int32_t ssl_error = SSL_get_error(ssl, ret);
-  
-  stack[0].ival = ssl_error;
-  
-  return 0;
-}
-
 int32_t SPVM__Net__SSLeay__read(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
