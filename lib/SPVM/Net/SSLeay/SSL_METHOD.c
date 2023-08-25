@@ -39,7 +39,7 @@ int32_t SPVM__Net__SSLeay__SSL_METHOD__SSLv23_server_method(SPVM_ENV* env, SPVM_
 
 int32_t SPVM__Net__SSLeay__SSL_METHOD__TLS_client_method(SPVM_ENV* env, SPVM_VALUE* stack) {
 #if !(OPENSSL_VERSION_NUMBER >= 0x10100000)
-  env->die(env, stack, "The ioctl method in the Sys::IO class is not supported in this system(!(OPENSSL_VERSION_NUMBER >= 0x10100000))", __func__, FILE_NAME, __LINE__);
+  env->die(env, stack, "The TLS_client_method method in the Net::SSLeay::SSL_METHOD class is not supported in this system(!(OPENSSL_VERSION_NUMBER >= 0x10100000))", __func__, FILE_NAME, __LINE__);
   return SPVM_NATIVE_C_BASIC_TYPE_ID_ERROR_NOT_SUPPORTED_CLASS;
 #else
   int32_t error_id = 0;
@@ -57,7 +57,7 @@ int32_t SPVM__Net__SSLeay__SSL_METHOD__TLS_client_method(SPVM_ENV* env, SPVM_VAL
 
 int32_t SPVM__Net__SSLeay__SSL_METHOD__TLS_server_method(SPVM_ENV* env, SPVM_VALUE* stack) {
 #if !(OPENSSL_VERSION_NUMBER >= 0x10100000)
-  env->die(env, stack, "The ioctl method in the Sys::IO class is not supported in this system(!(OPENSSL_VERSION_NUMBER >= 0x10100000))", __func__, FILE_NAME, __LINE__);
+  env->die(env, stack, "The TLS_server_method method in the Net::SSLeay::SSL_METHOD class is not supported in this system(!(OPENSSL_VERSION_NUMBER >= 0x10100000))", __func__, FILE_NAME, __LINE__);
   return SPVM_NATIVE_C_BASIC_TYPE_ID_ERROR_NOT_SUPPORTED_CLASS;
 #else
   int32_t error_id = 0;
