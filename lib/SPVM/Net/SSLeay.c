@@ -80,16 +80,13 @@ int32_t SPVM__Net__SSLeay__connect(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   if (!(status == 1)) {
     
-    int32_t ssl_error = SSL_get_error(ssl, status);
-    
-    const char* ssl_error_string = ERR_error_string(ssl_error, NULL);
-    
-    env->set_field_int_by_name(env, stack, obj_self, "return_code", status, &error_id, __func__, FILE_NAME, __LINE__);
+    int64_t ssl_error = ERR_get_error();
+    env->set_field_long_by_name(env, stack, obj_self, "error", ssl_error, &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
     
-    ERR_print_errors_fp(stderr);
-    
-    env->die(env, stack, "[System Error]SSL_connect failed.", __func__, FILE_NAME, __LINE__);
+    char ssl_error_string[256] = {0};
+    ERR_error_string_n(ssl_error, ssl_error_string, sizeof(ssl_error_string));
+    env->die(env, stack, "[System Error]SSL_connect failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
     return SPVM_NATIVE_C_BASIC_TYPE_ID_ERROR_SYSTEM_CLASS;
   }
   
@@ -107,9 +104,12 @@ int32_t SPVM__Net__SSLeay__accept(SPVM_ENV* env, SPVM_VALUE* stack) {
   int32_t status = SSL_accept(ssl);
   
   if (!(status == 1)) {
-    env->set_field_int_by_name(env, stack, obj_self, "return_code", status, &error_id, __func__, FILE_NAME, __LINE__);
+    int64_t ssl_error = ERR_get_error();
+    env->set_field_long_by_name(env, stack, obj_self, "error", ssl_error, &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
     
+    char ssl_error_string[256] = {0};
+    ERR_error_string_n(ssl_error, ssl_error_string, sizeof(ssl_error_string));
     env->die(env, stack, "[System Error]SSL_accept failed.", __func__, FILE_NAME, __LINE__);
     return SPVM_NATIVE_C_BASIC_TYPE_ID_ERROR_SYSTEM_CLASS;
   }
@@ -133,11 +133,12 @@ int32_t SPVM__Net__SSLeay__shutdown(SPVM_ENV* env, SPVM_VALUE* stack) {
       SSL_read(ssl, buf, 1);
     }
     else {
-      env->set_field_int_by_name(env, stack, obj_self, "return_code", status, &error_id, __func__, FILE_NAME, __LINE__);
+      int64_t ssl_error = ERR_get_error();
+      env->set_field_long_by_name(env, stack, obj_self, "error", ssl_error, &error_id, __func__, FILE_NAME, __LINE__);
       if (error_id) { return error_id; }
       
-      ERR_print_errors_fp(stderr);
-      
+      char ssl_error_string[256] = {0};
+      ERR_error_string_n(ssl_error, ssl_error_string, sizeof(ssl_error_string));
       env->die(env, stack, "[System Error]SSL_shutdown failed.", __func__, FILE_NAME, __LINE__);
       return SPVM_NATIVE_C_BASIC_TYPE_ID_ERROR_SYSTEM_CLASS;
     }
@@ -161,9 +162,12 @@ int32_t SPVM__Net__SSLeay__set_fd(SPVM_ENV* env, SPVM_VALUE* stack) {
   int32_t status = SSL_set_fd(ssl, fd);
   
   if (!(status == 1)) {
-    env->set_field_int_by_name(env, stack, obj_self, "return_code", status, &error_id, __func__, FILE_NAME, __LINE__);
+    int64_t ssl_error = ERR_get_error();
+    env->set_field_long_by_name(env, stack, obj_self, "error", ssl_error, &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
     
+    char ssl_error_string[256] = {0};
+    ERR_error_string_n(ssl_error, ssl_error_string, sizeof(ssl_error_string));
     env->die(env, stack, "[System Error]SSL_set_fd failed.", __func__, FILE_NAME, __LINE__);
     return SPVM_NATIVE_C_BASIC_TYPE_ID_ERROR_SYSTEM_CLASS;
   }
@@ -190,9 +194,12 @@ int32_t SPVM__Net__SSLeay__set_tlsext_host_name(SPVM_ENV* env, SPVM_VALUE* stack
   int32_t status = SSL_set_tlsext_host_name(ssl, name);
   
   if (!(status == 1)) {
-    env->set_field_int_by_name(env, stack, obj_self, "return_code", status, &error_id, __func__, FILE_NAME, __LINE__);
+    int64_t ssl_error = ERR_get_error();
+    env->set_field_long_by_name(env, stack, obj_self, "error", ssl_error, &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
     
+    char ssl_error_string[256] = {0};
+    ERR_error_string_n(ssl_error, ssl_error_string, sizeof(ssl_error_string));
     env->die(env, stack, "[System Error]SSL_set_tlsext_host_name failed.", __func__, FILE_NAME, __LINE__);
     return SPVM_NATIVE_C_BASIC_TYPE_ID_ERROR_SYSTEM_CLASS;
   }
@@ -255,6 +262,12 @@ int32_t SPVM__Net__SSLeay__read(SPVM_ENV* env, SPVM_VALUE* stack) {
   if (!(read_length > 0)) {
     int32_t ssl_error = SSL_get_error(ssl, read_length);
     if (!(ssl_error == SSL_ERROR_ZERO_RETURN)) {
+      int64_t ssl_error = ERR_get_error();
+      env->set_field_long_by_name(env, stack, obj_self, "error", ssl_error, &error_id, __func__, FILE_NAME, __LINE__);
+      if (error_id) { return error_id; }
+      
+      char ssl_error_string[256] = {0};
+      ERR_error_string_n(ssl_error, ssl_error_string, sizeof(ssl_error_string));
       env->die(env, stack, "[System Error]SSL_read failed.", __func__, FILE_NAME, __LINE__);
     }
   }
@@ -302,6 +315,12 @@ int32_t SPVM__Net__SSLeay__peek(SPVM_ENV* env, SPVM_VALUE* stack) {
   if (!(peek_length > 0)) {
     int32_t ssl_error = SSL_get_error(ssl, peek_length);
     if (!(ssl_error == SSL_ERROR_ZERO_RETURN)) {
+      int64_t ssl_error = ERR_get_error();
+      env->set_field_long_by_name(env, stack, obj_self, "error", ssl_error, &error_id, __func__, FILE_NAME, __LINE__);
+      if (error_id) { return error_id; }
+      
+      char ssl_error_string[256] = {0};
+      ERR_error_string_n(ssl_error, ssl_error_string, sizeof(ssl_error_string));
       env->die(env, stack, "[System Error]SSL_peek failed.", __func__, FILE_NAME, __LINE__);
     }
   }
@@ -349,6 +368,12 @@ int32_t SPVM__Net__SSLeay__write(SPVM_ENV* env, SPVM_VALUE* stack) {
   if (!(write_length > 0)) {
     int32_t ssl_error = SSL_get_error(ssl, write_length);
     if (!(ssl_error == SSL_ERROR_ZERO_RETURN)) {
+      int64_t ssl_error = ERR_get_error();
+      env->set_field_long_by_name(env, stack, obj_self, "error", ssl_error, &error_id, __func__, FILE_NAME, __LINE__);
+      if (error_id) { return error_id; }
+      
+      char ssl_error_string[256] = {0};
+      ERR_error_string_n(ssl_error, ssl_error_string, sizeof(ssl_error_string));
       env->die(env, stack, "[System Error]SSL_write failed.", __func__, FILE_NAME, __LINE__);
     }
   }

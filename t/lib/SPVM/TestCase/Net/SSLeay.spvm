@@ -38,8 +38,10 @@ class TestCase::Net::SSLeay {
     
     $ssl->set_tlsext_host_name($host);
     
-    eval { $ssl->connect; }
-    
+    $ssl->connect;
+
+=pod
+
     if ($@) {
       
       my $return_code = $ssl->return_code;
@@ -50,7 +52,9 @@ class TestCase::Net::SSLeay {
       
       die $ssl_error_message;
     }
-    
+
+=cut
+
     my $send_buffer = "GET / HTTP/1.0\r\n\r\n";
     $ssl->write($send_buffer);
     

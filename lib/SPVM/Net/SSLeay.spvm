@@ -17,7 +17,7 @@ class Net::SSLeay {
   # Fields
   has ssl_ctx : Net::SSLeay::SSL_CTX;
   
-  has return_code : ro int;
+  has error : ro long;
   
   # Class Methods
   native static method foo : void ();
