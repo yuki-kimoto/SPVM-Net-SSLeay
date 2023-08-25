@@ -17,6 +17,8 @@ class Net::SSLeay {
   # Fields
   has ssl_ctx : Net::SSLeay::SSL_CTX;
   
+  has operation_error : ro int;
+  
   has error : ro long;
   
   # Class Methods
