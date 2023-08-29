@@ -28,6 +28,42 @@ The Net::SSLeay::SSL_CTX class of L<SPVM> has methods to manipulate SSL/TLS cont
 
   method DESTROY : void ();
 
+=head2 set_mode
+
+  method set_mode : long ($mode : long);
+
+=head2 set_verify
+
+  method set_verify : int ($mode : int);
+
+=head2 get0_param
+
+  method get0_param : Net::SSLeay::X509_VERIFY_PARAM ();
+
+=head2 set_default_verify_paths
+
+  method set_default_verify_paths : int ();
+
+=head2 use_certificate_file
+
+  method use_certificate_file : int ($file : string, $type : int);
+
+=head2 use_certificate_chain_file
+
+  method use_certificate_chain_file : int ($file : string);
+
+=head2 use_PrivateKey_file
+
+  method use_PrivateKey_file : int ($file : string, $type : int);
+
+=head2 set_cipher_list
+
+  method set_cipher_list : int ($str : string);
+
+=head2 set_ciphersuites
+
+  method set_ciphersuites : int ($str : string);
+
 =head1 Copyright & License
 
 Copyright (c) 2023 Yuki Kimoto

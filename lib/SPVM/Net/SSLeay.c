@@ -11,7 +11,7 @@
 
 static const char* FILE_NAME = "Net/SSLeay.c";
 
-int32_t SPVM__Net__SSLeay__foo(SPVM_ENV* env, SPVM_VALUE* stack) {
+int32_t SPVM__Net__SSLeay___print_version_text(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   char *version = OPENSSL_VERSION_TEXT;
   fprintf(stderr, "OpenSSL version: %s\n", version);

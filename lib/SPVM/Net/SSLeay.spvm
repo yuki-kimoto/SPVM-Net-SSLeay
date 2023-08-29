@@ -22,11 +22,12 @@ class Net::SSLeay {
   has error : ro long;
   
   # Class Methods
-  native static method foo : void ();
-  
-  native static method init : void ();
-  
   native static method new : Net::SSLeay ($ssl_ctx : Net::SSLeay::SSL_CTX);
+  
+  # Private or Internal Class Methods
+  private native static method init : void ();
+  
+  native static method _print_version_text : void ();
   
   # Instance Methods
   native method DESTROY : void ();

@@ -6,40 +6,28 @@ package SPVM::Net::SSLeay::ERR;
 
 =head1 Name
 
-SPVM::Net::SSLeay::ERR - Short Description
+SPVM::Net::SSLeay::ERR - SSL/TSL Errors
 
 =head1 Description
 
-The Net::SSLeay::ERR class of L<SPVM> has methods for someting.
+The Net::SSLeay::ERR class of L<SPVM> has methods to manipulate SSL/TLS errors.
 
 =head1 Usage
 
   use Net::SSLeay::ERR;
 
-=head1 Fields
-
-
-
 =head1 Class Methods
 
+=head2 error_string_n
 
+  static method error_string_n : void ($e : long, $buf : mutable string, $len : int = -1);
 
-=head1 Instance Methods
+=head2 error_string
 
-
-
-
-=head1 Repository
-
-
-
-=head1 Author
-
-Yuki Kimoto C<kimoto.yuki@gmail.com>
+  static method error_string : string ($e : long);
 
 =head1 Copyright & License
 
 Copyright (c) 2023 Yuki Kimoto
 
 MIT License
-

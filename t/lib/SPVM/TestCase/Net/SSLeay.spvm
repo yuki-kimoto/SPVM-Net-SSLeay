@@ -9,7 +9,7 @@ class TestCase::Net::SSLeay {
   
   static method test : int () {
     
-    Net::SSLeay->foo;
+    Net::SSLeay->_print_version_text;
     
     # Socket
     my $host = "www.google.com";
