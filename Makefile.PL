@@ -5,8 +5,6 @@ use warnings;
 use Config;
 use Getopt::Long 'GetOptions';
 
-use D;du \%Config;
-
 GetOptions(
   'meta' => \my $meta,
   'no-build-spvm-modules' => \my $no_build_spvm_modules,
