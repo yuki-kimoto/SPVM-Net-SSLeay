@@ -5,37 +5,22 @@ package SPVM::Net::SSLeay::PEM;
 1;
 
 =head1 Name
-
-SPVM::Net::SSLeay::PEM - Short Description
+Short Description
+SPVM::Net::SSLeay::PEM - PEM
 
 =head1 Description
 
-The Net::SSLeay::PEM class of L<SPVM> has methods for someting.
+The Net::SSLeay::PEM class of L<SPVM> has methods to manipulate PEM.
 
 =head1 Usage
 
   use Net::SSLeay::PEM;
 
-=head1 Fields
-
-
-
 =head1 Class Methods
 
+=head2 read_bio_X509
 
-
-=head1 Instance Methods
-
-
-
-
-=head1 Repository
-
-
-
-=head1 Author
-
-Yuki Kimoto C<kimoto.yuki@gmail.com>
+  static method read_bio_X509 : Net::SSLeay::PEM ($bp : Net::SSLeay::BIO);
 
 =head1 Copyright & License
 

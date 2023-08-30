@@ -2,5 +2,8 @@
 # MIT License
 
 class Net::SSLeay::PEM {
+  use Net::SSLeay::BIO;
   
+  # Class Methods
+  native static method read_bio_X509 : Net::SSLeay::PEM ($bp : Net::SSLeay::BIO);
 }
