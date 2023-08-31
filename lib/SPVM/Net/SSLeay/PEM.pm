@@ -20,7 +20,7 @@ The Net::SSLeay::PEM class of L<SPVM> has methods to manipulate PEM.
 
 =head2 read_bio_X509
 
-  static method read_bio_X509 : Net::SSLeay::PEM ($bp : Net::SSLeay::BIO);
+  static method read_bio_X509 : Net::SSLeay::X509 ($bp : Net::SSLeay::BIO);
 
 =head1 Copyright & License
 

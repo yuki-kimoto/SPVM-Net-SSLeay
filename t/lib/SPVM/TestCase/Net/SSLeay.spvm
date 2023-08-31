@@ -5,7 +5,10 @@ class TestCase::Net::SSLeay {
   use Net::SSLeay::SSL_METHOD;
   use Net::SSLeay::Constant as SSL;
   use Net::SSLeay::ERR;
+  use Net::SSLeay::BIO;
+  use Net::SSLeay::PEM;
   use StringBuffer;
+  use Mozilla::CA;
   
   static method test : int () {
     
@@ -22,7 +25,19 @@ class TestCase::Net::SSLeay {
     
     $ssl_ctx->set_verify(SSL->SSL_VERIFY_PEER);
     
-    $ssl_ctx->set_default_verify_paths;
+    my $ca = Mozilla::CA->SSL_ca;
+    
+    my $bio = Net::SSLeay::BIO->new;
+    
+    $bio->write($ca);
+    
+    my $x509 = Net::SSLeay::PEM->read_bio_X509($bio);
+    
+    my $x509_store = $ssl_ctx->get_cert_store;
+    
+    $x509_store->add_cert($x509);
+    
+    # $ssl_ctx->set_default_verify_paths;
     
     my $verify_param = $ssl_ctx->get0_param;
     
