@@ -67,6 +67,7 @@ sub MY::postamble {
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::X509_VERIFY_PARAM');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::ERR');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::X509');
+    $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::X509_STORE');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::PEM');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::BIO');
     
