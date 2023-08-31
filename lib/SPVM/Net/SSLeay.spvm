@@ -5,9 +5,7 @@ class Net::SSLeay {
   version "0.001";
   
   use Net::SSLeay::Constant;
-  
   use Net::SSLeay::SSL_CTX;
-  
   use Net::SSLeay::ERR;
   
   INIT {
