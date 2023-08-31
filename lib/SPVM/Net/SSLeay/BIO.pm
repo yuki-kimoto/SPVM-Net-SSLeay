@@ -6,36 +6,23 @@ package SPVM::Net::SSLeay::BIO;
 
 =head1 Name
 
-SPVM::Net::SSLeay::BIO - Short Description
+SPVM::Net::SSLeay::BIO - BIO
 
 =head1 Description
 
-The Net::SSLeay::BIO class of L<SPVM> has methods for someting.
+The Net::SSLeay::BIO class of L<SPVM> has methods to manipulate BIO.
 
 =head1 Usage
 
   use Net::SSLeay::BIO;
 
-=head1 Fields
-
-
-
 =head1 Class Methods
 
-
+ static method new : Net::SSLeay::BIO ();
 
 =head1 Instance Methods
 
-
-
-
-=head1 Repository
-
-
-
-=head1 Author
-
-Yuki Kimoto C<kimoto.yuki@gmail.com>
+ method DESTROY : void ();
 
 =head1 Copyright & License
 
