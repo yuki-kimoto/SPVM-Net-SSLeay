@@ -283,3 +283,44 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_ciphersuites(SPVM_ENV* env, SPVM_VALUE* 
 #endif
 }
 
+int32_t SPVM__Net__SSLeay__SSL_CTX__load_verify_locations(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  SSL_CTX* ssl_ctx = env->get_pointer(env, stack, obj_self);
+  
+  void* obj_file = stack[1].oval;
+  char* file = (char*)env->get_chars(env, stack, obj_file);
+  
+  void* obj_path = stack[2].oval;
+  char* path = (char*)env->get_chars(env, stack, obj_path);
+  
+  int32_t status = SSL_CTX_load_verify_locations(ssl_ctx, file, path);
+  
+  if (!(status == 1)) {
+    return env->die(env, stack, "SSL_CTX_load_verify_locations failed.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  stack[0].ival = status;
+  
+  return 0;
+}
+
+int32_t SPVM__Net__SSLeay__SSL_CTX__get_cert_store(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  SSL_CTX* ssl_ctx = env->get_pointer(env, stack, obj_self);
+  
+  X509_STORE* x509_store = SSL_CTX_get_cert_store(ssl_ctx);
+  
+  void* obj_x509_store = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::X509_STORE", x509_store, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
+  
+  stack[0].oval = obj_x509_store;
+  
+  return 0;
+}
