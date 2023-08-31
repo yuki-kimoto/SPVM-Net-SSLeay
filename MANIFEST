@@ -1,4 +1,4 @@
-.github/workflows/linux-ubuntu-latest-32bit.yml.disable
+.github/workflows/linux-ubuntu-latest-32bit.yml
 .github/workflows/linux-ubuntu-latest-perl-5.8.9.yml
 .github/workflows/linux-ubuntu-latest.yml
 .github/workflows/macos-latest.yml
@@ -41,8 +41,6 @@ lib/SPVM/Net/SSLeay/X509.pm
 lib/SPVM/Net/SSLeay/X509.spvm
 lib/SPVM/Net/SSLeay/X509_STORE.c
 lib/SPVM/Net/SSLeay/X509_STORE.config
-lib/SPVM/Net/SSLeay/X509_STORE.native/include/.gitkeep
-lib/SPVM/Net/SSLeay/X509_STORE.native/src/.gitkeep
 lib/SPVM/Net/SSLeay/X509_STORE.pm
 lib/SPVM/Net/SSLeay/X509_STORE.spvm
 lib/SPVM/Net/SSLeay/X509_VERIFY_PARAM.c
