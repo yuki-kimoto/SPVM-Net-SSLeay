@@ -47,9 +47,9 @@ WriteMakefile(
   },
   PREREQ_PM         => {
     %configure_and_runtime_requires,
-    'SPVM::Mozilla::CA' => '0.001',
   },
   TEST_REQUIRES => {
+    'SPVM::Mozilla::CA' => '0.001',
     'SPVM::IO' => '0.204003',
   },
 );
