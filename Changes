@@ -1,4 +1,9 @@
-0.01 2023-08-19
+0.002 2024-10-29
+  [Changes]
+    * Add Net::SSLeay::Error::WantRead class.
+    * Add Net::SSLeay::Error::WantWrite class.
+  
+0.001 2023-08-19
   [Changes]
     * First release.
   
