@@ -6,4 +6,13 @@ class Net::SSLeay::X509_STORE {
   
   # Instance Methods
   native method add_cert : int ($x : Net::SSLeay::X509);
+  
+  native method set_flags : void ($flags : long);
+
 }
+
+=pod TODO
+
+Net::SSLeay::X509_STORE_add_crl
+
+=cut
