@@ -16,6 +16,41 @@ use File::Spec::Functions qw(catfile);
 use Symbol qw(gensym);
 use Text::Wrap;
 
+sub new {
+  my $class = shift;
+  
+  my $self = {
+    @_
+  };
+  
+  return bless $self, ref $class || $class;
+}
+
+sub build_config {
+  my ($self, $config) = @_;
+  
+  my $openssl_prefix = &find_openssl_prefix();
+  my $openss_build_opts = &ssleay_get_build_opts($openssl_prefix);
+  
+  my $cccdlflags = $openss_build_opts->{cccdlflags};
+  
+  my $inc_path = $openss_build_opts->{inc_path};
+  
+  my $lib_paths = $openss_build_opts->{lib_paths};
+  
+  my $lib_links = $openss_build_opts->{lib_links};
+  
+  if (length $cccdlflags) {
+    $config->add_ccflag($cccdlflags);
+  }
+  
+  $config->add_include_dir($inc_path);
+  
+  $config->add_lib_dir(@$lib_paths);
+  
+  $config->add_lib(@$lib_links);
+}
+
 # According to http://cpanwiki.grango.org/wiki/CPANAuthorNotes, the ideal
 # behaviour to exhibit when a prerequisite does not exist is to use exit code 0
 # to ensure smoke testers stop immediately without reporting a FAIL; in all
