@@ -4,6 +4,7 @@
     * Add Net::SSLeay::X509_CRL class.
     * Add Net::SSLeay::X509_STORE_CTX class.
     * Add Net::SSLeay::X509_STORE#add_crl method.
+    * Add Net::SSLeay::PEM#read_bio_X509_CRL method.
   
 0.003 2024-10-30
   [New Features]
