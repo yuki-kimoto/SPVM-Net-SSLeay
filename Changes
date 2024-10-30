@@ -1,7 +1,4 @@
 0.002 2024-10-30
-  [Changes]
-    * Add Net::SSLeay::Error::WantRead class.
-    * Add Net::SSLeay::Error::WantWrite class.
   [New Features]
     * Add Net::SSLeay::SSL_CTX#set_options
     * Add Net::SSLeay::SSL_CTX#get_options
