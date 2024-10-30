@@ -3,6 +3,8 @@
     * Add Net::SSLeay::SSL_CTX#set_options
     * Add Net::SSLeay::SSL_CTX#get_options
     * Add Net::SSLeay::SSL_CTX#clear_options
+    * Add SPVM::Net::SSLeay::ConfigBuilder class to detect OpenSSL/LibreSSL include and lib directory.
+    
 0.001 2023-08-19
   [Changes]
     * First release.
