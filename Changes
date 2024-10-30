@@ -1,3 +1,8 @@
+0.003 2024-10-30
+  [New Features]
+    * Add Net::SSLeay::SSL_METHOD#SSLv23_method method.
+    * Add Net::SSLeay::SSL_METHOD#TLS_method method.
+    
 0.002 2024-10-30
   [New Features]
     * Add Net::SSLeay::SSL_CTX#set_options
