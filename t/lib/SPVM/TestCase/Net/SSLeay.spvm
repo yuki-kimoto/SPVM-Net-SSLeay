@@ -9,8 +9,6 @@ class TestCase::Net::SSLeay {
   use Net::SSLeay::PEM;
   use StringBuffer;
   use Mozilla::CA;
-  use Net::SSLeay::Error::WantRead;
-  use Net::SSLeay::Error::WantWrite;
   use Sys::Signal::Constant as SIGNAL;
   
   static method test : int () {
