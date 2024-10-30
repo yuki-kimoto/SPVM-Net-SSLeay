@@ -26,6 +26,10 @@ C<method add_cert : int ($x : L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509>);>
 
 C<method set_flags : void ($flags : long);>
 
+=head2 add_crl
+
+C<mmethod add_crl : void ($x : L<Net::SSLeay::X509_CRL|SPVM::Net::SSLeay::X509_CRL>);>
+
 =head1 Copyright & License
 
 Copyright (c) 2023 Yuki Kimoto
