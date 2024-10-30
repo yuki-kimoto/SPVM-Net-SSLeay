@@ -1,4 +1,4 @@
-package SPVM::Net::SSLeay::Config::Prefix;
+package SPVM::Net::SSLeay::ConfigBuilder;
 
 # find_openssl_prefix function and ssleay_get_build_opts function are copied from Makefile.PL in Perl's Net::SSLeay.
 # Some parts are commented out with "=pod COMMENT OUT".
