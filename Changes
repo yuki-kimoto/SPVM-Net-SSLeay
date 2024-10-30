@@ -2,6 +2,7 @@
   [New Features]
     * Add Net::SSLeay::X509_STORE#set_flags method.
     * Add Net::SSLeay::X509_CRL class.
+    * Add Net::SSLeay::X509_STORE_CTX class.
   
 0.003 2024-10-30
   [New Features]
