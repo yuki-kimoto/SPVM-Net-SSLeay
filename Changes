@@ -1,3 +1,6 @@
+0.005 2024-11-02
+  [Requirement Changes]
+    * Require SPVM 0.990026.
 0.004 2024-10-31
   [New Features]
     * Add Net::SSLeay::X509_STORE#set_flags method.
