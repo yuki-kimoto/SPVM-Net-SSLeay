@@ -83,7 +83,9 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   SSL_CTX* ssl_ctx = env->get_pointer(env, stack, obj_self);
   
-  SSL_CTX_free(ssl_ctx);
+  if (!env->no_free(env, stack, obj_self)) {
+    SSL_CTX_free(ssl_ctx);
+  }
   
   return 0;
 }
