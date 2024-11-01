@@ -11,4 +11,6 @@ class Net::SSLeay::X509_STORE {
   native method set_flags : void ($flags : long);
   
   native method add_crl : void ($x : Net::SSLeay::X509_CRL);
+  
+  native method DESTROY : void ();
 }

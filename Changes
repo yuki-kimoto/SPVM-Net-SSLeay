@@ -6,6 +6,7 @@
     * Fix a bug that X509_CRL object is not freed.
     * Fix a bug that X509_VERIFY_PARAM object is not freed.
     * Fix a bug that X509_STORE_CTX object is not freed.
+    * Fix a bug that X509_STORE object is not freed.
 0.004 2024-10-31
   [New Features]
     * Add Net::SSLeay::X509_STORE#set_flags method.
