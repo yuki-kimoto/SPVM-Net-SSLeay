@@ -15,7 +15,9 @@ int32_t SPVM__Net__SSLeay__X509__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   X509* x509 = env->get_pointer(env, stack, obj_self);
   
-  X509_free(x509);
+  if (!env->no_free(env, stack, obj_self)) {
+    X509_free(x509);
+  }
   
   return 0;
 }

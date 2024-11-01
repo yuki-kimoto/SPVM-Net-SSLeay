@@ -15,9 +15,10 @@ int32_t SPVM__Net__SSLeay__X509_CRL__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   X509_CRL* x509_crl = env->get_pointer(env, stack, obj_self);
   
-  X509_CRL_free(x509_crl);
+  if (!env->no_free(env, stack, obj_self)) {
+    X509_CRL_free(x509_crl);
+  }
   
   return 0;
 }
-
 
