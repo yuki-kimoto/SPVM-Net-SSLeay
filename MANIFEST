@@ -40,6 +40,8 @@ lib/SPVM/Net/SSLeay/X509.c
 lib/SPVM/Net/SSLeay/X509.config
 lib/SPVM/Net/SSLeay/X509.pm
 lib/SPVM/Net/SSLeay/X509.spvm
+lib/SPVM/Net/SSLeay/X509_CRL.c
+lib/SPVM/Net/SSLeay/X509_CRL.config
 lib/SPVM/Net/SSLeay/X509_CRL.pm
 lib/SPVM/Net/SSLeay/X509_CRL.spvm
 lib/SPVM/Net/SSLeay/X509_STORE.c
