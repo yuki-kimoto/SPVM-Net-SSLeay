@@ -310,8 +310,12 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__get_cert_store(SPVM_ENV* env, SPVM_VALUE* st
   
   X509_STORE* x509_store = SSL_CTX_get_cert_store(ssl_ctx);
   
-  void* obj_x509_store = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::X509_STORE", x509_store, &error_id, __func__, FILE_NAME, __LINE__);
+  void* obj_address_x509_store = env->new_pointer_object_by_name(env, stack, "Address", x509_store, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
+  stack[0].oval = obj_address_x509_store;
+  env->call_class_method_by_name(env, stack, "Net::SSLeay::X509_STORE", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
+  void* obj_x509_store = stack[0].oval;
   
   env->set_no_free(env, stack, obj_x509_store, 1);
   
