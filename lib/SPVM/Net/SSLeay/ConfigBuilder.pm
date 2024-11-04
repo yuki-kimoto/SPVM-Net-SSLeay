@@ -289,3 +289,17 @@ $config is a L<SPVM::Builder::Config> object.
 The path of the directory that contains OpenSSL headers and library is automatically detected, but if you specify it, use C<$ENV{OPENSSL_PREFIX}> environment variable.
 
   export OPENSSL_PREFIX = /path/openssl
+
+=head1 See Also
+
+=over 2
+
+=item * L<SPVM::Net::SSLeay>
+
+=back
+
+=head1 Copyright & License
+
+Copyright (c) 2023 Yuki Kimoto
+
+MIT License

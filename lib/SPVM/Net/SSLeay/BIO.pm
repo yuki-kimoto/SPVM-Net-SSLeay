@@ -70,6 +70,14 @@ The $dlen must be lower than or equal to the length of the $data. Otherwise an e
 
 If BIO_write failed, an exception is thrown.
 
+=head1 See Also
+
+=over 2
+
+=item * L<Net::SSLeay|SPVM::Net::SSLeay>
+
+=back
+
 =head1 Copyright & License
 
 Copyright (c) 2023 Yuki Kimoto
