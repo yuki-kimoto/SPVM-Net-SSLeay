@@ -9,7 +9,8 @@
     * Use more constructors.
     * Rename Net::SSLeay::X509_STORE#certs field to certs_list.
     * Rename Net::SSLeay::X509_STORE#crls field to crls_list.
-    
+  [Bug Fix]
+    * Fix a bug that Net::SSLeay::SSL_CTX#add_cert method's memory bug.
 0.005 2024-11-02
   [Requirement Changes]
     * Require SPVM 0.990026.
