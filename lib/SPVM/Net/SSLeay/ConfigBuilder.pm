@@ -285,3 +285,7 @@ Create a new L<SPVM::Net::SSLeay::ConfigBuilder> object and returns it.
 Builds the config $config to bind L<Net::SSLeay|SPVM::Net::SSLeay>.
 
 $config is a L<SPVM::Builder::Config> object.
+
+The path of the directory that contains OpenSSL headers and library is automatically detected, but if you specify it, use C<$ENV{OPENSSL_PREFIX}> environment variable.
+
+  export OPENSSL_PREFIX = /path/openssl

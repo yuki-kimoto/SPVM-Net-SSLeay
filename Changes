@@ -16,6 +16,8 @@
     * Improve docs for Net::SSLeay::BIO class.
     * Improve docs for Net::SSLeay class.
     * Add docs for SPVM::Net::SSLeay::ConfigBuilder.
+    * Improve docs for Net::SSLeay::Constant.
+    
 0.005 2024-11-02
   [Requirement Changes]
     * Require SPVM 0.990026.
