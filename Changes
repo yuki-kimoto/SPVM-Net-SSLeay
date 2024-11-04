@@ -1,6 +1,12 @@
 0.006 2024-11-04
   [Requirement Changes]
     * Require SPVM 0.990028.
+  [Internal Changes]
+    * Add private Net::SSLeay::X509_CRL#new_with_pointer method.
+    * Add private Net::SSLeay::X509#new_with_pointer method.
+    * Add private Net::SSLeay::X509_STORE#new_with_pointer method.
+    * Add private Net::SSLeay::X509_STORE#new_with_pointer method.
+    
 0.005 2024-11-02
   [Requirement Changes]
     * Require SPVM 0.990026.
