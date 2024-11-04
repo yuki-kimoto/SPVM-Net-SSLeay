@@ -12,6 +12,10 @@ SPVM::Net::SSLeay - OpenSSL Binding
 
 Net::SSLeay class in L<SPVM> is a binding for OpenSSL.
 
+B<Warnings:>
+
+B<The document is not finished yet. The tests haven't been written yet. The features may be changed without notice.> 
+
 =head1 Usage
 
   use Net::SSLeay;
