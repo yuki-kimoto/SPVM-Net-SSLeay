@@ -7,6 +7,8 @@
     * Add private Net::SSLeay::X509_STORE#new_with_pointer method.
     * Add private Net::SSLeay::X509_STORE#new_with_pointer method.
     * Use more constructors.
+    * Rename Net::SSLeay::X509_STORE#certs field to certs_list.
+    * Rename Net::SSLeay::X509_STORE#crls field to crls_list.
     
 0.005 2024-11-02
   [Requirement Changes]
