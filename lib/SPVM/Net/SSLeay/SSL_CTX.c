@@ -20,10 +20,10 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__new(SPVM_ENV* env, SPVM_VALUE* stack) {
   // OpenSSL 1.1+ default
   SSL_CTX_set_mode(ssl_ctx, SSL_MODE_AUTO_RETRY);
   
-  void* obj_ssl_ctx = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::SSL_CTX", ssl_ctx, &error_id, __func__, FILE_NAME, __LINE__);
+  void* obj_self = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::SSL_CTX", ssl_ctx, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   
-  stack[0].oval = obj_ssl_ctx;
+  stack[0].oval = obj_self;
   
   return 0;
 }
