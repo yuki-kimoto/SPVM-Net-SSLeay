@@ -106,6 +106,10 @@ C<method write : int ($buf : string, $num : int = -1, $offset : int = 0);>
 
 =back
 
+=head2 Config Builder
+
+L<SPVM::Net::SSLeay::ConfigBuilder>
+
 =head1 Porting
 
 This class is a Perl's L<Net::SSLeay> porting to L<SPVM>.

@@ -1,4 +1,4 @@
-0.006 2024-11-04
+0.006 2024-11-05
   [Requirement Changes]
     * Require SPVM 0.990028.
   [Internal Changes]
@@ -14,6 +14,8 @@
     * Fix a bug that Net::SSLeay::SSL_CTX#add_crl method's memory bug.
   [Document Improvement]
     * Improve docs for Net::SSLeay::BIO class.
+    * Improve docs for Net::SSLeay class.
+    * Add docs for SPVM::Net::SSLeay::ConfigBuilder.
 0.005 2024-11-02
   [Requirement Changes]
     * Require SPVM 0.990026.

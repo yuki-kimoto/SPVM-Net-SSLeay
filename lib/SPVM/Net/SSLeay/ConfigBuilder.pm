@@ -251,3 +251,37 @@ sub find_openssl_prefix {
 }
 
 1;
+
+=head1 Name
+
+SPVM::Net::SSLeay::ConfigBuilder - Config Builder for Net::SSLeay.
+
+=head1 Description
+
+SPVM::Net::SSLeay::ConfigBuilder class is a config builder for L<Net::SSLeay|SPVM::Net::SSLeay>.
+
+This class is a Perl module.
+
+=head1 Usage
+
+my $ssl_config_builder = SPVM::Net::SSLeay::ConfigBuilder->new;
+
+$ssl_config_builder->build_config($config);
+
+=head1 Class Methods
+
+=head2 new
+
+  my $ssl_config_builder = SPVM::Net::SSLeay::ConfigBuilder->new;
+
+Create a new L<SPVM::Net::SSLeay::ConfigBuilder> object and returns it.
+
+=head1 Instance Methods
+
+=head2 build_config
+
+  $ssl_config_builder->build_config($config);
+
+Builds the config $config to bind L<Net::SSLeay|SPVM::Net::SSLeay>.
+
+$config is a L<SPVM::Builder::Config> object.
