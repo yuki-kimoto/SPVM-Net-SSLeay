@@ -45,21 +45,6 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_mode(SPVM_ENV* env, SPVM_VALUE* stack) {
   return 0;
 }
 
-int verify_callback(int preverified, X509_STORE_CTX *ctx)
-{
-	X509* cert;
-	char subject[1024];
-
-	cert = X509_STORE_CTX_get_current_cert(ctx);
-	if (cert == NULL) {
-		return 0;
-	}
-	X509_NAME_oneline(X509_get_subject_name(cert), &subject[0], sizeof(subject));
-	printf("%d %s\n", preverified, subject);
-
-	return preverified;
-}
-
 int32_t SPVM__Net__SSLeay__SSL_CTX__set_verify(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
