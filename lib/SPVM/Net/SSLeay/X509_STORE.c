@@ -70,6 +70,14 @@ int32_t SPVM__Net__SSLeay__X509_STORE__add_crl(SPVM_ENV* env, SPVM_VALUE* stack)
     return env->die(env, stack, "X509_STORE_add_crl failed.", __func__, FILE_NAME, __LINE__);
   }
   
+  void* obj_crls_list = env->get_field_object_by_name(env, stack, obj_self, "crls_list", &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
+  
+  stack[0].oval = obj_crls_list;
+  stack[1].oval = obj_x509_crl;
+  env->call_instance_method_by_name(env, stack, "push", 2, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
+  
   stack[0].ival = status;
   
   return 0;
