@@ -12,6 +12,7 @@
   [Bug Fix]
     * Fix a bug that Net::SSLeay::SSL_CTX#add_cert method's memory bug.
     * Fix a bug that Net::SSLeay::SSL_CTX#add_crl method's memory bug.
+    * Fix a bug that the return value of Net::SSLeay::ERR#error_string is not shortened before \0.
   [Document Improvement]
     * Improve docs for Net::SSLeay::BIO class.
     * Improve docs for Net::SSLeay class.
