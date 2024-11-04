@@ -6,6 +6,7 @@
     * Add private Net::SSLeay::X509#new_with_pointer method.
     * Add private Net::SSLeay::X509_STORE#new_with_pointer method.
     * Add private Net::SSLeay::X509_STORE#new_with_pointer method.
+    * Use more constructors.
     
 0.005 2024-11-02
   [Requirement Changes]
