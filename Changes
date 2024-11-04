@@ -12,6 +12,8 @@
   [Bug Fix]
     * Fix a bug that Net::SSLeay::SSL_CTX#add_cert method's memory bug.
     * Fix a bug that Net::SSLeay::SSL_CTX#add_crl method's memory bug.
+  [Document Improvement]
+    * Improve docs for Net::SSLeay::BIO class.
 0.005 2024-11-02
   [Requirement Changes]
     * Require SPVM 0.990026.
