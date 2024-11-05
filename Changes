@@ -19,6 +19,7 @@
     * Add docs for SPVM::Net::SSLeay::ConfigBuilder.
     * Improve docs for Net::SSLeay::Constant.
     * Add docs for Net::SSLeay::PEM.
+    * Add docs for Net::SSLeay::SSL_METHOD.
     
 0.005 2024-11-02
   [Requirement Changes]

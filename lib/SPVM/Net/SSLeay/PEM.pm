@@ -42,6 +42,18 @@ The BIO $bp must be defined. Otherwise an exception is thrown.
 
 If PEM_read_bio_X509_CRL failed, an exception is thrown.
 
+=head1 See Also
+
+=over 2
+
+=item * L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509>
+
+=item * L<Net::SSLeay::X509_CRL|SPVM::Net::SSLeay::X509_CRL>
+
+=item * L<Net::SSLeay|SPVM::Net::SSLeay>
+
+=back
+
 =head1 Copyright & License
 
 Copyright (c) 2023 Yuki Kimoto
