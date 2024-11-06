@@ -1,8 +1,8 @@
 0.007 2024-11-07
   [Document Improvement]
-    * Add docs for Net::SSLeay::X509.
-    * Add docs for Net::SSLeay::X509_CRL.
-    
+    * Add docs for Net::SSLeay::X509 class.
+    * Add docs for Net::SSLeay::X509_CRL class.
+    * Add docs for Net::SSLeay::X509_VERIFY_PARAM class.
 0.006 2024-11-05
   [Requirement Changes]
     * Require SPVM 0.990028.
