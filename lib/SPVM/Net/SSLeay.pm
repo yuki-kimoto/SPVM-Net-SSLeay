@@ -36,11 +36,23 @@ C<has operation_error : ro int;>
 
 C<static method new : Net::SSLeay ($ssl_ctx : L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX>);>
 
+Creates a new L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> object, creates a L<SSL> object by calling L<SSL_new> function, sets the pointer value of the new object to the return value of the function, and returns the new object.
+
+Exceptions:
+
+If SSL_new failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
 =head1 Instance Methods
 
 =head2 set_fd
 
 C<method set_fd : int ($fd : int);>
+
+Sets the file descriptor $fd as the input/output facility for the TLS/SSL (encrypted) side by calling L<SSL_set_fd|https://docs.openssl.org/master/man3/SSL_set_fd/> function, and returns its return value.
+
+Exceptions:
+
+If SSL_set_fd failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
 =head2 connect
 
