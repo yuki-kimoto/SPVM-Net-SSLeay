@@ -69,7 +69,7 @@ int32_t SPVM__Net__SSLeay__BIO__read(SPVM_ENV* env, SPVM_VALUE* stack) {
     int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
     
-    env->die(env, stack, "BIO_read failed.", __func__, FILE_NAME, __LINE__);
+    env->die(env, stack, "[OpenSSL Error]BIO_read failed.", __func__, FILE_NAME, __LINE__);
     return error_id;
   }
   
@@ -111,7 +111,7 @@ int32_t SPVM__Net__SSLeay__BIO__write(SPVM_ENV* env, SPVM_VALUE* stack) {
     int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
     
-    env->die(env, stack, "BIO_write failed.", __func__, FILE_NAME, __LINE__);
+    env->die(env, stack, "[OpenSSL Error]BIO_write failed.", __func__, FILE_NAME, __LINE__);
     return error_id;
   }
   

@@ -113,7 +113,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_default_verify_paths(SPVM_ENV* env, SPVM
     int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
     
-    env->die(env, stack, "SSL_CTX_set_default_verify_paths failed.", __func__, FILE_NAME, __LINE__);
+    env->die(env, stack, "[OpenSSL Error]SSL_CTX_set_default_verify_paths failed.", __func__, FILE_NAME, __LINE__);
     return error_id;
   }
   
@@ -147,7 +147,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__use_certificate_file(SPVM_ENV* env, SPVM_VAL
     int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
     
-    env->die(env, stack, "SSL_CTX_use_certificate_file failed.", __func__, FILE_NAME, __LINE__);
+    env->die(env, stack, "[OpenSSL Error]SSL_CTX_use_certificate_file failed.", __func__, FILE_NAME, __LINE__);
     return error_id;
   }
   
@@ -179,7 +179,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__use_certificate_chain_file(SPVM_ENV* env, SP
     int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
     
-    env->die(env, stack, "SSL_CTX_use_certificate_chain_file failed.", __func__, FILE_NAME, __LINE__);
+    env->die(env, stack, "[OpenSSL Error]SSL_CTX_use_certificate_chain_file failed.", __func__, FILE_NAME, __LINE__);
     return error_id;
   }
   
@@ -213,7 +213,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__use_PrivateKey_file(SPVM_ENV* env, SPVM_VALU
     int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
     
-    env->die(env, stack, "SSL_CTX_use_PrivateKey_file failed.", __func__, FILE_NAME, __LINE__);
+    env->die(env, stack, "[OpenSSL Error]SSL_CTX_use_PrivateKey_file failed.", __func__, FILE_NAME, __LINE__);
     return error_id;
   }
   
@@ -247,7 +247,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_cipher_list(SPVM_ENV* env, SPVM_VALUE* s
     int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
     
-    env->die(env, stack, "SSL_CTX_set_cipher_list failed.", __func__, FILE_NAME, __LINE__);
+    env->die(env, stack, "[OpenSSL Error]SSL_CTX_set_cipher_list failed.", __func__, FILE_NAME, __LINE__);
     return error_id;
   }
   
@@ -284,7 +284,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_ciphersuites(SPVM_ENV* env, SPVM_VALUE* 
     int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
     
-    env->die(env, stack, "SSL_CTX_set_ciphersuites failed.", __func__, FILE_NAME, __LINE__);
+    env->die(env, stack, "[OpenSSL Error]SSL_CTX_set_ciphersuites failed.", __func__, FILE_NAME, __LINE__);
     return error_id;
   }
   
@@ -313,7 +313,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__load_verify_locations(SPVM_ENV* env, SPVM_VA
     int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
     
-    env->die(env, stack, "SSL_CTX_load_verify_locations failed.", __func__, FILE_NAME, __LINE__);
+    env->die(env, stack, "[OpenSSL Error]SSL_CTX_load_verify_locations failed.", __func__, FILE_NAME, __LINE__);
     return error_id;
   }
   
