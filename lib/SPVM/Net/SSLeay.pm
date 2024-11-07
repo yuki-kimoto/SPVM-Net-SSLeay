@@ -82,27 +82,27 @@ C<method write : int ($buf : string, $num : int = -1, $offset : int = 0);>
 
 =over 2
 
-=item * L<Net::SSLeay::SSL_METHOD|SPVM::Net::SSLeay::SSL_METHOD>
-
 =item * L<Net::SSLeay::Constant|SPVM::Net::SSLeay::Constant>
 
+=item * L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX>
+
+=item * L<Net::SSLeay::SSL_METHOD|SPVM::Net::SSLeay::SSL_METHOD>
+
 =item * L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509>
-
-=item * L<Net::SSLeay::BIO|SPVM::Net::SSLeay::BIO>
-
-=item * L<Net::SSLeay::ERR|SPVM::Net::SSLeay::ERR>
 
 =item * L<Net::SSLeay::X509_VERIFY_PARAM|SPVM::Net::SSLeay::X509_VERIFY_PARAM>
 
 =item * L<Net::SSLeay::X509_CRL|SPVM::Net::SSLeay::X509_CRL>
 
-=item * L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX>
-
 =item * L<Net::SSLeay::X509_STORE_CTX|SPVM::Net::SSLeay::X509_STORE_CTX>
+
+=item * L<Net::SSLeay::X509_STORE|SPVM::Net::SSLeay::X509_STORE>
 
 =item * L<Net::SSLeay::PEM|SPVM::Net::SSLeay::PEM>
 
-=item * L<Net::SSLeay::X509_STORE|SPVM::Net::SSLeay::X509_STORE>
+=item * L<Net::SSLeay::BIO|SPVM::Net::SSLeay::BIO>
+
+=item * L<Net::SSLeay::ERR|SPVM::Net::SSLeay::ERR>
 
 =back
 
