@@ -128,7 +128,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__use_certificate_file(SPVM_ENV* env, SPVM_VAL
   void* obj_file = stack[1].oval;
   
   if (!obj_file) {
-    return env->die(env, stack, "The $file must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "The file $file must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   char* file = (char*)env->get_chars(env, stack, obj_file);
@@ -159,7 +159,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__use_certificate_chain_file(SPVM_ENV* env, SP
   void* obj_file = stack[1].oval;
   
   if (!obj_file) {
-    return env->die(env, stack, "The $file must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "The file $file must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   char* file = (char*)env->get_chars(env, stack, obj_file);
@@ -188,7 +188,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__use_PrivateKey_file(SPVM_ENV* env, SPVM_VALU
   void* obj_file = stack[1].oval;
   
   if (!obj_file) {
-    return env->die(env, stack, "The $file must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "The file $file must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   char* file = (char*)env->get_chars(env, stack, obj_file);
@@ -219,7 +219,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_cipher_list(SPVM_ENV* env, SPVM_VALUE* s
   void* obj_str = stack[1].oval;
   
   if (!obj_str) {
-    return env->die(env, stack, "The $str must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "The cipher list $str must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   char* str = (char*)env->get_chars(env, stack, obj_str);
@@ -253,7 +253,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_ciphersuites(SPVM_ENV* env, SPVM_VALUE* 
   void* obj_str = stack[1].oval;
   
   if (!obj_str) {
-    return env->die(env, stack, "The $str must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "The ciphersuites $str must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   char* str = (char*)env->get_chars(env, stack, obj_str);

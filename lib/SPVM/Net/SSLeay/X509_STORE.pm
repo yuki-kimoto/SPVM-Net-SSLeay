@@ -74,7 +74,7 @@ If X509_STORE_add_crl failed, an exception is thrown.
 
 C<method DESTROY : void ();>
 
-Frees L<X509|https://docs.openssl.org/3.1/man3/X509_STORE_new/> object using L<X509_STORE_free|https://docs.openssl.org/3.1/man3/X509_STORE_free/> function if C<no_free> flag of the instance is not a true value.
+Frees L<X509_STORE|https://docs.openssl.org/3.1/man3/X509_STORE_new/> object using L<X509_STORE_free|https://docs.openssl.org/3.1/man3/X509_STORE_free/> function if C<no_free> flag of the instance is not a true value.
 
 =head1 FAQ
 

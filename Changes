@@ -5,6 +5,7 @@
     * Add docs for Net::SSLeay::X509_VERIFY_PARAM class.
     * Add docs for Net::SSLeay::X509_STORE_CTX class.
     * Add docs for Net::SSLeay::X509_STORE class.
+    * Add docs for Net::SSLeay::SSL_CTX class.
   [Incompatible Changes]
     * Fix the return type of Net::SSLeay::SSL_CTX#set_verify method.
       
