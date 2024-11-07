@@ -18,6 +18,8 @@
     * Net::SSLeay::SSL_CTX does not throw system errors.
   [New Features]
     * Add Net::SSLeay::ERR#get_error method.
+    * Add Net::SSLeay::ERR#peek_error method.
+    * Add Net::SSLeay::ERR#peek_last_error method.
     
 0.006 2024-11-05
   [Requirement Changes]

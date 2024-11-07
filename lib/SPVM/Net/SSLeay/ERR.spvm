@@ -19,4 +19,9 @@ class Net::SSLeay::ERR {
   }
   
   native method get_error : long ();
+  
+  native method peek_error : long ();
+  
+  native method peek_last_error : long ();
+  
 }
