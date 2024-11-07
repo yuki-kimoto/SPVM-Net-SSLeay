@@ -45,7 +45,7 @@ int32_t SPVM__Net__SSLeay__BIO__read(SPVM_ENV* env, SPVM_VALUE* stack) {
   void* obj_data = stack[1].oval;
   
   if (!obj_data) {
-    return env->die(env, stack, "The $data must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "The data $data must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   char* data = (char*)env->get_chars(env, stack, obj_data);
@@ -58,7 +58,7 @@ int32_t SPVM__Net__SSLeay__BIO__read(SPVM_ENV* env, SPVM_VALUE* stack) {
   }
   
   if (!(dlen <= data_length)) {
-    return env->die(env, stack, "The $dlen must be lower than or equal to the length of the $data.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "The length $dlen must be lower than or equal to the length of the data $data.", __func__, FILE_NAME, __LINE__);
   }
   
   BIO* bio = env->get_pointer(env, stack, obj_self);
@@ -83,7 +83,7 @@ int32_t SPVM__Net__SSLeay__BIO__write(SPVM_ENV* env, SPVM_VALUE* stack) {
   void* obj_data = stack[1].oval;
   
   if (!obj_data) {
-    return env->die(env, stack, "The $data must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "The data $data must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   char* data = (char*)env->get_chars(env, stack, obj_data);
@@ -96,7 +96,7 @@ int32_t SPVM__Net__SSLeay__BIO__write(SPVM_ENV* env, SPVM_VALUE* stack) {
   }
   
   if (!(dlen <= data_length)) {
-    return env->die(env, stack, "The $dlen must be lower than or equal to the length of the $data.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "The length $dlen must be lower than or equal to the length of the data $data.", __func__, FILE_NAME, __LINE__);
   }
   
   BIO* bio = env->get_pointer(env, stack, obj_self);
@@ -104,7 +104,11 @@ int32_t SPVM__Net__SSLeay__BIO__write(SPVM_ENV* env, SPVM_VALUE* stack) {
   int32_t write_length = BIO_write(bio, data, dlen);
   
   if (write_length < 0) {
-    return env->die(env, stack, "BIO_write failed.", __func__, FILE_NAME, __LINE__);
+    int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) { return error_id; }
+    
+    env->die(env, stack, "BIO_write failed.", __func__, FILE_NAME, __LINE__);
+    return error_id;
   }
   
   stack[0].ival = write_length;
