@@ -52,7 +52,7 @@ The $data must be defined. Otherwise an exception is thrown.
 
 The $dlen must be lower than or equal to the length of the $data. Otherwise an exception is thrown.
 
-If BIO_read failed, an exception is thrown.
+If BIO_read failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
 =head2 write
 
@@ -68,7 +68,7 @@ The $data must be defined. Otherwise an exception is thrown.
 
 The $dlen must be lower than or equal to the length of the $data. Otherwise an exception is thrown.
 
-If BIO_write failed, an exception is thrown.
+If BIO_write failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
 =head1 See Also
 

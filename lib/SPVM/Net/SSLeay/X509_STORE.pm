@@ -48,7 +48,7 @@ Sets the flags to $flags by calling L<X509_STORE_set_flags|https://docs.openssl.
 
 Exceptions:
 
-If X509_STORE_set_flags failed, an exception is thrown.
+If X509_STORE_set_flags failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
 =head2 add_cert
 
@@ -58,7 +58,7 @@ Calls L<X509_STORE_add_cert|https://docs.openssl.org/1.1.1/man3/X509_STORE_add_c
 
 Exceptions:
 
-If X509_STORE_add_crl failed, an exception is thrown.
+If X509_STORE_add_crl failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
 =head2 add_crl
 
@@ -68,7 +68,7 @@ Calls L<X509_STORE_add_crl|https://docs.openssl.org/3.0/man3/X509_STORE_add_crl/
 
 Exceptions:
 
-If X509_STORE_add_crl failed, an exception is thrown.
+If X509_STORE_add_crl failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
 =head2 DESTROY
 

@@ -110,8 +110,11 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_default_verify_paths(SPVM_ENV* env, SPVM
   int32_t status = SSL_CTX_set_default_verify_paths(ssl_ctx);
   
   if (!(status == 1)) {
+    int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) { return error_id; }
+    
     env->die(env, stack, "SSL_CTX_set_default_verify_paths failed.", __func__, FILE_NAME, __LINE__);
-    return SPVM_NATIVE_C_BASIC_TYPE_ID_ERROR_SYSTEM_CLASS;
+    return error_id;
   }
   
   stack[0].ival = status;
@@ -141,8 +144,11 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__use_certificate_file(SPVM_ENV* env, SPVM_VAL
   int32_t status = SSL_CTX_use_certificate_file(ssl_ctx, file, type);
   
   if (!(status == 1)) {
+    int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) { return error_id; }
+    
     env->die(env, stack, "SSL_CTX_use_certificate_file failed.", __func__, FILE_NAME, __LINE__);
-    return SPVM_NATIVE_C_BASIC_TYPE_ID_ERROR_SYSTEM_CLASS;
+    return error_id;
   }
   
   stack[0].ival = status;
@@ -170,8 +176,11 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__use_certificate_chain_file(SPVM_ENV* env, SP
   int32_t status = SSL_CTX_use_certificate_chain_file(ssl_ctx, file);
   
   if (!(status == 1)) {
+    int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) { return error_id; }
+    
     env->die(env, stack, "SSL_CTX_use_certificate_chain_file failed.", __func__, FILE_NAME, __LINE__);
-    return SPVM_NATIVE_C_BASIC_TYPE_ID_ERROR_SYSTEM_CLASS;
+    return error_id;
   }
   
   stack[0].ival = status;
@@ -201,8 +210,11 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__use_PrivateKey_file(SPVM_ENV* env, SPVM_VALU
   int32_t status = SSL_CTX_use_PrivateKey_file(ssl_ctx, file, type);
   
   if (!(status == 1)) {
+    int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) { return error_id; }
+    
     env->die(env, stack, "SSL_CTX_use_PrivateKey_file failed.", __func__, FILE_NAME, __LINE__);
-    return SPVM_NATIVE_C_BASIC_TYPE_ID_ERROR_SYSTEM_CLASS;
+    return error_id;
   }
   
   stack[0].ival = status;
@@ -232,8 +244,11 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_cipher_list(SPVM_ENV* env, SPVM_VALUE* s
   int32_t status = SSL_CTX_set_cipher_list(ssl_ctx, str);
   
   if (!(status == 1)) {
+    int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) { return error_id; }
+    
     env->die(env, stack, "SSL_CTX_set_cipher_list failed.", __func__, FILE_NAME, __LINE__);
-    return SPVM_NATIVE_C_BASIC_TYPE_ID_ERROR_SYSTEM_CLASS;
+    return error_id;
   }
   
   stack[0].ival = status;
@@ -266,8 +281,11 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_ciphersuites(SPVM_ENV* env, SPVM_VALUE* 
   int32_t status = SSL_CTX_set_ciphersuites(ssl_ctx, str);
   
   if (!(status == 1)) {
+    int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) { return error_id; }
+    
     env->die(env, stack, "SSL_CTX_set_ciphersuites failed.", __func__, FILE_NAME, __LINE__);
-    return SPVM_NATIVE_C_BASIC_TYPE_ID_ERROR_SYSTEM_CLASS;
+    return error_id;
   }
   
   stack[0].ival = status;
@@ -292,7 +310,11 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__load_verify_locations(SPVM_ENV* env, SPVM_VA
   int32_t status = SSL_CTX_load_verify_locations(ssl_ctx, file, path);
   
   if (!(status == 1)) {
-    return env->die(env, stack, "SSL_CTX_load_verify_locations failed.", __func__, FILE_NAME, __LINE__);
+    int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) { return error_id; }
+    
+    env->die(env, stack, "SSL_CTX_load_verify_locations failed.", __func__, FILE_NAME, __LINE__);
+    return error_id;
   }
   
   stack[0].ival = status;

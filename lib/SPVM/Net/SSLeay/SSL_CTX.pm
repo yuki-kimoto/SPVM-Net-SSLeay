@@ -60,7 +60,7 @@ Specifies the locations, at which CA certificates for verification purposes are 
 
 Exceptions:
 
-If SSL_CTX_load_verify_locations failed, an exception is thrown.
+If SSL_CTX_load_verify_locations failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
 =head2 set_default_verify_paths
 
@@ -70,7 +70,7 @@ Specifies that the default locations from which CA certificates are loaded shoul
 
 Exceptions:
 
-If SSL_CTX_set_default_verify_paths failed, an exception is thrown.
+If SSL_CTX_set_default_verify_paths failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
 =head2 use_certificate_file
 
@@ -82,7 +82,7 @@ Exceptions:
 
 The file $file must be defined. Otherwise an exception is thrown.
 
-If SSL_CTX_use_certificate_file failed, an exception is thrown.
+If SSL_CTX_use_certificate_file failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
 =head2 use_certificate_chain_file
 
@@ -92,7 +92,7 @@ Loads a certificate chain from the file $file by calling L<use_certificate_chain
  
 Exceptions:
 
-If SSL_CTX_use_certificate_chain_file failed, an exception is thrown.
+If SSL_CTX_use_certificate_chain_file failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
 =head2 use_PrivateKey_file
 
@@ -104,7 +104,7 @@ Exceptions:
 
 The file $file must be defined. Otherwise an exception is thrown.
 
-If SSL_CTX_use_PrivateKey_file failed, an exception is thrown.
+If SSL_CTX_use_PrivateKey_file failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
 =head2 set_cipher_list
 
@@ -116,7 +116,7 @@ Exceptions:
 
 The cipher list $str must be defined. Otherwise an exception is thrown.
 
-If SSL_CTX_set_cipher_list failed, an exception is thrown.
+If SSL_CTX_set_cipher_list failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
 =head2 set_ciphersuites
 
@@ -128,7 +128,7 @@ Exceptions:
 
 The ciphersuites $str must be defined. Otherwise an exception is thrown.
 
-If SSL_CTX_set_ciphersuites failed, an exception is thrown.
+If SSL_CTX_set_ciphersuites failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
 =head2 get_cert_store
 

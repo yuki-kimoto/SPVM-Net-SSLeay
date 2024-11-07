@@ -16,6 +16,10 @@ Net::SSLeay::Error class in L<SPVM> represents an OpenSSL error.
 
   use Net::SSLeay::Error;
 
+=head1 Super Class
+
+L<Error|SPVM::Error>
+
 =head1 Copyright & License
 
 Copyright (c) 2024 Yuki Kimoto

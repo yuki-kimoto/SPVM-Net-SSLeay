@@ -16,6 +16,10 @@ Net::SSLeay::Error::Operation class in L<SPVM> represents an OpenSSL operation e
 
   use Net::SSLeay::Error::Operation;
 
+=head1 Super Class
+
+L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error>
+
 =head1 Copyright & License
 
 Copyright (c) 2024 Yuki Kimoto

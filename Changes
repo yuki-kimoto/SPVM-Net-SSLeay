@@ -4,6 +4,9 @@
     * Add Net::SSLeay::Error::Operation class.
   [Exception Messages Improvement]
     * Improve exception messages.
+  [Incompatible Changes]
+    * Use Net::SSLeay::Error for OpenSSL errors.
+    
 0.007 2024-11-07
   [Document Improvement]
     * Add docs for Net::SSLeay::X509 class.
