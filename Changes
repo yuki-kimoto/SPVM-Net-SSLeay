@@ -16,7 +16,9 @@
       method set_verify : void ($mode : int);
     
     * Net::SSLeay::SSL_CTX does not throw system errors.
-      
+  [New Features]
+    * Add Net::SSLeay::ERR#get_error method.
+    
 0.006 2024-11-05
   [Requirement Changes]
     * Require SPVM 0.990028.

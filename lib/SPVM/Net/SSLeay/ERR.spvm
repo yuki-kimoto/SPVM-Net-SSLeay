@@ -8,7 +8,6 @@ class Net::SSLeay::ERR {
   # Instance Methods
   native static method error_string_n : void ($e : long, $buf : mutable string, $len : int = -1);
   
-  # Safety emulation
   static method error_string : string ($e : long) {
     my $buf = (mutable string)new_string_len 256;
     
@@ -18,4 +17,6 @@ class Net::SSLeay::ERR {
     
     return $buf;
   }
+  
+  native method get_error : long ();
 }

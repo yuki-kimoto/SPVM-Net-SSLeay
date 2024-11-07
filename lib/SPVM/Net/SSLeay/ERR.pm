@@ -38,6 +38,12 @@ Same as L</"error_string_n> method, but $buf of the length 256 is created automa
 
 The returned string is cut just before C<\0>.
 
+=head2 get_error
+
+C<method get_error : long ();>
+
+Returns the earliest error code from the thread's error queue and removes the entry by calling L<ERR_get_error|https://docs.openssl.org/3.1/man3/ERR_get_error/#synopsis>.
+
 =head1 See Also
 
 =over 2
