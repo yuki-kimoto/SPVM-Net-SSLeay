@@ -1,6 +1,7 @@
 0.008 2024-11-07
   [New Features]
     * Add Net::SSLeay::Error class.
+    * Add Net::SSLeay::Error::Operation class.
   [Exception Messages Improvement]
     * Improve exception messages.
 0.007 2024-11-07
