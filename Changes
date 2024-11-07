@@ -6,6 +6,8 @@
     * Improve exception messages.
   [Incompatible Changes]
     * Use Net::SSLeay::Error for OpenSSL errors.
+  [Document Improvement]
+    * Add docs for Net::SSLeay class.
     
 0.007 2024-11-07
   [Document Improvement]

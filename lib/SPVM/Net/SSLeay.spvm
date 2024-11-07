@@ -29,13 +29,13 @@ class Net::SSLeay {
   # Instance Methods
   native method set_fd : int ($fd : int);
   
+  native method set_tlsext_host_name : int ($name : string);
+  
   native method connect : int ();
   
   native method accept : int ();
   
   native method shutdown : int ();
-  
-  native method set_tlsext_host_name : int ($name : string);
   
   native method read : int ($buf : mutable string, $num : int = -1, $offset : int = 0);
   
