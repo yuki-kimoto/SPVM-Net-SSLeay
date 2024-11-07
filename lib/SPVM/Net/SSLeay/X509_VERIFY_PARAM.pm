@@ -22,13 +22,13 @@ Net::SSLeay::X509_VERIFY_PARAM class in L<SPVM> represents L<X509_VERIFY_PARAM|h
 
 C<method set_hostflags : void ($flags : int);>
 
-Sets the host flags to $flags using L<X509_VERIFY_PARAM_set_hostflags|https://docs.openssl.org/1.0.2/man3/X509_VERIFY_PARAM_set_flags/> function.
+Sets the host flags to $flags by calling L<X509_VERIFY_PARAM_set_hostflags|https://docs.openssl.org/1.0.2/man3/X509_VERIFY_PARAM_set_flags/> function.
 
 =head2 set1_host
 
 C<method set1_host : int ($name : string, $namelen : int = 0);>
 
-Sets the host name $name of the length $namelen using L<X509_VERIFY_PARAM_set1_host|https://docs.openssl.org/1.0.2/man3/X509_VERIFY_PARAM_set_flags/> function.
+Sets the host name $name of the length $namelen by calling L<X509_VERIFY_PARAM_set1_host|https://docs.openssl.org/1.0.2/man3/X509_VERIFY_PARAM_set_flags/> function.
 
 If $namelen is 0, it is set to the length of $name.
 
@@ -42,7 +42,7 @@ The length $namelen must be greater than or equal to the length of the host name
 
 C<method DESTROY : void ();>
 
-Frees L<X509_VERIFY_PARAM|https://docs.openssl.org/1.0.2/man3/X509_VERIFY_PARAM_set_flags/> object using L<X509_VERIFY_PARAM_free|https://docs.openssl.org/1.0.2/man3/X509_VERIFY_PARAM_set_flags/> function if C<no_free> flag of the instance is not a true value.
+Frees L<X509_VERIFY_PARAM|https://docs.openssl.org/1.0.2/man3/X509_VERIFY_PARAM_set_flags/> object by calling L<X509_VERIFY_PARAM_free|https://docs.openssl.org/1.0.2/man3/X509_VERIFY_PARAM_set_flags/> function if C<no_free> flag of the instance is not a true value.
 
 =head1 FAQ
 
