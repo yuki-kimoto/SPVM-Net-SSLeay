@@ -10,6 +10,7 @@ class TestCase::Net::SSLeay {
   use StringBuffer;
   use Mozilla::CA;
   use Sys::Signal::Constant as SIGNAL;
+  use Net::SSLeay::Error;
   
   static method test : int () {
     
