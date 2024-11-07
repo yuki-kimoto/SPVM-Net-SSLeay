@@ -57,21 +57,6 @@ int32_t SPVM__Net__SSLeay__new(SPVM_ENV* env, SPVM_VALUE* stack) {
   return 0;
 }
 
-int32_t SPVM__Net__SSLeay__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
-  
-  int32_t error_id = 0;
-  
-  void* obj_self = stack[0].oval;
-  
-  SSL* ssl = env->get_pointer(env, stack, obj_self);
-  
-  if (!env->no_free(env, stack, obj_self)) {
-    SSL_free(ssl);
-  }
-  
-  return 0;
-}
-
 int32_t SPVM__Net__SSLeay__connect(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
@@ -424,6 +409,21 @@ int32_t SPVM__Net__SSLeay__write(SPVM_ENV* env, SPVM_VALUE* stack) {
   }
   
   stack[0].ival = write_length;
+  
+  return 0;
+}
+
+int32_t SPVM__Net__SSLeay__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  SSL* ssl = env->get_pointer(env, stack, obj_self);
+  
+  if (!env->no_free(env, stack, obj_self)) {
+    SSL_free(ssl);
+  }
   
   return 0;
 }

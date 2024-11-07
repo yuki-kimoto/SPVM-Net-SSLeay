@@ -27,8 +27,6 @@ class Net::SSLeay {
   native static method _print_version_text : void ();
   
   # Instance Methods
-  native method DESTROY : void ();
-  
   native method set_fd : int ($fd : int);
   
   native method connect : int ();
@@ -44,5 +42,7 @@ class Net::SSLeay {
   native method peek : int ($buf : mutable string, $num : int = -1, $offset : int = 0);
   
   native method write : int ($buf : string, $num : int = -1, $offset : int = 0);
+  
+  native method DESTROY : void ();
   
 }
