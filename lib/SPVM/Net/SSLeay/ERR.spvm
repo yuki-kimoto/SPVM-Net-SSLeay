@@ -3,6 +3,8 @@
 
 class Net::SSLeay::ERR {
   
+  use Net::SSLeay::Error;
+  
   use Fn;
   
   # Instance Methods

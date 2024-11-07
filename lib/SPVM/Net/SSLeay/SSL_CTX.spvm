@@ -2,6 +2,9 @@
 # MIT License
 
 class Net::SSLeay::SSL_CTX {
+  
+  use Net::SSLeay::Error;
+  
   use Net::SSLeay::SSL_METHOD;
   use Net::SSLeay::X509_STORE;
   use Net::SSLeay::X509_VERIFY_PARAM;
