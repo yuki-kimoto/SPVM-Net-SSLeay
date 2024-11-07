@@ -1,7 +1,8 @@
 0.008 2024-11-07
   [New Features]
     * Add Net::SSLeay::Error class.
-    
+  [Exception Messages Improvement]
+    * Improve exception messages.
 0.007 2024-11-07
   [Document Improvement]
     * Add docs for Net::SSLeay::X509 class.
