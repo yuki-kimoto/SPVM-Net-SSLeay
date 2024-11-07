@@ -20,6 +20,8 @@
     * Add Net::SSLeay::ERR#get_error method.
     * Add Net::SSLeay::ERR#peek_error method.
     * Add Net::SSLeay::ERR#peek_last_error method.
+  [Changes]
+    * Use ERR_peak_last_error instead of ERR_get_error not to change SSL error queue.
     
 0.006 2024-11-05
   [Requirement Changes]
