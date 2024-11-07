@@ -17,8 +17,6 @@ class Net::SSLeay {
   
   has operation_error : ro int;
   
-  has error : ro long;
-  
   # Class Methods
   native static method new : Net::SSLeay ($ssl_ctx : Net::SSLeay::SSL_CTX);
   

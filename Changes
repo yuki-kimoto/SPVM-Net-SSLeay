@@ -16,6 +16,7 @@
       method set_verify : void ($mode : int);
     
     * Net::SSLeay::SSL_CTX does not throw system errors.
+    * Remove Net::SSLeay#error field.
   [New Features]
     * Add Net::SSLeay::ERR#get_error method.
     * Add Net::SSLeay::ERR#peek_error method.

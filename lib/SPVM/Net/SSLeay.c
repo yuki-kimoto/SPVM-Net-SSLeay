@@ -92,8 +92,6 @@ int32_t SPVM__Net__SSLeay__connect(SPVM_ENV* env, SPVM_VALUE* stack) {
     if (error_id) { return error_id; }
     
     int64_t ssl_error = ERR_peek_last_error();
-    env->set_field_long_by_name(env, stack, obj_self, "error", ssl_error, &error_id, __func__, FILE_NAME, __LINE__);
-    if (error_id) { return error_id; }
     
     char ssl_error_string[256] = {0};
     ERR_error_string_n(ssl_error, ssl_error_string, sizeof(ssl_error_string));
@@ -123,8 +121,6 @@ int32_t SPVM__Net__SSLeay__accept(SPVM_ENV* env, SPVM_VALUE* stack) {
     if (error_id) { return error_id; }
     
     int64_t ssl_error = ERR_peek_last_error();
-    env->set_field_long_by_name(env, stack, obj_self, "error", ssl_error, &error_id, __func__, FILE_NAME, __LINE__);
-    if (error_id) { return error_id; }
     
     char ssl_error_string[256] = {0};
     ERR_error_string_n(ssl_error, ssl_error_string, sizeof(ssl_error_string));
@@ -155,8 +151,6 @@ int32_t SPVM__Net__SSLeay__shutdown(SPVM_ENV* env, SPVM_VALUE* stack) {
     assert(ssl_operation_error != SSL_ERROR_NONE);
     
     int64_t ssl_error = ERR_peek_last_error();
-    env->set_field_long_by_name(env, stack, obj_self, "error", ssl_error, &error_id, __func__, FILE_NAME, __LINE__);
-    if (error_id) { return error_id; }
     
     char ssl_error_string[256] = {0};
     ERR_error_string_n(ssl_error, ssl_error_string, sizeof(ssl_error_string));
@@ -185,8 +179,6 @@ int32_t SPVM__Net__SSLeay__set_fd(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   if (!(status == 1)) {
     int64_t ssl_error = ERR_peek_last_error();
-    env->set_field_long_by_name(env, stack, obj_self, "error", ssl_error, &error_id, __func__, FILE_NAME, __LINE__);
-    if (error_id) { return error_id; }
     
     char ssl_error_string[256] = {0};
     ERR_error_string_n(ssl_error, ssl_error_string, sizeof(ssl_error_string));
@@ -219,8 +211,6 @@ int32_t SPVM__Net__SSLeay__set_tlsext_host_name(SPVM_ENV* env, SPVM_VALUE* stack
   
   if (!(status == 1)) {
     int64_t ssl_error = ERR_peek_last_error();
-    env->set_field_long_by_name(env, stack, obj_self, "error", ssl_error, &error_id, __func__, FILE_NAME, __LINE__);
-    if (error_id) { return error_id; }
     
     char ssl_error_string[256] = {0};
     ERR_error_string_n(ssl_error, ssl_error_string, sizeof(ssl_error_string));
@@ -276,8 +266,6 @@ int32_t SPVM__Net__SSLeay__read(SPVM_ENV* env, SPVM_VALUE* stack) {
       if (error_id) { return error_id; }
       
       int64_t ssl_error = ERR_peek_last_error();
-      env->set_field_long_by_name(env, stack, obj_self, "error", ssl_error, &error_id, __func__, FILE_NAME, __LINE__);
-      if (error_id) { return error_id; }
       
       char ssl_error_string[256] = {0};
       ERR_error_string_n(ssl_error, ssl_error_string, sizeof(ssl_error_string));
@@ -335,8 +323,6 @@ int32_t SPVM__Net__SSLeay__peek(SPVM_ENV* env, SPVM_VALUE* stack) {
       if (error_id) { return error_id; }
       
       int64_t ssl_error = ERR_peek_last_error();
-      env->set_field_long_by_name(env, stack, obj_self, "error", ssl_error, &error_id, __func__, FILE_NAME, __LINE__);
-      if (error_id) { return error_id; }
       
       char ssl_error_string[256] = {0};
       ERR_error_string_n(ssl_error, ssl_error_string, sizeof(ssl_error_string));
@@ -394,8 +380,6 @@ int32_t SPVM__Net__SSLeay__write(SPVM_ENV* env, SPVM_VALUE* stack) {
       if (error_id) { return error_id; }
       
       int64_t ssl_error = ERR_peek_last_error();
-      env->set_field_long_by_name(env, stack, obj_self, "error", ssl_error, &error_id, __func__, FILE_NAME, __LINE__);
-      if (error_id) { return error_id; }
       
       char ssl_error_string[256] = {0};
       ERR_error_string_n(ssl_error, ssl_error_string, sizeof(ssl_error_string));

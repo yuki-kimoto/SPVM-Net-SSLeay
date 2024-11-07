@@ -30,10 +30,6 @@ See source codes of L<IO::Socket::SSL|https://metacpan.org/pod/SPVM::IO::Socket:
 
 C<has operation_error : ro int;>
 
-=head2 error
-
-C<has error : ro long;>
-
 =head1 Class Methods
 
 =head2 new
