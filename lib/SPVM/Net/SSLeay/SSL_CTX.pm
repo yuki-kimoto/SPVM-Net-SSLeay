@@ -28,12 +28,6 @@ C<SSL_MODE_AUTO_RETRY> mode is enabled.
 
 =head1 Instance Methods
 
-=head2 DESTROY
-
-C<method DESTROY : void ();>
-
-Frees L<SSL_CTX|https://docs.openssl.org/3.1/man3/SSL_CTX_new/> object by calling L<SSL_CTX_free|https://docs.openssl.org/3.1/man3/SSL_CTX_free/> function if C<no_free> flag of the instance is not a true value.
-
 =head2 set_mode
 
 C<method set_mode : long ($mode : long);>
@@ -153,6 +147,12 @@ Returns the options by calling L<SSL_CTX_get_options|https://docs.openssl.org/3.
 C<method clear_options : long ($options : long);>
 
 Clears the options set via bit-mask in the options $options by calling L<SSL_CTX_clear_options|https://docs.openssl.org/3.1/man3/SSL_CTX_set_options/> function, and returns its return value.
+
+=head2 DESTROY
+
+C<method DESTROY : void ();>
+
+Frees L<SSL_CTX|https://docs.openssl.org/3.1/man3/SSL_CTX_new/> object by calling L<SSL_CTX_free|https://docs.openssl.org/3.1/man3/SSL_CTX_free/> function if C<no_free> flag of the instance is not a true value.
 
 =head1 See Also
 

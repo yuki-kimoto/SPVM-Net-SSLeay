@@ -32,12 +32,6 @@ The pointer value of the new L<Net::SSLeay::BIO|SPVM::Net::SSLeay::BIO> object i
 
 =head1 Instance Methods
 
-=head2 DESTROY
-
-C<method DESTROY : void ();>
-
-Frees L<BIO|https://docs.openssl.org/1.0.2/man3/BIO_new> object by calling L<BIO_free|https://docs.openssl.org/1.0.2/man3/BIO_free> function if C<no_free> flag of the instance is not a true value.
-
 =head2 read
 
 C<method read : int ($data : mutable string, $dlen : int = -1);>
@@ -69,6 +63,12 @@ The $data must be defined. Otherwise an exception is thrown.
 The $dlen must be lower than or equal to the length of the $data. Otherwise an exception is thrown.
 
 If BIO_write failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
+=head2 DESTROY
+
+C<method DESTROY : void ();>
+
+Frees L<BIO|https://docs.openssl.org/1.0.2/man3/BIO_new> object by calling L<BIO_free|https://docs.openssl.org/1.0.2/man3/BIO_free> function if C<no_free> flag of the instance is not a true value.
 
 =head1 See Also
 

@@ -4,12 +4,10 @@
 class Net::SSLeay {
   version "0.007";
   
-  use Net::SSLeay::Error;
-  use Net::SSLeay::Error::Operation;
-  
   use Net::SSLeay::Constant;
   use Net::SSLeay::SSL_CTX;
   use Net::SSLeay::ERR;
+  use Net::SSLeay::Error;
   
   INIT {
     &init();

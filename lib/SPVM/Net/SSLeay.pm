@@ -38,10 +38,6 @@ C<static method new : Net::SSLeay ($ssl_ctx : L<Net::SSLeay::SSL_CTX|SPVM::Net::
 
 =head1 Instance Methods
 
-=head2 DESTROY
-
-C<method DESTROY : void ();>
-
 =head2 set_fd
 
 C<method set_fd : int ($fd : int);>
@@ -73,6 +69,10 @@ C<method peek : int ($buf : mutable string, $num : int = -1, $offset : int = 0);
 =head2 write
 
 C<method write : int ($buf : string, $num : int = -1, $offset : int = 0);>
+
+=head2 DESTROY
+
+C<method DESTROY : void ();>
 
 =head1 Modules
 

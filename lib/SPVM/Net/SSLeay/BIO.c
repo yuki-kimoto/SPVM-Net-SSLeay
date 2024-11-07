@@ -21,21 +21,6 @@ int32_t SPVM__Net__SSLeay__BIO__new(SPVM_ENV* env, SPVM_VALUE* stack) {
   return 0;
 }
 
-int32_t SPVM__Net__SSLeay__BIO__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
-  
-  int32_t error_id = 0;
-  
-  void* obj_self = stack[0].oval;
-  
-  BIO* bio = env->get_pointer(env, stack, obj_self);
-  
-  if (!env->no_free(env, stack, obj_self)) {
-    BIO_free(bio);
-  }
-  
-  return 0;
-}
-
 int32_t SPVM__Net__SSLeay__BIO__read(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
@@ -119,3 +104,19 @@ int32_t SPVM__Net__SSLeay__BIO__write(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   return 0;
 }
+
+int32_t SPVM__Net__SSLeay__BIO__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  BIO* bio = env->get_pointer(env, stack, obj_self);
+  
+  if (!env->no_free(env, stack, obj_self)) {
+    BIO_free(bio);
+  }
+  
+  return 0;
+}
+
