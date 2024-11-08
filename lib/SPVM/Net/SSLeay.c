@@ -191,7 +191,10 @@ int32_t SPVM__Net__SSLeay__accept(SPVM_ENV* env, SPVM_VALUE* stack) {
   int32_t status = SSL_accept(ssl);
   
   if (!(status == 1)) {
+    
     int32_t ssl_operation_error = SSL_get_error(ssl, status);
+    
+    assert(ssl_operation_error != SSL_ERROR_NONE);
     
     env->set_field_int_by_name(env, stack, obj_self, "operation_error", ssl_operation_error, &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -201,10 +204,9 @@ int32_t SPVM__Net__SSLeay__accept(SPVM_ENV* env, SPVM_VALUE* stack) {
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
-    if (error_id) { return error_id; }
+    env->die(env, stack, "[OpenSSL Error]SSL_accept failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
     
-    env->die(env, stack, "[OpenSSL Error]SSL_accept failed.", __func__, FILE_NAME, __LINE__);
+    int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     
     return error_id;
   }
