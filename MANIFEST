@@ -15,11 +15,17 @@ lib/SPVM/Net/SSLeay/BIO.c
 lib/SPVM/Net/SSLeay/BIO.config
 lib/SPVM/Net/SSLeay/BIO.pm
 lib/SPVM/Net/SSLeay/BIO.spvm
+lib/SPVM/Net/SSLeay/Callback/Pem_password_cb.pm
+lib/SPVM/Net/SSLeay/Callback/Pem_password_cb.spvm
 lib/SPVM/Net/SSLeay/ConfigBuilder.pm
 lib/SPVM/Net/SSLeay/Constant.c
 lib/SPVM/Net/SSLeay/Constant.config
 lib/SPVM/Net/SSLeay/Constant.pm
 lib/SPVM/Net/SSLeay/Constant.spvm
+lib/SPVM/Net/SSLeay/DH.c
+lib/SPVM/Net/SSLeay/DH.config
+lib/SPVM/Net/SSLeay/DH.pm
+lib/SPVM/Net/SSLeay/DH.spvm
 lib/SPVM/Net/SSLeay/ERR.c
 lib/SPVM/Net/SSLeay/ERR.config
 lib/SPVM/Net/SSLeay/ERR.pm
