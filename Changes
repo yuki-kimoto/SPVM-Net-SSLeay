@@ -1,3 +1,7 @@
+0.010 2024-11-09
+  [New Features]
+    * Add Net::SSLeay::BIO#new_file method.
+    
 0.009 2024-11-08
   [Requirement Changes]
     * Require SPVM 0.990029.

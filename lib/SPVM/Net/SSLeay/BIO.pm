@@ -22,17 +22,21 @@ Net::SSLeay::BIO class of L<SPVM> represents L<BIO|https://docs.openssl.org/1.0.
 
 C<static method new : L<Net::SSLeay::BIO|SPVM::Net::SSLeay::BIO> ();>
 
-Creates a new L<Net::SSLeay::BIO|SPVM::Net::SSLeay::BIO> object and returns its.
-
-Implementation:
-
-This method calls L<BIO_new|https://docs.openssl.org/1.0.2/man3/BIO_new/> function given the return value of C<BIO_s_mem()> as the first argument.
-
-The pointer value of the new L<Net::SSLeay::BIO|SPVM::Net::SSLeay::BIO> object is set to the return value of C<BIO_new> function.
+Creates a new L<Net::SSLeay::BIO|SPVM::Net::SSLeay::BIO> object, calls L<BIO_new|https://docs.openssl.org/1.0.2/man3/BIO_new/> function given the return value of C<BIO_s_mem()> as the first argument, sets the pointer value of the new L<Net::SSLeay::BIO|SPVM::Net::SSLeay::BIO> object to the return value of L<BIO_new|https://docs.openssl.org/1.0.2/man3/BIO_new/> function, and returns the new L<Net::SSLeay::BIO|SPVM::Net::SSLeay::BIO> object.
 
 Exceptions:
 
 If BIO_new failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
+=head2 new_file
+
+C<static method new_file : Net::SSLeay::BIO ($filename : string, $mode : string);>
+
+Creates a new L<Net::SSLeay::BIO|SPVM::Net::SSLeay::BIO> object, calls L<BIO_new_file|https://docs.openssl.org/1.0.2/man3/BIO_new_file/> function given the file name $filename and the mode $mode, sets the pointer value of the new L<Net::SSLeay::BIO|SPVM::Net::SSLeay::BIO> object to the return value of L<BIO_new_file|https://docs.openssl.org/1.0.2/man3/BIO_new_file/> function, and returns the new L<Net::SSLeay::BIO|SPVM::Net::SSLeay::BIO> object.
+
+Exceptions:
+
+If BIO_new_file failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
 =head1 Instance Methods
 
