@@ -286,9 +286,8 @@ int32_t SPVM__Net__SSLeay__read(SPVM_ENV* env, SPVM_VALUE* stack) {
   int32_t read_length = SSL_read(ssl, buf + offset, num);
   
   if (!(read_length > 0)) {
-    int32_t ssl_error = SSL_get_error(ssl, read_length);
-    if (!(ssl_error == SSL_ERROR_ZERO_RETURN)) {
-      int32_t ssl_operation_error = SSL_get_error(ssl, read_length);
+    int32_t ssl_operation_error = SSL_get_error(ssl, read_length);
+    if (!(ssl_operation_error == SSL_ERROR_ZERO_RETURN)) {
       env->set_field_int_by_name(env, stack, obj_self, "operation_error", ssl_operation_error, &error_id, __func__, FILE_NAME, __LINE__);
       if (error_id) { return error_id; }
       
@@ -348,9 +347,8 @@ int32_t SPVM__Net__SSLeay__peek(SPVM_ENV* env, SPVM_VALUE* stack) {
   int32_t peek_length = SSL_peek(ssl, buf + offset, num);
   
   if (!(peek_length > 0)) {
-    int32_t ssl_error = SSL_get_error(ssl, peek_length);
-    if (!(ssl_error == SSL_ERROR_ZERO_RETURN)) {
-      int32_t ssl_operation_error = SSL_get_error(ssl, peek_length);
+    int32_t ssl_operation_error = SSL_get_error(ssl, peek_length);
+    if (!(ssl_operation_error == SSL_ERROR_ZERO_RETURN)) {
       env->set_field_int_by_name(env, stack, obj_self, "operation_error", ssl_operation_error, &error_id, __func__, FILE_NAME, __LINE__);
       if (error_id) { return error_id; }
       
@@ -410,9 +408,8 @@ int32_t SPVM__Net__SSLeay__write(SPVM_ENV* env, SPVM_VALUE* stack) {
   int32_t write_length = SSL_write(ssl, buf + offset, num);
   
   if (!(write_length > 0)) {
-    int32_t ssl_error = SSL_get_error(ssl, write_length);
-    if (!(ssl_error == SSL_ERROR_ZERO_RETURN)) {
-      int32_t ssl_operation_error = SSL_get_error(ssl, write_length);
+    int32_t ssl_operation_error = SSL_get_error(ssl, write_length);
+    if (!(ssl_operation_error == SSL_ERROR_ZERO_RETURN)) {
       env->set_field_int_by_name(env, stack, obj_self, "operation_error", ssl_operation_error, &error_id, __func__, FILE_NAME, __LINE__);
       if (error_id) { return error_id; }
       
