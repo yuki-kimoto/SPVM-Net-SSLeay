@@ -1,3 +1,8 @@
+0.009 2024-11-08
+  [Requirement Changes]
+    * Require SPVM 0.990029.
+  [Exception Message Improvement]
+    * Add the detail of OpenSSL error to its exception message.
 0.008 2024-11-07
   [New Features]
     * Add Net::SSLeay::Error class.

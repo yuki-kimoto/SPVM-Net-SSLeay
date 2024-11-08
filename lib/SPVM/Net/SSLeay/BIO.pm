@@ -30,6 +30,10 @@ This method calls L<BIO_new|https://docs.openssl.org/1.0.2/man3/BIO_new/> functi
 
 The pointer value of the new L<Net::SSLeay::BIO|SPVM::Net::SSLeay::BIO> object is set to the return value of C<BIO_new> function.
 
+Exceptions:
+
+If BIO_new failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
 =head1 Instance Methods
 
 =head2 read

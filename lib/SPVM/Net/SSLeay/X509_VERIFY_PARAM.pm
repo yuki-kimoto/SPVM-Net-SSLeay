@@ -38,6 +38,8 @@ The host name $name must be defined. Otherwise an exception is thrown.
 
 The length $namelen must be greater than or equal to the length of the host name $name. Otherwise an exception is thrown.
 
+If X509_VERIFY_PARAM_set1_host failed, an exception is thrown.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>

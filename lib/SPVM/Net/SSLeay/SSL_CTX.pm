@@ -26,6 +26,10 @@ Creates a new L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> given the L<Net
 
 C<SSL_MODE_AUTO_RETRY> mode is enabled.
 
+Exceptions:
+
+If SSL_CTX_new failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
 =head1 Instance Methods
 
 =head2 set_mode

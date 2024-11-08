@@ -4,6 +4,7 @@
 #include "spvm_native.h"
 
 #include <openssl/ssl.h>
+#include <openssl/err.h>
 
 static const char* FILE_NAME = "Net/SSLeay/PEM.c";
 
@@ -22,10 +23,15 @@ int32_t SPVM__Net__SSLeay__PEM__read_bio_X509(SPVM_ENV* env, SPVM_VALUE* stack) 
   X509* x509 = PEM_read_bio_X509(bp, NULL, 0, NULL);
   
   if (!x509) {
-    int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
-    if (error_id) { return error_id; }
+    int64_t ssl_error = ERR_peek_last_error();
     
-    env->die(env, stack, "[OpenSSL Error]PEM_read_bio_X509 failed.", __func__, FILE_NAME, __LINE__);
+    char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
+    ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
+    
+    env->die(env, stack, "[OpenSSL Error]PEM_read_bio_X509 failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    
+    int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
+    
     return error_id;
   }
   
@@ -56,10 +62,15 @@ int32_t SPVM__Net__SSLeay__PEM__read_bio_X509_CRL(SPVM_ENV* env, SPVM_VALUE* sta
   X509_CRL* x509_crl = PEM_read_bio_X509_CRL(bp, NULL, 0, NULL);
   
   if (!x509_crl) {
-    int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
-    if (error_id) { return error_id; }
+    int64_t ssl_error = ERR_peek_last_error();
     
-    env->die(env, stack, "[OpenSSL Error]PEM_read_bio_X509_CRL failed.", __func__, FILE_NAME, __LINE__);
+    char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
+    ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
+    
+    env->die(env, stack, "[OpenSSL Error]PEM_read_bio_X509_CRL failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    
+    int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
+    
     return error_id;
   }
   

@@ -34,11 +34,17 @@ See source codes of L<IO::Socket::SSL|https://metacpan.org/pod/SPVM::IO::Socket:
 
 =head1 Fields
 
+=head2 ssl_ctx
+
+C<has ssl_ctx : L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX>;>
+
+A L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> object.
+
 =head2 operation_error
 
 C<has operation_error : ro int;>
 
-The place where the return value of L<SSL_get_error|https://docs.openssl.org/1.1.1/man3/SSL_get_error/>.
+The place where the return value of L<SSL_get_error|https://docs.openssl.org/1.1.1/man3/SSL_get_error/> function is stored.
 
 =head1 Class Methods
 
@@ -47,6 +53,8 @@ The place where the return value of L<SSL_get_error|https://docs.openssl.org/1.1
 C<static method new : Net::SSLeay ($ssl_ctx : L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX>);>
 
 Creates a new L<Net::SSLeay|SPVM::Net::SSLeay> object, creates a L<SSL|https://docs.openssl.org/master/man3/SSL_new/> object by calling L<SSL_new|https://docs.openssl.org/master/man3/SSL_new/> function given the L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> object $ssl_ctx, sets the pointer value of the new L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> object to the return value of L<SSL_new|https://docs.openssl.org/master/man3/SSL_new/> function, and returns the new L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> object.
+
+L</"ssl_ctx"> field is set to $ssl_ctx.
 
 Exceptions:
 
