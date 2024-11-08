@@ -152,6 +152,18 @@ C<method clear_options : long ($options : long);>
 
 Clears the options set via bit-mask in the options $options by calling L<SSL_CTX_clear_options|https://docs.openssl.org/3.1/man3/SSL_CTX_set_options/> function, and returns its return value.
 
+=head2 set_alpn_protos
+
+C<method set_alpn_protos : int ($protos : string, $protos_len : int = -1);>
+
+Calls L<SSL_CTX_set_alpn_protos|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_alpn_select_cb> function given the protocals $ptotos and the length $protos_len, and returns its return value.
+
+If $protos_len is less than 0, it is set to the length of $protos.
+
+Exceptions:
+
+The protocols $protos must be defined. Otherwise an exception is thrown.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>

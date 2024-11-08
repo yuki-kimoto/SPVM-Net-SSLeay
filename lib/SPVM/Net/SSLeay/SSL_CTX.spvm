@@ -41,6 +41,8 @@ class Net::SSLeay::SSL_CTX {
   
   native method clear_options : long ($options : long);
   
+  native method set_alpn_protos : int ($protos : string, $protos_len : int = -1);
+  
   native method DESTROY : void ();
   
 }
