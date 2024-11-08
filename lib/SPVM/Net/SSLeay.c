@@ -49,8 +49,8 @@ int32_t SPVM__Net__SSLeay__new(SPVM_ENV* env, SPVM_VALUE* stack) {
   if (!ssl) {
     int64_t ssl_error = ERR_peek_last_error();
     
-    char ssl_error_string[256] = {0};
-    ERR_error_string_n(ssl_error, ssl_error_string, sizeof(ssl_error_string));
+    char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
+    ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
     int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -87,8 +87,8 @@ int32_t SPVM__Net__SSLeay__set_fd(SPVM_ENV* env, SPVM_VALUE* stack) {
   if (!(status == 1)) {
     int64_t ssl_error = ERR_peek_last_error();
     
-    char ssl_error_string[256] = {0};
-    ERR_error_string_n(ssl_error, ssl_error_string, sizeof(ssl_error_string));
+    char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
+    ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
     int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -125,8 +125,8 @@ int32_t SPVM__Net__SSLeay__set_tlsext_host_name(SPVM_ENV* env, SPVM_VALUE* stack
   if (!(status == 1)) {
     int64_t ssl_error = ERR_peek_last_error();
     
-    char ssl_error_string[256] = {0};
-    ERR_error_string_n(ssl_error, ssl_error_string, sizeof(ssl_error_string));
+    char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
+    ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
     int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -161,8 +161,8 @@ int32_t SPVM__Net__SSLeay__connect(SPVM_ENV* env, SPVM_VALUE* stack) {
     
     int64_t ssl_error = ERR_peek_last_error();
     
-    char ssl_error_string[256] = {0};
-    ERR_error_string_n(ssl_error, ssl_error_string, sizeof(ssl_error_string));
+    char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
+    ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
     int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -196,8 +196,8 @@ int32_t SPVM__Net__SSLeay__accept(SPVM_ENV* env, SPVM_VALUE* stack) {
     
     int64_t ssl_error = ERR_peek_last_error();
     
-    char ssl_error_string[256] = {0};
-    ERR_error_string_n(ssl_error, ssl_error_string, sizeof(ssl_error_string));
+    char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
+    ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
     int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -233,8 +233,8 @@ int32_t SPVM__Net__SSLeay__shutdown(SPVM_ENV* env, SPVM_VALUE* stack) {
     
     int64_t ssl_error = ERR_peek_last_error();
     
-    char ssl_error_string[256] = {0};
-    ERR_error_string_n(ssl_error, ssl_error_string, sizeof(ssl_error_string));
+    char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
+    ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
     int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -294,8 +294,8 @@ int32_t SPVM__Net__SSLeay__read(SPVM_ENV* env, SPVM_VALUE* stack) {
       
       int64_t ssl_error = ERR_peek_last_error();
       
-      char ssl_error_string[256] = {0};
-      ERR_error_string_n(ssl_error, ssl_error_string, sizeof(ssl_error_string));
+      char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
+      ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
       
       int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
       if (error_id) { return error_id; }
@@ -356,8 +356,8 @@ int32_t SPVM__Net__SSLeay__peek(SPVM_ENV* env, SPVM_VALUE* stack) {
       
       int64_t ssl_error = ERR_peek_last_error();
       
-      char ssl_error_string[256] = {0};
-      ERR_error_string_n(ssl_error, ssl_error_string, sizeof(ssl_error_string));
+      char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
+      ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
       
       int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
       if (error_id) { return error_id; }
@@ -418,8 +418,8 @@ int32_t SPVM__Net__SSLeay__write(SPVM_ENV* env, SPVM_VALUE* stack) {
       
       int64_t ssl_error = ERR_peek_last_error();
       
-      char ssl_error_string[256] = {0};
-      ERR_error_string_n(ssl_error, ssl_error_string, sizeof(ssl_error_string));
+      char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
+      ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
       
       int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
       if (error_id) { return error_id; }
