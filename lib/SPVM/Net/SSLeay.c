@@ -4,7 +4,6 @@
 #include "spvm_native.h"
 
 #include <openssl/ssl.h>
-
 #include <openssl/err.h>
 
 #include <assert.h>
