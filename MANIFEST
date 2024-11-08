@@ -24,6 +24,10 @@ lib/SPVM/Net/SSLeay/DH.c
 lib/SPVM/Net/SSLeay/DH.config
 lib/SPVM/Net/SSLeay/DH.pm
 lib/SPVM/Net/SSLeay/DH.spvm
+lib/SPVM/Net/SSLeay/EC_KEY.c
+lib/SPVM/Net/SSLeay/EC_KEY.config
+lib/SPVM/Net/SSLeay/EC_KEY.pm
+lib/SPVM/Net/SSLeay/EC_KEY.spvm
 lib/SPVM/Net/SSLeay/ERR.c
 lib/SPVM/Net/SSLeay/ERR.config
 lib/SPVM/Net/SSLeay/ERR.pm
