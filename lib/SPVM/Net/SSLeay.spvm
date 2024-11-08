@@ -43,6 +43,8 @@ class Net::SSLeay {
   
   native method write : int ($buf : string, $num : int = -1, $offset : int = 0);
   
+  native method get_servername : string ($type : int);
+  
   native method DESTROY : void ();
   
 }

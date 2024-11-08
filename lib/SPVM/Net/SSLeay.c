@@ -436,6 +436,28 @@ int32_t SPVM__Net__SSLeay__write(SPVM_ENV* env, SPVM_VALUE* stack) {
   return 0;
 }
 
+int32_t SPVM__Net__SSLeay__get_servername(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  int32_t type = stack[1].ival;
+  
+  SSL* ssl = env->get_pointer(env, stack, obj_self);
+  
+  const char* servername = SSL_get_servername(ssl, type);
+  
+  void* obj_servername = NULL;
+  if (servername) {
+    obj_servername = env->new_string_nolen(env , stack, servername);
+  }
+  
+  stack[0].oval = obj_servername;
+  
+  return 0;
+}
+
 int32_t SPVM__Net__SSLeay__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;

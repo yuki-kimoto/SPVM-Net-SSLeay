@@ -164,6 +164,12 @@ The offset $offset + $num must be lower than or equal to the length of the buffe
 
 If SSL_write failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class and with L</"operation_error"> field set to the return vlaue of L<SSL_get_error|https://docs.openssl.org/1.1.1/man3/SSL_get_error/> function given the return value of L<SSL_write|https://docs.openssl.org/1.0.2/man3/SSL_write/> function.
 
+=head2 get_servername
+
+C<method get_servername : string ($type : int);>
+
+Calls L<SSL_get_servername|https://docs.openssl.org/master/man3/SSL_CTX_set_tlsext_servername_callback> function given the type $type, and returns its return value.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>
