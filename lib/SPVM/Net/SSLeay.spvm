@@ -21,6 +21,8 @@ class Net::SSLeay {
   # Class Methods
   native static method new : Net::SSLeay ($ssl_ctx : Net::SSLeay::SSL_CTX);
   
+  native static method alert_desc_string_long : string ($value : int);
+  
   # Private or Internal Class Methods
   private native static method init : void ();
   
@@ -46,8 +48,6 @@ class Net::SSLeay {
   native method get_servername : string ($type : int);
   
   native method set_tlsext_status_type : long  ($type : int);
-  
-  native method alert_desc_string_long : string ($value : int);
   
   native method DESTROY : void ();
   

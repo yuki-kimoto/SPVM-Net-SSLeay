@@ -35,6 +35,7 @@ int32_t SPVM__Net__SSLeay__init(SPVM_ENV* env, SPVM_VALUE* stack) {
   return 0;
 }
 
+// Class Methods
 int32_t SPVM__Net__SSLeay__new(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
@@ -69,6 +70,24 @@ int32_t SPVM__Net__SSLeay__new(SPVM_ENV* env, SPVM_VALUE* stack) {
   return 0;
 }
 
+int32_t SPVM__Net__SSLeay__alert_desc_string_long(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  int32_t type = stack[0].ival;
+  
+  const char* desc = SSL_alert_desc_string_long(type);
+  
+  assert(desc);
+  
+  void* obj_desc = env->new_string_nolen(env, stack, desc);
+  
+  stack[0].oval = obj_desc;
+  
+  return 0;
+}
+
+// Instance Methods
 int32_t SPVM__Net__SSLeay__set_fd(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
@@ -482,27 +501,6 @@ int32_t SPVM__Net__SSLeay__set_tlsext_status_type(SPVM_ENV* env, SPVM_VALUE* sta
     
     return error_id;
   }
-  
-  return 0;
-}
-
-int32_t SPVM__Net__SSLeay__alert_desc_string_long(SPVM_ENV* env, SPVM_VALUE* stack) {
-  
-  int32_t error_id = 0;
-  
-  void* obj_self = stack[0].oval;
-  
-  int32_t type = stack[1].ival;
-  
-  SSL* ssl = env->get_pointer(env, stack, obj_self);
-  
-  const char* desc = SSL_alert_desc_string_long(ssl, type);
-  
-  assert(desc);
-  
-  void* obj_desc = env->new_string_nolen(env, stack, desc);
-  
-  stack[0].oval = obj_desc;
   
   return 0;
 }
