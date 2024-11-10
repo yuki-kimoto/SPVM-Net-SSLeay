@@ -9,6 +9,7 @@
     * Add Net::SSLeay::SSL_CTX#set_tmp_ecdh method.
     * Add Net::SSLeay::SSL_CTX#set1_groups_list method.
     * Add Net::SSLeay::SSL_CTX#set1_curves_list method.
+    * Add Net::SSLeay#set_tlsext_status_type method.
     
 0.009 2024-11-08
   [Requirement Changes]

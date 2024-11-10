@@ -170,6 +170,14 @@ C<method get_servername : string ($type : int);>
 
 Calls L<SSL_get_servername|https://docs.openssl.org/master/man3/SSL_CTX_set_tlsext_servername_callback> function given the type $type, and returns its return value.
 
+=head2 set_tlsext_status_type
+
+C<method set_tlsext_status_type : long  ($type : int);>
+
+Calls L<SSL_set_tlsext_status_type|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_tlsext_status_cb> function given the type $type, and returns its return value.
+
+If SSL_set_tlsext_status_type failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>
