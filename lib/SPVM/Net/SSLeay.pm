@@ -176,7 +176,15 @@ C<method set_tlsext_status_type : long  ($type : int);>
 
 Calls L<SSL_set_tlsext_status_type|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_tlsext_status_cb> function given the type $type, and returns its return value.
 
+Exceptions:
+
 If SSL_set_tlsext_status_type failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
+=head2 alert_desc_string_long
+
+C<method alert_desc_string_long : string  ($type : int);>
+
+Calls L<SSL_alert_desc_string_long|https://docs.openssl.org/1.1.1/man3/SSL_alert_type_string/> function given the type $type, and returns its return value.
 
 =head2 DESTROY
 

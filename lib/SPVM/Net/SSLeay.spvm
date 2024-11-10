@@ -47,6 +47,8 @@ class Net::SSLeay {
   
   native method set_tlsext_status_type : long  ($type : int);
   
+  native method alert_desc_string_long : string ($value : int);
+  
   native method DESTROY : void ();
   
 }
