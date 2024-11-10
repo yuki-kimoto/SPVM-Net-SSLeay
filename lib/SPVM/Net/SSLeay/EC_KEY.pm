@@ -6,35 +6,15 @@ package SPVM::Net::SSLeay::EC_KEY;
 
 =head1 Name
 
-SPVM::Net::SSLeay::EC_KEY - Short Description
+SPVM::Net::SSLeay::EC_KEY - EC_KEY data structure in OpenSSL
 
 =head1 Description
 
-Net::SSLeay::EC_KEY class in L<SPVM> has methods to do someting.
+Net::SSLeay::EC_KEY class in L<SPVM> represents L<EC_KEY|https://docs.openssl.org/master/man3/EC_KEY_new/> data structure in OpenSSL
 
 =head1 Usage
 
   use Net::SSLeay::EC_KEY;
-
-=head1 Details
-
-
-
-=head1 Super Class
-
-
-
-=head1 Interfaces
-
-
-
-=head1 Enumerations
-
-
-
-=head1 Fields
-
-
 
 =head1 Class Methods
 
@@ -42,20 +22,15 @@ Net::SSLeay::EC_KEY class in L<SPVM> has methods to do someting.
 
 =head1 Instance Methods
 
+=head2 DESTROY
 
+C<method DESTROY : void ();>
+
+Frees L<EC_KEY|https://docs.openssl.org/master/man3/EC_KEY_new/> object by calling L<EC_KEY_free|https://docs.openssl.org/master/man3/EC_KEY_new/> function if C<no_free> flag of the instance is not a true value.
 
 =head1 See Also
 
 
-
-
-=head1 Repository
-
-
-
-=head1 Author
-
-Yuki Kimoto C<kimoto.yuki@gmail.com>
 
 =head1 Copyright & License
 
