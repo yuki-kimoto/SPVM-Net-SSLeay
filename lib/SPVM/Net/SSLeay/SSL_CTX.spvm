@@ -46,6 +46,8 @@ class Net::SSLeay::SSL_CTX {
   
   native method set_tmp_ecdh : long ($ecdh : Net::SSLeay::EC_KEY);
   
+  native method set1_groups_list : int ($list : string);
+  
   native method DESTROY : void ();
   
 }

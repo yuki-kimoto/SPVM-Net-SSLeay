@@ -166,7 +166,7 @@ The protocols $protos must be defined. Otherwise an exception is thrown.
 
 If SSL_CTX_set_alpn_protos failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
-=head2 
+=head2 set_tmp_ecdh
 
 C<method set_tmp_ecdh : long ($ecdh : L<Net::SSLeay::EC_KEY|SPVM::Net::SSLeay::EC_KEY>);>
 
@@ -177,6 +177,22 @@ Exceptions:
 The ECDH parameters $ecdh must be defined. Otherwise an exception is thrown.
 
 If SSL_CTX_set_tmp_ecdh failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
+=head2 set1_groups_list
+
+C<method set1_groups_list : int ($list : string);>
+
+Calls L<SSL_CTX_set1_groups_list|https://docs.openssl.org/3.1/man3/SSL_CTX_set1_curves> function given the group list $list, and returns its return value.
+
+Exceptions:
+
+The group list $list must be defined. Otherwise an exception is thrown.
+
+If set1_groups_list failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
+Requirements:
+
+OpenSSL 3.0
 
 =head2 DESTROY
 

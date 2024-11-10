@@ -518,3 +518,44 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_tmp_ecdh(SPVM_ENV* env, SPVM_VALUE* stac
   
   return 0;
 }
+
+int32_t SPVM__Net__SSLeay__SSL_CTX__set1_groups_list(SPVM_ENV* env, SPVM_VALUE* stack) {
+
+#if !(OPENSSL_VERSION_NUMBER >= 0x30000000L)
+  env->die(env, stack, "SSL_CTX_set1_groups_list is not supported on this system(!(OPENSSL_VERSION_NUMBER >= 0x30000000L))", __func__, FILE_NAME, __LINE__);
+  return SPVM_NATIVE_C_BASIC_TYPE_ID_ERROR_NOT_SUPPORTED_CLASS;
+#else
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  void* obj_list = stack[1].oval;
+  
+  if (!obj_list) {
+    return env->die(env, stack, "The group list $list must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  const char* list = env->get_chars(env, stack, obj_list);
+  
+  SSL_CTX* ssl_ctx = env->get_pointer(env, stack, obj_self);
+  
+  int64_t status = SSL_CTX_set1_groups_list(ssl_ctx, list);
+  
+  if (!(status == 1)) {
+    int64_t ssl_error = ERR_peek_last_error();
+    
+    char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
+    ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
+    
+    env->die(env, stack, "[OpenSSL Error]SSL_CTX_set1_groups_list failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    
+    int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
+    
+    return error_id;
+  }
+  
+  stack[0].lval = status;
+  
+  return 0;
+#endif
+}
