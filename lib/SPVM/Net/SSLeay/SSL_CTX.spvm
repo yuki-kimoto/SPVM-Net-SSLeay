@@ -48,6 +48,8 @@ class Net::SSLeay::SSL_CTX {
   
   native method set1_groups_list : int ($list : string);
   
+  native method set1_curves_list : int ($list : string);
+  
   native method DESTROY : void ();
   
 }

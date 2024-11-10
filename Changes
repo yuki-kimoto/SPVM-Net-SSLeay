@@ -8,6 +8,7 @@
     * Add Net::SSLeay::EC_KEY class.
     * Add Net::SSLeay::SSL_CTX#set_tmp_ecdh method.
     * Add Net::SSLeay::SSL_CTX#set1_groups_list method.
+    * Add Net::SSLeay::SSL_CTX#set1_curves_list method.
     
 0.009 2024-11-08
   [Requirement Changes]
