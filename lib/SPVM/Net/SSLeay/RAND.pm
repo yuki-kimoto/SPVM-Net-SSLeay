@@ -34,6 +34,18 @@ C<static method poll : int ();>
 
 Calls native L<RAND_poll|https://docs.openssl.org/3.0/man3/RAND_add/> function.
 
+=head2 load_file
+
+C<static method load_file : int ($filename : string, $max_bytes : long);>
+
+Calls native L<RAND_load_file|https://docs.openssl.org/master/man3/RAND_load_file/> function given $filename and $max_bytes, and returns its return value.
+
+Exceptions:
+
+The filename $filename must be defined.
+
+If RAND_load_file failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
 =head1 See Also
 
 =over 2

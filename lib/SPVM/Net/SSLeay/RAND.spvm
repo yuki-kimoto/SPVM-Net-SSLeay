@@ -8,4 +8,6 @@ class Net::SSLeay::RAND {
   
   native static method poll : int ();
   
+  native static method load_file : int ($filename : string, $max_bytes : long);
+  
 }
