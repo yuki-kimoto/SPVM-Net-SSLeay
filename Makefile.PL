@@ -72,6 +72,7 @@ sub MY::postamble {
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::PEM');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::SSL_CTX');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::SSL_METHOD');
+    $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::SSL_SESSION');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::X509');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::X509_CRL');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::X509_STORE');
