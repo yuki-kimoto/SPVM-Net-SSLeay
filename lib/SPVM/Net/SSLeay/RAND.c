@@ -29,3 +29,12 @@ int32_t SPVM__Net__SSLeay__RAND__seed(SPVM_ENV* env, SPVM_VALUE* stack) {
   return 0;
 }
 
+int32_t SPVM__Net__SSLeay__RAND__poll(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  RAND_poll();
+  
+  return 0;
+}
+

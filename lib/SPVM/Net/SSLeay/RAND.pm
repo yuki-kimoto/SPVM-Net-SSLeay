@@ -28,6 +28,12 @@ Exceptions:
 
 The buffer $buf must be defined. Otherwise an exception is thrown.
 
+=head2 poll
+
+C<static method poll : int ();>
+
+Calls native L<RAND_poll|https://docs.openssl.org/3.0/man3/RAND_add/> function.
+
 =head1 See Also
 
 =over 2

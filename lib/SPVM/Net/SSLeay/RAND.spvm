@@ -6,4 +6,6 @@ class Net::SSLeay::RAND {
   # Class Mehtods
   native static method seed : void ($buf : string, $num : int);
   
+  native static method poll : int ();
+  
 }
