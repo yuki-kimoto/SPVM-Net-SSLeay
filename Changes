@@ -6,6 +6,7 @@
     * Add Net::SSLeay::X509_NAME#get_text_by_NID method.
     * Add Net::SSLeay::X509#get_issuer_name method.
     * Add Net::SSLeay::X509#get_subject_name method.
+    * Add Net::SSLeay::EVP_MD class.
 0.010 2024-11-11
   [New Features]
     * Add Net::SSLeay::BIO#new_file method.

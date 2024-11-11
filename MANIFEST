@@ -34,6 +34,10 @@ lib/SPVM/Net/SSLeay/ERR.pm
 lib/SPVM/Net/SSLeay/ERR.spvm
 lib/SPVM/Net/SSLeay/Error.pm
 lib/SPVM/Net/SSLeay/Error.spvm
+lib/SPVM/Net/SSLeay/EVP_MD.c
+lib/SPVM/Net/SSLeay/EVP_MD.config
+lib/SPVM/Net/SSLeay/EVP_MD.pm
+lib/SPVM/Net/SSLeay/EVP_MD.spvm
 lib/SPVM/Net/SSLeay/OPENSSL.c
 lib/SPVM/Net/SSLeay/OPENSSL.config
 lib/SPVM/Net/SSLeay/OPENSSL.pm
