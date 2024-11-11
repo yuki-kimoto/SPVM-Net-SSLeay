@@ -238,6 +238,12 @@ C<method get_shutdown : int ();>
 
 Calls native L<SSL_get_shutdown|https://docs.openssl.org/master/man3/SSL_set_shutdown/> function, and returns its return value.
 
+=head2 pending
+
+C<method pending : int ();>
+
+Calls native L<SSL_pending|https://docs.openssl.org/master/man3/SSL_pending/> function, and returns its return value.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>
