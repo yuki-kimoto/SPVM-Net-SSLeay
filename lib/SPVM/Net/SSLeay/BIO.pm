@@ -22,7 +22,7 @@ Net::SSLeay::BIO class of L<SPVM> represents L<BIO|https://docs.openssl.org/1.0.
 
 C<static method new : L<Net::SSLeay::BIO|SPVM::Net::SSLeay::BIO> ();>
 
-Creates a new L<Net::SSLeay::BIO|SPVM::Net::SSLeay::BIO> object, calls L<BIO_new|https://docs.openssl.org/1.0.2/man3/BIO_new/> function given the return value of C<BIO_s_mem()> as the first argument, sets the pointer value of the new L<Net::SSLeay::BIO|SPVM::Net::SSLeay::BIO> object to the return value of L<BIO_new|https://docs.openssl.org/1.0.2/man3/BIO_new/> function, and returns the new L<Net::SSLeay::BIO|SPVM::Net::SSLeay::BIO> object.
+Calls L<BIO_new|https://docs.openssl.org/1.0.2/man3/BIO_new/> function given the return value of native L<BIO_s_mem|https://docs.openssl.org/1.0.2/man3/BIO_s_mem/> function as the first argument, creates a new L<Net::SSLeay::BIO|SPVM::Net::SSLeay::BIO> object, sets the pointer value of the new object to the return value of the native function, and returns the new object.
 
 Exceptions:
 
@@ -32,7 +32,7 @@ If BIO_new failed, an exception is thrown with C<eval_error_id> set to the basic
 
 C<static method new_file : Net::SSLeay::BIO ($filename : string, $mode : string);>
 
-Creates a new L<Net::SSLeay::BIO|SPVM::Net::SSLeay::BIO> object, calls L<BIO_new_file|https://docs.openssl.org/1.0.2/man3/BIO_new_file/> function given the file name $filename and the mode $mode, sets the pointer value of the new L<Net::SSLeay::BIO|SPVM::Net::SSLeay::BIO> object to the return value of L<BIO_new_file|https://docs.openssl.org/1.0.2/man3/BIO_new_file/> function, and returns the new L<Net::SSLeay::BIO|SPVM::Net::SSLeay::BIO> object.
+Calls native L<BIO_new_file|https://docs.openssl.org/1.0.2/man3/BIO_new_file/> function given the file name $filename and the mode $mode, creates a new L<Net::SSLeay::BIO|SPVM::Net::SSLeay::BIO> object, sets the pointer value of the new object to the return value of the native function, and returns the new object.
 
 Exceptions:
 
@@ -44,7 +44,7 @@ If BIO_new_file failed, an exception is thrown with C<eval_error_id> set to the 
 
 C<method read : int ($data : mutable string, $dlen : int = -1);>
 
-Attempts to read $dlen bytes from C<BIO> and places the data in $data by calling native L<BIO_read|https://docs.openssl.org/1.0.2/man3/BIO_read/> function and returns its return value.
+Calls native L<BIO_read|https://docs.openssl.org/1.0.2/man3/BIO_read/> function given $data and $dlen, and returns its return value.
 
 If $dlen is lower than 0, it is set to the length of $data.
 
@@ -60,7 +60,7 @@ If BIO_read failed, an exception is thrown with C<eval_error_id> set to the basi
 
 C<method write : int ($data : string, $dlen : int = -1);>
 
-Attempts to write $dlen bytes from $data to C<BIO> by calling native L<BIO_write|https://docs.openssl.org/1.0.2/man3/BIO_write/> function and returns its return value.
+Calls native L<BIO_write|https://docs.openssl.org/1.0.2/man3/BIO_write/> function given $data and $dlen, and returns its return value.
 
 If $dlen is lower than 0, it is set to the length of $data.
 
