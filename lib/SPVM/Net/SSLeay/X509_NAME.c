@@ -16,7 +16,7 @@ int32_t SPVM__Net__SSLeay__X509_NAME__oneline(SPVM_ENV* env, SPVM_VALUE* stack) 
   
   X509_NAME* x509_name = env->get_pointer(env, stack, obj_self);
   
-  char* ret  = X509_NAME_oneline(x509_name, NULL, 0);
+  char* ret = X509_NAME_oneline(x509_name, NULL, 0);
   
   if (!ret) {
     int64_t ssl_error = ERR_peek_last_error();
@@ -36,6 +36,36 @@ int32_t SPVM__Net__SSLeay__X509_NAME__oneline(SPVM_ENV* env, SPVM_VALUE* stack) 
   free(ret);
   
   stack[0].oval = obj_ret;
+  
+  return 0;
+}
+
+int32_t SPVM__Net__SSLeay__X509_NAME__get_text_by_NID(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  int32_t nid = stack[1].ival;
+  
+  void* obj_buf = stack[2].oval;
+  
+  char* buf = NULL;
+  if (!obj_buf) {
+    buf = (char*)env->get_chars(env, stack, obj_buf);
+  }
+  
+  int32_t len = stack[3].ival;
+  
+  if (obj_buf && len < 0) {
+    len = env->length(env, stack, obj_buf);
+  }
+  
+  X509_NAME* x509_name = env->get_pointer(env, stack, obj_self);
+  
+  int32_t length = X509_NAME_get_text_by_NID(x509_name, nid, buf, len);
+  
+  stack[0].ival = length;
   
   return 0;
 }
