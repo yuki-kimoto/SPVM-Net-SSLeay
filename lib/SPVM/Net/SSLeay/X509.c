@@ -4,6 +4,7 @@
 #include "spvm_native.h"
 
 #include <openssl/ssl.h>
+#include <openssl/err.h>
 
 static const char* FILE_NAME = "Net/SSLeay/X509.c";
 
