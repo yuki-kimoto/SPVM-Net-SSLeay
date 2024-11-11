@@ -41,6 +41,7 @@
     * Add Net::SSLeay::RAND#seed method.
     * Add Net::SSLeay::RAND#poll method.
     * Add Net::SSLeay::RAND#load_file method.
+    
 0.009 2024-11-08
   [Requirement Changes]
     * Require SPVM 0.990029.
