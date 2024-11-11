@@ -6,7 +6,7 @@ package SPVM::Net::SSLeay::BIO;
 
 =head1 Name
 
-SPVM::Net::SSLeay::BIO - BIO data structure in OpenSSL
+SPVM::Net::SSLeay::BIO - BIO Data Strucutre in OpenSSL
 
 =head1 Description
 

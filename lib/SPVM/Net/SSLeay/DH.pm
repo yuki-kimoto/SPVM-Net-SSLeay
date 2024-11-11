@@ -6,7 +6,7 @@ package SPVM::Net::SSLeay::DH;
 
 =head1 Name
 
-SPVM::Net::SSLeay::DH - DH data structure in OpenSSL
+SPVM::Net::SSLeay::DH - DH Data Strucutre in OpenSSL
 
 =head1 Description
 

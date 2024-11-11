@@ -6,7 +6,7 @@ package SPVM::Net::SSLeay::SSL_SESSION;
 
 =head1 Name
 
-SPVM::Net::SSLeay::SSL_SESSION - SSL_SESSION data strucutre in OpenSSL
+SPVM::Net::SSLeay::SSL_SESSION - SSL_SESSION Data Strucutre in OpenSSL
 
 =head1 Description
 

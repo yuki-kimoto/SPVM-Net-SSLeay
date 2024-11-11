@@ -6,7 +6,7 @@ package SPVM::Net::SSLeay::EC_KEY;
 
 =head1 Name
 
-SPVM::Net::SSLeay::EC_KEY - EC_KEY data structure in OpenSSL
+SPVM::Net::SSLeay::EC_KEY - EC_KEY Data Strucutre in OpenSSL
 
 =head1 Description
 

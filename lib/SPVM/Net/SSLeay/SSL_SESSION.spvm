@@ -4,8 +4,6 @@
 class Net::SSLeay::SSL_SESSION {
   
   # Instance Methods
-  native method up_ref : int ();
-  
   native method DESTROY : void ();
 
 }

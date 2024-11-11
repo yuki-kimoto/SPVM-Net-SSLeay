@@ -38,6 +38,10 @@ lib/SPVM/Net/SSLeay/PEM.c
 lib/SPVM/Net/SSLeay/PEM.config
 lib/SPVM/Net/SSLeay/PEM.pm
 lib/SPVM/Net/SSLeay/PEM.spvm
+lib/SPVM/Net/SSLeay/SSL_CIPHER.c
+lib/SPVM/Net/SSLeay/SSL_CIPHER.config
+lib/SPVM/Net/SSLeay/SSL_CIPHER.pm
+lib/SPVM/Net/SSLeay/SSL_CIPHER.spvm
 lib/SPVM/Net/SSLeay/SSL_CTX.c
 lib/SPVM/Net/SSLeay/SSL_CTX.config
 lib/SPVM/Net/SSLeay/SSL_CTX.pm
