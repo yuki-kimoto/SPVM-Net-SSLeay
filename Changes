@@ -36,6 +36,8 @@
     * Add Net::SSLeay#pending method.
     * Add Net::SSLeay#load_error_strings method.
     * Add Net::SSLeay#get1_session method.
+    * Add Net::SSLeay#set_session method.
+    * Add Net::SSLeay::RAND class.
     
 0.009 2024-11-08
   [Requirement Changes]

@@ -42,6 +42,10 @@ lib/SPVM/Net/SSLeay/PEM.c
 lib/SPVM/Net/SSLeay/PEM.config
 lib/SPVM/Net/SSLeay/PEM.pm
 lib/SPVM/Net/SSLeay/PEM.spvm
+lib/SPVM/Net/SSLeay/RAND.c
+lib/SPVM/Net/SSLeay/RAND.config
+lib/SPVM/Net/SSLeay/RAND.pm
+lib/SPVM/Net/SSLeay/RAND.spvm
 lib/SPVM/Net/SSLeay/SSL_CIPHER.c
 lib/SPVM/Net/SSLeay/SSL_CIPHER.config
 lib/SPVM/Net/SSLeay/SSL_CIPHER.pm
