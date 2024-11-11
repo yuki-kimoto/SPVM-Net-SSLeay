@@ -40,3 +40,18 @@ int32_t SPVM__Net__SSLeay__X509_NAME__foo(SPVM_ENV* env, SPVM_VALUE* stack) {
   return 0;
 }
 
+int32_t SPVM__Net__SSLeay__X509_NAME__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  X509_NAME* x509_name = env->get_pointer(env, stack, obj_self);
+  
+  if (!env->no_free(env, stack, obj_self)) {
+    X509_NAME_free(x509_name);
+  }
+  
+  return 0;
+}
+

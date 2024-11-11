@@ -6,4 +6,5 @@ class Net::SSLeay::X509_NAME {
   # Instance Methods
   native method oneline : string ();
   
+  native method DESTROY : void ();
 }
