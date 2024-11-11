@@ -22,7 +22,13 @@ Net::SSLeay::OPENSSL class in L<SPVM> represetns L<OPENSSL|https://docs.openssl.
 
 C<static method add_ssl_algorithms : int ();>
 
-Calls L<OpenSSL_add_ssl_algorithms|https://docs.openssl.org/1.1.1/man3/SSL_library_init> method, and returns its return value.
+Calls L<OpenSSL_add_ssl_algorithms|https://docs.openssl.org/1.1.1/man3/SSL_library_init> function, and returns its return value.
+
+=head2 add_all_algorithms
+
+C<add_all_algorithms : void();>
+
+Calls L<OpenSSL_add_all_algorithms|https://docs.openssl.org/1.1.1/man3/SSL_library_init> function.
 
 =head1 See Also
 

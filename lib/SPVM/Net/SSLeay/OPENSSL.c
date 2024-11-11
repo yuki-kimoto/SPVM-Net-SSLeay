@@ -19,3 +19,12 @@ int32_t SPVM__Net__SSLeay__OPENSSL_add_ssl_algorithms(SPVM_ENV* env, SPVM_VALUE*
   return 0;
 }
 
+int32_t SPVM__Net__SSLeay__OPENSSL_add_all_algorithms(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  OpenSSL_add_all_algorithms();
+  
+  return 0;
+}
+

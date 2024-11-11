@@ -6,4 +6,6 @@ class Net::SSLeay::OPENSSL {
   # Class Method
   native static method add_ssl_algorithms : int ();
   
+  native add_all_algorithms : void();
+  
 }
