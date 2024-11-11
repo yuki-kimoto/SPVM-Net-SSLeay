@@ -620,6 +620,25 @@ int32_t SPVM__Net__SSLeay__session_reused(SPVM_ENV* env, SPVM_VALUE* stack) {
   return 0;
 }
 
+int32_t SPVM__Net__SSLeay__get_cipher(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  SSL* ssl = env->get_pointer(env, stack, obj_self);
+  
+  const char* name = SSL_get_cipher(ssl);
+  
+  assert(name);
+  
+  void* obj_name = env->new_string_nolen(env, stack, name);
+  
+  stack[0].oval = obj_name;
+  
+  return 0;
+}
+
 int32_t SPVM__Net__SSLeay__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;

@@ -26,6 +26,7 @@
     * Add Net::SSLeay::SSL_SESSION#DESTROY method.
     * Add Net::SSLeay#session_reused method.
     * Add Net::SSLeay::CIPHER class.
+    * Add Net::SSLeay#get_cipher method.
     
 0.009 2024-11-08
   [Requirement Changes]

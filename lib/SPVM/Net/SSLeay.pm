@@ -188,33 +188,39 @@ Calls native L<SSL_alert_desc_string_long|https://docs.openssl.org/1.1.1/man3/SS
 
 =head2 set_mode
 
-  method set_mode : long ($mode : long);
+C<method set_mode : long ($mode : long);>
 
 Calls native L<SSL_set_mode|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_mode/> function given the mode $mode, and returns its return value.
 
 =head2 clear_mode
 
-  method clear_mode : long ($mode : long);
+C<method clear_mode : long ($mode : long);>
 
 Calls native L<SSL_clear_mode|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_mode/> function given the mode $mode, and returns its return value.
 
 =head2 get_mode
 
-  method get_mode : long ();
+C<method get_mode : long ();>
 
 Calls native L<get_mode|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_mode/> function, and returns its return value.
 
 =head2 version
 
-  native method version : int ();
-  
+C<native method version : int ();>
+
 Calls native L<version|https://docs.openssl.org/master/man3/SSL_get_version> function, and returns its return value.
 
 =head2 session_reused
 
-  native method session_reused : int ();
+C<native method session_reused : int ();>
   
 Calls native L<SSL_session_reused|https://docs.openssl.org/1.1.1/man3/SSL_session_reused/> function, and returns its return value.
+
+=head2 get_cipher
+
+C<method get_cipher : string ();>
+
+Calls native L<SSL_get_cipher|https://docs.openssl.org/1.0.2/man3/SSL_get_current_cipher/> function, and returns its return value.
 
 =head2 DESTROY
 
