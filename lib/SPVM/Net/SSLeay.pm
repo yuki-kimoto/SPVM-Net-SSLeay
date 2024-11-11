@@ -66,6 +66,12 @@ C<static method library_init : int ();>
 
 Calls native L<SSL_library_init|https://docs.openssl.org/master/man3/SSL_library_init> function, and returns its return value.
 
+=head2 load_error_strings
+
+C<static method load_error_strings : void ();>
+
+Calls native L<SSL_load_error_strings|https://docs.openssl.org/3.0/man3/ERR_load_crypto_strings/> function.
+
 =head1 Instance Methods
 
 =head2 set_fd

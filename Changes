@@ -34,7 +34,7 @@
     * Add Net::SSLeay::OPENSSL#add_all_algorithms method.
     * Add Net::SSLeay#get_shutdown method.
     * Add Net::SSLeay#pending method.
-    
+    * Add Net::SSLeay#load_error_strings method.
 0.009 2024-11-08
   [Requirement Changes]
     * Require SPVM 0.990029.

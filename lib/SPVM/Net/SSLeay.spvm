@@ -25,6 +25,8 @@ class Net::SSLeay {
   
   native static method alert_desc_string_long : string ($value : int);
   
+  native static method load_error_strings : void ();
+  
   # This native function is deprecated in OpenSSL 1.1.0, but Perl's IO::Socket::SSL used this method.
   native static method library_init : int ();
   
