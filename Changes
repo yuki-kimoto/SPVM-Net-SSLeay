@@ -27,6 +27,7 @@
     * Add Net::SSLeay#session_reused method.
     * Add Net::SSLeay::CIPHER class.
     * Add Net::SSLeay#get_cipher method.
+    * Add Net::SSLeay#get_peer_certificate method.
     
 0.009 2024-11-08
   [Requirement Changes]

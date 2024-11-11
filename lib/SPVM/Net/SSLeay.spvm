@@ -9,6 +9,7 @@ class Net::SSLeay {
   use Net::SSLeay::ERR;
   use Net::SSLeay::Error;
   use Net::SSLeay::SSL_CIPHER;
+  use Net::SSLeay::X509;
   
   INIT {
     &init();
@@ -61,6 +62,8 @@ class Net::SSLeay {
   native method session_reused : int ();
   
   native method get_cipher : string ();
+  
+  native method get_peer_certificate : Net::SSLeay::X509 ();
   
   # This method is not documented in OpenSSL, but Perl's IO::Socket::SSL needs this method
   native method set_SSL_CTX : Net::SSLeay::SSL_CTX ($ctx : Net::SSLeay::SSL_CTX);
