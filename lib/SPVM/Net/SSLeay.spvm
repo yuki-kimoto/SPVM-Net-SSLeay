@@ -10,6 +10,7 @@ class Net::SSLeay {
   use Net::SSLeay::Error;
   use Net::SSLeay::SSL_CIPHER;
   use Net::SSLeay::X509;
+  use Net::SSLeay::SSL_SESSION;
   
   INIT {
     &init();
@@ -73,6 +74,8 @@ class Net::SSLeay {
   native method get_shutdown : int ();
   
   native method pending : int ();
+  
+  native method get1_session :  Net::SSLeay::SSL_SESSION ();
   
   # This native function is not documented in OpenSSL, but Perl's IO::Socket::SSL uses this method
   native method set_SSL_CTX : Net::SSLeay::SSL_CTX ($ctx : Net::SSLeay::SSL_CTX);

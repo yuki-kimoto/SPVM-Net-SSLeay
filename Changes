@@ -35,6 +35,8 @@
     * Add Net::SSLeay#get_shutdown method.
     * Add Net::SSLeay#pending method.
     * Add Net::SSLeay#load_error_strings method.
+    * Add Net::SSLeay#get1_session method.
+    
 0.009 2024-11-08
   [Requirement Changes]
     * Require SPVM 0.990029.

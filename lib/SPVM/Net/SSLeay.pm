@@ -236,7 +236,11 @@ Calls native L<SSL_get_cipher|https://docs.openssl.org/1.0.2/man3/SSL_get_curren
 
 C<method get_peer_certificate : L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> ();>
 
-Calls native L<SSL_get_peer_certificate|https://docs.openssl.org/master/man3/SSL_get_peer_certificate> function, creates a new L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> object, sets the pointer value of the new object to the return value of the native function, and returns the new object.
+Calls native L<SSL_get_peer_certificate|https://docs.openssl.org/master/man3/SSL_get_peer_certificate> function.
+
+If the return value of the native function is NULL, returns undef.
+
+Otherwise, creates a new L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> object, sets the pointer value of the new object to the return value of the native function, and returns the new object.
 
 =head2 get_shutdown
 
@@ -249,6 +253,16 @@ Calls native L<SSL_get_shutdown|https://docs.openssl.org/master/man3/SSL_set_shu
 C<method pending : int ();>
 
 Calls native L<SSL_pending|https://docs.openssl.org/master/man3/SSL_pending/> function, and returns its return value.
+
+=head2 get1_session
+
+C<method get1_session : L<Net::SSLeay::SSL_SESSION|SPVM::Net::SSLeay::SSL_SESSION> ();>
+
+Calls native L<SSL_get1_session|https://docs.openssl.org/1.1.1/man3/SSL_get_session> function.
+
+If the return value of the native function is NULL, returns undef.
+
+Otherwise, creates a new L<Net::SSLeay::SSL_SESSION|SPVM::Net::SSLeay::SSL_SESSION> object, sets the pointer value of the new object to the return value of the native function, and returns the new object.
 
 =head2 DESTROY
 
