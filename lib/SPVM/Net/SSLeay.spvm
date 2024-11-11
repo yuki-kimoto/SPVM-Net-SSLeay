@@ -19,6 +19,8 @@ class Net::SSLeay {
   # Fields
   has ssl_ctx : Net::SSLeay::SSL_CTX;
   
+  has ssl_session : Net::SSLeay::SSL_SESSION;
+  
   has operation_error : ro int;
   
   # Class Methods
@@ -76,6 +78,8 @@ class Net::SSLeay {
   native method pending : int ();
   
   native method get1_session :  Net::SSLeay::SSL_SESSION ();
+  
+  native method set_session : int ($session : Net::SSLeay::SSL_SESSION);
   
   # This native function is not documented in OpenSSL, but Perl's IO::Socket::SSL uses this method
   native method set_SSL_CTX : Net::SSLeay::SSL_CTX ($ctx : Net::SSLeay::SSL_CTX);
