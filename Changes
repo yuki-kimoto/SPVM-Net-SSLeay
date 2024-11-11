@@ -21,6 +21,7 @@
     * Add Net::SSLeay#set_mode method.
     * Add Net::SSLeay#clear_mode method.
     * Add Net::SSLeay#version method.
+    * Add Net::SSLeay::DH#DESTROY method.
     
 0.009 2024-11-08
   [Requirement Changes]

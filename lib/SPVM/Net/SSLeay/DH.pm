@@ -6,35 +6,15 @@ package SPVM::Net::SSLeay::DH;
 
 =head1 Name
 
-SPVM::Net::SSLeay::DH - Short Description
+SPVM::Net::SSLeay::DH - DH data structure in OpenSSL
 
 =head1 Description
 
-Net::SSLeay::DH class in L<SPVM> has methods to do someting.
+Net::SSLeay::DH class in L<SPVM> represents L<DH|https://docs.openssl.org/3.0/man3/DH_new/> data structure in OpenSSL.
 
 =head1 Usage
 
   use Net::SSLeay::DH;
-
-=head1 Details
-
-
-
-=head1 Super Class
-
-
-
-=head1 Interfaces
-
-
-
-=head1 Enumerations
-
-
-
-=head1 Fields
-
-
 
 =head1 Class Methods
 
@@ -42,20 +22,19 @@ Net::SSLeay::DH class in L<SPVM> has methods to do someting.
 
 =head1 Instance Methods
 
+=head2 DESTROY
 
+C<method DESTROY : void ();>
+
+Frees native L<DH|https://docs.openssl.org/3.0/man3/DH_new/> object by calling native L<DH_free|https://docs.openssl.org/3.0/man3/DH_new/> function if C<no_free> flag of the instance is not a true value.
 
 =head1 See Also
 
+=over 2
 
+=item * L<Net::SSLeay|SPVM::Net::SSLeay>
 
-
-=head1 Repository
-
-
-
-=head1 Author
-
-Yuki Kimoto C<kimoto.yuki@gmail.com>
+=back
 
 =head1 Copyright & License
 

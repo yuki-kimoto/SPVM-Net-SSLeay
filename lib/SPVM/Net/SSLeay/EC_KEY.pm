@@ -38,7 +38,11 @@ Frees native L<EC_KEY|https://docs.openssl.org/master/man3/EC_KEY_new/> object b
 
 =head1 See Also
 
+=over 2
 
+=item * L<Net::SSLeay|SPVM::Net::SSLeay>
+
+=back
 
 =head1 Copyright & License
 
