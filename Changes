@@ -1,4 +1,4 @@
-0.010 2024-11-09
+0.010 2024-11-11
   [New Features]
     * Add Net::SSLeay::BIO#new_file method.
     * Add Net::SSLeay::DH class.
