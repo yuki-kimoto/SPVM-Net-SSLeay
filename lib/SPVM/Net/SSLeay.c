@@ -70,6 +70,17 @@ int32_t SPVM__Net__SSLeay__new(SPVM_ENV* env, SPVM_VALUE* stack) {
   return 0;
 }
 
+int32_t SPVM__Net__SSLeay__library_init(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  int32_t status = SSL_library_init();
+  
+  stack[0].ival = status;
+  
+  return 0;
+}
+
 int32_t SPVM__Net__SSLeay__alert_desc_string_long(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;

@@ -60,13 +60,19 @@ Exceptions:
 
 If SSL_new failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
+=head2 library_init
+
+C<static method library_init : int ();>
+
+Calls native L<SSL_library_init|https://docs.openssl.org/master/man3/SSL_library_init> function, and returns its return value.
+
 =head1 Instance Methods
 
 =head2 set_fd
 
 C<method set_fd : int ($fd : int);>
 
-Sets the file descriptor $fd as the input/output facility for the TLS/SSL (encrypted) side by calling native L<SSL_set_fd|https://docs.openssl.org/master/man3/SSL_set_fd/> function, and returns its return value.
+Calls native L<SSL_set_fd|https://docs.openssl.org/master/man3/SSL_set_fd/> function given $fd, and returns its return value.
 
 Exceptions:
 
@@ -76,7 +82,7 @@ If SSL_set_fd failed, an exception is thrown with C<eval_error_id> set to the ba
 
 C<method set_tlsext_host_name : int ($name : string);>
 
-Sets the server name indication ClientHello extension to contain the value name $name by calling native L<SSL_set_tlsext_host_name|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_tlsext_servername_callback> function.
+Calls native L<SSL_set_tlsext_host_name|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_tlsext_servername_callback> function given the host name $name, and returns its return value.
 
 Exceptions:
 
@@ -88,7 +94,7 @@ If SSL_set_tlsext_host_name failed, an exception is thrown with C<eval_error_id>
 
 C<method connect : int ();>
 
-Initiates the TLS/SSL handshake with a server by calling native L<SSL_connect|https://docs.openssl.org/1.0.2/man3/SSL_connect/> function, and returns its return value.
+Calls native L<SSL_connect|https://docs.openssl.org/1.0.2/man3/SSL_connect/> function, and returns its return value.
 
 Exceptions:
 
@@ -98,7 +104,7 @@ If SSL_connect failed, an exception is thrown with C<eval_error_id> set to the b
 
 C<method accept : int ();>
 
-Waits for a TLS/SSL client to initiate the TLS/SSL handshake by calling native L<SSL_accept|https://docs.openssl.org/master/man3/SSL_accept/> function, and returns its return value.
+Calls native L<SSL_accept|https://docs.openssl.org/master/man3/SSL_accept/> function, and returns its return value.
 
 Exceptions:
 
@@ -108,7 +114,7 @@ If SSL_accept failed, an exception is thrown with C<eval_error_id> set to the ba
 
 C<method shutdown : int ();>
 
-Shuts down an active connection represented by an SSL object by calling native L<SSL_shutdown|https://docs.openssl.org/master/man3/SSL_shutdown/> function, and returns its return value.
+Calls native L<SSL_shutdown|https://docs.openssl.org/master/man3/SSL_shutdown/> function, and returns its return value.
 
 Exceptions:
 
@@ -118,7 +124,7 @@ If SSL_shutdown failed, an exception is thrown with C<eval_error_id> set to the 
 
 C<method read : int ($buf : mutable string, $num : int = -1, $offset : int = 0);>
 
-Try to read $num bytes into the buffer $buf at the offset $offset by calling native L<SSL_read|https://docs.openssl.org/1.1.1/man3/SSL_read/>, and returns its return value.
+Calls native L<SSL_read|https://docs.openssl.org/1.1.1/man3/SSL_read/> function given $buf at the offest $offset, $num, and returns its return value.
 
 Exceptions:
 
@@ -134,9 +140,7 @@ If SSL_read failed, an exception is thrown with C<eval_error_id> set to the basi
 
 C<method peek : int ($buf : mutable string, $num : int = -1, $offset : int = 0);>
 
-Identical to L</"read"> respectively except no bytes are actually removed from the underlying BIO during the read.
-
-This method calls L<SSL_peek|https://docs.openssl.org/1.1.1/man3/SSL_read> function.
+Calls native L<SSL_peek|https://docs.openssl.org/1.1.1/man3/SSL_peek/> function given $buf at the offset $offset, $num, and returns its return value.
 
 Exceptions:
 
@@ -152,7 +156,7 @@ If SSL_peek failed, an exception is thrown with C<eval_error_id> set to the basi
 
 C<method write : int ($buf : string, $num : int = -1, $offset : int = 0);>
 
-Writes $num bytes from the buffer $buf at the offset $offset into the specified ssl connection by calling native L<SSL_write|https://docs.openssl.org/1.1.1/man3/SSL_write/> function, and returns its return value.
+Calls native L<SSL_write|https://docs.openssl.org/1.1.1/man3/SSL_write/> function, given $buf at the offset $offset, $num, and returns its return value.
 
 Exceptions:
 
@@ -168,13 +172,13 @@ If SSL_write failed, an exception is thrown with C<eval_error_id> set to the bas
 
 C<method get_servername : string ($type : int);>
 
-Calls native L<SSL_get_servername|https://docs.openssl.org/master/man3/SSL_CTX_set_tlsext_servername_callback> function given the type $type, and returns its return value.
+Calls native L<SSL_get_servername|https://docs.openssl.org/master/man3/SSL_CTX_set_tlsext_servername_callback> function given $type, and returns its return value.
 
 =head2 set_tlsext_status_type
 
 C<method set_tlsext_status_type : long  ($type : int);>
 
-Calls native L<SSL_set_tlsext_status_type|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_tlsext_status_cb> function given the type $type, and returns its return value.
+Calls native L<SSL_set_tlsext_status_type|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_tlsext_status_cb> function given $type, and returns its return value.
 
 Exceptions:
 
@@ -184,19 +188,19 @@ If SSL_set_tlsext_status_type failed, an exception is thrown with C<eval_error_i
 
 C<method alert_desc_string_long : string  ($type : int);>
 
-Calls native L<SSL_alert_desc_string_long|https://docs.openssl.org/1.1.1/man3/SSL_alert_type_string/> function given the type $type, and returns its return value.
+Calls native L<SSL_alert_desc_string_long|https://docs.openssl.org/1.1.1/man3/SSL_alert_type_string/> function given $type, and returns its return value.
 
 =head2 set_mode
 
 C<method set_mode : long ($mode : long);>
 
-Calls native L<SSL_set_mode|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_mode/> function given the mode $mode, and returns its return value.
+Calls native L<SSL_set_mode|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_mode/> function given $mode, and returns its return value.
 
 =head2 clear_mode
 
 C<method clear_mode : long ($mode : long);>
 
-Calls native L<SSL_clear_mode|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_mode/> function given the mode $mode, and returns its return value.
+Calls native L<SSL_clear_mode|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_mode/> function given $mode, and returns its return value.
 
 =head2 get_mode
 

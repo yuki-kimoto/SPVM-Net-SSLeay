@@ -25,6 +25,9 @@ class Net::SSLeay {
   
   native static method alert_desc_string_long : string ($value : int);
   
+  # This native function is deprecated in OpenSSL 1.1.0, but Perl's IO::Socket::SSL used this method.
+  native static method library_init : int ();
+  
   # Private or Internal Class Methods
   private native static method init : void ();
   
@@ -65,7 +68,7 @@ class Net::SSLeay {
   
   native method get_peer_certificate : Net::SSLeay::X509 ();
   
-  # This method is not documented in OpenSSL, but Perl's IO::Socket::SSL needs this method
+  # This native function is not documented in OpenSSL, but Perl's IO::Socket::SSL uses this method
   native method set_SSL_CTX : Net::SSLeay::SSL_CTX ($ctx : Net::SSLeay::SSL_CTX);
   
   native method DESTROY : void ();

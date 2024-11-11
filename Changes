@@ -28,6 +28,7 @@
     * Add Net::SSLeay::CIPHER class.
     * Add Net::SSLeay#get_cipher method.
     * Add Net::SSLeay#get_peer_certificate method.
+    * Add Net::SSLeay#library_init method.
     
 0.009 2024-11-08
   [Requirement Changes]
