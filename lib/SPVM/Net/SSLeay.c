@@ -541,6 +541,55 @@ int32_t SPVM__Net__SSLeay__set_SSL_CTX(SPVM_ENV* env, SPVM_VALUE* stack) {
   return 0;
 }
 
+int32_t SPVM__Net__SSLeay__set_mode(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  SSL* ssl = env->get_pointer(env, stack, obj_self);
+  
+  int64_t mode = stack[1].lval;
+  
+  int64_t ret = SSL_set_mode(ssl, mode);
+  
+  stack[0].lval = ret;
+  
+  return 0;
+}
+
+int32_t SPVM__Net__SSLeay__clear_mode(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  SSL* ssl = env->get_pointer(env, stack, obj_self);
+  
+  int64_t mode = stack[1].lval;
+  
+  int64_t ret = SSL_clear_mode(ssl, mode);
+  
+  stack[0].lval = ret;
+  
+  return 0;
+}
+
+int32_t SPVM__Net__SSLeay__get_mode(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  SSL* ssl = env->get_pointer(env, stack, obj_self);
+  
+  int64_t ret = SSL_get_mode(ssl);
+  
+  stack[0].lval = ret;
+  
+  return 0;
+}
+
 int32_t SPVM__Net__SSLeay__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;

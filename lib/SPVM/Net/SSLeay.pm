@@ -186,6 +186,24 @@ C<method alert_desc_string_long : string  ($type : int);>
 
 Calls L<SSL_alert_desc_string_long|https://docs.openssl.org/1.1.1/man3/SSL_alert_type_string/> function given the type $type, and returns its return value.
 
+=head2 set_mode
+
+  method set_mode : long ($mode : long);
+
+Calls native L<SSL_set_mode|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_mode/> function given the mode $mode, and returns its return value.
+
+=head2 clear_mode
+
+  method clear_mode : long ($mode : long);
+
+Calls native L<SSL_clear_mode|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_mode/> function given the mode $mode, and returns its return value.
+
+=head2 get_mode
+
+  method get_mode : long ();
+
+Calls native L<get_mode|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_mode/> function, and returns its return value.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>

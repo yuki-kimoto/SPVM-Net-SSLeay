@@ -14,6 +14,10 @@
     * Add Net::SSLeay::EC_KEY#free method.
     * Add Net::SSLeay::EC_KEY#new_by_curve_name method.
     * Add Net::SSLeay#set_SSL_CTX method.
+    * Add Net::SSLeay#get_mode method.
+    * Add Net::SSLeay#set_mode method.
+    * Add Net::SSLeay#clear_mode method.
+    
 0.009 2024-11-08
   [Requirement Changes]
     * Require SPVM 0.990029.

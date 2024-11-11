@@ -49,6 +49,12 @@ class Net::SSLeay {
   
   native method set_tlsext_status_type : long  ($type : int);
   
+  native method set_mode : long ($mode : long);
+  
+  native method clear_mode : long ($mode : long);
+  
+  native method get_mode : long ();
+  
   # This method is not documented in OpenSSL, but Perl's IO::Socket::SSL needs this method
   native method set_SSL_CTX : Net::SSLeay::SSL_CTX ($ctx : Net::SSLeay::SSL_CTX);
   
