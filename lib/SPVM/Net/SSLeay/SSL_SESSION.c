@@ -8,9 +8,18 @@
 
 static const char* FILE_NAME = "Net/SSLeay/SSL_SESSION.c";
 
-int32_t SPVM__Net__SSLeay__SSL_SESSION__foo(SPVM_ENV* env, SPVM_VALUE* stack) {
+// Instance Methods
+int32_t SPVM__Net__SSLeay__SSL_SESSION__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  SSL_SESSION* ssl_ctx = env->get_pointer(env, stack, obj_self);
+  
+  if (!env->no_free(env, stack, obj_self)) {
+    SSL_SESSION_free(ssl_ctx);
+  }
   
   return 0;
 }
-
-

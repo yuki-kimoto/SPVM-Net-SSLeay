@@ -6,56 +6,31 @@ package SPVM::Net::SSLeay::SSL_SESSION;
 
 =head1 Name
 
-SPVM::Net::SSLeay::SSL_SESSION - Short Description
+SPVM::Net::SSLeay::SSL_SESSION - SSL_SESSION data strucutre in OpenSSL
 
 =head1 Description
 
-Net::SSLeay::SSL_SESSION class in L<SPVM> has methods to do someting.
+Net::SSLeay::SSL_SESSION class in L<SPVM> represents  L<SSL_SESSION|https://docs.openssl.org/1.1.1/man3/SSL_SESSION_free/> data strucutre in OpenSSL.
 
 =head1 Usage
 
   use Net::SSLeay::SSL_SESSION;
 
-=head1 Details
-
-
-
-=head1 Super Class
-
-
-
-=head1 Interfaces
-
-
-
-=head1 Enumerations
-
-
-
-=head1 Fields
-
-
-
-=head1 Class Methods
-
-
-
 =head1 Instance Methods
 
+=head2 DESTROY
 
+C<method DESTROY : void ();>
+
+Frees native L<SSL_SESSION|https://docs.openssl.org/1.1.1/man3/SSL_SESSION_free/> object by calling native L<SSL_SESSION_free|https://docs.openssl.org/1.1.1/man3/SSL_SESSION_free/> function if C<no_free> flag of the instance is not a true value.
 
 =head1 See Also
 
+=over 2
 
+=item * L<Net::SSLeay|SPVM::Net::SSLeay>
 
-
-=head1 Repository
-
-
-
-=head1 Author
-
-Yuki Kimoto C<kimoto.yuki@gmail.com>
+=back
 
 =head1 Copyright & License
 
