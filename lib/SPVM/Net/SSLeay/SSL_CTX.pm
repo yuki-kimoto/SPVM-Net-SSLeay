@@ -10,7 +10,7 @@ SPVM::Net::SSLeay::SSL_CTX - SSL_CTX data structure in OpenSSL
 
 =head1 Description
 
-Net::SSLeay::SSL_CTX class in L<SPVM> represents SSL_CTX data structure in OpenSSL.
+Net::SSLeay::SSL_CTX class in L<SPVM> represents L<SSL_CTX|https://docs.openssl.org/master/man3/SSL_CTX_new/> data structure in OpenSSL.
 
 =head1 Usage
 
@@ -22,7 +22,7 @@ Net::SSLeay::SSL_CTX class in L<SPVM> represents SSL_CTX data structure in OpenS
 
 C<static method new : L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> ($method : L<Net::SSLeay::SSL_METHOD|SPVM::Net::SSLeay::SSL_METHOD>);>
 
-Creates a new L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> given the L<Net::SSLeay::SSL_METHOD|SPVM::Net::SSLeay::SSL_METHOD> object $method, and returns the new object.
+Calls native L<SSL_CTX_new|https://docs.openssl.org/master/man3/SSL_CTX_new/> function given the pointer value of $method, creates a new L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> object, sets the pointer value of the new object to the return value of the native function, and returns the new object.
 
 C<SSL_MODE_AUTO_RETRY> mode is enabled.
 
