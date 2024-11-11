@@ -16,13 +16,13 @@ Net::SSLeay::X509_NAME class in L<SPVM> represents L<X509_NAME|https://docs.open
 
   use Net::SSLeay::X509_NAME;
 
-=head1 Class Methods
-
-
-
 =head1 Instance Methods
 
+=head2 oneline
 
+C<method oneline : string ();>
+
+Calls native L<X509_NAME_oneline|https://docs.openssl.org/1.1.1/man3/X509_NAME_print_ex/#description> functions given $buf with NULL, and returns its return value.
 
 =head1 See Also
 

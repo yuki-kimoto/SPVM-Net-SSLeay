@@ -1,6 +1,7 @@
 0.011 2024-11-12
   [New Features]
     * Add Net::SSLeay::X509_NAME class.
+    * Add Net::SSLeay::X509_NAME#oneline method.
 0.010 2024-11-11
   [New Features]
     * Add Net::SSLeay::BIO#new_file method.
