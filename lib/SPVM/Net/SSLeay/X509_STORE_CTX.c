@@ -3,7 +3,7 @@
 
 #include "spvm_native.h"
 
-#include <openssl/x509_vfy.h>
+#include <openssl/ssl.h>
 
 static const char* FILE_NAME = "Net/SSLeay/X509_STORE_CTX.c";
 
