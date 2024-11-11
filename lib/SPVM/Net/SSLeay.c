@@ -590,6 +590,21 @@ int32_t SPVM__Net__SSLeay__get_mode(SPVM_ENV* env, SPVM_VALUE* stack) {
   return 0;
 }
 
+int32_t SPVM__Net__SSLeay__version(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  SSL* ssl = env->get_pointer(env, stack, obj_self);
+  
+  int32_t version = SSL_version(ssl);
+  
+  stack[0].ival = version;
+  
+  return 0;
+}
+
 int32_t SPVM__Net__SSLeay__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;

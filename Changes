@@ -17,6 +17,10 @@
     * Add Net::SSLeay#get_mode method.
     * Add Net::SSLeay#set_mode method.
     * Add Net::SSLeay#clear_mode method.
+    * Add Net::SSLeay#get_mode method.
+    * Add Net::SSLeay#set_mode method.
+    * Add Net::SSLeay#clear_mode method.
+    * Add Net::SSLeay#version method.
     
 0.009 2024-11-08
   [Requirement Changes]

@@ -204,6 +204,12 @@ Calls native L<SSL_clear_mode|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_mo
 
 Calls native L<get_mode|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_mode/> function, and returns its return value.
 
+=head2 version
+
+  native method version : int ();
+  
+Calls native L<version|https://docs.openssl.org/master/man3/SSL_get_version> function, and returns its return value.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>
