@@ -214,7 +214,7 @@ Calls native L<version|https://docs.openssl.org/master/man3/SSL_get_version> fun
 
 C<method DESTROY : void ();>
 
-Frees L<SSL|https://docs.openssl.org/1.0.2/man3/SSL_free> object by calling native L<SSL_free|https://docs.openssl.org/1.0.2/man3/SSL_free> function if C<no_free> flag of the instance is not a true value.
+Frees native L<SSL|https://docs.openssl.org/1.0.2/man3/SSL_free> object by calling native L<SSL_free|https://docs.openssl.org/1.0.2/man3/SSL_free> function if C<no_free> flag of the instance is not a true value.
 
 =head1 Modules
 

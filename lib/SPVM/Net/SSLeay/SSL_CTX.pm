@@ -210,7 +210,7 @@ If set1_curves_list failed, an exception is thrown with C<eval_error_id> set to 
 
 C<method DESTROY : void ();>
 
-Frees L<SSL_CTX|https://docs.openssl.org/3.1/man3/SSL_CTX_new/> object by calling native L<SSL_CTX_free|https://docs.openssl.org/3.1/man3/SSL_CTX_free/> function if C<no_free> flag of the instance is not a true value.
+Frees native L<SSL_CTX|https://docs.openssl.org/3.1/man3/SSL_CTX_new/> object by calling native L<SSL_CTX_free|https://docs.openssl.org/3.1/man3/SSL_CTX_free/> function if C<no_free> flag of the instance is not a true value.
 
 =head1 See Also
 

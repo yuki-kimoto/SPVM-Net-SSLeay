@@ -44,7 +44,7 @@ If X509_VERIFY_PARAM_set1_host failed, an exception is thrown.
 
 C<method DESTROY : void ();>
 
-Frees L<X509_VERIFY_PARAM|https://docs.openssl.org/1.0.2/man3/X509_VERIFY_PARAM_set_flags/> object by calling native L<X509_VERIFY_PARAM_free|https://docs.openssl.org/1.0.2/man3/X509_VERIFY_PARAM_set_flags/> function if C<no_free> flag of the instance is not a true value.
+Frees native L<X509_VERIFY_PARAM|https://docs.openssl.org/1.0.2/man3/X509_VERIFY_PARAM_set_flags/> object by calling native L<X509_VERIFY_PARAM_free|https://docs.openssl.org/1.0.2/man3/X509_VERIFY_PARAM_set_flags/> function if C<no_free> flag of the instance is not a true value.
 
 =head1 FAQ
 
