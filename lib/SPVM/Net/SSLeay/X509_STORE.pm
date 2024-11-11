@@ -54,7 +54,7 @@ If X509_STORE_set_flags failed, an exception is thrown with C<eval_error_id> set
 
 C<method add_cert : int ($x : L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509>);>
 
-Calls L<X509_STORE_add_cert|https://docs.openssl.org/1.1.1/man3/X509_STORE_add_cert/> function given the pointer value of the L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> object $x, creates a new L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> object, and pushes it to the end of the elements of L</"certs_list"> field.
+Calls native L<X509_STORE_add_cert|https://docs.openssl.org/1.1.1/man3/X509_STORE_add_cert/> function given the pointer value of the L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> object $x, creates a new L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> object, and pushes it to the end of the elements of L</"certs_list"> field.
 
 Exceptions:
 
@@ -64,7 +64,7 @@ If X509_STORE_add_crl failed, an exception is thrown with C<eval_error_id> set t
 
 C<method add_crl : void ($x : L<Net::SSLeay::X509_CRL|SPVM::Net::SSLeay::X509_CRL>);>
 
-Calls L<X509_STORE_add_crl|https://docs.openssl.org/3.0/man3/X509_STORE_add_crl/> function given the pointer value of the L<Net::SSLeay::X509_CRL|SPVM::Net::SSLeay::X509_CRL> object $x, creates a new L<Net::SSLeay::X509_CRL|SPVM::Net::SSLeay::X509_CRL> object, and pushes it to the end of the elements of L</"crls_list"> field.
+Calls native L<X509_STORE_add_crl|https://docs.openssl.org/3.0/man3/X509_STORE_add_crl/> function given the pointer value of the L<Net::SSLeay::X509_CRL|SPVM::Net::SSLeay::X509_CRL> object $x, creates a new L<Net::SSLeay::X509_CRL|SPVM::Net::SSLeay::X509_CRL> object, and pushes it to the end of the elements of L</"crls_list"> field.
 
 Exceptions:
 

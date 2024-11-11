@@ -22,7 +22,7 @@ Net::SSLeay::ERR class in L<SPVM> has methods to manipulate OpenSSL Errors.
 
 C<static method error_string_n : void ($e : long, $buf : mutable string, $len : int = -1);>
 
-Calls L<error_string_n|https://docs.openssl.org/1.1.1/man3/ERR_error_string/> function.
+Calls native L<error_string_n|https://docs.openssl.org/1.1.1/man3/ERR_error_string/> function.
 
 Exceptions:
 

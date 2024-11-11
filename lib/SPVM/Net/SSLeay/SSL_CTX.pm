@@ -156,7 +156,7 @@ Clears the options set via bit-mask in the options $options by calling L<SSL_CTX
 
 C<method set_alpn_protos : int ($protos : string, $protos_len : int = -1);>
 
-Calls L<SSL_CTX_set_alpn_protos|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_alpn_select_cb> function given the protocals $ptotos and the length $protos_len, and returns its return value.
+Calls native L<SSL_CTX_set_alpn_protos|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_alpn_select_cb> function given the protocals $ptotos and the length $protos_len, and returns its return value.
 
 If $protos_len is less than 0, it is set to the length of $protos.
 
@@ -170,7 +170,7 @@ If SSL_CTX_set_alpn_protos failed, an exception is thrown with C<eval_error_id> 
 
 C<method set_tmp_ecdh : long ($ecdh : L<Net::SSLeay::EC_KEY|SPVM::Net::SSLeay::EC_KEY>);>
 
-Calls L<SSL_CTX_set_tmp_ecdh|https://docs.openssl.org/master/man3/SSL_CTX_set_tmp_ecdh> function given the ECDH parameters $ecdh, and returns its return value.
+Calls native L<SSL_CTX_set_tmp_ecdh|https://docs.openssl.org/master/man3/SSL_CTX_set_tmp_ecdh> function given the ECDH parameters $ecdh, and returns its return value.
 
 Exceptions:
 
@@ -182,7 +182,7 @@ If SSL_CTX_set_tmp_ecdh failed, an exception is thrown with C<eval_error_id> set
 
 C<method set1_groups_list : int ($list : string);>
 
-Calls L<SSL_CTX_set1_groups_list|https://docs.openssl.org/3.1/man3/SSL_CTX_set1_curves> function given the group list $list, and returns its return value.
+Calls native L<SSL_CTX_set1_groups_list|https://docs.openssl.org/3.1/man3/SSL_CTX_set1_curves> function given the group list $list, and returns its return value.
 
 Exceptions:
 
@@ -198,7 +198,7 @@ OpenSSL 3.0
 
 C<method set1_curves_list : int ($list : string);>
 
-Calls L<SSL_CTX_set1_curves_list|https://docs.openssl.org/3.1/man3/SSL_CTX_set1_curves> function given the group list $list, and returns its return value.
+Calls native L<SSL_CTX_set1_curves_list|https://docs.openssl.org/3.1/man3/SSL_CTX_set1_curves> function given the group list $list, and returns its return value.
 
 Exceptions:
 
