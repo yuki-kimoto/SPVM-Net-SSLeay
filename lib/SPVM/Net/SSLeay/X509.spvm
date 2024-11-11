@@ -22,6 +22,8 @@ class Net::SSLeay::X509 {
   # Instance Methods
   native method get_issuer_name : Net::SSLeay::X509_NAME ();
   
+  native method get_subject_name : Net::SSLeay::X509_NAME ();
+  
   native method DESTROY : void ();
   
 }
