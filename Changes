@@ -32,6 +32,7 @@
     * Add Net::SSLeay::OPENSSL class.
     * Add Net::SSLeay::OPENSSL#add_ssl_algorithms method.
     * Add Net::SSLeay::OPENSSL#add_all_algorithms method.
+    * Add Net::SSLeay#get_shutdown method.
     
 0.009 2024-11-08
   [Requirement Changes]
