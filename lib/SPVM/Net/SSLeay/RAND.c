@@ -6,6 +6,8 @@
 #include <openssl/ssl.h>
 #include <openssl/err.h>
 
+#include <openssl/rand.h>
+
 static const char* FILE_NAME = "Net/SSLeay/RAND.c";
 
 int32_t SPVM__Net__SSLeay__RAND__seed(SPVM_ENV* env, SPVM_VALUE* stack) {
