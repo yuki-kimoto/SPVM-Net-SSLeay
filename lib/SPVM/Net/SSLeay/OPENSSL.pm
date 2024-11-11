@@ -6,11 +6,11 @@ package SPVM::Net::SSLeay::OPENSSL;
 
 =head1 Name
 
-SPVM::Net::SSLeay::OPENSSL - OPENSSL Name Space in OpenSSL
+SPVM::Net::SSLeay::OPENSSL - OPENSSL(or OpenSSL) Name Space in OpenSSL
 
 =head1 Description
 
-Net::SSLeay::OPENSSL class in L<SPVM> represetns L<https://docs.openssl.org/1.1.1/man3/OPENSSL_init_sslOPENSSL> Name Space in OpenSSL.
+Net::SSLeay::OPENSSL class in L<SPVM> represetns L<OPENSSL|https://docs.openssl.org/1.1.1/man3/OPENSSL_init_ssl>(or OpenSSL) Name Space in OpenSSL.
 
 =head1 Usage
 
@@ -18,7 +18,11 @@ Net::SSLeay::OPENSSL class in L<SPVM> represetns L<https://docs.openssl.org/1.1.
 
 =head1 Class Methods
 
+=head2 add_ssl_algorithms
 
+C<static method add_ssl_algorithms : int ();>
+
+Calls L<OpenSSL_add_ssl_algorithms|https://docs.openssl.org/1.1.1/man3/SSL_library_init> method, and returns its return value.
 
 =head1 See Also
 
