@@ -18,6 +18,16 @@ Net::SSLeay::SSL_SESSION class in L<SPVM> represents  L<SSL_SESSION|https://docs
 
 =head1 Instance Methods
 
+=head2 
+
+C<method up_ref : int ();>
+
+Calls native L<SSL_SESSION_up_ref|https://docs.openssl.org/1.1.1/man3/SSL_SESSION_free> function and returns its return value.
+
+Exceptions:
+
+If SSL_SESSION_up_ref failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>

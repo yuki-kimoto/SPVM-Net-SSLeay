@@ -23,6 +23,8 @@
     * Add Net::SSLeay#version method.
     * Add Net::SSLeay::DH#DESTROY method.
     * Add Net::SSLeay::SSL_SESSION class.
+    * Add Net::SSLeay::SSL_SESSION#DESTROY method.
+    * Add Net::SSLeay#session_reused method.
     
 0.009 2024-11-08
   [Requirement Changes]

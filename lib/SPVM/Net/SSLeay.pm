@@ -210,6 +210,12 @@ Calls native L<get_mode|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_mode/> f
   
 Calls native L<version|https://docs.openssl.org/master/man3/SSL_get_version> function, and returns its return value.
 
+=head2 session_reused
+
+  native method session_reused : int ();
+  
+Calls native L<SSL_session_reused|https://docs.openssl.org/1.1.1/man3/SSL_session_reused/> function, and returns its return value.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>
