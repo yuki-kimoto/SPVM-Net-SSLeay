@@ -6,15 +6,23 @@ package SPVM::Net::SSLeay::X509_STORE_CTX;
 
 =head1 Name
 
-SPVM::Net::SSLeay::X509_STORE_CTX - X509_STORE_CTX data structure
+SPVM::Net::SSLeay::X509_STORE_CTX - X509_STORE_CTX Data Structure in OpenSSL
 
 =head1 Description
 
-Net::SSLeay::X509_STORE_CTX class in L<SPVM> represents L<X509_STORE_CTX|https://docs.openssl.org/3.1/man3/X509_STORE_CTX_new/> structure in OpenSSL.
+Net::SSLeay::X509_STORE_CTX class in L<SPVM> represents L<X509_STORE_CTX|https://docs.openssl.org/3.1/man3/X509_STORE_CTX_new/> data structure in OpenSSL.
 
 =head1 Usage
 
   use Net::SSLeay::X509_STORE_CTX;
+
+=head1 Instance Methods
+
+=head2 set_error
+
+C<method set_error : void ($s : int);>
+
+Calls native L<X509_STORE_CTX_set_error|https://docs.openssl.org/master/man3/X509_STORE_CTX_get_error> function given $s.
 
 =head1 Copyright & License
 

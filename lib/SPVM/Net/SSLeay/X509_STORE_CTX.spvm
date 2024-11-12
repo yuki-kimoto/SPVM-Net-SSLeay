@@ -6,6 +6,8 @@ class Net::SSLeay::X509_STORE_CTX {
   use Net::SSLeay::Error;
   
   # Instance Methods
+  native method set_error : void ($s : int);
+  
   native method DESTROY : void ();
   
 }
