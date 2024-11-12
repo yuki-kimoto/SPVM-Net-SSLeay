@@ -3,6 +3,7 @@
     * Add Net::SSLeay::X509_STORE_CTX#set_error method.
     * Add Net::SSLeay::X509_STORE_CTX#get_error method.
     * Add Net::SSLeay::X509_STORE_CTX#get_error_depth method.
+    * Add Net::SSLeay::X509_STORE_CTX#get_current_cert method.
     
 0.011 2024-11-12
   [New Features]
