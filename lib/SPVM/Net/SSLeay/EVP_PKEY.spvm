@@ -3,4 +3,7 @@
 
 class Net::SSLeay::EVP_PKEY {
   
+  # Instance Methods
+  native method DESTROY : void ();
+  
 }
