@@ -11,6 +11,10 @@ lib/SPVM/Net/SSLeay.c
 lib/SPVM/Net/SSLeay.config
 lib/SPVM/Net/SSLeay.pm
 lib/SPVM/Net/SSLeay.spvm
+lib/SPVM/Net/SSLeay/ASN1_OBJECT.c
+lib/SPVM/Net/SSLeay/ASN1_OBJECT.config
+lib/SPVM/Net/SSLeay/ASN1_OBJECT.pm
+lib/SPVM/Net/SSLeay/ASN1_OBJECT.spvm
 lib/SPVM/Net/SSLeay/BIO.c
 lib/SPVM/Net/SSLeay/BIO.config
 lib/SPVM/Net/SSLeay/BIO.pm
@@ -42,6 +46,10 @@ lib/SPVM/Net/SSLeay/EVP_MD.c
 lib/SPVM/Net/SSLeay/EVP_MD.config
 lib/SPVM/Net/SSLeay/EVP_MD.pm
 lib/SPVM/Net/SSLeay/EVP_MD.spvm
+lib/SPVM/Net/SSLeay/EVP_PKEY.c
+lib/SPVM/Net/SSLeay/EVP_PKEY.config
+lib/SPVM/Net/SSLeay/EVP_PKEY.pm
+lib/SPVM/Net/SSLeay/EVP_PKEY.spvm
 lib/SPVM/Net/SSLeay/OPENSSL.c
 lib/SPVM/Net/SSLeay/OPENSSL.config
 lib/SPVM/Net/SSLeay/OPENSSL.pm
