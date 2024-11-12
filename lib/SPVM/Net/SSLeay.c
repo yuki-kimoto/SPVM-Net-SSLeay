@@ -867,6 +867,35 @@ int32_t SPVM__Net__SSLeay__get0_alpn_selected(SPVM_ENV* env, SPVM_VALUE* stack) 
   return 0;
 }
 
+int32_t SPVM__Net__SSLeay__get_peer_cert_chain(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  SSL* ssl = env->get_pointer(env, stack, obj_self);
+  
+  STACK_OF(X509)* stack_of_x509 = SSL_get_peer_cert_chain(ssl);
+  
+  void* obj_x509s = NULL;
+  
+  if (stack_of_x509) {
+    int32_t length = sk_X509_num(stack_of_x509);
+    obj_x509s = env->new_object_array_by_name(env, stack, "Net::SSLeay::X509", length, &error_id, __func__, FILE_NAME, __LINE__);
+    
+    for (int32_t i = 0; i < length; i++) {
+      X509* x509 = sk_X509_value(stack_of_x509, i);
+      X509_up_ref(x509);
+      void* obj_x509 = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::X509", x509, &error_id, __func__, FILE_NAME, __LINE__);
+      env->set_elem_object(env, stack, obj_x509s, i, obj_x509);
+    }
+  }
+  
+  stack[0].oval = obj_x509s;
+  
+  return 0;
+}
+
 int32_t SPVM__Net__SSLeay__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;

@@ -17,6 +17,7 @@
     * Add Net::SSLeay::EVP_PKEY#DESTROY method.
     * Add Net::SSLeay#get0_next_proto_negotiated method.
     * Add Net::SSLeay#get0_alpn_selected method.
+    * Add Net::SSLeay#get_peer_cert_chain method.
 0.010 2024-11-11
   [New Features]
     * Add Net::SSLeay::BIO#new_file method.

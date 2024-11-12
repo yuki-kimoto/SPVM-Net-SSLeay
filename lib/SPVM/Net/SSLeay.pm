@@ -300,6 +300,16 @@ C<method get0_alpn_selected : void ($data_ref : string[], $len_ref : int*);>
 
 Calls native L<SSL_get0_alpn_selected|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_alpn_select_cb> function given $data_ref, $len_ref.
 
+=head2 get_peer_cert_chain
+
+C<method get_peer_cert_chain : L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509>[] ();>
+
+Calls native L<SSL_get_peer_cert_chain|https://docs.openssl.org/1.1.1/man3/SSL_get_peer_cert_chain> function.
+
+If its return value is NULL, returns undef.
+
+Ohterwise converts its return value to the array of L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509>, and returns the array.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>
