@@ -55,7 +55,9 @@ class Net::SSLeay::SSL_CTX {
   
   native method set_ecdh_auto : long ($state : int);
   
-  native set_tmp_dh : long ($dh : Net::SSLeay::DH);
+  native method set_tmp_dh : long ($dh : Net::SSLeay::DH);
+  
+  
   
   native method DESTROY : void ();
   
