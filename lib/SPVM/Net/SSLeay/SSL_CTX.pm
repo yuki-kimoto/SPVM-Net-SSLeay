@@ -232,6 +232,12 @@ Exceptions:
 
 If set_tmp_dh failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
+=head2 set_post_handshake_auth
+
+C<method set_post_handshake_auth : void ($val : int);>
+
+Calls native L<SSL_CTX_set_post_handshake_auth|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_verify> function given $val.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>

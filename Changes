@@ -7,6 +7,7 @@
     * Add Net::SSLeay::SSL_CTX#set_session_cache_mode method.
     * Add Net::SSLeay::SSL_CTX#set_ecdh_auto method.
     * Add Net::SSLeay::SSL_CTX#set_tmp_dh method.
+    * Add Net::SSLeay::SSL_CTX#set_post_handshake_auth method.
     
 0.011 2024-11-12
   [New Features]

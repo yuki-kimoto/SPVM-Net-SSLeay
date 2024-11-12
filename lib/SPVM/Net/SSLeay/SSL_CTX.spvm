@@ -57,7 +57,7 @@ class Net::SSLeay::SSL_CTX {
   
   native method set_tmp_dh : long ($dh : Net::SSLeay::DH);
   
-  
+  native method set_post_handshake_auth : void ($val : int);
   
   native method DESTROY : void ();
   
