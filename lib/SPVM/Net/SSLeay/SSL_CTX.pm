@@ -222,6 +222,16 @@ Exceptions:
 
 If set_ecdh_auto failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
+=head2 set_tmp_dh
+
+C<method set_tmp_dh : long ($dh : L<Net::SSLeay::DH|SPVM::Net::SSLeay::DH>);>
+
+Calls native L<SSL_CTX_set_tmp_dh|https://docs.openssl.org/master/man3/SSL_CTX_set_tmp_dh_callback> function given the pointer value of $dh, and returns its return value.
+
+Exceptions:
+
+If set_tmp_dh failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>
