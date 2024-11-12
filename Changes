@@ -5,6 +5,7 @@
     * Add Net::SSLeay::X509_STORE_CTX#get_error_depth method.
     * Add Net::SSLeay::X509_STORE_CTX#get_current_cert method.
     * Add Net::SSLeay::SSL_CTX#set_session_cache_mode method.
+    * Add Net::SSLeay::SSL_CTX#set_ecdh_auto method.
     
 0.011 2024-11-12
   [New Features]

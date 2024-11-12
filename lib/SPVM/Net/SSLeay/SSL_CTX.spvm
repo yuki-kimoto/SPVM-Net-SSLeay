@@ -52,6 +52,8 @@ class Net::SSLeay::SSL_CTX {
   
   native method set_session_cache_mode : long ($mode : long);
   
+  native method set_ecdh_auto : long ($state : int);
+  
   native method DESTROY : void ();
   
 }
