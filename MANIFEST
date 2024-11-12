@@ -50,6 +50,10 @@ lib/SPVM/Net/SSLeay/EVP_PKEY.c
 lib/SPVM/Net/SSLeay/EVP_PKEY.config
 lib/SPVM/Net/SSLeay/EVP_PKEY.pm
 lib/SPVM/Net/SSLeay/EVP_PKEY.spvm
+lib/SPVM/Net/SSLeay/OBJ.c
+lib/SPVM/Net/SSLeay/OBJ.config
+lib/SPVM/Net/SSLeay/OBJ.pm
+lib/SPVM/Net/SSLeay/OBJ.spvm
 lib/SPVM/Net/SSLeay/OPENSSL.c
 lib/SPVM/Net/SSLeay/OPENSSL.config
 lib/SPVM/Net/SSLeay/OPENSSL.pm

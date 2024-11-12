@@ -19,6 +19,7 @@
     * Add Net::SSLeay#get0_alpn_selected method.
     * Add Net::SSLeay#get_peer_cert_chain method.
     * Add Net::SSLeay::ASN1_OBJECT class.
+    * Add Net::SSLeay::OBJ class.
 0.010 2024-11-11
   [New Features]
     * Add Net::SSLeay::BIO#new_file method.
