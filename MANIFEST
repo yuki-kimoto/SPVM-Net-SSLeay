@@ -5,6 +5,7 @@
 .github/workflows/windows-latest.yml
 .gitignore
 Changes
+DEVELOPMENT.txt
 helper/constants.txt
 helper/generate_constant_class.pl
 lib/SPVM/Net/SSLeay.c

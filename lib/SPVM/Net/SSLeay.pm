@@ -16,6 +16,62 @@ B<Warnings:>
 
 B<The tests haven't been written yet. The features may be changed without notice.> 
 
+=head1 Modules
+
+=over 2
+
+=item * L<Net::SSLeay|SPVM::Net::SSLeay>
+
+=item * L<Net::SSLeay::ASN1_OBJECT|SPVM::Net::SSLeay::ASN1_OBJECT>
+
+=item * L<Net::SSLeay::BIO|SPVM::Net::SSLeay::BIO>
+
+=item * L<Net::SSLeay::Constant|SPVM::Net::SSLeay::Constant>
+
+=item * L<Net::SSLeay::DH|SPVM::Net::SSLeay::DH>
+
+=item * L<Net::SSLeay::EC_KEY|SPVM::Net::SSLeay::EC_KEY>
+
+=item * L<Net::SSLeay::ERR|SPVM::Net::SSLeay::ERR>
+
+=item * L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error>
+
+=item * L<Net::SSLeay::EVP|SPVM::Net::SSLeay::EVP>
+
+=item * L<Net::SSLeay::EVP_MD|SPVM::Net::SSLeay::EVP_MD>
+
+=item * L<Net::SSLeay::EVP_PKEY|SPVM::Net::SSLeay::EVP_PKEY>
+
+=item * L<Net::SSLeay::OBJ|SPVM::Net::SSLeay::OBJ>
+
+=item * L<Net::SSLeay::OPENSSL|SPVM::Net::SSLeay::OPENSSL>
+
+=item * L<Net::SSLeay::PEM|SPVM::Net::SSLeay::PEM>
+
+=item * L<Net::SSLeay::RAND|SPVM::Net::SSLeay::RAND>
+
+=item * L<Net::SSLeay::SSL_CIPHER|SPVM::Net::SSLeay::SSL_CIPHER>
+
+=item * L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX>
+
+=item * L<Net::SSLeay::SSL_METHOD|SPVM::Net::SSLeay::SSL_METHOD>
+
+=item * L<Net::SSLeay::SSL_SESSION|SPVM::Net::SSLeay::SSL_SESSION>
+
+=item * L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509>
+
+=item * L<Net::SSLeay::X509_CRL|SPVM::Net::SSLeay::X509_CRL>
+
+=item * L<Net::SSLeay::X509_NAME|SPVM::Net::SSLeay::X509_NAME>
+
+=item * L<Net::SSLeay::X509_STORE|SPVM::Net::SSLeay::X509_STORE>
+
+=item * L<Net::SSLeay::X509_STORE_CTX|SPVM::Net::SSLeay::X509_STORE_CTX>
+
+=item * L<Net::SSLeay::X509_VERIFY_PARAM|SPVM::Net::SSLeay::X509_VERIFY_PARAM>
+
+=back
+
 =head1 Usage
 
   use Net::SSLeay;
@@ -315,34 +371,6 @@ Ohterwise converts its return value to the array of L<Net::SSLeay::X509|SPVM::Ne
 C<method DESTROY : void ();>
 
 Frees native L<SSL|https://docs.openssl.org/1.0.2/man3/SSL_free> object by calling native L<SSL_free|https://docs.openssl.org/1.0.2/man3/SSL_free> function if C<no_free> flag of the instance is not a true value.
-
-=head1 Modules
-
-=over 2
-
-=item * L<Net::SSLeay::Constant|SPVM::Net::SSLeay::Constant>
-
-=item * L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX>
-
-=item * L<Net::SSLeay::SSL_METHOD|SPVM::Net::SSLeay::SSL_METHOD>
-
-=item * L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509>
-
-=item * L<Net::SSLeay::X509_VERIFY_PARAM|SPVM::Net::SSLeay::X509_VERIFY_PARAM>
-
-=item * L<Net::SSLeay::X509_CRL|SPVM::Net::SSLeay::X509_CRL>
-
-=item * L<Net::SSLeay::X509_STORE_CTX|SPVM::Net::SSLeay::X509_STORE_CTX>
-
-=item * L<Net::SSLeay::X509_STORE|SPVM::Net::SSLeay::X509_STORE>
-
-=item * L<Net::SSLeay::PEM|SPVM::Net::SSLeay::PEM>
-
-=item * L<Net::SSLeay::BIO|SPVM::Net::SSLeay::BIO>
-
-=item * L<Net::SSLeay::ERR|SPVM::Net::SSLeay::ERR>
-
-=back
 
 =head2 Config Builder
 
