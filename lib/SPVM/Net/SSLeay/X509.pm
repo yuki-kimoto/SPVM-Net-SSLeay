@@ -34,6 +34,22 @@ Calls native L<X509_get_subject_name|https://docs.openssl.org/3.3/man3/X509_get_
 
 The C<no_free> flag of the new object is set to 1.
 
+=head2 digest
+
+C<method digest : int ($type : L<Net::SSLeay::EVP_MD|SPVM::Net::SSLeay::EVP_MD>, $md : mutable string, $len_ref : int*);>
+
+Calls native L<X509_digest|https://docs.openssl.org/master/man3/X509_digest> function given $type, the pointer value of $md, $len_ref, and returns its return value.
+
+Exceptions:
+
+The digest type $type must be defined. Otherwise an exception is thrown.
+
+The output buffer $md must be defined. Otherwise an exception is thrown.
+
+The length of output buffer $md must be greater than or equal to EVP_MAX_MD_SIZE. Otherwise an exception is thrown.
+
+If X509_digest failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>

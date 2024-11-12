@@ -9,6 +9,7 @@
     * Add Net::SSLeay::EVP_MD class.
     * Add Net::SSLeay::EVP class.
     * Add Net::SSLeay::EVP#get_digestbyname method.
+    * Add Net::SSLeay::X509#digest method.
 0.010 2024-11-11
   [New Features]
     * Add Net::SSLeay::BIO#new_file method.
