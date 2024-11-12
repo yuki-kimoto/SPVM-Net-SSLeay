@@ -30,6 +30,12 @@ C<method get_error : int ();>
 
 Calls native L<X509_STORE_CTX_get_error|https://docs.openssl.org/master/man3/X509_STORE_CTX_get_error> function, and returns its return value.
 
+=head2 get_error_depth
+
+C<method get_error_depth : int ();>
+
+Calls native L<X509_STORE_CTX_get_error_depth|https://docs.openssl.org/master/man3/X509_STORE_CTX_get_error_depth> function, and returns its return value.
+
 =head1 Copyright & License
 
 Copyright (c) 2024 Yuki Kimoto

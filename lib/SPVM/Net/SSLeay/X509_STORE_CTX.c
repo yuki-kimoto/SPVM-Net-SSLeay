@@ -38,6 +38,21 @@ int32_t SPVM__Net__SSLeay__X509_STORE_CTX__get_error(SPVM_ENV* env, SPVM_VALUE* 
   return 0;
 }
 
+int32_t SPVM__Net__SSLeay__X509_STORE_CTX__get_error_depth(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  X509_STORE_CTX* x509_store_ctx = env->get_pointer(env, stack, obj_self);
+  
+  int32_t error_depth = X509_STORE_CTX_get_error_depth(x509_store_ctx);
+  
+  stack[0].ival = error_depth;
+  
+  return 0;
+}
+
 int32_t SPVM__Net__SSLeay__X509_STORE_CTX__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;

@@ -10,6 +10,8 @@ class Net::SSLeay::X509_STORE_CTX {
   
   native method get_error : int ();
   
+  native method get_error_depth : int ();
+  
   native method DESTROY : void ();
   
 }
