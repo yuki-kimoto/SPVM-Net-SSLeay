@@ -23,7 +23,7 @@ Net::SSLeay::EVP class in L<SPVM> represents L<EVP|https://docs.openssl.org/3.1/
 
 =over 2
 
-=item * L<Net::SSLeay|SPVM::Net::EVP_MD>
+=item * L<Net::SSLeay::EVP_MD|SPVM::Net::EVP_MD>
 
 =item * L<Net::SSLeay|SPVM::Net::SSLeay>
 
