@@ -16,6 +16,14 @@ Net::SSLeay::SSL_CTX class in L<SPVM> represents L<SSL_CTX|https://docs.openssl.
 
   use Net::SSLeay::SSL_CTX;
 
+=head1 Fields
+
+=head2 pkeys_list
+
+C<has pkeys_list : L<List|SPVM::List> of L<Net::SSLeay::EVP_PKEY|SPVM::Net::SSLeay::EVP_PKEY>;>
+
+A list of private keys.
+
 =head1 Class Methods
 
 =head2 new
@@ -237,6 +245,12 @@ If set_tmp_dh failed, an exception is thrown with C<eval_error_id> set to the ba
 C<method set_post_handshake_auth : void ($val : int);>
 
 Calls native L<SSL_CTX_set_post_handshake_auth|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_verify> function given $val.
+
+=head2 use_PrivateKey
+
+C<method use_PrivateKey : int ($pkey : L<Net::SSLeay::EVP_PKEY|SPVM::Net::SSLeay::EVP_PKEY>);>
+
+Calls native L<SSL_CTX_use_PrivateKey|https://docs.openssl.org/master/man3/SSL_CTX_use_certificate> function given $pkey, pushes $pkey to the end of L</"pkeys_list"> field, and returns the return value of the native function.
 
 =head2 DESTROY
 

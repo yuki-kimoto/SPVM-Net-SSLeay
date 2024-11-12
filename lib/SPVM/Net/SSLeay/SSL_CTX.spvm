@@ -10,9 +10,20 @@ class Net::SSLeay::SSL_CTX {
   use Net::SSLeay::X509_VERIFY_PARAM;
   use Net::SSLeay::EC_KEY;
   use Net::SSLeay::DH;
+  use Net::SSLeay::EVP_PKEY;
+  use List;
+  
+  # Fields
+  has pkeys_list : List of Net::SSLeay::EVP_PKEY;
   
   # Class Methods
   native static method new : Net::SSLeay::SSL_CTX ($method : Net::SSLeay::SSL_METHOD);
+  
+  protected method init : void ($options : object[] = undef) {
+    
+    my $pkeys_list = List->new(new Net::SSLeay::EVP_PKEY[0]);
+    $self->{pkeys_list} = $pkeys_list;
+  }
   
   # Instance Methods
   native method set_mode : long ($mode : long);
@@ -58,6 +69,8 @@ class Net::SSLeay::SSL_CTX {
   native method set_tmp_dh : long ($dh : Net::SSLeay::DH);
   
   native method set_post_handshake_auth : void ($val : int);
+  
+  native method use_PrivateKey : int ($pkey : Net::SSLeay::EVP_PKEY);
   
   native method DESTROY : void ();
   

@@ -38,6 +38,10 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__new(SPVM_ENV* env, SPVM_VALUE* stack) {
   if (error_id) { return error_id; }
   
   stack[0].oval = obj_self;
+  env->call_instance_method_by_name(env, stack, "init", 0, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
+  
+  stack[0].oval = obj_self;
   
   return 0;
 }
@@ -426,21 +430,6 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__clear_options(SPVM_ENV* env, SPVM_VALUE* sta
   return 0;
 }
 
-int32_t SPVM__Net__SSLeay__SSL_CTX__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
-  
-  int32_t error_id = 0;
-  
-  void* obj_self = stack[0].oval;
-  
-  SSL_CTX* ssl_ctx = env->get_pointer(env, stack, obj_self);
-  
-  if (!env->no_free(env, stack, obj_self)) {
-    SSL_CTX_free(ssl_ctx);
-  }
-  
-  return 0;
-}
-
 int32_t SPVM__Net__SSLeay__SSL_CTX__set_alpn_protos(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
@@ -657,7 +646,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_tmp_dh(SPVM_ENV* env, SPVM_VALUE* stack)
     return env->die(env, stack, "The DH object $dh must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
-  DH* dh = env->get_pointer(env, stack, dh);
+  DH* dh = env->get_pointer(env, stack, obj_dh);
   
   int64_t status = SSL_CTX_set_tmp_dh(ssl_ctx, dh);
   
@@ -690,6 +679,68 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_post_handshake_auth(SPVM_ENV* env, SPVM_
   SSL_CTX* ssl_ctx = env->get_pointer(env, stack, obj_self);
   
   SSL_CTX_set_post_handshake_auth(ssl_ctx, val);
+  
+  return 0;
+}
+
+int32_t SPVM__Net__SSLeay__SSL_CTX__use_PrivateKey(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  void* obj_evp_pkey = stack[1].oval;
+  
+  SSL_CTX* ssl_ctx = env->get_pointer(env, stack, obj_self);
+  
+  if (!obj_evp_pkey) {
+    return env->die(env, stack, "The EVP_PKEY object $pkey must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  EVP_PKEY* evp_pkey = env->get_pointer(env, stack, obj_evp_pkey);
+  
+  int32_t status = SSL_CTX_use_PrivateKey(ssl_ctx, evp_pkey);
+  
+  if (!(status == 1)) {
+    int64_t ssl_error = ERR_peek_last_error();
+    
+    char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
+    ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
+    
+    env->die(env, stack, "[OpenSSL Error]SSL_CTX_use_PrivateKey failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    
+    int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
+    
+    return error_id;
+  }
+  
+  // SSL_CTX_use_PrivateKey increments the reference count of evp_pkey.
+  {
+    void* obj_pkeys_list = env->get_field_object_by_name(env, stack, obj_self, "pkeys_list", &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) { return error_id; }
+    
+    stack[0].oval = obj_pkeys_list;
+    stack[1].oval = obj_evp_pkey;
+    env->call_instance_method_by_name(env, stack, "push", 2, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) { return error_id; }
+  }
+  
+  stack[0].ival = status;
+  
+  return 0;
+}
+
+int32_t SPVM__Net__SSLeay__SSL_CTX__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  SSL_CTX* ssl_ctx = env->get_pointer(env, stack, obj_self);
+  
+  if (!env->no_free(env, stack, obj_self)) {
+    SSL_CTX_free(ssl_ctx);
+  }
   
   return 0;
 }
