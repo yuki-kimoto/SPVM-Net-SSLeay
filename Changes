@@ -11,6 +11,7 @@
     * Add Net::SSLeay::EVP#get_digestbyname method.
     * Add Net::SSLeay::X509#digest method.
     * Add Net::SSLeay::X509#pubkey_digest method.
+    * Add Net::SSLeay#get_certificate method.
 0.010 2024-11-11
   [New Features]
     * Add Net::SSLeay::BIO#new_file method.

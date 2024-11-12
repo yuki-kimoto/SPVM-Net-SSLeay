@@ -81,6 +81,8 @@ class Net::SSLeay {
   
   native method set_session : int ($session : Net::SSLeay::SSL_SESSION);
   
+  native method get_certificate : Net::SSLeay::X509 ();
+  
   # This native function is not documented in OpenSSL, but Perl's IO::Socket::SSL uses this method
   native method set_SSL_CTX : Net::SSLeay::SSL_CTX ($ctx : Net::SSLeay::SSL_CTX);
   

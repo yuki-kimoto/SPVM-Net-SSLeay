@@ -769,6 +769,30 @@ int32_t SPVM__Net__SSLeay__set_session(SPVM_ENV* env, SPVM_VALUE* stack) {
   return 0;
 }
 
+int32_t SPVM__Net__SSLeay__get_certificate(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  SSL* ssl = env->get_pointer(env, stack, obj_self);
+  
+  X509* x509 = SSL_get_certificate(ssl);
+  
+  void* obj_x509 = NULL;
+  
+  if (x509) {
+    env->new_pointer_object_by_name(env, stack, "Net::SSLeay::X509", x509, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) { return error_id; }
+    
+    env->set_no_free(env, stack, x509, 1);
+  }
+  
+  stack[0].oval = obj_x509;
+  
+  return 0;
+}
+
 int32_t SPVM__Net__SSLeay__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;

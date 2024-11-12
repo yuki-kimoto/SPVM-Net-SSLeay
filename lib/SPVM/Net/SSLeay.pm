@@ -276,6 +276,18 @@ Exceptions:
 
 If SSL_set_session failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
+=head2 get_certificate
+
+C<method get_certificate : L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> ();>
+
+Calls native L<SSL_get_certificate|https://docs.openssl.org/master/man3/SSL_get_certificate> function.
+
+If the return value of the native function is NULL, returns undef.
+
+Otherwise, creates a new L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> object, sets the pointer value of the new object to the return value of the native function, and returns the new object.
+
+C<no_free> flag of the new object is set to 1.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>
