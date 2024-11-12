@@ -3,4 +3,7 @@
 
 class Net::SSLeay::OBJ {
   
+  # Class Methods
+  native static method txt2nid : int ($s : string);
+  
 }
