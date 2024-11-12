@@ -595,3 +595,20 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set1_curves_list(SPVM_ENV* env, SPVM_VALUE* 
   
   return 0;
 }
+
+int32_t SPVM__Net__SSLeay__SSL_CTX__set_session_cache_mode(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  int64_t mode = stack[1].lval;
+  
+  SSL_CTX* ssl_ctx = env->get_pointer(env, stack, obj_self);
+  
+  int64_t ret_mode = SSL_CTX_set_session_cache_mode(ssl_ctx, mode);
+  
+  stack[0].lval = ret_mode;
+  
+  return 0;
+}
