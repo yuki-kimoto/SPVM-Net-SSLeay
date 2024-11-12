@@ -24,6 +24,12 @@ C<method set_error : void ($s : int);>
 
 Calls native L<X509_STORE_CTX_set_error|https://docs.openssl.org/master/man3/X509_STORE_CTX_get_error> function given $s.
 
+=head2 get_error
+
+C<method get_error : int ();>
+
+Calls native L<X509_STORE_CTX_get_error|https://docs.openssl.org/master/man3/X509_STORE_CTX_get_error> function, and returns its return value.
+
 =head1 Copyright & License
 
 Copyright (c) 2024 Yuki Kimoto
