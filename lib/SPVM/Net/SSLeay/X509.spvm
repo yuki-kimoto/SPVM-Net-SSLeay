@@ -27,6 +27,8 @@ class Net::SSLeay::X509 {
   
   native method digest : int ($type : Net::SSLeay::EVP_MD, $md : mutable string, $len_ref : int*);
   
+  native method pubkey_digest : int ($type : Net::SSLeay::EVP_MD, $md : mutable string, $len_ref : int*);
+  
   native method DESTROY : void ();
   
 }

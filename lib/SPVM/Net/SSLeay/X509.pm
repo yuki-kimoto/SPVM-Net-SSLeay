@@ -50,6 +50,22 @@ The length of output buffer $md must be greater than or equal to EVP_MAX_MD_SIZE
 
 If X509_digest failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
+=head2 pubkey_digest
+
+C<method pubkey_digest : int ($type : L<Net::SSLeay::EVP_MD|SPVM::Net::SSLeay::EVP_MD>, $md : mutable string, $len_ref : int*);>
+
+Calls native L<X509_pubkey_digest|https://docs.openssl.org/master/man3/X509_pubkey_digest> function given $type, the pointer value of $md, $len_ref, and returns its return value.
+
+Exceptions:
+
+The digest type $type must be defined. Otherwise an exception is thrown.
+
+The output buffer $md must be defined. Otherwise an exception is thrown.
+
+The length of output buffer $md must be greater than or equal to EVP_MAX_MD_SIZE. Otherwise an exception is thrown.
+
+If X509_pubkey_digest failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>
