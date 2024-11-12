@@ -288,6 +288,12 @@ Otherwise, creates a new L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> object, se
 
 C<no_free> flag of the new object is set to 1.
 
+=head2 get0_next_proto_negotiated
+
+C<method get0_next_proto_negotiated : void ($data_ref : string[], $len_ref : int*);>
+
+Calls native L<SSL_get0_next_proto_negotiated|https://docs.openssl.org/master/man3/SSL_get_certificate> function given $data_ref, $len_ref.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>

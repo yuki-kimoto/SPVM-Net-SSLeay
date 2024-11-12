@@ -15,6 +15,7 @@
     * Add Net::SSLeay::X509_VERIFY_PARAM#set_flags method.
     * Add Net::SSLeay::EVP_PKEY class.
     * Add Net::SSLeay::EVP_PKEY#DESTROY method.
+    * Add Net::SSLeay#get0_next_proto_negotiated method.
 0.010 2024-11-11
   [New Features]
     * Add Net::SSLeay::BIO#new_file method.
