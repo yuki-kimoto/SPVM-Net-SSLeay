@@ -801,7 +801,7 @@ int32_t SPVM__Net__SSLeay__get0_next_proto_negotiated(SPVM_ENV* env, SPVM_VALUE*
   
   void* obj_data_ref = stack[1].oval;
   
-  int32_t len_ref = stack[2].iref;
+  int32_t* len_ref = stack[2].iref;
   
   SSL* ssl = env->get_pointer(env, stack, obj_self);
   
@@ -809,7 +809,7 @@ int32_t SPVM__Net__SSLeay__get0_next_proto_negotiated(SPVM_ENV* env, SPVM_VALUE*
     return env->die(env, stack, "The data reference $data_ref must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
-  int32_t data_ref_length = env->length(env, stack, obj_data);
+  int32_t data_ref_length = env->length(env, stack, obj_data_ref);
   
   if (!(data_ref_length == 1)) {
     return env->die(env, stack, "The length of the data reference $data_ref must be 1.", __func__, FILE_NAME, __LINE__);
@@ -818,6 +818,43 @@ int32_t SPVM__Net__SSLeay__get0_next_proto_negotiated(SPVM_ENV* env, SPVM_VALUE*
   const unsigned char* data_ref_tmp[1] = {0};
   unsigned len_ref_tmp = -1;
   SSL_get0_next_proto_negotiated(ssl, data_ref_tmp, &len_ref_tmp);
+  
+  if (data_ref_tmp) {
+    void* obj_data = env->new_string_nolen(env, stack, data_ref_tmp[0]);
+    
+    env->set_elem_object(env, stack, obj_data_ref, 0, obj_data);
+  }
+  
+  *len_ref = len_ref_tmp;
+  
+  return 0;
+}
+
+int32_t SPVM__Net__SSLeay__get0_alpn_selected(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  void* obj_data_ref = stack[1].oval;
+  
+  int32_t* len_ref = stack[2].iref;
+  
+  SSL* ssl = env->get_pointer(env, stack, obj_self);
+  
+  if (!obj_data_ref) {
+    return env->die(env, stack, "The data reference $data_ref must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  int32_t data_ref_length = env->length(env, stack, obj_data_ref);
+  
+  if (!(data_ref_length == 1)) {
+    return env->die(env, stack, "The length of the data reference $data_ref must be 1.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  const unsigned char* data_ref_tmp[1] = {0};
+  unsigned int len_ref_tmp = -1;
+  SSL_get0_alpn_selected(ssl, data_ref_tmp, &len_ref_tmp);
   
   if (data_ref_tmp) {
     void* obj_data = env->new_string_nolen(env, stack, data_ref_tmp[0]);
