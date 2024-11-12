@@ -85,6 +85,7 @@ sub MY::postamble {
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::EVP');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::EVP_MD');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::EVP_PKEY');
+    $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::ASN1_OBJECT');
   }
   
   return $make_rule;
