@@ -382,6 +382,14 @@ If its return value is NULL, returns undef.
 
 Ohterwise, converts its return value to the array of L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509>, and returns the array.
 
+method get_SSL_CTX : Net::SSLeay::SSL_CTX ();
+
+=head2 get_SSL_CTX
+
+C<method get_SSL_CTX : Net::SSLeay::SSL_CTX ();>
+
+Returns the value of L</"ssl_ctx"> field.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>

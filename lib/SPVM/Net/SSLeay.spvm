@@ -92,7 +92,10 @@ class Net::SSLeay {
   
   native method get_peer_cert_chain : Net::SSLeay::X509[] ();
   
-  # This native function is not documented in OpenSSL, but Perl's IO::Socket::SSL uses this method
+  method get_SSL_CTX : Net::SSLeay::SSL_CTX () {
+    return $self->{ssl_ctx};
+  }
+  
   native method set_SSL_CTX : Net::SSLeay::SSL_CTX ($ctx : Net::SSLeay::SSL_CTX);
   
   native method DESTROY : void ();
