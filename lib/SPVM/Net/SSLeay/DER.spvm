@@ -3,4 +3,9 @@
 
 class Net::SSLeay::DER {
   
+  use Net::SSLeay::OCSP_REQUEST;
+  
+  # Class Methods
+  native static method d2i_OCSP_REQUEST : Net::SSLeay::OCSP_REQUEST ($a_ref : Net::SSLeay::OCSP_REQUEST[], $ppin_ref : string[], $length : long);
+  
 }

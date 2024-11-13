@@ -16,6 +16,7 @@
     * Add Net::SSLeay::OCSP class.
     * Add Net::SSLeay::OCSP_REQUEST class.
     * Add Net::SSLeay::OCSP_RESPONSE class.
+    * Add Net::SSLeay::DER#d2i_OCSP_REQUEST method.
     
 0.011 2024-11-12
   [New Features]

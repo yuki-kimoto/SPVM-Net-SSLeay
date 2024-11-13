@@ -6,6 +6,8 @@
 #include <openssl/ssl.h>
 #include <openssl/err.h>
 
+#include <openssl/ocsp.h>
+
 static const char* FILE_NAME = "Net/SSLeay/DER.c";
 
 int32_t SPVM__Net__SSLeay__DER__foo(SPVM_ENV* env, SPVM_VALUE* stack) {
@@ -13,4 +15,62 @@ int32_t SPVM__Net__SSLeay__DER__foo(SPVM_ENV* env, SPVM_VALUE* stack) {
   return 0;
 }
 
+
+int32_t SPVM__Net__SSLeay___DER__d2i_OCSP_REQUEST(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_a = stack[0].oval;
+  
+  void* obj_ppin_ref = stack[1].oval;
+  
+  int64_t length = stack[2].lval;
+  
+  if (obj_a) {
+    return env->die(env, stack, "$a must be undef. Currently reuse feature is not available.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  if (!obj_ppin_ref) {
+    return env->die(env, stack, "$ppin_ref must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  int32_t ppin_ref_length = env->length(env, stack, obj_ppin_ref);
+  
+  if (!(ppin_ref_length == 1)) {
+    return env->die(env, stack, "The length of $ppin_ref must be 1.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  void* obj_ppin = env->get_elem_string(env, stack, obj_ppin_ref, 0);
+  
+  if (!obj_ppin) {
+    return env->die(env, stack, "$ppin_ref at index 0 must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  char* ppin = (char*)env->get_chars(env, stack, obj_ppin);
+  
+  const unsigned char* ppin_ref_tmp[1] = {0};
+  ppin_ref_tmp[0] = ppin;
+  
+  OCSP_REQUEST* ret = d2i_OCSP_REQUEST(NULL, ppin_ref_tmp, ppin_ref_length);
+  
+  if (!ret) {
+    int64_t ssl_error = ERR_peek_last_error();
+    
+    char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
+    ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
+    
+    env->die(env, stack, "[OpenSSL Error]d2i_OCSP_REQUEST failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    
+    int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
+    
+    return error_id;
+  }
+  
+  void* obj_ret = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::OCSP_REQUEST", ret, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
+  
+  stack[0].oval = obj_ret;
+  
+  return 0;
+}
 
