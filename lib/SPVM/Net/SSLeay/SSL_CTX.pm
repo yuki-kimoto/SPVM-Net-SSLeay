@@ -252,6 +252,20 @@ C<method use_PrivateKey : int ($pkey : L<Net::SSLeay::EVP_PKEY|SPVM::Net::SSLeay
 
 Calls native L<SSL_CTX_use_PrivateKey|https://docs.openssl.org/master/man3/SSL_CTX_use_certificate> function given $pkey, pushes $pkey to the end of L</"pkeys_list"> field, and returns the return value of the native function.
 
+=head2 set_session_id_context
+
+C<method set_session_id_context : int ($sid_ctx : string, $sid_ctx_len : int = -1);>
+
+Calls native L<SSL_CTX_set_session_id_context|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_alpn_select_cb> function given $sid_ctx, $sid_ctx_len, and returns its return value.
+
+If $sid_ctx_len is less than 0, it is set to the length of $sid_ctx.
+
+Exceptions:
+
+The context $sid_ctx must be defined. Otherwise an exception is thrown.
+
+If SSL_CTX_set_session_id_context failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>

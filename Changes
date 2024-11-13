@@ -9,6 +9,7 @@
     * Add Net::SSLeay::SSL_CTX#set_tmp_dh method.
     * Add Net::SSLeay::SSL_CTX#set_post_handshake_auth method.
     * Add Net::SSLeay::SSL_CTX#use_PrivateKey method.
+    * Add Net::SSLeay::SSL_CTX#set_session_id_context method.
     
 0.011 2024-11-12
   [New Features]

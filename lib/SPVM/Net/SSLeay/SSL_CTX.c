@@ -730,6 +730,48 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__use_PrivateKey(SPVM_ENV* env, SPVM_VALUE* st
   return 0;
 }
 
+int32_t SPVM__Net__SSLeay__SSL_CTX__set_session_id_context(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  void* obj_sid_ctx = stack[1].oval;
+  
+  if (!obj_sid_ctx) {
+    return env->die(env, stack, "The context $sid_ctx must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  const char* sid_ctx = env->get_chars(env, stack, obj_sid_ctx);
+  
+  int32_t sid_ctx_len = stack[2].ival;
+  
+  if (sid_ctx_len < 0) {
+    sid_ctx_len = env->length(env, stack, obj_sid_ctx);
+  }
+  
+  SSL_CTX* ssl_ctx = env->get_pointer(env, stack, obj_self);
+  
+  int32_t status = SSL_CTX_set_session_id_context(ssl_ctx, sid_ctx, sid_ctx_len);
+  
+  if (!(status == 0)) {
+    int64_t ssl_error = ERR_peek_last_error();
+    
+    char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
+    ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
+    
+    env->die(env, stack, "[OpenSSL Error]SSL_CTX_set_session_id_context failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    
+    int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
+    
+    return error_id;
+  }
+  
+  stack[0].ival = status;
+  
+  return 0;
+}
+
 int32_t SPVM__Net__SSLeay__SSL_CTX__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
