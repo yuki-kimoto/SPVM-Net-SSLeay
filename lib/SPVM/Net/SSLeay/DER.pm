@@ -6,7 +6,7 @@ package SPVM::Net::SSLeay::DER;
 
 =head1 Name
 
-SPVM::Net::SSLeay::DER - Name Space for d2i_ and i2d_ prefixed functions in OpenSSL.
+SPVM::Net::SSLeay::DER - Name Space for d2i_ and i2d_ prefixed functions in OpenSSL
 
 =head1 Description
 
