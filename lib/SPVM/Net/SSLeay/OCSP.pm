@@ -24,6 +24,16 @@ C<static method response_status_str : string ($code : long);>
 
 Calls native L<OCSP_response_status_str|https://man.openbsd.org/OCSP_basic_sign.3> function, and returns its return value.
 
+=head2 response_status
+
+C<static method response_status : int ($resp : L<Net::SSLeay::OCSP_RESPONSE|SPVM::Net::SSLeay::OCSP_RESPONSE>);>
+
+Calls native L<OCSP_response_status|https://docs.openssl.org/1.1.1/man3/OCSP_response_status> function, and returns its return value.
+
+Exceptions:
+
+The OCSP response $resp must be defined. Otherwise an exception is thrown.
+
 =head1 See Also
 
 =over 2
