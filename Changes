@@ -21,6 +21,7 @@
     * Add Net::SSLeay::DER#i2d_OCSP_REQUEST method.
     * Add Net::SSLeay#load_client_CA_file method.
     * Add Net::SSLeay::SSL_CTX#set_client_CA_list method.
+    * Add Net::SSLeay::SSL_CTX#add_client_CA method.
     
 0.011 2024-11-12
   [New Features]

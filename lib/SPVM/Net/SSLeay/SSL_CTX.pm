@@ -286,6 +286,18 @@ Exceptions:
 
 The list $list must be defined. Otherwise an exception is thrown.
 
+=head2 add_client_CA
+
+C<method add_client_CA : int ($cacert : L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509>);>
+
+Calls native L<add_client_CA|https://docs.openssl.org/master/man3/SSL_CTX_set0_CA_list> function given $cacert, and returns its return value.
+
+Exceptions:
+
+The X509 object $cacert must be defined. Otherwise an exception is thrown.
+
+If add_client_CA failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>

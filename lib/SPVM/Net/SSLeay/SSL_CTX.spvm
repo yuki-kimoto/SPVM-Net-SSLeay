@@ -79,6 +79,8 @@ class Net::SSLeay::SSL_CTX {
   
   native method set_client_CA_list : void ($list : Net::SSLeay::X509_NAME[]);
   
+  native method add_client_CA : int ($cacert : Net::SSLeay::X509);
+  
   native method DESTROY : void ();
   
 }
