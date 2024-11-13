@@ -104,7 +104,7 @@ If SSL_CTX_use_certificate_chain_file failed, an exception is thrown with C<eval
 
 C<method use_PrivateKey_file : int ($file : string, $type : int);>
 
-Adds the first private key found in the file $file and the type $type by calling native L<use_PrivateKey_file|https://docs.openssl.org/3.1/man3/SSL_CTX_use_certificate/> function.
+Calls native L<use_PrivateKey_file|https://docs.openssl.org/3.1/man3/SSL_CTX_use_certificate> function given $file, $type, and returns its return value.
 
 Exceptions:
 
