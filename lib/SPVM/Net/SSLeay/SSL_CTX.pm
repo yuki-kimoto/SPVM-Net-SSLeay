@@ -266,6 +266,16 @@ The context $sid_ctx must be defined. Otherwise an exception is thrown.
 
 If SSL_CTX_set_session_id_context failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
+=head2 set_min_proto_version
+
+C<method set_min_proto_version : int ($version : int);>
+
+Calls native L<SSL_CTX_set_min_proto_version|https://docs.openssl.org/master/man3/SSL_CTX_set_min_proto_version> function given $version, and returns its return value.
+
+Exceptions:
+
+If SSL_CTX_set_min_proto_version failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>

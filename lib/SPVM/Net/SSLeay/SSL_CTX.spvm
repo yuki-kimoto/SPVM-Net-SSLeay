@@ -74,6 +74,8 @@ class Net::SSLeay::SSL_CTX {
   
   native method set_session_id_context : int ($sid_ctx : string, $sid_ctx_len : int = -1);
   
+  native method set_min_proto_version : int ($version : int);
+  
   native method DESTROY : void ();
   
 }
