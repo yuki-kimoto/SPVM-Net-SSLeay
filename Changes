@@ -13,6 +13,9 @@
     * Add Net::SSLeay::SSL_CTX#set_min_proto_version method.
     * Add Net::SSLeay::SSL_CTX#get_ext_d2i  method.
     * Add Net::SSLeay::DER class.
+    * Add Net::SSLeay::OCSP class.
+    * Add Net::SSLeay::OCSP_REQUEST class.
+    * Add Net::SSLeay::OCSP_RESPONSE class.
     
 0.011 2024-11-12
   [New Features]
