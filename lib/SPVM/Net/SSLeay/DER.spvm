@@ -11,4 +11,6 @@ class Net::SSLeay::DER {
   
   native static method d2i_OCSP_RESPONSE : Net::SSLeay::OCSP_RESPONSE ($a_ref : Net::SSLeay::OCSP_RESPONSE[], $ppin_ref : string[], $length : long);
   
+  native static method i2d_OCSP_REQUEST : int ($a : Net::SSLeay::OCSP_REQUEST, $ppout_ref : string[]);
+  
 }

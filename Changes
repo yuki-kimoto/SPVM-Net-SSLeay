@@ -18,6 +18,7 @@
     * Add Net::SSLeay::OCSP_RESPONSE class.
     * Add Net::SSLeay::DER#d2i_OCSP_REQUEST method.
     * Add Net::SSLeay::DER#d2i_OCSP_RESPONSE method.
+    * Add Net::SSLeay::DER#i2d_OCSP_REQUEST method.
     
 0.011 2024-11-12
   [New Features]

@@ -26,7 +26,7 @@ Calls native L<d2i_OCSP_REQUEST|https://docs.openssl.org/master/man3/d2i_X509> f
 
 Exceptions:
 
-$a must be undef(Currently reuse feature is not available). Otherwise an exception is thrown.
+$a_ref must be undef(Currently reuse feature is not available). Otherwise an exception is thrown.
 
 $ppin_ref must be defined. Otherwise an exception is thrown. Otherwise an exception is thrown.
 
@@ -44,7 +44,7 @@ Calls native L<d2i_OCSP_RESPONSE|https://docs.openssl.org/master/man3/d2i_X509> 
 
 Exceptions:
 
-$a must be undef(Currently reuse feature is not available). Otherwise an exception is thrown.
+$a_ref must be undef(Currently reuse feature is not available). Otherwise an exception is thrown.
 
 $ppin_ref must be defined. Otherwise an exception is thrown. Otherwise an exception is thrown.
 
@@ -53,6 +53,22 @@ The length of $ppin_ref must be 1. Otherwise an exception is thrown. Otherwise a
 $ppin_ref at index 0 must be defined. Otherwise an exception is thrown. Otherwise an exception is thrown.
 
 If d2i_OCSP_RESPONSE failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
+=head2 i2d_OCSP_REQUEST
+
+C<static method i2d_OCSP_REQUEST : int ($a : L<Net::SSLeay::OCSP_REQUEST|SPVM::Net::SSLeay::OCSP_REQUEST>, $ppout_ref : string[]);>
+
+Calls native L<i2d_OCSP_REQUEST|https://docs.openssl.org/master/man3/d2i_X509> function given $a_ref, $ppin_ref, $length, and returns its return value.
+
+Exceptions:
+
+$a must be undef. Otherwise an exception is thrown.
+
+$ppout_ref must be defined. Otherwise an exception is thrown. Otherwise an exception is thrown.
+
+The length of $ppout_ref must be 1. Otherwise an exception is thrown. Otherwise an exception is thrown.
+
+If i2d_OCSP_REQUEST failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
 =head1 See Also
 
