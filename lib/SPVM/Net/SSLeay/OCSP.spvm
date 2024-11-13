@@ -3,4 +3,6 @@
 
 class Net::SSLeay::OCSP {
   
+  native static method response_status_str : string ($code : long);
+  
 }

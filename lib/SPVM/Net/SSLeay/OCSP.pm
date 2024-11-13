@@ -18,6 +18,11 @@ Net::SSLeay::OCSP class in L<SPVM> represents L<OCSP|https://docs.openssl.org/ma
 
 =head1 Class Methods
 
+=head2 response_status_str
+
+C<static method response_status_str : string ($code : long);>
+
+Calls native L<OCSP_response_status_str|https://man.openbsd.org/OCSP_basic_sign.3> function, and returns its return value.
 
 =head1 See Also
 

@@ -1,3 +1,6 @@
+0.013 2024-11-13
+  [New Features]
+    * Add Net::SSLeay::OCSP#response_status_str method.
 0.012 2024-11-13
   [New Features]
     * Add Net::SSLeay::X509_STORE_CTX#set_error method.
