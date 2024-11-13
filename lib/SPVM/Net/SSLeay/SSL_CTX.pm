@@ -276,6 +276,16 @@ Exceptions:
 
 If SSL_CTX_set_min_proto_version failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
+=head2 set_client_CA_list
+
+C<method set_client_CA_list : void ($list : L<X509_NAME|SPVM::X509_NAME>[]);>
+
+Calls native L<set_client_CA_list|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_client_CA_list> function given $list.
+
+Exceptions:
+
+The list $list must be defined. Otherwise an exception is thrown.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>

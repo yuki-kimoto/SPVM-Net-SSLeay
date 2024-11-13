@@ -802,6 +802,37 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_min_proto_version(SPVM_ENV* env, SPVM_VA
   return 0;
 }
 
+int32_t SPVM__Net__SSLeay__SSL_CTX__set_client_CA_list(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  void* obj_list = stack[1].oval;
+  
+  SSL_CTX* ssl_ctx = env->get_pointer(env, stack, obj_self);
+  
+  if (!obj_list) {
+    return env->die(env, stack, "The list $list must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  STACK_OF(X509_NAME)* sk_x509_name = sk_X509_NAME_new_null();
+  
+  int32_t list_length = env->length(env, stack, obj_list);
+  
+  for (int32_t i = 0; i < list_length; i++) {
+    void* obj_x509_name = env->get_elem_object(env, stack, obj_list, i);
+    X509_NAME* x509_name = env->get_pointer(env, stack, obj_x509_name);
+    sk_X509_NAME_push(sk_x509_name, x509_name);
+  }
+  
+  SSL_CTX_set_client_CA_list(ssl_ctx, sk_x509_name);
+  
+  sk_X509_NAME_free(sk_x509_name);
+  
+  return 0;
+}
+
 int32_t SPVM__Net__SSLeay__SSL_CTX__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
