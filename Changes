@@ -23,6 +23,7 @@
     * Add Net::SSLeay::SSL_CTX#set_client_CA_list method.
     * Add Net::SSLeay::SSL_CTX#add_client_CA method.
     * Add Net::SSLeay#get_SSL_CTX  method.
+    * Add Net::SSLeay::SSL_CTX#add_extra_chain_cert method.
     
 0.011 2024-11-12
   [New Features]

@@ -298,6 +298,18 @@ The X509 object $cacert must be defined. Otherwise an exception is thrown.
 
 If add_client_CA failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
+=head2 add_extra_chain_cert
+
+C<method add_extra_chain_cert : long ($x509 : L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509>);>
+
+Calls native L<add_extra_chain_cert|https://docs.openssl.org/1.1.1/man3/SSL_CTX_add_extra_chain_cert/> function given $x509, sets the C<no_free> flag of $x509 is set to 1, and returns its return value.
+
+Exceptions:
+
+The X509 object $x509 must be defined. Otherwise an exception is thrown.
+
+If add_extra_chain_cert failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>
