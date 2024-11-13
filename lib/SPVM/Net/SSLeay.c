@@ -107,6 +107,47 @@ int32_t SPVM__Net__SSLeay__alert_desc_string_long(SPVM_ENV* env, SPVM_VALUE* sta
   return 0;
 }
 
+int32_t SPVM__Net__SSLeay__load_client_CA_file(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_file = stack[0].oval;
+  
+  if (!obj_file) {
+    return env->die(env, stack, "The file $file must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  const char* file = env->get_chars(env, stack, obj_file);
+  
+  STACK_OF(X509_NAME)* stack_of_x509_name = SSL_load_client_CA_file(file);
+  
+  if (!stack_of_x509_name) {
+    int64_t ssl_error = ERR_peek_last_error();
+    
+    char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
+    ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
+    
+    int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) { return error_id; }
+    
+    env->die(env, stack, "[OpenSSL Error]SSL_load_client_CA_file failed.", __func__, FILE_NAME, __LINE__);
+    return error_id;
+  }
+  
+  int32_t length = sk_X509_NAME_num(stack_of_x509_name);
+  void* obj_x509_names = env->new_object_array_by_name(env, stack, "Net::SSLeay::X509_NAME", length, &error_id, __func__, FILE_NAME, __LINE__);
+  
+  for (int32_t i = 0; i < length; i++) {
+    X509_NAME* x509_name = sk_X509_NAME_value(stack_of_x509_name, i);
+    void* obj_x509_name = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::X509_NAME", x509_name, &error_id, __func__, FILE_NAME, __LINE__);
+    env->set_elem_object(env, stack, obj_x509_names, i, obj_x509_name);
+  }
+  
+  stack[0].oval = obj_x509_names;
+  
+  return 0;
+}
+
 // Instance Methods
 int32_t SPVM__Net__SSLeay__set_fd(SPVM_ENV* env, SPVM_VALUE* stack) {
   
