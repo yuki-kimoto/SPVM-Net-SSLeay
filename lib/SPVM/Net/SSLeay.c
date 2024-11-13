@@ -139,7 +139,14 @@ int32_t SPVM__Net__SSLeay__load_client_CA_file(SPVM_ENV* env, SPVM_VALUE* stack)
   
   for (int32_t i = 0; i < length; i++) {
     X509_NAME* x509_name = sk_X509_NAME_value(stack_of_x509_name, i);
-    void* obj_x509_name = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::X509_NAME", x509_name, &error_id, __func__, FILE_NAME, __LINE__);
+    
+    void* obj_address_x509_name = env->new_pointer_object_by_name(env, stack, "Address", x509_name, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) { return error_id; }
+    stack[0].oval = obj_address_x509_name;
+    env->call_class_method_by_name(env, stack, "Net::SSLeay::X509_NAME", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) { return error_id; }
+    void* obj_x509_name = stack[0].oval;
+    
     env->set_elem_object(env, stack, obj_x509_names, i, obj_x509_name);
   }
   
