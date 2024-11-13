@@ -12,6 +12,7 @@
     * Add Net::SSLeay::SSL_CTX#set_session_id_context method.
     * Add Net::SSLeay::SSL_CTX#set_min_proto_version method.
     * Add Net::SSLeay::SSL_CTX#get_ext_d2i  method.
+    * Add Net::SSLeay::DER class.
     
 0.011 2024-11-12
   [New Features]
