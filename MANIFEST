@@ -7,7 +7,9 @@
 Changes
 DEVELOPMENT.txt
 helper/constants.txt
+helper/DER_type_names.txt
 helper/generate_constant_class.pl
+helper/generate_DER.pl
 lib/SPVM/Net/SSLeay.c
 lib/SPVM/Net/SSLeay.config
 lib/SPVM/Net/SSLeay.pm
@@ -95,6 +97,10 @@ lib/SPVM/Net/SSLeay/OCSP_RESPONSE.c
 lib/SPVM/Net/SSLeay/OCSP_RESPONSE.config
 lib/SPVM/Net/SSLeay/OCSP_RESPONSE.pm
 lib/SPVM/Net/SSLeay/OCSP_RESPONSE.spvm
+lib/SPVM/Net/SSLeay/OCSP_SINGLERESP.c
+lib/SPVM/Net/SSLeay/OCSP_SINGLERESP.config
+lib/SPVM/Net/SSLeay/OCSP_SINGLERESP.pm
+lib/SPVM/Net/SSLeay/OCSP_SINGLERESP.spvm
 lib/SPVM/Net/SSLeay/OPENSSL.c
 lib/SPVM/Net/SSLeay/OPENSSL.config
 lib/SPVM/Net/SSLeay/OPENSSL.pm
