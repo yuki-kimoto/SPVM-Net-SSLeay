@@ -14,4 +14,6 @@ class Net::SSLeay::OCSP {
   
   native static method basic_verify : int ($bs : Net::SSLeay::OCSP_BASICRESP, $certs : Net::SSLeay::X509[], $st : Net::SSLeay::X509_STORE, $flags : long);
   
+  native static method basic_add1_cert : int ($resp : Net::SSLeay::OCSP_BASICRESP, $cert : Net::SSLeay::X509);
+  
 }

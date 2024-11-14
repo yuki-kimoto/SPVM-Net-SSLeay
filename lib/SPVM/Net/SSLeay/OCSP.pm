@@ -48,6 +48,20 @@ Exceptions:
 
 If OCSP_basic_verify failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
+=head2 basic_add1_cert
+
+C<static basic_add1_cert : int ($resp : L<Net::SSLeay::OCSP_BASICRESP|SPVM::Net::SSLeay::OCSP_BASICRESP>, $cert : L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509>);>
+
+Calls native L<OCSP_basic_add1_cert|https://github.com/openssl/openssl/blob/master/crypto/ocsp/ocsp_srv.c> function, puses $cert to the end of L<certs_list|SPVM::Net::SSLeay::OCSP_BASICRESP/"certs_list"> field of $resp, and returns its return value.
+
+Exceptions:
+
+The OCSP_BASICRESP object $resp must be defined. Otherwise an exception is thrown.
+
+The X509 object $cert must be defined. Otherwise an exception is thrown.
+
+If OCSP_basic_add1_cert failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
 =head1 See Also
 
 =over 2

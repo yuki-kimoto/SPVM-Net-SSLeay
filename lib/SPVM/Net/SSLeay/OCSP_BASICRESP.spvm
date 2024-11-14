@@ -2,6 +2,7 @@
 # MIT License
 
 class Net::SSLeay::OCSP_BASICRESP {
+  allow Net::SSLeay::OCSP;
   
   use Net::SSLeay::X509;
   
