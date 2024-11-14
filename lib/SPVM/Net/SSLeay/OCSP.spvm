@@ -3,6 +3,7 @@
 
 class Net::SSLeay::OCSP {
   
+  use Net::SSLeay::OCSP_REQUEST;
   use Net::SSLeay::OCSP_RESPONSE;
   use Net::SSLeay::OCSP_BASICRESP;
   use Net::SSLeay::X509_STORE;
@@ -16,4 +17,5 @@ class Net::SSLeay::OCSP {
   
   native static method basic_add1_cert : int ($resp : Net::SSLeay::OCSP_BASICRESP, $cert : Net::SSLeay::X509);
   
+  native static method check_nonce : int ($req : Net::SSLeay::OCSP_REQUEST, $resp : Net::SSLeay::OCSP_BASICRESP);
 }

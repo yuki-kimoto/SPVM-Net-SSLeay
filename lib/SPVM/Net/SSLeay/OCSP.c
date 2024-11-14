@@ -156,3 +156,30 @@ int32_t SPVM__Net__SSLeay__OCSP__basic_add1_cert(SPVM_ENV* env, SPVM_VALUE* stac
   
   return 0;
 }
+
+int32_t SPVM__Net__SSLeay__OCSP__check_nonce(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_req = stack[0].oval;
+  
+  void* obj_resp = stack[1].oval;
+  
+  if (!obj_req) {
+    return env->die(env, stack, "The OCSP_REQUEST object $req must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  if (!obj_resp) {
+    return env->die(env, stack, "The OCSP_BASICRESP $resp must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  OCSP_REQUEST* req = env->get_pointer(env, stack, obj_req);
+  
+  OCSP_BASICRESP* resp = env->get_pointer(env, stack, obj_resp);
+  
+  int32_t ret = OCSP_check_nonce(req, resp);
+  
+  stack[0].ival = ret;
+  
+  return 0;
+}
