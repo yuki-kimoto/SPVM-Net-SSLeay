@@ -6,7 +6,7 @@ class Net::SSLeay::OCSP {
   use Net::SSLeay::OCSP_RESPONSE;
   use Net::SSLeay::OCSP_BASICRESP;
   use Net::SSLeay::X509_STORE;
-  
+  use Net::SSLeay::X509;
   
   native static method response_status_str : string ($code : long);
   
