@@ -16,6 +16,14 @@ Net::SSLeay::ASN1_GENERALIZEDTIME class in L<SPVM> represents L<ASN1_GENERALIZED
 
   use Net::SSLeay::ASN1_GENERALIZEDTIME;
 
+=head1 Instance Methods
+
+=head2 DESTROY
+
+C<method DESTROY : void ();>
+
+Calls native L<ASN1_STRING_free|https://docs.openssl.org/master/man3/ASN1_STRING_new/> function given the pointer value of the instance if C<no_free> flag of the instance is not a true value.
+
 =head1 See Also
 
 =over 2
