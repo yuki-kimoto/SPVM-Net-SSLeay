@@ -16,6 +16,10 @@ lib/SPVM/Net/SSLeay/ASN1_OBJECT.c
 lib/SPVM/Net/SSLeay/ASN1_OBJECT.config
 lib/SPVM/Net/SSLeay/ASN1_OBJECT.pm
 lib/SPVM/Net/SSLeay/ASN1_OBJECT.spvm
+lib/SPVM/Net/SSLeay/ASN1_TIME.c
+lib/SPVM/Net/SSLeay/ASN1_TIME.config
+lib/SPVM/Net/SSLeay/ASN1_TIME.pm
+lib/SPVM/Net/SSLeay/ASN1_TIME.spvm
 lib/SPVM/Net/SSLeay/BIO.c
 lib/SPVM/Net/SSLeay/BIO.config
 lib/SPVM/Net/SSLeay/BIO.pm
