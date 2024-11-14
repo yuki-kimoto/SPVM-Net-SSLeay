@@ -4,9 +4,14 @@
 class Net::SSLeay::OCSP {
   
   use Net::SSLeay::OCSP_RESPONSE;
+  use Net::SSLeay::OCSP_BASICRESP;
+  use Net::SSLeay::X509_STORE;
+  
   
   native static method response_status_str : string ($code : long);
   
   native static method response_status : int ($resp : Net::SSLeay::OCSP_RESPONSE);
-
+  
+  native static method basic_verify : int ($bs : Net::SSLeay::OCSP_BASICRESP, $certs : Net::SSLeay::X509[], $st : Net::SSLeay::X509_STORE, $flags : long);
+  
 }

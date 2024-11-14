@@ -34,6 +34,20 @@ Exceptions:
 
 The OCSP response $resp must be defined. Otherwise an exception is thrown.
 
+Exceptions:
+
+If SSL_CTX_new failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
+=head2 basic_verify
+
+C<static method basic_verify : int ($bs : L<Net::SSLeay::OCSP_BASICRESP|SPVM::Net::SSLeay::OCSP_BASICRESP>, $certs : L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509>[], $st : L<Net::SSLeay::X509_STORE|SPVM::Net::SSLeay::X509_STORE>, $flags : long);>
+
+Calls native L<OCSP_basic_verify|https://docs.openssl.org/1.1.1/man3/OCSP_resp_find_status> function, and returns its return value.
+
+Exceptions:
+
+If OCSP_basic_verify failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
 =head1 See Also
 
 =over 2
