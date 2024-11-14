@@ -6,6 +6,7 @@
     * Add Net::SSLeay::ASN1_GENERALIZEDTIME class.
     * Add Net::SSLeay::ASN1_INTEGER class.
     * Add Net::SSLeay::ASN1_ENUMERATED class.
+    * Add Net::SSLeay::OCSP_BASICRESP class.
 0.012 2024-11-13
   [New Features]
     * Add Net::SSLeay::X509_STORE_CTX#set_error method.
