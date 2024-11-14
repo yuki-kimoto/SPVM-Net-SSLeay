@@ -21,4 +21,7 @@ class Net::SSLeay::OCSP {
   native static method check_nonce : int ($req : Net::SSLeay::OCSP_REQUEST, $resp : Net::SSLeay::OCSP_BASICRESP);
   
   native static method check_validity : int ($thisupd : Net::SSLeay::ASN1_GENERALIZEDTIME, $nextupd : Net::SSLeay::ASN1_GENERALIZEDTIME, $sec : long, $maxsec : long);
+  
+  native static method resp_count : int ($bs : Net::SSLeay::OCSP_BASICRESP);
+  
 }

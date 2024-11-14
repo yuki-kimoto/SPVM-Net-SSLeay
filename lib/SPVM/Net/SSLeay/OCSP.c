@@ -228,3 +228,22 @@ int32_t SPVM__Net__SSLeay__OCSP__check_validity(SPVM_ENV* env, SPVM_VALUE* stack
   
   return 0;
 }
+
+int32_t SPVM__Net__SSLeay__OCSP__resp_count(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_bs = stack[0].oval;
+  
+  if (!obj_bs) {
+    return env->die(env, stack, "The OCSP_BASICRESP object $bs must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  OCSP_BASICRESP* bs = env->get_pointer(env, stack, obj_bs);
+  
+  int32_t count = OCSP_resp_count(bs);
+  
+  stack[0].ival = count;
+  
+  return 0;
+}

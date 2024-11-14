@@ -18,6 +18,7 @@
     * Add Net::SSLeay::OCSP#check_validity method.
     * Add Net::SSLeay::OCSP_SINGLERESP class.
     * Add Net::SSLeay::ASN1_GENERALIZEDTIME#DESTROY method.
+    * Add Net::SSLeay::OCSP#resp_count method.
 0.012 2024-11-13
   [New Features]
     * Add Net::SSLeay::X509_STORE_CTX#set_error method.

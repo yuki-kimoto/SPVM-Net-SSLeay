@@ -88,6 +88,16 @@ The ASN1_GENERALIZEDTIME $nextupd must be defined. Otherwise an exception is thr
 
 If OCSP_check_validity failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
+=head2 resp_count
+
+C<static method resp_count : int ($bs : L<Net::SSLeay::OCSP_BASICRESP|SPVM::Net::SSLeay::OCSP_BASICRESP>);>
+
+Calls native L<OCSP_resp_count|https://docs.openssl.org/master/man3/OCSP_resp_find_status> function given $bs, and returns its return value.
+
+Exceptions:
+
+The OCSP_BASICRESP object $bs must be defined. Otherwise an exception is thrown.
+
 =head1 See Also
 
 =over 2
