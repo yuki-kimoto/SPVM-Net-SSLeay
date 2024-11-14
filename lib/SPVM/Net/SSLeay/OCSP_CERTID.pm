@@ -16,6 +16,14 @@ Net::SSLeay::OCSP_CERTID class in L<SPVM> represents L<OCSP_CERTID|https://docs.
 
   use Net::SSLeay::OCSP_CERTID;
 
+=head1 Instance Methods
+
+=head2 DESTROY
+
+C<method DESTROY : void ();>
+
+Frees native L<OCSP_CERTID|https://docs.openssl.org/1.1.1/man3/OCSP_cert_to_id/> object by calling native L<OCSP_CERTID_free|https://docs.openssl.org/1.1.1/man3/OCSP_cert_to_id/> function if C<no_free> flag of the instance is not a true value.
+
 =head1 See Also
 
 =over 2
