@@ -1,13 +1,13 @@
 =pod
 
   # .spvm file
-  cat helper/DER_type_names.txt | perl helper/generate_DER.pl Net::SSLeay::DER spvm
+  cat helper/DER_type_names.txt | perl helper/generate_DER.pl Net::SSLeay::DER spvm > tmp/DER.spvm
   
   # .c file
-  cat helper/DER_type_names.txt | perl helper/generate_DER.pl Net::SSLeay::DER c
+  cat helper/DER_type_names.txt | perl helper/generate_DER.pl Net::SSLeay::DER c > tmp/DER.c
   
   # .pm file
-  cat helper/DER_type_names.txt | perl helper/generate_DER.pl Net::SSLeay::DER pm
+  cat helper/DER_type_names.txt | perl helper/generate_DER.pl Net::SSLeay::DER pm > tmp/DER.pm
 
 =cut
 

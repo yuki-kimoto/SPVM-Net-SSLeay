@@ -57,6 +57,7 @@ If i2d_TYPE failed, an exception is thrown with C<eval_error_id> set to the basi
 =head1 Class Methods
 
 =head2 d2i_OCSP_REQUEST
+=head2 d2i_OCSP_REQUEST
 
 C<static method d2i_OCSP_REQUEST : Net::SSLeay::OCSP_REQUEST ($a_ref : Net::SSLeay::OCSP_REQUEST[], $ppin_ref : string[], $length : long);>
 
@@ -77,6 +78,18 @@ See L</"d2i_TYPE"> template method.
 =head2 i2d_OCSP_RESPONSE
 
 C<static method i2d_OCSP_RESPONSE : int ($a : Net::SSLeay::OCSP_RESPONSE, $ppout_ref : string[]);>
+
+See L</"i2d_TYPE"> template method.
+
+=head2 d2i_OCSP_CERTID
+
+C<static method d2i_OCSP_CERTID : Net::SSLeay::OCSP_CERTID ($a_ref : Net::SSLeay::OCSP_CERTID[], $ppin_ref : string[], $length : long);>
+
+See L</"d2i_TYPE"> template method.
+
+=head2 i2d_OCSP_CERTID
+
+C<static method i2d_OCSP_CERTID : int ($a : Net::SSLeay::OCSP_CERTID, $ppout_ref : string[]);>
 
 See L</"i2d_TYPE"> template method.
 
