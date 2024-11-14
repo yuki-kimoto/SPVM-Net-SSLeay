@@ -28,4 +28,6 @@ class Net::SSLeay::OCSP_BASICRESP {
     $self->{certs_list} = $certs_list;
   }
   
+  native method DESTROY : void ();
+  
 }

@@ -13,6 +13,7 @@
     * Add Net::SSLeay::OCSP#basic_verify method.
     * Add Net::SSLeay::OCSP#basic_add1_cert method.
     * Add Net::SSLeay::OCSP#check_nonce method.
+    * Add Net::SSLeay::OCSP_BASICRESP#DESTROY method.
 0.012 2024-11-13
   [New Features]
     * Add Net::SSLeay::X509_STORE_CTX#set_error method.
