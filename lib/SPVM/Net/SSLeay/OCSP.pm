@@ -74,6 +74,20 @@ The OCSP_REQUEST object $req must be defined. Otherwise an exception is thrown.
 
 The OCSP_BASICRESP $resp must be defined. Otherwise an exception is thrown.
 
+=head2 check_validity
+
+C<static method check_validity : int ($thisupd : L<Net::SSLeay::ASN1_GENERALIZEDTIME|SPVM::Net::SSLeay::ASN1_GENERALIZEDTIME>, $nextupd : L<Net::SSLeay::ASN1_GENERALIZEDTIME|SPVM::Net::SSLeay::ASN1_GENERALIZEDTIME>, $sec : long, $maxsec : long);>
+
+Calls native L<OCSP_check_nonce|https://docs.openssl.org/1.1.1/man3/OCSP_request_add1_nonce> function given $req, $resp, and returns its return value.
+
+Exceptions:
+
+The ASN1_GENERALIZEDTIME object $thisupd must be defined. Otherwise an exception is thrown.
+
+The ASN1_GENERALIZEDTIME $nextupd must be defined. Otherwise an exception is thrown.
+
+If OCSP_check_validity failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
 =head1 See Also
 
 =over 2

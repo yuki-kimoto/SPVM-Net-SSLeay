@@ -183,3 +183,48 @@ int32_t SPVM__Net__SSLeay__OCSP__check_nonce(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   return 0;
 }
+
+int32_t SPVM__Net__SSLeay__OCSP__check_validity(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_thisupd = stack[0].oval;
+  
+  void* obj_nextupd = stack[1].oval;
+  
+  int64_t sec = stack[2].lval;
+  
+  int64_t maxsec = stack[3].lval;
+  
+  if (!obj_thisupd) {
+    return env->die(env, stack, "The ASN1_GENERALIZEDTIME object $thisupd must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  if (!obj_nextupd) {
+    return env->die(env, stack, "The ASN1_GENERALIZEDTIME $nextupd must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  ASN1_GENERALIZEDTIME* thisupd = env->get_pointer(env, stack, obj_thisupd);
+  
+  ASN1_GENERALIZEDTIME* nextupd = env->get_pointer(env, stack, obj_nextupd);
+  
+  int32_t ret = OCSP_check_validity(thisupd, nextupd, sec, maxsec);
+  
+  int32_t success = ret != 0;
+  if (!success) {
+    int64_t ssl_error = ERR_peek_last_error();
+    
+    char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
+    ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
+    
+    env->die(env, stack, "[OpenSSL Error]OCSP_check_validity failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    
+    int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
+    
+    return error_id;
+  }
+  
+  stack[0].ival = ret;
+  
+  return 0;
+}
