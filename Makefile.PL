@@ -96,6 +96,7 @@ sub MY::postamble {
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::OCSP_REQUEST');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::OCSP_RESPONSE');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::OCSP_BASICRESP');
+    $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::OCSP_CERTID');
   }
   
   return $make_rule;

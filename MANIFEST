@@ -83,6 +83,10 @@ lib/SPVM/Net/SSLeay/OCSP_BASICRESP.c
 lib/SPVM/Net/SSLeay/OCSP_BASICRESP.config
 lib/SPVM/Net/SSLeay/OCSP_BASICRESP.pm
 lib/SPVM/Net/SSLeay/OCSP_BASICRESP.spvm
+lib/SPVM/Net/SSLeay/OCSP_CERTID.c
+lib/SPVM/Net/SSLeay/OCSP_CERTID.config
+lib/SPVM/Net/SSLeay/OCSP_CERTID.pm
+lib/SPVM/Net/SSLeay/OCSP_CERTID.spvm
 lib/SPVM/Net/SSLeay/OCSP_REQUEST.c
 lib/SPVM/Net/SSLeay/OCSP_REQUEST.config
 lib/SPVM/Net/SSLeay/OCSP_REQUEST.pm
