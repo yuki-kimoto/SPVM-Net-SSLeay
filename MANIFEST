@@ -12,6 +12,10 @@ lib/SPVM/Net/SSLeay.c
 lib/SPVM/Net/SSLeay.config
 lib/SPVM/Net/SSLeay.pm
 lib/SPVM/Net/SSLeay.spvm
+lib/SPVM/Net/SSLeay/ASN1_GENERALIZEDTIME.c
+lib/SPVM/Net/SSLeay/ASN1_GENERALIZEDTIME.config
+lib/SPVM/Net/SSLeay/ASN1_GENERALIZEDTIME.pm
+lib/SPVM/Net/SSLeay/ASN1_GENERALIZEDTIME.spvm
 lib/SPVM/Net/SSLeay/ASN1_OBJECT.c
 lib/SPVM/Net/SSLeay/ASN1_OBJECT.config
 lib/SPVM/Net/SSLeay/ASN1_OBJECT.pm
