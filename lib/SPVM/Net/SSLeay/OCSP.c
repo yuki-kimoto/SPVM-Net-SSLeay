@@ -247,3 +247,110 @@ int32_t SPVM__Net__SSLeay__OCSP__resp_count(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   return 0;
 }
+
+int32_t SPVM__Net__SSLeay__OCSP__single_get0_status(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_single = stack[0].oval;
+  
+  int32_t* reason_ref = stack[1].iref;
+  
+  void* obj_revtime_ref = stack[2].oval;
+  
+  void* obj_thisupd_ref = stack[3].oval;
+  
+  void* obj_nextupd_ref = stack[4].oval;
+  
+  if (obj_single) {
+    return env->die(env, stack, "The OCSP_SINGLERESP object $single must be undef.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  OCSP_SINGLERESP* single = env->get_pointer(env, stack, obj_single);
+  
+  if (!obj_revtime_ref) {
+    return env->die(env, stack, "$revtime_ref must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  int32_t revtime_ref_length = env->length(env, stack, obj_revtime_ref);
+  
+  if (!(revtime_ref_length == 1)) {
+    return env->die(env, stack, "The length of $revtime_ref must be 1.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  if (!obj_thisupd_ref) {
+    return env->die(env, stack, "$thisupd_ref must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  int32_t thisupd_ref_length = env->length(env, stack, obj_thisupd_ref);
+  
+  if (!(thisupd_ref_length == 1)) {
+    return env->die(env, stack, "The length of $thisupd_ref must be 1.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  if (!obj_nextupd_ref) {
+    return env->die(env, stack, "$nextupd_ref must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  int32_t nextupd_ref_length = env->length(env, stack, obj_nextupd_ref);
+  
+  if (!(nextupd_ref_length == 1)) {
+    return env->die(env, stack, "The length of $nextupd_ref must be 1.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  int reason_tmp = 0;
+  ASN1_GENERALIZEDTIME* revtime_ref_tmp[1] = {0};
+  
+  ASN1_GENERALIZEDTIME* thisupd_ref_tmp[1] = {0};
+  
+  ASN1_GENERALIZEDTIME* nextupd_ref_tmp[1] = {0};
+  
+  int32_t status = OCSP_single_get0_status(single, &reason_tmp, revtime_ref_tmp, thisupd_ref_tmp, nextupd_ref_tmp);
+  
+  if (!(status == -1)) {
+    int64_t ssl_error = ERR_peek_last_error();
+    
+    char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
+    ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
+    
+    env->die(env, stack, "[OpenSSL Error]OCSP_single_get0_status failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    
+    int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
+    
+    return error_id;
+  }
+  
+  *reason_ref = reason_tmp;
+  
+  ASN1_GENERALIZEDTIME* revtime = ASN1_STRING_dup(revtime_ref_tmp[0]);
+  void* obj_address_revtime = env->new_pointer_object_by_name(env, stack, "Address", revtime, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
+  stack[0].oval = obj_address_revtime;
+  env->call_class_method_by_name(env, stack, "Net::SSLeay::ASN1_GENERALIZEDTIME", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
+  void* obj_revtime = stack[0].oval;
+  env->set_elem_object(env, stack, obj_revtime_ref, 0, obj_revtime);
+  
+  ASN1_GENERALIZEDTIME* thisupd = ASN1_STRING_dup(thisupd_ref_tmp[0]);
+  void* obj_address_thisupd = env->new_pointer_object_by_name(env, stack, "Address", thisupd, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
+  stack[0].oval = obj_address_thisupd;
+  env->call_class_method_by_name(env, stack, "Net::SSLeay::ASN1_GENERALIZEDTIME", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
+  void* obj_thisupd = stack[0].oval;
+  env->set_elem_object(env, stack, obj_thisupd_ref, 0, obj_thisupd);
+  
+  ASN1_GENERALIZEDTIME* nextupd = ASN1_STRING_dup(nextupd_ref_tmp[0]);
+  void* obj_address_nextupd = env->new_pointer_object_by_name(env, stack, "Address", nextupd, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
+  stack[0].oval = obj_address_nextupd;
+  env->call_class_method_by_name(env, stack, "Net::SSLeay::ASN1_GENERALIZEDTIME", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
+  void* obj_nextupd = stack[0].oval;
+  env->set_elem_object(env, stack, obj_nextupd_ref, 0, obj_nextupd);
+  
+  stack[0].ival = status;
+  
+  return 0;
+}
+

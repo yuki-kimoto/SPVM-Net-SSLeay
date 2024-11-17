@@ -98,6 +98,32 @@ Exceptions:
 
 The OCSP_BASICRESP object $bs must be defined. Otherwise an exception is thrown.
 
+=head2 single_get0_status
+
+C<static method single_get0_status : int ($single : L<Net::SSLeay::OCSP_SINGLERESP|SPVM::Net::SSLeay::OCSP_SINGLERESP>, $reason_ref : int*, $revtime_ref : L<Net::SSLeay::ASN1_GENERALIZEDTIME|SPVM::Net::SSLeay::ASN1_GENERALIZEDTIME>[], $thisupd_ref : L<Net::SSLeay::ASN1_GENERALIZEDTIME|SPVM::Net::SSLeay::ASN1_GENERALIZEDTIME>[], $nextupd_ref : L<Net::SSLeay::ASN1_GENERALIZEDTIME|Net::SSLeay::ASN1_GENERALIZEDTIME>[]);>
+
+Calls native L<OCSP_single_get0_status|https://docs.openssl.org/master/man3/OCSP_resp_find_status> function given $single, $reason_ref, $revtime_ref, $thisupd_ref, $nextupd_ref, and returns its return value.
+
+The first element of $reason_ref, the first element of $revtime_ref, the first element of $thisupd_ref are copied using native L<ASN1_STRING_dup|https://docs.openssl.org/1.1.1/man3/ASN1_STRING_length> function.
+
+Exceptions:
+
+The OCSP_SINGLERESP object $single must be undef. Otherwise an exception is thrown.
+
+$revtime_ref must be defined. Otherwise an exception is thrown.
+ 
+The length of $revtime_ref must be 1. Otherwise an exception is thrown.
+
+$thisupd_ref must be defined. Otherwise an exception is thrown.
+
+The length of $thisupd_ref must be 1. Otherwise an exception is thrown.
+
+$nextupd_ref must be defined. Otherwise an exception is thrown.
+
+The length of $nextupd_ref must be 1. Otherwise an exception is thrown.
+
+If OCSP_single_get0_status failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
 =head1 See Also
 
 =over 2
