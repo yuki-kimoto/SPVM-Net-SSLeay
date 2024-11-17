@@ -2,6 +2,7 @@
   [New Features]
     * Add Net::SSLeay::OCSP#single_get0_status method.
     * Add Net::SSLeay::OCSP#resp_find method.
+    * Add Net::SSLeay::OCSP_SINGLERESP#DESTROY method.
 0.013 2024-11-14
   [New Features]
     * Add Net::SSLeay::OCSP#response_status_str method.

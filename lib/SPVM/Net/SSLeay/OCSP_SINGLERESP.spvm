@@ -3,4 +3,19 @@
 
 class Net::SSLeay::OCSP_SINGLERESP {
   
+  allow Net::SSLeay::OCSP;
+  
+  # Class Methods
+  private static method new_with_pointer :  Net::SSLeay::OCSP_SINGLERESP ($pointer : Address, $options : object[] = undef) {
+    
+    my $self = new  Net::SSLeay::OCSP_SINGLERESP;
+    
+    Fn->set_pointer($self, $pointer);
+    
+    return $self;
+  }
+  
+  # Instance Methods
+  native method DESTROY : void ();
+  
 }
