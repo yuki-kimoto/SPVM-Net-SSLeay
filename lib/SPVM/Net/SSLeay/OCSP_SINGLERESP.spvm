@@ -5,6 +5,11 @@ class Net::SSLeay::OCSP_SINGLERESP {
   
   allow Net::SSLeay::OCSP;
   
+  # Fields
+  
+  # For Net::SSLeay::OCSP#resp_get0 method.
+  has ref_ocsp_basicresp : Net::SSLeay::OCSP_BASICRESP;
+  
   # Class Methods
   private static method new_with_pointer :  Net::SSLeay::OCSP_SINGLERESP ($pointer : Address, $options : object[] = undef) {
     
