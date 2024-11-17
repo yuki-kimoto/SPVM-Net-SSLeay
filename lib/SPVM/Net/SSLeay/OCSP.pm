@@ -142,7 +142,25 @@ C<static method resp_find : int ($bs : L<Net::SSLeay::OCSP_BASICRESP|SPVM::Net::
 
 Calls native L<OCSP_resp_find|https://docs.openssl.org/master/man3/OCSP_resp_find_status> function given $bs, $id, $last, and returns its return value.
 
+Exceptions:
+
+The OCSP_BASICRESP object $bs must be defined. Otherwise an exception is thrown.
+
+The OCSP_CERTID object $id must be defined. Otherwise an exception is thrown.
+
 If OCSP_resp_find failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
+=head2 resp_get0
+
+C<static method resp_get0 : L<Net::SSLeay::OCSP_SINGLERESP|SPVM::Net::SSLeay::OCSP_SINGLERESP> ($bs : L<Net::SSLeay::OCSP_BASICRESP|SPVM::Net::SSLeay::OCSP_BASICRESP>, $idx : int);>
+
+Calls native L<OCSP_resp_get0|https://docs.openssl.org/1.1.1/man3/OCSP_resp_find_status> function given $bs, $idx, creates a new L<Net::SSLeay::OCSP_SINGLERESP|SPVM::Net::SSLeay::OCSP_SINGLERESP> object, sets C<no_free> flag of the new object to 1, sets L<Net::SSLeay::OCSP_SINGLERESP#ref_ocsp_basicresp|SPVM::Net::SSLeay::OCSP_SINGLERESP/"ref_ocsp_basicresp"> field, and returns the new object.
+
+Exceptions:
+
+The OCSP_BASICRESP object $bs must be defined. Otherwise an exception is thrown.
+
+If OCSP_resp_get0 failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
 =head1 Copyright & License
 
