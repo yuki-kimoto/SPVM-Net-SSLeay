@@ -154,7 +154,7 @@ If OCSP_resp_find failed, an exception is thrown with C<eval_error_id> set to th
 
 C<static method resp_get0 : L<Net::SSLeay::OCSP_SINGLERESP|SPVM::Net::SSLeay::OCSP_SINGLERESP> ($bs : L<Net::SSLeay::OCSP_BASICRESP|SPVM::Net::SSLeay::OCSP_BASICRESP>, $idx : int);>
 
-Calls native L<OCSP_resp_get0|https://docs.openssl.org/1.1.1/man3/OCSP_resp_find_status> function given $bs, $idx, creates a new L<Net::SSLeay::OCSP_SINGLERESP|SPVM::Net::SSLeay::OCSP_SINGLERESP> object, sets C<no_free> flag of the new object to 1, sets L<Net::SSLeay::OCSP_SINGLERESP#ref_ocsp_basicresp|SPVM::Net::SSLeay::OCSP_SINGLERESP/"ref_ocsp_basicresp"> field, and returns the new object.
+Calls native L<OCSP_resp_get0|https://docs.openssl.org/1.1.1/man3/OCSP_resp_find_status> function given $bs, $idx, creates a new L<Net::SSLeay::OCSP_SINGLERESP|SPVM::Net::SSLeay::OCSP_SINGLERESP> object, sets C<no_free> flag of the new object to 1, sets L<Net::SSLeay::OCSP_SINGLERESP#ref_ocsp_basicresp|SPVM::Net::SSLeay::OCSP_SINGLERESP/"ref_ocsp_basicresp"> field to the new object, and returns the new object.
 
 Exceptions:
 
