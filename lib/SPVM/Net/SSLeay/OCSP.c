@@ -354,3 +354,46 @@ int32_t SPVM__Net__SSLeay__OCSP__single_get0_status(SPVM_ENV* env, SPVM_VALUE* s
   return 0;
 }
 
+int32_t SPVM__Net__SSLeay__OCSP__resp_find(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_bs = stack[0].oval;
+  
+  void* obj_id = stack[1].oval;
+  
+  int32_t last = stack[2].ival;
+  
+  if (!obj_bs) {
+    return env->die(env, stack, "The OCSP_BASICRESP object $bs must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  OCSP_BASICRESP* bs = env->get_pointer(env, stack, obj_bs);
+  
+  if (!obj_id) {
+    return env->die(env, stack, "The OCSP_CERTID object $id must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  OCSP_CERTID* id = env->get_pointer(env, stack, obj_id);
+  
+  int32_t found_index = OCSP_resp_find(bs, id, last);
+  
+  int32_t success = found_index != -1;
+  if (!success) {
+    int64_t ssl_error = ERR_peek_last_error();
+    
+    char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
+    ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
+    
+    env->die(env, stack, "[OpenSSL Error]OCSP_resp_find failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    
+    int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
+    
+    return error_id;
+  }
+  
+  stack[0].ival = found_index;
+  
+  return 0;
+}
+

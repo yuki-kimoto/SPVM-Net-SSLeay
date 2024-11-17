@@ -7,6 +7,7 @@ class Net::SSLeay::OCSP {
   use Net::SSLeay::OCSP_RESPONSE;
   use Net::SSLeay::OCSP_BASICRESP;
   use Net::SSLeay::OCSP_SINGLERESP;
+  use Net::SSLeay::OCSP_CERTID;
   use Net::SSLeay::X509_STORE;
   use Net::SSLeay::X509;
   use Net::SSLeay::ASN1_GENERALIZEDTIME;
@@ -26,4 +27,7 @@ class Net::SSLeay::OCSP {
   native static method resp_count : int ($bs : Net::SSLeay::OCSP_BASICRESP);
   
   native static method single_get0_status : int ($single : Net::SSLeay::OCSP_SINGLERESP, $reason_ref : int*, $revtime_ref : Net::SSLeay::ASN1_GENERALIZEDTIME[], $thisupd_ref : Net::SSLeay::ASN1_GENERALIZEDTIME[], $nextupd_ref : Net::SSLeay::ASN1_GENERALIZEDTIME[]);
+  
+  native static method resp_find : int ($bs : Net::SSLeay::OCSP_BASICRESP, $id : Net::SSLeay::OCSP_CERTID, $last : int);
+  
 }

@@ -136,6 +136,14 @@ If OCSP_single_get0_status failed, an exception is thrown with C<eval_error_id> 
 
 =back
 
+=head2 resp_find
+
+C<static method resp_find : int ($bs : L<Net::SSLeay::OCSP_BASICRESP|SPVM::Net::SSLeay::OCSP_BASICRESP>, $id : L<Net::SSLeay::OCSP_CERTID|SPVM::Net::SSLeay::OCSP_CERTID>, $last : int);>
+
+Calls native L<OCSP_resp_find|https://docs.openssl.org/master/man3/OCSP_resp_find_status> function given $bs, $id, $last, and returns its return value.
+
+If OCSP_resp_find failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
 =head1 Copyright & License
 
 Copyright (c) 2024 Yuki Kimoto
