@@ -10,7 +10,7 @@
 
 static const char* FILE_NAME = "Net/SSLeay/OCSP_SINGLERESP.c";
 
-int32_t SPVM__Net__SSLeay__SSL_CTX__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
+int32_t SPVM__Net__SSLeay__OCSP_SINGLERESP__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   

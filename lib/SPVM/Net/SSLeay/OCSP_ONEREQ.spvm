@@ -3,6 +3,13 @@
 
 class Net::SSLeay::OCSP_ONEREQ : pointer {
   
+  use Net::SSLeay::OCSP_REQUEST;
+  
+  # Fields
+  
+  # For OCSP#request_add0_id method
+  has ref_ocsp_request : Net::SSLeay::OCSP_REQUEST;
+  
   # Instance Methods
   native method DESTROY : void ();
   

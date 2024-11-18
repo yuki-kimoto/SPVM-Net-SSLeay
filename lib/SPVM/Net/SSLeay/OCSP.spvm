@@ -12,6 +12,7 @@ class Net::SSLeay::OCSP {
   use Net::SSLeay::X509;
   use Net::SSLeay::ASN1_GENERALIZEDTIME;
   use Net::SSLeay::EVP_MD;
+  use Net::SSLeay::OCSP_ONEREQ;
   
   native static method response_status_str : string ($code : long);
   
@@ -36,5 +37,7 @@ class Net::SSLeay::OCSP {
   native static method response_get1_basic : Net::SSLeay::OCSP_BASICRESP ($resp : Net::SSLeay::OCSP_RESPONSE);
   
   native static method cert_to_id : Net::SSLeay::OCSP_CERTID ($dgst : Net::SSLeay::EVP_MD, $subject : Net::SSLeay::X509, $issuer : Net::SSLeay::X509);
+  
+  native static method request_add0_id : Net::SSLeay::OCSP_ONEREQ ($req : Net::SSLeay::OCSP_REQUEST, $cid : Net::SSLeay::OCSP_CERTID);
   
 }

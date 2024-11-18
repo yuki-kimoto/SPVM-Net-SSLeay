@@ -542,3 +542,67 @@ int32_t SPVM__Net__SSLeay__OCSP__cert_to_id(SPVM_ENV* env, SPVM_VALUE* stack) {
   return 0;
 }
 
+int32_t SPVM__Net__SSLeay__OCSP__request_add0_id(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_req = stack[0].oval;
+  
+  void* obj_cid = stack[1].oval;
+  
+  if (!obj_cid) {
+    return env->die(env, stack, "The OCSP_REQUEST object $req must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  OCSP_REQUEST* req = env->get_pointer(env, stack, obj_req);
+  
+  if (!obj_cid) {
+    return env->die(env, stack, "The Net::SSLeay::OCSP_CERTID object $cid must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  OCSP_CERTID* cid = env->get_pointer(env, stack, obj_cid);
+  
+  OCSP_ONEREQ* onereq = OCSP_request_add0_id(req, cid);
+  
+  if (!onereq) {
+    int64_t ssl_error = ERR_peek_last_error();
+    
+    char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
+    ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
+    
+    env->die(env, stack, "[OpenSSL Error]OCSP_request_add0_id failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    
+    int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
+    
+    return error_id;
+  }
+  
+  void* obj_address_onereq = env->new_pointer_object_by_name(env, stack, "Address", onereq, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
+  stack[0].oval = obj_address_onereq;
+  env->call_class_method_by_name(env, stack, "Net::SSLeay::OCSP_ONEREQ", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
+  void* obj_onereq = stack[0].oval;
+  
+  env->set_no_free(env, stack, obj_onereq, 1);
+  
+  // cid must not be freed before req is freed.
+  {
+    void* obj_ocsp_certids_list = env->get_field_object_by_name(env, stack, obj_req, "ocsp_certidids_list", &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) { return error_id; }
+    
+    stack[0].oval = obj_ocsp_certids_list;
+    stack[1].oval = obj_cid;
+    env->call_instance_method_by_name(env, stack, "push", 2, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) { return error_id; }
+  }
+  
+  // req must not be freed before onereq is freed.
+  env->set_field_object_by_name(env, stack, obj_onereq, "ref_ocsp_request", obj_req, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
+  
+  stack[0].oval = obj_onereq;
+  
+  return 0;
+}
+
