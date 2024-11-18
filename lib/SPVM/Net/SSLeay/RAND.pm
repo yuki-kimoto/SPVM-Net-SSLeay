@@ -38,7 +38,7 @@ Calls native L<RAND_poll|https://docs.openssl.org/3.0/man3/RAND_add/> function.
 
 C<static method load_file : int ($filename : string, $max_bytes : long);>
 
-Calls native L<RAND_load_file|https://docs.openssl.org/master/man3/RAND_load_file/> function given the pointer value of the instance, $filename and $max_bytes, and returns its return value.
+Calls native L<RAND_load_file|https://docs.openssl.org/master/man3/RAND_load_file/> function given $filename and $max_bytes, and returns its return value.
 
 Exceptions:
 
