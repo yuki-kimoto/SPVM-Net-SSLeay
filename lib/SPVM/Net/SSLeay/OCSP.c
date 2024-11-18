@@ -435,10 +435,58 @@ int32_t SPVM__Net__SSLeay__OCSP__resp_get0(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   env->set_no_free(env, stack, obj_singleresp, 1);
   
-  env->set_field_object_by_name(env, stack, obj_address_singleresp, "ref_ocsp_basicresp", obj_bs, &error_id, __func__, FILE_NAME, __LINE__);
+  env->set_field_object_by_name(env, stack, obj_singleresp, "ref_ocsp_basicresp", obj_bs, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   
   stack[0].oval = obj_singleresp;
+  
+  return 0;
+}
+
+int32_t SPVM__Net__SSLeay__OCSP__response_get1_basic(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_resp = stack[0].oval;
+  
+  if (!obj_resp) {
+    return env->die(env, stack, "The OCSP_RESPONSE object $resp must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  OCSP_RESPONSE* resp = env->get_pointer(env, stack, obj_resp);
+  
+  if (!(OCSP_response_status(resp) == OCSP_RESPONSE_STATUS_SUCCESSFUL)) {
+    return env->die(env, stack, "OCSP_response_status($resp) must be OCSP_RESPONSE_STATUS_SUCCESSFUL.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  OCSP_BASICRESP* basicresp = OCSP_response_get1_basic(resp);
+  
+  if (!basicresp) {
+    int64_t ssl_error = ERR_peek_last_error();
+    
+    char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
+    ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
+    
+    env->die(env, stack, "[OpenSSL Error]OCSP_response_get1_basic failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    
+    int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
+    
+    return error_id;
+  }
+  
+  void* obj_address_basicresp = env->new_pointer_object_by_name(env, stack, "Address", basicresp, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
+  stack[0].oval = obj_address_basicresp;
+  env->call_class_method_by_name(env, stack, "Net::SSLeay::OCSP_BASICRESP", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
+  void* obj_basicresp = stack[0].oval;
+  
+  env->set_no_free(env, stack, obj_basicresp, 1);
+  
+  env->set_field_object_by_name(env, stack, obj_basicresp, "ref_ocsp_response", obj_resp, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
+  
+  stack[0].oval = obj_basicresp;
   
   return 0;
 }

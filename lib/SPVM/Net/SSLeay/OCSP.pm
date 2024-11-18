@@ -162,9 +162,22 @@ The OCSP_BASICRESP object $bs must be defined. Otherwise an exception is thrown.
 
 If OCSP_resp_get0 failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
+=head2 response_get1_basic
+
+C<static method response_get1_basic : L<Net::SSLeay::OCSP_BASICRESP|SPVM::Net::SSLeay::OCSP_BASICRESP> ($resp : L<Net::SSLeay::OCSP_RESPONSE|SPVM::Net::SSLeay::OCSP_RESPONSE>);>
+
+Calls native L<OCSP_response_get1_basic|https://docs.openssl.org/master/man3/OCSP_response_status> function given $resp, creates a new L<Net::SSLeay::OCSP_BASICRESP|SPVM::Net::SSLeay::OCSP_BASICRESP> object, sets C<no_free> flag of the new object to 1, sets L<Net::SSLeay::OCSP_BASICRESPP#ref_ocsp_response|SPVM::Net::SSLeay::OCSP_BASICRESP/"ref_ocsp_response"> field to the new object, and returns the new object.
+
+Exceptions:
+
+The OCSP_RESPONSE object $resp must be defined. Otherwise an exception is thrown.
+
+OCSP_response_status($resp) must be OCSP_RESPONSE_STATUS_SUCCESSFUL. Otherwise an exception is thrown.
+
+If OCSP_response_get1_basic failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
 =head1 Copyright & License
 
 Copyright (c) 2024 Yuki Kimoto
 
 MIT License
-

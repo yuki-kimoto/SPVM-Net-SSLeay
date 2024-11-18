@@ -32,4 +32,6 @@ class Net::SSLeay::OCSP {
   
   native static method resp_get0 : Net::SSLeay::OCSP_SINGLERESP ($bs : Net::SSLeay::OCSP_BASICRESP, $idx : int);
   
+  native static method response_get1_basic : Net::SSLeay::OCSP_BASICRESP ($resp : Net::SSLeay::OCSP_RESPONSE);
+  
 }
