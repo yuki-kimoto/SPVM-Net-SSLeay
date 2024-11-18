@@ -78,6 +78,16 @@ C<method dup : L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> ();>
 
 Calls native L<X509_dup|https://docs.openssl.org/3.3/man3/X509_dup> function given the pointer value of the instance, creates a new L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> object, sets the pointer value of the new object to the return value of the native function, and returns the new object.
 
+=head2 check_issued
+
+C<method check_issued : int ($subject : L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509>);>
+
+Calls native L<X509_check_issued|https://docs.openssl.org/1.1.1/man3/X509_check_issued> function given the pointer value of the instance, the pointer value of $subject, and returns its return value.
+
+Exceptions:
+
+The X509 object $subject must be defined. Otherwise an exception is thrown.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>

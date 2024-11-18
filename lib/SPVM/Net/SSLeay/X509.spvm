@@ -33,6 +33,8 @@ class Net::SSLeay::X509 {
   
   native method dup : Net::SSLeay::X509 ();
   
+  native method check_issued : int ($subject : Net::SSLeay::X509);
+  
   native method DESTROY : void ();
   
 }
