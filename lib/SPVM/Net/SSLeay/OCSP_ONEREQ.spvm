@@ -3,4 +3,7 @@
 
 class Net::SSLeay::OCSP_ONEREQ {
   
+  # Instance Methods
+  native method DESTROY : void ();
+  
 }
