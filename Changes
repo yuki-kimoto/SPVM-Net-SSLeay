@@ -10,6 +10,7 @@
     * Add Net::SSLeay::X509#dup method.
     * Add Net::SSLeay::OCSP#cert_to_id method.
     * Add Net::SSLeay::X509#check_issued method.
+    * Add Net::SSLeay::OCSP_ONEREQ class.
 0.013 2024-11-14
   [New Features]
     * Add Net::SSLeay::OCSP#response_status_str method.

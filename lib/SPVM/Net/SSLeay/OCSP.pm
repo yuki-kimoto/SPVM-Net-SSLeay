@@ -182,6 +182,14 @@ C<static method cert_to_id : L<Net::SSLeay::OCSP_CERTID|SPVM::Net::SSLeay::OCSP_
 
 Calls native L<OCSP_cert_to_id|https://docs.openssl.org/1.1.1/man3/OCSP_cert_to_id> function given $resp, creates a new L<Net::SSLeay::OCSP_CERTID|SPVM::Net::SSLeay::OCSP_CERTID> object, sets the pointer value of the new object to the return value of the native function, and returns the new object.
 
+=head1 See Also
+
+=over 2
+
+=item * L<Net::SSLeay|SPVM::Net::SSLeay>
+
+=back
+
 =head1 Copyright & License
 
 Copyright (c) 2024 Yuki Kimoto
