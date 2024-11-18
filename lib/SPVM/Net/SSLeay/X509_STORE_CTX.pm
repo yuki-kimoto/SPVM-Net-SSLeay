@@ -16,6 +16,25 @@ Net::SSLeay::X509_STORE_CTX class in L<SPVM> represents L<X509_STORE_CTX|https:/
 
   use Net::SSLeay::X509_STORE_CTX;
 
+=head1 Class Methods
+
+C<method get1_issuer : int ($issuer_ref : L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509>, $ctx : L<Net::SSLeay::X509_STORE_CTX|SPVM::Net::SSLeay::X509_STORE_CTX>, $x : L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509>);>
+
+Calls native L<X509_STORE_CTX_get1_issuer|https://docs.openssl.org/master/man3/OCSP_response_status> function given $issuer_ref, $ctx, $x.
+, sets $issuer_ref at index 0 to the new object, and returns the return value of the native function.
+
+Exceptions:
+
+The output array of the Net::SSLeay::X509 $issuer_ref must be defined. Otherwise an exception is thrown.
+
+The length of $issuer_ref must be 1. Otherwise an exception is thrown.
+
+The Net::SSLeay::X509_STORE_CTX object $ctx must be defined. Otherwise an exception is thrown.
+
+The X509 object $x must be defined. Otherwise an exception is thrown.
+
+If X509_STORE_CTX_get1_issuer failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
 =head1 Instance Methods
 
 =head2 set_error
