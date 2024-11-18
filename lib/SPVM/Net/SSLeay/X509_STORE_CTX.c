@@ -149,6 +149,66 @@ int32_t SPVM__Net__SSLeay__X509_STORE_CTX__get_current_cert(SPVM_ENV* env, SPVM_
   return 0;
 }
 
+int32_t SPVM__Net__SSLeay__X509_STORE_CTX__Init(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  void* obj_trust_store = stack[1].oval;
+  
+  void* obj_target = stack[2].oval;
+  
+  void* obj_untrusted_array = stack[3].oval;
+  
+  X509_STORE_CTX* x509_store_ctx = env->get_pointer(env, stack, obj_self);
+  
+  if (!obj_trust_store) {
+    return env->die(env, stack, "The X509_STORE object $trust_store must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  X509_STORE* trust_store = env->get_pointer(env, stack, obj_trust_store);
+  
+  if (!obj_target) {
+    return env->die(env, stack, "The X509 object $target must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  X509* target = env->get_pointer(env, stack, obj_target);
+  
+  if (!obj_untrusted_array) {
+    return env->die(env, stack, "The X509 array $untrusted_array must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  STACK_OF(X509)* sk_X509 = sk_X509_new_null();
+  
+  int32_t list_length = env->length(env, stack, obj_untrusted_array);
+  
+  for (int32_t i = 0; i < list_length; i++) {
+    void* obj_X509 = env->get_elem_object(env, stack, obj_untrusted_array, i);
+    X509* X509 = env->get_pointer(env, stack, obj_X509);
+    sk_X509_push(sk_X509, X509);
+  }
+  
+  int32_t status = X509_STORE_CTX_init(x509_store_ctx, trust_store, target, sk_X509);
+  
+  if (!(status == 1)) {
+    int64_t ssl_error = ERR_peek_last_error();
+    
+    char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
+    ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
+    
+    env->die(env, stack, "[OpenSSL Error]X509_STORE_CTX_init failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    
+    int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
+    
+    return error_id;
+  }
+  
+  stack[0].ival = status;
+  
+  return 0;
+}
+
 int32_t SPVM__Net__SSLeay__X509_STORE_CTX__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;

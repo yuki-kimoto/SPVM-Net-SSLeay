@@ -65,9 +65,22 @@ If the return value is NULL, returns undef.
 
 Otherwise, creates a new new L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> object, sets the pointer value of the new object to the return value of the native function, sets C<no_free> flag of the new object to 1, returns the new object.
 
+=head2 Init
+
+C<method Init : int ($trust_store : L<Net::SSLeay::X509_STORE|SPVM::Net::SSLeay::X509_STORE>, $target : L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509>, $untrusted_array : L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509>[]);>
+
+Calls native L<X509_STORE_CTX_init|https://docs.openssl.org/3.2/man3/X509_STORE_CTX_new> function given the pointer value of $trust_store, the pointer value of $target, the value that converts $untrusted_array to STACK_OF(X509) type, and returns its return value.
+
+Exceptions:
+
+The X509 object $target must be defined. Otherwise an exception is thrown.
+
+The X509 array $untrusted_array must be defined. Otherwise an exception is thrown.
+
+If X509_STORE_CTX_init failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
 =head1 Copyright & License
 
 Copyright (c) 2024 Yuki Kimoto
 
 MIT License
-
