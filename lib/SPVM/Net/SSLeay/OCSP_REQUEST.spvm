@@ -9,6 +9,8 @@ class Net::SSLeay::OCSP_REQUEST : pointer {
   has ocsp_certids_list : List of Net::SSLeay::OCSP_CERTID;
   
   # Class Methods
+  native static method new : Net::SSLeay::OCSP_REQUEST ($options : object[] = undef);
+  
   private static method new_with_pointer : Net::SSLeay::OCSP_REQUEST ($pointer : Address, $options : object[] = undef) {
     
     my $self = new Net::SSLeay::OCSP_REQUEST;
