@@ -196,6 +196,18 @@ The Net::SSLeay::OCSP_CERTID object $cid must be defined. Otherwise an exception
 
 If request_add0_id failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
+=head2 request_add1_nonce
+
+C<static method request_add1_nonce : int ($req : L<Net::SSLeay::OCSP_REQUEST|SPVM::Net::SSLeay::OCSP_REQUEST>, $val : string, $len : int);>
+
+Calls native L<OCSP_request_add1_nonce|https://docs.openssl.org/1.1.1/man3/OCSP_request_add1_nonce> function given the pointer value of $req, $val, $len, , and returns its return value.
+
+Exceptions:
+
+The OCSP_REQUEST object $req must be defined.
+
+If OCSP_request_add1_nonce failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
 =head1 See Also
 
 =over 2

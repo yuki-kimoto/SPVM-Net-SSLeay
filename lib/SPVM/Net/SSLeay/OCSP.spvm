@@ -40,4 +40,6 @@ class Net::SSLeay::OCSP {
   
   native static method request_add0_id : Net::SSLeay::OCSP_ONEREQ ($req : Net::SSLeay::OCSP_REQUEST, $cid : Net::SSLeay::OCSP_CERTID);
   
+  native static method request_add1_nonce : int ($req : Net::SSLeay::OCSP_REQUEST, $val : string, $len : int);
+  
 }

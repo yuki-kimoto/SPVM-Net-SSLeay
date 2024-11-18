@@ -606,3 +606,44 @@ int32_t SPVM__Net__SSLeay__OCSP__request_add0_id(SPVM_ENV* env, SPVM_VALUE* stac
   return 0;
 }
 
+int32_t SPVM__Net__SSLeay__OCSP__request_add1_nonce(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_req = stack[0].oval;
+  
+  void* obj_val = stack[1].oval;
+  
+  int32_t len = stack[2].ival;
+  
+  if (!obj_req) {
+    return env->die(env, stack, "The OCSP_REQUEST object $req must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  OCSP_REQUEST* req = env->get_pointer(env, stack, obj_req);
+  
+  unsigned char* val = NULL;
+  if (obj_val) {
+    val = (unsigned char*)env->get_chars(env, stack, obj_val);
+  }
+  
+  int32_t status = OCSP_request_add1_nonce(req, val, len);
+  
+  if (!(status == 1)) {
+    int64_t ssl_error = ERR_peek_last_error();
+    
+    char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
+    ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
+    
+    env->die(env, stack, "[OpenSSL Error]OCSP_request_add1_nonce failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    
+    int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
+    
+    return error_id;
+  }
+  
+  stack[0].ival = status;
+  
+  return 0;
+}
+
