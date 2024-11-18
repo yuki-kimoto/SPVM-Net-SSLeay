@@ -490,3 +490,55 @@ int32_t SPVM__Net__SSLeay__OCSP__response_get1_basic(SPVM_ENV* env, SPVM_VALUE* 
   
   return 0;
 }
+
+int32_t SPVM__Net__SSLeay__OCSP__cert_to_id(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_dgst = stack[0].oval;
+  
+  void* obj_subject = stack[1].oval;
+  
+  void* obj_issuer = stack[2].oval;
+  
+  EVP_MD* dgst = env->get_pointer(env, stack, obj_dgst);
+  
+  if (!obj_subject) {
+    return env->die(env, stack, "The X509 object $subject must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  X509* subject = env->get_pointer(env, stack, obj_subject);
+  
+  if (!obj_issuer) {
+    return env->die(env, stack, "The X509 object $issuer must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  X509* issuer = env->get_pointer(env, stack, obj_issuer);
+  
+  OCSP_CERTID* certid = OCSP_cert_to_id(dgst, subject, issuer);
+  
+  if (!certid) {
+    int64_t ssl_error = ERR_peek_last_error();
+    
+    char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
+    ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
+    
+    env->die(env, stack, "[OpenSSL Error]OCSP_cert_to_id failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    
+    int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
+    
+    return error_id;
+  }
+  
+  void* obj_address_certid = env->new_pointer_object_by_name(env, stack, "Address", certid, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
+  stack[0].oval = obj_address_certid;
+  env->call_class_method_by_name(env, stack, "Net::SSLeay::CERTID", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
+  void* obj_certid = stack[0].oval;
+  
+  stack[0].oval = obj_certid;
+  
+  return 0;
+}
+
