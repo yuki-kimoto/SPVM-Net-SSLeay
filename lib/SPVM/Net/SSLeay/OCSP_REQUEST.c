@@ -16,10 +16,10 @@ int32_t SPVM__Net__SSLeay__OCSP_REQUEST__DESTROY(SPVM_ENV* env, SPVM_VALUE* stac
   
   void* obj_self = stack[0].oval;
   
-  OCSP_REQUEST* ssl_ctx = env->get_pointer(env, stack, obj_self);
+  OCSP_REQUEST* pointer = env->get_pointer(env, stack, obj_self);
   
   if (!env->no_free(env, stack, obj_self)) {
-    OCSP_REQUEST_free(ssl_ctx);
+    OCSP_REQUEST_free(pointer);
   }
   
   return 0;

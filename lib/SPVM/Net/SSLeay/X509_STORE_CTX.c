@@ -215,10 +215,10 @@ int32_t SPVM__Net__SSLeay__X509_STORE_CTX__DESTROY(SPVM_ENV* env, SPVM_VALUE* st
   
   void* obj_self = stack[0].oval;
   
-  X509_STORE_CTX* x509_store_ctx = env->get_pointer(env, stack, obj_self);
+  X509_STORE_CTX* pointer = env->get_pointer(env, stack, obj_self);
   
   if (!env->no_free(env, stack, obj_self)) {
-    X509_STORE_CTX_free(x509_store_ctx);
+    X509_STORE_CTX_free(pointer);
   }
   
   return 0;
