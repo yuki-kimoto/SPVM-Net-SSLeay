@@ -20,7 +20,7 @@ Net::SSLeay::X509_STORE_CTX class in L<SPVM> represents L<X509_STORE_CTX|https:/
 
 C<method get1_issuer : int ($issuer_ref : L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509>, $ctx : L<Net::SSLeay::X509_STORE_CTX|SPVM::Net::SSLeay::X509_STORE_CTX>, $x : L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509>);>
 
-Calls native L<X509_STORE_CTX_get1_issuer|https://docs.openssl.org/master/man3/OCSP_response_status> function given the pointer value of the instance, $issuer_ref, $ctx, $x.
+Calls native L<X509_STORE_CTX_get1_issuer|https://docs.openssl.org/master/man3/OCSP_response_status> function given $issuer_ref, $ctx, $x.
 , sets $issuer_ref at index 0 to the new object, and returns the return value of the native function.
 
 Exceptions:
