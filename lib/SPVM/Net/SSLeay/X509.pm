@@ -92,7 +92,7 @@ The X509 object $subject must be defined. Otherwise an exception is thrown.
 
 C<method DESTROY : void ();>
 
-Frees native L<X509|https://docs.openssl.org/3.1/man3/X509_new/> object by calling native L<X509_free|https://docs.openssl.org/3.1/man3/X509_free/> function if C<no_free> flag of the instance is not a true value.
+Calls native L<X509_free|https://docs.openssl.org/3.1/man3/X509_free/> function given the pointer value of the instance if C<no_free> flag of the instance is not a true value.
 
 =head1 FAQ
 

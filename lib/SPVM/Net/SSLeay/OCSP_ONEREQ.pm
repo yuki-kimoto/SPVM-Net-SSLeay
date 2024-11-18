@@ -22,7 +22,7 @@ Net::SSLeay::OCSP_ONEREQ class in L<SPVM> represents L<OCSP_ONEREQ|https://docs.
 
 C<method DESTROY : void ();>
 
-Frees native L<OCSP_ONEREQ|https://docs.openssl.org/3.1/man3/X509_dup> object by calling native L<OCSP_ONEREQ_free|https://docs.openssl.org/3.1/man3/X509_dup> function given the pointer of the instance if C<no_free> flag of the instance is not a true value.
+Calls native L<OCSP_ONEREQ_free|https://docs.openssl.org/3.1/man3/X509_dup> function given the pointer of the instance if C<no_free> flag of the instance is not a true value.
 
 =head1 See Also
 

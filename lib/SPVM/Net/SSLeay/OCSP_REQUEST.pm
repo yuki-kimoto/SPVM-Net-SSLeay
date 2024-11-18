@@ -20,7 +20,7 @@ Net::SSLeay::OCSP_REQUEST class in L<SPVM> represents L<OCSP_REQUEST|https://doc
 
 C<method DESTROY : void ();>
 
-Frees native L<OCSP_REQUEST|https://docs.openssl.org/1.1.1/man3/X509_dup> object by calling native L<OCSP_REQUEST_free|https://docs.openssl.org/1.1.1/man3/X509_dup> function if C<no_free> flag of the instance is not a true value.
+Callsnative L<OCSP_REQUEST_free|https://docs.openssl.org/1.1.1/man3/X509_dup> function given the pointer value of the instance if C<no_free> flag of the instance is not a true value.
 
 =head1 See Also
 

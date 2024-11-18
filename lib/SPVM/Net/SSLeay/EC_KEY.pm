@@ -34,7 +34,7 @@ If EC_KEY_new failed, an exception is thrown with C<eval_error_id> set to the ba
 
 C<method DESTROY : void ();>
 
-Frees native L<EC_KEY|https://docs.openssl.org/master/man3/EC_KEY_new/> object by calling native L<EC_KEY_free|https://docs.openssl.org/master/man3/EC_KEY_new/> function if C<no_free> flag of the instance is not a true value.
+Calls native L<EC_KEY_free|https://docs.openssl.org/master/man3/EC_KEY_new/> function given the pointer value of the instance if C<no_free> flag of the instance is not a true value.
 
 =head1 See Also
 

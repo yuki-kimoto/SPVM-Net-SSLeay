@@ -76,7 +76,7 @@ If BIO_write failed, an exception is thrown with C<eval_error_id> set to the bas
 
 C<method DESTROY : void ();>
 
-Frees native L<BIO|https://docs.openssl.org/1.0.2/man3/BIO_new> object by calling native L<BIO_free|https://docs.openssl.org/1.0.2/man3/BIO_free> function if C<no_free> flag of the instance is not a true value.
+Calls native L<BIO_free|https://docs.openssl.org/1.0.2/man3/BIO_free> function given the pointer value of the instance if C<no_free> flag of the instance is not a true value.
 
 =head1 See Also
 

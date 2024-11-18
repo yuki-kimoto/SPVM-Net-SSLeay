@@ -36,7 +36,7 @@ If $buf is defined and $len is a negative value, $len is set to the length of $b
 
 C<method DESTROY : void ();>
 
-Frees native L<X509_NAME|https://docs.openssl.org/3.2/man3/X509_new/> object by calling native L<X509_free|https://docs.openssl.org/3.2/man3/X509_new> function if C<no_free> flag of the instance is not a true value.
+Calls native L<X509_free|https://docs.openssl.org/3.2/man3/X509_new> function given the pointer value of the instance if C<no_free> flag of the instance is not a true value.
 
 =head1 See Also
 
