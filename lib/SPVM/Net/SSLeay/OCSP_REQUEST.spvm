@@ -1,7 +1,7 @@
 # Copyright (c) 2024 Yuki Kimoto
 # MIT License
 
-class Net::SSLeay::OCSP_REQUEST {
+class Net::SSLeay::OCSP_REQUEST : pointer {
   
   # Instance Method
   native method DESTROY : void ();

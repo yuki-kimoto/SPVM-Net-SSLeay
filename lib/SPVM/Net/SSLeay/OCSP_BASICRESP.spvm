@@ -1,7 +1,7 @@
 # Copyright (c) 2024 Yuki Kimoto
 # MIT License
 
-class Net::SSLeay::OCSP_BASICRESP {
+class Net::SSLeay::OCSP_BASICRESP : pointer {
   allow Net::SSLeay::OCSP;
   
   use Net::SSLeay::X509;
