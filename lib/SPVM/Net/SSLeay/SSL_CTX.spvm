@@ -114,7 +114,7 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   native method set_psk_client_callback : void ($cb : Net::SSLeay::Callback::PskClient);
   
-  private method get_psk_client_cb : Net::SSLeay::Callback::PskClient ($key : string) {
+  private method GET_PSK_CLIENT_CB : Net::SSLeay::Callback::PskClient ($key : string) {
     
     $MUTEX->reader_lock;
     
@@ -125,7 +125,7 @@ class Net::SSLeay::SSL_CTX : pointer {
     return $psk_client_cb;
   }
   
-  private method set_psk_client_cb : void ($key : string, $psk_client_cb : Net::SSLeay::Callback::PskClient) {
+  private method SET_PSK_CLIENT_CB : void ($key : string, $psk_client_cb : Net::SSLeay::Callback::PskClient) {
     
     $MUTEX->lock;
     
@@ -135,19 +135,20 @@ class Net::SSLeay::SSL_CTX : pointer {
     
   }
   
-  private method delete_psk_client_cb : void ($key : string) {
+  private method DELETE_PSK_CLIENT_CB : Net::SSLeay::Callback::PskClient ($key : string) {
     
     $MUTEX->lock;
     
-    $PSK_CLIENT_CBS->delete($key);
+    my $deleted = (Net::SSLeay::Callback::PskClient)$PSK_CLIENT_CBS->delete($key);
     
     $MUTEX->unlock;
     
+    return $deleted;
   }
   
   native method set_psk_server_callback : void ($cb : Net::SSLeay::Callback::PskServer);
   
-  private method get_psk_server_cb : Net::SSLeay::Callback::PskServer ($key : string) {
+  private method GET_PSK_SERVER_CB : Net::SSLeay::Callback::PskServer ($key : string) {
     
     $MUTEX->reader_lock;
     
@@ -158,7 +159,7 @@ class Net::SSLeay::SSL_CTX : pointer {
     return $psk_server_cb;
   }
   
-  private method set_psk_server_cb : void ($key : string, $psk_server_cb : Net::SSLeay::Callback::PskServer) {
+  private method SET_PSK_SERVER_CB : void ($key : string, $psk_server_cb : Net::SSLeay::Callback::PskServer) {
     
     $MUTEX->lock;
     
@@ -168,14 +169,15 @@ class Net::SSLeay::SSL_CTX : pointer {
     
   }
   
-  private method delete_psk_server_cb : void ($key : string) {
+  private method DELETE_PSK_SERVER_CB : Net::SSLeay::Callback::PskServer ($key : string) {
     
     $MUTEX->lock;
     
-    $PSK_SERVER_CBS->delete($key);
+    my $deleted = (Net::SSLeay::Callback::PskServer)$PSK_SERVER_CBS->delete($key);
     
     $MUTEX->unlock;
     
+    return $deleted;
   }
   
   native method DESTROY : void ();
