@@ -19,6 +19,7 @@ class Net::SSLeay::SSL_CTX : pointer {
   use Net::SSLeay::Callback::PemPasswd;
   use Net::SSLeay::Callback::PskClient;
   use Net::SSLeay::Callback::PskServer;
+  use Net::SSLeay::Callback::TlsextTicketKey;
   use Sync::Mutex;
   
   # Class Variables

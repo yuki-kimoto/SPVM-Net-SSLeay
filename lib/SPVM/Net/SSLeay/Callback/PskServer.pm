@@ -6,32 +6,31 @@ package SPVM::Net::SSLeay::Callback::PskServer;
 
 =head1 Name
 
-SPVM::Net::SSLeay::Callback::PskServer - Short Description
+SPVM::Net::SSLeay::Callback::PskServer - Callback for SSL_CTX_set_psk_server_callback function in OpenSSL.
 
 =head1 Description
 
-Net::SSLeay::Callback::PskServer interface in L<SPVM> has interface methods to do someting.
+Net::SSLeay::Callback::PskServer interface in L<SPVM> is the callback for L<SSL_CTX_set_psk_server_callback|https://docs.openssl.org/1.1.1/man3/SSL_CTX_use_psk_identity_hint/> function in OpenSSL.
 
 =head1 Usage
 
-  interface Net::SSLeay::Callback::PskServer;
-
-=head1 Details
-
-
+  use Net::SSLeay::Callback::PskServer;
 
 =head1 Interface Methods
 
+C<required method : int ($ssl : L<Net::SSLeay|SPVM::Net::SSLeay>, $identity : string, $identity_len : int, $sess_ref : L<Net::SSLeay::SSL_SESSION|SPVM::Net::SSLeay::SSL_SESSION>[]);>
 
+This method is callback for native L<SSL_CTX_set_psk_server_callback|https://docs.openssl.org/1.1.1/man3/SSL_CTX_use_psk_identity_hint/> function.
 
+=head1 See Also
 
-=head1 Repository
+=over 2
 
+=item * L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX>
 
+=item * L<Net::SSLeay|SPVM::Net::SSLeay>
 
-=head1 Author
-
-Yuki Kimoto C<kimoto.yuki@gmail.com>
+=back
 
 =head1 Copyright & License
 

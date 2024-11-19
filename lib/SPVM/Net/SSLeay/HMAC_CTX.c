@@ -6,6 +6,8 @@
 #include <openssl/bio.h>
 #include <openssl/err.h>
 
+#include <openssl/hmac.h>
+
 static const char* FILE_NAME = "Net/SSLeay/HMAC_CTX.c";
 
 int32_t SPVM__Net__SSLeay__HMAC_CTX__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
