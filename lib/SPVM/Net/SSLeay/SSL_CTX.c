@@ -12,8 +12,6 @@ static const char* FILE_NAME = "Net/SSLeay/SSL_CTX.c";
 
 __thread SPVM_ENV* thread_env;
 
-__thread SPVM_VALUE* thread_stack;
-
 int32_t SPVM__Net__SSLeay__SSL_CTX__new(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
@@ -48,8 +46,6 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__new(SPVM_ENV* env, SPVM_VALUE* stack) {
   if (error_id) { return error_id; }
   
   thread_env = env;
-  
-  thread_stack = stack;
   
   stack[0].oval = obj_self;
   
