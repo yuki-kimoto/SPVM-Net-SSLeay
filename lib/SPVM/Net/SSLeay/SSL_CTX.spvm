@@ -15,6 +15,7 @@ class Net::SSLeay::SSL_CTX : pointer {
   use List;
   
   use Net::SSLeay::Callback::TlsextServername;
+  use Net::SSLeay::Callback::TlsextStatus;
   
   # Fields
   has pkeys_list : List of Net::SSLeay::EVP_PKEY;
@@ -86,6 +87,8 @@ class Net::SSLeay::SSL_CTX : pointer {
   native method add_extra_chain_cert : long ($x509 : Net::SSLeay::X509);
   
   native method set_tlsext_servername_callback : long ($cb : Net::SSLeay::Callback::TlsextServername, $arg : object = undef);
+  
+  native method set_tlsext_status_cb : long ($cb : Net::SSLeay::Callback::TlsextStatus, $arg : object = undef);
   
   native method DESTROY : void ();
   
