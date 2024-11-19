@@ -106,6 +106,8 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   native method set_default_passwd_cb : void ($cb : Net::SSLeay::Callback::PemPasswd, $arg : object = undef);
   
+  native method set_psk_client_callback : void ($cb : Net::SSLeay::Callback::PskClient);
+  
   private method get_psk_client_cb : Net::SSLeay::Callback::PskClient ($key : string) {
     
     $MUTEX->reader_lock;
