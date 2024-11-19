@@ -1,0 +1,9 @@
+# Copyright (c) 2024 Yuki Kimoto
+# MIT License
+
+class Net::SSLeay::EVP_CIPHER_CTX {
+  
+  # Instance Methods
+  native method DESTROY : void ();
+  
+}

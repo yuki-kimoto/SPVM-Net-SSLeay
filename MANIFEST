@@ -48,6 +48,8 @@ lib/SPVM/Net/SSLeay/Callback/TlsextServername.pm
 lib/SPVM/Net/SSLeay/Callback/TlsextServername.spvm
 lib/SPVM/Net/SSLeay/Callback/TlsextStatus.pm
 lib/SPVM/Net/SSLeay/Callback/TlsextStatus.spvm
+lib/SPVM/Net/SSLeay/Callback/TlsextTicketKey.pm
+lib/SPVM/Net/SSLeay/Callback/TlsextTicketKey.spvm
 lib/SPVM/Net/SSLeay/ConfigBuilder.pm
 lib/SPVM/Net/SSLeay/Constant.c
 lib/SPVM/Net/SSLeay/Constant.config
@@ -75,6 +77,10 @@ lib/SPVM/Net/SSLeay/EVP.c
 lib/SPVM/Net/SSLeay/EVP.config
 lib/SPVM/Net/SSLeay/EVP.pm
 lib/SPVM/Net/SSLeay/EVP.spvm
+lib/SPVM/Net/SSLeay/EVP_CIPHER_CTX.c
+lib/SPVM/Net/SSLeay/EVP_CIPHER_CTX.config
+lib/SPVM/Net/SSLeay/EVP_CIPHER_CTX.pm
+lib/SPVM/Net/SSLeay/EVP_CIPHER_CTX.spvm
 lib/SPVM/Net/SSLeay/EVP_MD.c
 lib/SPVM/Net/SSLeay/EVP_MD.config
 lib/SPVM/Net/SSLeay/EVP_MD.pm
