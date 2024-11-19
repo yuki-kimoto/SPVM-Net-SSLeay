@@ -280,7 +280,7 @@ If SSL_CTX_set_min_proto_version failed, an exception is thrown with C<eval_erro
 
 C<method set_client_CA_list : void ($list : L<X509_NAME|SPVM::X509_NAME>[]);>
 
-Calls native L<set_client_CA_list|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_client_CA_list> function given the pointer value of the instance, $list.
+Calls native L<SSL_CTX_set_client_CA_list|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_client_CA_list> function given the pointer value of the instance, $list.
 
 Exceptions:
 
@@ -290,7 +290,7 @@ The list $list must be defined. Otherwise an exception is thrown.
 
 C<method add_client_CA : int ($cacert : L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509>);>
 
-Calls native L<add_client_CA|https://docs.openssl.org/master/man3/SSL_CTX_set0_CA_list> function given the pointer value of the instance, $cacert, and returns its return value.
+Calls native L<SSL_CTX_add_client_CA|https://docs.openssl.org/master/man3/SSL_CTX_set0_CA_list> function given the pointer value of the instance, $cacert, and returns its return value.
 
 Exceptions:
 
@@ -302,13 +302,21 @@ If add_client_CA failed, an exception is thrown with C<eval_error_id> set to the
 
 C<method add_extra_chain_cert : long ($x509 : L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509>);>
 
-Calls native L<add_extra_chain_cert|https://docs.openssl.org/1.1.1/man3/SSL_CTX_add_extra_chain_cert/> function given the pointer value of the instance, $x509, sets the C<no_free> flag of $x509 is set to 1, and returns its return value.
+Calls native L<SSL_CTX_add_extra_chain_cert|https://docs.openssl.org/1.1.1/man3/SSL_CTX_add_extra_chain_cert/> function given the pointer value of the instance, $x509, sets the C<no_free> flag of $x509 is set to 1, and returns its return value.
 
 Exceptions:
 
 The X509 object $x509 must be defined. Otherwise an exception is thrown.
 
 If add_extra_chain_cert failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
+=head2 set_tlsext_servername_callback
+
+C<method set_tlsext_servername_callback : long ($cb : L<Net::SSLeay::Callback::TlsextServername|SPVM::Net::SSLeay::Callback::TlsextServername>, $arg : object = undef);>
+
+Calls native L<SSL_CTX_set_tlsext_servername_callback|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_tlsext_servername_callback> function given $cb, and returns its return value.
+
+$arg is expected to be passed to native L<SSL_CTX_set_tlsext_servername_arg|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_tlsext_servername_callback> function.
 
 =head2 DESTROY
 

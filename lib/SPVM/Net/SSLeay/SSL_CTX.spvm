@@ -85,6 +85,8 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   native method add_extra_chain_cert : long ($x509 : Net::SSLeay::X509);
   
+  native method set_tlsext_servername_callback : long ($cb : Net::SSLeay::Callback::TlsextServername, $arg : object = undef);
+  
   native method DESTROY : void ();
   
 }
