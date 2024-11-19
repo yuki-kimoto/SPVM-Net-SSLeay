@@ -1,4 +1,4 @@
-0.014 2024-11-18
+0.014 2024-11-19
   [New Features]
     * Add Net::SSLeay::OCSP#single_get0_status method.
     * Add Net::SSLeay::OCSP#resp_find method.
