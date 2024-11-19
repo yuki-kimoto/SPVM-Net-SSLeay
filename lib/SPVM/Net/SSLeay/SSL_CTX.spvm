@@ -18,12 +18,17 @@ class Net::SSLeay::SSL_CTX : pointer {
   use Net::SSLeay::Callback::TlsextStatus;
   use Net::SSLeay::Callback::PemPasswd;
   use Net::SSLeay::Callback::PskClient;
+  use Sync::Mutex;
   
   # Class Variables
   our $PSK_CLIENT_CBS : Hash of Net::SSLeay::Callback::PskClient;
   
+  our $MUTEX : Sync::Mutex;
+  
   INIT {
     $PSK_CLIENT_CBS = Hash->new;
+    
+    $MUTEX = Sync::Mutex->new;
   }
   
   # Fields
@@ -103,18 +108,33 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   private method get_psk_client_cb : Net::SSLeay::Callback::PskClient ($key : string) {
     
+    $MUTEX->reader_lock;
+    
     my $psk_clinent_cb = (Net::SSLeay::Callback::PskClient)$PSK_CLIENT_CBS->get($key);
+    
+    $MUTEX->reader_unlock;
     
     return $psk_clinent_cb;
   }
   
   private method set_psk_client_cb : void ($key : string, $psk_clinent_cb : Net::SSLeay::Callback::PskClient) {
     
+    $MUTEX->lock;
+    
     $PSK_CLIENT_CBS->set($key, $psk_clinent_cb);
+    
+    $MUTEX->unlock;
+    
   }
   
   private method delete_psk_client_cb : void ($key : string) {
+    
+    $MUTEX->lock;
+    
     $PSK_CLIENT_CBS->delete($key);
+    
+    $MUTEX->unlock;
+    
   }
   
   native method DESTROY : void ();
