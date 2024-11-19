@@ -1,3 +1,8 @@
+0.015 2024-11-20
+  [New Features]
+    * Add Net::SSLeay::SSL_CTX#set_psk_server_callback method.
+    * Add Net::SSLeay::EVP_CIPHER_CTX class.
+    * Add Net::SSLeay::HMAC_CTX class.
 0.014 2024-11-19
   [New Features]
     * Add Net::SSLeay::OCSP#single_get0_status method.
@@ -24,9 +29,6 @@
     * Add Net::SSLeay::Callback::TlsextServername class.
     * Add Net::SSLeay::Callback::PemPasswd class.
     * Add Net::SSLeay::SSL_CTX#set_psk_client_callback method.
-    * Add Net::SSLeay::SSL_CTX#set_psk_server_callback method.
-    * Add Net::SSLeay::EVP_CIPHER_CTX class.
-    * Add Net::SSLeay::HMAC_CTX class.
     
 0.013 2024-11-14
   [New Features]
