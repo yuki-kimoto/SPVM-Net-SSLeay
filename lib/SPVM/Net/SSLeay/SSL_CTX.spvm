@@ -17,6 +17,14 @@ class Net::SSLeay::SSL_CTX : pointer {
   use Net::SSLeay::Callback::TlsextServername;
   use Net::SSLeay::Callback::TlsextStatus;
   use Net::SSLeay::Callback::PemPasswd;
+  use Net::SSLeay::Callback::PskClient;
+  
+  # Class Variables
+  our $PSK_CLIENT_CBS : Hash of Net::SSLeay::Callback::PskClient;
+  
+  INIT {
+    $PSK_CLIENT_CBS = Hash->new;
+  }
   
   # Fields
   has pkeys_list : List of Net::SSLeay::EVP_PKEY;
@@ -92,6 +100,22 @@ class Net::SSLeay::SSL_CTX : pointer {
   native method set_tlsext_status_cb : long ($cb : Net::SSLeay::Callback::TlsextStatus, $arg : object = undef);
   
   native method set_default_passwd_cb : void ($cb : Net::SSLeay::Callback::PemPasswd, $arg : object = undef);
+  
+  private method get_psk_client_cb : Net::SSLeay::Callback::PskClient ($key : string) {
+    
+    my $psk_clinent_cb = (Net::SSLeay::Callback::PskClient)$PSK_CLIENT_CBS->get($key);
+    
+    return $psk_clinent_cb;
+  }
+  
+  private method set_psk_client_cb : void ($key : string, $psk_clinent_cb : Net::SSLeay::Callback::PskClient) {
+    
+    $PSK_CLIENT_CBS->set($key, $psk_clinent_cb);
+  }
+  
+  private method delete_psk_client_cb : void ($key : string) {
+    $PSK_CLIENT_CBS->delete($key);
+  }
   
   native method DESTROY : void ();
   
