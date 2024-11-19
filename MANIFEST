@@ -89,6 +89,10 @@ lib/SPVM/Net/SSLeay/EVP_PKEY.c
 lib/SPVM/Net/SSLeay/EVP_PKEY.config
 lib/SPVM/Net/SSLeay/EVP_PKEY.pm
 lib/SPVM/Net/SSLeay/EVP_PKEY.spvm
+lib/SPVM/Net/SSLeay/HMAC_CTX.c
+lib/SPVM/Net/SSLeay/HMAC_CTX.config
+lib/SPVM/Net/SSLeay/HMAC_CTX.pm
+lib/SPVM/Net/SSLeay/HMAC_CTX.spvm
 lib/SPVM/Net/SSLeay/OBJ.c
 lib/SPVM/Net/SSLeay/OBJ.config
 lib/SPVM/Net/SSLeay/OBJ.pm

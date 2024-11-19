@@ -26,6 +26,7 @@
     * Add Net::SSLeay::SSL_CTX#set_psk_client_callback method.
     * Add Net::SSLeay::SSL_CTX#set_psk_server_callback method.
     * Add Net::SSLeay::EVP_CIPHER_CTX class.
+    * Add Net::SSLeay::HMAC_CTX class.
     
 0.013 2024-11-14
   [New Features]

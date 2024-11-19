@@ -1,14 +1,14 @@
 # Copyright (c) 2024 Yuki Kimoto
 # MIT License
 
-class Net::SSLeay::EVP_CIPHER_CTX {
+class Net::SSLeay::HMAC_CTX {
   
   use Fn;
   
   # Class Methods
-  private static method new_with_pointer : Net::SSLeay::EVP_CIPHER_CTX ($pointer : Address, $options : object[] = undef) {
+  private static method new_with_pointer : Net::SSLeay::HMAC_CTX ($pointer : Address, $options : object[] = undef) {
     
-    my $self = new Net::SSLeay::EVP_CIPHER_CTX;
+    my $self = new Net::SSLeay::HMAC_CTX;
     
     Fn->set_pointer($self, $pointer);
     
