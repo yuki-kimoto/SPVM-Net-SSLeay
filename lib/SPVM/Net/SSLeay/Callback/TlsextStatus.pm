@@ -18,7 +18,7 @@ Net::SSLeay::Callback::TlsextStatus interface in L<SPVM> is the callback for L<S
 
 =head1 Interface Methods
 
-C<required method : int ($s : L<Net::SSLeay|SPVM::Net::SSLeay>, $arg : object);>
+C<required method : int ($ssl : L<Net::SSLeay|SPVM::Net::SSLeay>, $arg : object);>
 
 This method is callback for native L<SSL_CTX_set_tlsext_status_cb|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_tlsext_status_cb> function.
 

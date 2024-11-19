@@ -18,6 +18,7 @@
     * Add Net::SSLeay::Net::SSLeay::Callback::TlsextServername interface.
     * Add Net::SSLeay::SSL_CTX#set_tlsext_servername_callback method.
     * Add Net::SSLeay::SSL_CTX#set_tlsext_status_cb method.
+    * Add Net::SSLeay::SSL_CTX#set_default_passwd_cb method.
     
 0.013 2024-11-14
   [New Features]

@@ -16,6 +16,7 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   use Net::SSLeay::Callback::TlsextServername;
   use Net::SSLeay::Callback::TlsextStatus;
+  use Net::SSLeay::Callback::PemPasswd;
   
   # Fields
   has pkeys_list : List of Net::SSLeay::EVP_PKEY;
@@ -89,6 +90,8 @@ class Net::SSLeay::SSL_CTX : pointer {
   native method set_tlsext_servername_callback : long ($cb : Net::SSLeay::Callback::TlsextServername, $arg : object = undef);
   
   native method set_tlsext_status_cb : long ($cb : Net::SSLeay::Callback::TlsextStatus, $arg : object = undef);
+  
+  native method set_default_passwd_cb : void ($cb : Net::SSLeay::Callback::PemPasswd, $arg : object = undef);
   
   native method DESTROY : void ();
   

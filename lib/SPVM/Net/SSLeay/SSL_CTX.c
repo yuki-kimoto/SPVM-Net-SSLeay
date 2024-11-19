@@ -937,12 +937,16 @@ static int tlsext_servername_callback(SSL *ssl, int *al, void *arg) {
   stack[3].oval = obj_arg;
   
   env->call_instance_method_by_name(env, stack, "", 4, &error_id, __func__, FILE_NAME, __LINE__);
+  int32_t ret = stack[0].ival;
+  
   *al = al_tmp;
   
   if (error_id) {
     fprintf(env->spvm_stderr(env, stack), "[An exception is converted to a warning in native tlsext_servername_callback function]");
     env->print_stderr(env, stack, env->get_exception(env, stack));
   }
+  
+  return ret;
 }
 
 int32_t SPVM__Net__SSLeay__SSL_CTX__set_tlsext_servername_callback(SPVM_ENV* env, SPVM_VALUE* stack) {
@@ -1005,11 +1009,14 @@ static int tlsext_status_cb(SSL *ssl, void *arg) {
   stack[2].oval = obj_arg;
   
   env->call_instance_method_by_name(env, stack, "", 3, &error_id, __func__, FILE_NAME, __LINE__);
+  int32_t ret = stack[0].ival;
   
   if (error_id) {
     fprintf(env->spvm_stderr(env, stack), "[An exception is converted to a warning in native tlsext_status_cb function]");
     env->print_stderr(env, stack, env->get_exception(env, stack));
   }
+  
+  return ret;
 }
 
 int32_t SPVM__Net__SSLeay__SSL_CTX__set_tlsext_status_cb(SPVM_ENV* env, SPVM_VALUE* stack) {
@@ -1053,6 +1060,69 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_tlsext_status_cb(SPVM_ENV* env, SPVM_VAL
   }
   
   stack[0].lval = status;
+  
+  return 0;
+}
+
+static int default_passwd_cb(char *buf, int size, int rwflag, void *arg) {
+  
+  int32_t error_id = 0;
+  
+  SPVM_ENV* env = (SPVM_ENV*)((void**)arg)[0];
+  
+  SPVM_VALUE* stack = (SPVM_VALUE*)((void**)arg)[1];
+  
+  void* obj_cb = ((void**)arg)[2];
+  
+  void* obj_arg = ((void**)arg)[3];
+  
+  void* obj_buf = env->new_string(env, stack, buf, size);
+  
+  stack[0].oval = obj_cb;
+  stack[1].oval = obj_buf;
+  stack[2].ival = size;
+  stack[3].ival = rwflag;
+  stack[4].oval = obj_arg;
+  
+  env->call_instance_method_by_name(env, stack, "", 4, &error_id, __func__, FILE_NAME, __LINE__);
+  int32_t ret = stack[0].ival;
+  
+  memcpy(buf, env->get_chars(env, stack, obj_buf), size);
+  
+  if (error_id) {
+    fprintf(env->spvm_stderr(env, stack), "[An exception is converted to a warning in native default_passwd_cb function]");
+    env->print_stderr(env, stack, env->get_exception(env, stack));
+  }
+  
+  return ret;
+}
+
+int32_t SPVM__Net__SSLeay__SSL_CTX__set_default_passwd_cb(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  void* obj_cb = stack[1].oval;
+  
+  void* obj_arg = stack[2].oval;
+  
+  SSL_CTX* ssl_ctx = env->get_pointer(env, stack, obj_self);
+  
+  pem_password_cb* native_cb = NULL;
+  
+  if (obj_cb) {
+    native_cb = &default_passwd_cb;
+    
+    void* native_args[4] = {0};
+    native_args[0] = env;
+    native_args[1] = stack;
+    native_args[2] = obj_cb;
+    native_args[3] = obj_arg;
+    SSL_CTX_set_default_passwd_cb_userdata(ssl_ctx, native_args);
+  }
+  
+  SSL_CTX_set_default_passwd_cb(ssl_ctx, native_cb);
   
   return 0;
 }

@@ -18,7 +18,7 @@ Net::SSLeay::Callback::TlsextServername interface in L<SPVM> is the callback for
 
 =head1 Interface Methods
 
-C<required method : int ($s : L<Net::SSLeay|SPVM::Net::SSLeay>, $al_ref : int*, $arg : object);>
+C<required method : int ($ssl : L<Net::SSLeay|SPVM::Net::SSLeay>, $al_ref : int*, $arg : object);>
 
 This method is callback for native L<SSL_CTX_set_tlsext_servername_callback|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_tlsext_servername_callback> function.
 

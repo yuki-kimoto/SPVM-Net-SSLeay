@@ -308,7 +308,7 @@ Exceptions:
 
 The X509 object $x509 must be defined. Otherwise an exception is thrown.
 
-If add_extra_chain_cert failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+If SSL_CTX_add_extra_chain_cert failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
 =head2 set_tlsext_servername_callback
 
@@ -325,6 +325,18 @@ C<method set_tlsext_status_cb : long ($cb : L<Net::SSLeay::Callback::TlsextStatu
 Calls native L<SSL_CTX_set_tlsext_status_cb|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_tlsext_status_cb> function given $cb, and returns its return value.
 
 $arg is expected to be passed to native L<SSL_CTX_set_tlsext_status_arg|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_tlsext_status_cb> function.
+
+Exceptions:
+
+If SSL_CTX_set_tlsext_status_cb failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
+=head2 set_default_passwd_cb
+
+C<method set_default_passwd_cb : void ($cb : L<Net::SSLeay::Callback::PemPasswd|SPVM::Net::SSLeay::Callback::PemPasswd>, $arg : object = undef);>
+
+Calls native L<SSL_CTX_set_default_passwd_cb|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_default_passwd_cb> function given $cb, and returns its return value.
+
+$arg is expected to be passed to native L<SSL_CTX_set_default_passwd_cb_userdata|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_default_passwd_cb> function.
 
 =head2 DESTROY
 
