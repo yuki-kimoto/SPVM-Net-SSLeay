@@ -344,6 +344,12 @@ C<method set_psk_client_callback : void ($cb : L<Net::SSLeay::Callback::PskClien
 
 Calls native L<SSL_CTX_set_psk_client_callback|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_psk_client_callback> function given $cb.
 
+=head2 set_psk_server_callback
+
+C<method set_psk_server_callback : void ($cb : L<Net::SSLeay::Callback::PskServer|SPVM::Net::SSLeay::Callback::PskServer>);>
+
+Calls native L<SSL_CTX_set_psk_server_callback|https://docs.openssl.org/1.1.1/man3/SSL_CTX_use_psk_identity_hint> function given $cb.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>

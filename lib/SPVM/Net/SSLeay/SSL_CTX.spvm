@@ -18,15 +18,20 @@ class Net::SSLeay::SSL_CTX : pointer {
   use Net::SSLeay::Callback::TlsextStatus;
   use Net::SSLeay::Callback::PemPasswd;
   use Net::SSLeay::Callback::PskClient;
+  use Net::SSLeay::Callback::PskServer;
   use Sync::Mutex;
   
   # Class Variables
   our $PSK_CLIENT_CBS : Hash of Net::SSLeay::Callback::PskClient;
   
+  our $PSK_SERVER_CBS : Hash of Net::SSLeay::Callback::PskServer;
+  
   our $MUTEX : Sync::Mutex;
   
   INIT {
     $PSK_CLIENT_CBS = Hash->new;
+    
+    $PSK_SERVER_CBS = Hash->new;
     
     $MUTEX = Sync::Mutex->new;
   }
@@ -112,18 +117,18 @@ class Net::SSLeay::SSL_CTX : pointer {
     
     $MUTEX->reader_lock;
     
-    my $psk_clinent_cb = (Net::SSLeay::Callback::PskClient)$PSK_CLIENT_CBS->get($key);
+    my $psk_client_cb = (Net::SSLeay::Callback::PskClient)$PSK_CLIENT_CBS->get($key);
     
     $MUTEX->reader_unlock;
     
-    return $psk_clinent_cb;
+    return $psk_client_cb;
   }
   
-  private method set_psk_client_cb : void ($key : string, $psk_clinent_cb : Net::SSLeay::Callback::PskClient) {
+  private method set_psk_client_cb : void ($key : string, $psk_client_cb : Net::SSLeay::Callback::PskClient) {
     
     $MUTEX->lock;
     
-    $PSK_CLIENT_CBS->set($key, $psk_clinent_cb);
+    $PSK_CLIENT_CBS->set($key, $psk_client_cb);
     
     $MUTEX->unlock;
     
@@ -134,6 +139,39 @@ class Net::SSLeay::SSL_CTX : pointer {
     $MUTEX->lock;
     
     $PSK_CLIENT_CBS->delete($key);
+    
+    $MUTEX->unlock;
+    
+  }
+  
+  native method set_psk_server_callback : void ($cb : Net::SSLeay::Callback::PskServer);
+  
+  private method get_psk_server_cb : Net::SSLeay::Callback::PskServer ($key : string) {
+    
+    $MUTEX->reader_lock;
+    
+    my $psk_server_cb = (Net::SSLeay::Callback::PskServer)$PSK_SERVER_CBS->get($key);
+    
+    $MUTEX->reader_unlock;
+    
+    return $psk_server_cb;
+  }
+  
+  private method set_psk_server_cb : void ($key : string, $psk_server_cb : Net::SSLeay::Callback::PskServer) {
+    
+    $MUTEX->lock;
+    
+    $PSK_SERVER_CBS->set($key, $psk_server_cb);
+    
+    $MUTEX->unlock;
+    
+  }
+  
+  private method delete_psk_server_cb : void ($key : string) {
+    
+    $MUTEX->lock;
+    
+    $PSK_SERVER_CBS->delete($key);
     
     $MUTEX->unlock;
     
