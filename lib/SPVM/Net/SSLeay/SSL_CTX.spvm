@@ -23,6 +23,8 @@ class Net::SSLeay::SSL_CTX : pointer {
   use Net::SSLeay::Callback::PskServer;
   use Net::SSLeay::Callback::TlsextTicketKey;
   use Net::SSLeay::Callback::AlpnSelect;
+  use Net::SSLeay::Callback::NewSession;
+  use Net::SSLeay::Callback::RemoveSession;
   
   use Sync::Mutex;
   use StringList;

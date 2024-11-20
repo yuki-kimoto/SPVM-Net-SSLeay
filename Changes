@@ -9,6 +9,8 @@
     * Add Net::SSLeay::SSL_CTX#set_alpn_select_cb_with_protocols method.
     * Add Net::SSLeay::SSL_CTX#set_next_proto_select_cb_with_protocols method.
     * Add Net::SSLeay::SSL_CTX#set_next_protos_advertised_cb_with_protocols method.
+    * Add Net::SSLeay::Callback::NewSession class.
+    * Add Net::SSLeay::Callback::RemoveSession class.
 0.014 2024-11-19
   [New Features]
     * Add Net::SSLeay::OCSP#single_get0_status method.

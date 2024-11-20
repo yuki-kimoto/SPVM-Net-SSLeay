@@ -48,6 +48,8 @@ lib/SPVM/Net/SSLeay/Callback/PskClient.pm
 lib/SPVM/Net/SSLeay/Callback/PskClient.spvm
 lib/SPVM/Net/SSLeay/Callback/PskServer.pm
 lib/SPVM/Net/SSLeay/Callback/PskServer.spvm
+lib/SPVM/Net/SSLeay/Callback/RemoveSession.pm
+lib/SPVM/Net/SSLeay/Callback/RemoveSession.spvm
 lib/SPVM/Net/SSLeay/Callback/TlsextServername.pm
 lib/SPVM/Net/SSLeay/Callback/TlsextServername.spvm
 lib/SPVM/Net/SSLeay/Callback/TlsextStatus.pm
