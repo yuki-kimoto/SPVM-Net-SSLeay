@@ -140,11 +140,13 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   private method GET_PSK_CLIENT_CB : Net::SSLeay::Callback::PskClient ($key : string) {
     
+    Fn->defer(method : void () {
+      $MUTEX->reader_unlock;
+    });
+    
     $MUTEX->reader_lock;
     
     my $psk_client_cb = (Net::SSLeay::Callback::PskClient)$PSK_CLIENT_CBS->get($key);
-    
-    $MUTEX->reader_unlock;
     
     return $psk_client_cb;
   }
@@ -177,11 +179,13 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   private method GET_PSK_SERVER_CB : Net::SSLeay::Callback::PskServer ($key : string) {
     
+    Fn->defer(method : void () {
+      $MUTEX->reader_unlock;
+    });
+    
     $MUTEX->reader_lock;
     
     my $psk_server_cb = (Net::SSLeay::Callback::PskServer)$PSK_SERVER_CBS->get($key);
-    
-    $MUTEX->reader_unlock;
     
     return $psk_server_cb;
   }
@@ -214,11 +218,13 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   private method GET_TLSEXT_TICKET_KEY_CB : Net::SSLeay::Callback::TlsextTicketKey ($key : string) {
     
+    Fn->defer(method : void () {
+      $MUTEX->reader_unlock;
+    });
+    
     $MUTEX->reader_lock;
     
     my $psk_server_cb = (Net::SSLeay::Callback::TlsextTicketKey)$TLSEXT_TICKET_KEY_CBS->get($key);
-    
-    $MUTEX->reader_unlock;
     
     return $psk_server_cb;
   }
@@ -257,11 +263,13 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   private method GET_NEW_SESSION_CB : Net::SSLeay::Callback::NewSession ($key : string) {
     
+    Fn->defer(method : void () {
+      $MUTEX->reader_unlock;
+    });
+    
     $MUTEX->reader_lock;
     
     my $psk_server_cb = (Net::SSLeay::Callback::NewSession)$NEW_SESSION_CBS->get($key);
-    
-    $MUTEX->reader_unlock;
     
     return $psk_server_cb;
   }
@@ -294,11 +302,13 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   private method GET_REMOVE_SESSION_CB : Net::SSLeay::Callback::RemoveSession ($key : string) {
     
+    Fn->defer(method : void () {
+      $MUTEX->reader_unlock;
+    });
+    
     $MUTEX->reader_lock;
     
     my $psk_server_cb = (Net::SSLeay::Callback::RemoveSession)$REMOVE_SESSION_CBS->get($key);
-    
-    $MUTEX->reader_unlock;
     
     return $psk_server_cb;
   }
