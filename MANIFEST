@@ -38,6 +38,8 @@ lib/SPVM/Net/SSLeay/BIO.c
 lib/SPVM/Net/SSLeay/BIO.config
 lib/SPVM/Net/SSLeay/BIO.pm
 lib/SPVM/Net/SSLeay/BIO.spvm
+lib/SPVM/Net/SSLeay/Callback/AlpnSelect.pm
+lib/SPVM/Net/SSLeay/Callback/AlpnSelect.spvm
 lib/SPVM/Net/SSLeay/Callback/PemPasswd.pm
 lib/SPVM/Net/SSLeay/Callback/PemPasswd.spvm
 lib/SPVM/Net/SSLeay/Callback/PskClient.pm

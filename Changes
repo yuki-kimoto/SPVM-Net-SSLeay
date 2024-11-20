@@ -5,6 +5,7 @@
     * Add Net::SSLeay::HMAC_CTX class.
     * Add Net::SSLeay::Callback::TlsextTicketKey class.
     * Add Net::SSLeay::SSL_CTX#set_tlsext_ticket_key_cb method.
+    * Add Net::SSLeay::Callback::AlpnSelect class.
 0.014 2024-11-19
   [New Features]
     * Add Net::SSLeay::OCSP#single_get0_status method.
