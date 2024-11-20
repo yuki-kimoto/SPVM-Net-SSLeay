@@ -151,21 +151,24 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   private method SET_PSK_CLIENT_CB : void ($key : string, $psk_client_cb : Net::SSLeay::Callback::PskClient) {
     
+    Fn->defer(method : void () {
+      $MUTEX->unlock;
+    });
+    
     $MUTEX->lock;
     
     $PSK_CLIENT_CBS->set($key, $psk_client_cb);
-    
-    $MUTEX->unlock;
-    
   }
   
   private method DELETE_PSK_CLIENT_CB : Net::SSLeay::Callback::PskClient ($key : string) {
     
+    Fn->defer(method : void () {
+      $MUTEX->unlock;
+    });
+    
     $MUTEX->lock;
     
     my $deleted = (Net::SSLeay::Callback::PskClient)$PSK_CLIENT_CBS->delete($key);
-    
-    $MUTEX->unlock;
     
     return $deleted;
   }
@@ -185,21 +188,24 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   private method SET_PSK_SERVER_CB : void ($key : string, $psk_server_cb : Net::SSLeay::Callback::PskServer) {
     
+    Fn->defer(method : void () {
+      $MUTEX->unlock;
+    });
+    
     $MUTEX->lock;
     
     $PSK_SERVER_CBS->set($key, $psk_server_cb);
-    
-    $MUTEX->unlock;
-    
   }
   
   private method DELETE_PSK_SERVER_CB : Net::SSLeay::Callback::PskServer ($key : string) {
     
+    Fn->defer(method : void () {
+      $MUTEX->unlock;
+    });
+    
     $MUTEX->lock;
     
     my $deleted = (Net::SSLeay::Callback::PskServer)$PSK_SERVER_CBS->delete($key);
-    
-    $MUTEX->unlock;
     
     return $deleted;
   }
@@ -219,21 +225,24 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   private method SET_TLSEXT_TICKET_KEY_CB : void ($key : string, $psk_server_cb : Net::SSLeay::Callback::TlsextTicketKey) {
     
+    Fn->defer(method : void () {
+      $MUTEX->unlock;
+    });
+    
     $MUTEX->lock;
     
     $TLSEXT_TICKET_KEY_CBS->set($key, $psk_server_cb);
-    
-    $MUTEX->unlock;
-    
   }
   
   private method DELETE_TLSEXT_TICKET_KEY_CB : Net::SSLeay::Callback::TlsextTicketKey ($key : string) {
     
+    Fn->defer(method : void () {
+      $MUTEX->unlock;
+    });
+    
     $MUTEX->lock;
     
     my $deleted = (Net::SSLeay::Callback::TlsextTicketKey)$TLSEXT_TICKET_KEY_CBS->delete($key);
-    
-    $MUTEX->unlock;
     
     return $deleted;
   }
@@ -259,21 +268,24 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   private method SET_NEW_SESSION_CB : void ($key : string, $psk_server_cb : Net::SSLeay::Callback::NewSession) {
     
+    Fn->defer(method : void () {
+      $MUTEX->unlock;
+    });
+    
     $MUTEX->lock;
     
     $NEW_SESSION_CBS->set($key, $psk_server_cb);
-    
-    $MUTEX->unlock;
-    
   }
   
   private method DELETE_NEW_SESSION_CB : Net::SSLeay::Callback::NewSession ($key : string) {
     
+    Fn->defer(method : void () {
+      $MUTEX->unlock;
+    });
+    
     $MUTEX->lock;
     
     my $deleted = (Net::SSLeay::Callback::NewSession)$NEW_SESSION_CBS->delete($key);
-    
-    $MUTEX->unlock;
     
     return $deleted;
   }
@@ -293,21 +305,24 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   private method SET_REMOVE_SESSION_CB : void ($key : string, $psk_server_cb : Net::SSLeay::Callback::RemoveSession) {
     
+    Fn->defer(method : void () {
+      $MUTEX->unlock;
+    });
+    
     $MUTEX->lock;
     
     $REMOVE_SESSION_CBS->set($key, $psk_server_cb);
-    
-    $MUTEX->unlock;
-    
   }
   
   private method DELETE_REMOVE_SESSION_CB : Net::SSLeay::Callback::RemoveSession ($key : string) {
     
+    Fn->defer(method : void () {
+      $MUTEX->unlock;
+    });
+    
     $MUTEX->lock;
     
     my $deleted = (Net::SSLeay::Callback::RemoveSession)$REMOVE_SESSION_CBS->delete($key);
-    
-    $MUTEX->unlock;
     
     return $deleted;
   }
