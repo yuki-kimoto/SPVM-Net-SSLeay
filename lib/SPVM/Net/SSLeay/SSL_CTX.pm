@@ -380,6 +380,12 @@ C<method sess_set_new_cb : void ($cb : L<Net::SSLeay::Callback::NewSession|SPVM:
 
 Calls native L<SSL_CTX_sess_set_new_cb|https://docs.openssl.org/1.1.1/man3/SSL_CTX_sess_set_get_cb> function given $cb.
 
+=head2 sess_set_remove_cb
+
+C<method sess_set_remove_cb : void ($cb : L<Net::SSLeay::Callback::RemoveSession|SPVM::Net::SSLeay::Callback::RemoveSession>)>
+
+Calls native L<SSL_CTX_sess_set_remove_cb|https://docs.openssl.org/1.1.1/man3/SSL_CTX_sess_set_get_cb/> function given $cb.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>

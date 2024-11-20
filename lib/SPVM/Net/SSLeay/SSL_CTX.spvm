@@ -38,6 +38,8 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   our $NEW_SESSION_CBS : Hash of Net::SSLeay::Callback::NewSession;
   
+  our $REMOVE_SESSION_CBS : Hash of Net::SSLeay::Callback::RemoveSession;
+  
   our $MUTEX : Sync::Mutex;
   
   INIT {
@@ -48,6 +50,8 @@ class Net::SSLeay::SSL_CTX : pointer {
     $TLSEXT_TICKET_KEY_CBS = Hash->new;
     
     $NEW_SESSION_CBS = Hash->new;
+    
+    $REMOVE_SESSION_CBS = Hash->new;
     
     $MUTEX = Sync::Mutex->new;
   }
@@ -268,6 +272,40 @@ class Net::SSLeay::SSL_CTX : pointer {
     $MUTEX->lock;
     
     my $deleted = (Net::SSLeay::Callback::NewSession)$NEW_SESSION_CBS->delete($key);
+    
+    $MUTEX->unlock;
+    
+    return $deleted;
+  }
+  
+  native method sess_set_remove_cb : void ($cb : Net::SSLeay::Callback::NewSession);
+  
+  private method GET_REMOVE_SESSION_CB : Net::SSLeay::Callback::RemoveSession ($key : string) {
+    
+    $MUTEX->reader_lock;
+    
+    my $psk_server_cb = (Net::SSLeay::Callback::RemoveSession)$REMOVE_SESSION_CBS->get($key);
+    
+    $MUTEX->reader_unlock;
+    
+    return $psk_server_cb;
+  }
+  
+  private method SET_REMOVE_SESSION_CB : void ($key : string, $psk_server_cb : Net::SSLeay::Callback::RemoveSession) {
+    
+    $MUTEX->lock;
+    
+    $REMOVE_SESSION_CBS->set($key, $psk_server_cb);
+    
+    $MUTEX->unlock;
+    
+  }
+  
+  private method DELETE_REMOVE_SESSION_CB : Net::SSLeay::Callback::RemoveSession ($key : string) {
+    
+    $MUTEX->lock;
+    
+    my $deleted = (Net::SSLeay::Callback::RemoveSession)$REMOVE_SESSION_CBS->delete($key);
     
     $MUTEX->unlock;
     
