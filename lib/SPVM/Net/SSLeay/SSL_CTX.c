@@ -1707,3 +1707,75 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_next_proto_select_cb_with_protocols(SPVM
   return 0;
 }
 
+static int next_protos_advertised_cb_for_protocols (SSL *ssl, const unsigned char **out, unsigned int *outlen, void *arg) {
+  
+  int32_t error_id = 0;
+  
+  SPVM_ENV* env = (SPVM_ENV*)((void**)arg)[0];
+  
+  SPVM_VALUE* stack = (SPVM_VALUE*)((void**)arg)[1];
+  
+  void* obj_protocols = ((void**)arg)[2];
+  
+  void* obj_cb_output_strings_list = ((void**)arg)[3];
+  
+  assert(obj_protocols);
+  
+  int32_t protocols_wire_format_length = convert_to_wire_format(env, stack, obj_protocols, NULL);
+  void* obj_protocols_wire_format = env->new_string(env, stack, NULL, protocols_wire_format_length);
+  const char* protocols_wire_format = env->get_chars(env, stack, obj_protocols_wire_format);
+  
+  *out = protocols_wire_format;
+  
+  stack[0].oval = obj_cb_output_strings_list;
+  stack[1].oval = obj_protocols_wire_format;
+  env->call_instance_method_by_name(env, stack, "push", 2, &error_id, __func__, FILE_NAME, __LINE__);
+  
+  int32_t status = SSL_TLSEXT_ERR_NOACK;
+  if (error_id) {
+    void* obj_exception = env->get_exception(env, stack);
+    const char* exception = env->get_chars(env, stack, obj_exception);
+    
+    fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "[An exception thrown in native next_protos_advertised_cb_for_protocols function is converted to a warning]\n");
+    
+    env->print_stderr(env, stack, obj_exception);
+    
+    fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "\n");
+  }
+  else {
+    status = SSL_TLSEXT_ERR_OK;
+  }
+  
+  return status;
+}
+
+int32_t SPVM__Net__SSLeay__SSL_CTX__set_next_protos_advertised_cb_with_protocols(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  void* obj_protocols = stack[1].oval;
+  
+  SSL_CTX* ssl_ctx = env->get_pointer(env, stack, obj_self);
+  
+  int (*native_cb) (SSL *ssl, const unsigned char **out, unsigned int *outlen, void *arg) = NULL;
+  
+  if (obj_protocols) {
+    native_cb = &next_protos_advertised_cb_for_protocols;
+  }
+  
+  void* obj_cb_output_strings_list = env->get_field_object_by_name(env, stack, obj_self, "cb_output_strings_list", &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
+  
+  void* native_args[3] = {0};
+  native_args[0] = env;
+  native_args[1] = stack;
+  native_args[2] = obj_protocols;
+  native_args[3] = obj_cb_output_strings_list;
+  
+  SSL_CTX_set_next_protos_advertised_cb(ssl_ctx, native_cb, native_args);
+  
+  return 0;
+}
+

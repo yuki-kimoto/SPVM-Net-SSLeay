@@ -25,6 +25,7 @@ class Net::SSLeay::SSL_CTX : pointer {
   use Net::SSLeay::Callback::AlpnSelect;
   
   use Sync::Mutex;
+  use StringList;
   
   # Class Variables
   our $PSK_CLIENT_CBS : Hash of Net::SSLeay::Callback::PskClient;
@@ -48,6 +49,8 @@ class Net::SSLeay::SSL_CTX : pointer {
   # Fields
   has pkeys_list : List of Net::SSLeay::EVP_PKEY;
   
+  has cb_output_strings_list : StringList; # For SSL_CTX_set_alpn_select_cb, SSL_CTX_set_next_proto_select_cb
+  
   # Class Methods
   native static method new : Net::SSLeay::SSL_CTX ($method : Net::SSLeay::SSL_METHOD);
   
@@ -55,6 +58,9 @@ class Net::SSLeay::SSL_CTX : pointer {
     
     my $pkeys_list = List->new(new Net::SSLeay::EVP_PKEY[0]);
     $self->{pkeys_list} = $pkeys_list;
+    
+    my $cb_output_strings_list = StringList->new;
+    $self->{cb_output_strings_list} = $cb_output_strings_list;
   }
   
   # Instance Methods
@@ -225,6 +231,8 @@ class Net::SSLeay::SSL_CTX : pointer {
   native method set_alpn_select_cb_with_protocols : void ($protocols : string[]);
   
   native method set_next_proto_select_cb_with_protocols : void ($protocols : string[]);
+  
+  native method set_next_protos_advertised_cb_with_protocols : void ($protocols : string[]);
   
   native method DESTROY : void ();
   
