@@ -1330,7 +1330,7 @@ static unsigned int psk_server_callback(SSL *ssl, const char *identity, unsigned
   return ret;
 }
 
-static unsigned int tlsext_ticket_key_cb(SSL *ssl, unsigned char* key_name, unsigned char* iv, EVP_CIPHER_CTX *ctx, HMAC_CTX *hctx, int enc) {
+static unsigned int SPVM__Net__SSLeay__SSL_CTX__tlsext_ticket_key_cb(SSL *ssl, unsigned char* key_name, unsigned char* iv, EVP_CIPHER_CTX *ctx, HMAC_CTX *hctx, int enc) {
   
   int32_t error_id = 0;
   
@@ -1340,106 +1340,108 @@ static unsigned int tlsext_ticket_key_cb(SSL *ssl, unsigned char* key_name, unsi
   
   SSL_CTX* ssl_ctx = SSL_get_SSL_CTX(ssl);
   
-  int32_t ret = 0;
   if (!ssl_ctx) {
     env->die(env, stack, "SSL_get_SSL_CTX(ssl) failed.", __func__, FILE_NAME, __LINE__);
     
-    void* obj_exception = env->get_exception(env, stack);
-    const char* exception = env->get_chars(env, stack, obj_exception);
+    print_exception_to_stderr(env, stack);
     
-    fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "[An exception thrown in native tlsext_ticket_key_cb function is converted to a warning]\n");
-    
-    env->print_stderr(env, stack, obj_exception);
-    
-    fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "\n");
+    goto END_OF_FUNC;
   }
-  else {
-    char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
-    snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", ssl_ctx);
-    stack[0].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
-    env->call_instance_method_by_name(env, stack, "GET_TLSEXT_TICKET_KEY_CB", 1, &error_id, __func__, FILE_NAME, __LINE__);
-    if (error_id) {
-      void* obj_exception = env->get_exception(env, stack);
-      const char* exception = env->get_chars(env, stack, obj_exception);
-      
-      fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "[An exception thrown in native tlsext_ticket_key_cb function is converted to a warning]\n");
-      
-      env->print_stderr(env, stack, obj_exception);
-      
-      fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "\n");
-    }
-    else {
-      // Return value of get_psk_server_cb method
-      void* obj_cb = stack[0].oval;
-      
-      if (!obj_cb) {
-        env->die(env, stack, "GET_TLSEXT_TICKET_KEY_CB method returns undef.", __func__, FILE_NAME, __LINE__);
-        
-        void* obj_exception = env->get_exception(env, stack);
-        const char* exception = env->get_chars(env, stack, obj_exception);
-        
-        fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "[An exception thrown in native tlsext_ticket_key_cb function is converted to a warning]\n");
-        
-        env->print_stderr(env, stack, obj_exception);
-        
-        fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "\n");
-      }
-      else {
-        void* obj_address_ssl = env->new_pointer_object_by_name(env, stack, "Address", ssl, &error_id, __func__, FILE_NAME, __LINE__);
-        if (error_id) { return error_id; }
-        stack[0].oval = obj_address_ssl;
-        env->call_class_method_by_name(env, stack, "Net::SSLeay", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
-        if (error_id) { return error_id; }
-        void* obj_ssl = stack[0].oval;
-        env->set_no_free(env, stack, obj_ssl, 1);
-        
-        void* obj_key_name = env->new_string(env, stack, key_name, 16);
-        
-        void* obj_iv = env->new_string(env, stack, iv, EVP_MAX_IV_LENGTH);
-        
-        void* obj_address_ctx = env->new_pointer_object_by_name(env, stack, "Address", ctx, &error_id, __func__, FILE_NAME, __LINE__);
-        if (error_id) { return error_id; }
-        stack[0].oval = obj_address_ctx;
-        env->call_class_method_by_name(env, stack, "Net::SSLeay::EVP_CIPHER_CTX", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
-        if (error_id) { return error_id; }
-        void* obj_ctx = stack[0].oval;
-        env->set_no_free(env, stack, obj_ctx, 1);
-        
-        void* obj_address_hctx = env->new_pointer_object_by_name(env, stack, "Address", hctx, &error_id, __func__, FILE_NAME, __LINE__);
-        if (error_id) { return error_id; }
-        stack[0].oval = obj_address_hctx;
-        env->call_class_method_by_name(env, stack, "Net::SSLeay::HMAC_CTX", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
-        if (error_id) { return error_id; }
-        void* obj_hctx = stack[0].oval;
-        env->set_no_free(env, stack, obj_hctx, 1);
-        
-        stack[0].oval = obj_cb;
-        stack[1].oval = obj_ssl;
-        stack[2].oval = obj_key_name;
-        stack[3].oval = obj_iv;
-        stack[4].oval = obj_ctx;
-        stack[5].oval = obj_hctx;
-        stack[6].ival = enc;
-        
-        env->call_instance_method_by_name(env, stack, "", 7, &error_id, __func__, FILE_NAME, __LINE__);
-        if (error_id) {
-          void* obj_exception = env->get_exception(env, stack);
-          const char* exception = env->get_chars(env, stack, obj_exception);
-          
-          fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "[An exception thrown in native tlsext_ticket_key_cb function is converted to a warning]\n");
-          
-          env->print_stderr(env, stack, obj_exception);
-          
-          fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "\n");
-        }
-        
-        int32_t ret = stack[0].ival;
-        
-        memcpy(key_name, env->get_chars(env, stack, obj_key_name), 16);
-        memcpy(iv, env->get_chars(env, stack, obj_iv), EVP_MAX_IV_LENGTH);
-      }
-    }
+  
+  char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
+  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", ssl_ctx);
+  stack[0].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
+  env->call_instance_method_by_name(env, stack, "GET_TLSEXT_TICKET_KEY_CB", 1, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
   }
+  
+  // Return value of get_psk_server_cb method
+  void* obj_cb = stack[0].oval;
+  
+  if (!obj_cb) {
+    env->die(env, stack, "GET_TLSEXT_TICKET_KEY_CB method returns undef.", __func__, FILE_NAME, __LINE__);
+    
+    print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
+  }
+  
+  void* obj_address_ssl = env->new_pointer_object_by_name(env, stack, "Address", ssl, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
+  }
+  stack[0].oval = obj_address_ssl;
+  env->call_class_method_by_name(env, stack, "Net::SSLeay", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
+  }
+  void* obj_ssl = stack[0].oval;
+  env->set_no_free(env, stack, obj_ssl, 1);
+  
+  void* obj_key_name = env->new_string(env, stack, key_name, 16);
+  
+  void* obj_iv = env->new_string(env, stack, iv, EVP_MAX_IV_LENGTH);
+  
+  void* obj_address_ctx = env->new_pointer_object_by_name(env, stack, "Address", ctx, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
+  }
+  stack[0].oval = obj_address_ctx;
+  env->call_class_method_by_name(env, stack, "Net::SSLeay::EVP_CIPHER_CTX", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
+  }
+  void* obj_ctx = stack[0].oval;
+  env->set_no_free(env, stack, obj_ctx, 1);
+  
+  void* obj_address_hctx = env->new_pointer_object_by_name(env, stack, "Address", hctx, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
+  }
+  stack[0].oval = obj_address_hctx;
+  env->call_class_method_by_name(env, stack, "Net::SSLeay::HMAC_CTX", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
+  }
+  void* obj_hctx = stack[0].oval;
+  env->set_no_free(env, stack, obj_hctx, 1);
+  
+  stack[0].oval = obj_cb;
+  stack[1].oval = obj_ssl;
+  stack[2].oval = obj_key_name;
+  stack[3].oval = obj_iv;
+  stack[4].oval = obj_ctx;
+  stack[5].oval = obj_hctx;
+  stack[6].ival = enc;
+  
+  env->call_instance_method_by_name(env, stack, "", 7, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
+  }
+  
+  int32_t ret = stack[0].ival;
+  
+  memcpy(key_name, env->get_chars(env, stack, obj_key_name), 16);
+  memcpy(iv, env->get_chars(env, stack, obj_iv), EVP_MAX_IV_LENGTH);
+  
+  END_OF_FUNC:
   
   env->free_stack(env, stack);
   
@@ -1459,7 +1461,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_tlsext_ticket_key_cb(SPVM_ENV* env, SPVM
   unsigned int (*native_cb)(SSL *s, unsigned char* key_name, unsigned char* iv, EVP_CIPHER_CTX *ctx, HMAC_CTX *hctx, int enc) = NULL;
                  
   if (obj_cb) {
-    native_cb = &tlsext_ticket_key_cb;
+    native_cb = &SPVM__Net__SSLeay__SSL_CTX__tlsext_ticket_key_cb;
   }
   
   stack[0].oval = obj_self;
