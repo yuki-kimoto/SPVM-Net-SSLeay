@@ -1531,41 +1531,6 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_psk_server_callback(SPVM_ENV* env, SPVM_
   return 0;
 }
 
-int32_t SPVM__Net__SSLeay__SSL_CTX__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
-  
-  int32_t error_id = 0;
-  
-  char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
-  
-  void* obj_self = stack[0].oval;
-  
-  SSL_CTX* pointer = env->get_pointer(env, stack, obj_self);
-  
-  stack[0].oval = obj_self;
-  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", pointer);
-  stack[1].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
-  env->call_instance_method_by_name(env, stack, "DELETE_PSK_CLIENT_CB", 2, &error_id, __func__, FILE_NAME, __LINE__);
-  if (error_id) { return error_id; }
-  
-  stack[0].oval = obj_self;
-  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", pointer);
-  stack[1].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
-  env->call_instance_method_by_name(env, stack, "DELETE_PSK_SERVER_CB", 2, &error_id, __func__, FILE_NAME, __LINE__);
-  if (error_id) { return error_id; }
-  
-  stack[0].oval = obj_self;
-  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", pointer);
-  stack[1].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
-  env->call_instance_method_by_name(env, stack, "DELETE_TLSEXT_TICKET_KEY_CB", 2, &error_id, __func__, FILE_NAME, __LINE__);
-  if (error_id) { return error_id; }
-  
-  if (!env->no_free(env, stack, obj_self)) {
-    SSL_CTX_free(pointer);
-  }
-  
-  return 0;
-}
-
 static int convert_to_wire_format(SPVM_ENV* env, SPVM_VALUE* stack, void* obj_protocols, unsigned char *out_wire_format) {
   
   assert(obj_protocols);
@@ -1775,6 +1740,173 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_next_protos_advertised_cb_with_protocols
   native_args[3] = obj_cb_output_strings_list;
   
   SSL_CTX_set_next_protos_advertised_cb(ssl_ctx, native_cb, native_args);
+  
+  return 0;
+}
+
+static int sess_set_new_cb(SSL* ssl, SSL_SESSION* session) {
+  
+  int32_t error_id = 0;
+  
+  SPVM_ENV* env = thread_env;
+  
+  SPVM_VALUE* stack = env->new_stack(env);
+  
+  SSL_CTX* ssl_ctx = SSL_get_SSL_CTX(ssl);
+  
+  int32_t ret = 0;
+  if (!ssl_ctx) {
+    env->die(env, stack, "SSL_get_SSL_CTX(ssl) failed.", __func__, FILE_NAME, __LINE__);
+    
+    void* obj_exception = env->get_exception(env, stack);
+    const char* exception = env->get_chars(env, stack, obj_exception);
+    
+    fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "[An exception thrown in native sess_set_new_cb function is converted to a warning]\n");
+    
+    env->print_stderr(env, stack, obj_exception);
+    
+    fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "\n");
+  }
+  else {
+    char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
+    snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", ssl_ctx);
+    stack[0].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
+    env->call_instance_method_by_name(env, stack, "GET_NEW_SESSION_CB", 1, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) {
+      void* obj_exception = env->get_exception(env, stack);
+      const char* exception = env->get_chars(env, stack, obj_exception);
+      
+      fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "[An exception thrown in native sess_set_new_cb function is converted to a warning]\n");
+      
+      env->print_stderr(env, stack, obj_exception);
+      
+      fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "\n");
+    }
+    else {
+      // Return value of get_psk_server_cb method
+      void* obj_cb = stack[0].oval;
+      
+      if (!obj_cb) {
+        env->die(env, stack, "GET_NEW_SESSION_CB method returns undef.", __func__, FILE_NAME, __LINE__);
+        
+        void* obj_exception = env->get_exception(env, stack);
+        const char* exception = env->get_chars(env, stack, obj_exception);
+        
+        fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "[An exception thrown in native sess_set_new_cb function is converted to a warning]\n");
+        
+        env->print_stderr(env, stack, obj_exception);
+        
+        fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "\n");
+      }
+      else {
+        void* obj_address_ssl = env->new_pointer_object_by_name(env, stack, "Address", ssl, &error_id, __func__, FILE_NAME, __LINE__);
+        if (error_id) { return error_id; }
+        stack[0].oval = obj_address_ssl;
+        env->call_class_method_by_name(env, stack, "Net::SSLeay", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
+        if (error_id) { return error_id; }
+        void* obj_ssl = stack[0].oval;
+        env->set_no_free(env, stack, obj_ssl, 1);
+        
+        void* obj_address_session = env->new_pointer_object_by_name(env, stack, "Address", session, &error_id, __func__, FILE_NAME, __LINE__);
+        if (error_id) { return error_id; }
+        stack[0].oval = obj_address_session;
+        env->call_class_method_by_name(env, stack, "Net::SSLeay::SSL_SESSION", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
+        if (error_id) { return error_id; }
+        void* obj_session = stack[0].oval;
+        env->set_no_free(env, stack, obj_session, 1);
+        
+        stack[0].oval = obj_cb;
+        stack[1].oval = obj_ssl;
+        stack[2].oval = obj_session;
+        
+        env->call_instance_method_by_name(env, stack, "", 3, &error_id, __func__, FILE_NAME, __LINE__);
+        if (error_id) {
+          void* obj_exception = env->get_exception(env, stack);
+          const char* exception = env->get_chars(env, stack, obj_exception);
+          
+          fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "[An exception thrown in native sess_set_new_cb function is converted to a warning]\n");
+          
+          env->print_stderr(env, stack, obj_exception);
+          
+          fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "\n");
+        }
+        
+        int32_t ret = stack[0].ival;
+      }
+    }
+  }
+  
+  env->free_stack(env, stack);
+  
+  return ret;
+}
+
+int32_t SPVM__Net__SSLeay__SSL_CTX__sess_set_new_cb(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  void* obj_cb = stack[1].oval;
+  
+  SSL_CTX* ssl_ctx = env->get_pointer(env, stack, obj_self);
+  
+  int (*native_cb)(SSL*, SSL_SESSION*) = NULL;
+                 
+  if (obj_cb) {
+    native_cb = &sess_set_new_cb;
+  }
+  
+  stack[0].oval = obj_self;
+  char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
+  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", ssl_ctx);
+  stack[1].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
+  stack[2].oval = obj_cb;
+  env->call_instance_method_by_name(env, stack, "SET_NEW_SESSION_CB", 3, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
+  
+  SSL_CTX_sess_set_new_cb(ssl_ctx, native_cb);
+  
+  return 0;
+}
+
+int32_t SPVM__Net__SSLeay__SSL_CTX__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
+  
+  void* obj_self = stack[0].oval;
+  
+  SSL_CTX* pointer = env->get_pointer(env, stack, obj_self);
+  
+  stack[0].oval = obj_self;
+  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", pointer);
+  stack[1].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
+  env->call_instance_method_by_name(env, stack, "DELETE_PSK_CLIENT_CB", 2, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
+  
+  stack[0].oval = obj_self;
+  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", pointer);
+  stack[1].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
+  env->call_instance_method_by_name(env, stack, "DELETE_PSK_SERVER_CB", 2, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
+  
+  stack[0].oval = obj_self;
+  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", pointer);
+  stack[1].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
+  env->call_instance_method_by_name(env, stack, "DELETE_TLSEXT_TICKET_KEY_CB", 2, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
+  
+  stack[0].oval = obj_self;
+  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", pointer);
+  stack[1].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
+  env->call_instance_method_by_name(env, stack, "DELETE_NEW_SESSION_CB", 2, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
+  
+  if (!env->no_free(env, stack, obj_self)) {
+    SSL_CTX_free(pointer);
+  }
   
   return 0;
 }

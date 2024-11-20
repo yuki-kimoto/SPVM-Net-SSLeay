@@ -374,6 +374,12 @@ C<method set_next_protos_advertised_cb : void ($protocols : string[]);>
 
 Calls native L<SSL_CTX_set_next_protos_advertised_cb|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_alpn_select_cb> function defined to select $protocols.
 
+=head2 sess_set_new_cb
+
+C<method sess_set_new_cb : void ($cb : L<Net::SSLeay::Callback::NewSession|SPVM::Net::SSLeay::Callback::NewSession>)>
+
+Calls native L<SSL_CTX_sess_set_new_cb|https://docs.openssl.org/1.1.1/man3/SSL_CTX_sess_set_get_cb> function given $cb.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>
