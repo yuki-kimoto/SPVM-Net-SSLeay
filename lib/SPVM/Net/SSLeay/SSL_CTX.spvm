@@ -222,6 +222,8 @@ class Net::SSLeay::SSL_CTX : pointer {
     return $deleted;
   }
   
+  native method set_alpn_select_cb_with_protocols : void ($protocols : string[]);
+  
   native method DESTROY : void ();
   
 }

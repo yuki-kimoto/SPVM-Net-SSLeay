@@ -6,6 +6,7 @@
     * Add Net::SSLeay::Callback::TlsextTicketKey class.
     * Add Net::SSLeay::SSL_CTX#set_tlsext_ticket_key_cb method.
     * Add Net::SSLeay::Callback::AlpnSelect class.
+    * Add Net::SSLeay::SSL_CTX#set_alpn_select_cb_with_protocols method.
 0.014 2024-11-19
   [New Features]
     * Add Net::SSLeay::OCSP#single_get0_status method.

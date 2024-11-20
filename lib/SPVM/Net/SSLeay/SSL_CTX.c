@@ -1238,8 +1238,6 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_psk_client_callback(SPVM_ENV* env, SPVM_
   
   void* obj_cb = stack[1].oval;
   
-  void* obj_arg = stack[2].oval;
-  
   SSL_CTX* ssl_ctx = env->get_pointer(env, stack, obj_self);
   
   unsigned int (*native_cb)(SSL *ssl, const char *hint, char *identity, unsigned int max_identity_len, unsigned char *psk, unsigned int max_psk_len) = NULL;
@@ -1483,8 +1481,6 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_tlsext_ticket_key_cb(SPVM_ENV* env, SPVM
   
   void* obj_cb = stack[1].oval;
   
-  void* obj_arg = stack[2].oval;
-  
   SSL_CTX* ssl_ctx = env->get_pointer(env, stack, obj_self);
   
   unsigned int (*native_cb)(SSL *s, unsigned char* key_name, unsigned char* iv, EVP_CIPHER_CTX *ctx, HMAC_CTX *hctx, int enc) = NULL;
@@ -1513,8 +1509,6 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_psk_server_callback(SPVM_ENV* env, SPVM_
   void* obj_self = stack[0].oval;
   
   void* obj_cb = stack[1].oval;
-  
-  void* obj_arg = stack[2].oval;
   
   SSL_CTX* ssl_ctx = env->get_pointer(env, stack, obj_self);
   
@@ -1568,6 +1562,94 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   if (!env->no_free(env, stack, obj_self)) {
     SSL_CTX_free(pointer);
   }
+  
+  return 0;
+}
+
+static int convert_to_wire_format(SPVM_ENV* env, SPVM_VALUE* stack, void* obj_protocols, unsigned char *out_wire_format) {
+  
+  assert(obj_protocols);
+  
+  int32_t out_wire_format_length = 0;
+  int32_t protocols_length = env->length(env, stack, obj_protocols);
+  for(int32_t i = 0; i <= protocols_length; i++) {
+    
+    void* obj_protocol = env->get_elem_string(env, stack, obj_protocols, i);
+    
+    if (obj_protocol) {
+      const char *protocol = env->get_chars(env, stack, obj_protocol);
+      
+      int32_t protocol_length = env->length(env, stack, obj_protocol);
+      
+      if (protocol_length > 0) {
+        size_t len = protocol_length;
+        if (!(len <= 255)) {
+          // Error
+          break;
+        }
+        
+        if (out_wire_format) {
+          out_wire_format[out_wire_format_length] = (unsigned char)protocol_length;
+          strncpy((char*)out_wire_format + 1 + out_wire_format_length, protocol, protocol_length);
+        }
+        
+        out_wire_format_length += 1 + protocol_length;
+      }
+    }
+  }
+  
+  return out_wire_format_length;
+}
+
+static int alpn_select_cb_for_protocols (SSL *ssl, const unsigned char **out, unsigned char *outlen, const unsigned char *in, unsigned int inlen, void *arg) {
+  
+  int32_t error_id = 0;
+  
+  SPVM_ENV* env = (SPVM_ENV*)((void**)arg)[0];
+  
+  SPVM_VALUE* stack = (SPVM_VALUE*)((void**)arg)[1];
+  
+  void* obj_protocols = ((void**)arg)[2];
+  
+  assert(obj_protocols);
+  
+  void* obj_out_ref = env->new_string_array(env, stack, 1);
+  
+  void* obj_in = env->new_string(env, stack, in, inlen);
+  
+  int32_t protocols_wire_format_length = convert_to_wire_format(env, stack, obj_protocols, NULL);
+  void* obj_protocols_wire_format = env->new_string(env, stack, NULL, protocols_wire_format_length);
+  const char* protocols_wire_format = env->get_chars(env, stack, obj_protocols_wire_format);
+  
+  int32_t status_select_next_proto = SSL_select_next_proto((unsigned char **)out, outlen, in, inlen, protocols_wire_format, protocols_wire_format_length);
+  
+  int32_t status = status_select_next_proto == OPENSSL_NPN_NEGOTIATED ? SSL_TLSEXT_ERR_OK : SSL_TLSEXT_ERR_NOACK;
+  
+  return status;
+}
+
+int32_t SPVM__Net__SSLeay__SSL_CTX__set_alpn_select_cb_with_protocols(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  void* obj_protocols = stack[1].oval;
+  
+  SSL_CTX* ssl_ctx = env->get_pointer(env, stack, obj_self);
+  
+  int (*native_cb) (SSL *ssl, const unsigned char **out, unsigned char *outlen, const unsigned char *in, unsigned int inlen, void *arg) = NULL;
+  
+  if (obj_protocols) {
+    native_cb = &alpn_select_cb_for_protocols;
+  }
+  
+  void* native_args[3] = {0};
+  native_args[0] = env;
+  native_args[1] = stack;
+  native_args[2] = obj_protocols;
+  
+  SSL_CTX_set_alpn_select_cb(ssl_ctx, native_cb, native_args);
   
   return 0;
 }
