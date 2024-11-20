@@ -12,6 +12,8 @@ class Net::SSLeay::SSL_CTX : pointer {
   use Net::SSLeay::EC_KEY;
   use Net::SSLeay::DH;
   use Net::SSLeay::EVP_PKEY;
+  use Net::SSLeay::EVP_CIPHER_CTX;
+  use Net::SSLeay::HMAC_CTX;
   use List;
   
   use Net::SSLeay::Callback::TlsextServername;
@@ -27,12 +29,16 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   our $PSK_SERVER_CBS : Hash of Net::SSLeay::Callback::PskServer;
   
+  our $TLSEXT_TICKET_KEY_CBS : Hash of Net::SSLeay::Callback::TlsextTicketKey;
+  
   our $MUTEX : Sync::Mutex;
   
   INIT {
     $PSK_CLIENT_CBS = Hash->new;
     
     $PSK_SERVER_CBS = Hash->new;
+    
+    $TLSEXT_TICKET_KEY_CBS = Hash->new;
     
     $MUTEX = Sync::Mutex->new;
   }
@@ -174,6 +180,40 @@ class Net::SSLeay::SSL_CTX : pointer {
     $MUTEX->lock;
     
     my $deleted = (Net::SSLeay::Callback::PskServer)$PSK_SERVER_CBS->delete($key);
+    
+    $MUTEX->unlock;
+    
+    return $deleted;
+  }
+  
+  native method set_tlsext_ticket_key_cb : void ($cb : Net::SSLeay::Callback::TlsextTicketKey);
+  
+  private method GET_TLSEXT_TICKET_KEY_CB : Net::SSLeay::Callback::TlsextTicketKey ($key : string) {
+    
+    $MUTEX->reader_lock;
+    
+    my $psk_server_cb = (Net::SSLeay::Callback::TlsextTicketKey)$TLSEXT_TICKET_KEY_CBS->get($key);
+    
+    $MUTEX->reader_unlock;
+    
+    return $psk_server_cb;
+  }
+  
+  private method SET_TLSEXT_TICKET_KEY_CB : void ($key : string, $psk_server_cb : Net::SSLeay::Callback::TlsextTicketKey) {
+    
+    $MUTEX->lock;
+    
+    $TLSEXT_TICKET_KEY_CBS->set($key, $psk_server_cb);
+    
+    $MUTEX->unlock;
+    
+  }
+  
+  private method DELETE_TLSEXT_TICKET_KEY_CB : Net::SSLeay::Callback::TlsextTicketKey ($key : string) {
+    
+    $MUTEX->lock;
+    
+    my $deleted = (Net::SSLeay::Callback::TlsextTicketKey)$TLSEXT_TICKET_KEY_CBS->delete($key);
     
     $MUTEX->unlock;
     

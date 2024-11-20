@@ -350,6 +350,12 @@ C<method set_psk_server_callback : void ($cb : L<Net::SSLeay::Callback::PskServe
 
 Calls native L<SSL_CTX_set_psk_server_callback|https://docs.openssl.org/1.1.1/man3/SSL_CTX_use_psk_identity_hint> function given $cb.
 
+=head2 set_tlsext_ticket_key_cb
+
+C<method set_tlsext_ticket_key_cb : void ($cb : L<Net::SSLeay::Callback::TlsextTicketKey|SPVM::Net::SSLeay::Callback::TlsextTicketKey>);>
+
+Calls native L<SSL_CTX_set_tlsext_ticket_key_cb|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_tlsext_ticket_key_cb> function given $cb.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>
