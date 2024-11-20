@@ -1131,7 +1131,18 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_default_passwd_cb(SPVM_ENV* env, SPVM_VA
   return 0;
 }
 
-static unsigned int psk_client_callback(SSL *ssl, const char *hint, char *identity, unsigned int max_identity_len, unsigned char *psk, unsigned int max_psk_len) {
+static void print_exception_to_stderr(SPVM_ENV* env, SPVM_VALUE* stack) {
+  void* obj_exception = env->get_exception(env, stack);
+  const char* exception = env->get_chars(env, stack, obj_exception);
+  
+  fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "[An exception is converted to a warning]\n");
+  
+  env->print_stderr(env, stack, obj_exception);
+  
+  fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "\n");
+}
+
+static unsigned int SPVM__Net__SSLeay__SSL_CTX__psk_client_callback(SSL *ssl, const char *hint, char *identity, unsigned int max_identity_len, unsigned char *psk, unsigned int max_psk_len) {
   
   int32_t error_id = 0;
   
@@ -1141,89 +1152,75 @@ static unsigned int psk_client_callback(SSL *ssl, const char *hint, char *identi
   
   SSL_CTX* ssl_ctx = SSL_get_SSL_CTX(ssl);
   
-  int32_t ret = 0;
   if (!ssl_ctx) {
     env->die(env, stack, "SSL_get_SSL_CTX(ssl) failed.", __func__, FILE_NAME, __LINE__);
     
-    void* obj_exception = env->get_exception(env, stack);
-    const char* exception = env->get_chars(env, stack, obj_exception);
+    print_exception_to_stderr(env, stack);
     
-    fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "[An exception thrown in native psk_client_callback function is converted to a warning]\n");
-    
-    env->print_stderr(env, stack, obj_exception);
-    
-    fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "\n");
+    goto END_OF_FUNC;
   }
-  else {
-    char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
-    snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", ssl_ctx);
-    stack[0].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
-    env->call_instance_method_by_name(env, stack, "GET_PSK_CLIENT_CB", 1, &error_id, __func__, FILE_NAME, __LINE__);
-    if (error_id) {
-      void* obj_exception = env->get_exception(env, stack);
-      const char* exception = env->get_chars(env, stack, obj_exception);
-      
-      fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "[An exception thrown in native psk_client_callback function is converted to a warning]\n");
-      
-      env->print_stderr(env, stack, obj_exception);
-      
-      fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "\n");
-    }
-    else {
-      // Return value of get_psk_client_cb method
-      void* obj_cb = stack[0].oval;
-      
-      if (!obj_cb) {
-        env->die(env, stack, "GET_PSK_CLIENT_CB method returns undef.", __func__, FILE_NAME, __LINE__);
-        
-        void* obj_exception = env->get_exception(env, stack);
-        const char* exception = env->get_chars(env, stack, obj_exception);
-        
-        fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "[An exception thrown in native psk_client_callback function is converted to a warning]\n");
-        
-        env->print_stderr(env, stack, obj_exception);
-        
-        fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "\n");
-      }
-      else {
-        void* obj_address_ssl = env->new_pointer_object_by_name(env, stack, "Address", ssl, &error_id, __func__, FILE_NAME, __LINE__);
-        if (error_id) { return error_id; }
-        stack[0].oval = obj_address_ssl;
-        env->call_class_method_by_name(env, stack, "Net::SSLeay", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
-        if (error_id) { return error_id; }
-        void* obj_ssl = stack[0].oval;
-        
-        void* obj_identity = env->new_string(env, stack, identity, max_identity_len);
-        
-        void* obj_psk = env->new_string(env, stack, psk, max_psk_len);
-        
-        stack[0].oval = obj_cb;
-        stack[1].oval = obj_ssl;
-        stack[2].oval = obj_identity;
-        stack[3].ival = max_identity_len;
-        stack[4].oval = obj_psk;
-        stack[5].ival = max_psk_len;
-        
-        env->call_instance_method_by_name(env, stack, "", 6, &error_id, __func__, FILE_NAME, __LINE__);
-        if (error_id) {
-          void* obj_exception = env->get_exception(env, stack);
-          const char* exception = env->get_chars(env, stack, obj_exception);
-          
-          fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "[An exception thrown in native psk_client_callback function is converted to a warning]\n");
-          
-          env->print_stderr(env, stack, obj_exception);
-          
-          fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "\n");
-        }
-        
-        int32_t ret = stack[0].ival;
-        
-        memcpy(identity, env->get_chars(env, stack, obj_identity), max_identity_len);
-        
-        memcpy(psk, env->get_chars(env, stack, obj_psk), max_psk_len);
-      }
-    }
+  
+  char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
+  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", ssl_ctx);
+  stack[0].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
+  env->call_instance_method_by_name(env, stack, "GET_PSK_CLIENT_CB", 1, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
   }
+  
+  // Return value of get_psk_client_cb method
+  void* obj_cb = stack[0].oval;
+  
+  if (!obj_cb) {
+    env->die(env, stack, "GET_PSK_CLIENT_CB method returns undef.", __func__, FILE_NAME, __LINE__);
+    
+    print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
+  }
+  
+  void* obj_address_ssl = env->new_pointer_object_by_name(env, stack, "Address", ssl, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
+  }
+  
+  stack[0].oval = obj_address_ssl;
+  env->call_class_method_by_name(env, stack, "Net::SSLeay", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
+  }
+  void* obj_ssl = stack[0].oval;
+  
+  void* obj_identity = env->new_string(env, stack, identity, max_identity_len);
+  
+  void* obj_psk = env->new_string(env, stack, psk, max_psk_len);
+  
+  stack[0].oval = obj_cb;
+  stack[1].oval = obj_ssl;
+  stack[2].oval = obj_identity;
+  stack[3].ival = max_identity_len;
+  stack[4].oval = obj_psk;
+  stack[5].ival = max_psk_len;
+  
+  env->call_instance_method_by_name(env, stack, "", 6, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
+  }
+  int32_t ret = stack[0].ival;
+  
+  memcpy(identity, env->get_chars(env, stack, obj_identity), max_identity_len);
+  
+  memcpy(psk, env->get_chars(env, stack, obj_psk), max_psk_len);
+  
+  END_OF_FUNC:
   
   env->free_stack(env, stack);
   
@@ -1243,7 +1240,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_psk_client_callback(SPVM_ENV* env, SPVM_
   unsigned int (*native_cb)(SSL *ssl, const char *hint, char *identity, unsigned int max_identity_len, unsigned char *psk, unsigned int max_psk_len) = NULL;
   
   if (obj_cb) {
-    native_cb = &psk_client_callback;
+    native_cb = &SPVM__Net__SSLeay__SSL_CTX__psk_client_callback;
   }
   
   stack[0].oval = obj_self;
