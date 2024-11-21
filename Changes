@@ -1,3 +1,7 @@
+0.016 2024-11-21
+  [New Features]
+    * Add Net::SSLeay::Util class.
+    
 0.015 2024-11-20
   [New Features]
     * Add Net::SSLeay::SSL_CTX#set_psk_server_callback method.
