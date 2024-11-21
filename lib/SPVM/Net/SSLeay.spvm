@@ -44,8 +44,6 @@ class Net::SSLeay {
   
   native static method load_client_CA_file : Net::SSLeay::X509_NAME[] ($file : string);
   
-  native static method _print_version_text : void ();
-  
   # Instance Methods
   native method set_fd : int ($fd : int);
   
