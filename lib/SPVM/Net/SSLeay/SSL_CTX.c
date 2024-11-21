@@ -1679,18 +1679,15 @@ static int SPVM__Net__SSLeay__SSL_CTX__next_protos_advertised_cb_for_protocols (
   
   int32_t status = SSL_TLSEXT_ERR_NOACK;
   if (error_id) {
-    void* obj_exception = env->get_exception(env, stack);
-    const char* exception = env->get_chars(env, stack, obj_exception);
+    print_exception_to_stderr(env, stack);
     
-    fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "[An exception thrown in native next_protos_advertised_cb_for_protocols function is converted to a warning]\n");
-    
-    env->print_stderr(env, stack, obj_exception);
-    
-    fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "\n");
+    goto END_OF_FUNC;
   }
   else {
     status = SSL_TLSEXT_ERR_OK;
   }
+  
+  END_OF_FUNC:
   
   return status;
 }
@@ -1735,87 +1732,80 @@ static int SPVM__Net__SSLeay__SSL_CTX__session_new_cb(SSL* ssl, SSL_SESSION* ses
   
   SSL_CTX* ssl_ctx = SSL_get_SSL_CTX(ssl);
   
-  int32_t ret = 0;
   if (!ssl_ctx) {
     env->die(env, stack, "SSL_get_SSL_CTX(ssl) failed.", __func__, FILE_NAME, __LINE__);
     
-    void* obj_exception = env->get_exception(env, stack);
-    const char* exception = env->get_chars(env, stack, obj_exception);
+    print_exception_to_stderr(env, stack);
     
-    fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "[An exception thrown in native sess_set_new_cb function is converted to a warning]\n");
-    
-    env->print_stderr(env, stack, obj_exception);
-    
-    fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "\n");
+    goto END_OF_FUNC;
   }
-  else {
-    char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
-    snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", ssl_ctx);
-    stack[0].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
-    env->call_instance_method_by_name(env, stack, "GET_NEW_SESSION_CB", 1, &error_id, __func__, FILE_NAME, __LINE__);
-    if (error_id) {
-      void* obj_exception = env->get_exception(env, stack);
-      const char* exception = env->get_chars(env, stack, obj_exception);
-      
-      fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "[An exception thrown in native sess_set_new_cb function is converted to a warning]\n");
-      
-      env->print_stderr(env, stack, obj_exception);
-      
-      fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "\n");
-    }
-    else {
-      // Return value of get_psk_server_cb method
-      void* obj_cb = stack[0].oval;
-      
-      if (!obj_cb) {
-        env->die(env, stack, "GET_NEW_SESSION_CB method returns undef.", __func__, FILE_NAME, __LINE__);
-        
-        void* obj_exception = env->get_exception(env, stack);
-        const char* exception = env->get_chars(env, stack, obj_exception);
-        
-        fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "[An exception thrown in native sess_set_new_cb function is converted to a warning]\n");
-        
-        env->print_stderr(env, stack, obj_exception);
-        
-        fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "\n");
-      }
-      else {
-        void* obj_address_ssl = env->new_pointer_object_by_name(env, stack, "Address", ssl, &error_id, __func__, FILE_NAME, __LINE__);
-        if (error_id) { return error_id; }
-        stack[0].oval = obj_address_ssl;
-        env->call_class_method_by_name(env, stack, "Net::SSLeay", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
-        if (error_id) { return error_id; }
-        void* obj_ssl = stack[0].oval;
-        env->set_no_free(env, stack, obj_ssl, 1);
-        
-        void* obj_address_session = env->new_pointer_object_by_name(env, stack, "Address", session, &error_id, __func__, FILE_NAME, __LINE__);
-        if (error_id) { return error_id; }
-        stack[0].oval = obj_address_session;
-        env->call_class_method_by_name(env, stack, "Net::SSLeay::SSL_SESSION", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
-        if (error_id) { return error_id; }
-        void* obj_session = stack[0].oval;
-        env->set_no_free(env, stack, obj_session, 1);
-        
-        stack[0].oval = obj_cb;
-        stack[1].oval = obj_ssl;
-        stack[2].oval = obj_session;
-        
-        env->call_instance_method_by_name(env, stack, "", 3, &error_id, __func__, FILE_NAME, __LINE__);
-        if (error_id) {
-          void* obj_exception = env->get_exception(env, stack);
-          const char* exception = env->get_chars(env, stack, obj_exception);
-          
-          fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "[An exception thrown in native sess_set_new_cb function is converted to a warning]\n");
-          
-          env->print_stderr(env, stack, obj_exception);
-          
-          fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "\n");
-        }
-        
-        int32_t ret = stack[0].ival;
-      }
-    }
+  
+  char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
+  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", ssl_ctx);
+  stack[0].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
+  env->call_instance_method_by_name(env, stack, "GET_NEW_SESSION_CB", 1, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
   }
+  
+  // Return value of get_psk_server_cb method
+  void* obj_cb = stack[0].oval;
+  
+  if (!obj_cb) {
+    env->die(env, stack, "GET_NEW_SESSION_CB method returns undef.", __func__, FILE_NAME, __LINE__);
+    
+    print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
+  }
+  
+  void* obj_address_ssl = env->new_pointer_object_by_name(env, stack, "Address", ssl, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
+  }
+  stack[0].oval = obj_address_ssl;
+  env->call_class_method_by_name(env, stack, "Net::SSLeay", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
+  }
+  void* obj_ssl = stack[0].oval;
+  env->set_no_free(env, stack, obj_ssl, 1);
+  
+  void* obj_address_session = env->new_pointer_object_by_name(env, stack, "Address", session, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
+  }
+  stack[0].oval = obj_address_session;
+  env->call_class_method_by_name(env, stack, "Net::SSLeay::SSL_SESSION", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
+  }
+  void* obj_session = stack[0].oval;
+  env->set_no_free(env, stack, obj_session, 1);
+  
+  stack[0].oval = obj_cb;
+  stack[1].oval = obj_ssl;
+  stack[2].oval = obj_session;
+  
+  env->call_instance_method_by_name(env, stack, "", 3, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
+  }
+  int32_t ret = stack[0].ival;
+  
+  END_OF_FUNC:
   
   env->free_stack(env, stack);
   
