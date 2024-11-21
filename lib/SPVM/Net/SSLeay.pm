@@ -116,12 +116,6 @@ Exceptions:
 
 If SSL_new failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
-=head2 library_init
-
-C<static method library_init : int ();>
-
-Calls native L<SSL_library_init|https://docs.openssl.org/master/man3/SSL_library_init> function, and returns its return value.
-
 =head2 load_error_strings
 
 C<static method load_error_strings : void ();>

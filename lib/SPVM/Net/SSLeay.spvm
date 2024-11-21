@@ -43,9 +43,6 @@ class Net::SSLeay {
   
   native static method load_client_CA_file : Net::SSLeay::X509_NAME[] ($file : string);
   
-  # This native function is deprecated in OpenSSL 1.1.0, but Perl's IO::Socket::SSL used this method.
-  native static method library_init : int ();
-  
   native static method _print_version_text : void ();
   
   # Instance Methods
