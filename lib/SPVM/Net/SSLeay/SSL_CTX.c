@@ -1256,7 +1256,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_psk_client_callback(SPVM_ENV* env, SPVM_
   return 0;
 }
 
-static unsigned int psk_server_callback(SSL *ssl, const char *identity, unsigned char *psk, unsigned int max_psk_len) {
+static unsigned int SPVM__Net__SSLeay__SSL_CTX__psk_server_callback(SSL *ssl, const char *identity, unsigned char *psk, unsigned int max_psk_len) {
   
   int32_t error_id = 0;
   
@@ -1470,9 +1470,15 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_tlsext_ticket_key_cb(SPVM_ENV* env, SPVM
   stack[1].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
   stack[2].oval = obj_cb;
   env->call_instance_method_by_name(env, stack, "SET_TLSEXT_TICKET_KEY_CB", 3, &error_id, __func__, FILE_NAME, __LINE__);
-  if (error_id) { return error_id; }
+  if (error_id) {
+    print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
+  }
   
   SSL_CTX_set_tlsext_ticket_key_cb(ssl_ctx, native_cb);
+  
+  END_OF_FUNC:
   
   return 0;
 }
@@ -1490,7 +1496,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_psk_server_callback(SPVM_ENV* env, SPVM_
   SSL_psk_server_cb_func native_cb = NULL;
   
   if (obj_cb) {
-    native_cb = &psk_server_callback;
+    native_cb = &SPVM__Net__SSLeay__SSL_CTX__psk_server_callback;
   }
   
   stack[0].oval = obj_self;
