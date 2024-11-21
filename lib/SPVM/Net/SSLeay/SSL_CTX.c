@@ -1547,7 +1547,7 @@ static int convert_to_wire_format(SPVM_ENV* env, SPVM_VALUE* stack, void* obj_pr
   return out_wire_format_length;
 }
 
-static int alpn_select_cb_for_protocols (SSL *ssl, const unsigned char **out, unsigned char *outlen, const unsigned char *in, unsigned int inlen, void *arg) {
+static int SPVM__Net__SSLeay__SSL_CTX__alpn_select_cb_for_protocols (SSL *ssl, const unsigned char **out, unsigned char *outlen, const unsigned char *in, unsigned int inlen, void *arg) {
   
   int32_t error_id = 0;
   
@@ -1587,7 +1587,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_alpn_select_cb_with_protocols(SPVM_ENV* 
   int (*native_cb) (SSL *ssl, const unsigned char **out, unsigned char *outlen, const unsigned char *in, unsigned int inlen, void *arg) = NULL;
   
   if (obj_protocols) {
-    native_cb = &alpn_select_cb_for_protocols;
+    native_cb = &SPVM__Net__SSLeay__SSL_CTX__alpn_select_cb_for_protocols;
   }
   
   void* native_args[3] = {0};
@@ -1600,7 +1600,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_alpn_select_cb_with_protocols(SPVM_ENV* 
   return 0;
 }
 
-static int next_proto_select_cb_for_protocols (SSL *ssl, unsigned char **out, unsigned char *outlen, const unsigned char *in, unsigned int inlen, void *arg) {
+static int SPVM__Net__SSLeay__SSL_CTX__next_proto_select_cb_for_protocols (SSL *ssl, unsigned char **out, unsigned char *outlen, const unsigned char *in, unsigned int inlen, void *arg) {
   
   int32_t error_id = 0;
   
@@ -1640,7 +1640,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_next_proto_select_cb_with_protocols(SPVM
   int (*native_cb) (SSL *ssl, unsigned char **out, unsigned char *outlen, const unsigned char *in, unsigned int inlen, void *arg) = NULL;
   
   if (obj_protocols) {
-    native_cb = &next_proto_select_cb_for_protocols;
+    native_cb = &SPVM__Net__SSLeay__SSL_CTX__next_proto_select_cb_for_protocols;
   }
   
   void* native_args[3] = {0};
@@ -1653,7 +1653,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_next_proto_select_cb_with_protocols(SPVM
   return 0;
 }
 
-static int next_protos_advertised_cb_for_protocols (SSL *ssl, const unsigned char **out, unsigned int *outlen, void *arg) {
+static int SPVM__Net__SSLeay__SSL_CTX__next_protos_advertised_cb_for_protocols (SSL *ssl, const unsigned char **out, unsigned int *outlen, void *arg) {
   
   int32_t error_id = 0;
   
@@ -1708,7 +1708,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_next_protos_advertised_cb_with_protocols
   int (*native_cb) (SSL *ssl, const unsigned char **out, unsigned int *outlen, void *arg) = NULL;
   
   if (obj_protocols) {
-    native_cb = &next_protos_advertised_cb_for_protocols;
+    native_cb = &SPVM__Net__SSLeay__SSL_CTX__next_protos_advertised_cb_for_protocols;
   }
   
   void* obj_cb_output_strings_list = env->get_field_object_by_name(env, stack, obj_self, "cb_output_strings_list", &error_id, __func__, FILE_NAME, __LINE__);
@@ -1725,7 +1725,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_next_protos_advertised_cb_with_protocols
   return 0;
 }
 
-static int sess_set_new_cb(SSL* ssl, SSL_SESSION* session) {
+static int SPVM__Net__SSLeay__SSL_CTX__session_new_cb(SSL* ssl, SSL_SESSION* session) {
   
   int32_t error_id = 0;
   
@@ -1835,7 +1835,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__sess_set_new_cb(SPVM_ENV* env, SPVM_VALUE* s
   int (*native_cb)(SSL*, SSL_SESSION*) = NULL;
                  
   if (obj_cb) {
-    native_cb = &sess_set_new_cb;
+    native_cb = &SPVM__Net__SSLeay__SSL_CTX__session_new_cb;
   }
   
   stack[0].oval = obj_self;
@@ -1851,7 +1851,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__sess_set_new_cb(SPVM_ENV* env, SPVM_VALUE* s
   return 0;
 }
 
-static void sess_set_remove_cb(SSL_CTX *ssl_ctx, SSL_SESSION* session) {
+static void SPVM__Net__SSLeay__SSL_CTX__session_remove_cb(SSL_CTX *ssl_ctx, SSL_SESSION* session) {
   
   int32_t error_id = 0;
   
@@ -1959,7 +1959,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__sess_set_remove_cb(SPVM_ENV* env, SPVM_VALUE
   void (*native_cb)(SSL_CTX *ssl_ctx, SSL_SESSION* session) = NULL;
   
   if (obj_cb) {
-    native_cb = &sess_set_remove_cb;
+    native_cb = &SPVM__Net__SSLeay__SSL_CTX__session_remove_cb;
   }
   
   stack[0].oval = obj_self;
