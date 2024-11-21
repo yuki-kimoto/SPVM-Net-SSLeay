@@ -1470,15 +1470,9 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_tlsext_ticket_key_cb(SPVM_ENV* env, SPVM
   stack[1].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
   stack[2].oval = obj_cb;
   env->call_instance_method_by_name(env, stack, "SET_TLSEXT_TICKET_KEY_CB", 3, &error_id, __func__, FILE_NAME, __LINE__);
-  if (error_id) {
-    print_exception_to_stderr(env, stack);
-    
-    goto END_OF_FUNC;
-  }
+  if (error_id) { return error_id; }
   
   SSL_CTX_set_tlsext_ticket_key_cb(ssl_ctx, native_cb);
-  
-  END_OF_FUNC:
   
   return 0;
 }
