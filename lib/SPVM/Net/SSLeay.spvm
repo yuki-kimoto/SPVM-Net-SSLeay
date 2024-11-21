@@ -13,6 +13,7 @@ class Net::SSLeay {
   use Net::SSLeay::X509_NAME;
   use Net::SSLeay::SSL_SESSION;
   use Net::SSLeay::OCSP_ONEREQ;
+  use Net::SSLeay::Callback::Msg;
   
   INIT {
     &init();
@@ -107,6 +108,8 @@ class Net::SSLeay {
   }
   
   native method set_SSL_CTX : Net::SSLeay::SSL_CTX ($ctx : Net::SSLeay::SSL_CTX);
+  
+  native method set_msg_callback : void ($cb : Net::SSLeay::Callback::Msg, $arg : object = undef);
   
   native method DESTROY : void ();
   

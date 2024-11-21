@@ -390,6 +390,12 @@ C<method get_SSL_CTX : Net::SSLeay::SSL_CTX ();>
 
 Returns the value of L</"ssl_ctx"> field.
 
+=head2 set_msg_callback
+
+C<method set_msg_callback : void ($cb : L<Net::SSLeay::Callback::Msg|SPVM::Net::SSLeay::Callback::Msg>, $arg : object = undef);>
+
+Calls native L<SSL_set_msg_callback|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_msg_callback> function given $cb, $arg, and returns its return value.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>
