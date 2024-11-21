@@ -5,7 +5,4 @@ class Net::SSLeay::Util::X509 {
   
   use Net::SSLeay::X509;
   
-  # Class Methods
-  native static method get_ocsp_uri : string ($cert : Net::SSLeay::X509);
-  
 }

@@ -18,16 +18,6 @@ Net::SSLeay::Util::X509 class in L<SPVM> has utility methods for X509 data struc
 
 =head1 Class Methods
 
-C<static method get_ocsp_uri : string ($cert : L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509>);>
-
-Returns OCSP URI in the certificate $cert.
-
-If not found, returns undef.
-
-Exceptions:
-
-The X509 object $cert must be defined. Otherwise an exception is thrown.
-
 =head1 See Also
 
 =over 2
