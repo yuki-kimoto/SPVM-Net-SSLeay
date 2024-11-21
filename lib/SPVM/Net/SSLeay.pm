@@ -390,6 +390,12 @@ C<method set_msg_callback : void ($cb : L<Net::SSLeay::Callback::Msg|SPVM::Net::
 
 Calls native L<SSL_set_msg_callback|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_msg_callback> function given $cb, $arg, and returns its return value.
 
+=head2 P_dump_peer_certificate
+
+C<static method P_dump_peer_certificate : string ();>
+
+Returns the same output of Perl's L<Net::SSLeay#dump_peer_certificate|https://metacpan.org/dist/Net-SSLeay/view/lib/Net/SSLeay.pod#Convenience-routines> function.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>

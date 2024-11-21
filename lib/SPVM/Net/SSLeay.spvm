@@ -105,6 +105,23 @@ class Net::SSLeay {
   
   native method set_msg_callback : void ($cb : Net::SSLeay::Callback::Msg, $arg : object = undef);
   
+  static method P_dump_peer_certificate : string () {
+    
+    my $cert = $ssl->get_peer_certificate;
+    
+    unless ($cert) {
+      die "No cert is defined.";
+    }
+    
+    my $subject_name = $cert->get_subject_name->oneline;
+    
+    my $issuer_name = $cert->get_issuer_name->oneline;
+    
+    my $dump = "Subject Name: $subject_name\nIssuer  Name: $issuer_name\n";
+    
+    return $dump;
+  }
+  
   native method DESTROY : void ();
   
 }
