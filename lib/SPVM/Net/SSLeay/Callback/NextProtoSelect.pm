@@ -10,7 +10,7 @@ SPVM::Net::SSLeay::Callback::NextProtoSelect - Callback for SSL_CTX_set_next_pro
 
 =head1 Description
 
-Net::SSLeay::Callback::NextProtoSelect interface in L<SPVM> representas the callback for native L<SSL_CTX_set_next_proto_select_cb|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_alpn_select_cb/> function in OpenSSL.
+Net::SSLeay::Callback::NextProtoSelect interface in L<SPVM> representas the callback for L<SSL_CTX_set_next_proto_select_cb|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_alpn_select_cb/> function in OpenSSL.
 
 =head1 Usage
 

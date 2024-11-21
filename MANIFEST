@@ -40,6 +40,8 @@ lib/SPVM/Net/SSLeay/BIO.pm
 lib/SPVM/Net/SSLeay/BIO.spvm
 lib/SPVM/Net/SSLeay/Callback/AlpnSelect.pm
 lib/SPVM/Net/SSLeay/Callback/AlpnSelect.spvm
+lib/SPVM/Net/SSLeay/Callback/Msg.pm
+lib/SPVM/Net/SSLeay/Callback/Msg.spvm
 lib/SPVM/Net/SSLeay/Callback/NewSession.pm
 lib/SPVM/Net/SSLeay/Callback/NewSession.spvm
 lib/SPVM/Net/SSLeay/Callback/NextProtosAdvertised.pm
