@@ -13,6 +13,7 @@
     * Add Net::SSLeay::Callback::RemoveSession class.
     * Add Net::SSLeay::SSL_CTX#sess_set_new_cb method.
     * Add Net::SSLeay::SSL_CTX#SSL_CTX_sess_set_remove_cb method.
+    * Add Net::SSLeay::Callback::NextProtoSelect class.
 0.014 2024-11-19
   [New Features]
     * Add Net::SSLeay::OCSP#single_get0_status method.

@@ -26,6 +26,9 @@ class Net::SSLeay::SSL_CTX : pointer {
   use Net::SSLeay::Callback::NewSession;
   use Net::SSLeay::Callback::RemoveSession;
   
+  use Net::SSLeay::Callback::AlpnSelect; 
+  use Net::SSLeay::Callback::NextProtoSelect;
+  
   use Sync::Mutex;
   use StringList;
   
