@@ -22,11 +22,45 @@ B<The tests haven't been written yet. The features may be changed without notice
 
 =item * L<Net::SSLeay|SPVM::Net::SSLeay>
 
+=item * L<Net::SSLeay::ASN1_ENUMERATED|SPVM::Net::SSLeay::ASN1_ENUMERATED>
+
+=item * L<Net::SSLeay::ASN1_GENERALIZEDTIME|SPVM::Net::SSLeay::ASN1_GENERALIZEDTIME>
+
+=item * L<Net::SSLeay::ASN1_INTEGER|SPVM::Net::SSLeay::ASN1_INTEGER>
+
 =item * L<Net::SSLeay::ASN1_OBJECT|SPVM::Net::SSLeay::ASN1_OBJECT>
+
+=item * L<Net::SSLeay::ASN1_TIME|SPVM::Net::SSLeay::ASN1_TIME>
 
 =item * L<Net::SSLeay::BIO|SPVM::Net::SSLeay::BIO>
 
+=item * L<Net::SSLeay::Callback::AlpnSelect|SPVM::Net::SSLeay::Callback::AlpnSelect>
+
+=item * L<Net::SSLeay::Callback::Msg|SPVM::Net::SSLeay::Callback::Msg>
+
+=item * L<Net::SSLeay::Callback::NewSession|SPVM::Net::SSLeay::Callback::NewSession>
+
+=item * L<Net::SSLeay::Callback::NextProtosAdvertised|SPVM::Net::SSLeay::Callback::NextProtosAdvertised>
+
+=item * L<Net::SSLeay::Callback::NextProtoSelect|SPVM::Net::SSLeay::Callback::NextProtoSelect>
+
+=item * L<Net::SSLeay::Callback::PemPasswd|SPVM::Net::SSLeay::Callback::PemPasswd>
+
+=item * L<Net::SSLeay::Callback::PskClient|SPVM::Net::SSLeay::Callback::PskClient>
+
+=item * L<Net::SSLeay::Callback::PskServer|SPVM::Net::SSLeay::Callback::PskServer>
+
+=item * L<Net::SSLeay::Callback::RemoveSession|SPVM::Net::SSLeay::Callback::RemoveSession>
+
+=item * L<Net::SSLeay::Callback::TlsextServername|SPVM::Net::SSLeay::Callback::TlsextServername>
+
+=item * L<Net::SSLeay::Callback::TlsextStatus|SPVM::Net::SSLeay::Callback::TlsextStatus>
+
+=item * L<Net::SSLeay::Callback::TlsextTicketKey|SPVM::Net::SSLeay::Callback::TlsextTicketKey>
+
 =item * L<Net::SSLeay::Constant|SPVM::Net::SSLeay::Constant>
+
+=item * L<Net::SSLeay::DER|SPVM::Net::SSLeay::DER>
 
 =item * L<Net::SSLeay::DH|SPVM::Net::SSLeay::DH>
 
@@ -38,15 +72,37 @@ B<The tests haven't been written yet. The features may be changed without notice
 
 =item * L<Net::SSLeay::EVP|SPVM::Net::SSLeay::EVP>
 
+=item * L<Net::SSLeay::EVP_CIPHER_CTX|SPVM::Net::SSLeay::EVP_CIPHER_CTX>
+
 =item * L<Net::SSLeay::EVP_MD|SPVM::Net::SSLeay::EVP_MD>
 
 =item * L<Net::SSLeay::EVP_PKEY|SPVM::Net::SSLeay::EVP_PKEY>
 
+=item * L<Net::SSLeay::HMAC_CTX|SPVM::Net::SSLeay::HMAC_CTX>
+
 =item * L<Net::SSLeay::OBJ|SPVM::Net::SSLeay::OBJ>
+
+=item * L<Net::SSLeay::OCSP|SPVM::Net::SSLeay::OCSP>
+
+=item * L<Net::SSLeay::OCSP_BASICRESP|SPVM::Net::SSLeay::OCSP_BASICRESP>
+
+=item * L<Net::SSLeay::OCSP_CERTID|SPVM::Net::SSLeay::OCSP_CERTID>
+
+=item * L<Net::SSLeay::OCSP_ONEREQ|SPVM::Net::SSLeay::OCSP_ONEREQ>
+
+=item * L<Net::SSLeay::OCSP_REQUEST|SPVM::Net::SSLeay::OCSP_REQUEST>
+
+=item * L<Net::SSLeay::OCSP_RESPONSE|SPVM::Net::SSLeay::OCSP_RESPONSE>
+
+=item * L<Net::SSLeay::OCSP_SINGLERESP|SPVM::Net::SSLeay::OCSP_SINGLERESP>
 
 =item * L<Net::SSLeay::OPENSSL|SPVM::Net::SSLeay::OPENSSL>
 
+=item * L<Net::SSLeay::OPENSSL_INIT_SETTINGS|SPVM::Net::SSLeay::OPENSSL_INIT_SETTINGS>
+
 =item * L<Net::SSLeay::PEM|SPVM::Net::SSLeay::PEM>
+
+=item * L<Net::SSLeay::PKCS12|SPVM::Net::SSLeay::PKCS12>
 
 =item * L<Net::SSLeay::RAND|SPVM::Net::SSLeay::RAND>
 
