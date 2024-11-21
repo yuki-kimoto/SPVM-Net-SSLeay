@@ -33,6 +33,7 @@
     * Add Net::SSLeay::OPENSSL#init_ssl method.
     * Add Net::SSLeay::PKCS12 class.
     * Add  Net::SSLeay::Util::X509#get_ocsp_uri method.
+    * Add  Net::SSLeay::EVP#sha1 method.
   [Incompatible Changes]
     * Remove the logic of OpenSSL initializetion because this is automatically executed after OpenSSL 1.1.0.
     * Remove Net::SSLeay#library_init method.
