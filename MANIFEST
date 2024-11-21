@@ -8,6 +8,7 @@ Changes
 DEVELOPMENT.txt
 helper/constants.txt
 helper/DER_type_names.txt
+helper/generate_Constant.pl
 helper/generate_constant_class.pl
 helper/generate_DER.pl
 lib/SPVM/Net/SSLeay.c
@@ -141,6 +142,10 @@ lib/SPVM/Net/SSLeay/OPENSSL.c
 lib/SPVM/Net/SSLeay/OPENSSL.config
 lib/SPVM/Net/SSLeay/OPENSSL.pm
 lib/SPVM/Net/SSLeay/OPENSSL.spvm
+lib/SPVM/Net/SSLeay/OPENSSL_INIT_SETTINGS.c
+lib/SPVM/Net/SSLeay/OPENSSL_INIT_SETTINGS.config
+lib/SPVM/Net/SSLeay/OPENSSL_INIT_SETTINGS.pm
+lib/SPVM/Net/SSLeay/OPENSSL_INIT_SETTINGS.spvm
 lib/SPVM/Net/SSLeay/PEM.c
 lib/SPVM/Net/SSLeay/PEM.config
 lib/SPVM/Net/SSLeay/PEM.pm
