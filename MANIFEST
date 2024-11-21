@@ -150,6 +150,10 @@ lib/SPVM/Net/SSLeay/PEM.c
 lib/SPVM/Net/SSLeay/PEM.config
 lib/SPVM/Net/SSLeay/PEM.pm
 lib/SPVM/Net/SSLeay/PEM.spvm
+lib/SPVM/Net/SSLeay/PKCS12.c
+lib/SPVM/Net/SSLeay/PKCS12.config
+lib/SPVM/Net/SSLeay/PKCS12.pm
+lib/SPVM/Net/SSLeay/PKCS12.spvm
 lib/SPVM/Net/SSLeay/RAND.c
 lib/SPVM/Net/SSLeay/RAND.config
 lib/SPVM/Net/SSLeay/RAND.pm

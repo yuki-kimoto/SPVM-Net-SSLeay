@@ -20,7 +20,7 @@ Net::SSLeay::OPENSSL_INIT_SETTINGS class in L<SPVM> represents L<OPENSSL_INIT_SE
 
 =over 2
 
-=item * L<Net::SSLeay|SPVM::Net::SSLeay::OPENSSL>
+=item * L<Net::SSLeay::OPENSSL|SPVM::Net::SSLeay::OPENSSL>
 
 =item * L<Net::SSLeay|SPVM::Net::SSLeay>
 

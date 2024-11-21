@@ -81,6 +81,7 @@ sub MY::postamble {
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::X509_STORE_CTX');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::X509_VERIFY_PARAM');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::OPENSSL');
+    $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::OPENSSL_INIT_SETTINGS');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::RAND');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::EVP');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::EVP_MD');
@@ -100,6 +101,7 @@ sub MY::postamble {
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::OCSP_CERTID');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::OCSP_SINGLERESP');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::OCSP_ONEREQ');
+    $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::PKCS12');
   }
   
   return $make_rule;

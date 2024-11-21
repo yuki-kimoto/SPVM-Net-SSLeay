@@ -31,6 +31,7 @@
       OPENSSL_INIT_NO_ATEXIT
     * Add Net::SSLeay::OPENSSL_INIT_SETTINGS class.
     * Add Net::SSLeay::OPENSSL#init_ssl method.
+    * Add Net::SSLeay::PKCS12 class.
   [Incompatible Changes]
     * Remove the logic of OpenSSL initializetion because this is automatically executed after OpenSSL 1.1.0.
     * Remove Net::SSLeay#library_init method.
