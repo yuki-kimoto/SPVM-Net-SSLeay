@@ -1,6 +1,9 @@
 0.016 2024-11-21
   [New Features]
     * Add Net::SSLeay::Util class.
+    * Add Net::SSLeay::Util::OCSP class.
+    * Add Net::SSLeay::Util::X509 class.
+    * Add Net::SSLeay::Util::PKCS12 class.
     
 0.015 2024-11-20
   [New Features]
