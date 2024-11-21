@@ -15,6 +15,8 @@ class Net::SSLeay {
   use Net::SSLeay::OCSP_ONEREQ;
   use Net::SSLeay::Callback::Msg;
   use Net::SSLeay::Util;
+  use Net::SSLeay::OPENSSL;
+  use Net::SSLeay::OPENSSL_INIT_SETTINGS;
   
   # Fields
   has ssl_ctx : Net::SSLeay::SSL_CTX;
