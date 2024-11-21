@@ -18,23 +18,6 @@ int32_t SPVM__Net__SSLeay___print_version_text(SPVM_ENV* env, SPVM_VALUE* stack)
   return 0;
 }
 
-int32_t SPVM__Net__SSLeay__init(SPVM_ENV* env, SPVM_VALUE* stack) {
-
-#if !(defined(OPENSSL_VERSION_NUMBER) && OPENSSL_VERSION_NUMBER >= 0x10100000)
-  // SSL_library_init is deprecated in OpenSSL 1.1+.
-  SSL_library_init();
-  
-  // SSL_load_error_strings is deprecated OpenSSL in 1.1+.
-  SSL_load_error_strings();
-  
-  // OpenSSL_add_all_algorithms is deprecated in OpenSSL 1.1+.
-  OpenSSL_add_all_algorithms();
-  
-#endif
-  
-  return 0;
-}
-
 // Class Methods
 int32_t SPVM__Net__SSLeay__new(SPVM_ENV* env, SPVM_VALUE* stack) {
   

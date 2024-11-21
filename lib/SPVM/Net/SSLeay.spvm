@@ -16,10 +16,6 @@ class Net::SSLeay {
   use Net::SSLeay::Callback::Msg;
   use Net::SSLeay::Util;
   
-  INIT {
-    &init();
-  }
-  
   # Fields
   has ssl_ctx : Net::SSLeay::SSL_CTX;
   
@@ -47,9 +43,6 @@ class Net::SSLeay {
   
   # This native function is deprecated in OpenSSL 1.1.0, but Perl's IO::Socket::SSL used this method.
   native static method library_init : int ();
-  
-  # Private or Internal Class Methods
-  private native static method init : void ();
   
   native static method _print_version_text : void ();
   
