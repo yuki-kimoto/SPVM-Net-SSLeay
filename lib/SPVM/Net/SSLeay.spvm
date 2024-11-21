@@ -105,9 +105,9 @@ class Net::SSLeay {
   
   native method set_msg_callback : void ($cb : Net::SSLeay::Callback::Msg, $arg : object = undef);
   
-  static method P_dump_peer_certificate : string () {
+  method P_dump_peer_certificate : string () {
     
-    my $cert = $ssl->get_peer_certificate;
+    my $cert = $self->get_peer_certificate;
     
     unless ($cert) {
       die "No cert is defined.";

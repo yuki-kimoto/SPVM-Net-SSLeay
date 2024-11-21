@@ -2,6 +2,11 @@
   [Incompatible Changes]
     * Move Net::SSLeay::Util::X509#get_ocsp_uri method to Net::SSLeay::X509#P_get_ocsp_uri method.
     * Move Net::SSLeay::Util#dump_peer_certificate method to Net::SSLeay#P_dump_peer_certificate method.
+    * Remove the following classes.
+        Net::SSLeay::Util
+        Net::SSLeay::Util::OCSP
+        Net::SSLeay::Util::PKCS12
+        Net::SSLeay::Util::X509
     
 0.016 2024-11-21
   [New Features]
