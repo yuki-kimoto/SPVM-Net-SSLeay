@@ -4,6 +4,7 @@
     * Add Net::SSLeay::Util::OCSP class.
     * Add Net::SSLeay::Util::X509 class.
     * Add Net::SSLeay::Util::PKCS12 class.
+    * Add Net::SSLeay::Util#dump_peer_certificate method.
     
 0.015 2024-11-20
   [New Features]

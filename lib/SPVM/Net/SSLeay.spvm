@@ -14,6 +14,7 @@ class Net::SSLeay {
   use Net::SSLeay::SSL_SESSION;
   use Net::SSLeay::OCSP_ONEREQ;
   use Net::SSLeay::Callback::Msg;
+  use Net::SSLeay::Util;
   
   INIT {
     &init();
