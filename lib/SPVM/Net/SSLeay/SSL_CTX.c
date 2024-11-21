@@ -924,7 +924,7 @@ static void print_exception_to_stderr(SPVM_ENV* env, SPVM_VALUE* stack) {
   fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "\n");
 }
 
-static int SPVM__Net__SSLeay__SSL_CTX__tlsext_servername_callback(SSL *ssl, int *al, void *arg) {
+static int SPVM__Net__SSLeay__SSL_CTX__my_tlsext_servername_callback(SSL *ssl, int *al, void *arg) {
   
   int32_t error_id = 0;
   
@@ -990,7 +990,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_tlsext_servername_callback(SPVM_ENV* env
   int (*native_cb)(SSL *s, int *al, void *arg) = NULL;
   
   if (obj_cb) {
-    native_cb = &SPVM__Net__SSLeay__SSL_CTX__tlsext_servername_callback;
+    native_cb = &SPVM__Net__SSLeay__SSL_CTX__my_tlsext_servername_callback;
     
     void* native_args[4] = {0};
     native_args[0] = env;
@@ -1009,7 +1009,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_tlsext_servername_callback(SPVM_ENV* env
   return 0;
 }
 
-static int SPVM__Net__SSLeay__SSL_CTX__tlsext_status_cb(SSL *ssl, void *arg) {
+static int SPVM__Net__SSLeay__SSL_CTX__my_tlsext_status_cb(SSL *ssl, void *arg) {
   
   int32_t error_id = 0;
   
@@ -1070,7 +1070,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_tlsext_status_cb(SPVM_ENV* env, SPVM_VAL
   int (*native_cb)(SSL *s, void *arg) = NULL;
   
   if (obj_cb) {
-    native_cb = &SPVM__Net__SSLeay__SSL_CTX__tlsext_status_cb;
+    native_cb = &SPVM__Net__SSLeay__SSL_CTX__my_tlsext_status_cb;
     
     void* native_args[4] = {0};
     native_args[0] = env;
@@ -1100,7 +1100,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_tlsext_status_cb(SPVM_ENV* env, SPVM_VAL
   return 0;
 }
 
-static int SPVM__Net__SSLeay__SSL_CTX__default_passwd_cb(char *buf, int size, int rwflag, void *arg) {
+static int SPVM__Net__SSLeay__SSL_CTX__my_default_passwd_cb(char *buf, int size, int rwflag, void *arg) {
   
   int32_t error_id = 0;
   
@@ -1150,7 +1150,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_default_passwd_cb(SPVM_ENV* env, SPVM_VA
   pem_password_cb* native_cb = NULL;
   
   if (obj_cb) {
-    native_cb = &SPVM__Net__SSLeay__SSL_CTX__default_passwd_cb;
+    native_cb = &SPVM__Net__SSLeay__SSL_CTX__my_default_passwd_cb;
     
     void* native_args[4] = {0};
     native_args[0] = env;
@@ -1165,7 +1165,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_default_passwd_cb(SPVM_ENV* env, SPVM_VA
   return 0;
 }
 
-static unsigned int SPVM__Net__SSLeay__SSL_CTX__psk_client_callback(SSL *ssl, const char *hint, char *identity, unsigned int max_identity_len, unsigned char *psk, unsigned int max_psk_len) {
+static unsigned int SPVM__Net__SSLeay__SSL_CTX__my_psk_client_cb(SSL *ssl, const char *hint, char *identity, unsigned int max_identity_len, unsigned char *psk, unsigned int max_psk_len) {
   
   int32_t error_id = 0;
   
@@ -1263,7 +1263,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_psk_client_callback(SPVM_ENV* env, SPVM_
   unsigned int (*native_cb)(SSL *ssl, const char *hint, char *identity, unsigned int max_identity_len, unsigned char *psk, unsigned int max_psk_len) = NULL;
   
   if (obj_cb) {
-    native_cb = &SPVM__Net__SSLeay__SSL_CTX__psk_client_callback;
+    native_cb = &SPVM__Net__SSLeay__SSL_CTX__my_psk_client_cb;
   }
   
   stack[0].oval = obj_self;
@@ -1279,7 +1279,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_psk_client_callback(SPVM_ENV* env, SPVM_
   return 0;
 }
 
-static unsigned int SPVM__Net__SSLeay__SSL_CTX__psk_server_callback(SSL *ssl, const char *identity, unsigned char *psk, unsigned int max_psk_len) {
+static unsigned int SPVM__Net__SSLeay__SSL_CTX__my_psk_server_cb(SSL *ssl, const char *identity, unsigned char *psk, unsigned int max_psk_len) {
   
   int32_t error_id = 0;
   
@@ -1366,7 +1366,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_psk_server_callback(SPVM_ENV* env, SPVM_
   SSL_psk_server_cb_func native_cb = NULL;
   
   if (obj_cb) {
-    native_cb = &SPVM__Net__SSLeay__SSL_CTX__psk_server_callback;
+    native_cb = &SPVM__Net__SSLeay__SSL_CTX__my_psk_server_cb;
   }
   
   stack[0].oval = obj_self;
@@ -1382,7 +1382,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_psk_server_callback(SPVM_ENV* env, SPVM_
   return 0;
 }
 
-static unsigned int SPVM__Net__SSLeay__SSL_CTX__tlsext_ticket_key_cb(SSL *ssl, unsigned char* key_name, unsigned char* iv, EVP_CIPHER_CTX *ctx, HMAC_CTX *hctx, int enc) {
+static unsigned int SPVM__Net__SSLeay__SSL_CTX__my_tlsext_ticket_key_cb(SSL *ssl, unsigned char* key_name, unsigned char* iv, EVP_CIPHER_CTX *ctx, HMAC_CTX *hctx, int enc) {
   
   int32_t error_id = 0;
   
@@ -1513,7 +1513,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_tlsext_ticket_key_cb(SPVM_ENV* env, SPVM
   unsigned int (*native_cb)(SSL *s, unsigned char* key_name, unsigned char* iv, EVP_CIPHER_CTX *ctx, HMAC_CTX *hctx, int enc) = NULL;
                  
   if (obj_cb) {
-    native_cb = &SPVM__Net__SSLeay__SSL_CTX__tlsext_ticket_key_cb;
+    native_cb = &SPVM__Net__SSLeay__SSL_CTX__my_tlsext_ticket_key_cb;
   }
   
   stack[0].oval = obj_self;
@@ -1564,7 +1564,7 @@ static int convert_to_wire_format(SPVM_ENV* env, SPVM_VALUE* stack, void* obj_pr
   return out_wire_format_length;
 }
 
-static int SPVM__Net__SSLeay__SSL_CTX__alpn_select_cb_for_protocols (SSL *ssl, const unsigned char **out, unsigned char *outlen, const unsigned char *in, unsigned int inlen, void *arg) {
+static int SPVM__Net__SSLeay__SSL_CTX__my_alpn_select_cb_for_protocols (SSL *ssl, const unsigned char **out, unsigned char *outlen, const unsigned char *in, unsigned int inlen, void *arg) {
   
   int32_t error_id = 0;
   
@@ -1604,7 +1604,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_alpn_select_cb_with_protocols(SPVM_ENV* 
   int (*native_cb) (SSL *ssl, const unsigned char **out, unsigned char *outlen, const unsigned char *in, unsigned int inlen, void *arg) = NULL;
   
   if (obj_protocols) {
-    native_cb = &SPVM__Net__SSLeay__SSL_CTX__alpn_select_cb_for_protocols;
+    native_cb = &SPVM__Net__SSLeay__SSL_CTX__my_alpn_select_cb_for_protocols;
   }
   
   void* native_args[3] = {0};
@@ -1617,7 +1617,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_alpn_select_cb_with_protocols(SPVM_ENV* 
   return 0;
 }
 
-static int SPVM__Net__SSLeay__SSL_CTX__next_proto_select_cb_for_protocols (SSL *ssl, unsigned char **out, unsigned char *outlen, const unsigned char *in, unsigned int inlen, void *arg) {
+static int SPVM__Net__SSLeay__SSL_CTX__my_next_proto_select_cb_for_protocols (SSL *ssl, unsigned char **out, unsigned char *outlen, const unsigned char *in, unsigned int inlen, void *arg) {
   
   int32_t error_id = 0;
   
@@ -1657,7 +1657,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_next_proto_select_cb_with_protocols(SPVM
   int (*native_cb) (SSL *ssl, unsigned char **out, unsigned char *outlen, const unsigned char *in, unsigned int inlen, void *arg) = NULL;
   
   if (obj_protocols) {
-    native_cb = &SPVM__Net__SSLeay__SSL_CTX__next_proto_select_cb_for_protocols;
+    native_cb = &SPVM__Net__SSLeay__SSL_CTX__my_next_proto_select_cb_for_protocols;
   }
   
   void* native_args[3] = {0};
@@ -1670,7 +1670,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_next_proto_select_cb_with_protocols(SPVM
   return 0;
 }
 
-static int SPVM__Net__SSLeay__SSL_CTX__next_protos_advertised_cb_for_protocols (SSL *ssl, const unsigned char **out, unsigned int *outlen, void *arg) {
+static int SPVM__Net__SSLeay__SSL_CTX__my_next_protos_advertised_cb_for_protocols (SSL *ssl, const unsigned char **out, unsigned int *outlen, void *arg) {
   
   int32_t error_id = 0;
   
@@ -1722,7 +1722,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_next_protos_advertised_cb_with_protocols
   int (*native_cb) (SSL *ssl, const unsigned char **out, unsigned int *outlen, void *arg) = NULL;
   
   if (obj_protocols) {
-    native_cb = &SPVM__Net__SSLeay__SSL_CTX__next_protos_advertised_cb_for_protocols;
+    native_cb = &SPVM__Net__SSLeay__SSL_CTX__my_next_protos_advertised_cb_for_protocols;
   }
   
   void* obj_cb_output_strings_list = env->get_field_object_by_name(env, stack, obj_self, "cb_output_strings_list", &error_id, __func__, FILE_NAME, __LINE__);
@@ -1739,7 +1739,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_next_protos_advertised_cb_with_protocols
   return 0;
 }
 
-static int SPVM__Net__SSLeay__SSL_CTX__session_new_cb(SSL* ssl, SSL_SESSION* session) {
+static int SPVM__Net__SSLeay__SSL_CTX__my_session_new_cb(SSL* ssl, SSL_SESSION* session) {
   
   int32_t error_id = 0;
   
@@ -1842,7 +1842,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__sess_set_new_cb(SPVM_ENV* env, SPVM_VALUE* s
   int (*native_cb)(SSL*, SSL_SESSION*) = NULL;
                  
   if (obj_cb) {
-    native_cb = &SPVM__Net__SSLeay__SSL_CTX__session_new_cb;
+    native_cb = &SPVM__Net__SSLeay__SSL_CTX__my_session_new_cb;
   }
   
   stack[0].oval = obj_self;
@@ -1858,7 +1858,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__sess_set_new_cb(SPVM_ENV* env, SPVM_VALUE* s
   return 0;
 }
 
-static void SPVM__Net__SSLeay__SSL_CTX__session_remove_cb(SSL_CTX *ssl_ctx, SSL_SESSION* session) {
+static void SPVM__Net__SSLeay__SSL_CTX__my_session_remove_cb(SSL_CTX *ssl_ctx, SSL_SESSION* session) {
   
   int32_t error_id = 0;
   
@@ -1959,7 +1959,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__sess_set_remove_cb(SPVM_ENV* env, SPVM_VALUE
   void (*native_cb)(SSL_CTX *ssl_ctx, SSL_SESSION* session) = NULL;
   
   if (obj_cb) {
-    native_cb = &SPVM__Net__SSLeay__SSL_CTX__session_remove_cb;
+    native_cb = &SPVM__Net__SSLeay__SSL_CTX__my_session_remove_cb;
   }
   
   stack[0].oval = obj_self;
