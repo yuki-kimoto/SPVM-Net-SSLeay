@@ -7280,5 +7280,26 @@ int32_t SPVM__Net__SSLeay__Constant__XN_FLAG_SPC_EQ(SPVM_ENV* env, SPVM_VALUE* s
   
 }
 
+int32_t SPVM__Net__SSLeay__Constant__OPENSSL_INIT_NO_LOAD_SSL_STRINGS(SPVM_ENV* env, SPVM_VALUE* stack) {
 
+#ifdef OPENSSL_INIT_NO_LOAD_SSL_STRINGS
+  stack[0].ival = OPENSSL_INIT_NO_LOAD_SSL_STRINGS;
+  return 0;
+#else
+  env->die(env, stack, "OPENSSL_INIT_NO_LOAD_SSL_STRINGS is not defined on this system", __func__, FILE_NAME, __LINE__);
+  return SPVM_NATIVE_C_BASIC_TYPE_ID_ERROR_NOT_SUPPORTED_CLASS;
+#endif
+  
+}
 
+int32_t SPVM__Net__SSLeay__Constant__OPENSSL_INIT_LOAD_SSL_STRINGS(SPVM_ENV* env, SPVM_VALUE* stack) {
+
+#ifdef OPENSSL_INIT_LOAD_SSL_STRINGS
+  stack[0].ival = OPENSSL_INIT_LOAD_SSL_STRINGS;
+  return 0;
+#else
+  env->die(env, stack, "OPENSSL_INIT_LOAD_SSL_STRINGS is not defined on this system", __func__, FILE_NAME, __LINE__);
+  return SPVM_NATIVE_C_BASIC_TYPE_ID_ERROR_NOT_SUPPORTED_CLASS;
+#endif
+  
+}

@@ -3650,6 +3650,18 @@ C<static method XN_FLAG_SPC_EQ : int ();>
 
 Gets the value of C<XN_FLAG_SPC_EQ>. If this constant value is not defined on this system, an exception is thrown with the error id set to the basic type ID of the L<Error::NotSupported|SPVM::Error::NotSupported> class.
 
+=head2 OPENSSL_INIT_NO_LOAD_SSL_STRINGS
+
+  static method OPENSSL_INIT_NO_LOAD_SSL_STRINGS : int ();
+
+Gets the value of C<OPENSSL_INIT_NO_LOAD_SSL_STRINGS>. If this constant value is not defined on this system, an exception is thrown with the error id set to the basic type ID of the L<Error::NotSupported|SPVM::Error::NotSupported> class.
+
+=head2 OPENSSL_INIT_LOAD_SSL_STRINGS
+
+  static method OPENSSL_INIT_LOAD_SSL_STRINGS : int ();
+
+Gets the value of C<OPENSSL_INIT_LOAD_SSL_STRINGS>. If this constant value is not defined on this system, an exception is thrown with the error id set to the basic type ID of the L<Error::NotSupported|SPVM::Error::NotSupported> class.
+
 =head1 See Also
 
 =over 2

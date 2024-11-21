@@ -1215,4 +1215,8 @@ class Net::SSLeay::Constant {
 
   native static method XN_FLAG_SPC_EQ : int ();
 
+  native static method OPENSSL_INIT_NO_LOAD_SSL_STRINGS : int ();
+
+  native static method OPENSSL_INIT_LOAD_SSL_STRINGS : int ();
+
 }
