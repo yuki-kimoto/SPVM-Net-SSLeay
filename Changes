@@ -35,6 +35,7 @@
   [Incompatible Changes]
     * Remove the logic of OpenSSL initializetion because this is automatically executed after OpenSSL 1.1.0.
     * Remove Net::SSLeay#library_init method.
+    * Remove Net::SSLeay::X509#get_ext_d2i method.
 0.015 2024-11-20
   [New Features]
     * Add Net::SSLeay::SSL_CTX#set_psk_server_callback method.
