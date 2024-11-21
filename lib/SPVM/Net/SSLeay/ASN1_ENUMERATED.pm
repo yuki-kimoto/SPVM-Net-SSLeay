@@ -22,7 +22,7 @@ Net::SSLeay::ASN1_ENUMERATED class in L<SPVM> represents L<ASN1_ENUMERATED|https
 
 C<method DESTROY : void ();>
 
-Calls native L<ASN1_ENUMERATED_free|https://pub.sortix.org/sortix/release/cross-nightly/man/man3/ASN1_ENUMERATED_free.3.html> function given the pointer value of the instance if C<no_free> flag of the instance is not a true value.
+Calls native L<ASN1_ENUMERATED_free|https://github.com/google/boringssl/blob/master/include/openssl/asn1.h> function given the pointer value of the instance if C<no_free> flag of the instance is not a true value.
 
 =head1 See Also
 
