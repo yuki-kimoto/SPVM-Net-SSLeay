@@ -913,7 +913,18 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__add_extra_chain_cert(SPVM_ENV* env, SPVM_VAL
   return 0;
 }
 
-static int tlsext_servername_callback(SSL *ssl, int *al, void *arg) {
+static void print_exception_to_stderr(SPVM_ENV* env, SPVM_VALUE* stack) {
+  void* obj_exception = env->get_exception(env, stack);
+  const char* exception = env->get_chars(env, stack, obj_exception);
+  
+  fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "[An exception is converted to a warning]\n");
+  
+  env->print_stderr(env, stack, obj_exception);
+  
+  fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "\n");
+}
+
+static int SPVM__Net__SSLeay__SSL_CTX__tlsext_servername_callback(SSL *ssl, int *al, void *arg) {
   
   int32_t error_id = 0;
   
@@ -926,10 +937,18 @@ static int tlsext_servername_callback(SSL *ssl, int *al, void *arg) {
   void* obj_arg = ((void**)arg)[3];
   
   void* obj_address_ssl = env->new_pointer_object_by_name(env, stack, "Address", ssl, &error_id, __func__, FILE_NAME, __LINE__);
-  if (error_id) { return error_id; }
+  if (error_id) {
+    print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
+  }
   stack[0].oval = obj_address_ssl;
   env->call_class_method_by_name(env, stack, "Net::SSLeay", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
-  if (error_id) { return error_id; }
+  if (error_id) {
+    print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
+  }
   void* obj_ssl = stack[0].oval;
   
   env->set_no_free(env, stack, obj_ssl, 1);
@@ -946,9 +965,12 @@ static int tlsext_servername_callback(SSL *ssl, int *al, void *arg) {
   *al = al_tmp;
   
   if (error_id) {
-    fprintf(env->spvm_stderr(env, stack), "[An exception is converted to a warning in native tlsext_servername_callback function]");
-    env->print_stderr(env, stack, env->get_exception(env, stack));
+    print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
   }
+  
+  END_OF_FUNC:
   
   return ret;
 }
@@ -968,7 +990,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_tlsext_servername_callback(SPVM_ENV* env
   int (*native_cb)(SSL *s, int *al, void *arg) = NULL;
   
   if (obj_cb) {
-    native_cb = &tlsext_servername_callback;
+    native_cb = &SPVM__Net__SSLeay__SSL_CTX__tlsext_servername_callback;
     
     void* native_args[4] = {0};
     native_args[0] = env;
@@ -987,7 +1009,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_tlsext_servername_callback(SPVM_ENV* env
   return 0;
 }
 
-static int tlsext_status_cb(SSL *ssl, void *arg) {
+static int SPVM__Net__SSLeay__SSL_CTX__tlsext_status_cb(SSL *ssl, void *arg) {
   
   int32_t error_id = 0;
   
@@ -1000,10 +1022,18 @@ static int tlsext_status_cb(SSL *ssl, void *arg) {
   void* obj_arg = ((void**)arg)[3];
   
   void* obj_address_ssl = env->new_pointer_object_by_name(env, stack, "Address", ssl, &error_id, __func__, FILE_NAME, __LINE__);
-  if (error_id) { return error_id; }
+  if (error_id) {
+    print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
+  }
   stack[0].oval = obj_address_ssl;
   env->call_class_method_by_name(env, stack, "Net::SSLeay", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
-  if (error_id) { return error_id; }
+  if (error_id) {
+    print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
+  }
   void* obj_ssl = stack[0].oval;
   
   env->set_no_free(env, stack, obj_ssl, 1);
@@ -1013,12 +1043,14 @@ static int tlsext_status_cb(SSL *ssl, void *arg) {
   stack[2].oval = obj_arg;
   
   env->call_instance_method_by_name(env, stack, "", 3, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
+  }
   int32_t ret = stack[0].ival;
   
-  if (error_id) {
-    fprintf(env->spvm_stderr(env, stack), "[An exception is converted to a warning in native tlsext_status_cb function]");
-    env->print_stderr(env, stack, env->get_exception(env, stack));
-  }
+  END_OF_FUNC:
   
   return ret;
 }
@@ -1038,7 +1070,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_tlsext_status_cb(SPVM_ENV* env, SPVM_VAL
   int (*native_cb)(SSL *s, void *arg) = NULL;
   
   if (obj_cb) {
-    native_cb = &tlsext_status_cb;
+    native_cb = &SPVM__Net__SSLeay__SSL_CTX__tlsext_status_cb;
     
     void* native_args[4] = {0};
     native_args[0] = env;
@@ -1129,17 +1161,6 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_default_passwd_cb(SPVM_ENV* env, SPVM_VA
   SSL_CTX_set_default_passwd_cb(ssl_ctx, native_cb);
   
   return 0;
-}
-
-static void print_exception_to_stderr(SPVM_ENV* env, SPVM_VALUE* stack) {
-  void* obj_exception = env->get_exception(env, stack);
-  const char* exception = env->get_chars(env, stack, obj_exception);
-  
-  fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "[An exception is converted to a warning]\n");
-  
-  env->print_stderr(env, stack, obj_exception);
-  
-  fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "\n");
 }
 
 static unsigned int SPVM__Net__SSLeay__SSL_CTX__psk_client_callback(SSL *ssl, const char *hint, char *identity, unsigned int max_identity_len, unsigned char *psk, unsigned int max_psk_len) {
