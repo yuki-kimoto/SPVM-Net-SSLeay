@@ -29,8 +29,6 @@ This method is callback for native L<SSL_CTX_set_alpn_select_cb|https://docs.ope
 
 =over 2
 
-=item * L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX>
-
 =item * L<Net::SSLeay|SPVM::Net::SSLeay>
 
 =back

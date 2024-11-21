@@ -42,6 +42,8 @@ lib/SPVM/Net/SSLeay/Callback/AlpnSelect.pm
 lib/SPVM/Net/SSLeay/Callback/AlpnSelect.spvm
 lib/SPVM/Net/SSLeay/Callback/NewSession.pm
 lib/SPVM/Net/SSLeay/Callback/NewSession.spvm
+lib/SPVM/Net/SSLeay/Callback/NextProtosAdvertised.pm
+lib/SPVM/Net/SSLeay/Callback/NextProtosAdvertised.spvm
 lib/SPVM/Net/SSLeay/Callback/NextProtoSelect.pm
 lib/SPVM/Net/SSLeay/Callback/NextProtoSelect.spvm
 lib/SPVM/Net/SSLeay/Callback/PemPasswd.pm
