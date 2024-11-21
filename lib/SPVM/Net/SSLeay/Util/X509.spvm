@@ -6,29 +6,6 @@ class Net::SSLeay::Util::X509 {
   use Net::SSLeay::X509;
   
   # Class Methods
-  static method get_ocsp_uri : string ($cert : Net::SSLeay::X509) {
-    
-    
-    
-  }
+  native static method get_ocsp_uri : string ($cert : Net::SSLeay::X509);
   
-P_X509_get_ocsp_uri(cert)
-	X509 * cert
-    PPCODE:
-	AUTHORITY_INFO_ACCESS *info;
-	int i;
-	info = X509_get_ext_d2i(cert, NID_info_access, NULL, NULL);
-	if (!info) XSRETURN_UNDEF;
-
-	for (i = 0; i < sk_ACCESS_DESCRIPTION_num(info); i++) {
-	    ACCESS_DESCRIPTION *ad = sk_ACCESS_DESCRIPTION_value(info, i);
-	    if (OBJ_obj2nid(ad->method) == NID_ad_OCSP
-		&& ad->location->type == GEN_URI) {
-		XPUSHs(sv_2mortal(newSVpv(
-		    (char*)ASN1_STRING_data(ad->location->d.uniformResourceIdentifier),
-		    ASN1_STRING_length(ad->location->d.uniformResourceIdentifier)
-		)));
-		if (GIMME == G_SCALAR) break; /* get only first */
-	    }
-	}  
 }
