@@ -5,6 +5,7 @@
     * Add Net::SSLeay::ASN1_INTEGER#DESTROY method.
     * Add Net::SSLeay::ASN1_OBJECT#DESTROY method.
     * Add Net::SSLeay::ASN1_TIME#DESTROY method.
+    * Add Net::SSLeay::EVP_MD#DESTROY method.
   [Incompatible Changes]
     * Move Net::SSLeay::Util::X509#get_ocsp_uri method to Net::SSLeay::X509#P_get_ocsp_uri method.
     * Move Net::SSLeay::Util#dump_peer_certificate method to Net::SSLeay#P_dump_peer_certificate method.
