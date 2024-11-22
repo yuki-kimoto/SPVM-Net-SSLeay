@@ -6,3 +6,4 @@ Print modules in POD
 Print make rules of native classes.
 
   find lib | grep '\.config$' | perl -p -e 's/\.config$//' | sort | perl -p -e 's|lib/SPVM/||;s|/|::|g;chomp; $_ = "\$make_rule .= SPVM::Builder::Util::API::create_make_rule_native('\''$_'\'');\n";'
+

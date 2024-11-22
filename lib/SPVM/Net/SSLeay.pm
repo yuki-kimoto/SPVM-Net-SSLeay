@@ -98,6 +98,8 @@ B<The tests haven't been written yet. The features may be changed without notice
 
 =item * L<Net::SSLeay::OPENSSL|SPVM::Net::SSLeay::OPENSSL>
 
+=item * L<Net::SSLeay::OPENSSL_INIT|SPVM::Net::SSLeay::OPENSSL_INIT>
+
 =item * L<Net::SSLeay::OPENSSL_INIT_SETTINGS|SPVM::Net::SSLeay::OPENSSL_INIT_SETTINGS>
 
 =item * L<Net::SSLeay::PEM|SPVM::Net::SSLeay::PEM>
