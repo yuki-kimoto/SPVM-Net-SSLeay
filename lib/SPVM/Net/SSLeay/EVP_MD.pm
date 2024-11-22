@@ -24,6 +24,10 @@ C<method DESTROY : void ();>
 
 Calls native L<EVP_MD_free|https://docs.openssl.org/master/man3/EVP_DigestInit/> function given the pointer value of the instance if C<no_free> flag of the instance is not a true value.
 
+Requirement:
+
+OpenSSL 3.0
+
 =head1 See Also
 
 =over 2
