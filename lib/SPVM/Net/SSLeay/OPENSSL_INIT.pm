@@ -32,7 +32,7 @@ Calls native L<OPENSSL_INIT_set_config_filename|https://docs.openssl.org/1.1.1/m
 
 Requirement:
 
-OpenSSL 3.0
+OpenSSL 3.4
 
 Exceptions:
 
@@ -46,7 +46,7 @@ Calls native L<OPENSSL_INIT_set_config_file_flags|https://docs.openssl.org/1.1.1
 
 Requirement:
 
-OpenSSL 3.0
+OpenSSL 3.4
 
 =head2 set_config_appname
 

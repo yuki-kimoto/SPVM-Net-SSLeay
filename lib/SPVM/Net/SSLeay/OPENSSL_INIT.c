@@ -31,8 +31,8 @@ int32_t SPVM__Net__SSLeay__OPENSSL_INIT__new(SPVM_ENV* env, SPVM_VALUE* stack) {
 }
 
 int32_t SPVM__Net__SSLeay__OPENSSL_INIT__set_config_filename(SPVM_ENV* env, SPVM_VALUE* stack) {
-#if !(OPENSSL_VERSION_NUMBER >= 0x30000000L)
-  env->die(env, stack, "Net::SSLeay::OPENSSL_INIT#set_config_filename method is not supported on this system(!(OPENSSL_VERSION_NUMBER >= 0x30000000L))", __func__, FILE_NAME, __LINE__);
+#if !(OPENSSL_VERSION_NUMBER >= 0x30400000L)
+  env->die(env, stack, "Net::SSLeay::OPENSSL_INIT#set_config_filename method is not supported on this system(!(OPENSSL_VERSION_NUMBER >= 0x30400000L))", __func__, FILE_NAME, __LINE__);
   return SPVM_NATIVE_C_BASIC_TYPE_ID_ERROR_NOT_SUPPORTED_CLASS;
 #else
   int32_t error_id = 0;
@@ -71,8 +71,8 @@ int32_t SPVM__Net__SSLeay__OPENSSL_INIT__set_config_filename(SPVM_ENV* env, SPVM
 }
 
 int32_t SPVM__Net__SSLeay__OPENSSL_INIT__set_config_file_flags(SPVM_ENV* env, SPVM_VALUE* stack) {
-#if !(OPENSSL_VERSION_NUMBER >= 0x30000000L)
-  env->die(env, stack, "Net::SSLeay::OPENSSL_INIT#set_config_file_flags method is not supported on this system(!(OPENSSL_VERSION_NUMBER >= 0x30000000L))", __func__, FILE_NAME, __LINE__);
+#if !(OPENSSL_VERSION_NUMBER >= 0x30400000L)
+  env->die(env, stack, "Net::SSLeay::OPENSSL_INIT#set_config_file_flags method is not supported on this system(!(OPENSSL_VERSION_NUMBER >= 0x30400000L))", __func__, FILE_NAME, __LINE__);
   return SPVM_NATIVE_C_BASIC_TYPE_ID_ERROR_NOT_SUPPORTED_CLASS;
 #else
   int32_t error_id = 0;
