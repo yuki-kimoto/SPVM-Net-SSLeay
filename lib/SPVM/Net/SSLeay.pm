@@ -16,6 +16,12 @@ B<Warnings:>
 
 B<The tests haven't been written yet. The features may be changed without notice.> 
 
+=head1 Details
+
+=head2 Requirement
+
+OpenSSL 1.1.1
+
 =head1 Modules
 
 =over 2
@@ -460,9 +466,15 @@ C<method DESTROY : void ();>
 
 Frees native L<SSL|https://docs.openssl.org/1.0.2/man3/SSL_free> object by calling native L<SSL_free|https://docs.openssl.org/1.0.2/man3/SSL_free> function if C<no_free> flag of the instance is not a true value.
 
-=head2 Config Builder
+=head1 Config Builder
 
 L<SPVM::Net::SSLeay::ConfigBuilder>
+
+=head1 FAQ
+
+=head2 Is LibreSSL supported?
+
+Yes.
 
 =head1 Porting
 
