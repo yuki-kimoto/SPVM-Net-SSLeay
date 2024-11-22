@@ -15,6 +15,7 @@
       static method set_config_file_flags : int ($init : Net::SSLeay::OPENSSL_INIT_SETTINGS, $flags : long);
       
       static method set_config_appname : int ($init : Net::SSLeay::OPENSSL_INIT_SETTINGS, $name : string);
+    * Add Net::SSLeay::PKCS12#DESTROY method.
 
   [Incompatible Changes]
     * Move Net::SSLeay::Util::X509#get_ocsp_uri method to Net::SSLeay::X509#P_get_ocsp_uri method.
