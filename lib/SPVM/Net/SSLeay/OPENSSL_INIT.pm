@@ -32,9 +32,9 @@ Calls native L<OPENSSL_INIT_set_config_filename|https://docs.openssl.org/1.1.1/m
 
 Requirement:
 
-Not LiberaSSL
-
 OpenSSL 1.1.1b
+
+Not LibreSSL
 
 Exceptions:
 
@@ -48,9 +48,9 @@ Calls native L<OPENSSL_INIT_set_config_file_flags|https://docs.openssl.org/1.1.1
 
 Requirement:
 
-Not LiberaSSL
-
 OpenSSL 3.0.0
+
+Not LibreSSL
 
 =head2 set_config_appname
 
@@ -60,9 +60,9 @@ Calls native L<OPENSSL_INIT_set_config_appname|https://docs.openssl.org/1.1.1/ma
 
 Requirement:
 
-Not LiberaSSL
-
 OpenSSL 1.1.1b
+
+Not LibreSSL
 
 Exceptions:
 
