@@ -8,9 +8,3 @@
 
 static const char* FILE_NAME = "Net/SSLeay/PKCS12.c";
 
-int32_t SPVM__Net__SSLeay__PKCS12__foo(SPVM_ENV* env, SPVM_VALUE* stack) {
-  
-  return 0;
-}
-
-

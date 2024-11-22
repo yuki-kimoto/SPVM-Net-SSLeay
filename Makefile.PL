@@ -89,6 +89,7 @@ sub MY::postamble {
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::OCSP_RESPONSE');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::OCSP_SINGLERESP');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::OPENSSL');
+    $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::OPENSSL_INIT');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::OPENSSL_INIT_SETTINGS');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::PEM');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::PKCS12');
