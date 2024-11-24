@@ -1,0 +1,33 @@
+class TestCase::Net::SSLeay::SSL_CTX {
+  
+  use Net::SSLeay::SSL_CTX;
+  use Array;
+  
+  use Net::SSLeay::SSL_METHOD;
+  use Net::SSLeay::Net::SSLeay::SSL_CTX;
+  
+  my $ssl_method = Net::SSLeay::SSL_METHOD->TLS_method;
+  
+  my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
+  
+  static method set_alpn_protos_with_protocols : int () {
+    
+    {
+      my $ssl_method = Net::SSLeay::SSL_METHOD->TLS_method;
+      
+      my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
+      
+      my $protocols = ["spdy/1", "http/1.1"];
+      
+      my $ret = $ssl_ctx->set_alpn_protos_with_protocols($protocols);
+      
+      # SSL_CTX_set_alpn_protos functions reverse the return value convention.
+      unless ($ret == 0) {
+        return 0;
+      }
+    }
+    
+    return 1;
+  }
+  
+}

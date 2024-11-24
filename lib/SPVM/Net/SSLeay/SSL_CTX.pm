@@ -162,7 +162,7 @@ Calls native L<SSL_CTX_clear_options|https://docs.openssl.org/3.1/man3/SSL_CTX_s
 
 =head2 set_alpn_protos
 
-C<method set_alpn_protos : int ($protos : string, $protos_len : int = -1);>
+C<method set_alpn_protos : int ($protos : byte[], $protos_len : int = -1);>
 
 Calls native L<SSL_CTX_set_alpn_protos|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_alpn_select_cb> function given the protocals $ptotos and the length $protos_len, and returns its return value.
 

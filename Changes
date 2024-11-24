@@ -2,6 +2,13 @@
   [New Features]
     * Add Net::SSLeay::Util class.
     * Add Net::SSLeay::Util#convert_to_wire_format method.
+  [Incompatible Changes]
+    * Changed the argument of Net::SSLeay::SSL_CTX#set_alpn_protos method.
+      [Before]
+      method set_alpn_protos : int ($protos : string, $protos_len : int = -1)
+      [After]
+      method set_alpn_protos : int ($protos : byte[], $protos_len : int = -1)
+      
 0.017 2024-11-22
   [New Features]
     * Add Net::SSLeay::Constant#OPENSSL_VERSION_TEXT method.
