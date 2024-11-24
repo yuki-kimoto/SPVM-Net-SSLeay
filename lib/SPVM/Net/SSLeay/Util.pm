@@ -6,60 +6,38 @@ package SPVM::Net::SSLeay::Util;
 
 =head1 Name
 
-SPVM::Net::SSLeay::Util - Short Description
+SPVM::Net::SSLeay::Util - Utilitiy Methods for OpenSSL
 
 =head1 Description
 
-Net::SSLeay::Util class in L<SPVM> has methods to do someting.
+Net::SSLeay::Util class in L<SPVM> has utility methods for OpenSSL.
 
 =head1 Usage
 
   use Net::SSLeay::Util;
 
-=head1 Details
-
-
-
-=head1 Super Class
-
-
-
-=head1 Interfaces
-
-
-
-=head1 Enumerations
-
-
-
-=head1 Fields
-
-
-
 =head1 Class Methods
 
+=head2 convert_to_wire_format
 
+C<static method convert_to_wire_format : byte[] ($protocols : string[]);>
 
-=head1 Instance Methods
+Converts to the protocols $protocols to a L<wire format|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_alpn_select_cb>, and returns it.
 
+Exceptions:
 
+The protocols $protocols must be defined. Otherwise an exception is thrown.
 
-=head1 See Also
+The element of the protocols $protocols at index $i must be defined. Otherwise an exception is thrown.
 
+The element of the protocols $protocols at index $i must be a non-empty string. Otherwise an exception is thrown.
 
+The string lenght of the element of the protocols $protocols at index $i must be less than or equal to 255. Otherwise an exception is thrown.
 
-
-=head1 Repository
-
-
-
-=head1 Author
-
-Yuki Kimoto C<kimoto.yuki@gmail.com>
+($i is the index of the element of $protocols)
 
 =head1 Copyright & License
 
 Copyright (c) 2024 Yuki Kimoto
 
 MIT License
-

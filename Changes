@@ -1,6 +1,7 @@
 0.018 2024-11-22
   [New Features]
     * Add Net::SSLeay::Util class.
+    * Add Net::SSLeay::Util#convert_to_wire_format method.
 0.017 2024-11-22
   [New Features]
     * Add Net::SSLeay::Constant#OPENSSL_VERSION_TEXT method.
