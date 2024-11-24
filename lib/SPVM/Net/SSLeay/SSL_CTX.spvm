@@ -109,6 +109,8 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   native method set_alpn_protos : int ($protos : string, $protos_len : int = -1);
   
+  native method set_alpn_protos_with_protocols : int ($protocols : string[]);
+  
   native method set_tmp_ecdh : long ($ecdh : Net::SSLeay::EC_KEY);
   
   native method set1_groups_list : int ($list : string);
