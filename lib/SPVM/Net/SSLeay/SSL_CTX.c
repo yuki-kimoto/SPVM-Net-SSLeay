@@ -443,7 +443,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_alpn_protos(SPVM_ENV* env, SPVM_VALUE* s
     return env->die(env, stack, "The protocols $protos must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
-  const char* protos = env->get_chars(env, stack, obj_protos);
+  const char* protos = (const char*)env->get_elems_byte(env, stack, obj_protos);
   
   int32_t protos_len = stack[2].ival;
   
