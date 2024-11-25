@@ -8,6 +8,8 @@ BEGIN { $ENV{SPVM_BUILD_DIR} = "$FindBin::Bin/.spvm_build"; }
 
 use SPVM 'TestCase::Net::SSLeay';
 
+use SPVM 'TestCase::Net::SSLeay::Util';
+
 use SPVM 'Net::SSLeay';
 use SPVM::Net::SSLeay;
 use SPVM 'Fn';
