@@ -1633,6 +1633,7 @@ static int SPVM__Net__SSLeay__SSL_CTX__my_next_proto_select_cb_for_protocols (SS
   const char* protocols_wire_format = env->get_chars(env, stack, obj_protocols_wire_format);
   
   int32_t protocols_wire_format_length = env->length(env, stack, obj_protocols_wire_format);
+  
   int32_t ret_status_select_next_proto = SSL_select_next_proto((unsigned char **)out, outlen, in, inlen, protocols_wire_format, protocols_wire_format_length);
   
   if (ret_status_select_next_proto == OPENSSL_NPN_NEGOTIATED) {
@@ -1736,7 +1737,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_next_protos_advertised_cb_with_protocols
   void* obj_cb_output_strings_list = env->get_field_object_by_name(env, stack, obj_self, "cb_output_strings_list", &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   
-  void* native_args[3] = {0};
+  void* native_args[4] = {0};
   native_args[0] = env;
   native_args[1] = stack;
   native_args[2] = obj_protocols;
