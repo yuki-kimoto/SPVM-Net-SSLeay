@@ -20,6 +20,8 @@ ok(SPVM::TestCase::Net::SSLeay::Util->convert_to_wire_format);
 
 ok(SPVM::TestCase::Net::SSLeay::SSL_CTX->set_alpn_protos_with_protocols);
 
+ok(SPVM::TestCase::Net::SSLeay::SSL_CTX->set_alpn_select_cb_with_protocols);
+
 # Version
 {
   my $version_string = SPVM::Fn->get_version_string("Net::SSLeay");

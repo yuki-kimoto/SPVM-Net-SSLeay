@@ -26,4 +26,19 @@ class TestCase::Net::SSLeay::SSL_CTX {
     return 1;
   }
   
+  static method set_alpn_select_cb_with_protocols : int () {
+    
+    {
+      my $ssl_method = Net::SSLeay::SSL_METHOD->TLS_method;
+      
+      my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
+      
+      my $protocols = ["spdy/1", "http/1.1"];
+      
+      $ssl_ctx->set_alpn_select_cb_with_protocols($protocols);
+    }
+    
+    return 1;
+  }
+  
 }

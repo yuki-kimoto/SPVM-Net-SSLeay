@@ -10,7 +10,9 @@
       method set_alpn_protos : int ($protos : byte[], $protos_len : int = -1)
   [Bug Fix]
     * Fix potensial callback bugs.
-    
+  [Test Improvement]
+    * Add some tests.
+  
 0.017 2024-11-22
   [New Features]
     * Add Net::SSLeay::Constant#OPENSSL_VERSION_TEXT method.
