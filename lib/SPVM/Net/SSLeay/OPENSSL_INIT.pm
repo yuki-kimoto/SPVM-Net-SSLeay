@@ -32,7 +32,9 @@ Calls native L<OPENSSL_INIT_set_config_filename|https://docs.openssl.org/1.1.1/m
 
 Requirement:
 
-OpenSSL 3.0
+OpenSSL 1.1.1b
+
+Not LibreSSL
 
 Exceptions:
 
@@ -40,19 +42,27 @@ The file name $filename must be defined. Otherwise an exception is thrown.
 
 =head2 set_config_file_flags
 
-C<static method set_config_file_flags : int ($init : L<Net::SSLeay::OPENSSL_INIT_SETTINGS|SPVM::Net::SSLeay::OPENSSL_INIT_SETTINGS>, $flags : long);>
+C<static method set_config_file_flags : void ($init : L<Net::SSLeay::OPENSSL_INIT_SETTINGS|SPVM::Net::SSLeay::OPENSSL_INIT_SETTINGS>, $flags : long);>
 
-Calls native L<OPENSSL_INIT_set_config_file_flags|https://docs.openssl.org/1.1.1/man3/OPENSSL_init_crypto> function given $filename, and returns its return value.
+Calls native L<OPENSSL_INIT_set_config_file_flags|https://docs.openssl.org/1.1.1/man3/OPENSSL_init_crypto> function given $filename.
 
 Requirement:
 
-OpenSSL 3.0
+OpenSSL 3.0.0
+
+Not LibreSSL
 
 =head2 set_config_appname
 
 C<static method set_config_appname : int ($init : L<Net::SSLeay::OPENSSL_INIT_SETTINGS|SPVM::Net::SSLeay::OPENSSL_INIT_SETTINGS>, $name : string);>
 
 Calls native L<OPENSSL_INIT_set_config_appname|https://docs.openssl.org/1.1.1/man3/OPENSSL_init_crypto> function given $filename, and returns its return value.
+
+Requirement:
+
+OpenSSL 1.1.1b
+
+Not LibreSSL
 
 Exceptions:
 
