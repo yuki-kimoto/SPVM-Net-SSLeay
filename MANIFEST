@@ -213,4 +213,5 @@ MANIFEST.SKIP
 README.md
 t/basic.t
 t/lib/SPVM/TestCase/Net/SSLeay.spvm
+t/lib/SPVM/TestCase/Net/SSLeay/SSL_CTX.spvm
 t/lib/SPVM/TestCase/Net/SSLeay/Util.spvm
