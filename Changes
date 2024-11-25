@@ -1,4 +1,4 @@
-0.018 2024-11-22
+0.018 2024-11-25
   [New Features]
     * Add Net::SSLeay::Util class.
     * Add Net::SSLeay::Util#convert_to_wire_format method.
