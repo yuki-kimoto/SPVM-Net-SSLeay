@@ -1,6 +1,7 @@
 0.018 2024-11-25
   [New Features]
     * Add Net::SSLeay::Util class.
+    * Add Net::SSLeay::SSL_CTX#set_alpn_protos_with_protocols method.
   [Incompatible Changes]
     * Changed the argument of Net::SSLeay::SSL_CTX#set_alpn_protos method.
       [Before]
