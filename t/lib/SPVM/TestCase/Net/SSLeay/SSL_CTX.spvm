@@ -4,11 +4,7 @@ class TestCase::Net::SSLeay::SSL_CTX {
   use Array;
   
   use Net::SSLeay::SSL_METHOD;
-  use Net::SSLeay::Net::SSLeay::SSL_CTX;
-  
-  my $ssl_method = Net::SSLeay::SSL_METHOD->TLS_method;
-  
-  my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
+  use Net::SSLeay::SSL_CTX;
   
   static method set_alpn_protos_with_protocols : int () {
     

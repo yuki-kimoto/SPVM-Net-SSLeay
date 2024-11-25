@@ -8,6 +8,7 @@ BEGIN { $ENV{SPVM_BUILD_DIR} = "$FindBin::Bin/.spvm_build"; }
 
 use SPVM 'TestCase::Net::SSLeay';
 use SPVM 'TestCase::Net::SSLeay::Util';
+use SPVM 'TestCase::Net::SSLeay::SSL_CTX';
 
 use SPVM 'Net::SSLeay';
 use SPVM::Net::SSLeay;
@@ -16,6 +17,8 @@ use SPVM 'Fn';
 ok(SPVM::TestCase::Net::SSLeay->test);
 
 ok(SPVM::TestCase::Net::SSLeay::Util->convert_to_wire_format);
+
+ok(SPVM::TestCase::Net::SSLeay::SSL_CTX->set_alpn_protos_with_protocols);
 
 # Version
 {
