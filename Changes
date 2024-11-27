@@ -8,10 +8,12 @@
     * Add Net::SSLeay::X509#pubkey_digest_return_string method.
     * Add Net::SSLeay::X509#digest_return_string method.
     * Add Net::SSLeay#get_tlsext_status_type method.
+    * Add Net::SSLeay::ASN1_OCTET_STRING class.
     
   [Deprecations and Rename]
     * Net::SSLeay#P_dump_peer_certificate is deprecated, and dump_peer_certificate method is added.
     * Net::SSLeay::X509#P_get_ocsp_uri is deprecated, and get_ocsp_uri method is added.
+    * Net::SSLeay#get_peer_certificate is deprecated, and get_ocsp_uri method is added.
 0.018 2024-11-25
   [New Features]
     * Add Net::SSLeay::Util class.
