@@ -12,6 +12,7 @@
     * Add Net::SSLeay::X509_EXTENSION class.
     * Add Net::SSLeay::ASN1_STRING class.
     * Add Net::SSLeay::ASN1_STRING#length method.
+    * Add Net::SSLeay::ASN1_STRING#get0_data method.
     
   [Deprecations and Rename]
     * Net::SSLeay#P_dump_peer_certificate is deprecated, and dump_peer_certificate method is added.
