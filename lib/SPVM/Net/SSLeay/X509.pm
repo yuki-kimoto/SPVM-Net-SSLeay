@@ -50,6 +50,12 @@ The length of output buffer $md must be greater than or equal to EVP_MAX_MD_SIZE
 
 If X509_digest failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
+=head2 digest_return_string
+
+C<method digest_return_string : string ($type : Net::SSLeay::EVP_MD);>
+
+Calls L</"digest"> method given appropriate arguments, and returns the output string.
+
 =head2 pubkey_digest
 
 C<method pubkey_digest : int ($type : L<Net::SSLeay::EVP_MD|SPVM::Net::SSLeay::EVP_MD>, $md : mutable string, $len_ref : int*);>
@@ -65,6 +71,12 @@ The output buffer $md must be defined. Otherwise an exception is thrown.
 The length of output buffer $md must be greater than or equal to EVP_MAX_MD_SIZE. Otherwise an exception is thrown.
 
 If X509_pubkey_digest failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
+=head2 pubkey_digest_return_string
+
+C<method pubkey_digest_return_string : string ($type : Net::SSLeay::EVP_MD);>
+
+Calls L</"pubkey_digest"> method given appropriate arguments, and returns the output string.
 
 =head2 dup
 
