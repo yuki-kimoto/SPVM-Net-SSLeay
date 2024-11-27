@@ -10,7 +10,7 @@ SPVM::Net::SSLeay::X509_NAME - X509_NAME Data Structure in OpenSSL
 
 =head1 Description
 
-Net::SSLeay::X509_NAME class in L<SPVM> represents L<X509_NAME|https://docs.openssl.org/3.2/man3/X509_new/> data structure in OpenSSL
+Net::SSLeay::X509_NAME class in L<SPVM> represents L<X509_NAME|https://docs.openssl.org/3.3/man3/X509_dup/> data structure in OpenSSL
 
 =head1 Usage
 
@@ -36,7 +36,7 @@ If $buf is defined and $len is a negative value, $len is set to the length of $b
 
 C<method DESTROY : void ();>
 
-Calls native L<X509_free|https://docs.openssl.org/3.2/man3/X509_new> function given the pointer value of the instance if C<no_free> flag of the instance is not a true value.
+Calls native L<X509_NAME_free|https://docs.openssl.org/3.3/man3/X509_dup/> function given the pointer value of the instance if C<no_free> flag of the instance is not a true value.
 
 =head1 See Also
 

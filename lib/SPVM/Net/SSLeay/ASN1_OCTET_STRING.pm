@@ -10,7 +10,7 @@ SPVM::Net::SSLeay::ASN1_OCTET_STRING - ASN1_OCTET_STRING Data Structure in OpenS
 
 =head1 Description
 
-Net::SSLeay::ASN1_OCTET_STRING class in L<SPVM> represents L<ASN1_OCTET_STRING|https://docs.openssl.org/3.0/man3/s2i_ASN1_IA5STRING/> data structure in OpenSSL
+Net::SSLeay::ASN1_OCTET_STRING class in L<SPVM> represents L<ASN1_OCTET_STRING|https://pub.sortix.org/sortix/release/nightly/man/man3/ASN1_OCTET_STRING_free.3.html> data structure in OpenSSL
 
 =head1 Usage
 
@@ -22,7 +22,7 @@ Net::SSLeay::ASN1_OCTET_STRING class in L<SPVM> represents L<ASN1_OCTET_STRING|h
 
 C<method DESTROY : void ();>
 
-Calls native L<X509_free|https://docs.openssl.org/3.2/man3/X509_new> function given the pointer value of the instance if C<no_free> flag of the instance is not a true value.
+Calls native L<ASN1_OCTET_STRING_free|https://pub.sortix.org/sortix/release/nightly/man/man3/ASN1_OCTET_STRING_free.3.html> function given the pointer value of the instance if C<no_free> flag of the instance is not a true value.
 
 =head1 See Also
 

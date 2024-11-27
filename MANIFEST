@@ -34,6 +34,10 @@ lib/SPVM/Net/SSLeay/ASN1_OCTET_STRING.c
 lib/SPVM/Net/SSLeay/ASN1_OCTET_STRING.config
 lib/SPVM/Net/SSLeay/ASN1_OCTET_STRING.pm
 lib/SPVM/Net/SSLeay/ASN1_OCTET_STRING.spvm
+lib/SPVM/Net/SSLeay/ASN1_STRING.c
+lib/SPVM/Net/SSLeay/ASN1_STRING.config
+lib/SPVM/Net/SSLeay/ASN1_STRING.pm
+lib/SPVM/Net/SSLeay/ASN1_STRING.spvm
 lib/SPVM/Net/SSLeay/ASN1_TIME.c
 lib/SPVM/Net/SSLeay/ASN1_TIME.config
 lib/SPVM/Net/SSLeay/ASN1_TIME.pm
