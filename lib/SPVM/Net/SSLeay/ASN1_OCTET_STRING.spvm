@@ -16,10 +16,6 @@ class Net::SSLeay::ASN1_OCTET_STRING : pointer {
   }
   
   # Instance Methods
-  native method oneline : string ();
-  
-  native method get_text_by_NID : int ($nid : int, $buf : mutable string, $len : int = -1);
-  
   native method DESTROY : void ();
   
 }

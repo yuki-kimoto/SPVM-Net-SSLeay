@@ -9,6 +9,7 @@
     * Add Net::SSLeay::X509#digest_return_string method.
     * Add Net::SSLeay#get_tlsext_status_type method.
     * Add Net::SSLeay::ASN1_OCTET_STRING class.
+    * Add Net::SSLeay::X509_EXTENSION class.
     
   [Deprecations and Rename]
     * Net::SSLeay#P_dump_peer_certificate is deprecated, and dump_peer_certificate method is added.

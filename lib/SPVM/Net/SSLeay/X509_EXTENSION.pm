@@ -1,4 +1,4 @@
-package SPVM::Net::SSLeay::ASN1_OCTET_STRING;
+package SPVM::Net::SSLeay::X509_EXTENSION;
 
 
 
@@ -6,15 +6,15 @@ package SPVM::Net::SSLeay::ASN1_OCTET_STRING;
 
 =head1 Name
 
-SPVM::Net::SSLeay::ASN1_OCTET_STRING - ASN1_OCTET_STRING Data Structure in OpenSSL
+SPVM::Net::SSLeay::X509_EXTENSION - X509_EXTENSION Data Structure in OpenSSL
 
 =head1 Description
 
-Net::SSLeay::ASN1_OCTET_STRING class in L<SPVM> represents L<ASN1_OCTET_STRING|https://docs.openssl.org/3.0/man3/s2i_ASN1_IA5STRING/> data structure in OpenSSL
+Net::SSLeay::X509_EXTENSION class in L<SPVM> represents L<X509_EXTENSION|https://docs.openssl.org/3.0/man3/X509V3_get_d2i/> data structure in OpenSSL
 
 =head1 Usage
 
-  use Net::SSLeay::ASN1_OCTET_STRING;
+  use Net::SSLeay::X509_EXTENSION;
 
 =head1 Instance Methods
 

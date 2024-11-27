@@ -193,6 +193,10 @@ lib/SPVM/Net/SSLeay/X509_CRL.c
 lib/SPVM/Net/SSLeay/X509_CRL.config
 lib/SPVM/Net/SSLeay/X509_CRL.pm
 lib/SPVM/Net/SSLeay/X509_CRL.spvm
+lib/SPVM/Net/SSLeay/X509_EXTENSION.c
+lib/SPVM/Net/SSLeay/X509_EXTENSION.config
+lib/SPVM/Net/SSLeay/X509_EXTENSION.pm
+lib/SPVM/Net/SSLeay/X509_EXTENSION.spvm
 lib/SPVM/Net/SSLeay/X509_NAME.c
 lib/SPVM/Net/SSLeay/X509_NAME.config
 lib/SPVM/Net/SSLeay/X509_NAME.pm
