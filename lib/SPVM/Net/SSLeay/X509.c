@@ -220,7 +220,7 @@ int32_t SPVM__Net__SSLeay__X509__check_issued(SPVM_ENV* env, SPVM_VALUE* stack) 
   return 0;
 }
 
-int32_t SPVM__Net__SSLeay__X509__P_get_ocsp_uri(SPVM_ENV* env, SPVM_VALUE* stack) {
+int32_t SPVM__Net__SSLeay__X509__get_ocsp_uri(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   

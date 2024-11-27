@@ -82,9 +82,9 @@ Exceptions:
 
 The X509 object $subject must be defined. Otherwise an exception is thrown.
 
-=head2 P_get_ocsp_uri
+=head2 get_ocsp_uri
 
-C<static method P_get_ocsp_uri : string ();>
+C<method get_ocsp_uri : string ();>
 
 Returns OCSP URI in the certificate $cert.
 

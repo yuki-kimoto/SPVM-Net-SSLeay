@@ -33,7 +33,14 @@ class Net::SSLeay::X509 : pointer {
   
   native method check_issued : int ($subject : Net::SSLeay::X509);
   
-  native static method P_get_ocsp_uri : string ();
+  native method get_ocsp_uri : string ();
+  
+  method P_get_ocsp_uri : string () {
+    
+    warn "Net::SSLeay::X509#P_get_ocsp_uri method is deprecated.";
+    
+    return $self->get_ocsp_uri;
+  }
   
   native method DESTROY : void ();
   
