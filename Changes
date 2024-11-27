@@ -7,6 +7,7 @@
     * Add Net::SSLeay::X509_NAME_ENTRY class.
     * Add Net::SSLeay::X509#pubkey_digest_return_string method.
     * Add Net::SSLeay::X509#digest_return_string method.
+    * Add Net::SSLeay#get_tlsext_status_type method.
     
   [Deprecations and Rename]
     * Net::SSLeay#P_dump_peer_certificate is deprecated, and dump_peer_certificate method is added.

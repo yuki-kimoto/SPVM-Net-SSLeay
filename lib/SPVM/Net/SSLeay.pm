@@ -464,13 +464,19 @@ Returns the value of L</"ssl_ctx"> field.
 
 C<method set_msg_callback : void ($cb : L<Net::SSLeay::Callback::Msg|SPVM::Net::SSLeay::Callback::Msg>, $arg : object = undef);>
 
-Calls native L<SSL_set_msg_callback|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_msg_callback> function given $cb, $arg, and returns its return value.
+Calls native L<SSL_set_msg_callback|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_msg_callback> function given the pointer value of the instance, $cb, $arg, and returns its return value.
 
 =head2 dump_peer_certificate
 
 C<static method dump_peer_certificate : string ();>
 
 Returns the same output of Perl's L<Net::SSLeay#dump_peer_certificate|https://metacpan.org/dist/Net-SSLeay/view/lib/Net/SSLeay.pod#Convenience-routines> function.
+
+=head2 get_tlsext_status_type
+
+C<method get_tlsext_status_type : long ();>
+
+Calls native L<SSL_get_tlsext_status_type|https://docs.openssl.org/master/man3/SSL_CTX_set_tlsext_status_cb> function given the pointer value of the instance, and returns its return value.
 
 =head2 DESTROY
 
