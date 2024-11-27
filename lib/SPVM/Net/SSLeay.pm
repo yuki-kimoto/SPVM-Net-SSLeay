@@ -424,11 +424,23 @@ C<method get0_next_proto_negotiated : void ($data_ref : string[], $len_ref : int
 
 Calls native L<SSL_get0_next_proto_negotiated|https://docs.openssl.org/master/man3/SSL_get_certificate> function given the pointer value of the instance, $data_ref, $len_ref.
 
+=head2 get0_next_proto_negotiated_return_string
+
+C<method get0_next_proto_negotiated_return_string : string ()>
+
+Calls L</"get0_next_proto_negotiated"> method given appropriate arguments, and returns the output string.
+
 =head2 get0_alpn_selected
 
 C<method get0_alpn_selected : void ($data_ref : string[], $len_ref : int*);>
 
 Calls native L<SSL_get0_alpn_selected|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_alpn_select_cb> function given the pointer value of the instance, $data_ref, $len_ref.
+
+=head2 get0_alpn_selected_return_string
+
+C<method get0_alpn_selected_return_string : string ()>
+
+Calls L</"get0_alpn_selected"> method given appropriate arguments, and returns the output string.
 
 =head2 get_peer_cert_chain
 

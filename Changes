@@ -1,6 +1,7 @@
 0.019 2024-11-27
   [New Features]
     * Add get0_next_proto_negotiated_return_string method.
+    * Add get0_alpn_selected_return_string method.
     
 0.018 2024-11-25
   [New Features]
