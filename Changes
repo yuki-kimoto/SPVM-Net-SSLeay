@@ -12,7 +12,14 @@
     * Add Net::SSLeay::X509_EXTENSION class.
     * Add Net::SSLeay::ASN1_STRING class.
     * Add Net::SSLeay::ASN1_STRING#length method.
-    * Add Net::SSLeay::ASN1_STRING#get0_data method.
+    * Add Net::SSLeay::OBJ#nid2obj method.
+    * Add Net::SSLeay::OBJ#obj2nid method.
+    
+  native static method nid2obj : Net::SSLeay::ASN1_OBJECT ($n : int);
+  
+  native static method obj2nid : int ($o : Net::SSLeay::ASN1_OBJECT);
+  
+
     
   [Deprecations and Rename]
     * Net::SSLeay#P_dump_peer_certificate is deprecated, and dump_peer_certificate method is added.
