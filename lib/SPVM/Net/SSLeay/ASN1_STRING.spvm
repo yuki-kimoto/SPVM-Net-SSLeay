@@ -16,6 +16,8 @@ class Net::SSLeay::ASN1_STRING : pointer {
   }
   
   # Instance Methods
+  native method length : int ();
+  
   native method DESTROY : void ();
   
 }
