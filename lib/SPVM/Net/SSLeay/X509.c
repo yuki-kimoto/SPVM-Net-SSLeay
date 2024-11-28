@@ -18,9 +18,9 @@ int32_t SPVM__Net__SSLeay__X509__get_issuer_name(SPVM_ENV* env, SPVM_VALUE* stac
   
   void* obj_self = stack[0].oval;
   
-  X509* x509 = env->get_pointer(env, stack, obj_self);
+  X509* self = env->get_pointer(env, stack, obj_self);
   
-  X509_NAME* x509_name = X509_get_issuer_name(x509);
+  X509_NAME* x509_name = X509_get_issuer_name(self);
   
   assert(x509_name);
   
@@ -44,9 +44,9 @@ int32_t SPVM__Net__SSLeay__X509__get_subject_name(SPVM_ENV* env, SPVM_VALUE* sta
   
   void* obj_self = stack[0].oval;
   
-  X509* x509 = env->get_pointer(env, stack, obj_self);
+  X509* self = env->get_pointer(env, stack, obj_self);
   
-  X509_NAME* x509_name = X509_get_subject_name(x509);
+  X509_NAME* x509_name = X509_get_subject_name(self);
   
   assert(x509_name);
   
@@ -76,7 +76,7 @@ int32_t SPVM__Net__SSLeay__X509__digest(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t* len_ref = stack[3].iref;
   
-  X509* x509 = env->get_pointer(env, stack, obj_self);
+  X509* self = env->get_pointer(env, stack, obj_self);
   
   if (!obj_type) {
     return env->die(env, stack, "The digest type $type must be defined.", __func__, FILE_NAME, __LINE__);
@@ -96,7 +96,7 @@ int32_t SPVM__Net__SSLeay__X509__digest(SPVM_ENV* env, SPVM_VALUE* stack) {
   char* md = (char*)env->get_chars(env, stack, obj_md);
   
   unsigned int len_tmp = 0;
-  int32_t status = X509_digest(x509, type, md, &len_tmp);
+  int32_t status = X509_digest(self, type, md, &len_tmp);
   
   if (!(status == 1)) {
     int64_t ssl_error = ERR_peek_last_error();
@@ -130,7 +130,7 @@ int32_t SPVM__Net__SSLeay__X509__pubkey_digest(SPVM_ENV* env, SPVM_VALUE* stack)
   
   int32_t* len_ref = stack[3].iref;
   
-  X509* x509 = env->get_pointer(env, stack, obj_self);
+  X509* self = env->get_pointer(env, stack, obj_self);
   
   if (!obj_type) {
     return env->die(env, stack, "The digest type $type must be defined.", __func__, FILE_NAME, __LINE__);
@@ -150,7 +150,7 @@ int32_t SPVM__Net__SSLeay__X509__pubkey_digest(SPVM_ENV* env, SPVM_VALUE* stack)
   char* md = (char*)env->get_chars(env, stack, obj_md);
   
   unsigned int len_tmp = 0;
-  int32_t status = X509_pubkey_digest(x509, type, md, &len_tmp);
+  int32_t status = X509_pubkey_digest(self, type, md, &len_tmp);
   
   if (!(status == 1)) {
     int64_t ssl_error = ERR_peek_last_error();
@@ -178,9 +178,9 @@ int32_t SPVM__Net__SSLeay__X509__dup(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   void* obj_self = stack[0].oval;
   
-  X509* x509 = env->get_pointer(env, stack, obj_self);
+  X509* self = env->get_pointer(env, stack, obj_self);
   
-  X509* x509_dup = X509_dup(x509);
+  X509* x509_dup = X509_dup(self);
   
   assert(x509_dup);
   
@@ -205,7 +205,7 @@ int32_t SPVM__Net__SSLeay__X509__check_issued(SPVM_ENV* env, SPVM_VALUE* stack) 
   
   void* obj_subject = stack[1].oval;
   
-  X509* x509 = env->get_pointer(env, stack, obj_self);
+  X509* self = env->get_pointer(env, stack, obj_self);
   
   if (!obj_subject) {
     return env->die(env, stack, "The X509 object $subject must be defined.", __func__, FILE_NAME, __LINE__);
@@ -213,7 +213,7 @@ int32_t SPVM__Net__SSLeay__X509__check_issued(SPVM_ENV* env, SPVM_VALUE* stack) 
   
   X509* subject = env->get_pointer(env, stack, obj_subject);
   
-  int32_t status = X509_check_issued(x509, subject);
+  int32_t status = X509_check_issued(self, subject);
   
   stack[0].ival = status;
   
@@ -226,9 +226,9 @@ int32_t SPVM__Net__SSLeay__X509__get_ocsp_uri(SPVM_ENV* env, SPVM_VALUE* stack) 
   
   void* obj_self = stack[0].oval;
   
-  X509* x509 = env->get_pointer(env, stack, obj_self);
+  X509* self = env->get_pointer(env, stack, obj_self);
   
-  AUTHORITY_INFO_ACCESS* info = X509_get_ext_d2i(x509, NID_info_access, NULL, NULL);
+  AUTHORITY_INFO_ACCESS* info = X509_get_ext_d2i(self, NID_info_access, NULL, NULL);
   
   void* obj_ocsp_uri = NULL;
   

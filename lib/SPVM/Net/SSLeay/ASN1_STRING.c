@@ -14,9 +14,9 @@ int32_t SPVM__Net__SSLeay__ASN1_STRING__length(SPVM_ENV* env, SPVM_VALUE* stack)
   
   void* obj_self = stack[0].oval;
   
-  ASN1_STRING* asn1_string = env->get_pointer(env, stack, obj_self);
+  ASN1_STRING* self = env->get_pointer(env, stack, obj_self);
   
-  int32_t length = ASN1_STRING_length(asn1_string);
+  int32_t length = ASN1_STRING_length(self);
   
   stack[0].ival = length;
   
@@ -29,9 +29,9 @@ int32_t SPVM__Net__SSLeay__ASN1_STRING__get0_data(SPVM_ENV* env, SPVM_VALUE* sta
   
   void* obj_self = stack[0].oval;
   
-  ASN1_STRING* asn1_string = env->get_pointer(env, stack, obj_self);
+  ASN1_STRING* self = env->get_pointer(env, stack, obj_self);
   
-  const unsigned char* string = ASN1_STRING_get0_data(asn1_string);
+  const unsigned char* string = ASN1_STRING_get0_data(self);
   
   int32_t length = ASN1_STRING_length(asn1_string);
   

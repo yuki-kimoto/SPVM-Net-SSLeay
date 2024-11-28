@@ -14,9 +14,9 @@ int32_t SPVM__Net__SSLeay__X509_NAME__oneline(SPVM_ENV* env, SPVM_VALUE* stack) 
   
   void* obj_self = stack[0].oval;
   
-  X509_NAME* x509_name = env->get_pointer(env, stack, obj_self);
+  X509_NAME* self = env->get_pointer(env, stack, obj_self);
   
-  char* ret = X509_NAME_oneline(x509_name, NULL, 0);
+  char* ret = X509_NAME_oneline(self, NULL, 0);
   
   if (!ret) {
     int64_t ssl_error = ERR_peek_last_error();
@@ -61,9 +61,9 @@ int32_t SPVM__Net__SSLeay__X509_NAME__get_text_by_NID(SPVM_ENV* env, SPVM_VALUE*
     len = env->length(env, stack, obj_buf);
   }
   
-  X509_NAME* x509_name = env->get_pointer(env, stack, obj_self);
+  X509_NAME* self = env->get_pointer(env, stack, obj_self);
   
-  int32_t length = X509_NAME_get_text_by_NID(x509_name, nid, buf, len);
+  int32_t length = X509_NAME_get_text_by_NID(self, nid, buf, len);
   
   stack[0].ival = length;
   
@@ -78,9 +78,9 @@ int32_t SPVM__Net__SSLeay__X509_NAME__get_entry(SPVM_ENV* env, SPVM_VALUE* stack
   
   int32_t loc = stack[1].ival;
   
-  X509_NAME* x509_name = env->get_pointer(env, stack, obj_self);
+  X509_NAME* self = env->get_pointer(env, stack, obj_self);
   
-  X509_NAME_ENTRY* name_entry = X509_NAME_get_entry(x509_name, loc);
+  X509_NAME_ENTRY* name_entry = X509_NAME_get_entry(self, loc);
   
   if (!name_entry) {
     int64_t ssl_error = ERR_peek_last_error();
@@ -103,7 +103,7 @@ int32_t SPVM__Net__SSLeay__X509_NAME__get_entry(SPVM_ENV* env, SPVM_VALUE* stack
   void* obj_name_entry = stack[0].oval;
   env->set_no_free(env, stack, obj_name_entry, 1);
   
-  env->set_field_object_by_name(env, stack, obj_name_entry, "ref_x509_name", obj_self, &error_id, __func__, FILE_NAME, __LINE__); 
+  env->set_field_object_by_name(env, stack, obj_name_entry, "ref_self", obj_self, &error_id, __func__, FILE_NAME, __LINE__); 
   if (error_id) { return error_id; }
   
   stack[0].oval = obj_name_entry;
