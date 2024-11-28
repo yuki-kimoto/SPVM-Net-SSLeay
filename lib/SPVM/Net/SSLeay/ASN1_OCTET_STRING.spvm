@@ -16,6 +16,10 @@ class Net::SSLeay::ASN1_OCTET_STRING : pointer {
   }
   
   # Instance Methods
+  native method length : int ();
+  
+  native method get0_data : string ();
+  
   native method DESTROY : void ();
   
 }

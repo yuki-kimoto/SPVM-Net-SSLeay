@@ -18,6 +18,17 @@ Net::SSLeay::ASN1_OCTET_STRING class in L<SPVM> represents L<ASN1_OCTET_STRING|h
 
 =head1 Instance Methods
 
+=head2 length
+
+C<method length : int ();>
+
+Calls native L<ASN1_STRING_length|https://docs.openssl.org/1.1.1/man3/ASN1_STRING_length> function, and returns its return value.
+
+=head2 get0_data
+
+C<method get0_data : string ();>
+
+Calls native L<ASN1_STRING_get0_data|https://docs.openssl.org/1.1.1/man3/ASN1_STRING_length> function, converts its return value to a string which length is the return value of native L<ASN1_STRING_length|https://docs.openssl.org/1.1.1/man3/ASN1_STRING_length> function, and returns the string.
 =head2 DESTROY
 
 C<method DESTROY : void ();>
