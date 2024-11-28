@@ -102,6 +102,16 @@ Returns OCSP URI in the certificate $cert.
 
 If not found, returns undef.
 
+=head2 get_ext_by_NID
+
+C<method get_ext_by_NID : int ($nid : int, $lastpos : int);>
+
+Calls native L<X509_get_ext_by_NID|https://docs.openssl.org/1.1.1/man3/X509_check_issued> function given the pointer value of the instance, $nid, $lastpos, and returns its return value.
+
+Exceptions:
+
+The X509 object $subject must be defined. Otherwise an exception is thrown.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>
