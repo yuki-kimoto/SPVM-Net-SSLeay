@@ -25,6 +25,8 @@ class Net::SSLeay::X509_NAME : pointer {
   
   native method get_index_by_NID : int ($nid : int, $lastpos : int);
   
+  native method entry_count : int ();
+  
   native method DESTROY : void ();
   
 }

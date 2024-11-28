@@ -16,6 +16,7 @@
     * Add Net::SSLeay::OBJ#obj2nid method.
     * Add Net::SSLeay::X509_NAME#get_entry method.
     * Add Net::SSLeay::X509_NAME#get_index_by_NID method.
+    * Add Net::SSLeay::X509_NAME#entry_count method.
   native static method nid2obj : Net::SSLeay::ASN1_OBJECT ($n : int);
   
   native static method obj2nid : int ($o : Net::SSLeay::ASN1_OBJECT);

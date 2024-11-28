@@ -44,6 +44,12 @@ C<method get_index_by_NID : int ($nid : int, $lastpos : int);>
 
 Calls native L<X509_NAME_get_index_by_NID|https://docs.openssl.org/1.1.1/man3/X509_NAME_get_index_by_NID> functions given the pointer value of the instance, $nid, $lastpos, and returns its return value.
 
+=head2 entry_count
+
+C<method entry_count : int ();>
+
+Calls native L<X509_NAME_entry_count|https://docs.openssl.org/1.1.1/man3/X509_NAME_get_index_by_NID> functions given the pointer value of the instance, and returns its return value.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>
