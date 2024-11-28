@@ -48,6 +48,7 @@ int32_t SPVM__Net__SSLeay__X509_NAME_ENTRY__get_object(SPVM_ENV* env, SPVM_VALUE
   env->call_class_method_by_name(env, stack, "Net::SSLeay::ASN1_OBJECT", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);  
   if (error_id) { return error_id; }
   void* obj_asn1_object = stack[0].oval;
+  env->set_no_free(env, stack, obj_asn1_object, 1);
   
   stack[0].oval = obj_asn1_object;
   

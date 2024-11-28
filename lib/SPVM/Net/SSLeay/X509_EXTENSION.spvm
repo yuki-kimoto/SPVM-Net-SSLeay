@@ -6,6 +6,8 @@ class Net::SSLeay::X509_EXTENSION : pointer {
   allow Net::SSLeay::X509;
   
   use Net::SSLeay::X509;
+  use Net::SSLeay::ASN1_OCTET_STRING;
+  use Net::SSLeay::ASN1_OBJECT;
   use Fn;
   
   # Fields
@@ -22,6 +24,10 @@ class Net::SSLeay::X509_EXTENSION : pointer {
   }
   
   # Instance Methods
+  native method get_data : Net::SSLeay::ASN1_OCTET_STRING ();
+  
+  native method get_object : Net::SSLeay::ASN1_OBJECT ();
+  
   native method DESTROY : void ();
   
 }
