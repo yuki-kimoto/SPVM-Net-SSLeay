@@ -1,4 +1,4 @@
-0.019 2024-11-27
+0.019 2024-11-28
   [New Features]
     * Add Add Net::SSLeay#get0_next_proto_negotiated_return_string method.
     * Add Net::SSLeay#get0_alpn_selected_return_string method.
@@ -27,12 +27,6 @@
     * Add Net::SSLeay::X509_EXTENSION#get_data method.
     * Add Net::SSLeay::X509_EXTENSION#get_object method.
     * Add Net::SSLeay::X509_EXTENSION#get_critical method.
-  native static method nid2obj : Net::SSLeay::ASN1_OBJECT ($n : int);
-  
-  native static method obj2nid : int ($o : Net::SSLeay::ASN1_OBJECT);
-  
-
-    
   [Deprecations and Rename]
     * Net::SSLeay#P_dump_peer_certificate is deprecated, and dump_peer_certificate method is added.
     * Net::SSLeay::X509#P_get_ocsp_uri is deprecated, and get_ocsp_uri method is added.
