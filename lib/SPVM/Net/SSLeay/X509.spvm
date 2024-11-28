@@ -9,6 +9,7 @@ class Net::SSLeay::X509 : pointer {
   use Net::SSLeay::EVP_MD;
   use Net::SSLeay::Constant as SSL;
   use Net::SSLeay::ASN1_OBJECT;
+  use Net::SSLeay::X509_EXTENSION;
   
   use Fn;
   
@@ -73,6 +74,8 @@ class Net::SSLeay::X509 : pointer {
   native method get_ext_by_OBJ : int ($obj : Net::SSLeay::ASN1_OBJECT, $lastpos : int);
   
   native method get_ext_count : int ();
+  
+  native method get_ext : Net::SSLeay::X509_EXTENSION ($loc : int);
   
   native method DESTROY : void ();
   

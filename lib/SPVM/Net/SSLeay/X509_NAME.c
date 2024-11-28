@@ -103,7 +103,7 @@ int32_t SPVM__Net__SSLeay__X509_NAME__get_entry(SPVM_ENV* env, SPVM_VALUE* stack
   void* obj_name_entry = stack[0].oval;
   env->set_no_free(env, stack, obj_name_entry, 1);
   
-  env->set_field_object_by_name(env, stack, obj_name_entry, "ref_self", obj_self, &error_id, __func__, FILE_NAME, __LINE__); 
+  env->set_field_object_by_name(env, stack, obj_name_entry, "ref_x509_name", obj_self, &error_id, __func__, FILE_NAME, __LINE__); 
   if (error_id) { return error_id; }
   
   stack[0].oval = obj_name_entry;
