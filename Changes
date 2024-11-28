@@ -14,6 +14,7 @@
     * Add Net::SSLeay::ASN1_STRING#length method.
     * Add Net::SSLeay::OBJ#nid2obj method.
     * Add Net::SSLeay::OBJ#obj2nid method.
+    * Add Net::SSLeay::X509_NAME#get_entry method.
     
   native static method nid2obj : Net::SSLeay::ASN1_OBJECT ($n : int);
   

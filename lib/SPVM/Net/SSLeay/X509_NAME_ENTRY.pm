@@ -16,6 +16,12 @@ Net::SSLeay::X509_NAME_ENTRY class in L<SPVM> represents L<X509_NAME_ENTRY|https
 
   use Net::SSLeay::X509_NAME_ENTRY;
 
+=head1 Fields
+
+=head2 ref_x509_name
+
+C<has ref_x509_name : Net::SSLeay::X509_NAME;>
+
 =head1 Instance Methods
 
 =head2 DESTROY

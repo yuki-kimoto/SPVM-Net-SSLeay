@@ -3,6 +3,7 @@
 
 class Net::SSLeay::X509_NAME : pointer {
   
+  use Net::SSLeay::X509_NAME_ENTRY;
   use Fn;
   
   # Class Methods
@@ -19,6 +20,8 @@ class Net::SSLeay::X509_NAME : pointer {
   native method oneline : string ();
   
   native method get_text_by_NID : int ($nid : int, $buf : mutable string, $len : int = -1);
+  
+  native method get_entry : Net::SSLeay::X509_NAME_ENTRY ($loc : int);
   
   native method DESTROY : void ();
   

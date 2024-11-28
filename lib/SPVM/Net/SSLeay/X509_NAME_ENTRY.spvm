@@ -3,7 +3,11 @@
 
 class Net::SSLeay::X509_NAME_ENTRY {
   
+  use Net::SSLeay::X509_NAME;
   use Fn;
+  
+  # Fields
+  has ref_x509_name : Net::SSLeay::X509_NAME;
   
   # Class Methods
   private static method new_with_pointer : Net::SSLeay::X509_NAME_ENTRY ($pointer : Address, $options : object[] = undef) {
