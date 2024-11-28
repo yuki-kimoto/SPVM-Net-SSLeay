@@ -111,6 +111,25 @@ int32_t SPVM__Net__SSLeay__X509_NAME__get_entry(SPVM_ENV* env, SPVM_VALUE* stack
   return 0;
 }
 
+int32_t SPVM__Net__SSLeay__X509_NAME__get_index_by_NID(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  int32_t nid = stack[1].ival;
+  
+  int32_t lastpos = stack[2].ival;
+  
+  X509_NAME* self = env->get_pointer(env, stack, obj_self);
+  
+  int32_t index = X509_NAME_get_index_by_NID(self, nid, lastpos);
+  
+  stack[0].ival = index;
+  
+  return 0;
+}
+
 int32_t SPVM__Net__SSLeay__X509_NAME__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;

@@ -23,6 +23,8 @@ class Net::SSLeay::X509_NAME : pointer {
   
   native method get_entry : Net::SSLeay::X509_NAME_ENTRY ($loc : int);
   
+  native method get_index_by_NID : int ($nid : int, $lastpos : int);
+  
   native method DESTROY : void ();
   
 }
