@@ -28,6 +28,8 @@ class Net::SSLeay::X509_EXTENSION : pointer {
   
   native method get_object : Net::SSLeay::ASN1_OBJECT ();
   
+  native method get_critical : int ();
+  
   native method DESTROY : void ();
   
 }

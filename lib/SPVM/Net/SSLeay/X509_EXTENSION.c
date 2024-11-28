@@ -55,6 +55,22 @@ int32_t SPVM__Net__SSLeay__X509_EXTENSION__get_object(SPVM_ENV* env, SPVM_VALUE*
   return 0;
 }
 
+
+int32_t SPVM__Net__SSLeay__X509_EXTENSION__get_critical(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  X509_EXTENSION* self = env->get_pointer(env, stack, obj_self);
+  
+  int32_t critical = X509_EXTENSION_get_critical(self);
+  
+  stack[0].ival = critical;
+  
+  return 0;
+}
+
 int32_t SPVM__Net__SSLeay__X509_EXTENSION__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
