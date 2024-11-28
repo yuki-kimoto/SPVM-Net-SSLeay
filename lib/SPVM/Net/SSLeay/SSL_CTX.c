@@ -1994,40 +1994,40 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   void* obj_self = stack[0].oval;
   
-  SSL_CTX* pointer = env->get_pointer(env, stack, obj_self);
+  SSL_CTX* self = env->get_pointer(env, stack, obj_self);
   
   stack[0].oval = obj_self;
-  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", pointer);
+  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);
   stack[1].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
   env->call_instance_method_by_name(env, stack, "DELETE_PSK_CLIENT_CB", 2, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   
   stack[0].oval = obj_self;
-  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", pointer);
+  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);
   stack[1].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
   env->call_instance_method_by_name(env, stack, "DELETE_PSK_SERVER_CB", 2, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   
   stack[0].oval = obj_self;
-  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", pointer);
+  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);
   stack[1].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
   env->call_instance_method_by_name(env, stack, "DELETE_TLSEXT_TICKET_KEY_CB", 2, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   
   stack[0].oval = obj_self;
-  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", pointer);
+  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);
   stack[1].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
   env->call_instance_method_by_name(env, stack, "DELETE_NEW_SESSION_CB", 2, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   
   stack[0].oval = obj_self;
-  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", pointer);
+  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);
   stack[1].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
   env->call_instance_method_by_name(env, stack, "DELETE_REMOVE_SESSION_CB", 2, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   
   if (!env->no_free(env, stack, obj_self)) {
-    SSL_CTX_free(pointer);
+    SSL_CTX_free(self);
   }
   
   return 0;

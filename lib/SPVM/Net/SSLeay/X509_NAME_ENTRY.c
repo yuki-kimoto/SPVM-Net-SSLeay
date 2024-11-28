@@ -14,10 +14,10 @@ int32_t SPVM__Net__SSLeay__X509_NAME_ENTRY__DESTROY(SPVM_ENV* env, SPVM_VALUE* s
   
   void* obj_self = stack[0].oval;
   
-  X509_NAME_ENTRY* pointer = env->get_pointer(env, stack, obj_self);
+  X509_NAME_ENTRY* self = env->get_pointer(env, stack, obj_self);
   
   if (!env->no_free(env, stack, obj_self)) {
-    X509_NAME_ENTRY_free(pointer);
+    X509_NAME_ENTRY_free(self);
   }
   
   return 0;

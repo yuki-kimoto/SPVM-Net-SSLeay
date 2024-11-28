@@ -14,10 +14,10 @@ int32_t SPVM__Net__SSLeay__X509_EXTENSION__DESTROY(SPVM_ENV* env, SPVM_VALUE* st
   
   void* obj_self = stack[0].oval;
   
-  X509_EXTENSION* pointer = env->get_pointer(env, stack, obj_self);
+  X509_EXTENSION* self = env->get_pointer(env, stack, obj_self);
   
   if (!env->no_free(env, stack, obj_self)) {
-    X509_EXTENSION_free(pointer);
+    X509_EXTENSION_free(self);
   }
   
   return 0;
