@@ -4,6 +4,7 @@
 class Net::SSLeay::X509_NAME_ENTRY {
   
   use Net::SSLeay::X509_NAME;
+  use Net::SSLeay::ASN1_STRING;
   use Fn;
   
   # Fields
@@ -20,6 +21,8 @@ class Net::SSLeay::X509_NAME_ENTRY {
   }
   
   # Instance Methods
+  native method get_data : Net::SSLeay::ASN1_STRING ();
+  
   native method DESTROY : void ();
   
 }

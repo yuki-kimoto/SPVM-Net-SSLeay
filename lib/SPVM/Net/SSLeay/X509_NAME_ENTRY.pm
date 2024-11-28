@@ -24,6 +24,12 @@ C<has ref_x509_name : Net::SSLeay::X509_NAME;>
 
 =head1 Instance Methods
 
+=head2 get_data
+
+C<method get_data : Net::SSLeay::ASN1_STRING ();>
+
+Calls native L<X509_NAME_ENTRY_get_data|https://docs.openssl.org/1.1.1/man3/X509_NAME_ENTRY_get_object> functions given the pointer value of the instance, copies the return value, and returns the copied value.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>

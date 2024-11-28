@@ -33,7 +33,7 @@ int32_t SPVM__Net__SSLeay__ASN1_STRING__get0_data(SPVM_ENV* env, SPVM_VALUE* sta
   
   const unsigned char* string = ASN1_STRING_get0_data(self);
   
-  int32_t length = ASN1_STRING_length(asn1_string);
+  int32_t length = ASN1_STRING_length(self);
   
   void* obj_string = env->new_string(env, stack, string, length);
   

@@ -149,8 +149,6 @@ int32_t SPVM__Net__SSLeay__X509_NAME__entry_count(SPVM_ENV* env, SPVM_VALUE* sta
   return 0;
 }
 
-method get_index_by_OBJ : int ($obj : Net::SSLeay::ASN1_OBJECT, $lastpos : int);
-
 int32_t SPVM__Net__SSLeay__X509_NAME__get_index_by_OBJ(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
