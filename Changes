@@ -22,6 +22,7 @@
     * Add Net::SSLeay::X509_NAME_ENTRY#get_object method.
     * Add Net::SSLeay::X509#get_ext_by_NID method.
     * Add Net::SSLeay::X509#get_ext_by_OBJ method.
+    * Add Net::SSLeay::X509#get_ext_count method.
   native static method nid2obj : Net::SSLeay::ASN1_OBJECT ($n : int);
   
   native static method obj2nid : int ($o : Net::SSLeay::ASN1_OBJECT);

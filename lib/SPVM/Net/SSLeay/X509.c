@@ -325,6 +325,21 @@ int32_t SPVM__Net__SSLeay__X509__get_ext_by_OBJ(SPVM_ENV* env, SPVM_VALUE* stack
   return 0;
 }
 
+int32_t SPVM__Net__SSLeay__X509__get_ext_count(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  X509* self = env->get_pointer(env, stack, obj_self);
+  
+  int32_t ext_count = X509_get_ext_count(self);
+  
+  stack[0].ival = ext_count;
+  
+  return 0;
+}
+
 int32_t SPVM__Net__SSLeay__X509__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
