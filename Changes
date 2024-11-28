@@ -27,6 +27,7 @@
     * Add Net::SSLeay::X509_EXTENSION#get_data method.
     * Add Net::SSLeay::X509_EXTENSION#get_object method.
     * Add Net::SSLeay::X509_EXTENSION#get_critical method.
+    * Add Net::SSLeay::SSL_CTX#set_default_verify_paths_windows method.
   [Deprecations and Rename]
     * Net::SSLeay#P_dump_peer_certificate is deprecated, and dump_peer_certificate method is added.
     * Net::SSLeay::X509#P_get_ocsp_uri is deprecated, and get_ocsp_uri method is added.
