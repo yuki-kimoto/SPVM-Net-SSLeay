@@ -110,7 +110,17 @@ Calls native L<X509_get_ext_by_NID|https://docs.openssl.org/1.1.1/man3/X509_chec
 
 Exceptions:
 
-The X509 object $subject must be defined. Otherwise an exception is thrown.
+If X509_get_ext_by_NID failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
+=head2 get_ext_by_OBJ
+
+C<method get_ext_by_OBJ : int ($obj : L<Net::SSLeay::ASN1_OBJECT|SPVM::Net::SSLeay::ASN1_OBJECT>, $lastpos : int);>
+
+Calls native L<X509_get_ext_by_OBJ|https://docs.openssl.org/1.1.1/man3/X509_check_issued> function given the pointer value of the instance, $obj, $lastpos, and returns its return value.
+
+Exceptions:
+
+If X509_get_ext_by_OBJ failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
 =head2 DESTROY
 
