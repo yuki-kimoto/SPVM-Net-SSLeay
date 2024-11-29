@@ -2009,24 +2009,50 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_default_verify_paths_windows(SPVM_ENV* e
   
   void* obj_self = stack[0].oval;
   
+  spvm_warn("");
+  
   SSL_CTX* self = env->get_pointer(env, stack, obj_self);
+  
+  spvm_warn("");
   
   X509_STORE *store = SSL_CTX_get_cert_store(self);
   
+  spvm_warn("");
+  
   HCERTSTORE hStore = CertOpenSystemStore(0, "ROOT");
   
+  spvm_warn("");
+  
   if (!hStore) {
+  
+  spvm_warn("");
+  
     error_id = env->die(env, stack, "[Windows Error]CertOpenSystemStore failed.", __func__, FILE_NAME, __LINE__);
     goto END_OF_FUNC;
   }
   
   PCCERT_CONTEXT pContext;
+  
+  spvm_warn("");
+  
   while (pContext = CertEnumCertificatesInStore(hStore, pContext))
   {
+  
+  spvm_warn("");
+  
     char *encoded_cert = pContext->pbCertEncoded;
+  
+  spvm_warn("");
+  
     X509 *x509 = d2i_X509(NULL, (const unsigned char **)&encoded_cert, pContext->cbCertEncoded);
     
+  
+  spvm_warn("");
+  
     if (!x509) {
+  
+  spvm_warn("");
+  
       int64_t ssl_error = ERR_peek_last_error();
       
       char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
@@ -2039,11 +2065,23 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_default_verify_paths_windows(SPVM_ENV* e
       goto END_OF_FUNC;
     }
     
+  
+  spvm_warn("");
+  
     int32_t status = X509_STORE_add_cert(store, x509);
     
+  
+  spvm_warn("");
+  
     X509_free(x509);
     
+  
+  spvm_warn("");
+  
     if (!(status == 1)) {
+  
+  spvm_warn("");
+  
       int64_t ssl_error = ERR_peek_last_error();
       
       char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
@@ -2059,7 +2097,13 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_default_verify_paths_windows(SPVM_ENV* e
   
   END_OF_FUNC:
   
+  
+  spvm_warn("");
+  
   if (hStore) {
+  
+  spvm_warn("");
+  
     CertCloseStore(hStore, 0);
   }
   
