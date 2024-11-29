@@ -18,8 +18,6 @@ static const char* FILE_NAME = "Net/SSLeay/SSL_CTX.c";
 #include <wincrypt.h>
 #include <cryptuiapi.h>
 
-#include <openssl/x509.h>
-
 #pragma comment (lib, "crypt32.lib")
 #pragma comment (lib, "cryptui.lib")
 
