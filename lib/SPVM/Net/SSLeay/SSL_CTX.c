@@ -24,8 +24,6 @@ static const char* FILE_NAME = "Net/SSLeay/SSL_CTX.c";
 #pragma comment (lib, "crypt32.lib")
 #pragma comment (lib, "cryptui.lib")
 
-#define MY_ENCODING_TYPE  (PKCS_7_ASN_ENCODING | X509_ASN_ENCODING)
-
 #endif
 
 __thread SPVM_ENV* thread_env;
