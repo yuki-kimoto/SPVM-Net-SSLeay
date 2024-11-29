@@ -6,15 +6,8 @@
 
 #include <assert.h>
 
-#include <openssl/ssl.h>
-#include <openssl/err.h>
-
-static const char* FILE_NAME = "Net/SSLeay/SSL_CTX.c";
-
 // For set_default_verify_paths_windows method
 #ifdef _WIN32
-
-#define WIN32_LEAN_AND_MEAN
 
 #include <windows.h>
 #include <wincrypt.h>
@@ -24,6 +17,11 @@ static const char* FILE_NAME = "Net/SSLeay/SSL_CTX.c";
 #pragma comment (lib, "cryptui.lib")
 
 #endif
+
+#include <openssl/ssl.h>
+#include <openssl/err.h>
+
+static const char* FILE_NAME = "Net/SSLeay/SSL_CTX.c";
 
 __thread SPVM_ENV* thread_env;
 
