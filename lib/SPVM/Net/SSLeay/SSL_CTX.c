@@ -17,7 +17,6 @@ static const char* FILE_NAME = "Net/SSLeay/SSL_CTX.c";
 #include <windows.h>
 #include <wincrypt.h>
 #include <cryptuiapi.h>
-#include <tchar.h>
 
 #include <openssl/x509.h>
 
@@ -2015,7 +2014,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_default_verify_paths_windows(SPVM_ENV* e
   
   X509_STORE *store = SSL_CTX_get_cert_store(self);
   
-  HCERTSTORE hStore = CertOpenSystemStore(0, L"ROOT");
+  HCERTSTORE hStore = CertOpenSystemStore(0, "ROOT");
   
   if (!hStore) {
     error_id = env->die(env, stack, "[Windows Error]CertOpenSystemStore failed.", __func__, FILE_NAME, __LINE__);
