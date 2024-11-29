@@ -2018,7 +2018,8 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_default_verify_paths_windows(SPVM_ENV* e
   HCERTSTORE hStore = CertOpenSystemStore(NULL, L"ROOT");
   
   if (!hStore) {
-    return env->die(env, stack, "[Windows Error]CertOpenSystemStore failed.", __func__, FILE_NAME, __LINE__);
+    error_id = env->die(env, stack, "[Windows Error]CertOpenSystemStore failed.", __func__, FILE_NAME, __LINE__);
+    goto END_OF_FUNC;
   }
   
   PCCERT_CONTEXT pContext;
@@ -2042,14 +2043,16 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_default_verify_paths_windows(SPVM_ENV* e
         
         int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
         
-        return error_id;
+        goto END_OF_FUNC;
       }
     }
   }
   
+  END_OF_FUNC:
+  
   CertCloseStore(hStore, 0);
   
-  return 0;
+  return error_id;
 #endif
 }
 
