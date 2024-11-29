@@ -14,6 +14,8 @@ static const char* FILE_NAME = "Net/SSLeay/SSL_CTX.c";
 // For set_default_verify_paths_windows method
 #ifdef _WIN32
 
+#define WIN32_LEAN_AND_MEAN
+
 #include <windows.h>
 #include <wincrypt.h>
 #include <cryptuiapi.h>
