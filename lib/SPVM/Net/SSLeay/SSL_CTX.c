@@ -1998,6 +1998,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__sess_set_remove_cb(SPVM_ENV* env, SPVM_VALUE
   return 0;
 }
 
+// Originally copied from https://stackoverflow.com/questions/9507184/can-openssl-on-windows-use-the-system-certificate-store
 int32_t SPVM__Net__SSLeay__SSL_CTX__set_default_verify_paths_windows(SPVM_ENV* env, SPVM_VALUE* stack) {
 #if !_WIN32
   env->die(env, stack, "Net::SSLeay::SSL_CTX#set_default_verify_paths_windows method is not supported on this system(!_WIN32)", __func__, FILE_NAME, __LINE__);
