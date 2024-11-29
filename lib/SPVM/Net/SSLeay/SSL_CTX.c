@@ -2025,7 +2025,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_default_verify_paths_windows(SPVM_ENV* e
   PCCERT_CONTEXT pContext;
   while (pContext = CertEnumCertificatesInStore(hStore, pContext))
   {
-    char *encoded_cert = win_cert_context->pbCertEncoded;
+    char *encoded_cert = pContext->pbCertEncoded;
     X509 *x509 = d2i_X509(nullptr, &encoded_cert, pContext->cbCertEncoded);
     
     if (x509) {
