@@ -2048,7 +2048,6 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_default_verify_paths_windows(SPVM_ENV* e
     }
   }
   
-  CertFreeCertificateContext(pContext);
   CertCloseStore(hStore, 0);
   
   return 0;
