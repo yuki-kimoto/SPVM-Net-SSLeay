@@ -18,7 +18,6 @@ static const char* FILE_NAME = "Net/SSLeay/SSL_CTX.c";
 #include <windows.h>
 #include <wincrypt.h>
 #include <cryptuiapi.h>
-#include <iostream>
 #include <tchar.h>
 
 #include "openssl\x509.h"
