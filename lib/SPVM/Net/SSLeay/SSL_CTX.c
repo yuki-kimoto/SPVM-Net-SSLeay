@@ -2050,7 +2050,9 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_default_verify_paths_windows(SPVM_ENV* e
   
   END_OF_FUNC:
   
-  CertCloseStore(hStore, 0);
+  if (hStore) {
+    CertCloseStore(hStore, 0);
+  }
   
   return error_id;
 #endif
