@@ -2013,21 +2013,20 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_default_verify_paths_windows(SPVM_ENV* e
   
   SSL_CTX* self = env->get_pointer(env, stack, obj_self);
   
-  HCERTSTORE hStore;
-  PCCERT_CONTEXT pContext = NULL;
-  X509 *x509;
   X509_STORE *store = X509_get_cert_store(self);
   
-  hStore = CertOpenSystemStore(NULL, L"ROOT");
+  HCERTSTORE hStore = CertOpenSystemStore(NULL, L"ROOT");
   
   if (!hStore) {
     return env->die(env, stack, "[Windows Error]CertOpenSystemStore failed.", __func__, FILE_NAME, __LINE__);
   }
   
+  PCCERT_CONTEXT pContext;
   while (pContext = CertEnumCertificatesInStore(hStore, pContext))
   {
-    x509 = NULL;
-    x509 = d2i_X509(NULL, (const unsigned char **)&pContext->pbCertEncoded, pContext->cbCertEncoded);
+    char *encoded_cert = win_cert_context->pbCertEncoded;
+    X509 *x509 = d2i_X509(nullptr, &encoded_cert, pContext->cbCertEncoded);
+    
     if (x509) {
       int32_t status = X509_STORE_add_cert(store, x509);
       
