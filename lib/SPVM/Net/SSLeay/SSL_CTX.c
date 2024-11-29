@@ -2013,7 +2013,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_default_verify_paths_windows(SPVM_ENV* e
   
   SSL_CTX* self = env->get_pointer(env, stack, obj_self);
   
-  X509_STORE *store = X509_get_cert_store(self);
+  X509_STORE *store = SSL_CTX_get_cert_store(self);
   
   HCERTSTORE hStore = CertOpenSystemStore(NULL, L"ROOT");
   
