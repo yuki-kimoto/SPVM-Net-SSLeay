@@ -441,4 +441,62 @@ class TestCase::Net::SSLeay {
     return 1;
   }
   
+  static method SSL_METHOD : int () {
+    
+    {
+      my $ssl_method = Net::SSLeay::SSL_METHOD->SSLv23_method;
+      unless ($ssl_method is_type Net::SSLeay::SSL_METHOD) {
+        return 0;
+      }
+      
+      my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
+    }
+    
+    {
+      my $ssl_method = Net::SSLeay::SSL_METHOD->SSLv23_client_method;
+      unless ($ssl_method is_type Net::SSLeay::SSL_METHOD) {
+        return 0;
+      }
+      
+      my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
+    }
+    
+    {
+      my $ssl_method = Net::SSLeay::SSL_METHOD->SSLv23_server_method;
+      unless ($ssl_method is_type Net::SSLeay::SSL_METHOD) {
+        return 0;
+      }
+      
+      my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
+    }
+    
+    {
+      my $ssl_method = Net::SSLeay::SSL_METHOD->TLS_method;
+      unless ($ssl_method is_type Net::SSLeay::SSL_METHOD) {
+        return 0;
+      }
+      
+      my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
+    }
+    
+    {
+      my $ssl_method = Net::SSLeay::SSL_METHOD->TLS_client_method;
+      unless ($ssl_method is_type Net::SSLeay::SSL_METHOD) {
+        return 0;
+      }
+      
+      my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
+    }
+    
+    {
+      my $ssl_method = Net::SSLeay::SSL_METHOD->TLS_server_method;
+      unless ($ssl_method is_type Net::SSLeay::SSL_METHOD) {
+        return 0;
+      }
+      
+      my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
+    }
+    
+    return 1;
+  }
 }
