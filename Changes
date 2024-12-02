@@ -1,4 +1,9 @@
 0.022 2024-12-02
+  [New Features]
+    * Add Net::SSLeay::DH#new method.
+    * Add Net::SSLeay::EVP_PKEY#new method.
+    * Add Net::SSLeay::PEM#read_bio_PrivateKeymethod.
+    
   [Incompatible Changes]
     * Add an exception to Net::SSLeay::OBJ#nid2obj method.
     * Add an exception to Net::SSLeay::OBJ#obj2nid method.

@@ -634,6 +634,17 @@ EOS
       
     }
     
+    {
+      my $bio = Net::SSLeay::BIO->new_file("$FILE_DIR/intermediate-ca.key.pem", "r");
+      
+      my $evp_pkey = Net::SSLeay::PEM->read_bio_PrivateKey($bio);
+      
+      unless ($evp_pkey is_type Net::SSLeay::EVP_PKEY) {
+        return 0;
+      }
+      
+    }
+    
     return 1;
   }
 }
