@@ -118,8 +118,6 @@ OpenSSL 1.1.1
 
 =item * L<Net::SSLeay::RAND|SPVM::Net::SSLeay::RAND>
 
-=item * L<Net::SSLeay::SSL_CIPHER|SPVM::Net::SSLeay::SSL_CIPHER>
-
 =item * L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX>
 
 =item * L<Net::SSLeay::SSL_METHOD|SPVM::Net::SSLeay::SSL_METHOD>

@@ -95,7 +95,6 @@ sub MY::postamble {
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::PEM');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::PKCS12');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::RAND');
-    $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::SSL_CIPHER');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::SSL_CTX');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::SSL_METHOD');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::SSL_SESSION');
