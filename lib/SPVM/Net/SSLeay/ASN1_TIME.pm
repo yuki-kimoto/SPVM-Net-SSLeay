@@ -46,6 +46,16 @@ C<method check : int ();>
 
 Calls native L<ASN1_TIME_check|https://docs.openssl.org/1.1.1/man3/ASN1_TIME_set> function given the pointer value of the instance, and returns its return value.
 
+=head2 print
+
+C<method print : int ($b : L<Net::SSLeay::BIO|SPVM::Net::SSLeay::BIO>);>
+
+Calls native L<ASN1_TIME_print|https://docs.openssl.org/1.1.1/man3/ASN1_TIME_set> function given $b, the pointer value of the instance.
+
+Exceptions:
+
+If ASN1_TIME_print failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>

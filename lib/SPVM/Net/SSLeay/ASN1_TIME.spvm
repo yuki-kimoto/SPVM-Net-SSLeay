@@ -3,6 +3,8 @@
 
 class Net::SSLeay::ASN1_TIME : pointer {
   
+  use Net::SSLeay::BIO;
+  
   # Class Methods
   native static method new : Net::SSLeay::ASN1_TIME ();
   
@@ -13,9 +15,9 @@ class Net::SSLeay::ASN1_TIME : pointer {
   
   native method DESTROY : void ();
   
-=pod TODO
+  native method print : int ($b : Net::SSLeay::BIO);
 
-int ASN1_TIME_print(BIO *b, const ASN1_TIME *s);
+=pod TODO
 
 int ASN1_TIME_to_tm(const ASN1_TIME *s, struct tm *tm);
 
