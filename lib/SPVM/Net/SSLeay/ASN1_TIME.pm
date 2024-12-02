@@ -24,7 +24,21 @@ C<static method new : L<Net::SSLeay::ASN1_TIME|SPVM::Net::SSLeay::ASN1_TIME> ();
 
 Calls native L<ASN1_TIME_new|https://docs.openssl.org/1.0.2/man3/ASN1_TIME_new/> function, creates a new  L<Net::SSLeay::ASN1_TIME|SPVM::Net::SSLeay::ASN1_TIME> object, sets the pointer value of the object to the return value of the native function, and returns the new object.
 
+Exceptions:
+
+If ASN1_TIME_new failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
 =head1 Instance Methods
+
+=head2 set
+
+C<static method set : void ($t : long);>
+
+Calls native L<ASN1_TIME_set|https://docs.openssl.org/1.1.1/man3/ASN1_TIME_set> function given $t.
+
+Exceptions:
+
+If ASN1_TIME_new failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
 =head2 DESTROY
 

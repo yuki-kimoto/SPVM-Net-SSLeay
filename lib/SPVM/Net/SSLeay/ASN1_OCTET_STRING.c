@@ -12,7 +12,7 @@ int32_t SPVM__Net__SSLeay__ASN1_OCTET_STRING__new(SPVM_ENV* env, SPVM_VALUE* sta
   
   int32_t error_id = 0;
   
-  ASN1_STRING* self = ASN1_OCTET_STRING_new();
+  ASN1_OCTET_STRING* self = ASN1_OCTET_STRING_new();
   
   if (!self) {
     int64_t ssl_error = ERR_peek_last_error();
@@ -87,7 +87,7 @@ int32_t SPVM__Net__SSLeay__ASN1_OCTET_STRING__set(SPVM_ENV* env, SPVM_VALUE* sta
   
   const void* data = (const void*)env->get_chars(env, stack, obj_data);
   
-  ASN1_STRING* self = env->get_pointer(env, stack, obj_self);
+  ASN1_OCTET_STRING* self = env->get_pointer(env, stack, obj_self);
   
   int32_t status = ASN1_STRING_set(self, data, len);
   

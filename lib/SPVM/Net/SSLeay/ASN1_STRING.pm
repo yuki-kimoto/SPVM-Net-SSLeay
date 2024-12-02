@@ -24,6 +24,10 @@ C<static method new : L<Net::SSLeay::ASN1_STRING|SPVM::Net::SSLeay::ASN1_STRING>
 
 Calls native L<ASN1_STRING_new|https://docs.openssl.org/1.0.2/man3/ASN1_STRING_new/> function, creates a new  L<Net::SSLeay::ASN1_STRING|SPVM::Net::SSLeay::ASN1_STRING> object, sets the pointer value of the object to the return value of the native function, and returns the new object.
 
+Exceptions:
+
+If ASN1_STRING_new failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
 =head1 Instance Methods
 
 =head2 length

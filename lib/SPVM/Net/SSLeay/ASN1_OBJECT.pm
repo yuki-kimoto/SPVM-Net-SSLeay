@@ -22,7 +22,11 @@ Net::SSLeay::ASN1_OBJECT class in L<SPVM> represents L<ASN1_OBJECT|https://docs.
 
 C<static method new : L<Net::SSLeay::OBJECT|SPVM::Net::SSLeay::OBJECT> ();>
 
-Calls native L<OBJECT_new|https://docs.openssl.org/3.3/man3/ASN1_OBJECT_new> function, creates a new  L<Net::SSLeay::OBJECT|SPVM::Net::SSLeay::OBJECT> object, sets the pointer value of the object to the return value of the native function, and returns the new object.
+Calls native L<ASN1_OBJECT_new|https://docs.openssl.org/3.3/man3/ASN1_OBJECT_new> function, creates a new  L<Net::SSLeay::OBJECT|SPVM::Net::SSLeay::OBJECT> object, sets the pointer value of the object to the return value of the native function, and returns the new object.
+
+Exceptions:
+
+If ASN1_OBJECT_new failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
 =head1 Instance Methods
 
