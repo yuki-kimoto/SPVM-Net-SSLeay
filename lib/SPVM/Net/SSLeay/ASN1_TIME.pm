@@ -16,6 +16,14 @@ Net::SSLeay::ASN1_TIME class in L<SPVM> represents L<ASN1_TIME|https://docs.open
 
   use Net::SSLeay::ASN1_TIME;
 
+=head1 Class Methods
+
+=head2 new
+
+C<static method new : L<Net::SSLeay::ASN1_TIME|SPVM::Net::SSLeay::ASN1_TIME> ();>
+
+Calls native L<ASN1_TIME_new|https://docs.openssl.org/1.0.2/man3/ASN1_TIME_new/> function, creates a new  L<Net::SSLeay::ASN1_TIME|SPVM::Net::SSLeay::ASN1_TIME> object, sets the pointer value of the object to the return value of the native function, and returns the new object.
+
 =head1 Instance Methods
 
 =head2 DESTROY

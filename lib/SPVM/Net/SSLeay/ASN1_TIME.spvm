@@ -3,6 +3,9 @@
 
 class Net::SSLeay::ASN1_TIME : pointer {
   
+  # Class Methods
+  native static method new : Net::SSLeay::ASN1_TIME ();
+  
   # Instance Methods
   native method DESTROY : void ();
 
