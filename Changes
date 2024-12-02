@@ -2,7 +2,8 @@
   [Incompatible Changes]
     * Add an exception to Net::SSLeay::OBJ#nid2obj method.
     * Add an exception to Net::SSLeay::OBJ#obj2nid method.
-    
+  [Bug Fix]
+    * Fix bugs in methods in Net::SSLeay::OBJ class.
 0.021 2024-12-02
   [New Features]
     * Add Net::SSLeay::ASN1_ENUMERATED#new method.

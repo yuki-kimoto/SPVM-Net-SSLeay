@@ -83,7 +83,13 @@ int32_t SPVM__Net__SSLeay__OBJ__obj2nid(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  ASN1_OBJECT* o = stack[0].oval;
+  void* obj_o = stack[0].oval;
+  
+  if (!obj_o) {
+    return env->die(env, stack, "The ASN1_OBJECT object $o must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  ASN1_OBJECT* o = env->get_pointer(env, stack, obj_o);
   
   int32_t nid = OBJ_obj2nid(o);
   

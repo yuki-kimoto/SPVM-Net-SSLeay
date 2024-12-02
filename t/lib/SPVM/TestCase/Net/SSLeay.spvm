@@ -23,6 +23,7 @@ class TestCase::Net::SSLeay {
   use Net::SSLeay::ASN1_OCTET_STRING;
   use Sys::Time::Tm;
   use Net::SSLeay::ASN1_TIME;
+  use Net::SSLeay::OBJ;
   
   static method test : int () {
     
@@ -408,6 +409,33 @@ class TestCase::Net::SSLeay {
     
     unless (Fn->contains($buffer, "00:00:01")) {
       return 0;
+    }
+    
+    return 1;
+  }
+  
+  static method OBJ : int () {
+    
+    {
+      my $nid = Net::SSLeay::OBJ->txt2nid("commonName");
+      
+      unless ($nid == SSL->NID_commonName) {
+        return 0;
+      }
+    }
+    
+    {
+      my $obj = Net::SSLeay::OBJ->nid2obj(SSL->NID_commonName);
+      
+      unless ($obj) {
+        return 0;
+      }
+      
+      my $nid = Net::SSLeay::OBJ->obj2nid($obj);
+      
+      unless ($nid == SSL->NID_commonName) {
+        return 0;
+      }
     }
     
     return 1;

@@ -46,6 +46,8 @@ ok(SPVM::TestCase::Net::SSLeay->ASN1_TIME);
 
 ok(SPVM::TestCase::Net::SSLeay->ASN1_GENERALIZEDTIME);
 
+ok(SPVM::TestCase::Net::SSLeay->OBJ);
+
 my $end_memory_blocks_count = $api->get_memory_blocks_count;
 is($end_memory_blocks_count, $start_memory_blocks_count);
 
