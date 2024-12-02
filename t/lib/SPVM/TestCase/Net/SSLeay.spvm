@@ -17,6 +17,7 @@ class TestCase::Net::SSLeay {
   use Net::SSLeay::X509_NAME;
   use Net::SSLeay::X509_NAME_ENTRY;
   use Sys::OS;
+  use Net::SSLeay::ASN1_ENUMERATED;
   
   static method test : int () {
     
@@ -232,6 +233,19 @@ class TestCase::Net::SSLeay {
     }
     
     return $read_length;
+  }
+  
+  static method ASN1_ENUMERATED : int () {
+    
+    my $object = Net::SSLeay::ASN1_ENUMERATED->new;
+    
+    $object->set_int64(Fn->LONG_MIN);
+    
+    unless ($object->get_int64 == Fn->LONG_MIN) {
+      return 0;
+    }
+    
+    return 1;
   }
   
 }

@@ -28,6 +28,8 @@ ok(SPVM::TestCase::Net::SSLeay::SSL_CTX->set_next_proto_select_cb_with_protocols
 
 ok(SPVM::TestCase::Net::SSLeay::SSL_CTX->set_next_protos_advertised_cb_with_protocols);
 
+ok(SPVM::TestCase::Net::SSLeay->ASN1_ENUMERATED);
+
 # Version
 {
   my $version_string = SPVM::Fn->get_version_string("Net::SSLeay");
