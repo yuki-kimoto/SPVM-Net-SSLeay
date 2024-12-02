@@ -240,6 +240,10 @@ class TestCase::Net::SSLeay {
     
     my $object = Net::SSLeay::ASN1_ENUMERATED->new;
     
+    unless ($object is_type Net::SSLeay::ASN1_ENUMERATED) {
+      return 0;
+    }
+    
     $object->set_int64(Fn->LONG_MIN);
     
     unless ($object->get_int64 == Fn->LONG_MIN) {
@@ -253,9 +257,24 @@ class TestCase::Net::SSLeay {
     
     my $object = Net::SSLeay::ASN1_INTEGER->new;
     
+    unless ($object is_type Net::SSLeay::ASN1_INTEGER) {
+      return 0;
+    }
+    
     $object->set_int64(Fn->LONG_MIN);
     
     unless ($object->get_int64 == Fn->LONG_MIN) {
+      return 0;
+    }
+    
+    return 1;
+  }
+  
+  static method ASN1_OBJECT : int () {
+    
+    my $object = Net::SSLeay::ASN1_OBJECT->new;
+    
+    unless ($object is_type Net::SSLeay::ASN1_OBJECT) {
       return 0;
     }
     
