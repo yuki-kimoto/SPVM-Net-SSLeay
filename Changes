@@ -1,4 +1,9 @@
 0.021 2024-12-02
+  [New Features]
+    * Add Net::SSLeay::ASN1_ENUMERATED#new method.
+    * Add Net::SSLeay::ASN1_ENUMERATED#set_int64 method.
+    * Add Net::SSLeay::ASN1_ENUMERATED#get_int64 method.
+    
   [Bug Fix]
     * Fix bugs that exception messages for SSL are not shown well.
   [Requirement Changes]
