@@ -6,14 +6,14 @@ class Net::SSLeay::ASN1_TIME : pointer {
   # Class Methods
   native static method new : Net::SSLeay::ASN1_TIME ();
   
-  native static method set : void ($t : long);
-  
   # Instance Methods
+  native method set : void ($t : long);
+  
+  native method check : int ();
+  
   native method DESTROY : void ();
-
+  
 =pod TODO
-
-int ASN1_TIME_check(const ASN1_TIME *t);
 
 int ASN1_TIME_print(BIO *b, const ASN1_TIME *s);
 

@@ -13,6 +13,7 @@
     * Add Net::SSLeay::ASN1_OCTET_STRING#set method.
     * Add Net::SSLeay::ASN1_TIME#new method.
     * Add Net::SSLeay::ASN1_TIME#set method.
+    * Add Net::SSLeay::ASN1_TIME#check method.
     
   [Bug Fix]
     * Fix bugs that exception messages for SSL are not shown well.

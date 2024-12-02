@@ -69,6 +69,22 @@ int32_t SPVM__Net__SSLeay__ASN1_TIME__set(SPVM_ENV* env, SPVM_VALUE* stack) {
   return 0;
 }
 
+
+int32_t SPVM__Net__SSLeay__ASN1_TIME__check(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  ASN1_TIME* self = env->get_pointer(env, stack, obj_self);
+  
+  int32_t ret = ASN1_TIME_check(self);
+  
+  stack[0].ival = ret;
+  
+  return 0;
+}
+
 int32_t SPVM__Net__SSLeay__ASN1_TIME__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
