@@ -1,3 +1,6 @@
+0.021 2024-12-02
+  [Bug Fix]
+    * Fix bugs that exception messages for SSL are not shown well.
 0.020 2024-11-29
   [New Features]
     * Add Net::SSLeay::SSL_CTX#set_default_verify_paths_windows method.
