@@ -21,6 +21,8 @@ class TestCase::Net::SSLeay {
   use Net::SSLeay::ASN1_INTEGER;
   use Net::SSLeay::ASN1_STRING;
   use Net::SSLeay::ASN1_OCTET_STRING;
+  use Sys::Time::Tm;
+  use Net::SSLeay::ASN1_TIME;
   
   static method test : int () {
     
@@ -319,6 +321,63 @@ class TestCase::Net::SSLeay {
     }
     
     unless ($object->length == 3) {
+      return 0;
+    }
+    
+    return 1;
+  }
+  
+  static method ASN1_TIME : int () {
+    
+    my $object = Net::SSLeay::ASN1_TIME->new;
+    
+    unless ($object is_type Net::SSLeay::ASN1_TIME) {
+      return 0;
+    }
+    
+    $object->set(1);
+    
+    my $tm = Sys::Time::Tm->new;
+    
+    $object->to_tm($tm);
+    
+    unless ($tm->tm_year == 70) {
+      return 0;
+    }
+    
+    unless ($tm->tm_mon == 0) {
+      return 0;
+    }
+    
+    unless ($tm->tm_mday == 1) {
+      return 0;
+    }
+    
+    unless ($tm->tm_hour == 0) {
+      return 0;
+    }
+    
+    unless ($tm->tm_min == 0) {
+      return 0;
+    }
+    
+    unless ($tm->tm_sec == 1) {
+      return 0;
+    }
+    
+    my $bio = Net::SSLeay::BIO->new;
+    
+    $object->print($bio);
+    
+    my $buffer = (mutable string)new_string_len 256;
+    my $read_length = $bio->read($buffer);
+    Fn->shorten($buffer, $read_length);
+    
+    unless (Fn->contains($buffer, "1970")) {
+      return 0;
+    }
+    
+    unless (Fn->contains($buffer, "00:00:01")) {
       return 0;
     }
     
