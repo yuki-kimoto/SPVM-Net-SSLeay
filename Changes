@@ -7,6 +7,8 @@
     * Add Net::SSLeay::ASN1_INTEGER#set_int64 method.
     * Add Net::SSLeay::ASN1_INTEGER#get_int64 method.
     * Add Net::SSLeay::ASN1_OBJECT#new method.
+    * Add Net::SSLeay::ASN1_STRING#new method.
+    * Add Net::SSLeay::ASN1_STRING#set method.
     
   [Bug Fix]
     * Fix bugs that exception messages for SSL are not shown well.

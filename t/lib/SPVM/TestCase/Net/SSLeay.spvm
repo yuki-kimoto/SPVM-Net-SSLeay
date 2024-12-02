@@ -19,6 +19,7 @@ class TestCase::Net::SSLeay {
   use Sys::OS;
   use Net::SSLeay::ASN1_ENUMERATED;
   use Net::SSLeay::ASN1_INTEGER;
+  use Net::SSLeay::ASN1_STRING;
   
   static method test : int () {
     
@@ -275,6 +276,27 @@ class TestCase::Net::SSLeay {
     my $object = Net::SSLeay::ASN1_OBJECT->new;
     
     unless ($object is_type Net::SSLeay::ASN1_OBJECT) {
+      return 0;
+    }
+    
+    return 1;
+  }
+  
+  static method ASN1_STRING : int () {
+    
+    my $object = Net::SSLeay::ASN1_STRING->new;
+    
+    unless ($object is_type Net::SSLeay::ASN1_STRING) {
+      return 0;
+    }
+    
+    $object->set("abc");
+    
+    unless ($object->get0_data eq "abc") {
+      return 0;
+    }
+    
+    unless ($object->length == 3) {
       return 0;
     }
     
