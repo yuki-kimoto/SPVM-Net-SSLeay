@@ -15,6 +15,7 @@
     * Add Net::SSLeay::ASN1_TIME#set method.
     * Add Net::SSLeay::ASN1_TIME#check method.
     * Add Net::SSLeay::ASN1_TIME#print method.
+    * Add Net::SSLeay::ASN1_TIME#to_tm method.
     
   [Bug Fix]
     * Fix bugs that exception messages for SSL are not shown well.
