@@ -66,6 +66,16 @@ Exceptions:
 
 If ASN1_TIME_to_tm failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
+=head2 to_generalizedtime
+
+C<method to_generalizedtime : L<Net::SSLeay::ASN1_GENERALIZEDTIME|SPVM::Net::SSLeay::ASN1_GENERALIZEDTIME> ();>
+
+Calls native L<ASN1_TIME_to_generalizedtime|https://docs.openssl.org/1.1.1/man3/ASN1_TIME_set> function given the pointer value of the instance, NULL, creates a new L<Net::SSLeay::ASN1_GENERALIZEDTIME|SPVM::Net::SSLeay::ASN1_GENERALIZEDTIME>, sets the pointer value of the new object to the return value of the native function, and returns the new object.
+
+Exceptions:
+
+If ASN1_TIME_to_generalizedtime failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>
