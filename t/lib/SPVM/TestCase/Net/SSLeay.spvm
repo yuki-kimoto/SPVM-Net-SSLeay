@@ -20,6 +20,7 @@ class TestCase::Net::SSLeay {
   use Net::SSLeay::ASN1_ENUMERATED;
   use Net::SSLeay::ASN1_INTEGER;
   use Net::SSLeay::ASN1_STRING;
+  use Net::SSLeay::ASN1_OCTET_STRING;
   
   static method test : int () {
     
@@ -287,6 +288,27 @@ class TestCase::Net::SSLeay {
     my $object = Net::SSLeay::ASN1_STRING->new;
     
     unless ($object is_type Net::SSLeay::ASN1_STRING) {
+      return 0;
+    }
+    
+    $object->set("abc");
+    
+    unless ($object->get0_data eq "abc") {
+      return 0;
+    }
+    
+    unless ($object->length == 3) {
+      return 0;
+    }
+    
+    return 1;
+  }
+  
+  static method ASN1_OCTET_STRING : int () {
+    
+    my $object = Net::SSLeay::ASN1_OCTET_STRING->new;
+    
+    unless ($object is_type Net::SSLeay::ASN1_OCTET_STRING) {
       return 0;
     }
     
