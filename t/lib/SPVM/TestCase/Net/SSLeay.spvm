@@ -25,6 +25,8 @@ class TestCase::Net::SSLeay {
   use Net::SSLeay::BIO;
   use FindBin;
   use Net::SSLeay::PEM;
+  use Net::SSLeay::EVP_MD;
+  use Net::SSLeay::EVP;
   
   our $FILE_DIR : string;
   
@@ -647,4 +649,42 @@ EOS
     
     return 1;
   }
+  
+  static method EVP : int () {
+    
+    {
+      my $md = Net::SSLeay::EVP->sha1;
+      
+      unless ($md is_type Net::SSLeay::EVP_MD) {
+        return 0;
+      }
+    }
+    
+    {
+      my $md = Net::SSLeay::EVP->sha256;
+      
+      unless ($md is_type Net::SSLeay::EVP_MD) {
+        return 0;
+      }
+    }
+    
+    {
+      my $md = Net::SSLeay::EVP->sha512;
+      
+      unless ($md is_type Net::SSLeay::EVP_MD) {
+        return 0;
+      }
+    }
+    
+    {
+      my $md = Net::SSLeay::EVP->get_digestbyname("sha512");
+      
+      unless ($md is_type Net::SSLeay::EVP_MD) {
+        return 0;
+      }
+    }
+    
+    return 1;
+  }
+  
 }

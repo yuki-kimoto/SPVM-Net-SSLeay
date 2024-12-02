@@ -56,6 +56,8 @@ ok(SPVM::TestCase::Net::SSLeay->DH);
 
 ok(SPVM::TestCase::Net::SSLeay->PEM);
 
+ok(SPVM::TestCase::Net::SSLeay->EVP);
+
 my $end_memory_blocks_count = $api->get_memory_blocks_count;
 is($end_memory_blocks_count, $start_memory_blocks_count);
 
