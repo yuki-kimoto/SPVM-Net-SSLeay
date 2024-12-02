@@ -34,6 +34,8 @@ ok(SPVM::TestCase::Net::SSLeay::SSL_CTX->set_next_protos_advertised_cb_with_prot
 
 ok(SPVM::TestCase::Net::SSLeay->ASN1_ENUMERATED);
 
+ok(SPVM::TestCase::Net::SSLeay->ASN1_INTEGER);
+
 my $end_memory_blocks_count = $api->get_memory_blocks_count;
 is($end_memory_blocks_count, $start_memory_blocks_count);
 

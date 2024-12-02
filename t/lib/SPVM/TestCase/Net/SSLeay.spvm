@@ -18,6 +18,7 @@ class TestCase::Net::SSLeay {
   use Net::SSLeay::X509_NAME_ENTRY;
   use Sys::OS;
   use Net::SSLeay::ASN1_ENUMERATED;
+  use Net::SSLeay::ASN1_INTEGER;
   
   static method test : int () {
     
@@ -238,6 +239,19 @@ class TestCase::Net::SSLeay {
   static method ASN1_ENUMERATED : int () {
     
     my $object = Net::SSLeay::ASN1_ENUMERATED->new;
+    
+    $object->set_int64(Fn->LONG_MIN);
+    
+    unless ($object->get_int64 == Fn->LONG_MIN) {
+      return 0;
+    }
+    
+    return 1;
+  }
+  
+  static method ASN1_INTEGER : int () {
+    
+    my $object = Net::SSLeay::ASN1_INTEGER->new;
     
     $object->set_int64(Fn->LONG_MIN);
     
