@@ -612,6 +612,28 @@ EOS
       
     }
     
+    {
+      my $bio = Net::SSLeay::BIO->new_file("$FILE_DIR/simple-cert.cert.pem", "r");
+      
+      my $x509 = Net::SSLeay::PEM->read_bio_X509($bio);
+      
+      unless ($x509 is_type Net::SSLeay::X509) {
+        return 0;
+      }
+      
+    }
+    
+    {
+      my $bio = Net::SSLeay::BIO->new_file("$FILE_DIR/intermediate-ca.crl.pem", "r");
+      
+      my $x509_crl = Net::SSLeay::PEM->read_bio_X509_CRL($bio);
+      
+      unless ($x509_crl is_type Net::SSLeay::X509_CRL) {
+        return 0;
+      }
+      
+    }
+    
     return 1;
   }
 }
