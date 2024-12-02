@@ -957,17 +957,6 @@ int32_t SPVM__Net__SSLeay__get_peer_cert_chain(SPVM_ENV* env, SPVM_VALUE* stack)
   return 0;
 }
 
-static void print_exception_to_stderr(SPVM_ENV* env, SPVM_VALUE* stack) {
-  void* obj_exception = env->get_exception(env, stack);
-  const char* exception = env->get_chars(env, stack, obj_exception);
-  
-  fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "[An exception is converted to a warning]\n");
-  
-  env->print_stderr(env, stack, obj_exception);
-  
-  fprintf(env->api->runtime->get_spvm_stderr(env->runtime), "\n");
-}
-
 static void SPVM__Net__SSLeay__my_msg_cb(int write_p, int version, int content_type, const void *buf, size_t len, SSL *ssl, void *arg) {
   
   int32_t error_id = 0;
@@ -984,14 +973,14 @@ static void SPVM__Net__SSLeay__my_msg_cb(int write_p, int version, int content_t
   
   void* obj_address_ssl = env->new_pointer_object_by_name(env, stack, "Address", ssl, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) {
-    print_exception_to_stderr(env, stack);
+    env->print_exception_to_stderr(env, stack);
     
     goto END_OF_FUNC;
   }
   stack[0].oval = obj_address_ssl;
   env->call_class_method_by_name(env, stack, "Net::SSLeay", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) {
-    print_exception_to_stderr(env, stack);
+    env->print_exception_to_stderr(env, stack);
     
     goto END_OF_FUNC;
   }
@@ -1008,7 +997,7 @@ static void SPVM__Net__SSLeay__my_msg_cb(int write_p, int version, int content_t
   stack[7].oval = obj_arg;
   env->call_instance_method_by_name(env, stack, "", 7, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) {
-    print_exception_to_stderr(env, stack);
+    env->print_exception_to_stderr(env, stack);
     
     goto END_OF_FUNC;
   }
