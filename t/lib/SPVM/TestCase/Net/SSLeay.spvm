@@ -5,7 +5,6 @@ class TestCase::Net::SSLeay {
   use Net::SSLeay::SSL_METHOD;
   use Net::SSLeay::Constant as SSL;
   use Net::SSLeay::ERR;
-  use Net::SSLeay::BIO;
   use Net::SSLeay::PEM;
   use StringBuffer;
   use Mozilla::CA;
@@ -24,6 +23,14 @@ class TestCase::Net::SSLeay {
   use Sys::Time::Tm;
   use Net::SSLeay::ASN1_TIME;
   use Net::SSLeay::OBJ;
+  use Net::SSLeay::BIO;
+  use FindBin;
+  
+  our $FILE_DIR : string;
+  
+  INIT {
+    $FILE_DIR = FindBin->Bin . "/file";
+  }
   
   static method test : int () {
     
@@ -497,6 +504,71 @@ class TestCase::Net::SSLeay {
       my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
     }
     
+    return 1;
+  }
+  
+  static method BIO : int () {
+    
+    {
+      my $object = Net::SSLeay::BIO->new;
+      
+      unless ($object is_type Net::SSLeay::BIO) {
+        return 0;
+      }
+      
+      $object->write("abc");
+      
+      my $buffer = (mutable string)new_string_len 3;
+      my $read_length = $object->read($buffer);
+      
+      unless ($read_length == 3) {
+        return 0;
+      }
+      
+      unless ($buffer eq "abc") {
+        return 0;
+      }
+    }
+    
+    {
+      my $object = Net::SSLeay::BIO->new;
+      
+      unless ($object is_type Net::SSLeay::BIO) {
+        return 0;
+      }
+      
+      $object->write("abc", 2);
+      
+      my $buffer = (mutable string)new_string_len 3;
+      my $read_length = $object->read($buffer, 2);
+      
+      unless ($read_length == 2) {
+        return 0;
+      }
+      
+      unless ($buffer eq "ab\0") {
+        return 0;
+      }
+    }
+    
+    {
+      my $object = Net::SSLeay::BIO->new_file("$FILE_DIR/simple-cert.cert.pem", "r");
+      
+      unless ($object is_type Net::SSLeay::BIO) {
+        return 0;
+      }
+      
+      my $buffer = (mutable string)new_string_len 3;
+      my $read_length = $object->read($buffer, 3);
+      
+      unless ($read_length == 3) {
+        return 0;
+      }
+      
+      unless ($buffer eq "---") {
+        return 0;
+      }
+    }
     return 1;
   }
 }
