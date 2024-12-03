@@ -58,6 +58,10 @@ ok(SPVM::TestCase::Net::SSLeay->PEM);
 
 ok(SPVM::TestCase::Net::SSLeay->EVP);
 
+ok(SPVM::TestCase::Net::SSLeay->OPENSSL_INIT);
+
+$api->set_exception(undef);
+
 my $end_memory_blocks_count = $api->get_memory_blocks_count;
 is($end_memory_blocks_count, $start_memory_blocks_count);
 

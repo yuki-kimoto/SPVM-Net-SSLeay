@@ -27,6 +27,8 @@ class TestCase::Net::SSLeay {
   use Net::SSLeay::PEM;
   use Net::SSLeay::EVP_MD;
   use Net::SSLeay::EVP;
+  use Net::SSLeay::OPENSSL_INIT;
+  use Net::SSLeay::OPENSSL_INIT_SETTINGS;
   
   our $FILE_DIR : string;
   
@@ -681,6 +683,52 @@ EOS
       
       unless ($md is_type Net::SSLeay::EVP_MD) {
         return 0;
+      }
+    }
+    
+    return 1;
+  }
+  
+  static method OPENSSL_INIT : int () {
+    
+    {
+      my $init_setting = Net::SSLeay::OPENSSL_INIT->new;
+      
+      unless ($init_setting is_type Net::SSLeay::OPENSSL_INIT_SETTINGS) {
+        return 0;
+      }
+      
+      {
+        eval  {Net::SSLeay::OPENSSL_INIT->set_config_filename(undef, undef); }
+        
+        if ($@ && eval_error_id isa_error Error::NotSupported) {
+          warn "[Test Skip]Skip tests for Net::SSLeay::OPENSSL_INIT#set_config_filename method.";
+        }
+        else {
+          Net::SSLeay::OPENSSL_INIT->set_config_filename($init_setting, "foo.config");
+        }
+      }
+      
+      {
+        eval  {Net::SSLeay::OPENSSL_INIT->set_config_file_flags(undef, 0); }
+        
+        if ($@ && eval_error_id isa_error Error::NotSupported) {
+          warn "[Test Skip]Skip tests for Net::SSLeay::OPENSSL_INIT#set_config_file_flags method.";
+        }
+        else {
+          Net::SSLeay::OPENSSL_INIT->set_config_file_flags($init_setting, 0);
+        }
+      }
+      
+      {
+        eval  {Net::SSLeay::OPENSSL_INIT->set_config_appname(undef, undef); }
+        
+        if ($@ && eval_error_id isa_error Error::NotSupported) {
+          warn "[Test Skip]Skip tests for Net::SSLeay::OPENSSL_INIT#set_config_appname method.";
+        }
+        else {
+          Net::SSLeay::OPENSSL_INIT->set_config_appname($init_setting, "foo");
+        }
       }
     }
     
