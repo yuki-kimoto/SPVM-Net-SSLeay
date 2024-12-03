@@ -707,7 +707,13 @@ EOS
           warn "[Test Skip]Skip tests for Net::SSLeay::OPENSSL_INIT#set_config_filename method.";
         }
         else {
+      
+      warn;
+      
           Net::SSLeay::OPENSSL_INIT->set_config_filename($init_setting, "foo.config");
+      
+      warn;
+      
         }
       }
       
@@ -720,7 +726,13 @@ EOS
           warn "[Test Skip]Skip tests for Net::SSLeay::OPENSSL_INIT#set_config_file_flags method.";
         }
         else {
+      
+      warn;
+      
           Net::SSLeay::OPENSSL_INIT->set_config_file_flags($init_setting, 0);
+      
+      warn;
+      
         }
       }
       
@@ -733,7 +745,13 @@ EOS
           warn "[Test Skip]Skip tests for Net::SSLeay::OPENSSL_INIT#set_config_appname method.";
         }
         else {
+      
+      warn;
+      
           Net::SSLeay::OPENSSL_INIT->set_config_appname($init_setting, "foo");
+      
+      warn;
+      
         }
       }
       

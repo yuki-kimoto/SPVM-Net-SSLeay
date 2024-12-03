@@ -51,7 +51,11 @@ int32_t SPVM__Net__SSLeay__OPENSSL_INIT__set_config_filename(SPVM_ENV* env, SPVM
   
   const char* filename = env->get_chars(env, stack, obj_filename);
   
+  spvm_warn("%p %p", self, filename);
+  
   int32_t status = OPENSSL_INIT_set_config_filename(self, filename);
+  
+  spvm_warn("");
   
   if (!(status == 1)) {
     int64_t ssl_error = ERR_peek_last_error();
