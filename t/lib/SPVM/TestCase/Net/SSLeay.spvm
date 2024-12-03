@@ -698,8 +698,6 @@ EOS
         return 0;
       }
       
-      warn;
-      
       {
         eval  {Net::SSLeay::OPENSSL_INIT->set_config_filename(undef, undef); }
         
@@ -707,17 +705,9 @@ EOS
           warn "[Test Skip]Skip tests for Net::SSLeay::OPENSSL_INIT#set_config_filename method.";
         }
         else {
-      
-      warn;
-      
           Net::SSLeay::OPENSSL_INIT->set_config_filename($init_setting, "foo.config");
-      
-      warn;
-      
         }
       }
-      
-      warn;
       
       {
         eval  {Net::SSLeay::OPENSSL_INIT->set_config_file_flags(undef, 0); }
@@ -726,17 +716,9 @@ EOS
           warn "[Test Skip]Skip tests for Net::SSLeay::OPENSSL_INIT#set_config_file_flags method.";
         }
         else {
-      
-      warn;
-      
           Net::SSLeay::OPENSSL_INIT->set_config_file_flags($init_setting, 0);
-      
-      warn;
-      
         }
       }
-      
-      warn;
       
       {
         eval  {Net::SSLeay::OPENSSL_INIT->set_config_appname(undef, undef); }
@@ -745,18 +727,9 @@ EOS
           warn "[Test Skip]Skip tests for Net::SSLeay::OPENSSL_INIT#set_config_appname method.";
         }
         else {
-      
-      warn;
-      
           Net::SSLeay::OPENSSL_INIT->set_config_appname($init_setting, "foo");
-      
-      warn;
-      
         }
       }
-      
-      warn;
-      
     }
     
     return 1;
