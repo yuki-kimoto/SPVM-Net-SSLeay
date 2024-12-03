@@ -735,4 +735,17 @@ EOS
     return 1;
   }
   
+  static method OPENSSL : int () {
+    
+    Net::SSLeay::OPENSSL->add_ssl_algorithms;
+    
+    Net::SSLeay::OPENSSL->add_all_algorithms;
+    
+    my $init_setting = Net::SSLeay::OPENSSL_INIT->new;
+    
+    Net::SSLeay::OPENSSL->init_ssl(0, $init_setting);
+    
+    return 1;
+  }
+  
 }
