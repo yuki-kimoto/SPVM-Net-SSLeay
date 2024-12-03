@@ -5,6 +5,7 @@
     * Add Net::SSLeay::PEM#read_bio_PrivateKey method.
     * Add Net::SSLeay::EVP#sha256 method.
     * Add Net::SSLeay::EVP#sha512 method.
+    * Add Net::SSLeay::PKCS12#new method.
     
   [Incompatible Changes]
     * Add an exception to Net::SSLeay::OBJ#nid2obj method.
