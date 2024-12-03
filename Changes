@@ -1,4 +1,4 @@
-0.022 2024-12-02
+0.022 2024-12-04
   [New Features]
     * Add Net::SSLeay::DH#new method.
     * Add Net::SSLeay::EVP_PKEY#new method.
@@ -6,6 +6,7 @@
     * Add Net::SSLeay::EVP#sha256 method.
     * Add Net::SSLeay::EVP#sha512 method.
     * Add Net::SSLeay::PKCS12#new method.
+    * Add Net::SSLeay::DER#(i2d_TYPE|d2i_TYPE|d2i_TYPE_bio) methods.
     
   [Incompatible Changes]
     * Add an exception to Net::SSLeay::OBJ#nid2obj method.
