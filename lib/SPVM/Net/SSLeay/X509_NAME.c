@@ -47,7 +47,7 @@ int32_t SPVM__Net__SSLeay__X509_NAME__oneline(SPVM_ENV* env, SPVM_VALUE* stack) 
   
   spvm_warn("%s", ret);
   
-  // free(ret);
+  OPENSSL_free(ret);
   
   spvm_warn("");
   
