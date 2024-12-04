@@ -743,6 +743,8 @@ EOS
     
     Net::SSLeay::OPENSSL->add_all_algorithms;
     
+    Net::SSLeay::OPENSSL->init_crypto(SSL->OPENSSL_INIT_NO_ADD_ALL_CIPHERS | SSL->OPENSSL_INIT_NO_ADD_ALL_DIGESTS, undef);
+                    
     my $init_setting = Net::SSLeay::OPENSSL_INIT->new;
     
     Net::SSLeay::OPENSSL->init_ssl(0, $init_setting);
