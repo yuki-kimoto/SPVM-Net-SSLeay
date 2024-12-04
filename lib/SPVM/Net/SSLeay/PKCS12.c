@@ -77,11 +77,7 @@ int32_t SPVM__Net__SSLeay__PKCS12__parse(SPVM_ENV* env, SPVM_VALUE* stack) {
   X509* cert_tmp = NULL;
   STACK_OF(X509)* stack_of_cas_tmp = NULL;
   
-  spvm_warn("");
-  
   int32_t status = PKCS12_parse(self, pass, &pkey_tmp, &cert_tmp, &stack_of_cas_tmp);
-  
-  spvm_warn("");
   
   if (!(status == 1)) {
     int64_t ssl_error = ERR_peek_last_error();
@@ -98,8 +94,6 @@ int32_t SPVM__Net__SSLeay__PKCS12__parse(SPVM_ENV* env, SPVM_VALUE* stack) {
     return error_id;
   }
   
-  spvm_warn("%p", pkey_tmp);
-  
   void* obj_pkey = NULL;
   if (pkey_tmp) {
     EVP_PKEY_up_ref(pkey_tmp);
@@ -113,8 +107,6 @@ int32_t SPVM__Net__SSLeay__PKCS12__parse(SPVM_ENV* env, SPVM_VALUE* stack) {
   }
   env->set_elem_object(env, stack, obj_pkey_ref, 0, obj_pkey);
   
-  spvm_warn("");
-  
   void* obj_cert = NULL;
   if (cert_tmp) {
     X509_up_ref(cert_tmp);
@@ -127,8 +119,6 @@ int32_t SPVM__Net__SSLeay__PKCS12__parse(SPVM_ENV* env, SPVM_VALUE* stack) {
     obj_cert = stack[0].oval;
   }
   env->set_elem_object(env, stack, obj_cert_ref, 0, obj_cert);
-  
-  spvm_warn("");
   
   void* obj_cas = NULL;
   if (obj_cas_ref) {
@@ -156,8 +146,6 @@ int32_t SPVM__Net__SSLeay__PKCS12__parse(SPVM_ENV* env, SPVM_VALUE* stack) {
     
     env->set_elem_object(env, stack, obj_cas_ref, 0, obj_cas);
   }
-  
-  spvm_warn("");
   
   return 0;
 }
