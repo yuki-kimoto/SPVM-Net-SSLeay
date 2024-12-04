@@ -754,10 +754,6 @@ EOS
   
   static method PKCS12 : int () {
     
-    Net::SSLeay::OPENSSL->add_all_algorithms;
-    
-    Net::SSLeay::OPENSSL->init_crypto(SSL->OPENSSL_INIT_ADD_ALL_CIPHERS | SSL->OPENSSL_INIT_ADD_ALL_DIGESTS, undef);
-    
     {
       my $pkcs12 = Net::SSLeay::PKCS12->new;
       
@@ -767,7 +763,7 @@ EOS
     }
     
     {
-      my $bio = Net::SSLeay::BIO->new_file("$FILE_DIR/simple-cert.enc.p12", "r");
+      my $bio = Net::SSLeay::BIO->new_file("$FILE_DIR/simple-cert.enc.p12", "rb");
       
       my $pkcs12 = Net::SSLeay::DER->d2i_PKCS12_bio($bio);
       
@@ -791,7 +787,7 @@ EOS
     }
     
     {
-      my $bio = Net::SSLeay::BIO->new_file("$FILE_DIR/simple-cert.enc.p12", "r");
+      my $bio = Net::SSLeay::BIO->new_file("$FILE_DIR/simple-cert.enc.p12", "rb");
       
       my $pkcs12 = Net::SSLeay::DER->d2i_PKCS12_bio($bio);
       
@@ -820,7 +816,7 @@ EOS
     }
     
     {
-      my $bio = Net::SSLeay::BIO->new_file("$FILE_DIR/simple-cert.certchain.enc.p12", "r");
+      my $bio = Net::SSLeay::BIO->new_file("$FILE_DIR/simple-cert.certchain.enc.p12", "rb");
       
       my $pkcs12 = Net::SSLeay::DER->d2i_PKCS12_bio($bio);
       
