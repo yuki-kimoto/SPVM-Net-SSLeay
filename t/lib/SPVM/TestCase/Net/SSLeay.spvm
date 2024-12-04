@@ -779,28 +779,44 @@ EOS
       
       $pkcs12->parse($pass, $pkey_ref, $cert_ref);
       
+      warn;
+      
       unless ($pkey_ref->[0] isa Net::SSLeay::EVP_PKEY) {
         return 0;
       }
       
+      warn;
+      
       unless (Fn->contains($cert_ref->[0]->get_subject_name->oneline, "/C=PL/O=Net-SSLeay/OU=Test Suite/CN=simple-cert.net-ssleay.example")) {
         return 0;
       }
+      warn;
     }
     
     {
+      
+      warn;
+      
       my $bio = Net::SSLeay::BIO->new_file("$FILE_DIR/simple-cert.enc.p12", "rb");
       
+      warn;
+      
       my $pkcs12 = Net::SSLeay::DER->d2i_PKCS12_bio($bio);
+      
+      warn;
       
       unless ($pkcs12 is_type Net::SSLeay::PKCS12) {
         return 0;
       }
       
+      warn;
+      
       my $pass = (string)"test";
       my $pkey_ref = new Net::SSLeay::EVP_PKEY[1];
       my $cert_ref = new Net::SSLeay::X509[1];
       my $csa_ref = new Net::SSLeay::X509[][1];
+      
+      warn;
       
       $pkcs12->parse($pass, $pkey_ref, $cert_ref, $csa_ref);
       
