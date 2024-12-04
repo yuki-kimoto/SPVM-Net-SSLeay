@@ -98,7 +98,7 @@ int32_t SPVM__Net__SSLeay__PKCS12__parse(SPVM_ENV* env, SPVM_VALUE* stack) {
     return error_id;
   }
   
-  spvm_warn("");
+  spvm_warn("%p", pkey_tmp);
   
   void* obj_pkey = NULL;
   if (pkey_tmp) {
