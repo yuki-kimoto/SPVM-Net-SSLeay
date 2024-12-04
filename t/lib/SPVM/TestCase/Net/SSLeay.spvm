@@ -754,6 +754,8 @@ EOS
   
   static method PKCS12 : int () {
     
+    Net::SSLeay::OPENSSL->init_crypto(SSL->OPENSSL_INIT_ADD_ALL_CIPHERS | SSL->OPENSSL_INIT_ADD_ALL_DIGESTS, undef);
+    
     {
       my $pkcs12 = Net::SSLeay::PKCS12->new;
       
