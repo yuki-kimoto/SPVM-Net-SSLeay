@@ -169,7 +169,7 @@ int32_t SPVM__${class_name_c}__d2i_${type_name}_bio(SPVM_ENV* env, SPVM_VALUE* s
   
   void* obj_bio = stack[0].oval;
   
-  if (obj_bio) {
+  if (!obj_bio) {
     return env->die(env, stack, "The BIO object \$bio must be defined.", __func__, FILE_NAME, __LINE__);
   }
   

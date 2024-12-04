@@ -30,6 +30,7 @@ class TestCase::Net::SSLeay {
   use Net::SSLeay::OPENSSL_INIT;
   use Net::SSLeay::OPENSSL_INIT_SETTINGS;
   use Net::SSLeay::PKCS12;
+  use Net::SSLeay::DER;
   
   our $FILE_DIR : string;
   
@@ -757,6 +758,17 @@ EOS
       unless ($pkcs12 is_type Net::SSLeay::PKCS12) {
         return 0;
       }
+    }
+    
+    {
+      my $bio = Net::SSLeay::BIO->new_file("$FILE_DIR/simple-cert.enc.p12", "r");
+      
+      my $pkcs12 = Net::SSLeay::DER->d2i_PKCS12_bio($bio);
+      
+      unless ($pkcs12 is_type Net::SSLeay::PKCS12) {
+        return 0;
+      }
+      
     }
     
     return 1;

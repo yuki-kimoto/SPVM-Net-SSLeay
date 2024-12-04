@@ -129,7 +129,7 @@ int32_t SPVM__Net__SSLeay__DER__d2i_OCSP_REQUEST_bio(SPVM_ENV* env, SPVM_VALUE* 
   
   void* obj_bio = stack[0].oval;
   
-  if (obj_bio) {
+  if (!obj_bio) {
     return env->die(env, stack, "The BIO object $bio must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
@@ -273,7 +273,7 @@ int32_t SPVM__Net__SSLeay__DER__d2i_OCSP_RESPONSE_bio(SPVM_ENV* env, SPVM_VALUE*
   
   void* obj_bio = stack[0].oval;
   
-  if (obj_bio) {
+  if (!obj_bio) {
     return env->die(env, stack, "The BIO object $bio must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
@@ -526,7 +526,7 @@ int32_t SPVM__Net__SSLeay__DER__d2i_PKCS12_bio(SPVM_ENV* env, SPVM_VALUE* stack)
   
   void* obj_bio = stack[0].oval;
   
-  if (obj_bio) {
+  if (!obj_bio) {
     return env->die(env, stack, "The BIO object $bio must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
