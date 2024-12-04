@@ -5,6 +5,9 @@ class Net::SSLeay::PKCS12 {
   
   use Fn;
   
+  use Net::SSLeay::X509;
+  use Net::SSLeay::EVP_PKEY;
+  
   # Class Methods
   native static method new : Net::SSLeay::PKCS12 ();
   
@@ -18,6 +21,8 @@ class Net::SSLeay::PKCS12 {
   }
   
   # Instance Methods
+  native method parse : int ($pass : string, $pkey_ref : Net::SSLeay::EVP_PKEY[], $cert_ref : Net::SSLeay::X509[], $cas_ref : Net::SSLeay::X509[][]);
+  
   native method DESTROY : void ();
-
+  
 }
