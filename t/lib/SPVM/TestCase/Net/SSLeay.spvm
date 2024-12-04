@@ -787,6 +787,10 @@ EOS
       
       warn $cert_ref->[0]->get_subject_name;
       
+      my $subject_name = $cert_ref->[0]->get_subject_name;
+      
+      warn $subject_name->oneline;
+      
       warn $cert_ref->[0]->get_subject_name->oneline;
       
       unless (Fn->contains($cert_ref->[0]->get_subject_name->oneline, "/C=PL/O=Net-SSLeay/OU=Test Suite/CN=simple-cert.net-ssleay.example")) {

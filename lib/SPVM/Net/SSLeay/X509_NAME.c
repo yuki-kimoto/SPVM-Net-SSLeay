@@ -10,6 +10,8 @@ static const char* FILE_NAME = "Net/SSLeay/X509_NAME.c";
 
 int32_t SPVM__Net__SSLeay__X509_NAME__oneline(SPVM_ENV* env, SPVM_VALUE* stack) {
   
+  spvm_warn("");
+  
   int32_t error_id = 0;
   
   void* obj_self = stack[0].oval;
