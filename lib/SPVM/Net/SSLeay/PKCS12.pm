@@ -30,6 +30,30 @@ If PKCS12_new failed, an exception is thrown with C<eval_error_id> set to the ba
 
 =head1 Instance Methods
 
+=head2 parse
+
+C<method parse : int ($pass : string, $pkey_ref : L<Net::SSLeay::EVP_PKEY|SPVM::Net::SSLeay::EVP_PKEY>[], $cert_ref : L<Net::SSLeay::X509[]|SPVM::Net::SSLeay::X509>, $cas_ref : L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509>[][] = undef);>
+
+Calls native L<PKCS12_parse|https://docs.openssl.org/master/man3/PKCS12_parse/> function given $pass, apprepriate arguments for rest arguments.
+
+And creates a new L<Net::SSLeay::EVP_PKEY|SPVM::Net::SSLeay::EVP_PKEY>, sets the pointer value of the new object to the value of the corresponding output argument of the native function, sets C<$pkey_ref->[0]> to the new object.
+
+And creates a new L<Net::SSLeay::X509[]|SPVM::Net::SSLeay::X509>, sets the pointer value of the new object to the value of the output corresponding argument of the native function, sets C<$cert_ref->[0]> to the new object.
+
+And creates a new array of L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> from the value of the output corresponding argument of the native function, sets C<$cas_ref->[0]> to the new array.
+
+And returns the return value of the native function.
+
+Exceptions:
+
+The 1-length array $pkey_ref for output for a private key must be defined. Otherwise an exception is thrown.
+
+The 1-length array $cert_ref for output for a certificate must be defined. Otherwise an exception is thrown.
+
+The 1-length array $cas_ref for output for intermediate certificate must be defined if defined. Otherwise an exception is thrown.
+
+If PKCS12_parse failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>
