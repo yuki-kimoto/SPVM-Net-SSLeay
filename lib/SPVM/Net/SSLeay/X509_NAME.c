@@ -45,9 +45,9 @@ int32_t SPVM__Net__SSLeay__X509_NAME__oneline(SPVM_ENV* env, SPVM_VALUE* stack) 
   
   void* obj_ret = env->new_string_nolen(env, stack, ret);
   
-  spvm_warn("");
+  spvm_warn("%s", ret);
   
-  free(ret);
+  // free(ret);
   
   spvm_warn("");
   
