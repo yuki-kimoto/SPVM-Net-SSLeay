@@ -777,7 +777,7 @@ EOS
       
       $pkcs12->parse($pass, $pkey_ref, $cert_ref);
       
-      warn;
+      warn $pkey_ref->[0];
       
       unless ($pkey_ref->[0] isa Net::SSLeay::EVP_PKEY) {
         return 0;
