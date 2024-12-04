@@ -76,7 +76,6 @@ int32_t SPVM__Net__SSLeay__PKCS12__parse(SPVM_ENV* env, SPVM_VALUE* stack) {
   EVP_PKEY* pkey_tmp = NULL;
   X509* cert_tmp = NULL;
   STACK_OF(X509)* stack_of_cas_tmp = NULL;
-  spvm_warn("%s", pass);
   int32_t status = PKCS12_parse(self, pass, &pkey_tmp, &cert_tmp, &stack_of_cas_tmp);
   
   if (!(status == 1)) {
@@ -125,8 +124,6 @@ int32_t SPVM__Net__SSLeay__PKCS12__parse(SPVM_ENV* env, SPVM_VALUE* stack) {
     if (stack_of_cas_tmp) {
       int32_t length = sk_X509_num(stack_of_cas_tmp);
       obj_cas = env->new_object_array_by_name(env, stack, "Net::SSLeay::X509", length, &error_id, __func__, FILE_NAME, __LINE__);
-      
-      spvm_warn("");
       
       for (int32_t i = 0; i < length; i++) {
         X509* ca = sk_X509_value(stack_of_cas_tmp, i);
