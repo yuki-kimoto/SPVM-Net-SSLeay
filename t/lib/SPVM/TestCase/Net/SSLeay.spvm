@@ -754,8 +754,6 @@ EOS
   
   static method PKCS12 : int () {
     
-    Net::SSLeay::OPENSSL->add_all_algorithms;
-    
     {
       my $pkcs12 = Net::SSLeay::PKCS12->new;
       
