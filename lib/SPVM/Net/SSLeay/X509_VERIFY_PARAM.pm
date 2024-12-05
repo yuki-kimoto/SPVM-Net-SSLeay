@@ -76,7 +76,7 @@ Calls native L<X509_VERIFY_PARAM_get_hostflags|https://docs.openssl.org/master/m
 
 C<method set1_email : int ($email : string, $emaillen : int = -1);>
 
-Calls native L<X509_VERIFY_PARAM_set1_email|https://docs.openssl.org/1.0.2/man3/X509_VERIFY_PARAM_set_flags/> function given the pointer value of the instance, $name, $namelen, and returns its return value.
+Calls native L<X509_VERIFY_PARAM_set1_email|https://docs.openssl.org/1.0.2/man3/X509_VERIFY_PARAM_set_flags/> function given the pointer value of the instance, $email, $emaillen, and returns its return value.
 
 If $namelen is less than 0, it is set to the length of $name.
 
@@ -85,6 +85,18 @@ Exceptions:
 The email $email must be defined. Otherwise an exception is thrown.
 
 The length $emaillen must be greater than or equal to the length of the host name $name. Otherwise an exception is thrown.
+
+If X509_VERIFY_PARAM_set1_email failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
+=head2 set1_email
+
+C<method set1_ip_asc : int ($ipasc : string);>
+
+Calls native L<X509_VERIFY_PARAM_set1_ip_asc|https://docs.openssl.org/1.0.2/man3/X509_VERIFY_PARAM_set_flags/> function given the pointer value of the instance, $ipasc, and returns its return value.
+
+Exceptions:
+
+The IP address $ipasc must be defined. Otherwise an exception is thrown.
 
 If X509_VERIFY_PARAM_set1_email failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
