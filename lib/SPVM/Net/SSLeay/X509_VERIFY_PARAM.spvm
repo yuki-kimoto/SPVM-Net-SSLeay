@@ -25,5 +25,7 @@ class Net::SSLeay::X509_VERIFY_PARAM : pointer {
   
   native method set_flags : int ($flags : long);
   
+  native method clear_flags : int ($flags : long);
+  
   native method DESTROY : void ();
 }

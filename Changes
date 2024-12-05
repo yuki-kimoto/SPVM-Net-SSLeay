@@ -1,3 +1,6 @@
+0.023 2024-12-05
+  [New Features]
+    * Add Net::SSLeay::X509_VERIFY_PARAM#clear_flags method.
 0.022 2024-12-04
   [New Features]
     * Add Net::SSLeay::DH#new method.
