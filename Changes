@@ -3,6 +3,7 @@
     * Add Net::SSLeay::X509_VERIFY_PARAM#clear_flags method.
     * Add Net::SSLeay::X509_VERIFY_PARAM#get_flags method.
     * Add Net::SSLeay::X509_VERIFY_PARAM#get_hostflags method.
+    * Add Net::SSLeay::X509_VERIFY_PARAM#set1_email method.
   [Changes]
     * Change the default value of $namele in Net::SSLeay::X509_VERIFY_PARAM#set1_host method.
       [Before]

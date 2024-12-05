@@ -31,5 +31,7 @@ class Net::SSLeay::X509_VERIFY_PARAM : pointer {
   
   native method get_hostflags : int ();
   
+  native method set1_email : int ($email : string, $emaillen : int = -1);
+                                 
   native method DESTROY : void ();
 }

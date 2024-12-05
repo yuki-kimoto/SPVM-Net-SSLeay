@@ -165,6 +165,54 @@ int32_t SPVM__Net__SSLeay__X509_VERIFY_PARAM__get_hostflags(SPVM_ENV* env, SPVM_
   return 0;
 }
 
+int32_t SPVM__Net__SSLeay__X509_VERIFY_PARAM__set1_email(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  void* obj_name = stack[1].oval;
+  
+  if (!obj_name) {
+    return env->die(env, stack, "The email $email must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  int32_t namelen = stack[2].ival;
+  
+  int32_t name_length = env->length(env, stack, obj_name);
+    
+  if (namelen < 0) {
+    namelen = name_length;
+  }
+  
+  if (!(namelen <= name_length)) {
+    return env->die(env, stack, "The length $emaillen must be greater than or equal to the length of the email name $name.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  const char* name = env->get_chars(env, stack, obj_name);
+  
+  X509_VERIFY_PARAM* self = env->get_pointer(env, stack, obj_self);
+  
+  int32_t status = X509_VERIFY_PARAM_set1_email(self, name, namelen);
+  
+  if (!(status == 1)) {
+    int64_t ssl_error = ERR_peek_last_error();
+    
+    char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
+    ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
+    
+    env->die(env, stack, "[OpenSSL Error]X509_VERIFY_PARAM_set1_email failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    
+    int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) { return error_id; }
+    error_id = tmp_error_id;
+    
+    return error_id;
+  }
+  
+  return 0;
+}
+
 int32_t SPVM__Net__SSLeay__X509_VERIFY_PARAM__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   int32_t error_id = 0;
   
