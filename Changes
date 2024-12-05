@@ -10,6 +10,7 @@
     * Add Net::SSLeay::X509_NAME#new method.
     * Add Net::SSLeay::X509_NAME#add_entry_by_NID method.
     * Add Net::SSLeay::X509_NAME#delete_entry method.
+    * Add Net::SSLeay::X509_CRL#new method.
   [Changes]
     * Change the default value of $namele in Net::SSLeay::X509_VERIFY_PARAM#set1_host method.
       [Before]

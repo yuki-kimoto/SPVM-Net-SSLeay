@@ -9,6 +9,8 @@ class Net::SSLeay::X509_CRL : pointer {
   use Fn;
   
   # Class Methods
+  native static method new : Net::SSLeay::X509_CRL ();
+  
   private static method new_with_pointer : Net::SSLeay::X509_CRL ($pointer : Address, $options : object[] = undef) {
     
     my $self = new Net::SSLeay::X509_CRL;
@@ -19,6 +21,17 @@ class Net::SSLeay::X509_CRL : pointer {
   }
   
   # Instance Methods
+
+=pod
+
+  STACK_OF(X509_REVOKED) *X509_CRL_get_REVOKED(X509_CRL *crl);
+  
+  const ASN1_INTEGER *X509_REVOKED_get0_serialNumber(const X509_REVOKED *r);
+  
+  const ASN1_TIME *X509_REVOKED_get0_revocationDate(const X509_REVOKED *r);
+
+=cut
+
   native method DESTROY : void ();
   
 }
