@@ -31,6 +31,7 @@ class TestCase::Net::SSLeay {
   use Net::SSLeay::OPENSSL_INIT_SETTINGS;
   use Net::SSLeay::PKCS12;
   use Net::SSLeay::DER;
+  use Net::SSLeay::X509_VERIFY_PARAM;
   
   our $FILE_DIR : string;
   
@@ -844,6 +845,56 @@ EOS
       unless (@{$csa_ref->[0]} == 2) {
         return 0;
       }
+    }
+    
+    return 1;
+  }
+  
+  static method X509_VERIFY_PARAM : int () {
+    
+    {
+      my $param = Net::SSLeay::X509_VERIFY_PARAM->new;
+      
+      unless ($param is_type Net::SSLeay::X509_VERIFY_PARAM) {
+        return 0;
+      }
+      
+      $param->set_flags(SSL->X509_V_FLAG_CRL_CHECK);
+      
+      {
+        my $flags = $param->get_flags;
+        
+        unless ($flags & SSL->X509_V_FLAG_CRL_CHECK) {
+          return 0;
+        }
+      }
+      
+      {
+        $param->clear_flags(SSL->X509_V_FLAG_CRL_CHECK);
+        
+        my $flags = $param->get_flags;
+        
+        if ($flags & SSL->X509_V_FLAG_CRL_CHECK) {
+          return 0;
+        }
+      }
+      
+      $param->set_hostflags(SSL->X509_CHECK_FLAG_ALWAYS_CHECK_SUBJECT);
+      
+      {
+        my $hostflags = $param->get_hostflags;
+        
+        unless ($hostflags & SSL->X509_CHECK_FLAG_ALWAYS_CHECK_SUBJECT) {
+          return 0;
+        }
+      }
+      
+      $param->set1_host("foo.com");
+      
+      $param->set1_ip_asc("127.0.0.1");
+      
+      $param->set1_email("kimoto@foo.com");
+      
     }
     
     return 1;

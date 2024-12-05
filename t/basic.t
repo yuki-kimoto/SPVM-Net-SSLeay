@@ -62,6 +62,8 @@ ok(SPVM::TestCase::Net::SSLeay->OPENSSL_INIT);
 
 ok(SPVM::TestCase::Net::SSLeay->PKCS12);
 
+ok(SPVM::TestCase::Net::SSLeay->X509_VERIFY_PARAM);
+
 $api->set_exception(undef);
 
 my $end_memory_blocks_count = $api->get_memory_blocks_count;
