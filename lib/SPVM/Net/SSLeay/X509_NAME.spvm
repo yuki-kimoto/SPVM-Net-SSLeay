@@ -28,8 +28,6 @@ class Net::SSLeay::X509_NAME : pointer {
   
   native method entry_count : int ();
   
-  native method get_index_by_OBJ : int ($obj : Net::SSLeay::ASN1_OBJECT, $lastpos : int);
-  
   native method DESTROY : void ();
   
 }

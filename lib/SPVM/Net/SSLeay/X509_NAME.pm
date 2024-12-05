@@ -50,12 +50,6 @@ C<method entry_count : int ();>
 
 Calls native L<X509_NAME_entry_count|https://docs.openssl.org/1.1.1/man3/X509_NAME_get_index_by_NID> functions given the pointer value of the instance, and returns its return value.
 
-=head2 get_index_by_OBJ
-
-C<method get_index_by_OBJ : int ($obj : Net::SSLeay::ASN1_OBJECT, $lastpos : int);>
-
-Calls native L<X509_NAME_get_index_by_OBJ|https://docs.openssl.org/1.1.1/man3/X509_NAME_get_index_by_NID> functions given the pointer value of the instance, the pointer value of $obj, $lastpos, and returns its return value.
-
 =head2 DESTROY
 
 C<method DESTROY : void ();>

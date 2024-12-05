@@ -153,27 +153,6 @@ int32_t SPVM__Net__SSLeay__X509_NAME__entry_count(SPVM_ENV* env, SPVM_VALUE* sta
   return 0;
 }
 
-int32_t SPVM__Net__SSLeay__X509_NAME__get_index_by_OBJ(SPVM_ENV* env, SPVM_VALUE* stack) {
-  
-  int32_t error_id = 0;
-  
-  void* obj_self = stack[0].oval;
-  
-  void* obj_obj = stack[1].oval;
-  
-  int32_t lastpos = stack[2].ival;
-  
-  X509_NAME* self = env->get_pointer(env, stack, obj_self);
-  
-  ASN1_OBJECT* obj = env->get_pointer(env, stack, obj_obj);
-  
-  int32_t index = X509_NAME_get_index_by_OBJ(self, obj, lastpos);
-  
-  stack[0].ival = index;
-  
-  return 0;
-}
-
 int32_t SPVM__Net__SSLeay__X509_NAME__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
