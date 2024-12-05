@@ -82,7 +82,9 @@ Calls native L<X509_NAME_free|https://docs.openssl.org/3.3/man3/X509_dup/> funct
 
 =over 2
 
-=item * L<Net::SSLeay::PEM|SPVM::Net::SSLeay::X509>
+=item * L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509>
+
+=item * L<Net::SSLeay::X509_NAME_ENTRY|SPVM::Net::SSLeay::X509_NAME_ENTRY>
 
 =item * L<Net::SSLeay|SPVM::Net::SSLeay>
 
