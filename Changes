@@ -14,7 +14,8 @@
       
       [After]
       method set1_host : int ($name : string, $namelen : int = -1);
-      
+  [Incompatibe Changes]
+    * Remove Net::SSLeay::X509#get_ext_by_OBJ method.
 0.022 2024-12-04
   [New Features]
     * Add Net::SSLeay::DH#new method.
