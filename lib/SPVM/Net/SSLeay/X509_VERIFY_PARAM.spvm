@@ -9,6 +9,8 @@ class Net::SSLeay::X509_VERIFY_PARAM : pointer {
   use Fn;
   
   # Class Methods
+  native static method new : Net::SSLeay::X509_VERIFY_PARAM ();
+  
   private static method new_with_pointer : Net::SSLeay::X509_VERIFY_PARAM ($pointer : Address, $options : object[] = undef) {
     
     my $self = new Net::SSLeay::X509_VERIFY_PARAM;
