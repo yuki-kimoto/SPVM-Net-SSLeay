@@ -48,11 +48,21 @@ C<method DESTROY : void ();>
 
 Calls native L<X509_free|https://docs.openssl.org/3.2/man3/X509_new> function given the pointer value of the instance if C<no_free> flag of the instance is not a true value.
 
+=head1 FAQ
+
+=head2 How to convert a Net::SSLeay::ASN1_OBJECT object to NID?
+
+Use L<Net::SSLeay::OBJ#obj2nid|SPVM::Net::SSLeay::OBJ/"obj2nid"> method.
+
 =head1 See Also
 
 =over 2
 
-=item * L<Net::SSLeay::PEM|SPVM::Net::SSLeay::X509>
+=item * L<Net::SSLeay::X509_NAME|SPVM::Net::SSLeay::X509_NAME>
+
+=item * L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509>
+
+=item * L<Net::SSLeay::OBJ|SPVM::Net::SSLeay::OBJ>
 
 =item * L<Net::SSLeay|SPVM::Net::SSLeay>
 
