@@ -27,6 +27,8 @@ class Net::SSLeay::X509_NAME : pointer {
   
   native method entry_count : int ();
   
+  native method add_entry_by_NID : int ($nid : int, $type : int, $bytes : string, $len : int = -1, $loc : int = -1, $set : int = 0);
+  
   native method DESTROY : void ();
   
 }

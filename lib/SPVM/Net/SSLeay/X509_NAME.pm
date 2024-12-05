@@ -54,6 +54,18 @@ C<method entry_count : int ();>
 
 Calls native L<X509_NAME_entry_count|https://docs.openssl.org/1.1.1/man3/X509_NAME_get_index_by_NID> functions given the pointer value of the instance, and returns its return value.
 
+=head2 add_entry_by_NID
+
+C<method add_entry_by_NID : int ($nid : int, $type : int, $bytes : string, $len : int = -1, $loc : int = -1, $set : int = 0);>
+
+Calls native L<X509_NAME_add_entry_by_NID|https://docs.openssl.org/1.1.1/man3/X509_NAME_get_index_by_NID> functions given the pointer value of the instance, $nid, $type, $bytes, $len, $loc, $set, and returns its return value.
+
+Exceptions:
+
+The bytes $bytes must be defined. Otherwise an exception is thrown.
+
+If X509_NAME_add_entry_by_NID failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>
