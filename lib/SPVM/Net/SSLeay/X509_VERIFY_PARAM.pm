@@ -26,11 +26,11 @@ Calls native L<X509_VERIFY_PARAM_set_hostflags|https://docs.openssl.org/1.0.2/ma
 
 =head2 set1_host
 
-C<method set1_host : int ($name : string, $namelen : int = 0);>
+C<method set1_host : int ($name : string, $namelen : int = -1);>
 
 Calls native L<X509_VERIFY_PARAM_set1_host|https://docs.openssl.org/1.0.2/man3/X509_VERIFY_PARAM_set_flags/> function given the pointer value of the instance, $name, $namelen, and returns its return value.
 
-If $namelen is 0, it is set to the length of $name.
+If $namelen is less than 0, it is set to the length of $name.
 
 Exceptions:
 

@@ -39,7 +39,7 @@ int32_t SPVM__Net__SSLeay__X509_VERIFY_PARAM__set1_host(SPVM_ENV* env, SPVM_VALU
   
   int32_t name_length = env->length(env, stack, obj_name);
     
-  if (namelen == 0) {
+  if (namelen < 0) {
     namelen = name_length;
   }
   
