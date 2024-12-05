@@ -204,6 +204,45 @@ int32_t SPVM__Net__SSLeay__X509_NAME__add_entry_by_NID(SPVM_ENV* env, SPVM_VALUE
   return 0;
 }
 
+int32_t SPVM__Net__SSLeay__X509_NAME__delete_entry(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  int32_t loc = stack[1].ival;
+  
+  X509_NAME* self = env->get_pointer(env, stack, obj_self);
+  
+  X509_NAME_ENTRY* name_entry = X509_NAME_delete_entry(self, loc);
+  
+  if (!name_entry) {
+    int64_t ssl_error = ERR_peek_last_error();
+    
+    char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
+    ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
+    
+    env->die(env, stack, "[OpenSSL Error]X509_NAME_delete_entry failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    
+    int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) { return error_id; }
+    error_id = tmp_error_id;
+    
+    return error_id;
+  }
+  
+  void* obj_address_name_entry = env->new_pointer_object_by_name(env, stack, "Address", name_entry, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
+  stack[0].oval = obj_address_name_entry;
+  env->call_class_method_by_name(env, stack, "Net::SSLeay::X509_NAME_ENTRY", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);  
+  if (error_id) { return error_id; }
+  void* obj_name_entry = stack[0].oval;
+  
+  stack[0].oval = obj_name_entry;
+  
+  return 0;
+}
+
 int32_t SPVM__Net__SSLeay__X509_NAME__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;

@@ -66,6 +66,12 @@ The bytes $bytes must be defined. Otherwise an exception is thrown.
 
 If X509_NAME_add_entry_by_NID failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
+=head2 delete_entry
+
+C<method delete_entry : L<Net::SSLeay::X509_NAME_ENTRY|SPVM::Net::SSLeay::X509_NAME_ENTRY> ($loc : int);>
+
+Calls native L<X509_NAME_delete_entry|https://docs.openssl.org/3.1/man3/X509_NAME_get_index_by_NID> functions given the pointer value of the instance, $loc, creates a new L<Net::SSLeay::X509_NAME_ENTRY|SPVM::Net::SSLeay::X509_NAME_ENTRY> object, sets the pointer value of the new object to the return value of the native function,, and returns the new object.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>
