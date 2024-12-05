@@ -60,6 +60,12 @@ Exceptions:
 
 If X509_VERIFY_PARAM_clear_flags failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
+=head2 get_flags
+
+C<method get_flags : long ();>
+
+Calls native L<X509_VERIFY_PARAM_get_flags|https://docs.openssl.org/master/man3/X509_VERIFY_PARAM_clear_flags> function given the pointer value of the instance, and returns its return value.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>
