@@ -66,6 +66,12 @@ C<method get_flags : long ();>
 
 Calls native L<X509_VERIFY_PARAM_get_flags|https://docs.openssl.org/master/man3/X509_VERIFY_PARAM_clear_flags> function given the pointer value of the instance, and returns its return value.
 
+=head2 get_hostflags
+
+C<method get_hostflags : int ();>
+
+Calls native L<X509_VERIFY_PARAM_get_hostflags|https://docs.openssl.org/master/man3/X509_VERIFY_PARAM_clear_flags> function given the pointer value of the instance, and returns its return value.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>

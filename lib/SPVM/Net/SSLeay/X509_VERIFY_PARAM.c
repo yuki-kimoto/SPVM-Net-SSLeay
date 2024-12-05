@@ -150,6 +150,21 @@ int32_t SPVM__Net__SSLeay__X509_VERIFY_PARAM__get_flags(SPVM_ENV* env, SPVM_VALU
   return 0;
 }
 
+int32_t SPVM__Net__SSLeay__X509_VERIFY_PARAM__get_hostflags(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  X509_VERIFY_PARAM* self = env->get_pointer(env, stack, obj_self);
+  
+  int32_t hostflags = X509_VERIFY_PARAM_get_hostflags(self);
+  
+  stack[0].ival = hostflags;
+  
+  return 0;
+}
+
 int32_t SPVM__Net__SSLeay__X509_VERIFY_PARAM__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   int32_t error_id = 0;
   
