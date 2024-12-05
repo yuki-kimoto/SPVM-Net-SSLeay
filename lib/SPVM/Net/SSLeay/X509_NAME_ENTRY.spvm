@@ -8,9 +8,6 @@ class Net::SSLeay::X509_NAME_ENTRY {
   use Net::SSLeay::ASN1_OBJECT;
   use Fn;
   
-  # Fields
-  has ref_x509_name : Net::SSLeay::X509_NAME;
-  
   # Class Methods
   native static method new : Net::SSLeay::X509_NAME_ENTRY ();
   
