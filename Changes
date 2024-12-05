@@ -7,6 +7,7 @@
     * Add Net::SSLeay::X509_VERIFY_PARAM#set1_ip_asc method.
     * Add Net::SSLeay::X509_VERIFY_PARAM#new method.
     * Add Net::SSLeay::X509_NAME_ENTRY#new method.
+    * Add Net::SSLeay::X509_NAME#new method.
   [Changes]
     * Change the default value of $namele in Net::SSLeay::X509_VERIFY_PARAM#set1_host method.
       [Before]
