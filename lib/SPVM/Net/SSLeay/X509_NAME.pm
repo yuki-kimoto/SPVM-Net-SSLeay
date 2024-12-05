@@ -24,14 +24,6 @@ C<method oneline : string ();>
 
 Calls native L<X509_NAME_oneline|https://docs.openssl.org/1.1.1/man3/X509_NAME_print_ex> functions given the pointer value of the instance, $buf with NULL, and returns its return value.
 
-=head2 get_text_by_NID
-
-C<method get_text_by_NID : int ($nid : int, $buf : mutable string, $len : int = -1);>
-
-Calls native L<X509_NAME_get_text_by_NID|https://docs.openssl.org/1.1.1/man3/X509_NAME_get_index_by_NID> functions given the pointer value of the instance, $nid, $buf, $len, and returns its return value.
-
-If $buf is defined and $len is a negative value, $len is set to the length of $buf.
-
 =head2 get_entry
 
 C<method get_entry : L<Net::SSLeay::X509_NAME_ENTRY|SPVM::Net::SSLeay::X509_NAME_ENTRY> ($loc : int);>

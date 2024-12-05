@@ -17,6 +17,7 @@
   [Incompatibe Changes]
     * Remove Net::SSLeay::X509#get_ext_by_OBJ method.
     * Remove Net::SSLeay::X509_NAME#get_index_by_OBJ method.
+    * Remove Net::SSLeay::X509_NAME#get_text_by_NID method.
 0.022 2024-12-04
   [New Features]
     * Add Net::SSLeay::DH#new method.
