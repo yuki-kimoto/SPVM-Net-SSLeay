@@ -2,4 +2,24 @@
 # MIT License
 
 class Net::SSLeay::X509_REVOKED {
+  allow Net::SSLeay::PEM;
+  
+  use Net::SSLeay::Error;
+  
+  use Fn;
+  
+  # Class Methods
+  native static method new : Net::SSLeay::X509_REVOKED ();
+  
+  private static method new_with_pointer : Net::SSLeay::X509_REVOKED ($pointer : Address, $options : object[] = undef) {
+    
+    my $self = new Net::SSLeay::X509_REVOKED;
+    
+    Fn->set_pointer($self, $pointer);
+    
+    return $self;
+  }
+  
+  native method DESTROY : void ();
+  
 }

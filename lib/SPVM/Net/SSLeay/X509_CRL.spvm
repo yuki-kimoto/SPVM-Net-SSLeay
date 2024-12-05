@@ -5,6 +5,7 @@ class Net::SSLeay::X509_CRL : pointer {
   allow Net::SSLeay::PEM;
   
   use Net::SSLeay::Error;
+  use Net::SSLeay::X509_REVOKED;
   
   use Fn;
   
