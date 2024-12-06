@@ -5,6 +5,8 @@ class Net::SSLeay::X509_REVOKED {
   allow Net::SSLeay::PEM;
   
   use Net::SSLeay::Error;
+  use Net::SSLeay::ASN1_INTEGER;
+  use Net::SSLeay::ASN1_TIME;
   
   use Fn;
   
@@ -20,14 +22,11 @@ class Net::SSLeay::X509_REVOKED {
     return $self;
   }
   
+  # Instance Methods
+  native method get0_serialNumber : Net::SSLeay::ASN1_INTEGER ();
+  
+  native method get0_revocationDate : Net::SSLeay::ASN1_TIME ();
+  
   native method DESTROY : void ();
   
-=pod TODO
-
-  const ASN1_INTEGER *X509_REVOKED_get0_serialNumber(const X509_REVOKED *r);
-  
-  const ASN1_TIME *X509_REVOKED_get0_revocationDate(const X509_REVOKED *r);
-
-=cut
-
 }
