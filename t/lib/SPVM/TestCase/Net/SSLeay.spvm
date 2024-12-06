@@ -1019,4 +1019,38 @@ EOS
     return 1;
   }
   
+  static method X509_EXTENSION : int () {
+    
+    {
+      my $x509_ext = Net::SSLeay::X509_EXTENSION->new;
+      
+      unless ($x509_ext is_type Net::SSLeay::X509_EXTENSION) {
+        return 0;
+      }
+      
+      $x509_ext->set_object(Net::SSLeay::OBJ->nid2obj(Net::SSLeay::OBJ->txt2nid("C")));
+      
+      unless (Net::SSLeay::OBJ->obj2nid($x509_ext->get_object) == Net::SSLeay::OBJ->txt2nid("C")) {
+        return 0;
+      }
+      
+      $x509_ext->set_critical(1);
+      
+      unless ($x509_ext->get_critical == 1) {
+        return 0;
+      }
+      
+      my $data = Net::SSLeay::ASN1_OCTET_STRING->new;
+      $data->set("ABC");
+      
+      $x509_ext->set_data($data);
+      
+      unless ($x509_ext->get_data->get0_data eq "ABC") {
+        return 0;
+      }
+      
+    }
+    
+    return 1;
+  }
 }

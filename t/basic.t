@@ -68,6 +68,8 @@ ok(SPVM::TestCase::Net::SSLeay->X509_NAME);
 
 ok(SPVM::TestCase::Net::SSLeay->X509_CRL);
 
+ok(SPVM::TestCase::Net::SSLeay->X509_EXTENSION);
+
 $api->set_exception(undef);
 
 my $end_memory_blocks_count = $api->get_memory_blocks_count;
