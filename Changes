@@ -3,6 +3,7 @@
     * Remove deprecated Net::SSLeay::X509#P_get_ocsp_uri method.
   [New Features]
     * Add Net::SSLeay::XX509#new method.
+    * Add Net::SSLeay::XX509#get_pubkey method.
 0.024 2024-12-06
   [New Features]
     * Add Net::SSLeay::XX509_EXTENSION#new method.
