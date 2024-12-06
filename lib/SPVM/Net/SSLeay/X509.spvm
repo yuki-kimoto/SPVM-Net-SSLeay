@@ -28,6 +28,8 @@ class Net::SSLeay::X509 : pointer {
   }
   
   # Instance Methods
+  native method get_serialNumber : Net::SSLeay::ASN1_INTEGER ();
+  
   native method get_issuer_name : Net::SSLeay::X509_NAME ();
   
   native method get_subject_name : Net::SSLeay::X509_NAME ();
@@ -74,8 +76,6 @@ class Net::SSLeay::X509 : pointer {
   
   native method digest : int ($type : Net::SSLeay::EVP_MD, $md : mutable string, $len_ref : int*);
   
-  native method get_serialNumber : Net::SSLeay::ASN1_INTEGER ();
-
   native method DESTROY : void ();
   
 }
