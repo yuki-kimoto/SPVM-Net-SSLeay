@@ -22,4 +22,12 @@ class Net::SSLeay::X509_REVOKED {
   
   native method DESTROY : void ();
   
+=pod TODO
+
+  const ASN1_INTEGER *X509_REVOKED_get0_serialNumber(const X509_REVOKED *r);
+  
+  const ASN1_TIME *X509_REVOKED_get0_revocationDate(const X509_REVOKED *r);
+
+=cut
+
 }

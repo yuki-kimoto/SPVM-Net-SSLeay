@@ -22,17 +22,8 @@ class Net::SSLeay::X509_CRL : pointer {
   }
   
   # Instance Methods
-
-=pod
-
-  STACK_OF(X509_REVOKED) *X509_CRL_get_REVOKED(X509_CRL *crl);
+  native method get_REVOKED : Net::SSLeay::X509_REVOKED[] ();
   
-  const ASN1_INTEGER *X509_REVOKED_get0_serialNumber(const X509_REVOKED *r);
-  
-  const ASN1_TIME *X509_REVOKED_get0_revocationDate(const X509_REVOKED *r);
-
-=cut
-
   native method DESTROY : void ();
   
 }
