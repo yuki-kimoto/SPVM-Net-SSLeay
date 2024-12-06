@@ -49,9 +49,11 @@ int32_t SPVM__Net__SSLeay__X509__get_issuer_name(SPVM_ENV* env, SPVM_VALUE* stac
   
   X509* self = env->get_pointer(env, stack, obj_self);
   
-  X509_NAME* x509_name = X509_get_issuer_name(self);
+  X509_NAME* x509_name_tmp = X509_get_issuer_name(self);
   
-  assert(x509_name);
+  assert(x509_name_tmp);
+  
+  X509_NAME* x509_name = X509_NAME_dup(x509_name_tmp);
   
   void* obj_address_x509_name = env->new_pointer_object_by_name(env, stack, "Address", x509_name, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
@@ -59,8 +61,6 @@ int32_t SPVM__Net__SSLeay__X509__get_issuer_name(SPVM_ENV* env, SPVM_VALUE* stac
   env->call_class_method_by_name(env, stack, "Net::SSLeay::X509_NAME", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   void* obj_x509_name = stack[0].oval;
-  
-  env->set_no_free(env, stack, obj_x509_name, 1);
   
   stack[0].oval = obj_x509_name;
   
