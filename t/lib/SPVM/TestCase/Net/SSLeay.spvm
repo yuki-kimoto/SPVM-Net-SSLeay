@@ -32,6 +32,8 @@ class TestCase::Net::SSLeay {
   use Net::SSLeay::X509_VERIFY_PARAM;
   use Net::SSLeay::X509_NAME;
   use Net::SSLeay::X509_NAME_ENTRY;
+  use Net::SSLeay::ASN1_INTEGER;
+  use Net::SSLeay::ASN1_TIME;
   
   our $FILE_DIR : string;
   
@@ -964,6 +966,54 @@ EOS
           return 0;
         }
       }
+    }
+    
+    return 1;
+  }
+  
+  static method X509_CRL : int () {
+    
+    {
+      my $bio = Net::SSLeay::BIO->new_file("$FILE_DIR/intermediate-ca.crl.pem", "r");
+      
+      my $x509_crl = Net::SSLeay::PEM->read_bio_X509_CRL($bio);
+      
+      unless ($x509_crl is_type Net::SSLeay::X509_CRL) {
+        return 0;
+      }
+      
+      my $x509_revokeds = $x509_crl->get_REVOKED;
+      
+      unless (@$x509_revokeds == 1) {
+        return 0;
+      }
+      
+      my $x509_revoked = $x509_revokeds->[0];
+      
+      my $serialNumber = $x509_revoked->get0_serialNumber;
+      
+      my $serialNumber_long = $serialNumber->get_int64;
+      
+      unless ($serialNumber_long == 5) {
+        return 0;
+      }
+      
+      my $revocationDate = $x509_revoked->get0_revocationDate;
+      
+      my $revocationDate_bio = Net::SSLeay::BIO->new;
+      
+      $revocationDate->print($revocationDate_bio);
+      
+      my $revocationDate_string = (mutable string)new_string_len 255;
+      
+      my $read_length = $revocationDate_bio->read($revocationDate_string);
+      
+      Fn->shorten($revocationDate_string, $read_length);
+      
+      unless ($revocationDate_string eq "Jun  6 06:06:06 2020 GMT") {
+        return 0;
+      }
+      
     }
     
     return 1;

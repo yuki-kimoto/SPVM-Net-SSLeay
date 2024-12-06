@@ -47,7 +47,7 @@ int32_t SPVM__Net__SSLeay__X509_REVOKED__get0_serialNumber(SPVM_ENV* env, SPVM_V
   
   const ASN1_INTEGER* ret_tmp = X509_REVOKED_get0_serialNumber(self);
   
-  ASN1_INTEGER* ret = ASN1_INTEGER_dup(ret);
+  ASN1_INTEGER* ret = ASN1_INTEGER_dup(ret_tmp);
   
   void* obj_address_ret = env->new_pointer_object_by_name(env, stack, "Address", ret, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
@@ -71,7 +71,7 @@ int32_t SPVM__Net__SSLeay__X509_REVOKED__get0_revocationDate(SPVM_ENV* env, SPVM
   
   const ASN1_TIME* ret_tmp = X509_REVOKED_get0_revocationDate(self);
   
-  ASN1_TIME* ret = ASN1_STRING_dup(ret);
+  ASN1_TIME* ret = ASN1_STRING_dup(ret_tmp);
   
   void* obj_address_ret = env->new_pointer_object_by_name(env, stack, "Address", ret, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
