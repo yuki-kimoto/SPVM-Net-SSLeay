@@ -10,9 +10,6 @@ class Net::SSLeay::X509_EXTENSION : pointer {
   use Net::SSLeay::ASN1_OBJECT;
   use Fn;
   
-  # Fields
-  has ref_x509 : Net::SSLeay::X509;
-  
   # Class Methods
   native static method new : Net::SSLeay::X509_EXTENSION ();
   

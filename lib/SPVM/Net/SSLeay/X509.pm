@@ -130,7 +130,7 @@ Calls native L<X509_get_ext_count|https://docs.openssl.org/1.1.1/man3/X509v3_get
 
 C<method get_ext : L<Net::SSLeay::X509_EXTENSION|SPVM::Net::SSLeay::X509_EXTENSION> ($loc : int);>
 
-Calls native L<X509_get_ext|https://docs.openssl.org/1.1.1/man3/X509v3_get_ext_by_NID> function given the pointer value of the instance, $loc, creates a new L<Net::SSLeay::X509_EXTENSION|SPVM::Net::SSLeay::X509_EXTENSION> object, sets the pointer value of the new object to the return value of the native function, sets C<no_free> flag of the new object to 1, creates a reference from the new object to the instance, and returns the new object.
+Calls native L<X509_get_ext|https://docs.openssl.org/1.1.1/man3/X509v3_get_ext_by_NID> function given the pointer value of the instance, $loc, copies its return value using native L<X509_EXTENSION_dup|https://docs.openssl.org/3.0/man3/X509_dup/> function, creates a new L<Net::SSLeay::X509_EXTENSION|SPVM::Net::SSLeay::X509_EXTENSION> object, sets the pointer value of the new object to the native copied value, and returns the new object.
 
 Exceptions:
 
