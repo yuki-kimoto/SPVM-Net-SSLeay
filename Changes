@@ -5,7 +5,8 @@
     * Add Net::SSLeay::XX509#new method.
     * Add Net::SSLeay::XX509#get_pubkey method.
   [Incompatibe Changes]
-    * Net::SSLeay::XX509#get_pubkey method returns a copied value.
+    * Net::SSLeay::XX509#get_issuer_name method returns a copied value.
+    * Net::SSLeay::XX509#get_subject_name method returns a copied value.
 0.024 2024-12-06
   [New Features]
     * Add Net::SSLeay::XX509_EXTENSION#new method.
