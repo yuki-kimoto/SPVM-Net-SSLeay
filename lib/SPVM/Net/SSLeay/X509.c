@@ -385,6 +385,7 @@ int32_t SPVM__Net__SSLeay__X509__get_pubkey(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   X509* self = env->get_pointer(env, stack, obj_self);
   
+  // The reference count is incremented
   EVP_PKEY* pubkey = X509_get_pubkey(self);
   
   if (!pubkey) {
@@ -408,8 +409,6 @@ int32_t SPVM__Net__SSLeay__X509__get_pubkey(SPVM_ENV* env, SPVM_VALUE* stack) {
   env->call_class_method_by_name(env, stack, "Net::SSLeay::EVP_PKEY", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   void* obj_pubkey = stack[0].oval;
-  
-  env->set_no_free(env, stack, obj_pubkey, 1);
   
   stack[0].oval = obj_pubkey;
   
