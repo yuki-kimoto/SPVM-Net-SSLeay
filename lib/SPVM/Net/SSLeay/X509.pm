@@ -42,6 +42,12 @@ The X509 object $subject must be defined. Otherwise an exception is thrown.
 
 =head1 Instance Methods
 
+=head2 get_serialNumber
+
+C<method get_serialNumber : L<Net::SSLeay::ASN1_INTEGER|SPVM::Net::SSLeay::ASN1_INTEGER> ()>
+
+Calls native L<X509_get_serialNumber|https://docs.openssl.org/3.2/man3/X509_get_serialNumber/> function given the pointer value of the instance, copies its return value using native L<ASN1_INTEGER_dup|https://docs.openssl.org/master/man3/X509_dup/> function, creates a new L<Net::SSLeay::ASN1_INTEGER|SPVM::Net::SSLeay::X509_NAME> object, sets the pointer value of the new object to the native copied value, and returns the new object.
+
 =head2 get_issuer_name
 
 C<method get_issuer_name : L<Net::SSLeay::X509_NAME|SPVM::Net::SSLeay::X509_NAME> ();>
@@ -54,27 +60,15 @@ C<method get_subject_name : L<Net::SSLeay::X509_NAME|SPVM::Net::SSLeay::X509_NAM
 
 Calls native L<X509_get_subject_name|https://docs.openssl.org/3.3/man3/X509_get_subject_name> function given the pointer value of the instance, copies its return value using native L<X509_NAME_dup|https://docs.openssl.org/master/man3/X509_dup/> function, creates a new L<Net::SSLeay::X509_NAME|SPVM::Net::SSLeay::X509_NAME> object, sets the pointer value of the new object to the native copied value, and returns the new object.
 
-=head2 digest
+=head2 get_pubkey
 
-C<method digest : int ($type : L<Net::SSLeay::EVP_MD|SPVM::Net::SSLeay::EVP_MD>, $md : mutable string, $len_ref : int*);>
+C<method get_pubkey : L<Net::SSLeay::EVP_PKEY|SPVM::Net::SSLeay::EVP_PKEY> ();>
 
-Calls native L<X509_digest|https://docs.openssl.org/master/man3/X509_digest> function given the pointer value of the instance, $type, the pointer value of $md, $len_ref, and returns its return value.
+Calls native L<X509_get_pubkey|https://docs.openssl.org/master/man3/X509_get_pubkey> function, creates a new L<Net::SSLeay::EVP_PKEY|SPVM::Net::SSLeay::EVP_PKEY> object, sets the pointer value of the new object to the return vlaue of the native function, and returns the new object.
 
 Exceptions:
 
-The digest type $type must be defined. Otherwise an exception is thrown.
-
-The output buffer $md must be defined. Otherwise an exception is thrown.
-
-The length of output buffer $md must be greater than or equal to EVP_MAX_MD_SIZE. Otherwise an exception is thrown.
-
-If X509_digest failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
-
-=head2 digest_return_string
-
-C<method digest_return_string : string ($type : Net::SSLeay::EVP_MD);>
-
-Calls L</"digest"> method given appropriate arguments, and returns the output string.
+If X509_get_ext failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
 =head2 pubkey_digest
 
@@ -97,12 +91,6 @@ If X509_pubkey_digest failed, an exception is thrown with C<eval_error_id> set t
 C<method pubkey_digest_return_string : string ($type : Net::SSLeay::EVP_MD);>
 
 Calls L</"pubkey_digest"> method given appropriate arguments, and returns the output string.
-
-=head2 dup
-
-C<method dup : L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> ();>
-
-Calls native L<X509_dup|https://docs.openssl.org/3.3/man3/X509_dup> function given the pointer value of the instance, creates a new L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> object, sets the pointer value of the new object to the return value of the native function, and returns the new object.
 
 =head2 get_ocsp_uri
 
@@ -138,21 +126,33 @@ Exceptions:
 
 If X509_get_ext failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
-=head2 get_pubkey
+=head2 digest
 
-C<method get_pubkey : L<Net::SSLeay::EVP_PKEY|SPVM::Net::SSLeay::EVP_PKEY> ();>
+C<method digest : int ($type : L<Net::SSLeay::EVP_MD|SPVM::Net::SSLeay::EVP_MD>, $md : mutable string, $len_ref : int*);>
 
-Calls native L<X509_get_pubkey|https://docs.openssl.org/master/man3/X509_get_pubkey> function, creates a new L<Net::SSLeay::EVP_PKEY|SPVM::Net::SSLeay::EVP_PKEY> object, sets the pointer value of the new object to the return vlaue of the native function, and returns the new object.
+Calls native L<X509_digest|https://docs.openssl.org/master/man3/X509_digest> function given the pointer value of the instance, $type, the pointer value of $md, $len_ref, and returns its return value.
 
 Exceptions:
 
-If X509_get_ext failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+The digest type $type must be defined. Otherwise an exception is thrown.
 
-=head2 get_serialNumber
+The output buffer $md must be defined. Otherwise an exception is thrown.
 
-C<method get_serialNumber : L<Net::SSLeay::ASN1_INTEGER|SPVM::Net::SSLeay::ASN1_INTEGER> ()>
+The length of output buffer $md must be greater than or equal to EVP_MAX_MD_SIZE. Otherwise an exception is thrown.
 
-Calls native L<X509_get_serialNumber|https://docs.openssl.org/3.2/man3/X509_get_serialNumber/> function given the pointer value of the instance, copies its return value using native L<ASN1_INTEGER_dup|https://docs.openssl.org/master/man3/X509_dup/> function, creates a new L<Net::SSLeay::ASN1_INTEGER|SPVM::Net::SSLeay::X509_NAME> object, sets the pointer value of the new object to the native copied value, and returns the new object.
+If X509_digest failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
+=head2 digest_return_string
+
+C<method digest_return_string : string ($type : Net::SSLeay::EVP_MD);>
+
+Calls L</"digest"> method given appropriate arguments, and returns the output string.
+
+=head2 dup
+
+C<method dup : L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> ();>
+
+Calls native L<X509_dup|https://docs.openssl.org/3.3/man3/X509_dup> function given the pointer value of the instance, creates a new L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> object, sets the pointer value of the new object to the return value of the native function, and returns the new object.
 
 =head2 DESTROY
 

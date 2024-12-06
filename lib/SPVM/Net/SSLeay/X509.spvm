@@ -36,20 +36,6 @@ class Net::SSLeay::X509 : pointer {
   
   native method get_subject_name : Net::SSLeay::X509_NAME ();
   
-  method digest_return_string : string ($type : Net::SSLeay::EVP_MD) {
-    
-    my $md = (mutable string)new_string_len SSL->EVP_MAX_MD_SIZE;
-    my $len = 0;
-    
-    $self->digest($type, $md, \$len);
-    
-    Fn->shorten($md, $len);
-    
-    return $md;
-  }
-  
-  native method dup : Net::SSLeay::X509 ();
-  
   native method pubkey_digest : int ($type : Net::SSLeay::EVP_MD, $md : mutable string, $len_ref : int*);
   
   method pubkey_digest_return_string : string ($type : Net::SSLeay::EVP_MD) {
@@ -73,6 +59,20 @@ class Net::SSLeay::X509 : pointer {
   native method get_ocsp_uri : string ();
   
   native method digest : int ($type : Net::SSLeay::EVP_MD, $md : mutable string, $len_ref : int*);
+  
+  method digest_return_string : string ($type : Net::SSLeay::EVP_MD) {
+    
+    my $md = (mutable string)new_string_len SSL->EVP_MAX_MD_SIZE;
+    my $len = 0;
+    
+    $self->digest($type, $md, \$len);
+    
+    Fn->shorten($md, $len);
+    
+    return $md;
+  }
+  
+  native method dup : Net::SSLeay::X509 ();
   
   native method DESTROY : void ();
   
