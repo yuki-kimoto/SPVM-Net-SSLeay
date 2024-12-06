@@ -9,6 +9,7 @@
     * Net::SSLeay::XX509#get_issuer_name method returns a copied value.
     * Net::SSLeay::XX509#get_subject_name method returns a copied value.
     * Net::SSLeay::XX509#get_ext method returns a copied value.
+    * Net::SSLeay::XX509#check_issued method becomes a static method.
 0.024 2024-12-06
   [New Features]
     * Add Net::SSLeay::XX509_EXTENSION#new method.

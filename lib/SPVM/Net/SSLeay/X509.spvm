@@ -27,6 +27,8 @@ class Net::SSLeay::X509 : pointer {
     return $self;
   }
   
+  native static method check_issued : int ($issuer : Net::SSLeay::X509, $subject : Net::SSLeay::X509);
+  
   # Instance Methods
   native method get_serialNumber : Net::SSLeay::ASN1_INTEGER ();
   
@@ -47,10 +49,6 @@ class Net::SSLeay::X509 : pointer {
   }
   
   native method dup : Net::SSLeay::X509 ();
-  
-  native method check_issued : int ($subject : Net::SSLeay::X509);
-  
-  native method get_pubkey : Net::SSLeay::EVP_PKEY ();
   
   native method pubkey_digest : int ($type : Net::SSLeay::EVP_MD, $md : mutable string, $len_ref : int*);
   

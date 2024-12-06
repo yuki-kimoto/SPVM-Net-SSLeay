@@ -234,11 +234,15 @@ int32_t SPVM__Net__SSLeay__X509__check_issued(SPVM_ENV* env, SPVM_VALUE* stack) 
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  void* obj_issuer = stack[0].oval;
   
   void* obj_subject = stack[1].oval;
   
-  X509* self = env->get_pointer(env, stack, obj_self);
+  if (!obj_issuer) {
+    return env->die(env, stack, "The X509 object $issuer must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  X509* issuer = env->get_pointer(env, stack, obj_issuer);
   
   if (!obj_subject) {
     return env->die(env, stack, "The X509 object $subject must be defined.", __func__, FILE_NAME, __LINE__);
@@ -246,7 +250,7 @@ int32_t SPVM__Net__SSLeay__X509__check_issued(SPVM_ENV* env, SPVM_VALUE* stack) 
   
   X509* subject = env->get_pointer(env, stack, obj_subject);
   
-  int32_t status = X509_check_issued(self, subject);
+  int32_t status = X509_check_issued(issuer, subject);
   
   stack[0].ival = status;
   
