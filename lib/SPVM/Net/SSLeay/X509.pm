@@ -92,14 +92,6 @@ C<method pubkey_digest_return_string : string ($type : Net::SSLeay::EVP_MD);>
 
 Calls L</"pubkey_digest"> method given appropriate arguments, and returns the output string.
 
-=head2 get_ocsp_uri
-
-C<method get_ocsp_uri : string ();>
-
-Returns OCSP URI in the certificate $cert.
-
-If not found, returns undef.
-
 =head2 get_ext_by_NID
 
 C<method get_ext_by_NID : int ($nid : int, $lastpos : int);>
@@ -125,6 +117,14 @@ Calls native L<X509_get_ext|https://docs.openssl.org/1.1.1/man3/X509v3_get_ext_b
 Exceptions:
 
 If X509_get_ext failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
+=head2 get_ocsp_uri
+
+C<method get_ocsp_uri : string ();>
+
+Returns OCSP URI in the certificate $cert.
+
+If not found, returns undef.
 
 =head2 digest
 
