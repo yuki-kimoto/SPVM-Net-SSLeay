@@ -73,8 +73,6 @@ class Net::SSLeay::X509 : pointer {
   
   native method DESTROY : void ();
   
-  native method get_subject_name : Net::SSLeay::X509_NAME ();
-  
   native method get_pubkey : Net::SSLeay::EVP_PKEY ();
   
 }
