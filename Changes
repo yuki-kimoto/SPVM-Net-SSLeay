@@ -1,6 +1,10 @@
 0.024 2024-12-06
   [New Features]
     * Add Net::SSLeay::XX509_EXTENSION#new method.
+    * Add Net::SSLeay::XX509_EXTENSION#set_object method.
+    * Add Net::SSLeay::XX509_EXTENSION#set_critical method.
+    * Add Net::SSLeay::XX509_EXTENSION#set_data method.
+    
 0.023 2024-12-06
   [New Features]
     * Add Net::SSLeay::X509_VERIFY_PARAM#clear_flags method.

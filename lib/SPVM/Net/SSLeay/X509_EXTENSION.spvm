@@ -32,6 +32,12 @@ class Net::SSLeay::X509_EXTENSION : pointer {
   
   native method get_critical : int ();
   
+  native method set_object : int ($obj : Net::SSLeay::ASN1_OBJECT);
+  
+  native method set_critical : int ($crit : int);
+  
+  native method set_data : int ($data : Net::SSLeay::ASN1_OCTET_STRING);
+  
   native method DESTROY : void ();
   
 }
