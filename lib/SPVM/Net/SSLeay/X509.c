@@ -77,7 +77,7 @@ int32_t SPVM__Net__SSLeay__X509__get_subject_name(SPVM_ENV* env, SPVM_VALUE* sta
   
   X509_NAME* x509_name_tmp = X509_get_subject_name(self);
   
-  assert(x509_name);
+  assert(x509_name_tmp);
   
   X509_NAME* x509_name = X509_NAME_dup(x509_name_tmp);
   
@@ -414,6 +414,32 @@ int32_t SPVM__Net__SSLeay__X509__get_pubkey(SPVM_ENV* env, SPVM_VALUE* stack) {
   env->set_no_free(env, stack, obj_pubkey, 1);
   
   stack[0].oval = obj_pubkey;
+  
+  return 0;
+}
+
+int32_t SPVM__Net__SSLeay__X509__get_serialNumber(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  X509* self = env->get_pointer(env, stack, obj_self);
+  
+  ASN1_INTEGER* serialNumber_tmp = X509_get_serialNumber(self);
+  
+  assert(serialNumber_tmp);
+  
+  ASN1_INTEGER* serialNumber = ASN1_INTEGER_dup(serialNumber_tmp);
+  
+  void* obj_address_serialNumber = env->new_pointer_object_by_name(env, stack, "Address", serialNumber, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
+  stack[0].oval = obj_address_serialNumber;
+  env->call_class_method_by_name(env, stack, "Net::SSLeay::ASN1_INTEGER", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
+  void* obj_serialNumber = stack[0].oval;
+  
+  stack[0].oval = obj_serialNumber;
   
   return 0;
 }

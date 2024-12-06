@@ -36,15 +36,11 @@ C<method get_issuer_name : L<Net::SSLeay::X509_NAME|SPVM::Net::SSLeay::X509_NAME
 
 Calls native L<X509_get_issuer_name|https://docs.openssl.org/3.3/man3/X509_get_subject_name> function given the pointer value of the instance, copies its return value using native L<X509_NAME_dup|https://docs.openssl.org/master/man3/X509_dup/> function, creates a new L<Net::SSLeay::X509_NAME|SPVM::Net::SSLeay::X509_NAME> object, sets the pointer value of the new object to the native copied value, and returns the new object.
 
-The C<no_free> flag of the new object is set to 1.
-
 =head2 get_subject_name
 
 C<method get_subject_name : L<Net::SSLeay::X509_NAME|SPVM::Net::SSLeay::X509_NAME> ();>
 
 Calls native L<X509_get_subject_name|https://docs.openssl.org/3.3/man3/X509_get_subject_name> function given the pointer value of the instance, copies its return value using native L<X509_NAME_dup|https://docs.openssl.org/master/man3/X509_dup/> function, creates a new L<Net::SSLeay::X509_NAME|SPVM::Net::SSLeay::X509_NAME> object, sets the pointer value of the new object to the native copied value, and returns the new object.
-
-The C<no_free> flag of the new object is set to 1.
 
 =head2 digest
 
@@ -149,6 +145,12 @@ Calls native L<X509_get_pubkey|https://docs.openssl.org/master/man3/X509_get_pub
 Exceptions:
 
 If X509_get_ext failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
+=head2 get_serialNumber
+
+C<method get_serialNumber : L<Net::SSLeay::ASN1_INTEGER|SPVM::Net::SSLeay::ASN1_INTEGER> ()>
+
+Calls native L<X509_get_serialNumber|https://docs.openssl.org/3.2/man3/X509_get_serialNumber/> function given the pointer value of the instance, copies its return value using native L<ASN1_INTEGER_dup|https://docs.openssl.org/master/man3/X509_dup/> function, creates a new L<Net::SSLeay::ASN1_INTEGER|SPVM::Net::SSLeay::X509_NAME> object, sets the pointer value of the new object to the native copied value, and returns the new object.
 
 =head2 DESTROY
 
