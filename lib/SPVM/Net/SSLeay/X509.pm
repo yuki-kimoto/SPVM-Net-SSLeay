@@ -118,6 +118,26 @@ Exceptions:
 
 If X509_get_ext failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
+=head2 get_subjectAltNames
+
+C<method get_subjectAltNames : L<Net::SSLeay::GENERAL_NAME|SPVM::Net::SSLeay::GENERAL_NAME>[] ();>
+
+Gets C<STACK_OF(GENERAL_NAME)> data by the following codes. C<self> is the pointer value of the instancce.
+
+  int32_t ext_loc = X509_get_ext_by_NID(self, NID_subject_alt_name, -1);
+  STACK_OF(GENERAL_NAME)* sans_stack = NULL;
+  if (ext_loc >= 0) {
+    X509_EXTENSION* ext = X509_get_ext(self, ext_loc);
+    assert(ext);
+    sans_stack = STACK_OF(GENERAL_NAME) *)X509V3_EXT_d2i(ext);
+  }
+
+And creates a new L<GENERAL_NAME|SPVM::GENERAL_NAME> array,
+
+And runs the following loop: copies the element at index $i of the return value(C<STACK_OF(GENERAL_NAME)>) of the native function using native L<GENERAL_NAME_dup|https://docs.openssl.org/1.1.1/man3/X509_dup/>, creates a new L<GENERAL_NAME|SPVM::GENERAL_NAME> object, sets the pointer value of the new object to the native copied value, and puses the new object to the new array.
+
+And returns the new array.
+
 =head2 get_ocsp_uri
 
 C<method get_ocsp_uri : string ();>

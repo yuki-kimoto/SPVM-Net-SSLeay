@@ -331,6 +331,43 @@ int32_t SPVM__Net__SSLeay__X509__get_ext(SPVM_ENV* env, SPVM_VALUE* stack) {
   return 0;
 }
 
+int32_t SPVM__Net__SSLeay__X509__get_subjectAltNames(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  X509* self = env->get_pointer(env, stack, obj_self);
+  
+  int32_t ext_loc = X509_get_ext_by_NID(self, NID_subject_alt_name, -1);
+  STACK_OF(GENERAL_NAME)* sans_stack = NULL;
+  if (ext_loc >= 0) {
+    X509_EXTENSION* ext = X509_get_ext(self, ext_loc);
+    assert(ext);
+    sans_stack = (STACK_OF(GENERAL_NAME)*)X509V3_EXT_d2i(ext);
+  }
+  
+  int32_t length = sans_stack ? sk_GENERAL_NAME_num(sans_stack) : 0;
+  void* obj_sans = env->new_object_array_by_name(env, stack, "Net::SSLeay::GENERAL_NAME", length, &error_id, __func__, FILE_NAME, __LINE__);
+  for (int32_t i = 0; i < length; i++) {
+    GENERAL_NAME* san_tmp = sk_GENERAL_NAME_value(sans_stack, i);
+    GENERAL_NAME* san = GENERAL_NAME_dup(san_tmp);
+    
+    void* obj_address_san = env->new_pointer_object_by_name(env, stack, "Address", san, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) { return error_id; }
+    stack[0].oval = obj_address_san;
+    env->call_class_method_by_name(env, stack, "Net::SSLeay::GENERAL_NAME", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) { return error_id; }
+    void* obj_san = stack[0].oval;
+    
+    env->set_elem_object(env, stack, obj_sans, i, obj_san);
+  }
+  
+  stack[0].oval = obj_sans;
+  
+  return 0;
+}
+
 int32_t SPVM__Net__SSLeay__X509__get_ocsp_uri(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;

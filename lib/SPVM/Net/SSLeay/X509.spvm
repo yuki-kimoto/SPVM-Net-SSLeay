@@ -12,6 +12,7 @@ class Net::SSLeay::X509 : pointer {
   use Net::SSLeay::X509_EXTENSION;
   use Net::SSLeay::EVP_PKEY;
   use Net::SSLeay::ASN1_INTEGER;
+  use Net::SSLeay::GENERAL_NAME;
   
   use Fn;
   
@@ -55,6 +56,8 @@ class Net::SSLeay::X509 : pointer {
   native method get_ext_count : int ();
   
   native method get_ext : Net::SSLeay::X509_EXTENSION ($loc : int);
+  
+  native method get_subjectAltNames : Net::SSLeay::GENERAL_NAME[] ();
   
   native method get_ocsp_uri : string ();
   
