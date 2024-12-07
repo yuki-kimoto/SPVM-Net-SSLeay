@@ -181,17 +181,19 @@ int32_t SPVM__Net__SSLeay__X509_STORE_CTX__Init(SPVM_ENV* env, SPVM_VALUE* stack
     return env->die(env, stack, "The X509 array $untrusted_array must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
-  STACK_OF(X509)* sk_X509 = sk_X509_new_null();
+  STACK_OF(X509)* x509s_stack = sk_X509_new_null();
   
   int32_t list_length = env->length(env, stack, obj_untrusted_array);
   
   for (int32_t i = 0; i < list_length; i++) {
     void* obj_X509 = env->get_elem_object(env, stack, obj_untrusted_array, i);
     X509* X509 = env->get_pointer(env, stack, obj_X509);
-    sk_X509_push(sk_X509, X509);
+    sk_X509_push(x509s_stack, X509);
   }
   
-  int32_t status = X509_STORE_CTX_init(self, trust_store, target, sk_X509);
+  int32_t status = X509_STORE_CTX_init(self, trust_store, target, x509s_stack);
+  
+  sk_X509_free(x509s_stack);
   
   if (!(status == 1)) {
     int64_t ssl_error = ERR_peek_last_error();
