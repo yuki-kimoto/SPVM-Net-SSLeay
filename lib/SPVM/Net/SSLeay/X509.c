@@ -376,13 +376,13 @@ int32_t SPVM__Net__SSLeay__X509__get_ocsp_uri(SPVM_ENV* env, SPVM_VALUE* stack) 
   
   X509* self = env->get_pointer(env, stack, obj_self);
   
-  AUTHORITY_INFO_ACCESS* info = X509_get_ext_d2i(self, NID_info_access, NULL, NULL);
+  STACK_OF(ACCESS_DESCRIPTION)* ads_stack = X509_get_ext_d2i(self, NID_info_access, NULL, NULL);
   
   void* obj_ocsp_uri = NULL;
   
-  if (info) {
-    for (int32_t i = 0; i < sk_ACCESS_DESCRIPTION_num(info); i++) {
-      ACCESS_DESCRIPTION *ad = sk_ACCESS_DESCRIPTION_value(info, i);
+  if (ads_stack) {
+    for (int32_t i = 0; i < sk_ACCESS_DESCRIPTION_num(ads_stack); i++) {
+      ACCESS_DESCRIPTION *ad = sk_ACCESS_DESCRIPTION_value(ads_stack, i);
       
       if (OBJ_obj2nid(ad->method) == NID_ad_OCSP && ad->location->type == GEN_URI) {
         
