@@ -36,6 +36,18 @@ C<method type : int ();>
 
 Returns the value of C<type> member variable in C<GENERAL_NAME> data strcuture.
 
+=head2 get_data_as_string
+
+C<method get_data_as_string : string ();>
+
+Creates a string from the data in C<GENERAL_NAME>, and returns it.
+
+Exceptions:
+
+If the length of d.rid is invalid, an exception is thrown.
+
+The value of type member variable is invalid, an exception is thrown.
+
 =head2 DESTROY
 
 C<method DESTROY : void ();>

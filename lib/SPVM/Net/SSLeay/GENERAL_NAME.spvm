@@ -20,6 +20,8 @@ class Net::SSLeay::GENERAL_NAME {
   # Instance Methods
   native method type : int ();
   
+  native method get_data_as_string : string ();
+  
   native method DESTROY : void ();
   
 }
