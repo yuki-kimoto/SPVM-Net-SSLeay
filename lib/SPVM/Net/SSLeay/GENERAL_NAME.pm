@@ -32,7 +32,7 @@ If GENERAL_NAME_new failed, an exception is thrown with C<eval_error_id> set to 
 
 =head2 type
 
-C<method type : int ();>
+C<method get_type : int ();>
 
 Returns the value of C<type> member variable in C<GENERAL_NAME> data strcuture.
 

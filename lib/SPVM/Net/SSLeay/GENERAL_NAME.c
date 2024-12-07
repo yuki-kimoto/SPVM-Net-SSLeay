@@ -39,7 +39,7 @@ int32_t SPVM__Net__SSLeay__GENERAL_NAME__new(SPVM_ENV* env, SPVM_VALUE* stack) {
   return 0;
 }
 
-int32_t SPVM__Net__SSLeay__GENERAL_NAME__type(SPVM_ENV* env, SPVM_VALUE* stack) {
+int32_t SPVM__Net__SSLeay__GENERAL_NAME__get_type(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
