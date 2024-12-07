@@ -929,12 +929,12 @@ int32_t SPVM__Net__SSLeay__get_peer_cert_chain(SPVM_ENV* env, SPVM_VALUE* stack)
   
   SSL* self = env->get_pointer(env, stack, obj_self);
   
-  STACK_OF(X509)* stack_of_x509s = SSL_get_peer_cert_chain(self);
+  STACK_OF(X509)* x509s_stack = SSL_get_peer_cert_chain(self);
   
-  int32_t length = stack_of_x509s ? sk_X509_num(stack_of_x509s) : 0;
+  int32_t length = x509s_stack ? sk_X509_num(x509s_stack) : 0;
   void* obj_x509s = env->new_object_array_by_name(env, stack, "Net::SSLeay::X509", length, &error_id, __func__, FILE_NAME, __LINE__);
   for (int32_t i = 0; i < length; i++) {
-    X509* x509 = sk_X509_value(stack_of_x509s, i);
+    X509* x509 = sk_X509_value(x509s_stack, i);
     X509_up_ref(x509);
     
     void* obj_address_x509 = env->new_pointer_object_by_name(env, stack, "Address", x509, &error_id, __func__, FILE_NAME, __LINE__);
