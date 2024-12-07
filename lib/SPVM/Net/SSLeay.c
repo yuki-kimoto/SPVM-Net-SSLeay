@@ -931,7 +931,7 @@ int32_t SPVM__Net__SSLeay__get_peer_cert_chain(SPVM_ENV* env, SPVM_VALUE* stack)
   
   STACK_OF(X509)* stack_of_x509s = SSL_get_peer_cert_chain(self);
   
-  int32_t length = sk_X509_num(stack_of_x509s);
+  int32_t length = stack_of_x509s ? sk_X509_num(stack_of_x509s) : 0;
   void* obj_x509s = env->new_object_array_by_name(env, stack, "Net::SSLeay::X509", length, &error_id, __func__, FILE_NAME, __LINE__);
   for (int32_t i = 0; i < length; i++) {
     X509* x509 = sk_X509_value(stack_of_x509s, i);
