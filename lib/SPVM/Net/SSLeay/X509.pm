@@ -122,7 +122,7 @@ If X509_get_ext failed, an exception is thrown with C<eval_error_id> set to the 
 
 C<method get_subjectAltNames : L<Net::SSLeay::GENERAL_NAME|SPVM::Net::SSLeay::GENERAL_NAME>[] ();>
 
-Gets C<STACK_OF(GENERAL_NAME)> data by the following codes. C<self> is the pointer value of the instancce.
+Gets C<STACK_OF(GENERAL_NAME)> data by the following native C codes. C<self> is the pointer value of the instancce.
 
   int32_t ext_loc = X509_get_ext_by_NID(self, NID_subject_alt_name, -1);
   STACK_OF(GENERAL_NAME)* sans_stack = NULL;
@@ -132,9 +132,9 @@ Gets C<STACK_OF(GENERAL_NAME)> data by the following codes. C<self> is the point
     sans_stack = STACK_OF(GENERAL_NAME) *)X509V3_EXT_d2i(ext);
   }
 
-And creates a new L<GENERAL_NAME|SPVM::GENERAL_NAME> array,
+And creates a new L<Net::SSLeay::GENERAL_NAME|SPVM::Net::SSLeay::GENERAL_NAME> array,
 
-And runs the following loop: copies the element at index $i of the return value(C<STACK_OF(GENERAL_NAME)>) of the native function using native L<GENERAL_NAME_dup|https://docs.openssl.org/1.1.1/man3/X509_dup/>, creates a new L<GENERAL_NAME|SPVM::GENERAL_NAME> object, sets the pointer value of the new object to the native copied value, and puses the new object to the new array.
+And runs the following loop: copies the element at index $i of the return value(C<STACK_OF(GENERAL_NAME)>) of the native function using native L<GENERAL_NAME_dup|https://docs.openssl.org/1.1.1/man3/X509_dup/>, creates a new L<Net::SSLeay::GENERAL_NAME|SPVM::Net::SSLeay::GENERAL_NAME> object, sets the pointer value of the new object to the native copied value, and puses the new object to the new array.
 
 And returns the new array.
 
@@ -145,6 +145,30 @@ C<method get_ocsp_uri : string ();>
 Returns OCSP URI in the certificate $cert.
 
 If not found, returns undef.
+
+Implementation:
+
+An OCSP URI is got by the following native C codes. C<self> is the pointer value of the instancce.
+
+  STACK_OF(ACCESS_DESCRIPTION)* ads_stack = X509_get_ext_d2i(self, NID_info_access, NULL, NULL);
+  
+  void* obj_ocsp_uri = NULL;
+  
+  if (ads_stack) {
+    for (int32_t i = 0; i < sk_ACCESS_DESCRIPTION_num(ads_stack); i++) {
+      ACCESS_DESCRIPTION *ad = sk_ACCESS_DESCRIPTION_value(ads_stack, i);
+      
+      if (OBJ_obj2nid(ad->method) == NID_ad_OCSP && ad->location->type == GEN_URI) {
+        
+        const char* ocsp_uri = (const char*)ASN1_STRING_get0_data(ad->location->d.uniformResourceIdentifier);
+        int32_t ocsp_uri_length = ASN1_STRING_length(ad->location->d.uniformResourceIdentifier);
+        
+        obj_ocsp_uri = env->new_string(env, stack, ocsp_uri, ocsp_uri_length);
+        
+        break;
+      }
+    }
+  }
 
 =head2 digest
 
