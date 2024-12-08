@@ -137,13 +137,13 @@ int32_t SPVM__Net__SSLeay__X509_STORE_CTX__get_current_cert(SPVM_ENV* env, SPVM_
   void* obj_x509 = NULL;
   
   if (x509) {
+    X509_up_ref(x509);
     void* obj_address_x509 = env->new_pointer_object_by_name(env, stack, "Address", x509, &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
     stack[0].oval = obj_address_x509;
     env->call_class_method_by_name(env, stack, "Net::SSLeay::X509", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);  
     if (error_id) { return error_id; }
     obj_x509 = stack[0].oval;
-    env->set_no_free(env, stack, obj_x509, 1);
   }
   
   stack[0].oval = obj_x509;

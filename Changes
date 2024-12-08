@@ -17,7 +17,7 @@
     * Net::SSLeay::XX509#check_issued method becomes a static method.
   [Bug Fix]
     * Fix STACK_OF memory bugs.
-    
+    * Fix a memory bug of Net::SSLeay::X509_STORE_CTX#get_current_cert method.
   [Incompatibe Changes]
     * Remove Net::SSLeay::Net::SSLeay::X509_STORE_CTX#Init method.
 0.023 2024-12-06
