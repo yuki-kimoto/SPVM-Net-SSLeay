@@ -59,11 +59,11 @@ Calls native L<X509_STORE_CTX_get_error_depth|https://docs.openssl.org/master/ma
 
 C<method get_current_cert : L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> ();>
 
-Calls native L<X509_STORE_CTX_get_current_cert|https://docs.openssl.org/master/man3/X509_STORE_CTX_get_error_depth> function.
+Calls native L<X509_STORE_CTX_get_current_cert|https://docs.openssl.org/master/man3/X509_STORE_CTX_get_error_depth> function given the pointer value of the instance.
 
-If the return value is NULL, returns undef.
+If its return value is NULL, returns undef.
 
-Otherwise, creates a new new L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> object, sets the pointer value of the new object to the return value of the native function, sets C<no_free> flag of the new object to 1, returns the new object.
+Otherwise, increments the refernece count of its return value using native L<X509_up_ref|https://docs.openssl.org/3.0/man3/X509_new/> function, creates a new L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> object, sets the pointe value of the new object to the return value of the native function, and returns the new object.
 
 =head1 Copyright & License
 
