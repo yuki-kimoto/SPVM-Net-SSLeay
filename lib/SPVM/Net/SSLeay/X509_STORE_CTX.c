@@ -6,10 +6,8 @@
 #include <openssl/ssl.h>
 #include <openssl/err.h>
 
-
 static const char* FILE_NAME = "Net/SSLeay/X509_STORE_CTX.c";
 
-// Class Methods
 int32_t SPVM__Net__SSLeay__X509_STORE_CTX__get1_issuer(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
@@ -20,14 +18,8 @@ int32_t SPVM__Net__SSLeay__X509_STORE_CTX__get1_issuer(SPVM_ENV* env, SPVM_VALUE
   
   void* obj_x = stack[2].oval;
   
-  if (!obj_issuer_ref) {
-    return env->die(env, stack, "The output array of the Net::SSLeay::X509 $issuer_ref must be defined.", __func__, FILE_NAME, __LINE__);
-  }
-  
-  int32_t issuer_ref_length = env->length(env, stack, obj_issuer_ref);
-  
-  if (!(issuer_ref_length == 1)) {
-    return env->die(env, stack, "The length of $issuer_ref must be 1.", __func__, FILE_NAME, __LINE__);
+  if (!(obj_issuer_ref && env->length(env, stack, obj_issuer_ref) == 1)) {
+    return env->die(env, stack, "The output array of the Net::SSLeay::X509 $issuer_ref must be a 1-length array.", __func__, FILE_NAME, __LINE__);
   }
   
   if (!obj_ctx) {
@@ -78,7 +70,6 @@ int32_t SPVM__Net__SSLeay__X509_STORE_CTX__get1_issuer(SPVM_ENV* env, SPVM_VALUE
   return 0;
 }
 
-// Instance Methods
 int32_t SPVM__Net__SSLeay__X509_STORE_CTX__set_error(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
