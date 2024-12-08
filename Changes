@@ -18,6 +18,8 @@
   [Bug Fix]
     * Fix STACK_OF memory bugs.
     
+  [Incompatibe Changes]
+    * Remove Net::SSLeay::Net::SSLeay::X509_STORE_CTX#Init method.
 0.023 2024-12-06
   [New Features]
     * Add Net::SSLeay::X509_VERIFY_PARAM#clear_flags method.

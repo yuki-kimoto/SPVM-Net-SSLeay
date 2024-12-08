@@ -19,8 +19,6 @@ class Net::SSLeay::X509_STORE_CTX : pointer {
   
   native method get_current_cert : Net::SSLeay::X509 ();
   
-  native method Init : int ($trust_store : Net::SSLeay::X509_STORE, $target : Net::SSLeay::X509, $untrusted_array : Net::SSLeay::X509[]);
-  
   native method DESTROY : void ();
   
 }
