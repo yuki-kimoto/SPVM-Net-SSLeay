@@ -84,7 +84,6 @@ int32_t SPVM__Net__SSLeay__X509_EXTENSION__get_object(SPVM_ENV* env, SPVM_VALUE*
   return 0;
 }
 
-
 int32_t SPVM__Net__SSLeay__X509_EXTENSION__get_critical(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;

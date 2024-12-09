@@ -1053,4 +1053,98 @@ EOS
     
     return 1;
   }
+  
+  static method X509 : int () {
+    
+    {
+      my $x509 = Net::SSLeay::X509->new;
+      
+      unless ($x509 is_type Net::SSLeay::X509) {
+        return 0;
+      }
+    }
+    
+    {
+      my $bio = Net::SSLeay::BIO->new_file("$FILE_DIR/simple-cert.cert.pem", "r");
+      
+      my $x509 = Net::SSLeay::PEM->read_bio_X509($bio);
+      
+      unless ($x509 is_type Net::SSLeay::X509) {
+        return 0;
+      }
+      
+      my $serialNumber = $x509->get_serialNumber;
+      
+      unless ($serialNumber->get_int64 == 1) {
+        return 0;
+      }
+      my $issuer_name = $x509->get_issuer_name;
+      
+      unless ($issuer_name is_type Net::SSLeay::X509_NAME) {
+        return 0;
+      }
+      
+      unless ($issuer_name->oneline eq "/C=PL/O=Net-SSLeay/OU=Test Suite/CN=Intermediate CA") {
+        return 0;
+      }
+      
+      my $subject_name = $x509->get_subject_name;
+      
+      unless ($subject_name is_type Net::SSLeay::X509_NAME) {
+        return 0;
+      }
+      
+      unless ($subject_name->oneline eq "/C=PL/O=Net-SSLeay/OU=Test Suite/CN=simple-cert.net-ssleay.example") {
+        return 0;
+      }
+      
+=pod TODO
+
+  # Instance Methods
+  native method pubkey_digest : int ($type : Net::SSLeay::EVP_MD, $md : mutable string, $len_ref : int*);
+  
+  method pubkey_digest_return_string : string ($type : Net::SSLeay::EVP_MD) {
+    
+    my $md = (mutable string)new_string_len SSL->EVP_MAX_MD_SIZE;
+    my $len = 0;
+    
+    $self->pubkey_digest($type, $md, \$len);
+    
+    Fn->shorten($md, $len);
+    
+    return $md;
+  }
+  
+  native method get_ext_by_NID : int ($nid : int, $lastpos : int);
+  
+  native method get_ext_count : int ();
+  
+  native method get_ext : Net::SSLeay::X509_EXTENSION ($loc : int);
+  
+  native method get_subjectAltNames : Net::SSLeay::GENERAL_NAME[] ();
+  
+  native method get_ocsp_uri : string ();
+  
+  native method digest : int ($type : Net::SSLeay::EVP_MD, $md : mutable string, $len_ref : int*);
+  
+  method digest_return_string : string ($type : Net::SSLeay::EVP_MD) {
+    
+    my $md = (mutable string)new_string_len SSL->EVP_MAX_MD_SIZE;
+    my $len = 0;
+    
+    $self->digest($type, $md, \$len);
+    
+    Fn->shorten($md, $len);
+    
+    return $md;
+  }
+  
+  native method dup : Net::SSLeay::X509 ();
+  
+=cut
+      
+    }
+    
+    return 1;
+  }
 }
