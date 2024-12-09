@@ -1300,5 +1300,7 @@ EOS
         $x509_store->add_crl($x509_crl);
       }
     }
+    
+    return 1;
   }
 }
