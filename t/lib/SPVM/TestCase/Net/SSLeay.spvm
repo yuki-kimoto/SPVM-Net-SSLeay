@@ -1239,6 +1239,7 @@ EOS
         return 0;
       }
       
+      my $issued = Net::SSLeay::X509->check_issued($x509, $x509);
     }
     
 =pod TODO
