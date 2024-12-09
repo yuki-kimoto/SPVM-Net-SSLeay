@@ -34,6 +34,7 @@ class TestCase::Net::SSLeay {
   use Net::SSLeay::X509_NAME_ENTRY;
   use Net::SSLeay::ASN1_INTEGER;
   use Net::SSLeay::ASN1_TIME;
+  use Array;
   
   our $FILE_DIR : string;
   
@@ -1098,23 +1099,55 @@ EOS
         return 0;
       }
       
+      my $sha1_digest = Net::SSLeay::EVP->get_digestbyname("sha1");
+      
+      my $pubkey_digest = $x509->pubkey_digest_return_string($sha1_digest);
+      
+      unless (Array->equals_byte((byte[])$pubkey_digest, [(byte)-7, 125, -9, 111, -37, -33, 64, -29, -92, -79, 35, -72, -95, 23, 101, -119, -4, 122, 91, -11])) {
+        return 0;
+      }
+      
+      my $digest = $x509->digest_return_string($sha1_digest);
+      
+      my $digest_expected = [(byte)
+        -100,
+        46,
+        -112,
+        -71,
+        -89,
+        -124,
+        122,
+        58,
+        43,
+        -66,
+        -3,
+        -91,
+        -47,
+        70,
+        -22,
+        49,
+        117,
+        -23,
+        3,
+        38
+      ];
+      
+      unless (Array->equals_byte((byte[])$digest, $digest_expected)) {
+        return 0;
+      }
+      
+      my $x509_dup = $x509->dup;
+      
+      if ($x509 == $x509_dup) {
+        return 0;
+      }
+      
+      unless ($x509_dup->get_serialNumber->get_int64 == $x509->get_serialNumber->get_int64) {
+        return 0;
+      }
+      
 =pod TODO
 
-  # Instance Methods
-  native method pubkey_digest : int ($type : Net::SSLeay::EVP_MD, $md : mutable string, $len_ref : int*);
-  
-  method pubkey_digest_return_string : string ($type : Net::SSLeay::EVP_MD) {
-    
-    my $md = (mutable string)new_string_len SSL->EVP_MAX_MD_SIZE;
-    my $len = 0;
-    
-    $self->pubkey_digest($type, $md, \$len);
-    
-    Fn->shorten($md, $len);
-    
-    return $md;
-  }
-  
   native method get_ext_by_NID : int ($nid : int, $lastpos : int);
   
   native method get_ext_count : int ();
@@ -1124,22 +1157,6 @@ EOS
   native method get_subjectAltNames : Net::SSLeay::GENERAL_NAME[] ();
   
   native method get_ocsp_uri : string ();
-  
-  native method digest : int ($type : Net::SSLeay::EVP_MD, $md : mutable string, $len_ref : int*);
-  
-  method digest_return_string : string ($type : Net::SSLeay::EVP_MD) {
-    
-    my $md = (mutable string)new_string_len SSL->EVP_MAX_MD_SIZE;
-    my $len = 0;
-    
-    $self->digest($type, $md, \$len);
-    
-    Fn->shorten($md, $len);
-    
-    return $md;
-  }
-  
-  native method dup : Net::SSLeay::X509 ();
   
 =cut
       
