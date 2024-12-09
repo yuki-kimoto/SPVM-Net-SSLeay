@@ -11,6 +11,7 @@
     * Add Net::SSLeay::X509#get_subjectAltNames method.
     * Add Net::SSLeay::X509_STORE#new method.
     * Add Net::SSLeay::SSL_SESSION#new method.
+    * Add Net::SSLeay::Error::PEM_R_NO_START_LINE class.
   [Incompatibe Changes]
     * Remove deprecated Net::SSLeay::X509#P_get_ocsp_uri method.
     * Net::SSLeay::XX509#get_issuer_name method returns a copied value.

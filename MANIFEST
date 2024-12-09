@@ -93,6 +93,8 @@ lib/SPVM/Net/SSLeay/ERR.pm
 lib/SPVM/Net/SSLeay/ERR.spvm
 lib/SPVM/Net/SSLeay/Error.pm
 lib/SPVM/Net/SSLeay/Error.spvm
+lib/SPVM/Net/SSLeay/Error/PEM_R_NO_START_LINE.pm
+lib/SPVM/Net/SSLeay/Error/PEM_R_NO_START_LINE.spvm
 lib/SPVM/Net/SSLeay/EVP.c
 lib/SPVM/Net/SSLeay/EVP.config
 lib/SPVM/Net/SSLeay/EVP.pm
