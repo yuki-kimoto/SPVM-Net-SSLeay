@@ -1258,14 +1258,9 @@ EOS
       
       my $issued = Net::SSLeay::X509->check_issued($x509, $x509);
       
+      my $ocsp_uri = $x509->get_ocsp_uri;
     }
     
-=pod TODO
-
-  native method get_ocsp_uri : string ();
-  
-=cut
-      
     return 1;
   }
 }
