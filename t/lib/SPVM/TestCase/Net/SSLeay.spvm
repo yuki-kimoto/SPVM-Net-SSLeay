@@ -1146,6 +1146,112 @@ EOS
         return 0;
       }
       
+    }
+    
+    {
+      my $bio = Net::SSLeay::BIO->new_file("$FILE_DIR/extended-cert.cert.pem", "r");
+      
+      my $x509 = Net::SSLeay::PEM->read_bio_X509($bio);
+      
+      unless ($x509 is_type Net::SSLeay::X509) {
+        return 0;
+      }
+      
+      my $subjectAltNames = $x509->get_subjectAltNames;
+      
+      unless ($subjectAltNames is_type Net::SSLeay::GENERAL_NAME[]) {
+        return 0;
+      }
+
+=begin comment
+
+# define GEN_OTHERNAME   0
+# define GEN_EMAIL       1
+# define GEN_DNS         2
+# define GEN_X400        3
+# define GEN_DIRNAME     4
+# define GEN_EDIPARTY    5
+# define GEN_URI         6
+# define GEN_IPADD       7
+# define GEN_RID         8
+
+=end comment
+
+=cut
+
+      unless (@$subjectAltNames == 7) {
+        return 0;
+      }
+      
+      unless ($subjectAltNames->[0]->get_type == SSL->GEN_EMAIL) {
+        return 0;
+      }
+      
+      unless ($subjectAltNames->[0]->get_data_as_string eq "john.doe@net-ssleay.example") {
+        return 0;
+      }
+      
+      unless ($subjectAltNames->[1]->get_type == SSL->GEN_URI) {
+        return 0;
+      }
+      
+      unless ($subjectAltNames->[1]->get_data_as_string eq "http://johndoe.net-ssleay.example") {
+        return 0;
+      }
+      
+      unless ($subjectAltNames->[2]->get_type == SSL->GEN_DNS) {
+        return 0;
+      }
+      
+      unless ($subjectAltNames->[2]->get_data_as_string eq "johndoe.net-ssleay.example") {
+        return 0;
+      }
+      
+      unless ($subjectAltNames->[3]->get_type == SSL->GEN_RID) {
+        return 0;
+      }
+      
+      unless ($subjectAltNames->[3]->get_data_as_string eq "1.2.3.4") {
+        return 0;
+      }
+      
+      unless ($subjectAltNames->[4]->get_type == SSL->GEN_IPADD) {
+        return 0;
+      }
+      
+      unless ($subjectAltNames->[4]->get_data_as_string eq "\x{C0}\x{A8}\x{00}\x{02}") {
+        return 0;
+      }
+      
+      unless ($subjectAltNames->[5]->get_type == SSL->GEN_IPADD) {
+        return 0;
+      }
+      
+      unless ($subjectAltNames->[5]->get_data_as_string eq "\x{FD}%\x{F8}\x{14}\x{AF}\x{B5}\x{98}s\x{00}\x{00}\x{00}\x{00}\x{00}\x{00}\x{00}\x{02}") {
+        return 0;
+      }
+      
+      unless ($subjectAltNames->[6]->get_type == SSL->GEN_OTHERNAME) {
+        return 0;
+      }
+      
+      unless ($subjectAltNames->[6]->get_data_as_string eq "jd@net-ssleay.example") {
+        return 0;
+      }
+      
+      
+      
+      for my $subjectAltName (@$subjectAltNames) {
+        warn $subjectAltName->get_type;
+        
+        warn $subjectAltName->get_data_as_string;
+      }
+      
+      warn dump $subjectAltNames;
+      
+      
+    }
+    
 =pod TODO
 
   native method get_ext_by_NID : int ($nid : int, $lastpos : int);
@@ -1160,8 +1266,6 @@ EOS
   
 =cut
       
-    }
-    
     return 1;
   }
 }
