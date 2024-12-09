@@ -42,6 +42,60 @@ C<method get_data_as_string : string ();>
 
 Creates a string from the data in C<GENERAL_NAME>, and returns it.
 
+Implementation:
+
+The following codes are native C codes to create a string corresponding to the type. C<self> is the pointer value of the instance.
+
+  switch (self->type) {
+    case GEN_OTHERNAME: {
+      ASN1_STRING* data_asn1_string = self->d.otherName->value->value.utf8string;
+      
+      const char* data = ASN1_STRING_get0_data(data_asn1_string);
+      int32_t data_length = ASN1_STRING_length(data_asn1_string);
+      
+      obj_data_as_string = env->new_string(env, stack, data, data_length);
+      break;
+    }
+    case GEN_EMAIL:
+    case GEN_DNS:
+    case GEN_URI:
+    {
+      ASN1_STRING* data_asn1_string = self->d.ia5;
+      
+      const char* data = ASN1_STRING_get0_data(data_asn1_string);
+      int32_t data_length = ASN1_STRING_length(data_asn1_string);
+      
+      obj_data_as_string = env->new_string(env, stack, data, data_length);
+      break;
+    }
+    case GEN_DIRNAME: {
+      char * buf = X509_NAME_oneline(self->d.dirn, NULL, 0);
+      obj_data_as_string = env->new_string(env, stack, buf, strlen(buf));
+      OPENSSL_free(buf);
+      break;
+    }
+    case GEN_RID: {
+      char buf[2501] = {0};
+      int len = OBJ_obj2txt(buf, sizeof(buf), self->d.rid, 1);
+      if (len < 0 || len > (int)((sizeof(buf) - 1))) {
+        return env->die(env, stack, "The length of d.rid is invalid.", __func__, FILE_NAME, __LINE__);
+      }
+      
+      obj_data_as_string = env->new_string_nolen(env, stack, buf);
+      break;
+    }
+    case GEN_IPADD: {
+      const char* data = self->d.ip->data;
+      int32_t data_length = self->d.ip->length;
+      
+      obj_data_as_string = env->new_string(env, stack, data, data_length);
+      break;
+    }
+    default : {
+      return env->die(env, stack, "The value of type member variable: %d.", self->type, __func__, FILE_NAME, __LINE__);
+    }
+  }
+
 Exceptions:
 
 If the length of d.rid is invalid, an exception is thrown.

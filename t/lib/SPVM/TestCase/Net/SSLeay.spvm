@@ -1239,17 +1239,6 @@ EOS
         return 0;
       }
       
-      
-      
-      for my $subjectAltName (@$subjectAltNames) {
-        warn $subjectAltName->get_type;
-        
-        warn $subjectAltName->get_data_as_string;
-      }
-      
-      warn dump $subjectAltNames;
-      
-      
     }
     
 =pod TODO
