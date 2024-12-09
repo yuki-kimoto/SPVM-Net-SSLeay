@@ -12,6 +12,8 @@ class Net::SSLeay::X509_STORE : pointer {
   use Fn;
   
   # Class Methods
+  native static method new : Net::SSLeay::X509_STORE ();
+  
   private static method new_with_pointer : Net::SSLeay::X509_STORE ($pointer : Address, $options : object[] = undef) {
     
     my $self = new Net::SSLeay::X509_STORE;
