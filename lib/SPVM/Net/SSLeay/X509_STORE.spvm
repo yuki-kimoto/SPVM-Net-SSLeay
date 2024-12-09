@@ -12,8 +12,6 @@ class Net::SSLeay::X509_STORE : pointer {
   use Fn;
   
   # Fields
-  has certs_list : List of Net::SSLeay::X509;
-  
   has crls_list : List of Net::SSLeay::X509_CRL;
   
   # Class Methods
@@ -30,8 +28,6 @@ class Net::SSLeay::X509_STORE : pointer {
   
   # Instance Methods
   protected method init : void ($options : object[] = undef) {
-    
-    $self->{certs_list} = List->new(new Net::SSLeay::X509[0]);
     
     $self->{crls_list} = List->new(new Net::SSLeay::X509_CRL[0]);
   }
