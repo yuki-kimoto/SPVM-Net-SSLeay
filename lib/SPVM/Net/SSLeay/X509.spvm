@@ -51,7 +51,7 @@ class Net::SSLeay::X509 : pointer {
     return $md;
   }
   
-  native method get_ext_by_NID : int ($nid : int, $lastpos : int);
+  native method get_ext_by_NID : int ($nid : int, $lastpos : int = 0);
   
   native method get_ext_count : int ();
   

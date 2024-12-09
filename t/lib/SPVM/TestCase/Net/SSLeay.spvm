@@ -1239,19 +1239,29 @@ EOS
         return 0;
       }
       
+      my $ext_count = $x509->get_ext_count;
+      
+      unless ($ext_count == 10) {
+        return 0;
+      }
+      
+      my $ext_loc = $x509->get_ext_by_NID(SSL->NID_ext_key_usage);
+      my $ext = $x509->get_ext($ext_loc);
+      
+      unless ($ext is_type Net::SSLeay::X509_EXTENSION) {
+        return 0;
+      }
+      
+      unless (Net::SSLeay::OBJ->obj2nid($ext->get_object) == SSL->NID_ext_key_usage) {
+        return 0;
+      }
+      
       my $issued = Net::SSLeay::X509->check_issued($x509, $x509);
+      
     }
     
 =pod TODO
 
-  native method get_ext_by_NID : int ($nid : int, $lastpos : int);
-  
-  native method get_ext_count : int ();
-  
-  native method get_ext : Net::SSLeay::X509_EXTENSION ($loc : int);
-  
-  native method get_subjectAltNames : Net::SSLeay::GENERAL_NAME[] ();
-  
   native method get_ocsp_uri : string ();
   
 =cut
