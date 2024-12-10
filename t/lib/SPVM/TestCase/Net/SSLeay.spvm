@@ -745,29 +745,6 @@ EOS
       
     }
     
-    {
-      my $bio = Net::SSLeay::BIO->new_file("$FILE_DIR/simple-cert.key.pem", "r");
-      
-      while (1) {
-        my $evp_pkey = (Net::SSLeay::EVP_PKEY)undef;
-        
-        eval { $evp_pkey = Net::SSLeay::PEM->read_bio_PrivateKey($bio); }
-        
-        if ($@) {
-          if (eval_error_id isa_error Net::SSLeay::Error::PEM_R_NO_START_LINE) {
-            last;
-          }
-          else {
-            die $@;
-          }
-        }
-        
-        unless ($evp_pkey is_type Net::SSLeay::EVP_PKEY) {
-          return 0;
-        }
-      }
-    }
-    
     return 1;
   }
   
