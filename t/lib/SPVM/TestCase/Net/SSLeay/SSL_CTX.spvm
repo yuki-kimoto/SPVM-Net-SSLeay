@@ -6,6 +6,71 @@ class TestCase::Net::SSLeay::SSL_CTX {
   use Net::SSLeay::SSL_METHOD;
   use Net::SSLeay::SSL_CTX;
   
+  static method new : int () {
+    
+    {
+      my $ssl_method = Net::SSLeay::SSL_METHOD->SSLv23_method;
+      
+      my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
+      
+      unless ($ssl_ctx is_type Net::SSLeay::SSL_CTX) {
+        return 0;
+      }
+    }
+    
+    {
+      my $ssl_method = Net::SSLeay::SSL_METHOD->SSLv23_client_method;
+      
+      my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
+      
+      unless ($ssl_ctx is_type Net::SSLeay::SSL_CTX) {
+        return 0;
+      }
+    }
+    
+    {
+      my $ssl_method = Net::SSLeay::SSL_METHOD->SSLv23_server_method;
+      
+      my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
+      
+      unless ($ssl_ctx is_type Net::SSLeay::SSL_CTX) {
+        return 0;
+      }
+    }
+    
+    {
+      my $ssl_method = Net::SSLeay::SSL_METHOD->TLS_method;
+      
+      my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
+      
+      unless ($ssl_ctx is_type Net::SSLeay::SSL_CTX) {
+        return 0;
+      }
+    }
+    
+    {
+      my $ssl_method = Net::SSLeay::SSL_METHOD->TLS_client_method;
+      
+      my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
+      
+      unless ($ssl_ctx is_type Net::SSLeay::SSL_CTX) {
+        return 0;
+      }
+    }
+    
+    {
+      my $ssl_method = Net::SSLeay::SSL_METHOD->TLS_server_method;
+      
+      my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
+      
+      unless ($ssl_ctx is_type Net::SSLeay::SSL_CTX) {
+        return 0;
+      }
+    }
+    
+    return 1;
+  }
+  
   static method set_alpn_protos_with_protocols : int () {
     
     {
