@@ -735,7 +735,7 @@ EOS
     }
     
     {
-      my $bio = Net::SSLeay::BIO->new_file("$FILE_DIR/intermediate-ca.key.pem", "r");
+      my $bio = Net::SSLeay::BIO->new_file("$FILE_DIR/simple-cert.key.pem", "r");
       
       my $evp_pkey = Net::SSLeay::PEM->read_bio_PrivateKey($bio);
       
@@ -746,7 +746,7 @@ EOS
     }
     
     {
-      my $bio = Net::SSLeay::BIO->new_file("$FILE_DIR/intermediate-ca.key.pem", "r");
+      my $bio = Net::SSLeay::BIO->new_file("$FILE_DIR/simple-cert.key.pem", "r");
       
       while (1) {
         my $evp_pkey = (Net::SSLeay::EVP_PKEY)undef;
