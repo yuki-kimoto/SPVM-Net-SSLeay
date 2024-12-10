@@ -376,3 +376,4 @@ t/lib/SPVM/TestCase/Net/SSLeay.spvm
 t/lib/SPVM/TestCase/Net/SSLeay/SSL_CTX.spvm
 t/lib/SPVM/TestCase/Net/SSLeay/Util.spvm
 t/OPENSSL.t
+t/SSL_CTX.t
