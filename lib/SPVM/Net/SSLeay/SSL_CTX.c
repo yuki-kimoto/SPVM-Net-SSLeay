@@ -731,17 +731,18 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__use_PrivateKey(SPVM_ENV* env, SPVM_VALUE* st
   
   void* obj_self = stack[0].oval;
   
-  void* obj_evp_pkey = stack[1].oval;
+  void* obj_pkey = stack[1].oval;
   
   SSL_CTX* self = env->get_pointer(env, stack, obj_self);
   
-  if (!obj_evp_pkey) {
+  if (!obj_pkey) {
     return env->die(env, stack, "The EVP_PKEY object $pkey must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
-  EVP_PKEY* evp_pkey = env->get_pointer(env, stack, obj_evp_pkey);
+  EVP_PKEY* pkey = env->get_pointer(env, stack, obj_pkey);
   
-  int32_t status = SSL_CTX_use_PrivateKey(self, evp_pkey);
+  // The reference counter of pkey is incremented on success
+  int32_t status = SSL_CTX_use_PrivateKey(self, pkey);
   
   if (!(status == 1)) {
     int64_t ssl_error = ERR_peek_last_error();
@@ -756,17 +757,6 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__use_PrivateKey(SPVM_ENV* env, SPVM_VALUE* st
     error_id = tmp_error_id;
     
     return error_id;
-  }
-  
-  // SSL_CTX_use_PrivateKey increments the reference count of evp_pkey.
-  {
-    void* obj_pkeys_list = env->get_field_object_by_name(env, stack, obj_self, "pkeys_list", &error_id, __func__, FILE_NAME, __LINE__);
-    if (error_id) { return error_id; }
-    
-    stack[0].oval = obj_pkeys_list;
-    stack[1].oval = obj_evp_pkey;
-    env->call_instance_method_by_name(env, stack, "push", 2, &error_id, __func__, FILE_NAME, __LINE__);
-    if (error_id) { return error_id; }
   }
   
   stack[0].ival = status;

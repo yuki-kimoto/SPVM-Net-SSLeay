@@ -63,17 +63,12 @@ class Net::SSLeay::SSL_CTX : pointer {
   }
   
   # Fields
-  has pkeys_list : List of Net::SSLeay::EVP_PKEY;
-  
   has cb_output_strings_list : StringList; # For SSL_CTX_set_alpn_select_cb, SSL_CTX_set_next_proto_select_cb
   
   # Class Methods
   native static method new : Net::SSLeay::SSL_CTX ($method : Net::SSLeay::SSL_METHOD);
   
   protected method init : void ($options : object[] = undef) {
-    
-    my $pkeys_list = List->new(new Net::SSLeay::EVP_PKEY[0]);
-    $self->{pkeys_list} = $pkeys_list;
     
     my $cb_output_strings_list = StringList->new;
     $self->{cb_output_strings_list} = $cb_output_strings_list;

@@ -18,12 +18,6 @@ Net::SSLeay::SSL_CTX class in L<SPVM> represents L<SSL_CTX|https://docs.openssl.
 
 =head1 Fields
 
-=head2 pkeys_list
-
-C<has pkeys_list : L<List|SPVM::List> of L<Net::SSLeay::EVP_PKEY|SPVM::Net::SSLeay::EVP_PKEY>;>
-
-A list of private keys.
-
 =head1 Class Methods
 
 =head2 new
