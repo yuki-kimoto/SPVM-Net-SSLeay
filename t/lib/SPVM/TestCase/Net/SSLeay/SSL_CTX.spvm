@@ -5,7 +5,7 @@ class TestCase::Net::SSLeay::SSL_CTX {
   
   use Net::SSLeay::SSL_METHOD;
   use Net::SSLeay::SSL_CTX;
-  use Net::SSLeay::Contant as SSL;
+  use Net::SSLeay::Constant as SSL;
   
   static method basic : int () {
     
@@ -21,17 +21,25 @@ class TestCase::Net::SSLeay::SSL_CTX {
     
     # set_mode
     {
+      my $ssl_method = Net::SSLeay::SSL_METHOD->TLS_method;
+      
       my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
       
-      $ssl_ctx->set_mode(SSL_MODE_ENABLE_PARTIAL_WRITE);
+      $ssl_ctx->set_mode(SSL->SSL_MODE_ENABLE_PARTIAL_WRITE);
       
-      $ssl_ctx->set_mode(SSL_MODE_ACCEPT_MOVING_WRITE_BUFFER);
+      $ssl_ctx->set_mode(SSL->SSL_MODE_ACCEPT_MOVING_WRITE_BUFFER);
       
-      $ssl_ctx->set_mode(SSL_MODE_AUTO_RETRY);
+      $ssl_ctx->set_mode(SSL->SSL_MODE_AUTO_RETRY);
       
-      $ssl_ctx->set_mode(SSL_MODE_RELEASE_BUFFERS);
+      $ssl_ctx->set_mode(SSL->SSL_MODE_RELEASE_BUFFERS);
       
-      $ssl_ctx->set_mode(SSL_MODE_SEND_FALLBACK_SCSV);
+      $ssl_ctx->set_mode(SSL->SSL_MODE_SEND_FALLBACK_SCSV);
+      
+      my $mode = $ssl_ctx->get_mode;
+      
+      unless ($mode & SSL->SSL_MODE_SEND_FALLBACK_SCSV) {
+        return 0;
+      }
       
     }
     

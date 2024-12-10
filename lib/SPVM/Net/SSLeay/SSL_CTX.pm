@@ -34,11 +34,17 @@ If SSL_CTX_new failed, an exception is thrown with C<eval_error_id> set to the b
 
 =head1 Instance Methods
 
+=head2 get_mode
+
+C<method get_mode : long ();>
+
+Calls native L<SSL_CTX_get_mode|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_mode> function given the pointer value of the instance, and returns its return value.
+
 =head2 set_mode
 
 C<method set_mode : long ($mode : long);>
 
-Calls native L<SSL_CTX_set_mode|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_mode> function given the pointer value of the instance, $mode, and returns the updated mode.
+Calls native L<SSL_CTX_set_mode|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_mode> function given the pointer value of the instance, $mode, and returns its return value.
 
 =head2 set_verify
 

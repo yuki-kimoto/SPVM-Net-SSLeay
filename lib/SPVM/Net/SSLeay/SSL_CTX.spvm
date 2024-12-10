@@ -75,6 +75,8 @@ class Net::SSLeay::SSL_CTX : pointer {
   }
   
   # Instance Methods
+  native method get_mode : long ();
+  
   native method set_mode : long ($mode : long);
   
   native method set_verify : void ($mode : int);
