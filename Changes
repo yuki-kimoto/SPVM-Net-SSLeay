@@ -1,3 +1,8 @@
+0.025 2024-12-10
+  [New Features]
+    * Add Net::SSLeay::Error::PEM_R_NO_START_LINE class.
+  [Changes]
+    * Every Net::SSLeay::PEM#read_* method throwns an exception with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error::PEM_R_NO_START_LINE|SPVM::Net::SSLeay::Error::PEM_R_NO_START_LINE> class if the error is PEM_R_NO_START_LINE.
 0.024 2024-12-08
   [New Features]
     * Add Net::SSLeay::XX509_EXTENSION#new method.
@@ -11,7 +16,6 @@
     * Add Net::SSLeay::X509#get_subjectAltNames method.
     * Add Net::SSLeay::X509_STORE#new method.
     * Add Net::SSLeay::SSL_SESSION#new method.
-    * Add Net::SSLeay::Error::PEM_R_NO_START_LINE class.
   [Incompatibe Changes]
     * Remove deprecated Net::SSLeay::X509#P_get_ocsp_uri method.
     * Net::SSLeay::XX509#get_issuer_name method returns a copied value.
