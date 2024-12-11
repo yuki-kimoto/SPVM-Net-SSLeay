@@ -211,6 +211,18 @@ class TestCase::Net::SSLeay::SSL_CTX {
       }
     }
     
+    # set1_groups_list
+    {
+      {
+        my $ssl_method = Net::SSLeay::SSL_METHOD->TLS_method;
+        
+        my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
+        
+        $ssl_ctx->set1_groups_list("P-521:P-384");
+      }
+      
+    }
+    
     return 1;
   }
   
