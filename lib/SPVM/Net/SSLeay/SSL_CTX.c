@@ -798,6 +798,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__add_extra_chain_cert(SPVM_ENV* env, SPVM_VAL
   
   X509* x509 = env->get_pointer(env, stack, obj_x509);
   
+  // SSL_CTX destructor calls X509_free on x509.
   int32_t status = SSL_CTX_add_extra_chain_cert(self, x509);
   
   if (!(status == 1)) {
@@ -815,7 +816,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__add_extra_chain_cert(SPVM_ENV* env, SPVM_VAL
     return error_id;
   }
   
-  env->set_no_free(env, stack, obj_x509, 1);
+  X509_up_ref(x509);
   
   stack[0].ival = status;
   

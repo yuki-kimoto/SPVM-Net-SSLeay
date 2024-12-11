@@ -18,6 +18,7 @@
     * Remove Net::SSLeay::SSL_CTX#set_ecdh_auto method because this has no effect.
   [Bug Fix]
     * Fix Net::SSLeay::SSL_CTX#set_client_CA_list bugs.
+    * Fix Net::SSLeay::SSL_CTX#add_extra_chain_cert bugs.
 0.024 2024-12-08
   [New Features]
     * Add Net::SSLeay::XX509_EXTENSION#new method.
