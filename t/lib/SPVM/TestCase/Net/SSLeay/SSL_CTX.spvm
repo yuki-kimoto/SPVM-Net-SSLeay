@@ -181,6 +181,36 @@ class TestCase::Net::SSLeay::SSL_CTX {
       }
     }
     
+    # clear_options, get_options, set_options
+    {
+      {
+        my $ssl_method = Net::SSLeay::SSL_METHOD->TLS_method;
+        
+        my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
+        
+        $ssl_ctx->set_options(SSL->SSL_OP_ALL);
+        
+        {
+          my $options = $ssl_ctx->get_options;
+          
+          unless ($options & SSL->SSL_OP_ALL) {
+            return 0;
+          }
+        }
+        
+        $ssl_ctx->clear_options(SSL->SSL_OP_ALL);
+        
+        {
+          my $options = $ssl_ctx->get_options;
+          
+          if ($options & SSL->SSL_OP_ALL) {
+            return 0;
+          }
+        }
+        
+      }
+    }
+    
     return 1;
   }
   
