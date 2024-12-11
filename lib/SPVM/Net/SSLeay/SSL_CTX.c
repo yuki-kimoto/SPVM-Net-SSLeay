@@ -759,6 +759,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__add_client_CA(SPVM_ENV* env, SPVM_VALUE* sta
   
   X509* x509 = env->get_pointer(env, stack, obj_x509);
   
+  // x509 is copied by X509_NAME_dup.
   int32_t status = SSL_CTX_add_client_CA(self, x509);
   
   if (!(status == 1)) {
