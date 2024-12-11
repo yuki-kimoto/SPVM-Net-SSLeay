@@ -125,8 +125,6 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   native method set_session_cache_mode : long ($mode : long);
   
-  native method set_ecdh_auto : long ($state : int);
-  
   native method set_post_handshake_auth : void ($val : int);
   
   native method set_session_id_context : int ($sid_ctx : string, $sid_ctx_len : int = -1);

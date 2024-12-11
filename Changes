@@ -15,6 +15,7 @@
     * Remove Net::SSLeay::SSL_METHOD#SSLv23_method method because TSL_method eixsts.
     * Remove Net::SSLeay::SSL_METHOD#SSLv23_client_method method because TSL_client_method eixsts.
     * Remove Net::SSLeay::SSL_METHOD#SSLv23_server_method method because TSL_server_method eixsts.
+    * Remove Net::SSLeay::SSL_CTX#set_ecdh_auto method because this has no effect.
 0.024 2024-12-08
   [New Features]
     * Add Net::SSLeay::XX509_EXTENSION#new method.
@@ -30,10 +31,11 @@
     * Add Net::SSLeay::SSL_SESSION#new method.
   [Incompatibe Changes]
     * Remove deprecated Net::SSLeay::X509#P_get_ocsp_uri method.
-    * Net::SSLeay::XX509#get_issuer_name method returns a copied value.
-    * Net::SSLeay::XX509#get_subject_name method returns a copied value.
-    * Net::SSLeay::XX509#get_ext method returns a copied value.
-    * Net::SSLeay::XX509#check_issued method becomes a static method.
+    * Net::SSLeay::X509#get_issuer_name method returns a copied value.
+    * Net::SSLeay::X509#get_subject_name method returns a copied value.
+    * Net::SSLeay::X509#get_ext method returns a copied value.
+    * Net::SSLeay::X509#check_issued method becomes a static method.
+    * Net::SSLeay::X509#check_issued method becomes a static method.
   [Bug Fix]
     * Fix STACK_OF memory bugs.
     * Fix a memory bug of Net::SSLeay::X509_STORE_CTX#get_current_cert method.
