@@ -96,6 +96,8 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   native method use_PrivateKey_file : int ($file : string, $type : int);
   
+  native method use_PrivateKey : int ($pkey : Net::SSLeay::EVP_PKEY);
+  
   native method set_cipher_list : int ($str : string);
   
   native method set_ciphersuites : int ($str : string);
@@ -126,8 +128,6 @@ class Net::SSLeay::SSL_CTX : pointer {
   native method set_ecdh_auto : long ($state : int);
   
   native method set_post_handshake_auth : void ($val : int);
-  
-  native method use_PrivateKey : int ($pkey : Net::SSLeay::EVP_PKEY);
   
   native method set_session_id_context : int ($sid_ctx : string, $sid_ctx_len : int = -1);
   

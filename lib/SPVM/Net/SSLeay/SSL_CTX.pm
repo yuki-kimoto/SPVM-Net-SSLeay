@@ -106,6 +106,12 @@ The file $file must be defined. Otherwise an exception is thrown.
 
 If SSL_CTX_use_PrivateKey_file failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
+=head2 use_PrivateKey
+
+C<method use_PrivateKey : int ($pkey : L<Net::SSLeay::EVP_PKEY|SPVM::Net::SSLeay::EVP_PKEY>);>
+
+Calls native L<SSL_CTX_use_PrivateKey|https://docs.openssl.org/master/man3/SSL_CTX_use_certificate> function given the pointer value of the instance, $pkey, pushes $pkey to the end of L</"pkeys_list"> field, and returns the return value of the native function.
+
 =head2 set_cipher_list
 
 C<method set_cipher_list : int ($str : string);>
@@ -201,12 +207,6 @@ If set_ecdh_auto failed, an exception is thrown with C<eval_error_id> set to the
 C<method set_post_handshake_auth : void ($val : int);>
 
 Calls native L<SSL_CTX_set_post_handshake_auth|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_verify> function given the pointer value of the instance, $val.
-
-=head2 use_PrivateKey
-
-C<method use_PrivateKey : int ($pkey : L<Net::SSLeay::EVP_PKEY|SPVM::Net::SSLeay::EVP_PKEY>);>
-
-Calls native L<SSL_CTX_use_PrivateKey|https://docs.openssl.org/master/man3/SSL_CTX_use_certificate> function given the pointer value of the instance, $pkey, pushes $pkey to the end of L</"pkeys_list"> field, and returns the return value of the native function.
 
 =head2 set_session_id_context
 
