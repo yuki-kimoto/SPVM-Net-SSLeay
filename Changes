@@ -10,6 +10,7 @@
   [Incompatibe Changes]
     * Rename Net::SSLeay::Callback::PemPasswd class to Net::SSLeay::Callback::PemPassword class.
     * Remove Net::SSLeay::SSL_CTX#set_tmp_dh method because the corresponding native function is deprecated and set1_groups_list eixsts.
+    * Remove Net::SSLeay::SSL_CTX#set_tmp_ecdh method because the corresponding native function is deprecated and set1_groups_list eixsts.
 0.024 2024-12-08
   [New Features]
     * Add Net::SSLeay::XX509_EXTENSION#new method.
