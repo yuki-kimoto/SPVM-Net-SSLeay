@@ -314,6 +314,12 @@ C<method set_tlsext_ticket_key_cb : void ($cb : L<Net::SSLeay::Callback::TlsextT
 
 Calls native L<SSL_CTX_set_tlsext_ticket_key_cb|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_tlsext_ticket_key_cb> function given $cb.
 
+=head2 set_alpn_select_cb
+
+C<method set_alpn_select_cb : void ($cb : Net::SSLeay::Callback::AlpnSelect, $arg : object);>
+
+Calls native L<SSL_CTX_set_alpn_select_cb|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_alpn_select_cb> function given $cb, $arg.
+
 =head2 set_alpn_select_cb_with_protocols
 
 C<method set_alpn_select_cb_with_protocols : void ($protocols : string[]);>

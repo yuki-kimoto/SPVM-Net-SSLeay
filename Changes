@@ -1,3 +1,6 @@
+0.027 2024-12-12
+  [New Features]
+    * Add Net::SSLeay::SSL_CTX#set_alpn_select_cb method.
 0.026 2024-12-11
   [Incompatibe Changes]
     * Remove X509#get_ocsp_uri method.

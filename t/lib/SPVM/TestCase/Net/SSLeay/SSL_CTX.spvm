@@ -15,6 +15,10 @@ class TestCase::Net::SSLeay::SSL_CTX {
     $FILE_DIR = FindBin->Bin . "/file";
   }
   
+  static method callback : int () {
+    
+  }
+  
   static method basic : int () {
     
     {

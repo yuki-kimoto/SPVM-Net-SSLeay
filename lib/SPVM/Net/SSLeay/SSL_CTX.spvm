@@ -68,15 +68,17 @@ class Net::SSLeay::SSL_CTX : pointer {
   }
   
   # Fields
-  has cb_output_strings_list : StringList; # For SSL_CTX_set_alpn_select_cb, SSL_CTX_set_next_proto_select_cb
+  has ref_output_string_for_set_alpn_select_cb : StringList; # For set_alpn_select_cb
+  
+  has ref_output_string_for_set_next_proto_select_cb : StringList; # For set_next_proto_select_cb
+  
+  has cb_output_strings_list : StringList; # For set_alpn_select_cb, set_next_proto_select_cb
   
   # Class Methods
   native static method new : Net::SSLeay::SSL_CTX ($method : Net::SSLeay::SSL_METHOD);
   
   protected method init : void ($options : object[] = undef) {
     
-    my $cb_output_strings_list = StringList->new;
-    $self->{cb_output_strings_list} = $cb_output_strings_list;
   }
   
   # Instance Methods
@@ -263,6 +265,8 @@ class Net::SSLeay::SSL_CTX : pointer {
     
     return $deleted;
   }
+  
+  native method set_alpn_select_cb : void ($cb : Net::SSLeay::Callback::AlpnSelect, $arg : object);
   
   native method set_alpn_select_cb_with_protocols : void ($protocols : string[]);
   
