@@ -68,11 +68,11 @@ class Net::SSLeay::SSL_CTX : pointer {
   }
   
   # Fields
-  has ref_output_string_for_set_alpn_select_cb : StringList; # For set_alpn_select_cb
+  has ref_output_for_set_alpn_select_cb : string;
   
-  has ref_output_string_for_set_next_proto_select_cb : StringList; # For set_next_proto_select_cb
+  has ref_output_for_set_next_proto_select_cb : string;
   
-  has cb_output_strings_list : StringList; # For set_alpn_select_cb, set_next_proto_select_cb
+  has ref_output_for_set_next_protos_advertised_cb : string;
   
   # Class Methods
   native static method new : Net::SSLeay::SSL_CTX ($method : Net::SSLeay::SSL_METHOD);

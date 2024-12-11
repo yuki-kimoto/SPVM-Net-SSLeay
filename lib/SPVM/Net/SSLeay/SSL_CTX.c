@@ -1633,7 +1633,7 @@ static int SPVM__Net__SSLeay__SSL_CTX__my__alpn_select_cb(SSL* ssl, const unsign
   const char* out = env->get_chars(env, stack, obj_out);
   *out_ref = out;
   
-  env->set_field_string_by_name(env, stack, obj_self, "ref_output_string_for_set_alpn_select_cb", obj_out, &error_id, __func__, FILE_NAME, __LINE__);
+  env->set_field_string_by_name(env, stack, obj_self, "ref_output_for_set_alpn_select_cb", obj_out, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) {
     env->print_exception_to_stderr(env, stack);
     goto END_OF_FUNC;
@@ -1834,8 +1834,6 @@ static int SPVM__Net__SSLeay__SSL_CTX__my__next_protos_advertised_cb_for_protoco
   
   void* obj_protocols = native_args[4];
   
-  void* obj_cb_output_strings_list = native_args[5];
-  
   assert(obj_protocols);
   
   stack[0].oval = obj_protocols;
@@ -1851,18 +1849,13 @@ static int SPVM__Net__SSLeay__SSL_CTX__my__next_protos_advertised_cb_for_protoco
   
   *out = protocols_wire_format;
   
-  stack[0].oval = obj_cb_output_strings_list;
-  stack[1].oval = obj_protocols_wire_format;
-  env->call_instance_method_by_name(env, stack, "push", 2, &error_id, __func__, FILE_NAME, __LINE__);
-  
+  env->set_field_string_by_name(env, stack, obj_self, "ref_output_for_set_next_protos_advertised_cb", obj_protocols_wire_format, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) {
     env->print_exception_to_stderr(env, stack);
-    
     goto END_OF_FUNC;
   }
-  else {
-    ret_status = SSL_TLSEXT_ERR_OK;
-  }
+  
+  ret_status = SSL_TLSEXT_ERR_OK;
   
   END_OF_FUNC:
   
@@ -1885,15 +1878,11 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_next_protos_advertised_cb_with_protocols
     native_cb = &SPVM__Net__SSLeay__SSL_CTX__my__next_protos_advertised_cb_for_protocols;
   }
   
-  void* obj_cb_output_strings_list = env->get_field_object_by_name(env, stack, obj_self, "cb_output_strings_list", &error_id, __func__, FILE_NAME, __LINE__);
-  if (error_id) { return error_id; }
-  
   void* native_args[SPVM__Net__SSLeay__SSL_CTX__my__NATIVE_ARGS_MAX_LENGTH] = {0};
   native_args[0] = env;
   native_args[1] = stack;
   native_args[2] = obj_self;
   native_args[3] = obj_protocols;
-  native_args[4] = obj_cb_output_strings_list;
   
   SSL_CTX_set_next_protos_advertised_cb(self, native_cb, native_args);
   
