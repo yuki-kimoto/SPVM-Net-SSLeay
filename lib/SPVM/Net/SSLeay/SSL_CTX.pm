@@ -180,22 +180,6 @@ The group list $list must be defined. Otherwise an exception is thrown.
 
 If set1_groups_list failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
-Requirements:
-
-OpenSSL 3.0
-
-=head2 set1_curves_list
-
-C<method set1_curves_list : int ($list : string);>
-
-Calls native L<SSL_CTX_set1_curves_list|https://docs.openssl.org/3.1/man3/SSL_CTX_set1_curves> function given the group list $list, and returns its return value.
-
-Exceptions:
-
-The group list $list must be defined. Otherwise an exception is thrown.
-
-If set1_curves_list failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
-
 =head2 set_session_cache_mode
 
 C<method set_session_cache_mode : long ($mode : long);>
