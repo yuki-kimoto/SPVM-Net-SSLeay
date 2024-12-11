@@ -166,6 +166,21 @@ class TestCase::Net::SSLeay::SSL_CTX {
       
     }
     
+    # get_cert_store
+    {
+      {
+        my $ssl_method = Net::SSLeay::SSL_METHOD->TLS_method;
+        
+        my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
+        
+        my $cert_store = $ssl_ctx->get_cert_store;
+        
+        unless ($cert_store is_type Net::SSLeay::X509_STORE) {
+          return 0;
+        }
+      }
+    }
+    
     return 1;
   }
   
