@@ -289,6 +289,16 @@ class TestCase::Net::SSLeay::SSL_CTX {
       
     }
     
+    # set_min_proto_version
+    {
+      my $ssl_method = Net::SSLeay::SSL_METHOD->TLS_method;
+      
+      my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
+      
+      $ssl_ctx->set_min_proto_version(SSL->TLS1_3_VERSION);
+      
+    }
+    
     return 1;
   }
   
