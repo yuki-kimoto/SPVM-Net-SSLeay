@@ -279,6 +279,16 @@ class TestCase::Net::SSLeay::SSL_CTX {
       
     }
     
+    # set_session_id_context
+    {
+      my $ssl_method = Net::SSLeay::SSL_METHOD->TLS_method;
+      
+      my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
+      
+      $ssl_ctx->set_session_id_context("my_host");
+      
+    }
+    
     return 1;
   }
   
