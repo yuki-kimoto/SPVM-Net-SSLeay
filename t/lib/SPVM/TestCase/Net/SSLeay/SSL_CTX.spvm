@@ -147,7 +147,7 @@ class TestCase::Net::SSLeay::SSL_CTX {
         
         my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
         
-        $ssl_ctx->set_cipher_list("DES-CBC3-MD5:RC4-MD5");
+        $ssl_ctx->set_cipher_list("ALL");
         
       }
       
