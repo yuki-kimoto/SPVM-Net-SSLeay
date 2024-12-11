@@ -115,8 +115,9 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__get0_param(SPVM_ENV* env, SPVM_VALUE* stack)
   env->call_class_method_by_name(env, stack, "Net::SSLeay::X509_VERIFY_PARAM", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   void* obj_x509_verify_param = stack[0].oval;
-  env->set_no_free(env, stack, obj_x509_verify_param, 1);
   
+  // X509_VERIFY_PARAM_up_ref, X509_VERIFY_PARAM_dup does not exists.
+  env->set_no_free(env, stack, obj_x509_verify_param, 1);
   env->set_field_object_by_name(env, stack, obj_x509_verify_param, "ref_ssl_ctx", obj_self, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   
