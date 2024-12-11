@@ -92,20 +92,6 @@ OpenSSL 1.1.1
 
 =item * L<Net::SSLeay::OBJ|SPVM::Net::SSLeay::OBJ>
 
-=item * L<Net::SSLeay::OCSP|SPVM::Net::SSLeay::OCSP>
-
-=item * L<Net::SSLeay::OCSP_BASICRESP|SPVM::Net::SSLeay::OCSP_BASICRESP>
-
-=item * L<Net::SSLeay::OCSP_CERTID|SPVM::Net::SSLeay::OCSP_CERTID>
-
-=item * L<Net::SSLeay::OCSP_ONEREQ|SPVM::Net::SSLeay::OCSP_ONEREQ>
-
-=item * L<Net::SSLeay::OCSP_REQUEST|SPVM::Net::SSLeay::OCSP_REQUEST>
-
-=item * L<Net::SSLeay::OCSP_RESPONSE|SPVM::Net::SSLeay::OCSP_RESPONSE>
-
-=item * L<Net::SSLeay::OCSP_SINGLERESP|SPVM::Net::SSLeay::OCSP_SINGLERESP>
-
 =item * L<Net::SSLeay::OPENSSL|SPVM::Net::SSLeay::OPENSSL>
 
 =item * L<Net::SSLeay::OPENSSL_INIT|SPVM::Net::SSLeay::OPENSSL_INIT>
