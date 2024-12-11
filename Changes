@@ -19,6 +19,7 @@
   [Bug Fix]
     * Fix Net::SSLeay::SSL_CTX#set_client_CA_list bugs.
     * Fix Net::SSLeay::SSL_CTX#add_extra_chain_cert bugs.
+    * Fix Net::SSLeay::SSL_CTX#get0_param bugs.
 0.024 2024-12-08
   [New Features]
     * Add Net::SSLeay::XX509_EXTENSION#new method.
