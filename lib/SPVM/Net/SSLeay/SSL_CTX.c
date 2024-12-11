@@ -165,7 +165,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__use_certificate_file(SPVM_ENV* env, SPVM_VAL
     return env->die(env, stack, "The file $file must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
-  char* file = (char*)env->get_chars(env, stack, obj_file);
+  const char* file = env->get_chars(env, stack, obj_file);
   int32_t file_length = env->length(env, stack, obj_file);
   
   int32_t type = stack[2].ival;
