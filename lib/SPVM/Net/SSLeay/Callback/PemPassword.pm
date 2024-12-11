@@ -6,11 +6,11 @@ package SPVM::Net::SSLeay::Callback::PemPassword;
 
 =head1 Name
 
-SPVM::Net::SSLeay::Callback::PemPassword - Callback for SSL_CTX_set_default_passwd_cb function in OpenSSL.
+SPVM::Net::SSLeay::Callback::PemPassword - pem_password_cb Function Pointer Type in OpenSSL..
 
 =head1 Description
 
-Net::SSLeay::Callback::PemPassword interface in L<SPVM> is the callback for L<SSL_CTX_set_default_passwd_cb|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_default_passwd_cb> function in OpenSSL.
+Net::SSLeay::Callback::PemPassword interface in L<SPVM> represents L<pem_password_cb|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_default_passwd_cb> function pointer type in OpenSSL.
 
 =head1 Usage
 
@@ -20,7 +20,7 @@ Net::SSLeay::Callback::PemPassword interface in L<SPVM> is the callback for L<SS
 
 C<required method : int ($ssl : L<Net::SSLeay|SPVM::Net::SSLeay>, $rwflag : int, $arg : object);>
 
-This method is callback for native L<SSL_CTX_set_default_passwd_cb|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_default_passwd_cb> function.
+This method represents L<pem_password_cb|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_default_passwd_cb> function pointer type in OpenSSL.
 
 =head1 See Also
 

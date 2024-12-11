@@ -6,7 +6,7 @@ package SPVM::Net::SSLeay::Callback::Verify;
 
 =head1 Name
 
-SPVM::Net::SSLeay::Callback::Verify - SSL_verify_cb function pointer type in OpenSSL.
+SPVM::Net::SSLeay::Callback::Verify - SSL_verify_cb Function Pointer Type in OpenSSL.
 
 =head1 Description
 
