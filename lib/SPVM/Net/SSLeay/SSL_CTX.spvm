@@ -123,6 +123,8 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   native method set1_groups_list : int ($list : string);
   
+  native method get_session_cache_mode : long ();
+  
   native method set_session_cache_mode : long ($mode : long);
   
   native method set_post_handshake_auth : void ($val : int);
