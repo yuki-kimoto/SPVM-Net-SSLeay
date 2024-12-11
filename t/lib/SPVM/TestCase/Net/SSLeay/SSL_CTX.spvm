@@ -140,6 +140,19 @@ class TestCase::Net::SSLeay::SSL_CTX {
       }
     }
     
+    # set_cipher_list
+    {
+      {
+        my $ssl_method = Net::SSLeay::SSL_METHOD->TLS_method;
+        
+        my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
+        
+        $ssl_ctx->set_cipher_list("DES-CBC3-MD5:RC4-MD5");
+        
+      }
+      
+    }
+    
     return 1;
   }
   
