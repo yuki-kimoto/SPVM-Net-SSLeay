@@ -99,6 +99,87 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_mode(SPVM_ENV* env, SPVM_VALUE* stack) {
   return 0;
 }
 
+static int SPVM__Net__SSLeay__SSL_CTX__my_verify_cb(int preverify_ok, X509_STORE_CTX* x509_store_ctx) {
+  
+  int32_t error_id = 0;
+  
+  int32_t ret_status = 0;
+  
+  SPVM_ENV* env = thread_env;
+  
+  SPVM_VALUE* stack = env->new_stack(env);
+  
+  SSL* ssl = (SSL*)X509_STORE_CTX_get_ex_data(x509_store_ctx, SSL_get_ex_data_X509_STORE_CTX_idx());
+  
+  if (!ssl) {
+    env->die(env, stack, "X509_STORE_CTX_get_ex_data(x509_store_ctx, SSL_get_ex_data_X509_STORE_CTX_idx()) failed.", __func__, FILE_NAME, __LINE__);
+    
+    env->print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
+  }
+  
+  SSL_CTX* self = SSL_get_SSL_CTX(ssl);
+  
+  if (!self) {
+    env->die(env, stack, "SSL_get_SSL_CTX(ssl) failed.", __func__, FILE_NAME, __LINE__);
+    
+    env->print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
+  }
+  
+  char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
+  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);
+  stack[0].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
+  env->call_instance_method_by_name(env, stack, "GET_VERIFY_CB", 1, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    env->print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
+  }
+  void* obj_cb = stack[0].oval;
+  
+  if (!obj_cb) {
+    env->die(env, stack, "GET_VERIFY_CB method returns undef.", __func__, FILE_NAME, __LINE__);
+    
+    env->print_exception_to_stderr(env, stack);
+    goto END_OF_FUNC;
+  }
+  
+  void* obj_address_x509_store_ctx = env->new_pointer_object_by_name(env, stack, "Address", x509_store_ctx, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    env->print_exception_to_stderr(env, stack);
+    goto END_OF_FUNC;
+  }
+  stack[0].oval = obj_address_x509_store_ctx;
+  env->call_class_method_by_name(env, stack, "Net::SSLeay::X509_STORE_CTX", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    env->print_exception_to_stderr(env, stack);
+    goto END_OF_FUNC;
+  }
+  void* obj_x509_store_ctx = stack[0].oval;
+  env->set_no_free(env, stack, obj_x509_store_ctx, 1);
+  
+  stack[0].oval = obj_cb;
+  stack[1].ival = preverify_ok;
+  stack[2].oval = obj_x509_store_ctx;
+  
+  env->call_instance_method_by_name(env, stack, "", 3, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    env->print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
+  }
+  ret_status = stack[0].ival;
+  
+  END_OF_FUNC:
+  
+  env->free_stack(env, stack);
+  
+  return ret_status;
+}
+
 int32_t SPVM__Net__SSLeay__SSL_CTX__set_verify(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
@@ -107,9 +188,24 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_verify(SPVM_ENV* env, SPVM_VALUE* stack)
   
   int32_t mode = stack[1].ival;
   
+  void* obj_cb = stack[2].oval;
+  
   SSL_CTX* self = env->get_pointer(env, stack, obj_self);
   
-  SSL_CTX_set_verify(self, mode, NULL);
+  SSL_verify_cb native_cb = NULL;
+  if (obj_cb) {
+    native_cb = &SPVM__Net__SSLeay__SSL_CTX__my_verify_cb;
+    
+    stack[0].oval = obj_self;
+    char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
+    snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);
+    stack[1].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
+    stack[2].oval = obj_cb;
+    env->call_instance_method_by_name(env, stack, "SET_VERIFY_CB", 3, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) { return error_id; }
+  }
+  
+  SSL_CTX_set_verify(self, mode, native_cb);
   
   return 0;
 }
@@ -1242,8 +1338,6 @@ static unsigned int SPVM__Net__SSLeay__SSL_CTX__my_psk_client_cb(SSL *ssl, const
     
     goto END_OF_FUNC;
   }
-  
-  // Return value of get_psk_client_cb method
   void* obj_cb = stack[0].oval;
   
   if (!obj_cb) {
@@ -1358,8 +1452,6 @@ static unsigned int SPVM__Net__SSLeay__SSL_CTX__my_psk_server_cb(SSL *ssl, const
     
     goto END_OF_FUNC;
   }
-  
-  // Return value of get_psk_server_cb method
   void* obj_cb = stack[0].oval;
   
   if (!obj_cb) {
@@ -1463,8 +1555,6 @@ static unsigned int SPVM__Net__SSLeay__SSL_CTX__my_tlsext_ticket_key_cb(SSL *ssl
     
     goto END_OF_FUNC;
   }
-  
-  // Return value of get_psk_server_cb method
   void* obj_cb = stack[0].oval;
   
   if (!obj_cb) {
@@ -1823,8 +1913,6 @@ static int SPVM__Net__SSLeay__SSL_CTX__my_session_new_cb(SSL* ssl, SSL_SESSION* 
     
     goto END_OF_FUNC;
   }
-  
-  // Return value of get_psk_server_cb method
   void* obj_cb = stack[0].oval;
   
   if (!obj_cb) {
@@ -1941,8 +2029,6 @@ static void SPVM__Net__SSLeay__SSL_CTX__my_session_remove_cb(SSL_CTX *self, SSL_
     
     goto END_OF_FUNC;
   }
-  
-  // Return value of get_psk_server_cb method
   void* obj_cb = stack[0].oval;
   
   if (!obj_cb) {
