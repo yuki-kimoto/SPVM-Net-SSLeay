@@ -19,7 +19,7 @@ class TestCase::Net::SSLeay::SSL_CTX {
       }
     }
     
-    # set_mode
+    # set_mode, get_mode
     {
       my $ssl_method = Net::SSLeay::SSL_METHOD->TLS_method;
       

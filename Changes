@@ -3,6 +3,7 @@
     * Add Net::SSLeay::Error::PEM_R_NO_START_LINE class.
     * Add Net::SSLeay::SSL_CTX#get_mode method.
     * Add Net::SSLeay::Constant#SSL_MODE_SEND_FALLBACK_SCSV method.
+    * Add Net::SSLeay::Callback::Verify class.
   [Changes]
     * Every Net::SSLeay::PEM#read_* method throwns an exception with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error::PEM_R_NO_START_LINE|SPVM::Net::SSLeay::Error::PEM_R_NO_START_LINE> class if the error is PEM_R_NO_START_LINE.
 0.024 2024-12-08

@@ -70,6 +70,8 @@ lib/SPVM/Net/SSLeay/Callback/TlsextStatus.pm
 lib/SPVM/Net/SSLeay/Callback/TlsextStatus.spvm
 lib/SPVM/Net/SSLeay/Callback/TlsextTicketKey.pm
 lib/SPVM/Net/SSLeay/Callback/TlsextTicketKey.spvm
+lib/SPVM/Net/SSLeay/Callback/Verify.pm
+lib/SPVM/Net/SSLeay/Callback/Verify.spvm
 lib/SPVM/Net/SSLeay/ConfigBuilder.pm
 lib/SPVM/Net/SSLeay/Constant.c
 lib/SPVM/Net/SSLeay/Constant.config
