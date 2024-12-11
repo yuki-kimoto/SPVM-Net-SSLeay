@@ -12,6 +12,9 @@
     * Remove Net::SSLeay::SSL_CTX#set_tmp_dh method because the corresponding native function is deprecated and set1_groups_list eixsts.
     * Remove Net::SSLeay::SSL_CTX#set_tmp_ecdh method because the corresponding native function is deprecated and set1_groups_list eixsts.
     * Remove Net::SSLeay::SSL_CTX#set1_curves_list method because set1_groups_list eixsts.
+    * Remove Net::SSLeay::SSL_METHOD#SSLv23_method method because TSL_method eixsts.
+    * Remove Net::SSLeay::SSL_METHOD#SSLv23_client_method method because TSL_client_method eixsts.
+    * Remove Net::SSLeay::SSL_METHOD#SSLv23_server_method method because TSL_server_method eixsts.
 0.024 2024-12-08
   [New Features]
     * Add Net::SSLeay::XX509_EXTENSION#new method.
