@@ -153,6 +153,19 @@ class TestCase::Net::SSLeay::SSL_CTX {
       
     }
     
+    # set_ciphersuites
+    {
+      {
+        my $ssl_method = Net::SSLeay::SSL_METHOD->TLS_method;
+        
+        my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
+        
+        $ssl_ctx->set_ciphersuites("TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256");
+        
+      }
+      
+    }
+    
     return 1;
   }
   
