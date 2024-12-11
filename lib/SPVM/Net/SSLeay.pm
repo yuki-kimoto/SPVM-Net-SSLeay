@@ -54,7 +54,7 @@ OpenSSL 1.1.1
 
 =item * L<Net::SSLeay::Callback::NextProtoSelect|SPVM::Net::SSLeay::Callback::NextProtoSelect>
 
-=item * L<Net::SSLeay::Callback::PemPasswd|SPVM::Net::SSLeay::Callback::PemPasswd>
+=item * L<Net::SSLeay::Callback::PemPassword|SPVM::Net::SSLeay::Callback::PemPassword>
 
 =item * L<Net::SSLeay::Callback::PskClient|SPVM::Net::SSLeay::Callback::PskClient>
 

@@ -18,7 +18,7 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   use Net::SSLeay::Callback::TlsextServername;
   use Net::SSLeay::Callback::TlsextStatus;
-  use Net::SSLeay::Callback::PemPasswd;
+  use Net::SSLeay::Callback::PemPassword;
   use Net::SSLeay::Callback::PskClient;
   use Net::SSLeay::Callback::PskServer;
   use Net::SSLeay::Callback::TlsextTicketKey;
@@ -151,7 +151,7 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   native method set_tlsext_status_cb : long ($cb : Net::SSLeay::Callback::TlsextStatus, $arg : object = undef);
   
-  native method set_default_passwd_cb : void ($cb : Net::SSLeay::Callback::PemPasswd, $arg : object = undef);
+  native method set_default_passwd_cb : void ($cb : Net::SSLeay::Callback::PemPassword, $arg : object = undef);
   
   native method set_psk_client_callback : void ($cb : Net::SSLeay::Callback::PskClient);
   

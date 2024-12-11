@@ -332,7 +332,7 @@ If SSL_CTX_set_tlsext_status_cb failed, an exception is thrown with C<eval_error
 
 =head2 set_default_passwd_cb
 
-C<method set_default_passwd_cb : void ($cb : L<Net::SSLeay::Callback::PemPasswd|SPVM::Net::SSLeay::Callback::PemPasswd>, $arg : object = undef);>
+C<method set_default_passwd_cb : void ($cb : L<Net::SSLeay::Callback::PemPassword|SPVM::Net::SSLeay::Callback::PemPassword>, $arg : object = undef);>
 
 Calls native L<SSL_CTX_set_default_passwd_cb|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_default_passwd_cb> function given $cb, and returns its return value.
 

@@ -7,6 +7,8 @@
     * Add $verify_callback argument to Net::SSLeay::SSL_CTX#set_verify method.
   [Changes]
     * Every Net::SSLeay::PEM#read_* method throwns an exception with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error::PEM_R_NO_START_LINE|SPVM::Net::SSLeay::Error::PEM_R_NO_START_LINE> class if the error is PEM_R_NO_START_LINE.
+  [Incompatibe Changes]
+    * Rename Net::SSLeay::Callback::PemPasswd class to Net::SSLeay::Callback::PemPassword class.
 0.024 2024-12-08
   [New Features]
     * Add Net::SSLeay::XX509_EXTENSION#new method.
