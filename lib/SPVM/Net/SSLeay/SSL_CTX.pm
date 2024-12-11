@@ -54,9 +54,9 @@ Calls native L<SSL_CTX_get0_param|https://docs.openssl.org/master/man3/SSL_CTX_g
 
 =head2 load_verify_locations
 
-C<method load_verify_locations : int ($path : string);>
+C<method load_verify_locations : int ($CAfile : string, $CApath : string);>
 
-Calls native L<SSL_CTX_load_verify_locations|https://docs.openssl.org/master/man3/SSL_CTX_load_verify_locations/> function given the pointer value of the instance, $path, and returns its return value.
+Calls native L<SSL_CTX_load_verify_locations|https://docs.openssl.org/master/man3/SSL_CTX_load_verify_locations/> function given the pointer value of the instance, $CAfile, $CApath, and returns its return value.
 
 Exceptions:
 

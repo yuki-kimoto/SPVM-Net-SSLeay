@@ -86,7 +86,7 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   native method get0_param : Net::SSLeay::X509_VERIFY_PARAM ();
   
-  native method load_verify_locations : int ($path : string);
+  native method load_verify_locations : int ($CAfile : string, $CApath : string);
   
   native method set_default_verify_paths : int ();
   

@@ -17,6 +17,7 @@ class TestCase::Net::SSLeay::SSL_CTX {
       unless ($ssl_ctx is_type Net::SSLeay::SSL_CTX) {
         return 0;
       }
+      
     }
     
     # set_mode, get_mode
@@ -40,6 +41,30 @@ class TestCase::Net::SSLeay::SSL_CTX {
       unless ($mode & SSL->SSL_MODE_SEND_FALLBACK_SCSV) {
         return 0;
       }
+      
+    }
+    
+    # get0_param
+    {
+      my $ssl_method = Net::SSLeay::SSL_METHOD->TLS_method;
+      
+      my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
+      
+      my $veryfy_param = $ssl_ctx->get0_param;
+      
+      unless ($veryfy_param is_type Net::SSLeay::X509_VERIFY_PARAM) {
+        return 0;
+      }
+      
+    }
+    
+    # load_verify_locations
+    {
+      my $ssl_method = Net::SSLeay::SSL_METHOD->TLS_method;
+      
+      my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
+      
+      eval { $ssl_ctx->load_verify_locations(".", "."); }
       
     }
     

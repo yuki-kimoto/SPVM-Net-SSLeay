@@ -360,13 +360,22 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__load_verify_locations(SPVM_ENV* env, SPVM_VA
   int32_t error_id = 0;
   
   void* obj_self = stack[0].oval;
-  SSL_CTX* self = env->get_pointer(env, stack, obj_self);
   
   void* obj_file = stack[1].oval;
-  char* file = (char*)env->get_chars(env, stack, obj_file);
   
   void* obj_path = stack[2].oval;
-  char* path = (char*)env->get_chars(env, stack, obj_path);
+  
+  SSL_CTX* self = env->get_pointer(env, stack, obj_self);
+  
+  const char* file = NULL;
+  if (obj_file) {
+    file = env->get_chars(env, stack, obj_file);
+  }
+  
+  const char* path = NULL;
+  if (obj_path) {
+    path = env->get_chars(env, stack, obj_path);
+  }
   
   int32_t status = SSL_CTX_load_verify_locations(self, file, path);
   
