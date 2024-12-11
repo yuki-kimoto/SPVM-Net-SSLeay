@@ -26,6 +26,7 @@ class Net::SSLeay::SSL_CTX : pointer {
   use Net::SSLeay::Callback::NewSession;
   use Net::SSLeay::Callback::RemoveSession;
   use Net::SSLeay::Callback::Msg;
+  use Net::SSLeay::Callback::Verify;
   
   use Net::SSLeay::Callback::AlpnSelect; 
   use Net::SSLeay::Callback::NextProtoSelect;
@@ -46,6 +47,8 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   our $REMOVE_SESSION_CBS : Hash of Net::SSLeay::Callback::RemoveSession;
   
+  our $VERIFY_CBS : Hash of Net::SSLeay::Callback::Verify;
+  
   our $MUTEX : Sync::Mutex;
   
   INIT {
@@ -58,6 +61,8 @@ class Net::SSLeay::SSL_CTX : pointer {
     $NEW_SESSION_CBS = Hash->new;
     
     $REMOVE_SESSION_CBS = Hash->new;
+    
+    $VERIFY_CBS = Hash->new;
     
     $MUTEX = Sync::Mutex->new;
   }
@@ -345,6 +350,43 @@ class Net::SSLeay::SSL_CTX : pointer {
     $MUTEX->lock;
     
     my $deleted = (Net::SSLeay::Callback::RemoveSession)$REMOVE_SESSION_CBS->delete($key);
+    
+    return $deleted;
+  }
+  
+  private method GET_VERIFY_CB : Net::SSLeay::Callback::Verify ($key : string) {
+    
+    Fn->defer(method : void () {
+      $MUTEX->reader_unlock;
+    });
+    
+    $MUTEX->reader_lock;
+    
+    my $psk_server_cb = (Net::SSLeay::Callback::Verify)$VERIFY_CBS->get($key);
+    
+    return $psk_server_cb;
+  }
+  
+  private method SET_VERIFY_CB : void ($key : string, $psk_server_cb : Net::SSLeay::Callback::Verify) {
+    
+    Fn->defer(method : void () {
+      $MUTEX->unlock;
+    });
+    
+    $MUTEX->lock;
+    
+    $VERIFY_CBS->set($key, $psk_server_cb);
+  }
+  
+  private method DELETE_VERIFY_CB : Net::SSLeay::Callback::Verify ($key : string) {
+    
+    Fn->defer(method : void () {
+      $MUTEX->unlock;
+    });
+    
+    $MUTEX->lock;
+    
+    my $deleted = (Net::SSLeay::Callback::Verify)$VERIFY_CBS->delete($key);
     
     return $deleted;
   }
