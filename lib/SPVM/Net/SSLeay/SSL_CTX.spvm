@@ -84,7 +84,7 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   native method set_mode : long ($mode : long);
   
-  native method set_verify : void ($mode : int);
+  native method set_verify : void ($mode : int, $verify_callback : Net::SSLeay::Callback::Verify = undef);
   
   native method get0_param : Net::SSLeay::X509_VERIFY_PARAM ();
   
