@@ -16,6 +16,8 @@
     * Remove Net::SSLeay::SSL_METHOD#SSLv23_client_method method because TSL_client_method eixsts.
     * Remove Net::SSLeay::SSL_METHOD#SSLv23_server_method method because TSL_server_method eixsts.
     * Remove Net::SSLeay::SSL_CTX#set_ecdh_auto method because this has no effect.
+  [Bug Fix]
+    * Fix Net::SSLeay::SSL_CTX#set_client_CA_list bugs.
 0.024 2024-12-08
   [New Features]
     * Add Net::SSLeay::XX509_EXTENSION#new method.

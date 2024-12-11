@@ -734,12 +734,11 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_client_CA_list(SPVM_ENV* env, SPVM_VALUE
   for (int32_t i = 0; i < list_length; i++) {
     void* obj_x509_name = env->get_elem_object(env, stack, obj_list, i);
     X509_NAME* x509_name = env->get_pointer(env, stack, obj_x509_name);
-    sk_X509_NAME_push(x509_names_stack, x509_name);
+    sk_X509_NAME_push(x509_names_stack, X509_NAME_dup(x509_name));
   }
   
+  // STACK_OF(X509_NAME) object is set. The old stack and values are freed and replaced the old stack to the new stack.
   SSL_CTX_set_client_CA_list(self, x509_names_stack);
-  
-  sk_X509_NAME_free(x509_names_stack);
   
   return 0;
 }

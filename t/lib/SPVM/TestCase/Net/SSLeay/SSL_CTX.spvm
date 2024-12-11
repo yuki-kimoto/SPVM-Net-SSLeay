@@ -299,6 +299,34 @@ class TestCase::Net::SSLeay::SSL_CTX {
       
     }
     
+    # set_min_proto_version
+    {
+      my $ssl_method = Net::SSLeay::SSL_METHOD->TLS_method;
+      
+      my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
+      
+      $ssl_ctx->set_min_proto_version(SSL->TLS1_3_VERSION);
+      
+    }
+    
+    # set_client_CA_list
+    {
+      {
+        my $ssl_method = Net::SSLeay::SSL_METHOD->TLS_method;
+        
+        my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
+        
+        $ssl_ctx->use_certificate_file("$FILE_DIR/simple-cert.cert.pem", SSL->SSL_FILETYPE_PEM);
+        
+        my $bio = Net::SSLeay::BIO->new_file("$FILE_DIR/simple-cert.cert.pem", "r");
+        
+        my $x509 = Net::SSLeay::PEM->read_bio_X509($bio);
+        
+        $ssl_ctx->set_client_CA_list([$x509->get_issuer_name]);
+        
+      }
+    }
+    
     return 1;
   }
   
