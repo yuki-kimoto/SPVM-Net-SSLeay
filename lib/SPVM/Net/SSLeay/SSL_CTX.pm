@@ -46,12 +46,6 @@ C<method set_mode : long ($mode : long);>
 
 Calls native L<SSL_CTX_set_mode|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_mode> function given the pointer value of the instance, $mode, and returns its return value.
 
-=head2 set_verify
-
-C<method set_verify : void ($mode : int);>
-
-Calls native L<SSL_CTX_set_verify|https://docs.openssl.org/master/man3/SSL_CTX_set_verify/> function given the pointer value of the instance, $mode.
-
 =head2 get0_param
 
 C<method get0_param : L<Net::SSLeay::X509_VERIFY_PARAM|SPVM::Net::SSLeay::X509_VERIFY_PARAM> ();>
@@ -309,6 +303,12 @@ Exceptions:
 The X509 object $x509 must be defined. Otherwise an exception is thrown.
 
 If SSL_CTX_add_extra_chain_cert failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
+=head2 set_verify
+
+C<method set_verify : void ($mode : int, $verify_callback : L<Net::SSLeay::Callback::Verify|SPVM::Net::SSLeay::Callback::Verify> = undef);>
+
+Calls native L<SSL_CTX_set_verify|https://docs.openssl.org/master/man3/SSL_CTX_set_verify/> function given the pointer value of the instance, $mode, $verify_callback.
 
 =head2 set_tlsext_servername_callback
 
