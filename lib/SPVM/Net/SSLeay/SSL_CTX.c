@@ -458,7 +458,6 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__get_cert_store(SPVM_ENV* env, SPVM_VALUE* st
   env->call_class_method_by_name(env, stack, "Net::SSLeay::X509_STORE", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   void* obj_x509_store = stack[0].oval;
-  env->set_no_free(env, stack, obj_x509_store, 1);
   
   X509_STORE_up_ref(x509_store);
   
