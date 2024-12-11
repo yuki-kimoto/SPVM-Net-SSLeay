@@ -2,7 +2,7 @@
 # MIT License
 
 class Net::SSLeay {
-  version "0.024";
+  version "0.025";
   
   use Net::SSLeay::Constant;
   use Net::SSLeay::SSL_CTX;
