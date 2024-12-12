@@ -33,8 +33,6 @@ class Net::SSLeay {
   
   native static method alert_desc_string_long : string ($value : int);
   
-  native static method load_error_strings : void ();
-  
   native static method load_client_CA_file : Net::SSLeay::X509_NAME[] ($file : string);
   
   # Instance Methods

@@ -47,15 +47,6 @@ int32_t SPVM__Net__SSLeay__new(SPVM_ENV* env, SPVM_VALUE* stack) {
   return 0;
 }
 
-int32_t SPVM__Net__SSLeay__load_error_strings(SPVM_ENV* env, SPVM_VALUE* stack) {
-  
-  int32_t error_id = 0;
-  
-  SSL_load_error_strings();
-  
-  return 0;
-}
-
 int32_t SPVM__Net__SSLeay__alert_desc_string_long(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
