@@ -10,6 +10,7 @@
     * Remove Net::SSLeay::SSL_CTX#set_psk_server_callback method.
     * Remove Net::SSLeay::SSL_CTX#set_tlsext_ticket_key_cb method.
     * Remove Net::SSLeay::SSL_CTX#sess_set_new_cb method.
+    * Remove Net::SSLeay::SSL_CTX#sess_remove_new_cb method.
 0.026 2024-12-11
   [Incompatibe Changes]
     * Remove X509#get_ocsp_uri method.
