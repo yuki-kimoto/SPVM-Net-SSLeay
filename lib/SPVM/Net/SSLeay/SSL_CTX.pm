@@ -304,12 +304,6 @@ Calls native L<SSL_CTX_set_tlsext_servername_callback|https://docs.openssl.org/1
 
 $arg is expected to be passed to native L<SSL_CTX_set_tlsext_servername_arg|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_tlsext_servername_callback> function.
 
-=head2 set_tlsext_ticket_key_cb
-
-C<method set_tlsext_ticket_key_cb : void ($cb : L<Net::SSLeay::Callback::TlsextTicketKey|SPVM::Net::SSLeay::Callback::TlsextTicketKey>);>
-
-Calls native L<SSL_CTX_set_tlsext_ticket_key_cb|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_tlsext_ticket_key_cb> function given $cb.
-
 =head2 sess_set_new_cb
 
 C<method sess_set_new_cb : void ($cb : L<Net::SSLeay::Callback::NewSession|SPVM::Net::SSLeay::Callback::NewSession>)>
