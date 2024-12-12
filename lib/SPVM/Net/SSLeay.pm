@@ -142,12 +142,6 @@ See source codes of L<IO::Socket::SSL|https://metacpan.org/pod/SPVM::IO::Socket:
 
 =head1 Fields
 
-=head2 ssl_ctx
-
-C<has ssl_ctx : L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX>;>
-
-A L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> object.
-
 =head2 operation_error
 
 C<has operation_error : ro int;>
