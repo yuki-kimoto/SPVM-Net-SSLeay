@@ -98,8 +98,6 @@ class Net::SSLeay {
     return $self->{ssl_ctx};
   }
   
-  native method set_SSL_CTX : Net::SSLeay::SSL_CTX ($ctx : Net::SSLeay::SSL_CTX);
-  
   native method set_msg_callback : void ($cb : Net::SSLeay::Callback::Msg, $arg : object = undef);
   
   method P_dump_peer_certificate : string () {
