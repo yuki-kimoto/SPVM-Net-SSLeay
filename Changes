@@ -17,6 +17,7 @@
     * Remove Net::SSLeay::Callback::TlsextTicketKey class.
     * Remove Net::SSLeay::Callback::TlsextStatus class.
     * Remove Net::SSLeay::Callback::RemoveSession class.
+    * Remove Net::SSLeay::Callback::PskServer class.
     
 0.026 2024-12-11
   [Incompatibe Changes]
