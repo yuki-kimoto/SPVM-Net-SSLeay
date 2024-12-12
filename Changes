@@ -24,6 +24,7 @@
     * Remove Net::SSLeay::Callback::NextProtosAdvertised class.
     * Remove Net::SSLeay::HMAC_CTX class.
     * Remove Net::SSLeay::EC_KEY class.
+    * Remove Net::SSLeay::PEM#read_bio_DHparams method.
     
 0.026 2024-12-11
   [Incompatibe Changes]

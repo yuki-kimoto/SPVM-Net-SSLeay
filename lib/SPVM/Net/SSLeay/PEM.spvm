@@ -17,8 +17,6 @@ class Net::SSLeay::PEM {
   
   native static method read_bio_X509_CRL : Net::SSLeay::X509_CRL ($bp : Net::SSLeay::BIO);
   
-  native static method read_bio_DHparams : Net::SSLeay::DH ($bp : Net::SSLeay::BIO);
-  
   native static method read_bio_PrivateKey : Net::SSLeay::EVP_PKEY ($bp : Net::SSLeay::BIO);
                                   
 }
