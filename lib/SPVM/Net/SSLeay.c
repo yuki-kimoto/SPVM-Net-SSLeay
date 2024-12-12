@@ -315,9 +315,6 @@ int32_t SPVM__Net__SSLeay__set_SSL_CTX(SPVM_ENV* env, SPVM_VALUE* stack) {
   if (error_id) { return error_id; }
   void* obj_ret_ctx = stack[0].oval;
   
-  env->set_field_object_by_name(env, stack, obj_self, "ssl_ctx", obj_ret_ctx, &error_id, __func__, FILE_NAME, __LINE__);
-  if (error_id) { return error_id; }
-  
   return 0;
 }
 
