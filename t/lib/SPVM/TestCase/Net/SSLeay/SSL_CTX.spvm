@@ -30,8 +30,22 @@ class TestCase::Net::SSLeay::SSL_CTX {
       }
       
       $ssl_ctx->set_verify(SSL->SSL_VERIFY_NONE, method : int ($preverify_ok : int, $x509_ctx : Net::SSLeay::X509_STORE_CTX) {
-        
+        return 0;
       });
+      
+    }
+    
+    # set_default_passwd_cb
+    {
+      my $ssl_method = Net::SSLeay::SSL_METHOD->TLS_method;
+      
+      my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
+      
+      unless ($ssl_ctx is_type Net::SSLeay::SSL_CTX) {
+        return 0;
+      }
+      
+      $ssl_ctx->set_default_passwd_cb(method : int ($buf : mutable string, $size : int, $rwflag : int, $arg : object) { return 0; }, undef);
       
     }
     
