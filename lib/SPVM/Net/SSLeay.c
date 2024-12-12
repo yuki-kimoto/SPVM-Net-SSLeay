@@ -10,7 +10,10 @@
 
 static const char* FILE_NAME = "Net/SSLeay.c";
 
-// Class Methods
+enum {
+  SPVM__Net__SSLeay__my__NATIVE_ARGS_MAX_LENGTH = 16,
+};
+
 int32_t SPVM__Net__SSLeay__new(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
@@ -753,17 +756,21 @@ int32_t SPVM__Net__SSLeay__get0_alpn_selected(SPVM_ENV* env, SPVM_VALUE* stack) 
   return 0;
 }
 
-static void SPVM__Net__SSLeay__my__msg_cb(int write_p, int version, int content_type, const void *buf, size_t len, SSL *ssl, void *arg) {
+static void SPVM__Net__SSLeay__my__msg_cb(int write_p, int version, int content_type, const void* buf, size_t len, SSL* ssl, void* native_arg) {
   
   int32_t error_id = 0;
   
-  SPVM_ENV* env = (SPVM_ENV*)((void**)arg)[0];
+  void** native_args = (void**)native_arg;
   
-  SPVM_VALUE* stack = (SPVM_VALUE*)((void**)arg)[1];
+  SPVM_ENV* env = (SPVM_ENV*)native_args[0];
   
-  void* obj_cb = ((void**)arg)[2];
+  SPVM_VALUE* stack = (SPVM_VALUE*)native_args[1];
   
-  void* obj_arg = ((void**)arg)[3];
+  void* obj_self = native_args[2];
+  
+  void* obj_cb = native_args[3];
+  
+  void* obj_arg = native_args[4];
   
   void* obj_buf = env->new_string(env, stack, buf, len);
   
@@ -821,11 +828,12 @@ int32_t SPVM__Net__SSLeay__set_msg_callback(SPVM_ENV* env, SPVM_VALUE* stack) {
   if (obj_cb) {
     native_cb = &SPVM__Net__SSLeay__my__msg_cb;
     
-    void* native_args[4] = {0};
+    void* native_args[SPVM__Net__SSLeay__my__NATIVE_ARGS_MAX_LENGTH] = {0};
     native_args[0] = env;
     native_args[1] = stack;
-    native_args[2] = obj_cb;
-    native_args[3] = obj_arg;
+    native_args[2] = obj_self;
+    native_args[3] = obj_cb;
+    native_args[4] = obj_arg;
     SSL_set_msg_callback_arg(self, native_args);
   }
   
