@@ -6,6 +6,7 @@
     * Remove Net::SSLeay::SSL_CTX#set_next_proto_select_cb_with_protocols method.
     * Remove Net::SSLeay::SSL_CTX#set_next_protos_advertised_cb_with_protocols method.
     * Remove Net::SSLeay::SSL_CTX#set_tlsext_servername_callback method.
+    * Remove Net::SSLeay::SSL_CTX#set_psk_client_callback method.
 0.026 2024-12-11
   [Incompatibe Changes]
     * Remove X509#get_ocsp_uri method.

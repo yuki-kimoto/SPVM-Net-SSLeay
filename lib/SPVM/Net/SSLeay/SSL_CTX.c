@@ -1441,35 +1441,6 @@ static unsigned int SPVM__Net__SSLeay__SSL_CTX__my__psk_client_cb(SSL* ssl, cons
   return ret_status;
 }
 
-int32_t SPVM__Net__SSLeay__SSL_CTX__set_psk_client_callback(SPVM_ENV* env, SPVM_VALUE* stack) {
-  
-  int32_t error_id = 0;
-  
-  void* obj_self = stack[0].oval;
-  
-  void* obj_cb = stack[1].oval;
-  
-  SSL_CTX* self = env->get_pointer(env, stack, obj_self);
-  
-  unsigned int (*native_cb)(SSL *ssl, const char *hint, char *identity, unsigned int max_identity_len, unsigned char *psk, unsigned int max_psk_len) = NULL;
-  
-  if (obj_cb) {
-    native_cb = &SPVM__Net__SSLeay__SSL_CTX__my__psk_client_cb;
-  }
-  
-  stack[0].oval = obj_self;
-  char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
-  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);
-  stack[1].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
-  stack[2].oval = obj_cb;
-  env->call_instance_method_by_name(env, stack, "SET_PSK_CLIENT_CB", 3, &error_id, __func__, FILE_NAME, __LINE__);
-  if (error_id) { return error_id; }
-  
-  SSL_CTX_set_psk_client_callback(self, native_cb);
-  
-  return 0;
-}
-
 static unsigned int SPVM__Net__SSLeay__SSL_CTX__my__psk_server_cb(SSL* ssl, const char* identity, unsigned char* psk, unsigned int max_psk_len) {
   
   int32_t error_id = 0;
@@ -1963,12 +1934,6 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   void* obj_self = stack[0].oval;
   
   SSL_CTX* self = env->get_pointer(env, stack, obj_self);
-  
-  stack[0].oval = obj_self;
-  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);
-  stack[1].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
-  env->call_instance_method_by_name(env, stack, "DELETE_PSK_CLIENT_CB", 2, &error_id, __func__, FILE_NAME, __LINE__);
-  if (error_id) { return error_id; }
   
   stack[0].oval = obj_self;
   snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);

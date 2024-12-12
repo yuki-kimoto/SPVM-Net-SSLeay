@@ -304,12 +304,6 @@ Calls native L<SSL_CTX_set_tlsext_servername_callback|https://docs.openssl.org/1
 
 $arg is expected to be passed to native L<SSL_CTX_set_tlsext_servername_arg|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_tlsext_servername_callback> function.
 
-=head2 set_psk_client_callback
-
-C<method set_psk_client_callback : void ($cb : L<Net::SSLeay::Callback::PskClient|SPVM::Net::SSLeay::Callback::PskClient>);>
-
-Calls native L<SSL_CTX_set_psk_client_callback|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_psk_client_callback> function given $cb.
-
 =head2 set_psk_server_callback
 
 C<method set_psk_server_callback : void ($cb : L<Net::SSLeay::Callback::PskServer|SPVM::Net::SSLeay::Callback::PskServer>);>
