@@ -6,6 +6,7 @@ class TestCase::Net::SSLeay::SSL_CTX {
   use Net::SSLeay::SSL_METHOD;
   use Net::SSLeay::SSL_CTX;
   use Net::SSLeay::Constant as SSL;
+  use Net::SSLeay::X509_STORE_CTX;
   
   use FindBin;
   use Sys::OS;
@@ -18,6 +19,23 @@ class TestCase::Net::SSLeay::SSL_CTX {
   
   static method callback : int () {
     
+    # set_verify
+    {
+      my $ssl_method = Net::SSLeay::SSL_METHOD->TLS_method;
+      
+      my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
+      
+      unless ($ssl_ctx is_type Net::SSLeay::SSL_CTX) {
+        return 0;
+      }
+      
+      $ssl_ctx->set_verify(SSL->SSL_VERIFY_NONE, method : int ($preverify_ok : int, $x509_ctx : Net::SSLeay::X509_STORE_CTX) {
+        
+      });
+      
+    }
+    
+    return 1;
   }
   
   static method basic : int () {
