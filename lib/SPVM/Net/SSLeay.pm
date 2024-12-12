@@ -162,6 +162,12 @@ Exceptions:
 
 If SSL_new failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
+=head2 alert_desc_string_long
+
+C<static method alert_desc_string_long : string ($value : int);>
+
+Calls native L<SSL_alert_desc_string_long|https://docs.openssl.org/1.1.1/man3/SSL_alert_type_string/> function given the pointer value of the instance, $type, and returns its return value.
+
 =head2 load_client_CA_file
 
 C<static method load_client_CA_file : L<Net::SSLeay::X509_NAME|SPVM::Net::SSLeay::X509_NAME>[] ($file : string);>
@@ -216,6 +222,12 @@ The host name $name must be defined. Otherwise an exception is thrown.
 
 If SSL_set_tlsext_host_name failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
+=head2 get_servername
+
+C<method get_servername : string ($type : int);>
+
+Calls native L<SSL_get_servername|https://docs.openssl.org/master/man3/SSL_CTX_set_tlsext_servername_callback> function given the pointer value of the instance, $type, and returns its return value.
+
 =head2 get_SSL_CTX
 
 C<method get_SSL_CTX : L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> ();>
@@ -258,16 +270,6 @@ Exceptions:
 
 If SSL_accept failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class and with L</"operation_error"> field set to the return vlaue of L<SSL_get_error|https://docs.openssl.org/1.1.1/man3/SSL_get_error/> function given the return value of L<SSL_accept|https://docs.openssl.org/1.0.2/man3/SSL_accept/> function.
 
-=head2 shutdown
-
-C<method shutdown : int ();>
-
-Calls native L<SSL_shutdown|https://docs.openssl.org/master/man3/SSL_shutdown/> function, and returns its return value.
-
-Exceptions:
-
-If SSL_shutdown failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class and with L</"operation_error"> field set to the return vlaue of L<SSL_get_error|https://docs.openssl.org/1.1.1/man3/SSL_get_error/> function given the return value of L<SSL_shutdown|https://docs.openssl.org/1.0.2/man3/SSL_shutdown/> function.
-
 =head2 read
 
 C<method read : int ($buf : mutable string, $num : int = -1, $offset : int = 0);>
@@ -300,39 +302,27 @@ The offset $offset + $num must be lower than or equal to the length of the buffe
 
 If SSL_write failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class and with L</"operation_error"> field set to the return vlaue of L<SSL_get_error|https://docs.openssl.org/1.1.1/man3/SSL_get_error/> function given the return value of L<SSL_write|https://docs.openssl.org/1.0.2/man3/SSL_write/> function.
 
-=head2 get_servername
+=head2 shutdown
 
-C<method get_servername : string ($type : int);>
+C<method shutdown : int ();>
 
-Calls native L<SSL_get_servername|https://docs.openssl.org/master/man3/SSL_CTX_set_tlsext_servername_callback> function given the pointer value of the instance, $type, and returns its return value.
+Calls native L<SSL_shutdown|https://docs.openssl.org/master/man3/SSL_shutdown/> function, and returns its return value.
 
-=head2 alert_desc_string_long
+Exceptions:
 
-C<method alert_desc_string_long : string  ($type : int);>
-
-Calls native L<SSL_alert_desc_string_long|https://docs.openssl.org/1.1.1/man3/SSL_alert_type_string/> function given the pointer value of the instance, $type, and returns its return value.
-
-=head2 get_cipher
-
-C<method get_cipher : string ();>
-
-Calls native L<SSL_get_cipher|https://docs.openssl.org/1.0.2/man3/SSL_get_current_cipher/> function, and returns its return value.
-
-=head2 get_peer_certificate
-
-C<method get_peer_certificate : L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> ();>
-
-Calls native L<SSL_get_peer_certificate|https://docs.openssl.org/master/man3/SSL_get_peer_certificate> function.
-
-If the return value of the native function is NULL, returns undef.
-
-Otherwise, creates a new L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> object, sets the pointer value of the new object to the return value of the native function, and returns the new object.
+If SSL_shutdown failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class and with L</"operation_error"> field set to the return vlaue of L<SSL_get_error|https://docs.openssl.org/1.1.1/man3/SSL_get_error/> function given the return value of L<SSL_shutdown|https://docs.openssl.org/1.0.2/man3/SSL_shutdown/> function.
 
 =head2 get_shutdown
 
 C<method get_shutdown : int ();>
 
 Calls native L<SSL_get_shutdown|https://docs.openssl.org/master/man3/SSL_set_shutdown/> function, and returns its return value.
+
+=head2 get_cipher
+
+C<method get_cipher : string ();>
+
+Calls native L<SSL_get_cipher|https://docs.openssl.org/1.0.2/man3/SSL_get_current_cipher/> function, and returns its return value.
 
 =head2 get_certificate
 
@@ -345,6 +335,16 @@ If the return value of the native function is NULL, returns undef.
 Otherwise, creates a new L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> object, sets the pointer value of the new object to the return value of the native function, and returns the new object.
 
 C<no_free> flag of the new object is set to 1.
+
+=head2 get_peer_certificate
+
+C<method get_peer_certificate : L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> ();>
+
+Calls native L<SSL_get_peer_certificate|https://docs.openssl.org/master/man3/SSL_get_peer_certificate> function.
+
+If the return value of the native function is NULL, returns undef.
+
+Otherwise, creates a new L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> object, sets the pointer value of the new object to the return value of the native function, and returns the new object.
 
 =head2 get0_alpn_selected
 

@@ -44,6 +44,8 @@ class Net::SSLeay {
   
   native method set_tlsext_host_name : int ($name : string);
   
+  native method get_servername : string ($type : int);
+  
   native method get_SSL_CTX : Net::SSLeay::SSL_CTX ();
   
   native method set_SSL_CTX : Net::SSLeay::SSL_CTX ($ctx : Net::SSLeay::SSL_CTX);
@@ -54,21 +56,19 @@ class Net::SSLeay {
   
   native method accept : int ();
   
-  native method shutdown : int ();
-  
   native method read : int ($buf : mutable string, $num : int = -1, $offset : int = 0);
   
   native method write : int ($buf : string, $num : int = -1, $offset : int = 0);
   
-  native method get_servername : string ($type : int);
-  
-  native method get_cipher : string ();
-  
-  native method get_peer_certificate : Net::SSLeay::X509 ();
+  native method shutdown : int ();
   
   native method get_shutdown : int ();
   
+  native method get_cipher : string ();
+  
   native method get_certificate : Net::SSLeay::X509 ();
+  
+  native method get_peer_certificate : Net::SSLeay::X509 ();
   
   native method get_peer_cert_chain : Net::SSLeay::X509[] ();
   
