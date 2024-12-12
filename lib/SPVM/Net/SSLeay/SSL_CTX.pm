@@ -304,18 +304,6 @@ Calls native L<SSL_CTX_set_tlsext_servername_callback|https://docs.openssl.org/1
 
 $arg is expected to be passed to native L<SSL_CTX_set_tlsext_servername_arg|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_tlsext_servername_callback> function.
 
-=head2 set_tlsext_status_cb
-
-C<method set_tlsext_status_cb : long ($cb : L<Net::SSLeay::Callback::TlsextStatus|SPVM::Net::SSLeay::Callback::TlsextStatus>, $arg : object = undef);>
-
-Calls native L<SSL_CTX_set_tlsext_status_cb|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_tlsext_status_cb> function given $cb, and returns its return value.
-
-$arg is expected to be passed to native L<SSL_CTX_set_tlsext_status_arg|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_tlsext_status_cb> function.
-
-Exceptions:
-
-If SSL_CTX_set_tlsext_status_cb failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
-
 =head2 set_psk_client_callback
 
 C<method set_psk_client_callback : void ($cb : L<Net::SSLeay::Callback::PskClient|SPVM::Net::SSLeay::Callback::PskClient>);>

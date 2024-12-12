@@ -1264,7 +1264,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_default_passwd_cb(SPVM_ENV* env, SPVM_VA
   return 0;
 }
 
-static int SPVM__Net__SSLeay__SSL_CTX__my__tlsext_servername_callback(SSL* ssl, int*al, void* native_arg) {
+static int SPVM__Net__SSLeay__SSL_CTX__my__tlsext_servername_callback(SSL* ssl, int* al, void* native_arg) {
   
   int32_t error_id = 0;
   
@@ -1350,106 +1350,6 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_tlsext_servername_callback(SPVM_ENV* env
   int64_t status = SSL_CTX_set_tlsext_servername_callback(self, native_cb);
   
   assert(status == 1);
-  
-  stack[0].lval = status;
-  
-  return 0;
-}
-
-static int SPVM__Net__SSLeay__SSL_CTX__my__tlsext_status_cb(SSL* ssl, void* native_arg) {
-  
-  int32_t error_id = 0;
-  
-  int32_t ret_status = SSL_TLSEXT_ERR_NOACK;
-  
-  void** native_args = (void**)native_arg;
-  
-  SPVM_ENV* env = (SPVM_ENV*)native_args[0];
-  
-  SPVM_VALUE* stack = (SPVM_VALUE*)native_args[1];
-  
-  void* obj_self = native_args[2];
-  
-  void* obj_cb = native_args[3];
-  
-  void* obj_arg = native_args[4];
-  
-  void* obj_address_ssl = env->new_pointer_object_by_name(env, stack, "Address", ssl, &error_id, __func__, FILE_NAME, __LINE__);
-  if (error_id) {
-    env->print_exception_to_stderr(env, stack);
-    
-    goto END_OF_FUNC;
-  }
-  stack[0].oval = obj_address_ssl;
-  env->call_class_method_by_name(env, stack, "Net::SSLeay", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
-  if (error_id) {
-    env->print_exception_to_stderr(env, stack);
-    
-    goto END_OF_FUNC;
-  }
-  void* obj_ssl = stack[0].oval;
-  
-  env->set_no_free(env, stack, obj_ssl, 1);
-  
-  stack[0].oval = obj_cb;
-  stack[1].oval = obj_ssl;
-  stack[2].oval = obj_arg;
-  
-  env->call_instance_method_by_name(env, stack, "", 3, &error_id, __func__, FILE_NAME, __LINE__);
-  if (error_id) {
-    env->print_exception_to_stderr(env, stack);
-    
-    goto END_OF_FUNC;
-  }
-  ret_status = stack[0].ival;
-  
-  END_OF_FUNC:
-  
-  return ret_status;
-}
-
-int32_t SPVM__Net__SSLeay__SSL_CTX__set_tlsext_status_cb(SPVM_ENV* env, SPVM_VALUE* stack) {
-  
-  int32_t error_id = 0;
-  
-  void* obj_self = stack[0].oval;
-  
-  void* obj_cb = stack[1].oval;
-  
-  void* obj_arg = stack[2].oval;
-  
-  SSL_CTX* self = env->get_pointer(env, stack, obj_self);
-  
-  int (*native_cb)(SSL *s, void *arg) = NULL;
-  
-  if (obj_cb) {
-    native_cb = &SPVM__Net__SSLeay__SSL_CTX__my__tlsext_status_cb;
-    
-    void* native_args[SPVM__Net__SSLeay__SSL_CTX__my__NATIVE_ARGS_MAX_LENGTH] = {0};
-    native_args[0] = env;
-    native_args[1] = stack;
-    native_args[2] = obj_self;
-    native_args[3] = obj_cb;
-    native_args[4] = obj_arg;
-    SSL_CTX_set_tlsext_status_arg(self, native_args);
-  }
-  
-  int64_t status = SSL_CTX_set_tlsext_status_cb(self, native_cb);
-  
-  if (!(status == 1)) {
-    int64_t ssl_error = ERR_peek_last_error();
-    
-    char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
-    ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
-    
-    env->die(env, stack, "[OpenSSL Error]SSL_CTX_set_tlsext_status_cb failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
-    
-    int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
-    if (error_id) { return error_id; }
-    error_id = tmp_error_id;
-    
-    return error_id;
-  }
   
   stack[0].lval = status;
   
