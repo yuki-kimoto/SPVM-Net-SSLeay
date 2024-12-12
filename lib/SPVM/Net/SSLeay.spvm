@@ -50,8 +50,6 @@ class Net::SSLeay {
   
   native method get_servername : string ($type : int);
   
-  native method set_tlsext_status_type : long  ($type : int);
-  
   native method set_mode : long ($mode : long);
   
   native method clear_mode : long ($mode : long);
