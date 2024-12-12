@@ -398,7 +398,9 @@ method get_SSL_CTX : Net::SSLeay::SSL_CTX ();
 
 =head2 get_SSL_CTX
 
-C<method get_SSL_CTX : Net::SSLeay::SSL_CTX ();>
+C<method get_SSL_CTX : L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> ();>
+
+Calls native L<SSL_get_SSL_CTX|https://docs.openssl.org/3.4/man3/SSL_get_SSL_CTX/> function given the pointer value of the instance, creates a new L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> object, sets the pointer value of the new object to the return value of the native function, sets C<no_free> flag of the new object to 1, creates a reference from the new object to the instance, and returns the new object.
 
 Returns the value of L</"ssl_ctx"> field.
 

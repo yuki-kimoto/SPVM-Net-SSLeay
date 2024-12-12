@@ -15,8 +15,6 @@ class Net::SSLeay {
   use Net::SSLeay::OPENSSL_INIT_SETTINGS;
   
   # Fields
-  has ssl_ctx : Net::SSLeay::SSL_CTX;
-  
   has operation_error : ro int;
   
   # Class Methods
@@ -94,9 +92,7 @@ class Net::SSLeay {
   
   native method get_peer_cert_chain : Net::SSLeay::X509[] ();
   
-  method get_SSL_CTX : Net::SSLeay::SSL_CTX () {
-    return $self->{ssl_ctx};
-  }
+  native method get_SSL_CTX : Net::SSLeay::SSL_CTX ();
   
   native method set_SSL_CTX : Net::SSLeay::SSL_CTX ($ctx : Net::SSLeay::SSL_CTX);
   

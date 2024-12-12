@@ -5,6 +5,7 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   use Net::SSLeay::Error;
   
+  use Net::SSLeay;
   use Net::SSLeay::SSL_METHOD;
   use Net::SSLeay::X509_STORE;
   use Net::SSLeay::X509_NAME;
@@ -36,6 +37,8 @@ class Net::SSLeay::SSL_CTX : pointer {
   }
   
   # Fields
+  has ref_ssl : Net::SSLeay;
+  
   has ref_output_for_set_alpn_select_cb : string;
   
   # Class Methods

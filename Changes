@@ -34,7 +34,7 @@
     * Remove Net::SSLeay#set_session method.
     * Remove Net::SSLeay::SSL_SESSION class.
     * Remove Net::SSLeay#load_error_strings method.
-    
+    * Net::SSLeay#get_SSL_CTX returns a new object.
   [Bug Fix]
     * Fix bugs of Net::SSLeay#get0_alpn_selected method.
     * Fix bugs of Net::SSLeay#get0_next_proto_negotiated method.
