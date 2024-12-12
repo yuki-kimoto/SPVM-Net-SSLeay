@@ -11,18 +11,43 @@ class TestUtil::Socket extends IO::Socket::IP  {
     
     my $self = new TestUtil::Socket;
     
+    $self->init($options);
+    
+    $self->configure;
+    
+    return $self;
+  }
+  
+  # Instance Methods
+  protected method configure : void () {
+    
+    $self->SUPER::configure;
+    
+    $self->configure_SSL;
+  }
+  
+  protected method init : void ($options : object[] = undef) {
+    
+    $self->SUPER::init($options);
+    
+  }
+  
+  protected method configure_SSL : void () {
+    
     my $ssl_method = Net::SSLeay::SSL_METHOD->TLS_method;
     
     my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
     
     my $ssl = Net::SSLeay->new($ssl_ctx);
     
+    my $socket_fileno = $self->fileno;
+    
+    $ssl->set_fd($socket_fileno);
+    
     $self->{ssl} = $ssl;
     
-    return $self;
   }
   
-  # Instance Methods
   method connect_SSL : void () {
     
     my $ssl = $self->{ssl};
