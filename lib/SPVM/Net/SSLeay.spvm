@@ -122,8 +122,6 @@ class Net::SSLeay {
     return $dump;
   }
   
-  native method get_tlsext_status_type : long ();
-  
   native method DESTROY : void ();
   
 }

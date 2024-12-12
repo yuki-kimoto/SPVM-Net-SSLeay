@@ -944,21 +944,6 @@ int32_t SPVM__Net__SSLeay__set_msg_callback(SPVM_ENV* env, SPVM_VALUE* stack) {
   return 0;
 }
 
-int32_t SPVM__Net__SSLeay__get_tlsext_status_type(SPVM_ENV* env, SPVM_VALUE* stack) {
-  
-  int32_t error_id = 0;
-  
-  void* obj_self = stack[0].oval;
-  
-  SSL* self = env->get_pointer(env, stack, obj_self);
-  
-  int64_t type = SSL_get_tlsext_status_type(self);
-  
-  stack[0].lval = type;
-  
-  return 0;
-}
-
 int32_t SPVM__Net__SSLeay__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
