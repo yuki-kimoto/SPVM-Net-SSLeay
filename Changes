@@ -15,6 +15,7 @@
     * Remove Net::SSLeay::SSL_CTX#set_session_cache_mode method.
     * Remove Net::SSLeay::SSL_CTX#set_session_id_context method.
     * Remove Net::SSLeay::Callback::TlsextTicketKey class.
+    * Remove Net::SSLeay::Callback::TlsextStatus class.
     
 0.026 2024-12-11
   [Incompatibe Changes]
