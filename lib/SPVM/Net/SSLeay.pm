@@ -190,6 +190,24 @@ Exceptions:
 
 If SSL_set_fd failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
+=head2 get_mode
+
+C<method get_mode : long ();>
+
+Calls native L<get_mode|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_mode/> function, and returns its return value.
+
+=head2 set_mode
+
+C<method set_mode : long ($mode : long);>
+
+Calls native L<SSL_set_mode|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_mode/> function given the pointer value of the instance, $mode, and returns its return value.
+
+=head2 clear_mode
+
+C<method clear_mode : long ($mode : long);>
+
+Calls native L<SSL_clear_mode|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_mode/> function given the pointer value of the instance, $mode, and returns its return value.
+
 =head2 set_tlsext_host_name
 
 C<method set_tlsext_host_name : int ($name : string);>
@@ -275,24 +293,6 @@ Calls native L<SSL_get_servername|https://docs.openssl.org/master/man3/SSL_CTX_s
 C<method alert_desc_string_long : string  ($type : int);>
 
 Calls native L<SSL_alert_desc_string_long|https://docs.openssl.org/1.1.1/man3/SSL_alert_type_string/> function given the pointer value of the instance, $type, and returns its return value.
-
-=head2 set_mode
-
-C<method set_mode : long ($mode : long);>
-
-Calls native L<SSL_set_mode|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_mode/> function given the pointer value of the instance, $mode, and returns its return value.
-
-=head2 clear_mode
-
-C<method clear_mode : long ($mode : long);>
-
-Calls native L<SSL_clear_mode|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_mode/> function given the pointer value of the instance, $mode, and returns its return value.
-
-=head2 get_mode
-
-C<method get_mode : long ();>
-
-Calls native L<get_mode|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_mode/> function, and returns its return value.
 
 =head2 version
 

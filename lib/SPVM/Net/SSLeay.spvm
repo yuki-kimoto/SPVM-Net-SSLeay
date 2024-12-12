@@ -36,6 +36,12 @@ class Net::SSLeay {
   # Instance Methods
   native method set_fd : int ($fd : int);
   
+  native method get_mode : long ();
+  
+  native method set_mode : long ($mode : long);
+  
+  native method clear_mode : long ($mode : long);
+  
   native method set_tlsext_host_name : int ($name : string);
   
   native method connect : int ();
@@ -49,12 +55,6 @@ class Net::SSLeay {
   native method write : int ($buf : string, $num : int = -1, $offset : int = 0);
   
   native method get_servername : string ($type : int);
-  
-  native method set_mode : long ($mode : long);
-  
-  native method clear_mode : long ($mode : long);
-  
-  native method get_mode : long ();
   
   native method version : int ();
   

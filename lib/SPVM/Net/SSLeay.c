@@ -146,6 +146,55 @@ int32_t SPVM__Net__SSLeay__set_fd(SPVM_ENV* env, SPVM_VALUE* stack) {
   return 0;
 }
 
+int32_t SPVM__Net__SSLeay__get_mode(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  SSL* self = env->get_pointer(env, stack, obj_self);
+  
+  int64_t ret = SSL_get_mode(self);
+  
+  stack[0].lval = ret;
+  
+  return 0;
+}
+
+int32_t SPVM__Net__SSLeay__set_mode(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  SSL* self = env->get_pointer(env, stack, obj_self);
+  
+  int64_t mode = stack[1].lval;
+  
+  int64_t ret = SSL_set_mode(self, mode);
+  
+  stack[0].lval = ret;
+  
+  return 0;
+}
+
+int32_t SPVM__Net__SSLeay__clear_mode(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  SSL* self = env->get_pointer(env, stack, obj_self);
+  
+  int64_t mode = stack[1].lval;
+  
+  int64_t ret = SSL_clear_mode(self, mode);
+  
+  stack[0].lval = ret;
+  
+  return 0;
+}
+
 int32_t SPVM__Net__SSLeay__set_tlsext_host_name(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
@@ -530,55 +579,6 @@ int32_t SPVM__Net__SSLeay__set_SSL_CTX(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   env->set_field_object_by_name(env, stack, obj_self, "ssl_ctx", obj_ret_ctx, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
-  
-  return 0;
-}
-
-int32_t SPVM__Net__SSLeay__set_mode(SPVM_ENV* env, SPVM_VALUE* stack) {
-  
-  int32_t error_id = 0;
-  
-  void* obj_self = stack[0].oval;
-  
-  SSL* self = env->get_pointer(env, stack, obj_self);
-  
-  int64_t mode = stack[1].lval;
-  
-  int64_t ret = SSL_set_mode(self, mode);
-  
-  stack[0].lval = ret;
-  
-  return 0;
-}
-
-int32_t SPVM__Net__SSLeay__clear_mode(SPVM_ENV* env, SPVM_VALUE* stack) {
-  
-  int32_t error_id = 0;
-  
-  void* obj_self = stack[0].oval;
-  
-  SSL* self = env->get_pointer(env, stack, obj_self);
-  
-  int64_t mode = stack[1].lval;
-  
-  int64_t ret = SSL_clear_mode(self, mode);
-  
-  stack[0].lval = ret;
-  
-  return 0;
-}
-
-int32_t SPVM__Net__SSLeay__get_mode(SPVM_ENV* env, SPVM_VALUE* stack) {
-  
-  int32_t error_id = 0;
-  
-  void* obj_self = stack[0].oval;
-  
-  SSL* self = env->get_pointer(env, stack, obj_self);
-  
-  int64_t ret = SSL_get_mode(self);
-  
-  stack[0].lval = ret;
   
   return 0;
 }
