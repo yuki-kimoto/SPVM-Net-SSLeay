@@ -9,7 +9,6 @@ class Net::SSLeay::PEM {
   use Net::SSLeay::BIO;
   use Net::SSLeay::X509;
   use Net::SSLeay::X509_CRL;
-  use Net::SSLeay::DH;
   use Net::SSLeay::EVP_PKEY;
   
   # Class Methods

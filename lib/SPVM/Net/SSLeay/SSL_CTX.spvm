@@ -14,20 +14,11 @@ class Net::SSLeay::SSL_CTX : pointer {
   use List;
   
   use Net::SSLeay::Callback::TlsextServername;
-  use Net::SSLeay::Callback::TlsextStatus;
   use Net::SSLeay::Callback::PemPassword;
-  use Net::SSLeay::Callback::PskClient;
-  use Net::SSLeay::Callback::PskServer;
-  use Net::SSLeay::Callback::TlsextTicketKey;
-  use Net::SSLeay::Callback::AlpnSelect;
-  use Net::SSLeay::Callback::NewSession;
-  use Net::SSLeay::Callback::RemoveSession;
   use Net::SSLeay::Callback::Msg;
   use Net::SSLeay::Callback::Verify;
-  
   use Net::SSLeay::Callback::AlpnSelect; 
-  use Net::SSLeay::Callback::NextProtoSelect;
-  use Net::SSLeay::Callback::NextProtosAdvertised;
+  
   use Net::SSLeay::Util;
   
   use Sync::Mutex;

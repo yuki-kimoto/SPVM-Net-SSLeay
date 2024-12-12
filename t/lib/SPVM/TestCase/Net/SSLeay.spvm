@@ -556,19 +556,6 @@ class TestCase::Net::SSLeay {
     return 1;
   }
   
-  static method DH : int () {
-    
-    {
-      my $dh = Net::SSLeay::DH->new;
-      
-      unless ($dh is_type Net::SSLeay::DH) {
-        return 0;
-      }
-    }
-    
-    return 1;
-  }
-  
   static method PEM : int () {
     
     {
