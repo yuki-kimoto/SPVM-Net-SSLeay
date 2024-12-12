@@ -71,10 +71,6 @@ class TestCase::Net::SSLeay {
     
     $verify_param->set1_host($host);
     
-    my $socket_fileno = $socket->fileno;
-    
-    $ssl->set_fd($socket_fileno);
-    
     $ssl->set_tlsext_host_name($host);
     
     my $timeout = 0;
@@ -180,8 +176,6 @@ class TestCase::Net::SSLeay {
     my $verify_param = $ssl_ctx->get0_param;
     
     $verify_param->set1_host($host);
-    
-    my $socket_fileno = $socket->fileno;
     
     $ssl->set_tlsext_host_name($host);
     
