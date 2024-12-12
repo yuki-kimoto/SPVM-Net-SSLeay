@@ -344,12 +344,6 @@ C<native method version : int ();>
 
 Calls native L<version|https://docs.openssl.org/master/man3/SSL_get_version> function, and returns its return value.
 
-=head2 session_reused
-
-C<native method session_reused : int ();>
-  
-Calls native L<SSL_session_reused|https://docs.openssl.org/1.1.1/man3/SSL_session_reused/> function, and returns its return value.
-
 =head2 get_cipher
 
 C<method get_cipher : string ();>
@@ -377,28 +371,6 @@ Calls native L<SSL_get_shutdown|https://docs.openssl.org/master/man3/SSL_set_shu
 C<method pending : int ();>
 
 Calls native L<SSL_pending|https://docs.openssl.org/master/man3/SSL_pending/> function, and returns its return value.
-
-=head2 get1_session
-
-C<method get1_session : L<Net::SSLeay::SSL_SESSION|SPVM::Net::SSLeay::SSL_SESSION> ();>
-
-Calls native L<SSL_get1_session|https://docs.openssl.org/1.1.1/man3/SSL_get_session> function.
-
-If the return value of the native function is NULL, returns undef.
-
-Otherwise, creates a new L<Net::SSLeay::SSL_SESSION|SPVM::Net::SSLeay::SSL_SESSION> object, sets the pointer value of the new object to the return value of the native function, and returns the new object.
-
-=head2 set_session
-
-C<method set_session : int ($session : Net::SSLeay::SSL_SESSION);>
-
-Calls native L<SSL_set_session|https://docs.openssl.org/1.1.1/man3/SSL_set_session> function given the pointer value of $session, sets L</"ssl_session"> field to $ssl.
-
-If this method succeeds, C<no_free> flag of $session is set to 1.
-
-Exceptions:
-
-If SSL_set_session failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
 =head2 get_certificate
 

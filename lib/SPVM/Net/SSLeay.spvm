@@ -18,8 +18,6 @@ class Net::SSLeay {
   # Fields
   has ssl_ctx : Net::SSLeay::SSL_CTX;
   
-  has ssl_session : Net::SSLeay::SSL_SESSION;
-  
   has operation_error : ro int;
   
   # Class Methods
@@ -69,8 +67,6 @@ class Net::SSLeay {
   
   native method version : int ();
   
-  native method session_reused : int ();
-  
   native method get_cipher : string ();
   
   native method get_peer_certificate : Net::SSLeay::X509 ();
@@ -78,10 +74,6 @@ class Net::SSLeay {
   native method get_shutdown : int ();
   
   native method pending : int ();
-  
-  native method get1_session :  Net::SSLeay::SSL_SESSION ();
-  
-  native method set_session : int ($session : Net::SSLeay::SSL_SESSION);
   
   native method get_certificate : Net::SSLeay::X509 ();
   
