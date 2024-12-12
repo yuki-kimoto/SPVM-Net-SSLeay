@@ -26,12 +26,12 @@ class Net::SSLeay::SSL_CTX : pointer {
   use StringList;
   
   # Class Variables
-  our $VERIFY_CBS : Hash of Net::SSLeay::Callback::Verify;
+  our $VERIFY_CBS_H : Hash of Net::SSLeay::Callback::Verify;
   
   our $MUTEX : Sync::Mutex;
   
   INIT {
-    $VERIFY_CBS = Hash->new;
+    $VERIFY_CBS_H = Hash->new;
     
     $MUTEX = Sync::Mutex->new;
   }
@@ -124,7 +124,7 @@ class Net::SSLeay::SSL_CTX : pointer {
     
     $MUTEX->reader_lock;
     
-    my $psk_server_cb = (Net::SSLeay::Callback::Verify)$VERIFY_CBS->get($key);
+    my $psk_server_cb = (Net::SSLeay::Callback::Verify)$VERIFY_CBS_H->get($key);
     
     return $psk_server_cb;
   }
@@ -137,7 +137,7 @@ class Net::SSLeay::SSL_CTX : pointer {
     
     $MUTEX->lock;
     
-    $VERIFY_CBS->set($key, $psk_server_cb);
+    $VERIFY_CBS_H->set($key, $psk_server_cb);
   }
   
   private method DELETE_VERIFY_CB : Net::SSLeay::Callback::Verify ($key : string) {
@@ -148,7 +148,7 @@ class Net::SSLeay::SSL_CTX : pointer {
     
     $MUTEX->lock;
     
-    my $deleted = (Net::SSLeay::Callback::Verify)$VERIFY_CBS->delete($key);
+    my $deleted = (Net::SSLeay::Callback::Verify)$VERIFY_CBS_H->delete($key);
     
     return $deleted;
   }
