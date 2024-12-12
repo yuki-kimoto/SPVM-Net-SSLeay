@@ -317,5 +317,6 @@ t/file/wildcard-cert.p12
 t/lib/SPVM/TestCase/Net/SSLeay.spvm
 t/lib/SPVM/TestCase/Net/SSLeay/SSL_CTX.spvm
 t/lib/SPVM/TestCase/Net/SSLeay/Util.spvm
+t/lib/SPVM/TestUtil/Socket.spvm
 t/OPENSSL.t
 t/SSL_CTX.t

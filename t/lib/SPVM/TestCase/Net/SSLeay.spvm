@@ -37,6 +37,8 @@ class TestCase::Net::SSLeay {
   use Array;
   use Net::SSLeay::X509_STORE;
   
+  use TestUtil::Socket;
+  
   our $FILE_DIR : string;
   
   INIT {

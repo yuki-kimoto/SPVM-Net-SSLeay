@@ -1,0 +1,156 @@
+class TestUtil::Socket extends IO::Socket::IP  {
+  
+  use Sys::Socket::Errno;
+  use Sys::Socket::Sockaddr;
+  
+  # Fields
+  has ssl : ro Net::SSLeay;
+  
+  # Class Methods
+  static method new : TestUtil::Socket ($options : object[] = undef) {
+    
+    my $self = new TestUtil::Socket;
+    
+    my $ssl_method = Net::SSLeay::SSL_METHOD->TLS_method;
+    
+    my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
+    
+    my $ssl = Net::SSLeay->new($ssl_ctx);
+    
+    $self->{ssl} = $ssl;
+    
+    return $self;
+  }
+  
+  # Instance Methods
+  method connect_SSL : void () {
+    
+    my $ssl = $self->{ssl};
+    
+    my $timeout = $self->{Timeout};
+    
+    my $fd = $self->{FD};
+    
+    while (1) {
+      eval { $ssl->connect; }
+      
+      if ($@) {
+        my $again = Sys::Socket::Errno->is_connect_again(Sys::Socket::Errno->errno);
+        
+        if ($again) {
+          Go->gosched_io_write($fd, $timeout);
+          next;
+        }
+        else {
+          die $@;
+        }
+      }
+      else {
+        last;
+      }
+    }
+  }
+  
+  method accept_SSL : void () {
+    
+    my $ssl = $self->{ssl};
+    
+    my $fd = $self->{FD};
+    
+    my $timeout = $self->{Timeout};
+    
+    while (1) {
+      eval { $ssl->accept; }
+      
+      if ($@) {
+        my $again = Sys::Socket::Errno->is_accept_again(Sys::Socket::Errno->errno);
+        
+        if ($again) {
+          Go->gosched_io_read($fd, $timeout);
+          next;
+        }
+        else {
+          die $@;
+        }
+      }
+      else {
+        last;
+      }
+    }
+  }
+  
+  method read : int ($buffer : mutable string, $length : int = -1, $offset : int = 0) {
+    
+    my $ssl = $self->{ssl};
+    
+    my $fd = $self->{FD};
+    
+    my $timeout = $self->{Timeout};
+    
+    my $read_length = -1;
+    while (1) {
+      eval { $read_length = $ssl->read($buffer, $length, $offset); }
+      
+      if ($@) {
+        my $again = Sys::Socket::Errno->is_read_again(Sys::Socket::Errno->errno);
+        
+        if ($again) {
+          Go->gosched_io_read($fd, $timeout);
+          next;
+        }
+        else {
+          die $@;
+        }
+      }
+      else {
+        last;
+      }
+    }
+    
+    return $read_length;
+  }
+  
+  method write : int ($buffer : string, $length : int = -1, $offset : int = 0) {
+    
+    my $ssl = $self->{ssl};
+    
+    my $fd = $self->{FD};
+    
+    my $timeout = $self->{Timeout};
+    
+    my $write_length = -1;
+    while (1) {
+      
+      eval { $write_length = $ssl->write($buffer, $length, $offset); }
+      
+      if ($@) {
+        my $again = Sys::Socket::Errno->is_write_again(Sys::Socket::Errno->errno);
+        
+        if ($again) {
+          Go->gosched_io_write($fd, $timeout);
+          next;
+        }
+        else {
+          die $@;
+        }
+      }
+      else {
+        last;
+      }
+    }
+    
+    return $write_length;
+  }
+  
+  method close : void () {
+    
+    my $ssl = $self->{ssl};
+    
+    $ssl->shutdown;
+    
+    $self->SUPER::close;
+    
+  }
+  
+
+}
