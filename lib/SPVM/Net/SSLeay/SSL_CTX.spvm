@@ -105,8 +105,6 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   native method set_post_handshake_auth : void ($val : int);
   
-  native method set_session_id_context : int ($sid_ctx : string, $sid_ctx_len : int = -1);
-  
   native method set_min_proto_version : int ($version : int);
   
   native method set_client_CA_list : void ($list : Net::SSLeay::X509_NAME[]);

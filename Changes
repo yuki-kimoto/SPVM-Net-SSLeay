@@ -13,6 +13,7 @@
     * Remove Net::SSLeay::SSL_CTX#sess_remove_new_cb method.
     * Remove Net::SSLeay::SSL_CTX#get_session_cache_mode method.
     * Remove Net::SSLeay::SSL_CTX#set_session_cache_mode method.
+    * Remove Net::SSLeay::SSL_CTX#set_session_id_context method.
 0.026 2024-12-11
   [Incompatibe Changes]
     * Remove X509#get_ocsp_uri method.
