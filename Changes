@@ -34,7 +34,6 @@
     * Remove Net::SSLeay#set_session method.
     * Remove Net::SSLeay::SSL_SESSION class.
     * Remove Net::SSLeay#load_error_strings method.
-    * Remove Net::SSLeay#set_SSL_CTX method.
     
   [Bug Fix]
     * Fix bugs of Net::SSLeay#get0_alpn_selected method.
