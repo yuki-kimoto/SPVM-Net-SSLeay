@@ -92,13 +92,6 @@ class Net::SSLeay {
   
   native method set_msg_callback : void ($cb : Net::SSLeay::Callback::Msg, $arg : object = undef);
   
-  method P_dump_peer_certificate : string () {
-    
-    warn "P_dump_peer_certificate is deprecated.";
-    
-    return $self->dump_peer_certificate;
-  }
-  
   method dump_peer_certificate : string () {
     
     my $cert = $self->get_peer_certificate;
