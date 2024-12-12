@@ -26,6 +26,9 @@
     * Remove Net::SSLeay::EC_KEY class.
     * Remove Net::SSLeay::PEM#read_bio_DHparams method.
     * Remove Net::SSLeay::DH class.
+    * Remove Net::SSLeay::PEM#get0_next_proto_negotiated method.
+    * Remove Net::SSLeay::PEM#get0_next_proto_negotiated_return_string method.
+    
   [Bug Fix]
     * Fix bugs of Net::SSLeay#get0_alpn_selected method.
     * Fix bugs of Net::SSLeay#get0_next_proto_negotiated method.
