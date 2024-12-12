@@ -873,7 +873,7 @@ int32_t SPVM__Net__SSLeay__get0_next_proto_negotiated(SPVM_ENV* env, SPVM_VALUE*
   unsigned len_ref_tmp = -1;
   SSL_get0_next_proto_negotiated(self, data_ref_tmp, &len_ref_tmp);
   
-  if (data_ref_tmp) {
+  if (data_ref_tmp[0]) {
     void* obj_data = env->new_string_nolen(env, stack, data_ref_tmp[0]);
     
     env->set_elem_object(env, stack, obj_data_ref, 0, obj_data);
@@ -910,7 +910,7 @@ int32_t SPVM__Net__SSLeay__get0_alpn_selected(SPVM_ENV* env, SPVM_VALUE* stack) 
   unsigned int len_ref_tmp = -1;
   SSL_get0_alpn_selected(self, data_ref_tmp, &len_ref_tmp);
   
-  if (data_ref_tmp) {
+  if (data_ref_tmp[0]) {
     void* obj_data = env->new_string_nolen(env, stack, data_ref_tmp[0]);
     
     env->set_elem_object(env, stack, obj_data_ref, 0, obj_data);
