@@ -673,21 +673,6 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set1_groups_list(SPVM_ENV* env, SPVM_VALUE* 
   return 0;
 }
 
-int32_t SPVM__Net__SSLeay__SSL_CTX__get_session_cache_mode(SPVM_ENV* env, SPVM_VALUE* stack) {
-  
-  int32_t error_id = 0;
-  
-  void* obj_self = stack[0].oval;
-  
-  SSL_CTX* self = env->get_pointer(env, stack, obj_self);
-  
-  int64_t mode = SSL_CTX_get_session_cache_mode(self);
-  
-  stack[0].lval = mode;
-  
-  return 0;
-}
-
 int32_t SPVM__Net__SSLeay__SSL_CTX__set_session_cache_mode(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
