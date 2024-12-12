@@ -194,12 +194,6 @@ The group list $list must be defined. Otherwise an exception is thrown.
 
 If set1_groups_list failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
-=head2 set_session_cache_mode
-
-C<method set_session_cache_mode : long ($mode : long);>
-
-Calls native L<SSL_CTX_set_session_cache_mode|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_session_cache_mode/> function given the pointer value of the instance, $mode, and returns its return value.
-
 =head2 set_post_handshake_auth
 
 C<method set_post_handshake_auth : void ($val : int);>
