@@ -19,6 +19,9 @@
     * Remove Net::SSLeay::Callback::RemoveSession class.
     * Remove Net::SSLeay::Callback::PskServer class.
     * Remove Net::SSLeay::Callback::PskClient class.
+    * Remove Net::SSLeay::Callback::NewSession class.
+    * Remove Net::SSLeay::Callback::NextProtoSelect class.
+    * Remove Net::SSLeay::Callback::NextProtosAdvertised class.
     
 0.026 2024-12-11
   [Incompatibe Changes]
