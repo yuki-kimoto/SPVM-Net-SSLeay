@@ -72,6 +72,14 @@ Exceptions:
 
 If SSL_CTX_set_default_verify_paths failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
+=head2 set_default_verify_paths_windows
+
+C<method set_default_verify_paths_windows : void ();>
+
+It behaves as if L</"set_default_verify_paths"> had been invoked in Windows using the way described below.
+
+L<https://stackoverflow.com/questions/9507184/can-openssl-on-windows-use-the-system-certificate-store>
+
 =head2 use_certificate_file
 
 C<method use_certificate_file : int ($file : string, $type : int);>
@@ -337,14 +345,6 @@ Calls native L<SSL_CTX_sess_set_new_cb|https://docs.openssl.org/1.1.1/man3/SSL_C
 C<method sess_set_remove_cb : void ($cb : L<Net::SSLeay::Callback::RemoveSession|SPVM::Net::SSLeay::Callback::RemoveSession>)>
 
 Calls native L<SSL_CTX_sess_set_remove_cb|https://docs.openssl.org/1.1.1/man3/SSL_CTX_sess_set_get_cb/> function given $cb.
-
-=head2 set_default_verify_paths_windows
-
-C<method set_default_verify_paths_windows : void ();>
-
-It behaves as if L</"set_default_verify_paths"> had been invoked in Windows using the way described below.
-
-L<https://stackoverflow.com/questions/9507184/can-openssl-on-windows-use-the-system-certificate-store>
 
 =head2 DESTROY
 
