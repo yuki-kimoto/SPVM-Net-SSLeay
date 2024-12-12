@@ -23,6 +23,7 @@
     * Remove Net::SSLeay::Callback::NextProtoSelect class.
     * Remove Net::SSLeay::Callback::NextProtosAdvertised class.
     * Remove Net::SSLeay::HMAC_CTX class.
+    * Remove Net::SSLeay::EC_KEY class.
     
 0.026 2024-12-11
   [Incompatibe Changes]
