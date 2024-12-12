@@ -82,7 +82,6 @@ sub MY::postamble {
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::EVP_MD');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::EVP_PKEY');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::GENERAL_NAME');
-    $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::HMAC_CTX');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::OBJ');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::OPENSSL');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::OPENSSL_INIT');

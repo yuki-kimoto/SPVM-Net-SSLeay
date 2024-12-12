@@ -22,6 +22,7 @@
     * Remove Net::SSLeay::Callback::NewSession class.
     * Remove Net::SSLeay::Callback::NextProtoSelect class.
     * Remove Net::SSLeay::Callback::NextProtosAdvertised class.
+    * Remove Net::SSLeay::HMAC_CTX class.
     
 0.026 2024-12-11
   [Incompatibe Changes]

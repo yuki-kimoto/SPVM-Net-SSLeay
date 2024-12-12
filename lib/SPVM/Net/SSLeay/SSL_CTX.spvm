@@ -13,7 +13,6 @@ class Net::SSLeay::SSL_CTX : pointer {
   use Net::SSLeay::DH;
   use Net::SSLeay::EVP_PKEY;
   use Net::SSLeay::EVP_CIPHER_CTX;
-  use Net::SSLeay::HMAC_CTX;
   use List;
   
   use Net::SSLeay::Callback::TlsextServername;
