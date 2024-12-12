@@ -8,6 +8,7 @@ class TestCase::Net::SSLeay::SSL_CTX {
   use Net::SSLeay::Constant as SSL;
   
   use FindBin;
+  use Sys::OS;
   
   our $FILE_DIR : string;
   
@@ -87,6 +88,16 @@ class TestCase::Net::SSLeay::SSL_CTX {
       my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
       
       $ssl_ctx->set_default_verify_paths;
+      
+    }
+    
+    # set_default_verify_paths_windows
+    if (Sys::OS->is_windows) {
+      my $ssl_method = Net::SSLeay::SSL_METHOD->TLS_method;
+      
+      my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
+      
+      $ssl_ctx->set_default_verify_paths_windows;
       
     }
     
