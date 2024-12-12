@@ -11,17 +11,21 @@ use SPVM 'TestCase::Net::SSLeay::Util';
 
 use SPVM 'TestCase::Net::SSLeay::Util';
 
+use SPVM 'Net::SSLeay::Constant';
+
 use SPVM 'Net::SSLeay';
 use SPVM::Net::SSLeay;
 use SPVM 'Fn';
 
 my $api = SPVM::api();
 
+warn "[Test Output]" . SPVM::Net::SSLeay::Constant->OPENSSL_VERSION_TEXT;
+
 my $start_memory_blocks_count = $api->get_memory_blocks_count;
 
-ok(SPVM::TestCase::Net::SSLeay->test);
+ok(SPVM::TestCase::Net::SSLeay->https_google_with_mozilla_ca);
 
-ok(SPVM::TestCase::Net::SSLeay->test_no_mozilla_ca);
+ok(SPVM::TestCase::Net::SSLeay->https_google);
 
 ok(SPVM::TestCase::Net::SSLeay->ASN1_ENUMERATED);
 

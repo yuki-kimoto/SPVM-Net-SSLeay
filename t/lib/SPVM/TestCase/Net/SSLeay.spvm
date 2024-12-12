@@ -45,11 +45,7 @@ class TestCase::Net::SSLeay {
     $FILE_DIR = FindBin->Bin . "/file";
   }
   
-  static method test : int () {
-    
-    my $version = SSL->OPENSSL_VERSION_TEXT;
-    
-    warn "[Test Output]OpenSSL version:$version";
+  static method https_google_with_mozilla_ca : int () {
     
     # Socket
     my $host = "www.google.com";
@@ -121,7 +117,7 @@ class TestCase::Net::SSLeay {
     return 1;
   }
   
-  static method test_no_mozilla_ca : int () {
+  static method https_google : int () {
     
     my $version = SSL->OPENSSL_VERSION_TEXT;
     
@@ -645,7 +641,7 @@ class TestCase::Net::SSLeay {
         eval  {Net::SSLeay::OPENSSL_INIT->set_config_filename(undef, undef); }
         
         if ($@ && eval_error_id isa_error Error::NotSupported) {
-          warn "[Test Skip]Skip tests for Net::SSLeay::OPENSSL_INIT#set_config_filename method.";
+          warn "[Skip]Skip tests for Net::SSLeay::OPENSSL_INIT#set_config_filename method.";
         }
         else {
           Net::SSLeay::OPENSSL_INIT->set_config_filename($init_setting, "foo.config");
@@ -656,7 +652,7 @@ class TestCase::Net::SSLeay {
         eval  {Net::SSLeay::OPENSSL_INIT->set_config_file_flags(undef, 0); }
         
         if ($@ && eval_error_id isa_error Error::NotSupported) {
-          warn "[Test Skip]Skip tests for Net::SSLeay::OPENSSL_INIT#set_config_file_flags method.";
+          warn "[Skip]Skip tests for Net::SSLeay::OPENSSL_INIT#set_config_file_flags method.";
         }
         else {
           Net::SSLeay::OPENSSL_INIT->set_config_file_flags($init_setting, 0);
@@ -667,7 +663,7 @@ class TestCase::Net::SSLeay {
         eval  {Net::SSLeay::OPENSSL_INIT->set_config_appname(undef, undef); }
         
         if ($@ && eval_error_id isa_error Error::NotSupported) {
-          warn "[Test Skip]Skip tests for Net::SSLeay::OPENSSL_INIT#set_config_appname method.";
+          warn "[Skip]Skip tests for Net::SSLeay::OPENSSL_INIT#set_config_appname method.";
         }
         else {
           Net::SSLeay::OPENSSL_INIT->set_config_appname($init_setting, "foo");
