@@ -1441,109 +1441,6 @@ static unsigned int SPVM__Net__SSLeay__SSL_CTX__my__psk_client_cb(SSL* ssl, cons
   return ret_status;
 }
 
-static unsigned int SPVM__Net__SSLeay__SSL_CTX__my__psk_server_cb(SSL* ssl, const char* identity, unsigned char* psk, unsigned int max_psk_len) {
-  
-  int32_t error_id = 0;
-  
-  int32_t ret_status = 0;
-  
-  SPVM_ENV* env = thread_env;
-  
-  SPVM_VALUE* stack = env->new_stack(env);
-  
-  SSL_CTX* self = SSL_get_SSL_CTX(ssl);
-  
-  if (!self) {
-    env->die(env, stack, "SSL_get_SSL_CTX(ssl) failed.", __func__, FILE_NAME, __LINE__);
-    
-    env->print_exception_to_stderr(env, stack);
-    
-    goto END_OF_FUNC;
-  }
-  
-  char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
-  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);
-  stack[0].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
-  env->call_instance_method_by_name(env, stack, "GET_PSK_SERVER_CB", 1, &error_id, __func__, FILE_NAME, __LINE__);
-  if (error_id) {
-    env->print_exception_to_stderr(env, stack);
-    
-    goto END_OF_FUNC;
-  }
-  void* obj_cb = stack[0].oval;
-  
-  if (!obj_cb) {
-    env->die(env, stack, "GET_PSK_SERVER_CB method returns undef.", __func__, FILE_NAME, __LINE__);
-    
-    env->print_exception_to_stderr(env, stack);
-    
-    goto END_OF_FUNC;
-  }
-  
-  void* obj_address_ssl = env->new_pointer_object_by_name(env, stack, "Address", ssl, &error_id, __func__, FILE_NAME, __LINE__);
-  if (error_id) { return error_id; }
-  stack[0].oval = obj_address_ssl;
-  env->call_class_method_by_name(env, stack, "Net::SSLeay", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
-  if (error_id) { return error_id; }
-  void* obj_ssl = stack[0].oval;
-  env->set_no_free(env, stack, obj_ssl, 1);
-  
-  void* obj_identity = env->new_string_nolen(env, stack, identity);
-  
-  void* obj_psk = env->new_string(env, stack, psk, max_psk_len);
-  
-  stack[0].oval = obj_cb;
-  stack[1].oval = obj_ssl;
-  stack[2].oval = obj_identity;
-  stack[3].oval = obj_psk;
-  stack[4].ival = max_psk_len;
-  
-  env->call_instance_method_by_name(env, stack, "", 5, &error_id, __func__, FILE_NAME, __LINE__);
-  if (error_id) {
-    env->print_exception_to_stderr(env, stack);
-    
-    goto END_OF_FUNC;
-  }
-  ret_status = stack[0].ival;
-  
-  memcpy(psk, env->get_chars(env, stack, obj_psk), max_psk_len);
-  
-  END_OF_FUNC:
-  
-  env->free_stack(env, stack);
-  
-  return ret_status;
-}
-
-int32_t SPVM__Net__SSLeay__SSL_CTX__set_psk_server_callback(SPVM_ENV* env, SPVM_VALUE* stack) {
-  
-  int32_t error_id = 0;
-  
-  void* obj_self = stack[0].oval;
-  
-  void* obj_cb = stack[1].oval;
-  
-  SSL_CTX* self = env->get_pointer(env, stack, obj_self);
-  
-  SSL_psk_server_cb_func native_cb = NULL;
-  
-  if (obj_cb) {
-    native_cb = &SPVM__Net__SSLeay__SSL_CTX__my__psk_server_cb;
-  }
-  
-  stack[0].oval = obj_self;
-  char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
-  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);
-  stack[1].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
-  stack[2].oval = obj_cb;
-  env->call_instance_method_by_name(env, stack, "SET_TLSEXT_TICKET_KEY_CB", 3, &error_id, __func__, FILE_NAME, __LINE__);
-  if (error_id) { return error_id; }
-  
-  SSL_CTX_set_psk_server_callback(self, native_cb);
-  
-  return 0;
-}
-
 static unsigned int SPVM__Net__SSLeay__SSL_CTX__my__tlsext_ticket_key_cb(SSL* ssl, unsigned char* key_name, unsigned char* iv, EVP_CIPHER_CTX* ctx, HMAC_CTX* hctx, int enc) {
   
   int32_t error_id = 0;
@@ -1934,12 +1831,6 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   void* obj_self = stack[0].oval;
   
   SSL_CTX* self = env->get_pointer(env, stack, obj_self);
-  
-  stack[0].oval = obj_self;
-  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);
-  stack[1].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
-  env->call_instance_method_by_name(env, stack, "DELETE_PSK_SERVER_CB", 2, &error_id, __func__, FILE_NAME, __LINE__);
-  if (error_id) { return error_id; }
   
   stack[0].oval = obj_self;
   snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);

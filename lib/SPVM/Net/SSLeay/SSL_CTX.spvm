@@ -37,8 +37,6 @@ class Net::SSLeay::SSL_CTX : pointer {
   use StringList;
   
   # Class Variables
-  our $PSK_SERVER_CBS : Hash of Net::SSLeay::Callback::PskServer;
-  
   our $TLSEXT_TICKET_KEY_CBS : Hash of Net::SSLeay::Callback::TlsextTicketKey;
   
   our $NEW_SESSION_CBS : Hash of Net::SSLeay::Callback::NewSession;
@@ -50,8 +48,6 @@ class Net::SSLeay::SSL_CTX : pointer {
   our $MUTEX : Sync::Mutex;
   
   INIT {
-    $PSK_SERVER_CBS = Hash->new;
-    
     $TLSEXT_TICKET_KEY_CBS = Hash->new;
     
     $NEW_SESSION_CBS = Hash->new;
@@ -145,8 +141,6 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   native method set_tlsext_servername_callback : long ($cb : Net::SSLeay::Callback::TlsextServername, $arg : object = undef);
   
-  native method set_psk_server_callback : void ($cb : Net::SSLeay::Callback::PskServer);
-  
   native method set_tlsext_ticket_key_cb : void ($cb : Net::SSLeay::Callback::TlsextTicketKey);
   
   native method sess_set_new_cb : void ($cb : Net::SSLeay::Callback::NewSession);
@@ -154,43 +148,6 @@ class Net::SSLeay::SSL_CTX : pointer {
   native method sess_set_remove_cb : void ($cb : Net::SSLeay::Callback::NewSession);
   
   native method DESTROY : void ();
-  
-  private method GET_PSK_SERVER_CB : Net::SSLeay::Callback::PskServer ($key : string) {
-    
-    Fn->defer(method : void () {
-      $MUTEX->reader_unlock;
-    });
-    
-    $MUTEX->reader_lock;
-    
-    my $psk_server_cb = (Net::SSLeay::Callback::PskServer)$PSK_SERVER_CBS->get($key);
-    
-    return $psk_server_cb;
-  }
-  
-  private method SET_PSK_SERVER_CB : void ($key : string, $psk_server_cb : Net::SSLeay::Callback::PskServer) {
-    
-    Fn->defer(method : void () {
-      $MUTEX->unlock;
-    });
-    
-    $MUTEX->lock;
-    
-    $PSK_SERVER_CBS->set($key, $psk_server_cb);
-  }
-  
-  private method DELETE_PSK_SERVER_CB : Net::SSLeay::Callback::PskServer ($key : string) {
-    
-    Fn->defer(method : void () {
-      $MUTEX->unlock;
-    });
-    
-    $MUTEX->lock;
-    
-    my $deleted = (Net::SSLeay::Callback::PskServer)$PSK_SERVER_CBS->delete($key);
-    
-    return $deleted;
-  }
   
   private method GET_TLSEXT_TICKET_KEY_CB : Net::SSLeay::Callback::TlsextTicketKey ($key : string) {
     
