@@ -72,10 +72,6 @@ OpenSSL 1.1.1
 
 =item * L<Net::SSLeay::DER|SPVM::Net::SSLeay::DER>
 
-=item * L<Net::SSLeay::DH|SPVM::Net::SSLeay::DH>
-
-=item * L<Net::SSLeay::EC_KEY|SPVM::Net::SSLeay::EC_KEY>
-
 =item * L<Net::SSLeay::ERR|SPVM::Net::SSLeay::ERR>
 
 =item * L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error>
@@ -107,8 +103,6 @@ OpenSSL 1.1.1
 =item * L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX>
 
 =item * L<Net::SSLeay::SSL_METHOD|SPVM::Net::SSLeay::SSL_METHOD>
-
-=item * L<Net::SSLeay::SSL_SESSION|SPVM::Net::SSLeay::SSL_SESSION>
 
 =item * L<Net::SSLeay::Util|SPVM::Net::SSLeay::Util>
 

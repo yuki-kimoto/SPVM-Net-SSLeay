@@ -129,10 +129,6 @@ lib/SPVM/Net/SSLeay/SSL_METHOD.c
 lib/SPVM/Net/SSLeay/SSL_METHOD.config
 lib/SPVM/Net/SSLeay/SSL_METHOD.pm
 lib/SPVM/Net/SSLeay/SSL_METHOD.spvm
-lib/SPVM/Net/SSLeay/SSL_SESSION.c
-lib/SPVM/Net/SSLeay/SSL_SESSION.config
-lib/SPVM/Net/SSLeay/SSL_SESSION.pm
-lib/SPVM/Net/SSLeay/SSL_SESSION.spvm
 lib/SPVM/Net/SSLeay/Util.c
 lib/SPVM/Net/SSLeay/Util.config
 lib/SPVM/Net/SSLeay/Util.pm

@@ -1283,16 +1283,4 @@ class TestCase::Net::SSLeay {
     return 1;
   }
   
-  static method SSL_SESSION : int () {
-    
-    {
-      my $ssl_session = Net::SSLeay::SSL_SESSION->new;
-      
-      unless ($ssl_session is_type Net::SSLeay::SSL_SESSION) {
-        return 0;
-      }
-    }
-    
-    return 1;
-  }
 }
