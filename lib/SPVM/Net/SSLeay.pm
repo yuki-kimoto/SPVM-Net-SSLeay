@@ -180,15 +180,11 @@ If load_client_CA_file failed, an exception is thrown with C<eval_error_id> set 
 
 =head1 Instance Methods
 
-=head2 set_fd
+=head2 version
 
-C<method set_fd : int ($fd : int);>
+C<native method version : int ();>
 
-Calls native L<SSL_set_fd|https://docs.openssl.org/master/man3/SSL_set_fd/> function given the pointer value of the instance, $fd, and returns its return value.
-
-Exceptions:
-
-If SSL_set_fd failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+Calls native L<version|https://docs.openssl.org/master/man3/SSL_get_version> function, and returns its return value.
 
 =head2 get_mode
 
@@ -219,6 +215,28 @@ Exceptions:
 The host name $name must be defined. Otherwise an exception is thrown.
 
 If SSL_set_tlsext_host_name failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+
+=head2 get_SSL_CTX
+
+C<method get_SSL_CTX : L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> ();>
+
+Calls native L<SSL_get_SSL_CTX|https://docs.openssl.org/3.4/man3/SSL_get_SSL_CTX/> function given the pointer value of the instance, creates a new L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> object, sets the pointer value of the new object to the return value of the native function, sets C<no_free> flag of the new object to 1, creates a reference from the new object to the instance, and returns the new object.
+
+=head2 set_SSL_CTX
+
+C<method set_SSL_CTX : Net::SSLeay::SSL_CTX ($ctx : Net::SSLeay::SSL_CTX);>
+
+Calls native L<SSL_set_SSL_CTX|https://docs.openssl.org/3.4/man3/SSL_get_SSL_CTX/> function given the pointer value of the instance, creates a new L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> object, sets the pointer value of the new object to the return value of the native function, sets C<no_free> flag of the new object to 1, creates a reference from the new object to the instance, and returns the new object.
+
+=head2 set_fd
+
+C<method set_fd : int ($fd : int);>
+
+Calls native L<SSL_set_fd|https://docs.openssl.org/master/man3/SSL_set_fd/> function given the pointer value of the instance, $fd, and returns its return value.
+
+Exceptions:
+
+If SSL_set_fd failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
 =head2 connect
 
@@ -294,12 +312,6 @@ C<method alert_desc_string_long : string  ($type : int);>
 
 Calls native L<SSL_alert_desc_string_long|https://docs.openssl.org/1.1.1/man3/SSL_alert_type_string/> function given the pointer value of the instance, $type, and returns its return value.
 
-=head2 version
-
-C<native method version : int ();>
-
-Calls native L<version|https://docs.openssl.org/master/man3/SSL_get_version> function, and returns its return value.
-
 =head2 get_cipher
 
 C<method get_cipher : string ();>
@@ -357,14 +369,6 @@ If its return value is NULL, returns undef.
 Ohterwise, converts its return value to the array of L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509>, and returns the array.
 
 method get_SSL_CTX : Net::SSLeay::SSL_CTX ();
-
-=head2 get_SSL_CTX
-
-C<method get_SSL_CTX : L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> ();>
-
-Calls native L<SSL_get_SSL_CTX|https://docs.openssl.org/3.4/man3/SSL_get_SSL_CTX/> function given the pointer value of the instance, creates a new L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> object, sets the pointer value of the new object to the return value of the native function, sets C<no_free> flag of the new object to 1, creates a reference from the new object to the instance, and returns the new object.
-
-Returns the value of L</"ssl_ctx"> field.
 
 =head2 set_msg_callback
 
