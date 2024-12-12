@@ -70,10 +70,6 @@ class Net::SSLeay::SSL_CTX : pointer {
   # Fields
   has ref_output_for_set_alpn_select_cb : string;
   
-  has ref_output_for_set_next_proto_select_cb : string;
-  
-  has ref_output_for_set_next_protos_advertised_cb : string;
-  
   # Class Methods
   native static method new : Net::SSLeay::SSL_CTX ($method : Net::SSLeay::SSL_METHOD);
   
@@ -269,12 +265,6 @@ class Net::SSLeay::SSL_CTX : pointer {
   native method set_alpn_select_cb : void ($cb : Net::SSLeay::Callback::AlpnSelect, $arg : object);
   
   native method set_alpn_select_cb_with_protocols : void ($protocols : string[]);
-  
-  native method set_next_proto_select_cb : void ($cb : Net::SSLeay::Callback::NextProtoSelect, $arg : object);
-  
-  native method set_next_proto_select_cb_with_protocols : void ($protocols : string[]);
-  
-  native method set_next_protos_advertised_cb_with_protocols : void ($protocols : string[]);
   
   native method sess_set_new_cb : void ($cb : Net::SSLeay::Callback::NewSession);
   

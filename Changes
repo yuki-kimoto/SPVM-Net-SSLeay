@@ -1,7 +1,10 @@
 0.027 2024-12-12
   [New Features]
     * Add Net::SSLeay::SSL_CTX#set_alpn_select_cb method.
-    * Add Net::SSLeay::SSL_CTX#set_next_proto_select_cb method.
+  [Incompatibe Changes]
+    * Remove Net::SSLeay::SSL_CTX#set_next_proto_select_cb method.
+    * Remove Net::SSLeay::SSL_CTX#set_next_proto_select_cb_with_protocols method.
+    * Remove Net::SSLeay::SSL_CTX#set_next_protos_advertised_cb_with_protocols method.
 0.026 2024-12-11
   [Incompatibe Changes]
     * Remove X509#get_ocsp_uri method.

@@ -326,24 +326,6 @@ C<method set_alpn_select_cb_with_protocols : void ($protocols : string[]);>
 
 Calls native L<SSL_CTX_set_alpn_select_cb|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_alpn_select_cb> function defined to select $protocols.
 
-=head2 set_next_proto_select_cb
-
-C<method set_next_proto_select_cb : void ($cb : Net::SSLeay::Callback::NextProtoSelect, $arg : object);>
-
-Calls native L<SSL_CTX_set_next_proto_select_cb|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_alpn_select_cb> function given $cb, $arg.
-
-=head2 set_next_proto_select_cb_with_protocols
-
-C<method set_next_proto_select_cb_with_protocols : void ($protocols : string[]);>
-
-Calls native L<SSL_CTX_set_next_proto_select_cb|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_next_proto_select_cb> function defined to select $protocols.
-
-=head2 set_next_protos_advertised_cb_with_protocols
-
-C<method set_next_protos_advertised_cb : void ($protocols : string[]);>
-
-Calls native L<SSL_CTX_set_next_protos_advertised_cb|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_alpn_select_cb> function defined to select $protocols.
-
 =head2 sess_set_new_cb
 
 C<method sess_set_new_cb : void ($cb : L<Net::SSLeay::Callback::NewSession|SPVM::Net::SSLeay::Callback::NewSession>)>
