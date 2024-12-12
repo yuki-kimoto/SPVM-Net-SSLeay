@@ -268,6 +268,26 @@ C<method set_verify : void ($mode : int, $verify_callback : L<Net::SSLeay::Callb
 
 Calls native L<SSL_CTX_set_verify|https://docs.openssl.org/master/man3/SSL_CTX_set_verify/> function given the pointer value of the instance, $mode, $verify_callback.
 
+=head2 set_alpn_select_cb
+
+C<method set_alpn_select_cb : void ($cb : Net::SSLeay::Callback::AlpnSelect, $arg : object);>
+
+Calls native L<SSL_CTX_set_alpn_select_cb|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_alpn_select_cb> function given $cb, $arg.
+
+=head2 set_alpn_select_cb_with_protocols
+
+C<method set_alpn_select_cb_with_protocols : void ($protocols : string[]);>
+
+Calls native L<SSL_CTX_set_alpn_select_cb|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_alpn_select_cb> function defined to select $protocols.
+
+=head2 set_default_passwd_cb
+
+C<method set_default_passwd_cb : void ($cb : L<Net::SSLeay::Callback::PemPassword|SPVM::Net::SSLeay::Callback::PemPassword>, $arg : object = undef);>
+
+Calls native L<SSL_CTX_set_default_passwd_cb|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_default_passwd_cb> function given $cb, and returns its return value.
+
+$arg is expected to be passed to native L<SSL_CTX_set_default_passwd_cb_userdata|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_default_passwd_cb> function.
+
 =head2 set_tlsext_servername_callback
 
 C<method set_tlsext_servername_callback : long ($cb : L<Net::SSLeay::Callback::TlsextServername|SPVM::Net::SSLeay::Callback::TlsextServername>, $arg : object = undef);>
@@ -288,14 +308,6 @@ Exceptions:
 
 If SSL_CTX_set_tlsext_status_cb failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
-=head2 set_default_passwd_cb
-
-C<method set_default_passwd_cb : void ($cb : L<Net::SSLeay::Callback::PemPassword|SPVM::Net::SSLeay::Callback::PemPassword>, $arg : object = undef);>
-
-Calls native L<SSL_CTX_set_default_passwd_cb|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_default_passwd_cb> function given $cb, and returns its return value.
-
-$arg is expected to be passed to native L<SSL_CTX_set_default_passwd_cb_userdata|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_default_passwd_cb> function.
-
 =head2 set_psk_client_callback
 
 C<method set_psk_client_callback : void ($cb : L<Net::SSLeay::Callback::PskClient|SPVM::Net::SSLeay::Callback::PskClient>);>
@@ -313,18 +325,6 @@ Calls native L<SSL_CTX_set_psk_server_callback|https://docs.openssl.org/1.1.1/ma
 C<method set_tlsext_ticket_key_cb : void ($cb : L<Net::SSLeay::Callback::TlsextTicketKey|SPVM::Net::SSLeay::Callback::TlsextTicketKey>);>
 
 Calls native L<SSL_CTX_set_tlsext_ticket_key_cb|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_tlsext_ticket_key_cb> function given $cb.
-
-=head2 set_alpn_select_cb
-
-C<method set_alpn_select_cb : void ($cb : Net::SSLeay::Callback::AlpnSelect, $arg : object);>
-
-Calls native L<SSL_CTX_set_alpn_select_cb|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_alpn_select_cb> function given $cb, $arg.
-
-=head2 set_alpn_select_cb_with_protocols
-
-C<method set_alpn_select_cb_with_protocols : void ($protocols : string[]);>
-
-Calls native L<SSL_CTX_set_alpn_select_cb|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_alpn_select_cb> function defined to select $protocols.
 
 =head2 sess_set_new_cb
 

@@ -139,11 +139,15 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   native method set_verify : void ($mode : int, $verify_callback : Net::SSLeay::Callback::Verify = undef);
   
+  native method set_alpn_select_cb : void ($cb : Net::SSLeay::Callback::AlpnSelect, $arg : object);
+  
+  native method set_default_passwd_cb : void ($cb : Net::SSLeay::Callback::PemPassword, $arg : object = undef);
+  
+  native method set_alpn_select_cb_with_protocols : void ($protocols : string[]);
+  
   native method set_tlsext_servername_callback : long ($cb : Net::SSLeay::Callback::TlsextServername, $arg : object = undef);
   
   native method set_tlsext_status_cb : long ($cb : Net::SSLeay::Callback::TlsextStatus, $arg : object = undef);
-  
-  native method set_default_passwd_cb : void ($cb : Net::SSLeay::Callback::PemPassword, $arg : object = undef);
   
   native method set_psk_client_callback : void ($cb : Net::SSLeay::Callback::PskClient);
   
@@ -261,10 +265,6 @@ class Net::SSLeay::SSL_CTX : pointer {
     
     return $deleted;
   }
-  
-  native method set_alpn_select_cb : void ($cb : Net::SSLeay::Callback::AlpnSelect, $arg : object);
-  
-  native method set_alpn_select_cb_with_protocols : void ($protocols : string[]);
   
   native method sess_set_new_cb : void ($cb : Net::SSLeay::Callback::NewSession);
   
