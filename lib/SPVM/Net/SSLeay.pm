@@ -248,22 +248,6 @@ The offset $offset + $num must be lower than or equal to the length of the buffe
 
 If SSL_read failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class and with L</"operation_error"> field set to the return vlaue of L<SSL_get_error|https://docs.openssl.org/1.1.1/man3/SSL_get_error/> function given the return value of L<SSL_read|https://docs.openssl.org/1.0.2/man3/SSL_read/> function.
 
-=head2 peek
-
-C<method peek : int ($buf : mutable string, $num : int = -1, $offset : int = 0);>
-
-Calls native L<SSL_peek|https://docs.openssl.org/1.1.1/man3/SSL_peek/> function given the pointer value of the instance, $buf at the offset $offset, $num, and returns its return value.
-
-Exceptions:
-
-The buffer $buf must be defined. Otherwise an exception is thrown.
-
-The offset $offset must be greater than or equal to 0. Otherwise an exception is thrown.
-
-The offset $offset + $num must be lower than or equal to the length of the buffer $buf. Otherwise an exception is thrown.
-
-If SSL_peek failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class and with L</"operation_error"> field set to the return vlaue of L<SSL_get_error|https://docs.openssl.org/1.1.1/man3/SSL_get_error/> function given the return value of L<SSL_peek|https://docs.openssl.org/1.0.2/man3/SSL_peek/> function.
-
 =head2 write
 
 C<method write : int ($buf : string, $num : int = -1, $offset : int = 0);>
