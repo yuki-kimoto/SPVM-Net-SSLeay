@@ -40,7 +40,8 @@
   [Bug Fix]
     * Fix bugs of Net::SSLeay#get0_alpn_selected method.
     * Fix bugs of Net::SSLeay#get0_next_proto_negotiated method.
-    
+  [Requirement Bug Fix]
+    * Fix a SPVM::Sys dependency bug.
 0.026 2024-12-11
   [Incompatibe Changes]
     * Remove X509#get_ocsp_uri method.
