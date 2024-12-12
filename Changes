@@ -36,6 +36,7 @@
     * Remove Net::SSLeay#load_error_strings method.
     * Net::SSLeay#get_SSL_CTX returns a new object.
     * Remove Net::SSLeay#get_tlsext_status_type method.
+    * Remove Net::SSLeay#pending method.
   [Bug Fix]
     * Fix bugs of Net::SSLeay#get0_alpn_selected method.
     * Fix bugs of Net::SSLeay#get0_next_proto_negotiated method.

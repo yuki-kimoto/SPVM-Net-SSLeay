@@ -348,12 +348,6 @@ C<method get_shutdown : int ();>
 
 Calls native L<SSL_get_shutdown|https://docs.openssl.org/master/man3/SSL_set_shutdown/> function, and returns its return value.
 
-=head2 pending
-
-C<method pending : int ();>
-
-Calls native L<SSL_pending|https://docs.openssl.org/master/man3/SSL_pending/> function, and returns its return value.
-
 =head2 get_certificate
 
 C<method get_certificate : L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> ();>

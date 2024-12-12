@@ -68,8 +68,6 @@ class Net::SSLeay {
   
   native method get_shutdown : int ();
   
-  native method pending : int ();
-  
   native method get_certificate : Net::SSLeay::X509 ();
   
   native method get0_alpn_selected : void ($data_ref : string[], $len_ref : int*);
