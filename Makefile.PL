@@ -74,7 +74,6 @@ sub MY::postamble {
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::BIO');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::Constant');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::DER');
-    $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::DH');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::ERR');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::EVP');
     $make_rule .= SPVM::Builder::Util::API::create_make_rule_native('Net::SSLeay::EVP_CIPHER_CTX');

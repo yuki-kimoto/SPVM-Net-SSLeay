@@ -9,7 +9,6 @@ class Net::SSLeay::SSL_CTX : pointer {
   use Net::SSLeay::X509_STORE;
   use Net::SSLeay::X509_NAME;
   use Net::SSLeay::X509_VERIFY_PARAM;
-  use Net::SSLeay::DH;
   use Net::SSLeay::EVP_PKEY;
   use Net::SSLeay::EVP_CIPHER_CTX;
   use List;

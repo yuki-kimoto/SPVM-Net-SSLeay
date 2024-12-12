@@ -65,10 +65,6 @@ lib/SPVM/Net/SSLeay/DER.c
 lib/SPVM/Net/SSLeay/DER.config
 lib/SPVM/Net/SSLeay/DER.pm
 lib/SPVM/Net/SSLeay/DER.spvm
-lib/SPVM/Net/SSLeay/DH.c
-lib/SPVM/Net/SSLeay/DH.config
-lib/SPVM/Net/SSLeay/DH.pm
-lib/SPVM/Net/SSLeay/DH.spvm
 lib/SPVM/Net/SSLeay/ERR.c
 lib/SPVM/Net/SSLeay/ERR.config
 lib/SPVM/Net/SSLeay/ERR.pm
