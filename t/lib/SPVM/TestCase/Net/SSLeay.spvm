@@ -91,6 +91,15 @@ class TestCase::Net::SSLeay {
   
   static method accept : int ($port : int) {
     
+    # Clsss Methods
+    {
+      my $alert_desc_string_long = Net::SSLeay->alert_desc_string_long(1);
+      
+      unless ($alert_desc_string_long is_type string) {
+        return 0;
+      }
+    }
+    
     my $success_ref = [1];
     
     my $wg = Go::Sync::WaitGroup->new;
