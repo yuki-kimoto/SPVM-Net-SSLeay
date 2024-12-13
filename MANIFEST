@@ -73,6 +73,10 @@ lib/SPVM/Net/SSLeay/Error.pm
 lib/SPVM/Net/SSLeay/Error.spvm
 lib/SPVM/Net/SSLeay/Error/PEM_R_NO_START_LINE.pm
 lib/SPVM/Net/SSLeay/Error/PEM_R_NO_START_LINE.spvm
+lib/SPVM/Net/SSLeay/Error/SSL_ERROR_WANT_READ.pm
+lib/SPVM/Net/SSLeay/Error/SSL_ERROR_WANT_READ.spvm
+lib/SPVM/Net/SSLeay/Error/SSL_ERROR_WANT_WRITE.pm
+lib/SPVM/Net/SSLeay/Error/SSL_ERROR_WANT_WRITE.spvm
 lib/SPVM/Net/SSLeay/EVP.c
 lib/SPVM/Net/SSLeay/EVP.config
 lib/SPVM/Net/SSLeay/EVP.pm
