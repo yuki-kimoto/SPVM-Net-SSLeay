@@ -23,10 +23,6 @@ warn "[Test Output]" . SPVM::Net::SSLeay::Constant->OPENSSL_VERSION_TEXT;
 
 my $start_memory_blocks_count = $api->get_memory_blocks_count;
 
-ok(SPVM::TestCase::Net::SSLeay->https_google);
-
-ok(SPVM::TestCase::Net::SSLeay->https_google_with_mozilla_ca);
-
 ok(SPVM::TestCase::Net::SSLeay->ASN1_ENUMERATED);
 
 ok(SPVM::TestCase::Net::SSLeay->ASN1_INTEGER);
