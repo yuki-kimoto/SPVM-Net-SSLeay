@@ -158,6 +158,11 @@ class TestCase::Net::SSLeay {
         unless ($string_buffer->to_string eq "abc") {
           $success_ref->[0] = 0;
         }
+        
+        unless ($ssl->get_shutdown == SSL->SSL_RECEIVED_SHUTDOWN) {
+          $success_ref->[0] = 0;
+        }
+        
       }
       
       $wg->done;
