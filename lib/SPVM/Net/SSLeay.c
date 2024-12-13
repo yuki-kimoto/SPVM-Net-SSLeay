@@ -291,9 +291,14 @@ int32_t SPVM__Net__SSLeay__set_SSL_CTX(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   SSL_CTX* ctx = env->get_pointer(env, stack, obj_ssl_ctx);
   
+  SSL_CTX_up_ref(ctx);
+  
+  // The reference count of ctx is decremented if this function succeed.
   void* ret_ctx = SSL_set_SSL_CTX(self, ctx);
   
   if (!ret_ctx) {
+    SSL_CTX_free(ctx);
+    
     int64_t ssl_error = ERR_peek_last_error();
     
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
