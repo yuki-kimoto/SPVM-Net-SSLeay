@@ -128,6 +128,14 @@ class TestCase::Net::SSLeay {
         
         $ssl_ctx->set_post_handshake_auth(1);
         
+        if ($ssl->get_peer_certificate) {
+          $success_ref->[0] = 0;
+        }
+        
+        if ($ssl->get_peer_cert_chain) {
+          $success_ref->[0] = 0;
+        }
+        
         $socket->connect_SSL;
         
         my $certificate = $ssl->get_certificate;

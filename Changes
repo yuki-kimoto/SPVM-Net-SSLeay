@@ -1,6 +1,7 @@
 0.028 2024-12-13
   [Bug Fix]
     * Fix bugs of Net::SSLeay#get_certificate method.
+    * Fix bugs of Net::SSLeay#get_cert_chaine method.
 0.028 2024-12-13
   [Bug Fix]
     * Fix bugs of Net::SSLeay#get_SSL_CTX method.

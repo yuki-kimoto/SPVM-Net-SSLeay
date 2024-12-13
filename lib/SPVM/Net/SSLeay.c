@@ -762,20 +762,23 @@ int32_t SPVM__Net__SSLeay__get_peer_cert_chain(SPVM_ENV* env, SPVM_VALUE* stack)
   
   STACK_OF(X509)* x509s_stack = SSL_get_peer_cert_chain(self);
   
-  int32_t length = x509s_stack ? sk_X509_num(x509s_stack) : 0;
-  void* obj_x509s = env->new_object_array_by_name(env, stack, "Net::SSLeay::X509", length, &error_id, __func__, FILE_NAME, __LINE__);
-  for (int32_t i = 0; i < length; i++) {
-    X509* x509 = sk_X509_value(x509s_stack, i);
-    X509_up_ref(x509);
-    
-    void* obj_address_x509 = env->new_pointer_object_by_name(env, stack, "Address", x509, &error_id, __func__, FILE_NAME, __LINE__);
-    if (error_id) { return error_id; }
-    stack[0].oval = obj_address_x509;
-    env->call_class_method_by_name(env, stack, "Net::SSLeay::X509", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
-    if (error_id) { return error_id; }
-    void* obj_x509 = stack[0].oval;
-    
-    env->set_elem_object(env, stack, obj_x509s, i, obj_x509);
+  void* obj_x509s = NULL;
+  if (x509s_stack) {
+    int32_t length = sk_X509_num(x509s_stack);
+    obj_x509s = env->new_object_array_by_name(env, stack, "Net::SSLeay::X509", length, &error_id, __func__, FILE_NAME, __LINE__);
+    for (int32_t i = 0; i < length; i++) {
+      X509* x509 = sk_X509_value(x509s_stack, i);
+      X509_up_ref(x509);
+      
+      void* obj_address_x509 = env->new_pointer_object_by_name(env, stack, "Address", x509, &error_id, __func__, FILE_NAME, __LINE__);
+      if (error_id) { return error_id; }
+      stack[0].oval = obj_address_x509;
+      env->call_class_method_by_name(env, stack, "Net::SSLeay::X509", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
+      if (error_id) { return error_id; }
+      void* obj_x509 = stack[0].oval;
+      
+      env->set_elem_object(env, stack, obj_x509s, i, obj_x509);
+    }
   }
   
   stack[0].oval = obj_x509s;
