@@ -13,6 +13,8 @@ use SPVM 'TestCase::Net::SSLeay::Util';
 
 use SPVM 'Net::SSLeay::Constant';
 
+use Test::SPVM::Sys::Socket::Util;
+
 use SPVM 'Net::SSLeay';
 use SPVM::Net::SSLeay;
 use SPVM 'Fn';

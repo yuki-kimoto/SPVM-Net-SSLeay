@@ -13,6 +13,8 @@ class Net::SSLeay {
   use Net::SSLeay::Callback::Msg;
   use Net::SSLeay::OPENSSL;
   use Net::SSLeay::OPENSSL_INIT_SETTINGS;
+  use Net::SSLeay::Error::SSL_ERROR_WANT_READ;
+  use Net::SSLeay::Error::SSL_ERROR_WANT_WRITE;
   
   # Fields
   has operation_error : ro int;
