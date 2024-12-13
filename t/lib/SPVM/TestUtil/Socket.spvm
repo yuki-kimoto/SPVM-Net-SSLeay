@@ -4,7 +4,7 @@ class TestUtil::Socket extends IO::Socket::IP  {
   use Sys::Socket::Sockaddr;
   
   # Fields
-  has ssl : ro Net::SSLeay;
+  has ssl : rw Net::SSLeay;
   
   # Class Methods
   static method new : TestUtil::Socket ($options : object[] = undef) {
