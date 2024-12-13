@@ -65,6 +65,8 @@ class TestCase::Net::SSLeay {
     
     $ssl_ctx->use_certificate_file("$FILE_DIR/simple-cert.cert.pem");
     
+    $ssl_ctx->use_certificate_chain_file("$FILE_DIR/simple-cert.certchain.pem");
+    
     my $accepted_socket = $server_socket->accept;
     
     $accepted_socket->accept_SSL;
@@ -133,6 +135,24 @@ class TestCase::Net::SSLeay {
         my $peer_certificate = $ssl->get_peer_certificate;
         
         unless ($peer_certificate->get_subject_name->oneline eq "/C=PL/O=Net-SSLeay/OU=Test Suite/CN=simple-cert.net-ssleay.example") {
+          $success_ref->[0] = 0;
+        }
+        
+        my $peer_cert_chains = $ssl->get_peer_cert_chain;
+        
+        unless (@$peer_cert_chains == 3) {
+          $success_ref->[0] = 0;
+        }
+        
+        unless ($peer_cert_chains->[0]->get_subject_name->oneline eq "/C=PL/O=Net-SSLeay/OU=Test Suite/CN=simple-cert.net-ssleay.example") {
+          $success_ref->[0] = 0;
+        }
+        
+        unless ($peer_cert_chains->[1]->get_subject_name->oneline eq "/C=PL/O=Net-SSLeay/OU=Test Suite/CN=Intermediate CA") {
+          $success_ref->[0] = 0;
+        }
+        
+        unless ($peer_cert_chains->[2]->get_subject_name->oneline eq "/C=PL/O=Net-SSLeay/OU=Test Suite/CN=Root CA") {
           $success_ref->[0] = 0;
         }
         
