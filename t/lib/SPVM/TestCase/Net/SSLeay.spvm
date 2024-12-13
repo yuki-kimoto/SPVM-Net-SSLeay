@@ -79,8 +79,6 @@ class TestCase::Net::SSLeay {
           last;
         }
         
-        Fn->say_stderr($data);
-        
         $client_socket->write($data);
       }
       else {
@@ -88,7 +86,6 @@ class TestCase::Net::SSLeay {
       }
     }
     
-    warn;
   }
   
   static method accept : int ($port : int) {
@@ -106,8 +103,6 @@ class TestCase::Net::SSLeay {
       $go_server_ref->[0] = 1;
       
       &run_echo_server_accept_once($port);
-      
-      warn;
       
       $wg->done;
     });
@@ -128,10 +123,16 @@ class TestCase::Net::SSLeay {
         
         $socket->connect_SSL;
         
+        my $cipher = $ssl->get_cipher;
+        
+        unless ($cipher && !Fn->contains($cipher, "NONE")) {
+          $success_ref->[0] = 0;
+        }
+        
         my $write_buffer = "abc";
           
         $socket->write($write_buffer);
-          
+        
         $socket->write("\0");
         
         my $string_buffer = StringBuffer->new;
@@ -145,9 +146,6 @@ class TestCase::Net::SSLeay {
           eval { $recv_length = $socket->read($recv_buffer); }
           
           if ($recv_length > 0) {
-            
-            Fn->say_stderr($recv_buffer);
-            
             $string_buffer->push($recv_buffer);
           }
           else {
