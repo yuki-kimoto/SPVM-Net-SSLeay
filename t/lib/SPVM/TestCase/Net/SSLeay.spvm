@@ -93,10 +93,33 @@ class TestCase::Net::SSLeay {
     
     # Clsss Methods
     {
-      my $alert_desc_string_long = Net::SSLeay->alert_desc_string_long(1);
+      {
+        my $alert_desc_string_long = Net::SSLeay->alert_desc_string_long(1);
+        
+        unless ($alert_desc_string_long is_type string) {
+          return 0;
+        }
+      }
       
-      unless ($alert_desc_string_long is_type string) {
-        return 0;
+      {
+        my $x509_names = Net::SSLeay->load_client_CA_file("$FILE_DIR/simple-cert.certchain.pem");
+        
+        unless (@$x509_names == 3) {
+          return 0;
+        }
+        
+        unless ($x509_names->[0]->oneline eq "/C=PL/O=Net-SSLeay/OU=Test Suite/CN=simple-cert.net-ssleay.example") {
+          return 0;
+        }
+        
+        unless ($x509_names->[1]->oneline eq "/C=PL/O=Net-SSLeay/OU=Test Suite/CN=Intermediate CA") {
+          return 0;
+        }
+        
+        unless ($x509_names->[2]->oneline eq "/C=PL/O=Net-SSLeay/OU=Test Suite/CN=Root CA") {
+          return 0;
+        }
+        
       }
     }
     

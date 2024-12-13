@@ -97,7 +97,9 @@ int32_t SPVM__Net__SSLeay__load_client_CA_file(SPVM_ENV* env, SPVM_VALUE* stack)
   void* obj_x509_names = env->new_object_array_by_name(env, stack, "Net::SSLeay::X509_NAME", length, &error_id, __func__, FILE_NAME, __LINE__);
   
   for (int32_t i = 0; i < length; i++) {
-    X509_NAME* x509_name = sk_X509_NAME_value(x509_names_stack, i);
+    X509_NAME* x509_name_tmp = sk_X509_NAME_value(x509_names_stack, i);
+    
+    X509_NAME* x509_name = X509_NAME_dup(x509_name_tmp);
     
     void* obj_address_x509_name = env->new_pointer_object_by_name(env, stack, "Address", x509_name, &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
