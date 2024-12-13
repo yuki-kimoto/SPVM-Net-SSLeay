@@ -12,9 +12,25 @@ my $api = SPVM::api();
 
 my $start_memory_blocks_count = $api->get_memory_blocks_count;
 
-ok(SPVM::TestCase::Net::SSLeay::Online->https_google);
+my $ok = 0;
 
-ok(SPVM::TestCase::Net::SSLeay::Online->https_google_with_mozilla_ca);
+eval { $ok = SPVM::TestCase::Net::SSLeay::Online->https_google };
+
+if ($@) {
+  warn "[Skip]https_google test failed. The system may be offline.";
+}
+else {
+  ok($ok);
+}
+
+eval { $ok = SPVM::TestCase::Net::SSLeay::Online->https_google_with_mozilla_ca };
+
+if ($@) {
+  warn "[Skip]https_google test failed. The system may be offline.";
+}
+else {
+  ok($ok);
+}
 
 $api->set_exception(undef);
 

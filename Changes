@@ -2,6 +2,8 @@
   [Bug Fix]
     * Fix bugs of Net::SSLeay#get_SSL_CTX method.
     * Fix bugs of Net::SSLeay#set_SSL_CTX method.
+  [Test Improvement]
+    * Online tests are skipped in offline systems.
 0.027 2024-12-12
   [New Features]
     * Add Net::SSLeay::SSL_CTX#set_alpn_select_cb method.
