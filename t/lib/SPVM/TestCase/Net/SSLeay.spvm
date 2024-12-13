@@ -161,6 +161,7 @@ class TestCase::Net::SSLeay {
           $success_ref->[0] = 0;
         }
         
+        $socket->shutdown_SSL;
       }
       
       $wg->done;

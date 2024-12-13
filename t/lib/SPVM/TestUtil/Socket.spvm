@@ -2,6 +2,7 @@ class TestUtil::Socket extends IO::Socket::IP  {
   
   use Sys::Socket::Errno;
   use Sys::Socket::Sockaddr;
+  use Net::SSLeay::Constant as SSL;
   
   # Fields
   has ssl : rw Net::SSLeay;
@@ -242,7 +243,14 @@ class TestUtil::Socket extends IO::Socket::IP  {
     
     my $ssl = $self->{ssl};
     
-    $self->shutdown_SSL;
+    my $shutdown_status = $ssl->get_shutdown;
+    
+    my $listen = $self->{Listen};
+    
+    # Only client sockets and accpected sockets
+    unless ($listen > 0) {
+      $self->shutdown_SSL;
+    }
     
     $self->SUPER::close;
     
