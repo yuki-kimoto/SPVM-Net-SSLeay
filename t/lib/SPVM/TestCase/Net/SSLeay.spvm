@@ -65,27 +65,26 @@ class TestCase::Net::SSLeay {
     
     $ssl_ctx->use_certificate_file("$FILE_DIR/simple-cert.cert.pem");
     
-    my $client_socket = $server_socket->accept;
+    my $accepted_socket = $server_socket->accept;
     
-    $client_socket->accept_SSL;
+    $accepted_socket->accept_SSL;
     
     while (1) {
       
       my $data = (mutable string)new_string_len 1;
-      my $read_length = $client_socket->read($data);
+      my $read_length = $accepted_socket->read($data);
       
       if ($read_length > 0) {
         if ($data eq "\0") {
           last;
         }
         
-        $client_socket->write($data);
+        $accepted_socket->write($data);
       }
       else {
         last;
       }
     }
-    
   }
   
   static method accept : int ($port : int) {
