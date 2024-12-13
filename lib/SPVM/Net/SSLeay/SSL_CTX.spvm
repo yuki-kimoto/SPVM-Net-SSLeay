@@ -70,11 +70,11 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   native method set_default_verify_paths_windows : void ();
   
-  native method use_certificate_file : int ($file : string, $type : int);
+  native method use_certificate_file : int ($file : string, $type : int = -1);
   
   native method use_certificate_chain_file : int ($file : string);
   
-  native method use_PrivateKey_file : int ($file : string, $type : int);
+  native method use_PrivateKey_file : int ($file : string, $type : int = -1);
   
   native method use_PrivateKey : int ($pkey : Net::SSLeay::EVP_PKEY);
   
