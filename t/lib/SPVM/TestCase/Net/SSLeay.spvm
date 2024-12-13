@@ -130,6 +130,12 @@ class TestCase::Net::SSLeay {
         
         my $certificate = $ssl->get_certificate;
         
+        my $peer_certificate = $ssl->get_peer_certificate;
+        
+        unless ($peer_certificate->get_subject_name->oneline eq "/C=PL/O=Net-SSLeay/OU=Test Suite/CN=simple-cert.net-ssleay.example") {
+          $success_ref->[0] = 0;
+        }
+        
         my $cipher = $ssl->get_cipher;
         
         unless ($cipher && !Fn->contains($cipher, "NONE")) {

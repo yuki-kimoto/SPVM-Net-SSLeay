@@ -733,6 +733,7 @@ int32_t SPVM__Net__SSLeay__get_peer_certificate(SPVM_ENV* env, SPVM_VALUE* stack
   
   SSL* self = env->get_pointer(env, stack, obj_self);
   
+  // The reference count of the return value is incremented.
   X509* x509 = SSL_get_peer_certificate(self);
   
   void* obj_x509 = NULL;
