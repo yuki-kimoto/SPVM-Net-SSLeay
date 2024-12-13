@@ -704,6 +704,7 @@ int32_t SPVM__Net__SSLeay__get_certificate(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   SSL* self = env->get_pointer(env, stack, obj_self);
   
+  // The increment count of the retrun value is not incremented.
   X509* x509 = SSL_get_certificate(self);
   
   void* obj_x509 = NULL;
@@ -716,7 +717,7 @@ int32_t SPVM__Net__SSLeay__get_certificate(SPVM_ENV* env, SPVM_VALUE* stack) {
     if (error_id) { return error_id; }
     obj_x509 = stack[0].oval;
     
-    env->set_no_free(env, stack, obj_x509, 1);
+    X509_up_ref(x509);
   }
   
   stack[0].oval = obj_x509;
