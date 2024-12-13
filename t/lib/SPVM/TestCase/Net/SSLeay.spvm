@@ -176,6 +176,8 @@ class TestCase::Net::SSLeay {
           $success_ref->[0] = 0;
         }
         
+        my $alpn_selected_protocol = $ssl->get0_alpn_selected_return_string;
+        
         my $cipher = $ssl->get_cipher;
         
         unless ($cipher && !Fn->contains($cipher, "NONE")) {

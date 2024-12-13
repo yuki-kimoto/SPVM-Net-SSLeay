@@ -79,12 +79,12 @@ class Net::SSLeay {
   method get0_alpn_selected_return_string : string () {
     
     my $data_ref = new string[1];
-    my $len = 0;
+    my $len = -1;
     
     $self->get0_alpn_selected($data_ref, \$len);
     
     my $protocol = (string)undef;
-    if ($data_ref) {
+    if ($data_ref->[0]) {
       $protocol = $data_ref->[0];
       Fn->shorten((mutable string)$protocol, $len);
     }
