@@ -83,7 +83,12 @@ class TestUtil::Socket extends IO::Socket::IP  {
   }
   
   method accept : TestUtil::Socket ($peer_ref : Sys::Socket::Sockaddr[] = undef) {
-    return (TestUtil::Socket)$self->SUPER::accept($peer_ref);
+    
+    my $client_socket = (TestUtil::Socket)$self->SUPER::accept($peer_ref);
+    
+    $client_socket->ssl->set_SSL_CTX($self->ssl->get_SSL_CTX);
+    
+    return $client_socket;
   }
   
   method accept_SSL : void () {
