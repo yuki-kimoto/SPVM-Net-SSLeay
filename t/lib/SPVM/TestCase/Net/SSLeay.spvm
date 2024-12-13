@@ -72,16 +72,23 @@ class TestCase::Net::SSLeay {
     while (1) {
       
       my $data = (mutable string)new_string_len 1;
-      
       my $read_length = $client_socket->read($data);
       
       if ($read_length > 0) {
+        if ($data eq "\0") {
+          last;
+        }
+        
+        Fn->say_stderr($data);
+        
         $client_socket->write($data);
       }
       else {
         last;
       }
     }
+    
+    warn;
   }
   
   static method accept : int ($port : int) {
@@ -100,6 +107,8 @@ class TestCase::Net::SSLeay {
       
       &run_echo_server_accept_once($port);
       
+      warn;
+      
       $wg->done;
     });
     
@@ -117,15 +126,13 @@ class TestCase::Net::SSLeay {
         
         my $ssl_ctx = $ssl->get_SSL_CTX;
         
-        $ssl_ctx->set_verify(SSL->SSL_VERIFY_NONE);
-        
         $socket->connect_SSL;
         
-        my $send_buffer = "abc\n";
-        
-        $socket->write($send_buffer);
-        
-        $socket->shutdown(SOCKET->SHUT_WR);
+        my $write_buffer = "abc";
+          
+        $socket->write($write_buffer);
+          
+        $socket->write("\0");
         
         my $string_buffer = StringBuffer->new;
         
@@ -133,18 +140,22 @@ class TestCase::Net::SSLeay {
         
         while (1) {
           
-          my $recv_length = $socket->recv($recv_buffer);
+          my $recv_length = -1;
+          
+          eval { $recv_length = $socket->read($recv_buffer); }
           
           if ($recv_length > 0) {
+            
+            Fn->say_stderr($recv_buffer);
+            
             $string_buffer->push($recv_buffer);
           }
-          
-          if ($recv_buffer eq "\n") {
+          else {
             last;
           }
         }
         
-        unless ($string_buffer->to_string eq "abc\n") {
+        unless ($string_buffer->to_string eq "abc") {
           $success_ref->[0] = 0;
         }
       }

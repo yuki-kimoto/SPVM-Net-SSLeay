@@ -143,10 +143,12 @@ class TestUtil::Socket extends IO::Socket::IP  {
         my $again_write = eval_error_id isa_error Net::SSLeay::Error::SSL_ERROR_WANT_WRITE;
         
         if ($again_read) {
+          warn "[read:read again]";
           Go->gosched_io_read($fd, $timeout);
           next;
         }
         elsif ($again_write) {
+          warn "[read:write again]";
           Go->gosched_io_write($fd, $timeout);
           next;
         }
@@ -248,5 +250,9 @@ class TestUtil::Socket extends IO::Socket::IP  {
     
   }
   
+  method DESTROY : void () {
+    warn;
+    $self->close;
+  }
 
 }
