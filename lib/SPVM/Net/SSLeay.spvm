@@ -4,17 +4,16 @@
 class Net::SSLeay {
   version "0.028";
   
-  use Net::SSLeay::Constant;
+  use Net::SSLeay::Constant as SSL;
   use Net::SSLeay::SSL_CTX;
-  use Net::SSLeay::ERR;
-  use Net::SSLeay::Error;
   use Net::SSLeay::X509;
   use Net::SSLeay::X509_NAME;
-  use Net::SSLeay::Callback::Msg;
-  use Net::SSLeay::OPENSSL;
-  use Net::SSLeay::OPENSSL_INIT_SETTINGS;
+  
+  use Net::SSLeay::Error;
   use Net::SSLeay::Error::SSL_ERROR_WANT_READ;
   use Net::SSLeay::Error::SSL_ERROR_WANT_WRITE;
+  
+  use Net::SSLeay::Callback::Msg;
   
   # Fields
   has operation_error : ro int;

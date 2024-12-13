@@ -36,6 +36,7 @@ class TestCase::Net::SSLeay {
   use Net::SSLeay::ASN1_TIME;
   use Array;
   use Net::SSLeay::X509_STORE;
+  use Net::SSLeay::OPENSSL;
   
   use TestUtil::Socket;
   use Sys::Socket::Constant as SOCKET;
