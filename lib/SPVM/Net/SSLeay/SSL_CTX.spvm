@@ -28,8 +28,6 @@ class Net::SSLeay::SSL_CTX : pointer {
   # Class Variables
   our $VERIFY_CBS_H : Hash of Net::SSLeay::Callback::Verify;
   
-  our $VERIFY_CB_ARGS_H : Address;
-  
   our $MUTEX : Sync::Mutex;
   
   INIT {

@@ -15,8 +15,25 @@ class Net::SSLeay {
   
   use Net::SSLeay::Callback::Msg;
   
+  use Sync::Mutex;
+  
+  # Class Variables
+  our $INSTANCES_H : Hash of Net::SSLeay;
+  
+  our $MUTEX : Sync::Mutex;
+  
+  INIT {
+    $INSTANCES_H = Hash->new;
+    
+    $MUTEX = Sync::Mutex->new;
+  }
+  
   # Fields
   has operation_error : ro int;
+  
+  has msg_cb : Net::SSLeay::Callback::Msg;
+  
+  has msg_cb_arg : object;
   
   # Class Methods
   native static method new : Net::SSLeay ($ssl_ctx : Net::SSLeay::SSL_CTX);
@@ -111,5 +128,42 @@ class Net::SSLeay {
   }
   
   native method DESTROY : void ();
+  
+  private static method GET_INSTANCE : Net::SSLeay ($address : string) {
+    
+    Fn->defer(method : void () {
+      $MUTEX->reader_unlock;
+    });
+    
+    $MUTEX->reader_lock;
+    
+    my $self = (Net::SSLeay)$INSTANCES_H->get($address);
+    
+    return $self;
+  }
+  
+  private static method SET_INSTANCE : void ($address : string, $self : Net::SSLeay) {
+    
+    Fn->defer(method : void () {
+      $MUTEX->unlock;
+    });
+    
+    $MUTEX->lock;
+    
+    $INSTANCES_H->set($address, $self);
+  }
+  
+  private static method DELETE_INSTANCE : Net::SSLeay ($address : string) {
+    
+    Fn->defer(method : void () {
+      $MUTEX->unlock;
+    });
+    
+    $MUTEX->lock;
+    
+    my $deleted = (Net::SSLeay)$INSTANCES_H->delete($address);
+    
+    return $deleted;
+  }
   
 }
