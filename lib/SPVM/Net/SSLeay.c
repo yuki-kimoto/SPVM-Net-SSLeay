@@ -14,6 +14,8 @@ enum {
   SPVM__Net__SSLeay__my__NATIVE_ARGS_MAX_LENGTH = 16,
 };
 
+__thread SPVM_ENV* thread_env;
+
 int32_t SPVM__Net__SSLeay__new(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
@@ -43,6 +45,8 @@ int32_t SPVM__Net__SSLeay__new(SPVM_ENV* env, SPVM_VALUE* stack) {
   if (error_id) { return error_id; }
   
   stack[0].oval = obj_self;
+  
+  thread_env = env;
   
   return 0;
 }
