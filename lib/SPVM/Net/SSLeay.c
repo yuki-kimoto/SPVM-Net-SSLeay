@@ -923,6 +923,12 @@ int32_t SPVM__Net__SSLeay__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   SSL* self = env->get_pointer(env, stack, obj_self);
   
+  char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
+  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);
+  stack[0].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
+  env->call_instance_method_by_name(env, stack, "DELETE_INSTANCE", 1, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
+  
   if (!env->no_free(env, stack, obj_self)) {
     SSL_free(self);
   }
