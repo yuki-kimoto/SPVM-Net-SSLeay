@@ -835,15 +835,15 @@ static void SPVM__Net__SSLeay__my__msg_cb(int write_p, int version, int content_
   
   void** native_args = (void**)native_arg;
   
-  SPVM_ENV* env = (SPVM_ENV*)native_args[0];
+  SPVM_ENV* env = thread_env;;
   
-  SPVM_VALUE* stack = (SPVM_VALUE*)native_args[1];
+  SPVM_VALUE* stack = env->new_stack(env);
   
-  void* obj_self = native_args[2];
+  void* obj_self = native_args[0];
   
-  void* obj_cb = native_args[3];
+  void* obj_cb = native_args[1];
   
-  void* obj_arg = native_args[4];
+  void* obj_arg = native_args[2];
   
   void* obj_buf = env->new_string(env, stack, buf, len);
   
@@ -881,6 +881,8 @@ static void SPVM__Net__SSLeay__my__msg_cb(int write_p, int version, int content_
   
   END_OF_FUNC:
   
+  env->free_stack(env, stack);
+  
   return;
 }
 
@@ -902,11 +904,9 @@ int32_t SPVM__Net__SSLeay__set_msg_callback(SPVM_ENV* env, SPVM_VALUE* stack) {
     native_cb = &SPVM__Net__SSLeay__my__msg_cb;
     
     void* native_args[SPVM__Net__SSLeay__my__NATIVE_ARGS_MAX_LENGTH] = {0};
-    native_args[0] = env;
-    native_args[1] = stack;
-    native_args[2] = obj_self;
-    native_args[3] = obj_cb;
-    native_args[4] = obj_arg;
+    native_args[0] = obj_self;
+    native_args[1] = obj_cb;
+    native_args[2] = obj_arg;
     SSL_set_msg_callback_arg(self, native_args);
   }
   
