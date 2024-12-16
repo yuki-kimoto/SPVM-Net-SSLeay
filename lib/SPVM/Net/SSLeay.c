@@ -44,9 +44,17 @@ int32_t SPVM__Net__SSLeay__new(SPVM_ENV* env, SPVM_VALUE* stack) {
   void* obj_self = env->new_pointer_object_by_name(env, stack, "Net::SSLeay", self, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   
-  stack[0].oval = obj_self;
-  
   thread_env = env;
+  
+  char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
+  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);
+  stack[0].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
+  spvm_warn("New %s", tmp_buffer);
+  stack[1].oval = obj_self;
+  env->call_class_method_by_name(env, stack, "Net::SSLeay", "SET_INSTANCE", 2, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
+  
+  stack[0].oval = obj_self;
   
   return 0;
 }
@@ -925,8 +933,9 @@ int32_t SPVM__Net__SSLeay__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
   snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);
+  spvm_warn("DESTROY:%s", tmp_buffer);
   stack[0].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
-  env->call_instance_method_by_name(env, stack, "DELETE_INSTANCE", 1, &error_id, __func__, FILE_NAME, __LINE__);
+  env->call_class_method_by_name(env, stack, "Net::SSLeay", "DELETE_INSTANCE", 1, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   
   if (!env->no_free(env, stack, obj_self)) {
