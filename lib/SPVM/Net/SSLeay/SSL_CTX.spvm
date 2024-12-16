@@ -37,8 +37,6 @@ class Net::SSLeay::SSL_CTX : pointer {
   }
   
   # Fields
-  has ref_ssl : Net::SSLeay;
-  
   has ref_output_for_set_alpn_select_cb : string;
   
   # Class Methods
