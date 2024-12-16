@@ -25,6 +25,8 @@ warn "[Test Output]" . SPVM::Net::SSLeay::Constant->OPENSSL_VERSION_TEXT;
 
 my $start_memory_blocks_count = $api->get_memory_blocks_count;
 
+ok(SPVM::TestCase::Net::SSLeay->new);
+
 my $port = Test::SPVM::Sys::Socket::Util::get_available_port();
 
 ok(SPVM::TestCase::Net::SSLeay->accept($port));

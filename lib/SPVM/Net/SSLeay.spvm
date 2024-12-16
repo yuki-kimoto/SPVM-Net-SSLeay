@@ -156,12 +156,12 @@ class Net::SSLeay {
     
     $INSTANCES_H->set($address, $self);
     
+    $INSTANCES_H->weaken($address);
+    
     warn;
   }
   
   private static method DELETE_INSTANCE : Net::SSLeay ($address : string) {
-    
-    warn $MUTEX;
     
     warn $INSTANCES_H;
     
