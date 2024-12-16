@@ -20,14 +20,10 @@ class Net::SSLeay {
   # Class Variables
   our $INSTANCES_H : Hash of Net::SSLeay;
   
-  our $INSTANCES_H_2 : Hash of Net::SSLeay;
-  
   our $MUTEX : Sync::Mutex;
   
   INIT {
     $INSTANCES_H = Hash->new;
-    
-    $INSTANCES_H_2  = $INSTANCES_H;
     
     $MUTEX = Sync::Mutex->new;
   }
@@ -168,8 +164,6 @@ class Net::SSLeay {
     warn $MUTEX;
     
     warn $INSTANCES_H;
-    
-    warn $INSTANCES_H_2;
     
     Fn->defer(method : void () {
       $MUTEX->unlock;
