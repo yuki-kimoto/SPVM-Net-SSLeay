@@ -41,6 +41,8 @@ class TestUtil::Socket extends IO::Socket::IP  {
     
     my $ssl = Net::SSLeay->new($ssl_ctx);
     
+    warn $ssl;
+    
     my $socket_fileno = $self->fileno;
     
     $ssl->set_fd($socket_fileno);

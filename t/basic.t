@@ -27,10 +27,6 @@ my $start_memory_blocks_count = $api->get_memory_blocks_count;
 
 ok(SPVM::TestCase::Net::SSLeay->new);
 
-my $port = Test::SPVM::Sys::Socket::Util::get_available_port();
-
-ok(SPVM::TestCase::Net::SSLeay->accept($port));
-
 ok(SPVM::TestCase::Net::SSLeay->ASN1_ENUMERATED);
 
 ok(SPVM::TestCase::Net::SSLeay->ASN1_INTEGER);
@@ -70,6 +66,10 @@ ok(SPVM::TestCase::Net::SSLeay->X509_EXTENSION);
 ok(SPVM::TestCase::Net::SSLeay->X509);
 
 ok(SPVM::TestCase::Net::SSLeay->X509_STORE);
+
+my $port = Test::SPVM::Sys::Socket::Util::get_available_port();
+
+ok(SPVM::TestCase::Net::SSLeay->accept($port));
 
 $api->set_exception(undef);
 

@@ -44,6 +44,8 @@ class Net::SSLeay {
     
     Fn->set_pointer($self, $pointer);
     
+    $self->init;
+    
     return $self;
   }
   
@@ -52,6 +54,14 @@ class Net::SSLeay {
   native static method load_client_CA_file : Net::SSLeay::X509_NAME[] ($file : string);
   
   # Instance Methods
+  protected method  init : int ($options : object[] = undef) {
+    
+    $self->_init_native;
+    
+  }
+  
+  native private method _init_native : int ();
+  
   native method version : int ();
   
   native method get_mode : long ();

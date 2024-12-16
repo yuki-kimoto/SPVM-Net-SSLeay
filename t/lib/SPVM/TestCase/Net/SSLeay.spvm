@@ -104,6 +104,8 @@ class TestCase::Net::SSLeay {
         last;
       }
     }
+    
+    $server_socket = undef;
   }
   
   static method accept : int ($port : int) {
@@ -266,6 +268,12 @@ class TestCase::Net::SSLeay {
         }
         
         $socket->shutdown_SSL;
+        
+        warn;
+        
+        $socket = undef;
+        
+        warn;
       }
       
       $wg->done;
@@ -591,74 +599,6 @@ class TestCase::Net::SSLeay {
       my $x509 = Net::SSLeay::PEM->read_bio_X509($bio);
       
       unless ($x509 is_type Net::SSLeay::X509) {
-        return 0;
-      }
-      
-    }
-    
-    {
-      my $bio = Net::SSLeay::BIO->new_file("$FILE_DIR/simple-cert.cert.pem", "r");
-      
-      while (1) {
-        my $x509 = (Net::SSLeay::X509)undef;
-        
-        eval { $x509 = Net::SSLeay::PEM->read_bio_X509($bio); }
-        
-        if ($@) {
-          if (eval_error_id isa_error Net::SSLeay::Error::PEM_R_NO_START_LINE) {
-            last;
-          }
-          else {
-            die $@;
-          }
-        }
-        
-        unless ($x509 is_type Net::SSLeay::X509) {
-          return 0;
-        }
-      }
-    }
-    
-    {
-      my $bio = Net::SSLeay::BIO->new_file("$FILE_DIR/intermediate-ca.crl.pem", "r");
-      
-      my $x509_crl = Net::SSLeay::PEM->read_bio_X509_CRL($bio);
-      
-      unless ($x509_crl is_type Net::SSLeay::X509_CRL) {
-        return 0;
-      }
-      
-    }
-    
-    {
-      my $bio = Net::SSLeay::BIO->new_file("$FILE_DIR/intermediate-ca.crl.pem", "r");
-      
-      while (1) {
-        my $x509_crl = (Net::SSLeay::X509_CRL)undef;
-        
-        eval { $x509_crl = Net::SSLeay::PEM->read_bio_X509_CRL($bio); }
-        
-        if ($@) {
-          if (eval_error_id isa_error Net::SSLeay::Error::PEM_R_NO_START_LINE) {
-            last;
-          }
-          else {
-            die $@;
-          }
-        }
-        
-        unless ($x509_crl is_type Net::SSLeay::X509_CRL) {
-          return 0;
-        }
-      }
-    }
-    
-    {
-      my $bio = Net::SSLeay::BIO->new_file("$FILE_DIR/simple-cert.key.pem", "r");
-      
-      my $evp_pkey = Net::SSLeay::PEM->read_bio_PrivateKey($bio);
-      
-      unless ($evp_pkey is_type Net::SSLeay::EVP_PKEY) {
         return 0;
       }
       
