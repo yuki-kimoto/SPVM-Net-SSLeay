@@ -84,7 +84,9 @@ class TestUtil::Socket extends IO::Socket::IP  {
       }
     }
   }
-  
+
+=pod
+
   method accept : TestUtil::Socket ($peer_ref : Sys::Socket::Sockaddr[] = undef) {
     
     my $client_socket = (TestUtil::Socket)$self->SUPER::accept($peer_ref);
@@ -97,7 +99,55 @@ class TestUtil::Socket extends IO::Socket::IP  {
     
     return $client_socket;
   }
-  
+
+=cut
+
+  method accept : TestUtil::Socket ($peer_ref : Sys::Socket::Sockaddr[] = undef) {
+    
+    my $fd = $self->{FD};
+    
+    my $timeout = $self->{Timeout};
+    
+    my $client_fd = -1;
+    my $client_sockaddr = (Sys::Socket::Sockaddr)undef;
+    
+    while (1) {
+      eval { $client_sockaddr = Sys->accept(\$client_fd, $fd); }
+      
+      if ($@) {
+        my $again = Sys::Socket::Errno->is_accept_again(Sys::Socket::Errno->errno);
+        
+        if ($again) {
+          Go->gosched_io_read($fd, $timeout);
+          next;
+        }
+        else {
+          die $@;
+        }
+      }
+      else {
+        last;
+      }
+    }
+    
+    my $options = {
+      Timeout => $timeout,
+      FD => $client_fd,
+      Domain => $self->{Domain},
+      Type => $self->{Type},
+      Proto => $self->{Proto},
+    };
+    
+    my $class = type_name $self;
+    my $client = TestUtil::Socket->new($options);
+    
+    if ($peer_ref) {
+      $peer_ref->[0] = $client_sockaddr;
+    }
+    
+    return $client;
+  }
+
   method accept_SSL : void () {
     
     my $ssl = $self->{ssl};
