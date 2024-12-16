@@ -273,10 +273,7 @@ int32_t SPVM__Net__SSLeay__get_SSL_CTX(SPVM_ENV* env, SPVM_VALUE* stack) {
   env->call_class_method_by_name(env, stack, "Net::SSLeay::SSL_CTX", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   void* obj_ssl_ctx = stack[0].oval;
-  env->set_no_free(env, stack, obj_ssl_ctx, 1);
-  
-  env->set_field_object_by_name(env, stack, obj_ssl_ctx, "ref_ssl", obj_self, &error_id, __func__, FILE_NAME, __LINE__);
-  if (error_id) { return error_id; }
+  SSL_CTX_up_ref(ssl_ctx);
   
   return 0;
 }
