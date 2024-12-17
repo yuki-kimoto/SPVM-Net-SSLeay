@@ -26,9 +26,13 @@ class Net::SSLeay::SSL_CTX : pointer {
   use StringList;
   
   # Class Variables
+  our $INSTANCES_H : Hash of Net::SSLeay::SSL_CTX;
+  
   our $MUTEX : Sync::Mutex;
   
   INIT {
+    $INSTANCES_H = Hash->new;
+    
     $MUTEX = Sync::Mutex->new;
   }
   
@@ -134,5 +138,44 @@ class Net::SSLeay::SSL_CTX : pointer {
   native method set_tlsext_servername_callback : long ($cb : Net::SSLeay::Callback::TlsextServername, $arg : object = undef);
   
   native method DESTROY : void ();
+  
+  private static method GET_INSTANCE : Net::SSLeay::SSL_CTX ($address : string) {
+    
+    Fn->defer(method : void () {
+      $MUTEX->reader_unlock;
+    });
+    
+    $MUTEX->reader_lock;
+    
+    my $self = (Net::SSLeay::SSL_CTX)$INSTANCES_H->get($address);
+    
+    return $self;
+  }
+  
+  private static method SET_INSTANCE : void ($address : string, $self : Net::SSLeay::SSL_CTX) {
+    
+    Fn->defer(method : void () {
+      $MUTEX->unlock;
+    });
+    
+    $MUTEX->lock;
+    
+    $INSTANCES_H->set($address, $self);
+    
+    $INSTANCES_H->weaken($address);
+  }
+  
+  private static method DELETE_INSTANCE : Net::SSLeay::SSL_CTX ($address : string) {
+    
+    Fn->defer(method : void () {
+      $MUTEX->unlock;
+    });
+    
+    $MUTEX->lock;
+    
+    my $deleted = (Net::SSLeay::SSL_CTX)$INSTANCES_H->delete($address);
+    
+    return $deleted;
+  }
   
 }
