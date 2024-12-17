@@ -29,6 +29,10 @@ class Net::SSLeay {
   # Fields
   has operation_error : ro int;
   
+  has msg_cb : Net::SSLeay::Callback::Msg;
+  
+  has msg_cb_arg : object;
+  
   # Class Methods
   native static method new : Net::SSLeay ($ssl_ctx : Net::SSLeay::SSL_CTX);
   
