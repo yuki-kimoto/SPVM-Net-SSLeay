@@ -14,6 +14,8 @@ enum {
   SPVM__Net__SSLeay__my__NATIVE_ARGS_MAX_LENGTH = 16,
 };
 
+__thread SPVM_ENV* thread_env;
+
 int32_t SPVM__Net__SSLeay__new(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
@@ -127,6 +129,15 @@ int32_t SPVM__Net__SSLeay___init_native(SPVM_ENV* env, SPVM_VALUE* stack) {
   void* obj_self = stack[0].oval;
   
   SSL* self = env->get_pointer(env, stack, obj_self);
+  
+  thread_env = env;
+  
+  char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
+  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);
+  stack[0].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
+  stack[1].oval = obj_self;
+  env->call_class_method_by_name(env, stack, "Net::SSLeay", "SET_INSTANCE", 2, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
   
   return 0;
 }
@@ -930,6 +941,12 @@ int32_t SPVM__Net__SSLeay__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   void* obj_self = stack[0].oval;
   
   SSL* self = env->get_pointer(env, stack, obj_self);
+  
+  char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
+  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);
+  stack[0].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
+  env->call_class_method_by_name(env, stack, "Net::SSLeay", "DELETE_INSTANCE", 1, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
   
   if (!env->no_free(env, stack, obj_self)) {
     SSL_free(self);
