@@ -989,25 +989,52 @@ static int SPVM__Net__SSLeay__SSL_CTX__my__alpn_select_cb(SSL* ssl, const unsign
   
   int32_t scope_id = env->enter_scope(env, stack);
   
-  void* obj_self = native_args[0];
+  SSL_CTX* ssl_ctx = SSL_get_SSL_CTX(ssl);
   
-  void* obj_cb = native_args[1];
+  char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
+  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", ssl);
+  stack[0].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
+  env->call_class_method_by_name(env, stack, "Net::SSLeay::SSL_CTX", "GET_INSTANCE", 1, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    env->print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
+  }
+  void* obj_self = stack[0].oval;
   
-  void* obj_arg = native_args[2];
+  void* obj_cb = env->get_field_object_by_name(env, stack, obj_self, "alpn_select_cb", &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    env->print_exception_to_stderr(env, stack);
+    goto END_OF_FUNC;
+  }
+  
+  if (!obj_cb) {
+    env->die(env, stack, "alpn_select_cb field must be defined.", __func__, FILE_NAME, __LINE__);
+    
+    env->print_exception_to_stderr(env, stack);
+    goto END_OF_FUNC;
+  }
+  
+  void* obj_arg = env->get_field_object_by_name(env, stack, obj_self, "alpn_select_cb_arg", &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    env->print_exception_to_stderr(env, stack);
+    goto END_OF_FUNC;
+  }
   
   void* obj_address_ssl = env->new_pointer_object_by_name(env, stack, "Address", ssl, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) {
     env->print_exception_to_stderr(env, stack);
     goto END_OF_FUNC;
   }
-  stack[0].oval = obj_address_ssl;
-  env->call_class_method_by_name(env, stack, "Net::SSLeay", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
+  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", ssl);
+  stack[0].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
+  env->call_class_method_by_name(env, stack, "Net::SSLeay", "GET_INSTANCE", 1, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) {
     env->print_exception_to_stderr(env, stack);
+    
     goto END_OF_FUNC;
   }
   void* obj_ssl = stack[0].oval;
-  env->set_no_free(env, stack, obj_ssl, 1);
   
   void* obj_out_ref = env->new_string_array(env, stack, 1);
   
@@ -1068,16 +1095,17 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_alpn_select_cb(SPVM_ENV* env, SPVM_VALUE
   
   int (*native_cb) (SSL *ssl, const unsigned char **out, unsigned char *outlen, const unsigned char *in, unsigned int inlen, void *arg) = NULL;
   
-  void* native_args[SPVM__Net__SSLeay__SSL_CTX__my__NATIVE_ARGS_MAX_LENGTH] = {0};
   if (obj_cb) {
     native_cb = &SPVM__Net__SSLeay__SSL_CTX__my__alpn_select_cb;
     
-    native_args[0] = obj_self;
-    native_args[1] = obj_cb;
-    native_args[2] = obj_arg;
+    env->set_field_object_by_name(env, stack, obj_self, "alpn_select_cb", obj_cb, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) { return error_id; }
   }
   
-  SSL_CTX_set_alpn_select_cb(self, native_cb, native_args);
+  env->set_field_object_by_name(env, stack, obj_self, "alpn_select_cb_arg", obj_arg, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
+  
+  SSL_CTX_set_alpn_select_cb(self, native_cb, NULL);
   
   return 0;
 }
