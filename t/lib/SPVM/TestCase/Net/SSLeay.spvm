@@ -173,9 +173,10 @@ class TestCase::Net::SSLeay {
         
         my $msg_callback_results = new object[10];
         
-        my $msg_callback = [$msg_callback_results : object[]]method : void ($write_p : int, $version : int, $content_type : int, $buf : string, $len : int, $ssl : Net::SSLeay, $arg : object) {
-          
+        my $msg_callback = [$msg_callback_results : object[]]method : void ($write_p : int, $version : int, $content_type : int, $buf : string, $len : int, $ssl : Net::SSLeay, $arg : object) {          
           unless ($msg_callback_results->[0]) {
+            warn "[Test Output]\$write_p:$write_p,\$version:$version,\$content_type:$content_type,\$buf:" . dump $buf . ",\$len:$len,\$ssl:" . type_name($ssl) . ",\$arg:" . $arg->(int);
+            
             $msg_callback_results->[0] = $write_p;
             $msg_callback_results->[1] = $version;
             $msg_callback_results->[2] = $content_type;
@@ -189,7 +190,6 @@ class TestCase::Net::SSLeay {
             $msg_callback_results->[5] = $ssl_hash;
             $msg_callback_results->[6] = $arg;
             
-            warn dump $msg_callback_results;
           }
         };
         
