@@ -29,7 +29,7 @@ class Net::SSLeay {
   # Fields
   has operation_error : ro int;
   
-  has msg_callback : ro Net::SSLeay::Callback::Msg;
+  has msg_callback : Net::SSLeay::Callback::Msg;
   
   has msg_callback_arg : object;
   
