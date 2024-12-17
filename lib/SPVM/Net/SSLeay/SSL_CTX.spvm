@@ -26,13 +26,9 @@ class Net::SSLeay::SSL_CTX : pointer {
   use StringList;
   
   # Class Variables
-  our $VERIFY_CBS_H : Hash of Net::SSLeay::Callback::Verify;
-  
   our $MUTEX : Sync::Mutex;
   
   INIT {
-    $VERIFY_CBS_H = Hash->new;
-    
     $MUTEX = Sync::Mutex->new;
   }
   
@@ -127,7 +123,7 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   native method add_extra_chain_cert : long ($x509 : Net::SSLeay::X509);
   
-  native method set_verify : void ($mode : int, $verify_callback : Net::SSLeay::Callback::Verify = undef);
+  native method set_verify : void ($mode : int, $verify_callback : Net::SSLeay::Callback::Verify = undef, $arg : object = undef);
   
   native method set_default_passwd_cb : void ($cb : Net::SSLeay::Callback::PemPassword, $arg : object = undef);
   
@@ -138,42 +134,5 @@ class Net::SSLeay::SSL_CTX : pointer {
   native method set_tlsext_servername_callback : long ($cb : Net::SSLeay::Callback::TlsextServername, $arg : object = undef);
   
   native method DESTROY : void ();
-  
-  private method GET_VERIFY_CB : Net::SSLeay::Callback::Verify ($key : string) {
-    
-    Fn->defer(method : void () {
-      $MUTEX->reader_unlock;
-    });
-    
-    $MUTEX->reader_lock;
-    
-    my $psk_server_cb = (Net::SSLeay::Callback::Verify)$VERIFY_CBS_H->get($key);
-    
-    return $psk_server_cb;
-  }
-  
-  private method SET_VERIFY_CB : void ($key : string, $psk_server_cb : Net::SSLeay::Callback::Verify) {
-    
-    Fn->defer(method : void () {
-      $MUTEX->unlock;
-    });
-    
-    $MUTEX->lock;
-    
-    $VERIFY_CBS_H->set($key, $psk_server_cb);
-  }
-  
-  private method DELETE_VERIFY_CB : Net::SSLeay::Callback::Verify ($key : string) {
-    
-    Fn->defer(method : void () {
-      $MUTEX->unlock;
-    });
-    
-    $MUTEX->lock;
-    
-    my $deleted = (Net::SSLeay::Callback::Verify)$VERIFY_CBS_H->delete($key);
-    
-    return $deleted;
-  }
   
 }

@@ -870,19 +870,17 @@ static int SPVM__Net__SSLeay__SSL_CTX__my__verify_cb(int preverify_ok, X509_STOR
     goto END_OF_FUNC;
   }
   
-  char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
-  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);
-  stack[0].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
-  env->call_instance_method_by_name(env, stack, "GET_VERIFY_CB", 1, &error_id, __func__, FILE_NAME, __LINE__);
+  // TODO
+  void* obj_self = NULL;
+  
+  void* obj_cb = env->get_field_object_by_name(env, stack, obj_self, "verify_callback", &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) {
     env->print_exception_to_stderr(env, stack);
-    
     goto END_OF_FUNC;
   }
-  void* obj_cb = stack[0].oval;
   
   if (!obj_cb) {
-    env->die(env, stack, "GET_VERIFY_CB method returns undef.", __func__, FILE_NAME, __LINE__);
+    env->die(env, stack, "verify_callback field must be defined.", __func__, FILE_NAME, __LINE__);
     
     env->print_exception_to_stderr(env, stack);
     goto END_OF_FUNC;
@@ -933,20 +931,20 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_verify(SPVM_ENV* env, SPVM_VALUE* stack)
   
   void* obj_cb = stack[2].oval;
   
+  void* obj_arg = stack[3].oval;
+  
   SSL_CTX* self = env->get_pointer(env, stack, obj_self);
   
   SSL_verify_cb native_cb = NULL;
   if (obj_cb) {
     native_cb = &SPVM__Net__SSLeay__SSL_CTX__my__verify_cb;
     
-    stack[0].oval = obj_self;
-    char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
-    snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);
-    stack[1].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
-    stack[2].oval = obj_cb;
-    env->call_instance_method_by_name(env, stack, "SET_VERIFY_CB", 3, &error_id, __func__, FILE_NAME, __LINE__);
+    env->set_field_object_by_name(env, stack, obj_self, "verify_callback", obj_cb, &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
   }
+  
+  env->set_field_object_by_name(env, stack, obj_self, "verify_callback_arg", obj_arg, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
   
   SSL_CTX_set_verify(self, mode, native_cb);
   
@@ -1317,12 +1315,6 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   void* obj_self = stack[0].oval;
   
   SSL_CTX* self = env->get_pointer(env, stack, obj_self);
-  
-  stack[0].oval = obj_self;
-  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);
-  stack[1].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
-  env->call_instance_method_by_name(env, stack, "DELETE_VERIFY_CB", 2, &error_id, __func__, FILE_NAME, __LINE__);
-  if (error_id) { return error_id; }
   
   if (!env->no_free(env, stack, obj_self)) {
     SSL_CTX_free(self);
