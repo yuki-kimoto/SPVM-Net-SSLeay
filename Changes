@@ -1,6 +1,16 @@
 0.030 2024-12-16
   [Bug Fix]
     * Fix bugs of Net::SSLeay#get_SSL_CTX method.
+  [New Features]
+    * Add Net::SSLeay#msg_callback getter.
+    * Add Net::SSLeay#msg_callback_arg field and settter and getter.
+  [Incompatible Changes]
+    * Change the definition of Net::SSLeay#set_msg_callback method.
+      [Before]
+      method set_msg_callback : void ($cb : Net::SSLeay::Callback::Msg, $arg : object = undef);
+      [After]
+      method set_msg_callback : void ($cb : Net::SSLeay::Callback::Msg);
+    
 0.029 2024-12-16
   [Bug Fix]
     * Fix bugs of Net::SSLeay#get_certificate method.

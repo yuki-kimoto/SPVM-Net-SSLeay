@@ -932,8 +932,6 @@ int32_t SPVM__Net__SSLeay__set_msg_callback(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   void* obj_cb = stack[1].oval;
   
-  void* obj_arg = stack[2].oval;
-  
   SSL* self = env->get_pointer(env, stack, obj_self);
   
   void (*native_cb)(int write_p, int version, int content_type, const void *buf, size_t len, SSL *ssl, void *arg) = NULL;

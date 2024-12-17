@@ -115,7 +115,7 @@ class Net::SSLeay {
     return $protocol;
   }
   
-  native method set_msg_callback : void ($cb : Net::SSLeay::Callback::Msg, $arg : object = undef);
+  native method set_msg_callback : void ($cb : Net::SSLeay::Callback::Msg);
   
   method dump_peer_certificate : string () {
     

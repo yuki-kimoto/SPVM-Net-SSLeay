@@ -179,6 +179,7 @@ class TestCase::Net::SSLeay {
         
         $socket->set_msg_cb($msg_cb, $msg_cb_arg);
 =cut
+
         $socket->connect_SSL;
         
         my $certificate = $ssl->get_certificate;
