@@ -942,6 +942,9 @@ int32_t SPVM__Net__SSLeay__set_msg_callback(SPVM_ENV* env, SPVM_VALUE* stack) {
     env->set_field_object_by_name(env, stack, obj_self, "msg_callback", obj_cb, &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
   }
+  else {
+    SSL_set_msg_callback(self, NULL);
+  }
   
   return 0;
 }
