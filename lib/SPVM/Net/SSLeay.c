@@ -848,7 +848,7 @@ int32_t SPVM__Net__SSLeay__get0_alpn_selected(SPVM_ENV* env, SPVM_VALUE* stack) 
   return 0;
 }
 
-static void SPVM__Net__SSLeay__my__msg_cb(int write_p, int version, int content_type, const void* buf, size_t len, SSL* ssl, void* native_arg) {
+static void SPVM__Net__SSLeay__my__msg_callback(int write_p, int version, int content_type, const void* buf, size_t len, SSL* ssl, void* native_arg) {
   
   int32_t error_id = 0;
   
@@ -869,14 +869,14 @@ static void SPVM__Net__SSLeay__my__msg_cb(int write_p, int version, int content_
   
   assert(obj_self);
   
-  void* obj_cb = env->get_field_object_by_name(env, stack, obj_self, "msg_cb", &error_id, __func__, FILE_NAME, __LINE__);
+  void* obj_cb = env->get_field_object_by_name(env, stack, obj_self, "msg_callback", &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) {
     env->print_exception_to_stderr(env, stack);
     
     goto END_OF_FUNC;
   }
   
-  void* obj_arg = env->get_field_object_by_name(env, stack, obj_self, "msg_cb_arg", &error_id, __func__, FILE_NAME, __LINE__);
+  void* obj_arg = env->get_field_object_by_name(env, stack, obj_self, "msg_callback_arg", &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) {
     env->print_exception_to_stderr(env, stack);
     
@@ -939,19 +939,13 @@ int32_t SPVM__Net__SSLeay__set_msg_callback(SPVM_ENV* env, SPVM_VALUE* stack) {
   void (*native_cb)(int write_p, int version, int content_type, const void *buf, size_t len, SSL *ssl, void *arg) = NULL;
   
   if (obj_cb) {
-    native_cb = &SPVM__Net__SSLeay__my__msg_cb;
+    native_cb = &SPVM__Net__SSLeay__my__msg_callback;
     
-    env->set_field_object_by_name(env, stack, obj_self, "msg_cb", obj_cb, &error_id, __func__, FILE_NAME, __LINE__);
+    SSL_set_msg_callback(self, native_cb);
+    
+    env->set_field_object_by_name(env, stack, obj_self, "msg_callback", obj_cb, &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
   }
-  
-  if (obj_arg) {
-    env->set_field_object_by_name(env, stack, obj_self, "msg_cb_arg", obj_arg, &error_id, __func__, FILE_NAME, __LINE__);
-    if (error_id) { return error_id; }
-  }
-  
-  
-  SSL_set_msg_callback(self, native_cb);
   
   return 0;
 }
