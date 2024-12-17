@@ -66,6 +66,22 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__new(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   thread_env = env;
   
+  thread_env = env;
+  
+  char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
+  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);
+  void* obj_address = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
+  stack[0].oval = obj_address;
+  env->call_class_method_by_name(env, stack, "Net::SSLeay::SSL_CTX", "GET_INSTANCE", 1, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
+  void* obj_self_found = stack[0].oval;
+  if (!obj_self_found) {
+    stack[0].oval = obj_address;
+    stack[1].oval = obj_self;
+    env->call_class_method_by_name(env, stack, "Net::SSLeay::SSL_CTX", "SET_INSTANCE", 2, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) { return error_id; }
+  }
+  
   stack[0].oval = obj_self;
   
   return 0;
@@ -1310,11 +1326,15 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
-  
   void* obj_self = stack[0].oval;
   
   SSL_CTX* self = env->get_pointer(env, stack, obj_self);
+  
+  char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
+  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);
+  stack[0].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
+  env->call_class_method_by_name(env, stack, "Net::SSLeay::SSL_CTX", "DELETE_INSTANCE", 1, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
   
   if (!env->no_free(env, stack, obj_self)) {
     SSL_CTX_free(self);
