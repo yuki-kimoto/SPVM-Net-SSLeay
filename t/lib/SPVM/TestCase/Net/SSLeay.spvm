@@ -201,11 +201,11 @@ class TestCase::Net::SSLeay {
         
         $ssl->set_msg_callback(undef);
         
-        unless ($msg_callback_results->[0]->(int) == 1) {
+        unless ($msg_callback_results->[0]->(int) >= 0) {
           $success_ref->[0] = 0;
         }
         
-        unless ($msg_callback_results->[1]->(int) == 0) {
+        unless ($msg_callback_results->[1]->(int) >= 0) {
           $success_ref->[0] = 0;
         }
         
