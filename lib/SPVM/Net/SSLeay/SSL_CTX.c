@@ -848,6 +848,8 @@ static int SPVM__Net__SSLeay__SSL_CTX__my__verify_cb(int preverify_ok, X509_STOR
   
   SPVM_VALUE* stack = env->new_stack(env);
   
+  int32_t scope_id = env->enter_scope(env, stack);
+  
   SSL* ssl = (SSL*)X509_STORE_CTX_get_ex_data(x509_store_ctx, SSL_get_ex_data_X509_STORE_CTX_idx());
   
   if (!ssl) {
@@ -914,6 +916,8 @@ static int SPVM__Net__SSLeay__SSL_CTX__my__verify_cb(int preverify_ok, X509_STOR
   
   END_OF_FUNC:
   
+  env->leave_scope(env, stack, scope_id);
+  
   env->free_stack(env, stack);
   
   return ret_status;
@@ -957,9 +961,11 @@ static int SPVM__Net__SSLeay__SSL_CTX__my__alpn_select_cb(SSL* ssl, const unsign
   
   void** native_args = (void**)native_arg;
   
-  SPVM_ENV* env = (SPVM_ENV*)native_args[0];
+  SPVM_ENV* env = thread_env;
   
-  SPVM_VALUE* stack = (SPVM_VALUE*)native_args[1];
+  SPVM_VALUE* stack = env->new_stack(env);
+  
+  int32_t scope_id = env->enter_scope(env, stack);
   
   void* obj_self = native_args[2];
   
@@ -1019,6 +1025,10 @@ static int SPVM__Net__SSLeay__SSL_CTX__my__alpn_select_cb(SSL* ssl, const unsign
   
   END_OF_FUNC:
   
+  env->leave_scope(env, stack, scope_id);
+  
+  env->free_stack(env, stack);
+  
   return ret_status;
 }
 
@@ -1060,9 +1070,11 @@ static int SPVM__Net__SSLeay__SSL_CTX__my__alpn_select_cb_for_protocols (SSL* ss
   
   void** native_args = (void**)native_arg;
   
-  SPVM_ENV* env = (SPVM_ENV*)native_args[0];
+  SPVM_ENV* env = thread_env;
   
-  SPVM_VALUE* stack = (SPVM_VALUE*)native_args[1];
+  SPVM_VALUE* stack = env->new_stack(env);
+  
+  int32_t scope_id = env->enter_scope(env, stack);
   
   void* obj_self = native_args[2];
   
@@ -1093,6 +1105,10 @@ static int SPVM__Net__SSLeay__SSL_CTX__my__alpn_select_cb_for_protocols (SSL* ss
   }
   
   END_OF_FUNC:
+  
+  env->leave_scope(env, stack, scope_id);
+  
+  env->free_stack(env, stack);
   
   return ret_status;
 }
@@ -1132,9 +1148,11 @@ static int SPVM__Net__SSLeay__SSL_CTX__my__default_passwd_cb(char* buf, int size
   
   void** native_args = (void**)native_arg;
   
-  SPVM_ENV* env = (SPVM_ENV*)native_args[0];
+  SPVM_ENV* env = thread_env;
   
-  SPVM_VALUE* stack = (SPVM_VALUE*)native_args[1];
+  SPVM_VALUE* stack = env->new_stack(env);
+  
+  int32_t scope_id = env->enter_scope(env, stack);
   
   void* obj_self = native_args[2];
   
@@ -1161,6 +1179,10 @@ static int SPVM__Net__SSLeay__SSL_CTX__my__default_passwd_cb(char* buf, int size
   memcpy(buf, env->get_chars(env, stack, obj_buf), size);
   
   END_OF_FUNC:
+  
+  env->leave_scope(env, stack, scope_id);
+  
+  env->free_stack(env, stack);
   
   return ret_buf_length;
 }
@@ -1204,9 +1226,11 @@ static int SPVM__Net__SSLeay__SSL_CTX__my__tlsext_servername_callback(SSL* ssl, 
   
   void** native_args = (void**)native_arg;
   
-  SPVM_ENV* env = (SPVM_ENV*)native_args[0];
+  SPVM_ENV* env = thread_env;
   
-  SPVM_VALUE* stack = (SPVM_VALUE*)native_args[1];
+  SPVM_VALUE* stack = env->new_stack(env);
+  
+  int32_t scope_id = env->enter_scope(env, stack);
   
   void* obj_self = native_args[2];
   
@@ -1249,6 +1273,10 @@ static int SPVM__Net__SSLeay__SSL_CTX__my__tlsext_servername_callback(SSL* ssl, 
   }
   
   END_OF_FUNC:
+  
+  env->leave_scope(env, stack, scope_id);
+  
+  env->free_stack(env, stack);
   
   return ret_status;
 }
@@ -1297,6 +1325,8 @@ static unsigned int SPVM__Net__SSLeay__SSL_CTX__my__psk_client_cb(SSL* ssl, cons
   SPVM_ENV* env = thread_env;
   
   SPVM_VALUE* stack = env->new_stack(env);
+  
+  int32_t scope_id = env->enter_scope(env, stack);
   
   SSL_CTX* self = SSL_get_SSL_CTX(ssl);
   
@@ -1367,6 +1397,8 @@ static unsigned int SPVM__Net__SSLeay__SSL_CTX__my__psk_client_cb(SSL* ssl, cons
   memcpy(psk, env->get_chars(env, stack, obj_psk), max_psk_len);
   
   END_OF_FUNC:
+  
+  env->leave_scope(env, stack, scope_id);
   
   env->free_stack(env, stack);
   
