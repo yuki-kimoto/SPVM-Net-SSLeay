@@ -5,7 +5,9 @@ class TestUtil::Socket extends IO::Socket::IP  {
   use Net::SSLeay::Constant as SSL;
   
   # Fields
-  has ssl : rw Net::SSLeay;
+  has ssl_ctx : ro Net::SSLeay::SSL_CTX;
+  
+  has ssl : ro Net::SSLeay;
   
   # Class Methods
   static method new : TestUtil::Socket ($options : object[] = undef) {
@@ -38,6 +40,8 @@ class TestUtil::Socket extends IO::Socket::IP  {
     my $ssl_method = Net::SSLeay::SSL_METHOD->TLS_method;
     
     my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
+    
+    $self->{ssl_ctx} = $ssl_ctx;
     
     my $ssl = Net::SSLeay->new($ssl_ctx);
     
@@ -87,7 +91,8 @@ class TestUtil::Socket extends IO::Socket::IP  {
     
     my $client_socket = (TestUtil::Socket)$self->SUPER::accept($peer_ref);
     
-    $client_socket->ssl->set_SSL_CTX($self->ssl->get_SSL_CTX);
+    $client_socket->{ssl_ctx} = $self->{ssl_ctx};
+    $client_socket->ssl->set_SSL_CTX($client_socket->{ssl_ctx});
     
     return $client_socket;
   }
