@@ -170,16 +170,17 @@ class TestCase::Net::SSLeay {
         if ($ssl->get_peer_cert_chain) {
           $success_ref->[0] = 0;
         }
-=pod
-        my $msg_cb = method : void ($write_p : int, $version : int, $content_type : int, $buf : string, $len : int, $ssl : Net::SSLeay, $arg : object) {
+
+        my $msg_callback = method : void ($write_p : int, $version : int, $content_type : int, $buf : string, $len : int, $ssl : Net::SSLeay, $arg : object) {
           
         };
         
-        my $msg_cb_arg = Int->new(1);
+        my $msg_callback_arg = Int->new(1);
         
-        $socket->set_msg_cb($msg_cb, $msg_cb_arg);
-=cut
-
+        $ssl->set_msg_callback($msg_callback);
+        
+        # $ssl->set_msg_callback_arg($msg_callback_arg);
+        
         $socket->connect_SSL;
         
         my $certificate = $ssl->get_certificate;
