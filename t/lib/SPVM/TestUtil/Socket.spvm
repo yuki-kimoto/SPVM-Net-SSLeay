@@ -9,6 +9,8 @@ class TestUtil::Socket extends IO::Socket::IP  {
   
   has ssl : ro Net::SSLeay;
   
+  has before_connect_SSL : void (
+  
   # Class Methods
   static method new : TestUtil::Socket ($options : object[] = undef) {
     
