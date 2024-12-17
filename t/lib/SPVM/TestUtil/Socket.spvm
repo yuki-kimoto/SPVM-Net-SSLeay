@@ -4,12 +4,17 @@ class TestUtil::Socket extends IO::Socket::IP  {
   use Sys::Socket::Sockaddr;
   use Net::SSLeay::Constant as SSL;
   
+  use TestUtil::Socket::Callback::BeforeConnectSSL;
+  use TestUtil::Socket::Callback::BeforeAcceptSSL;
+  
   # Fields
   has ssl_ctx : ro Net::SSLeay::SSL_CTX;
   
   has ssl : ro Net::SSLeay;
   
-  has before_connect_SSL : void (
+  has before_connect_SSL : rw TestUtil::Socket::Callback::BeforeConnectSSL;
+  
+  has before_accept_SSL : rw TestUtil::Socket::Callback::BeforeAcceptSSL;
   
   # Class Methods
   static method new : TestUtil::Socket ($options : object[] = undef) {
@@ -63,6 +68,12 @@ class TestUtil::Socket extends IO::Socket::IP  {
     
     my $fd = $self->{FD};
     
+    my $before_connect_SSL = $self->{before_connect_SSL};
+    
+    if ($before_connect_SSL) {
+      $before_connect_SSL->($ssl);
+    }
+    
     while (1) {
       eval { $ssl->connect; }
       
@@ -106,6 +117,12 @@ class TestUtil::Socket extends IO::Socket::IP  {
     my $fd = $self->{FD};
     
     my $timeout = $self->{Timeout};
+    
+    my $before_accept_SSL = $self->{before_accept_SSL};
+    
+    if ($before_accept_SSL) {
+      $before_accept_SSL->($ssl);
+    }
     
     while (1) {
       eval { $ssl->accept; }
