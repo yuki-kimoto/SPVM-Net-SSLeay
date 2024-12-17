@@ -852,17 +852,36 @@ static void SPVM__Net__SSLeay__my__msg_cb(int write_p, int version, int content_
   
   int32_t error_id = 0;
   
-  void** native_args = (void**)native_arg;
+  SPVM_ENV* env = thread_env;
   
-  SPVM_ENV* env = (SPVM_ENV*)native_args[0];
+  SPVM_VALUE* stack = env->new_stack(env);
   
-  SPVM_VALUE* stack = (SPVM_VALUE*)native_args[1];
+  char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
+  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", ssl);
+  stack[0].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
+  env->call_class_method_by_name(env, stack, "Net::SSLeay", "GET_INSTANCE", 1, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    env->print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
+  }
+  void* obj_self = stack[0].oval;
   
-  void* obj_self = native_args[2];
+  assert(obj_self);
   
-  void* obj_cb = native_args[3];
+  void* obj_cb = env->get_field_object_by_name(env, stack, obj_self, "msg_cb", &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    env->print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
+  }
   
-  void* obj_arg = native_args[4];
+  void* obj_arg = env->get_field_object_by_name(env, stack, obj_self, "msg_cb_arg", &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    env->print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
+  }
   
   void* obj_buf = env->new_string(env, stack, buf, len);
   
@@ -900,6 +919,8 @@ static void SPVM__Net__SSLeay__my__msg_cb(int write_p, int version, int content_
   
   END_OF_FUNC:
   
+  env->free_stack(env, stack);
+  
   return;
 }
 
@@ -920,14 +941,15 @@ int32_t SPVM__Net__SSLeay__set_msg_callback(SPVM_ENV* env, SPVM_VALUE* stack) {
   if (obj_cb) {
     native_cb = &SPVM__Net__SSLeay__my__msg_cb;
     
-    void* native_args[SPVM__Net__SSLeay__my__NATIVE_ARGS_MAX_LENGTH] = {0};
-    native_args[0] = env;
-    native_args[1] = stack;
-    native_args[2] = obj_self;
-    native_args[3] = obj_cb;
-    native_args[4] = obj_arg;
-    SSL_set_msg_callback_arg(self, native_args);
+    env->set_field_object_by_name(env, stack, obj_self, "msg_cb", obj_cb, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) { return error_id; }
   }
+  
+  if (obj_arg) {
+    env->set_field_object_by_name(env, stack, obj_self, "msg_cb_arg", obj_arg, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) { return error_id; }
+  }
+  
   
   SSL_set_msg_callback(self, native_cb);
   
