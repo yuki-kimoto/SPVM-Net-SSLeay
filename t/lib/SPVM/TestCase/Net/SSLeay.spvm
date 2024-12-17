@@ -60,7 +60,7 @@ class TestCase::Net::SSLeay {
     
     my $ssl = $server_socket->ssl;
     
-    my $ssl_ctx = $ssl->get_SSL_CTX;
+    my $ssl_ctx = $server_socket->ssl_ctx;
     
     $ssl_ctx->use_PrivateKey_file("$FILE_DIR/simple-cert.key.pem");
     
@@ -153,7 +153,7 @@ class TestCase::Net::SSLeay {
         
         my $ssl = $socket->ssl;
         
-        my $ssl_ctx = $ssl->get_SSL_CTX;
+        my $ssl_ctx = $socket->ssl_ctx;
         
         $ssl_ctx->use_PrivateKey_file("$FILE_DIR/simple-cert.key.pem");
         
