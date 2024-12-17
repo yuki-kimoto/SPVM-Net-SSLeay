@@ -1105,18 +1105,18 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_alpn_select_cb(SPVM_ENV* env, SPVM_VALUE
   env->set_field_object_by_name(env, stack, obj_self, "alpn_select_cb_arg", obj_arg, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   
-  SSL_CTX_set_alpn_select_cb(self, native_cb, NULL);
+  SSL_CTX_set_alpn_select_cb(self, native_cb, self);
   
   return 0;
 }
 
 static int SPVM__Net__SSLeay__SSL_CTX__my__alpn_select_cb_for_protocols (SSL* ssl, const unsigned char** out_ref, unsigned char* outlen_ref, const unsigned char* in, unsigned int inlen, void* native_arg) {
   
+  spvm_warn("");
+  
   int32_t error_id = 0;
   
   int32_t ret_status = SSL_TLSEXT_ERR_NOACK;
-  
-  void** native_args = (void**)native_arg;
   
   SPVM_ENV* env = thread_env;
   
@@ -1124,9 +1124,24 @@ static int SPVM__Net__SSLeay__SSL_CTX__my__alpn_select_cb_for_protocols (SSL* ss
   
   int32_t scope_id = env->enter_scope(env, stack);
   
-  void* obj_self = native_args[0];
+  SSL_CTX* self = SSL_get_SSL_CTX(ssl);
   
-  void* obj_protocols = native_args[1];
+  char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
+  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);
+  stack[0].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
+  env->call_class_method_by_name(env, stack, "Net::SSLeay::SSL_CTX", "GET_INSTANCE", 1, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    env->print_exception_to_stderr(env, stack);
+    
+    goto END_OF_FUNC;
+  }
+  void* obj_self = stack[0].oval;
+  
+  void* obj_protocols = env->get_field_object_by_name(env, stack, obj_self, "alpn_select_cb_arg", &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    env->print_exception_to_stderr(env, stack);
+    goto END_OF_FUNC;
+  }
   
   assert(obj_protocols);
   
@@ -1177,11 +1192,10 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_alpn_select_cb_with_protocols(SPVM_ENV* 
     native_cb = &SPVM__Net__SSLeay__SSL_CTX__my__alpn_select_cb_for_protocols;
   }
   
-  void* native_args[SPVM__Net__SSLeay__SSL_CTX__my__NATIVE_ARGS_MAX_LENGTH] = {0};
-  native_args[0] = obj_self;
-  native_args[1] = obj_protocols;
+  env->set_field_object_by_name(env, stack, obj_self, "alpn_select_cb_arg", obj_protocols, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
   
-  SSL_CTX_set_alpn_select_cb(self, native_cb, native_args);
+  SSL_CTX_set_alpn_select_cb(self, native_cb, NULL);
   
   return 0;
 }
