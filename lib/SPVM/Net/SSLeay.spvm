@@ -20,14 +20,10 @@ class Net::SSLeay {
   # Class Variables
   our $INSTANCES_H : Hash of Net::SSLeay;
   
-  our $INSTANCES_H_2 : Hash of Net::SSLeay;
-  
   our $MUTEX : Sync::Mutex;
   
   INIT {
     $INSTANCES_H = Hash->new;
-    
-    $INSTANCES_H_2  = $INSTANCES_H;
     
     $MUTEX = Sync::Mutex->new;
   }
@@ -154,24 +150,12 @@ class Net::SSLeay {
     
     $MUTEX->lock;
     
-    warn $address;
-    
-    warn $self;
-    
     $INSTANCES_H->set($address, $self);
     
     $INSTANCES_H->weaken($address);
-    
-    warn;
   }
   
   private static method DELETE_INSTANCE : Net::SSLeay ($address : string) {
-    
-    warn $MUTEX;
-    
-    warn $INSTANCES_H;
-    
-    warn $INSTANCES_H_2;
     
     Fn->defer(method : void () {
       $MUTEX->unlock;
