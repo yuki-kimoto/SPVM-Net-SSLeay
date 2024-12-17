@@ -117,7 +117,7 @@ class TestCase::Net::SSLeay::Online {
     
     my $ssl = $socket->ssl;
     
-    my $ssl_ctx = $ssl->get_SSL_CTX;
+    my $ssl_ctx = $socket->ssl_ctx;
     
     $ssl_ctx->set_verify(SSL->SSL_VERIFY_PEER);
     
