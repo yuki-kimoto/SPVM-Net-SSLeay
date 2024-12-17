@@ -175,22 +175,29 @@ class TestCase::Net::SSLeay {
         
         my $msg_callback = [$msg_callback_results : object[]]method : void ($write_p : int, $version : int, $content_type : int, $buf : string, $len : int, $ssl : Net::SSLeay, $arg : object) {
           
-          warn $write_p;
-          
           unless ($msg_callback_results->[0]) {
             $msg_callback_results->[0] = $write_p;
-          }
-          
-          unless ($msg_callback_results->[1]) {
             $msg_callback_results->[1] = $version;
+            $msg_callback_results->[2] = $content_type;
+            $msg_callback_results->[3] = $buf;
+            $msg_callback_results->[4] = $len;
+            
+            my $ssl_hash = Hash->new;
+            $ssl_hash->set("ssl", $ssl);
+            $ssl_hash->weaken("ssl");
+            
+            $msg_callback_results->[5] = $ssl_hash;
+            $msg_callback_results->[6] = $arg;
+            
+            warn dump $msg_callback_results;
           }
         };
         
-        my $msg_callback_arg = Int->new(1);
+        my $msg_callback_arg = Int->new(10);
         
         $ssl->set_msg_callback($msg_callback);
         
-        # $ssl->set_msg_callback_arg($msg_callback_arg);
+        $ssl->set_msg_callback_arg($msg_callback_arg);
         
         $socket->connect_SSL;
         
@@ -200,7 +207,29 @@ class TestCase::Net::SSLeay {
           $success_ref->[0] = 0;
         }
         
-        warn $msg_callback_results->[1]->(int);
+        unless ($msg_callback_results->[1]->(int) == 0) {
+          $success_ref->[0] = 0;
+        }
+        
+        unless ($msg_callback_results->[2]->(int) > 0) {
+          $success_ref->[0] = 0;
+        }
+        
+        unless (length $msg_callback_results->[3]->(string) > 0) {
+          $success_ref->[0] = 0;
+        }
+        
+        unless ($msg_callback_results->[4]->(int) > 0) {
+          $success_ref->[0] = 0;
+        }
+        
+        unless ($msg_callback_results->[5]->(Hash)->get("ssl") is_type Net::SSLeay) {
+          $success_ref->[0] = 0;
+        }
+        
+        unless ($msg_callback_results->[6]->(int) == 10) {
+          $success_ref->[0] = 0;
+        }
         
         my $certificate = $ssl->get_certificate;
         
