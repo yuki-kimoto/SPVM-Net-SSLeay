@@ -134,7 +134,6 @@ int32_t SPVM__Net__SSLeay___init_native(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
   snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);
-  spvm_warn("[init_native]%p", self);
   void* obj_address = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
   stack[0].oval = obj_address;
   env->call_class_method_by_name(env, stack, "Net::SSLeay", "GET_INSTANCE", 1, &error_id, __func__, FILE_NAME, __LINE__);
@@ -885,8 +884,6 @@ static void SPVM__Net__SSLeay__my__msg_callback(int write_p, int version, int co
     
     goto END_OF_FUNC;
   }
-  
-  spvm_warn("ssl:%p, obj_self:%p, obj_cb:%p", ssl, obj_self, obj_cb);
   
   void* obj_arg = env->get_field_object_by_name(env, stack, obj_self, "msg_callback_arg", &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) {
