@@ -4,7 +4,6 @@
     * Fix bugs of Net::SSLeay#set_msg_callback method.
   [New Features]
     * Add Net::SSLeay#msg_callback getter.
-    * Add Net::SSLeay#msg_callback_arg field and settter and getter.
 0.029 2024-12-16
   [Bug Fix]
     * Fix bugs of Net::SSLeay#get_certificate method.
