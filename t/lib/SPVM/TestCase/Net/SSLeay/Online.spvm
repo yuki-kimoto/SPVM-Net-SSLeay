@@ -46,9 +46,9 @@ class TestCase::Net::SSLeay::Online {
     
     $verify_param->set1_host($host);
     
-    $ssl->set_tlsext_host_name($host);
-    
-    my $timeout = 0;
+    $socket->set_before_connect_SSL_cb([$host : string] method : void ($ssl : Net::SSLeay) {
+      $ssl->set_tlsext_host_name($host);
+    });
     
     $socket->connect_SSL;
     
@@ -154,9 +154,9 @@ class TestCase::Net::SSLeay::Online {
     
     $verify_param->set1_host($host);
     
-    $ssl->set_tlsext_host_name($host);
-    
-    my $timeout = 0;
+    $socket->set_before_connect_SSL_cb([$host : string] method : void ($ssl : Net::SSLeay) {
+      $ssl->set_tlsext_host_name($host);
+    });
     
     $socket->connect_SSL;
     

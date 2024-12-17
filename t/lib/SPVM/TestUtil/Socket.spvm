@@ -12,9 +12,9 @@ class TestUtil::Socket extends IO::Socket::IP  {
   
   has ssl : ro Net::SSLeay;
   
-  has before_connect_SSL : rw TestUtil::Socket::Callback::BeforeConnectSSL;
+  has before_connect_SSL_cb : rw TestUtil::Socket::Callback::BeforeConnectSSL;
   
-  has before_accept_SSL : rw TestUtil::Socket::Callback::BeforeAcceptSSL;
+  has before_accept_SSL_cb : rw TestUtil::Socket::Callback::BeforeAcceptSSL;
   
   # Class Methods
   static method new : TestUtil::Socket ($options : object[] = undef) {
@@ -68,10 +68,10 @@ class TestUtil::Socket extends IO::Socket::IP  {
     
     my $fd = $self->{FD};
     
-    my $before_connect_SSL = $self->{before_connect_SSL};
+    my $before_connect_SSL_cb = $self->{before_connect_SSL_cb};
     
-    if ($before_connect_SSL) {
-      $before_connect_SSL->($ssl);
+    if ($before_connect_SSL_cb) {
+      $before_connect_SSL_cb->($ssl);
     }
     
     while (1) {
@@ -118,10 +118,10 @@ class TestUtil::Socket extends IO::Socket::IP  {
     
     my $timeout = $self->{Timeout};
     
-    my $before_accept_SSL = $self->{before_accept_SSL};
+    my $before_accept_SSL_cb = $self->{before_accept_SSL_cb};
     
-    if ($before_accept_SSL) {
-      $before_accept_SSL->($ssl);
+    if ($before_accept_SSL_cb) {
+      $before_accept_SSL_cb->($ssl);
     }
     
     while (1) {
