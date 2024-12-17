@@ -160,6 +160,8 @@ class Net::SSLeay {
     
     $INSTANCES_H->set($address, $self);
     
+    $INSTANCES_H->weaken($address);
+    
     warn;
   }
   
