@@ -31,7 +31,7 @@ class Net::SSLeay {
   
   has msg_callback : ro Net::SSLeay::Callback::Msg;
   
-  has msg_callback_arg : rw object;
+  has msg_callback_arg : object;
   
   # Class Methods
   native static method new : Net::SSLeay ($ssl_ctx : Net::SSLeay::SSL_CTX);
@@ -115,7 +115,7 @@ class Net::SSLeay {
     return $protocol;
   }
   
-  native method set_msg_callback : void ($cb : Net::SSLeay::Callback::Msg);
+  native method set_msg_callback : void ($cb : Net::SSLeay::Callback::Msg, $arg : object = undef);
   
   method dump_peer_certificate : string () {
     

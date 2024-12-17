@@ -195,9 +195,7 @@ class TestCase::Net::SSLeay {
         
         my $msg_callback_arg = Int->new(10);
         
-        $ssl->set_msg_callback($msg_callback);
-        
-        $ssl->set_msg_callback_arg($msg_callback_arg);
+        $ssl->set_msg_callback($msg_callback, $msg_callback_arg);
         
         $socket->connect_SSL;
         
