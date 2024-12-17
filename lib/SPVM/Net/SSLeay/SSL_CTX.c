@@ -1296,28 +1296,47 @@ static int SPVM__Net__SSLeay__SSL_CTX__my__tlsext_servername_callback(SSL* ssl, 
   
   int32_t ret_status = SSL_TLSEXT_ERR_NOACK;
   
-  void** native_args = (void**)native_arg;
-  
   SPVM_ENV* env = thread_env;
   
   SPVM_VALUE* stack = env->new_stack(env);
   
   int32_t scope_id = env->enter_scope(env, stack);
   
-  void* obj_self = native_args[0];
+  SSL_CTX* self = SSL_get_SSL_CTX(ssl);
   
-  void* obj_cb = native_args[1];
-  
-  void* obj_arg = native_args[2];
-  
-  void* obj_address_ssl = env->new_pointer_object_by_name(env, stack, "Address", ssl, &error_id, __func__, FILE_NAME, __LINE__);
+  char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
+  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);
+  stack[0].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
+  env->call_class_method_by_name(env, stack, "Net::SSLeay::SSL_CTX", "GET_INSTANCE", 1, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) {
     env->print_exception_to_stderr(env, stack);
     
     goto END_OF_FUNC;
   }
-  stack[0].oval = obj_address_ssl;
-  env->call_class_method_by_name(env, stack, "Net::SSLeay", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
+  void* obj_self = stack[0].oval;
+  
+  void* obj_cb = env->get_field_object_by_name(env, stack, obj_self, "tlsext_servername_callback", &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    env->print_exception_to_stderr(env, stack);
+    goto END_OF_FUNC;
+  }
+  
+  if (!obj_cb) {
+    env->die(env, stack, "verify_callback field must be defined.", __func__, FILE_NAME, __LINE__);
+    
+    env->print_exception_to_stderr(env, stack);
+    goto END_OF_FUNC;
+  }
+  
+  void* obj_arg = env->get_field_object_by_name(env, stack, obj_self, "tlsext_servername_callback_arg", &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    env->print_exception_to_stderr(env, stack);
+    goto END_OF_FUNC;
+  }
+  
+  snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", ssl);
+  stack[0].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
+  env->call_class_method_by_name(env, stack, "Net::SSLeay", "GET_INSTANCE", 1, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) {
     env->print_exception_to_stderr(env, stack);
     
@@ -1325,7 +1344,7 @@ static int SPVM__Net__SSLeay__SSL_CTX__my__tlsext_servername_callback(SSL* ssl, 
   }
   void* obj_ssl = stack[0].oval;
   
-  env->set_no_free(env, stack, obj_ssl, 1);
+  assert(obj_ssl);
   
   stack[0].oval = obj_cb;
   stack[1].oval = obj_ssl;
@@ -1370,12 +1389,12 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_tlsext_servername_callback(SPVM_ENV* env
   if (obj_cb) {
     native_cb = &SPVM__Net__SSLeay__SSL_CTX__my__tlsext_servername_callback;
     
-    void* native_args[SPVM__Net__SSLeay__SSL_CTX__my__NATIVE_ARGS_MAX_LENGTH] = {0};
-    native_args[0] = obj_self;
-    native_args[1] = obj_cb;
-    native_args[2] = obj_arg;
-    SSL_CTX_set_tlsext_servername_arg(self, native_args);
+    env->set_field_object_by_name(env, stack, obj_self, "tlsext_servername_callback", obj_cb, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) { return error_id; }
   }
+  
+  env->set_field_object_by_name(env, stack, obj_self, "tlsext_servername_callback_arg", obj_arg, &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) { return error_id; }
   
   int64_t status = SSL_CTX_set_tlsext_servername_callback(self, native_cb);
   
