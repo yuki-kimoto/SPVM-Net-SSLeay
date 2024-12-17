@@ -967,11 +967,11 @@ static int SPVM__Net__SSLeay__SSL_CTX__my__alpn_select_cb(SSL* ssl, const unsign
   
   int32_t scope_id = env->enter_scope(env, stack);
   
-  void* obj_self = native_args[2];
+  void* obj_self = native_args[0];
   
-  void* obj_cb = native_args[3];
+  void* obj_cb = native_args[1];
   
-  void* obj_arg = native_args[4];
+  void* obj_arg = native_args[2];
   
   void* obj_address_ssl = env->new_pointer_object_by_name(env, stack, "Address", ssl, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) {
@@ -1050,11 +1050,9 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_alpn_select_cb(SPVM_ENV* env, SPVM_VALUE
   if (obj_cb) {
     native_cb = &SPVM__Net__SSLeay__SSL_CTX__my__alpn_select_cb;
     
-    native_args[0] = env;
-    native_args[1] = stack;
-    native_args[2] = obj_self;
-    native_args[3] = obj_cb;
-    native_args[4] = obj_arg;
+    native_args[0] = obj_self;
+    native_args[1] = obj_cb;
+    native_args[2] = obj_arg;
   }
   
   SSL_CTX_set_alpn_select_cb(self, native_cb, native_args);
@@ -1076,9 +1074,9 @@ static int SPVM__Net__SSLeay__SSL_CTX__my__alpn_select_cb_for_protocols (SSL* ss
   
   int32_t scope_id = env->enter_scope(env, stack);
   
-  void* obj_self = native_args[2];
+  void* obj_self = native_args[0];
   
-  void* obj_protocols = native_args[3];
+  void* obj_protocols = native_args[1];
   
   assert(obj_protocols);
   
@@ -1130,10 +1128,8 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_alpn_select_cb_with_protocols(SPVM_ENV* 
   }
   
   void* native_args[SPVM__Net__SSLeay__SSL_CTX__my__NATIVE_ARGS_MAX_LENGTH] = {0};
-  native_args[0] = env;
-  native_args[1] = stack;
-  native_args[2] = obj_self;
-  native_args[3] = obj_protocols;
+  native_args[0] = obj_self;
+  native_args[1] = obj_protocols;
   
   SSL_CTX_set_alpn_select_cb(self, native_cb, native_args);
   
@@ -1154,11 +1150,11 @@ static int SPVM__Net__SSLeay__SSL_CTX__my__default_passwd_cb(char* buf, int size
   
   int32_t scope_id = env->enter_scope(env, stack);
   
-  void* obj_self = native_args[2];
+  void* obj_self = native_args[0];
   
-  void* obj_cb = native_args[3];
+  void* obj_cb = native_args[1];
   
-  void* obj_arg = native_args[4];
+  void* obj_arg = native_args[2];
   
   void* obj_buf = env->new_string(env, stack, buf, size);
   
@@ -1205,11 +1201,9 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_default_passwd_cb(SPVM_ENV* env, SPVM_VA
     native_cb = &SPVM__Net__SSLeay__SSL_CTX__my__default_passwd_cb;
     
     void* native_args[SPVM__Net__SSLeay__SSL_CTX__my__NATIVE_ARGS_MAX_LENGTH] = {0};
-    native_args[0] = env;
-    native_args[1] = stack;
-    native_args[2] = obj_self;
-    native_args[3] = obj_cb;
-    native_args[4] = obj_arg;
+    native_args[0] = obj_self;
+    native_args[1] = obj_cb;
+    native_args[2] = obj_arg;
     SSL_CTX_set_default_passwd_cb_userdata(self, native_args);
   }
   
@@ -1232,11 +1226,11 @@ static int SPVM__Net__SSLeay__SSL_CTX__my__tlsext_servername_callback(SSL* ssl, 
   
   int32_t scope_id = env->enter_scope(env, stack);
   
-  void* obj_self = native_args[2];
+  void* obj_self = native_args[0];
   
-  void* obj_cb = native_args[3];
+  void* obj_cb = native_args[1];
   
-  void* obj_arg = native_args[4];
+  void* obj_arg = native_args[2];
   
   void* obj_address_ssl = env->new_pointer_object_by_name(env, stack, "Address", ssl, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) {
@@ -1299,11 +1293,9 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_tlsext_servername_callback(SPVM_ENV* env
     native_cb = &SPVM__Net__SSLeay__SSL_CTX__my__tlsext_servername_callback;
     
     void* native_args[SPVM__Net__SSLeay__SSL_CTX__my__NATIVE_ARGS_MAX_LENGTH] = {0};
-    native_args[0] = env;
-    native_args[1] = stack;
-    native_args[2] = obj_self;
-    native_args[3] = obj_cb;
-    native_args[4] = obj_arg;
+    native_args[0] = obj_self;
+    native_args[1] = obj_cb;
+    native_args[2] = obj_arg;
     SSL_CTX_set_tlsext_servername_arg(self, native_args);
   }
   
