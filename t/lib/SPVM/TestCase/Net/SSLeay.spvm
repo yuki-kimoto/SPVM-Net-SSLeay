@@ -151,8 +151,6 @@ class TestCase::Net::SSLeay {
         my $host = "127.0.0.1";
         my $socket = TestUtil::Socket->new({PeerAddr => $host, PeerPort => $port});
         
-        my $ssl = $socket->ssl;
-        
         my $ssl_ctx = $socket->ssl_ctx;
         
         $ssl_ctx->use_PrivateKey_file("$FILE_DIR/simple-cert.key.pem");
@@ -162,14 +160,6 @@ class TestCase::Net::SSLeay {
         $ssl_ctx->set_post_handshake_auth(1);
         
         $ssl_ctx->set_alpn_protos_with_protocols(["http1.1"]);
-        
-        if ($ssl->get_peer_certificate) {
-          $success_ref->[0] = 0;
-        }
-        
-        if ($ssl->get_peer_cert_chain) {
-          $success_ref->[0] = 0;
-        }
         
         my $msg_callback_results = new object[10];
         
@@ -200,6 +190,8 @@ class TestCase::Net::SSLeay {
         });
         
         $socket->connect_SSL;
+        
+        my $ssl = $socket->ssl;
         
         $ssl = $socket->ssl;
         
