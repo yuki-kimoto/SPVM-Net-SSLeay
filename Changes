@@ -1,3 +1,7 @@
+0.031 2024-12-19
+  [New Features]
+    * Add Net::SSLeay#select_next_proto method.
+
 0.030 2024-12-18
   [Bug Fix]
     * Fix bugs of Net::SSLeay#get_SSL_CTX method.

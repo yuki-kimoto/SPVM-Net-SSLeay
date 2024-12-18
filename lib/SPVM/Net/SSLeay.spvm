@@ -134,6 +134,8 @@ class Net::SSLeay {
     return $dump;
   }
   
+  native method select_next_proto : int ($out_ref : string[], $outlen_ref : byte*, $server : string, $server_len : int, $client : string, $client_len : int);
+  
   native method DESTROY : void ();
   
   private static method GET_INSTANCE : Net::SSLeay ($address : string) {
