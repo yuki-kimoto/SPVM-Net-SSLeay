@@ -54,8 +54,6 @@ class TestUtil::Socket extends IO::Socket::IP  {
     
     my $socket_fileno = $self->fileno;
     
-    $ssl->set_fd($socket_fileno);
-    
     $self->{ssl} = $ssl;
     
   }
@@ -67,6 +65,8 @@ class TestUtil::Socket extends IO::Socket::IP  {
     my $timeout = $self->{Timeout};
     
     my $fd = $self->{FD};
+    
+    $ssl->set_fd($fd);
     
     my $before_connect_SSL_cb = $self->{before_connect_SSL_cb};
     
@@ -117,6 +117,8 @@ class TestUtil::Socket extends IO::Socket::IP  {
     my $fd = $self->{FD};
     
     my $timeout = $self->{Timeout};
+    
+    $ssl->set_fd($fd);
     
     my $before_accept_SSL_cb = $self->{before_accept_SSL_cb};
     
