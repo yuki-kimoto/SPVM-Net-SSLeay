@@ -855,19 +855,17 @@ int32_t SPVM__Net__SSLeay__select_next_proto(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  void* obj_out_ref = stack[0].oval;
   
-  void* obj_out_ref = stack[1].oval;
+  int8_t* outlen_ref = stack[1].bref;
   
-  int8_t* outlen_ref = stack[2].bref;
+  void* obj_server = stack[2].oval;
   
-  void* obj_server = stack[3].oval;
+  int32_t server_len = stack[3].ival;
   
-  int32_t server_len = stack[4].ival;
+  void* obj_client = stack[4].oval;
   
-  void* obj_client = stack[5].oval;
-  
-  int32_t client_len = stack[6].ival;
+  int32_t client_len = stack[5].ival;
   
   if (!(obj_out_ref && env->length(env, stack, obj_out_ref) == 1)) {
     return env->die(env, stack, "The output reference $out_ref must be 1-length array.", __func__, FILE_NAME, __LINE__);

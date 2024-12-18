@@ -51,6 +51,8 @@ class Net::SSLeay {
   
   native static method load_client_CA_file : Net::SSLeay::X509_NAME[] ($file : string);
   
+  native static method select_next_proto : int ($out_ref : string[], $outlen_ref : byte*, $server : string, $server_len : int, $client : string, $client_len : int);
+  
   # Instance Methods
   protected method init : void ($objects : object[] = undef) {
     
@@ -133,8 +135,6 @@ class Net::SSLeay {
     
     return $dump;
   }
-  
-  native method select_next_proto : int ($out_ref : string[], $outlen_ref : byte*, $server : string, $server_len : int, $client : string, $client_len : int);
   
   native method DESTROY : void ();
   
