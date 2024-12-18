@@ -21,6 +21,7 @@ class Net::SSLeay::SSL_CTX : pointer {
   use Net::SSLeay::Callback::AlpnSelect; 
   
   use Net::SSLeay::Util;
+  use Net::SSLeay::X509_STORE_CTX;
   
   use Sync::Mutex;
   use StringList;

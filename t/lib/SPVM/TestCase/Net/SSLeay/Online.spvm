@@ -11,6 +11,7 @@ class TestCase::Net::SSLeay::Online {
   use Net::SSLeay::BIO;
   use FindBin;
   use Array;
+  use Net::SSLeay::X509_STORE_CTX;
   
   use TestUtil::Socket;
   
@@ -31,7 +32,9 @@ class TestCase::Net::SSLeay::Online {
     
     my $ssl_ctx = $socket->ssl_ctx;
     
-    $ssl_ctx->set_verify(SSL->SSL_VERIFY_PEER);
+    $ssl_ctx->set_verify(SSL->SSL_VERIFY_PEER, method : int ($preverify_ok : int, $x509_ctx : Net::SSLeay::X509_STORE_CTX) {
+      return 1;
+    });
     
     if (Sys::OS->is_windows) {
       $ssl_ctx->set_default_verify_paths_windows;
