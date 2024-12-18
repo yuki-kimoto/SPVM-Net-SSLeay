@@ -92,6 +92,29 @@ class TestCase::Net::SSLeay {
   
   static method accept : int ($port : int) {
     
+    # set_SSL_CTX, get_SSL_CTX
+    {
+      {
+        my $ssl_method = Net::SSLeay::SSL_METHOD->TLS_method;
+        
+        my $ssl_ctx1 = Net::SSLeay::SSL_CTX->new($ssl_method);
+        
+        my $ssl_ctx2 = Net::SSLeay::SSL_CTX->new($ssl_method);
+        
+        my $ssl = Net::SSLeay->new($ssl_ctx1);
+        
+        unless (Fn->eq_pointer($ssl->get_SSL_CTX, $ssl_ctx1)) {
+          return 0;
+        }
+        
+        $ssl->set_SSL_CTX($ssl_ctx2);
+        
+        unless (Fn->eq_pointer($ssl->get_SSL_CTX, $ssl_ctx2)) {
+          return 0;
+        }
+      }
+    }
+    
     # Clsss Methods
     {
       {
