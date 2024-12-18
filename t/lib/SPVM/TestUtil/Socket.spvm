@@ -49,22 +49,17 @@ class TestUtil::Socket extends IO::Socket::IP  {
     my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
     
     $self->{ssl_ctx} = $ssl_ctx;
-    
-    my $ssl = Net::SSLeay->new($ssl_ctx);
-    
-    my $socket_fileno = $self->fileno;
-    
-    $self->{ssl} = $ssl;
-    
   }
   
   method connect_SSL : void () {
     
-    my $ssl = $self->{ssl};
-    
     my $timeout = $self->{Timeout};
     
     my $fd = $self->{FD};
+    
+    my $ssl_ctx = $self->{ssl_ctx};
+    
+    my $ssl = Net::SSLeay->new($ssl_ctx);
     
     $ssl->set_fd($fd);
     
@@ -108,18 +103,19 @@ class TestUtil::Socket extends IO::Socket::IP  {
     my $client_socket = (TestUtil::Socket)$self->SUPER::accept($peer_ref);
     
     $client_socket->{ssl_ctx} = $self->{ssl_ctx};
-    $client_socket->ssl->set_SSL_CTX($client_socket->{ssl_ctx});
     
     return $client_socket;
   }
   
   method accept_SSL : void () {
     
-    my $ssl = $self->{ssl};
-    
     my $fd = $self->{FD};
     
     my $timeout = $self->{Timeout};
+    
+    my $ssl_ctx = $self->{ssl_ctx};
+    
+    my $ssl = Net::SSLeay->new($ssl_ctx);
     
     $ssl->set_fd($fd);
     
