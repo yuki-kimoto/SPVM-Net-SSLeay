@@ -267,13 +267,13 @@ class TestUtil::Socket extends IO::Socket::IP  {
     
     my $ssl = $self->{ssl};
     
-    my $shutdown_status = $ssl->get_shutdown;
-    
-    my $listen = $self->{Listen};
-    
-    # Only client sockets and accpected sockets
-    unless ($listen > 0) {
-      $self->shutdown_SSL;
+    if ($ssl) {
+      my $listen = $self->{Listen};
+      
+      # Only client sockets and accpected sockets
+      unless ($listen > 0) {
+        $self->shutdown_SSL;
+      }
     }
     
     $self->SUPER::close;
