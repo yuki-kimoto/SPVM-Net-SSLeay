@@ -72,15 +72,9 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__new(SPVM_ENV* env, SPVM_VALUE* stack) {
   snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);
   void* obj_address = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
   stack[0].oval = obj_address;
-  env->call_class_method_by_name(env, stack, "Net::SSLeay::SSL_CTX", "GET_INSTANCE", 1, &error_id, __func__, FILE_NAME, __LINE__);
+  stack[1].oval = obj_self;
+  env->call_class_method_by_name(env, stack, "Net::SSLeay::SSL_CTX", "INIT_INSTANCE", 2, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
-  void* obj_self_found = stack[0].oval;
-  if (!obj_self_found) {
-    stack[0].oval = obj_address;
-    stack[1].oval = obj_self;
-    env->call_class_method_by_name(env, stack, "Net::SSLeay::SSL_CTX", "SET_INSTANCE", 2, &error_id, __func__, FILE_NAME, __LINE__);
-    if (error_id) { return error_id; }
-  }
   
   stack[0].oval = obj_self;
   

@@ -153,7 +153,7 @@ class Net::SSLeay::SSL_CTX : pointer {
     return $self;
   }
   
-  private static method SET_INSTANCE : void ($address : string, $self : Net::SSLeay::SSL_CTX) {
+  private static method INIT_INSTANCE : void ($address : string, $self : Net::SSLeay::SSL_CTX) {
     
     Fn->defer(method : void () {
       $MUTEX->unlock;
@@ -161,9 +161,11 @@ class Net::SSLeay::SSL_CTX : pointer {
     
     $MUTEX->lock;
     
-    $INSTANCES_H->set($address, $self);
-    
-    $INSTANCES_H->weaken($address);
+    unless ($INSTANCES_H->exists($address)) {
+      $INSTANCES_H->set($address, $self);
+      
+      $INSTANCES_H->weaken($address);
+    }
   }
   
   private static method DELETE_INSTANCE : Net::SSLeay::SSL_CTX ($address : string) {
