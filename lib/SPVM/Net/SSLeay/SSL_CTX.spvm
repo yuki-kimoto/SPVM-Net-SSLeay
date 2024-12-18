@@ -105,7 +105,7 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   native method clear_options : long ($options : long);
   
-  native method set_alpn_protos : int ($protos : byte[], $protos_len : int = -1);
+  native method set_alpn_protos : int ($protos : string, $protos_len : int = -1);
   
   method set_alpn_protos_with_protocols : int ($protocols : string[]) {
     

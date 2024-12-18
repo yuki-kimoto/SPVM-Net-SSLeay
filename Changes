@@ -2,12 +2,22 @@
   [New Features]
     * Add Net::SSLeay#select_next_proto method.
   [Changes]
-    Change the definition of Net::SSLeay::SSL_CTX#set_alpn_select_cb method
-    [Before]
-      method set_alpn_select_cb : void ($cb : Net::SSLeay::Callback::AlpnSelect);
-    [After]
-      method set_alpn_select_cb : void ($cb : Net::SSLeay::Callback::AlpnSelect, $arg : object = undef);
-
+    * Change the definition of Net::SSLeay::SSL_CTX#set_alpn_select_cb method
+      [Before]
+        method set_alpn_select_cb : void ($cb : Net::SSLeay::Callback::AlpnSelect);
+      [After]
+        method set_alpn_select_cb : void ($cb : Net::SSLeay::Callback::AlpnSelect, $arg : object = undef);
+  [Incompatible Changes]
+    * Change the definition of Net::SSLeay::SSL_CTX#set_alpn_protos method
+      [Before]
+      method set_alpn_protos : int ($protos : byte[], $protos_len : int = -1);
+      [After]
+      method set_alpn_protos : int ($protos : string, $protos_len : int = -1);
+    * Change the definition of Net::SSLeay::Util#convert_to_wire_format method
+      [Before]
+      static method convert_to_wire_format : byte[] ($protocols : string[]);
+      [After]
+      static method convert_to_wire_format : string ($protocols : string[]);
 0.030 2024-12-18
   [Bug Fix]
     * Fix bugs of Net::SSLeay#get_SSL_CTX method.
