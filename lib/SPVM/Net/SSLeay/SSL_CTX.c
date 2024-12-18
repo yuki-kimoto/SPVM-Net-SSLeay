@@ -1337,7 +1337,7 @@ static int SPVM__Net__SSLeay__SSL_CTX__my__tlsext_servername_callback(SSL* ssl, 
   }
   
   if (!obj_cb) {
-    env->die(env, stack, "verify_callback field must be defined.", __func__, FILE_NAME, __LINE__);
+    env->die(env, stack, "tlsext_servername_callback field must be defined.", __func__, FILE_NAME, __LINE__);
     
     env->print_exception_to_stderr(env, stack);
     goto END_OF_FUNC;
