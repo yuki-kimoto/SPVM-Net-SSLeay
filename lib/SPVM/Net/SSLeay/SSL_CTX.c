@@ -910,6 +910,12 @@ static int SPVM__Net__SSLeay__SSL_CTX__my__verify_cb(int preverify_ok, X509_STOR
     goto END_OF_FUNC;
   }
   
+  void* obj_arg = env->get_field_object_by_name(env, stack, obj_self, "verify_callback_arg", &error_id, __func__, FILE_NAME, __LINE__);
+  if (error_id) {
+    env->print_exception_to_stderr(env, stack);
+    goto END_OF_FUNC;
+  }
+  
   void* obj_address_x509_store_ctx = env->new_pointer_object_by_name(env, stack, "Address", x509_store_ctx, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) {
     env->print_exception_to_stderr(env, stack);
@@ -927,6 +933,7 @@ static int SPVM__Net__SSLeay__SSL_CTX__my__verify_cb(int preverify_ok, X509_STOR
   stack[0].oval = obj_cb;
   stack[1].ival = preverify_ok;
   stack[2].oval = obj_x509_store_ctx;
+  stack[3].oval = obj_arg;
   
   env->call_instance_method_by_name(env, stack, "", 3, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) {
