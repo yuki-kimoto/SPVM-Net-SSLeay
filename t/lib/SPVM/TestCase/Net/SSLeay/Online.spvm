@@ -32,10 +32,46 @@ class TestCase::Net::SSLeay::Online {
     
     my $ssl_ctx = $socket->ssl_ctx;
     
-    $ssl_ctx->set_verify(SSL->SSL_VERIFY_PEER, method : int ($preverify_ok : int, $x509_ctx : Net::SSLeay::X509_STORE_CTX, $arg : object) {
+    $ssl_ctx->set_verify(SSL->SSL_VERIFY_PEER, method : int ($preverify_ok : int, $x509_store_ctx : Net::SSLeay::X509_STORE_CTX, $arg : object) {
       
-      my $verify_ok = $preverify_ok && $x509_ctx is_type Net::SSLeay::X509_STORE_CTX && $arg->(int) == 1;
+      my $verify_ok = 1;
       
+      unless ($preverify_ok) {
+        $verify_ok = 0;
+      }
+      
+      unless ($x509_store_ctx is_type Net::SSLeay::X509_STORE_CTX) {
+        $verify_ok = 0;
+      }
+      
+      unless ($arg->(int) == 1) {
+        $verify_ok = 0;
+      }
+      
+      unless ($x509_store_ctx->get_error == 0) {
+        $verify_ok = 0;
+      }
+      
+      unless ($x509_store_ctx->get_error_depth >= 0) {
+        $verify_ok = 0;
+      }
+      
+      $x509_store_ctx->set_error(1);
+      
+      $x509_store_ctx->set_error(0);
+      
+      my $current_cert = $x509_store_ctx->get_current_cert;
+      
+      unless ($current_cert is_type Net::SSLeay::X509) {
+        $verify_ok = 0;
+      }
+      
+      unless (length $current_cert->get_subject_name->oneline > 0) {
+        $verify_ok = 0;
+      }
+      
+      # native method get1_issuer : int ($issuer_ref : Net::SSLeay::X509[], $ctx : Net::SSLeay::X509_STORE_CTX, $x : Net::SSLeay::X509);
+  
       return $verify_ok;
     }, Int->new(1));
     
