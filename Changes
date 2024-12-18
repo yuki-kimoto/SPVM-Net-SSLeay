@@ -1,6 +1,12 @@
 0.031 2024-12-19
   [New Features]
     * Add Net::SSLeay#select_next_proto method.
+  [Changes]
+    Change the definition of Net::SSLeay::SSL_CTX#set_alpn_select_cb method
+    [Before]
+      method set_alpn_select_cb : void ($cb : Net::SSLeay::Callback::AlpnSelect);
+    [After]
+      method set_alpn_select_cb : void ($cb : Net::SSLeay::Callback::AlpnSelect, $arg : object = undef);
 
 0.030 2024-12-18
   [Bug Fix]

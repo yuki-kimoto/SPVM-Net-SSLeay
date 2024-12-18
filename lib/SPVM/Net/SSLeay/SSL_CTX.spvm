@@ -132,7 +132,7 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   native method set_default_passwd_cb : void ($cb : Net::SSLeay::Callback::PemPassword, $arg : object = undef);
   
-  native method set_alpn_select_cb : void ($cb : Net::SSLeay::Callback::AlpnSelect, $arg : object);
+  native method set_alpn_select_cb : void ($cb : Net::SSLeay::Callback::AlpnSelect, $arg : object = undef);
   
   native method set_alpn_select_cb_with_protocols : void ($protocols : string[]);
   
