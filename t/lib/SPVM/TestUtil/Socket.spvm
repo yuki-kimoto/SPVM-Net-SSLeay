@@ -98,6 +98,9 @@ class TestUtil::Socket extends IO::Socket::IP  {
         last;
       }
     }
+    
+    $self->{ssl} = $ssl;
+    
   }
   
   method accept : TestUtil::Socket ($peer_ref : Sys::Socket::Sockaddr[] = undef) {
@@ -150,6 +153,8 @@ class TestUtil::Socket extends IO::Socket::IP  {
         last;
       }
     }
+    
+    $self->{ssl} = $ssl;
   }
   
   method read : int ($buffer : mutable string, $length : int = -1, $offset : int = 0) {
