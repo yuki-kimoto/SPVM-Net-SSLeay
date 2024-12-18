@@ -70,8 +70,15 @@ class TestCase::Net::SSLeay::Online {
         $verify_ok = 0;
       }
       
-      # native method get1_issuer : int ($issuer_ref : Net::SSLeay::X509[], $ctx : Net::SSLeay::X509_STORE_CTX, $x : Net::SSLeay::X509);
-  
+      my $issuer_ref = [(Net::SSLeay::X509)undef];
+      my $found = Net::SSLeay::X509_STORE_CTX->get1_issuer($issuer_ref, $x509_store_ctx, $current_cert);
+      
+      if ($found) {
+        unless (length $issuer_ref->[0]->get_subject_name->oneline > 0) {
+          $verify_ok = 0;
+        }
+      }
+      
       return $verify_ok;
     }, Int->new(1));
     

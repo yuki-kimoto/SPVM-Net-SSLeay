@@ -17,7 +17,7 @@ class Net::SSLeay::X509_STORE_CTX : pointer {
     return $self;
   }
   
-  native method get1_issuer : int ($issuer_ref : Net::SSLeay::X509[], $ctx : Net::SSLeay::X509_STORE_CTX, $x : Net::SSLeay::X509);
+  native static method get1_issuer : int ($issuer_ref : Net::SSLeay::X509[], $ctx : Net::SSLeay::X509_STORE_CTX, $x : Net::SSLeay::X509);
   
   # Instance Methods
   native method set_error : void ($s : int);
