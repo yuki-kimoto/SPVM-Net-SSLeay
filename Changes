@@ -1,6 +1,18 @@
 0.031 2024-12-19
   [New Features]
     * Add Net::SSLeay#select_next_proto method.
+    * Add the following methods to Net::SSLeay::Constant class.
+    
+      static method SSL_TLSEXT_ERR_OK : int ();
+
+      static method SSL_TLSEXT_ERR_ALERT_FATAL : int ();
+
+      static method SSL_TLSEXT_ERR_NOACK : int ();
+
+      static method OPENSSL_NPN_NEGOTIATED : int ();
+
+      static method OPENSSL_NPN_NO_OVERLAP : int ();
+
   [Changes]
     * Change the definition of Net::SSLeay::SSL_CTX#set_alpn_select_cb method
       [Before]
