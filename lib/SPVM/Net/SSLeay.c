@@ -928,13 +928,6 @@ static void SPVM__Net__SSLeay__my__msg_callback(int write_p, int version, int co
     goto END_OF_FUNC;
   }
   
-  void* obj_arg = env->get_field_object_by_name(env, stack, obj_self, "msg_callback_arg", &error_id, __func__, FILE_NAME, __LINE__);
-  if (error_id) {
-    env->print_exception_to_stderr(env, stack);
-    
-    goto END_OF_FUNC;
-  }
-  
   void* obj_buf = env->new_string(env, stack, buf, len);
   
   stack[0].oval = obj_cb;
@@ -944,7 +937,6 @@ static void SPVM__Net__SSLeay__my__msg_callback(int write_p, int version, int co
   stack[4].oval = obj_buf;
   stack[5].ival = len;
   stack[6].oval = obj_self;
-  stack[7].oval = obj_arg;
   env->call_instance_method_by_name(env, stack, "", 7, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) {
     env->print_exception_to_stderr(env, stack);
@@ -970,8 +962,6 @@ int32_t SPVM__Net__SSLeay__set_msg_callback(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   void* obj_cb = stack[1].oval;
   
-  void* obj_arg = stack[2].oval;
-  
   SSL* self = env->get_pointer(env, stack, obj_self);
   
   void (*native_cb)(int write_p, int version, int content_type, const void *buf, size_t len, SSL *ssl, void *arg) = NULL;
@@ -984,9 +974,6 @@ int32_t SPVM__Net__SSLeay__set_msg_callback(SPVM_ENV* env, SPVM_VALUE* stack) {
     env->set_field_object_by_name(env, stack, obj_self, "msg_callback", obj_cb, &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
   }
-  
-  env->set_field_object_by_name(env, stack, obj_self, "msg_callback_arg", obj_arg, &error_id, __func__, FILE_NAME, __LINE__);
-  if (error_id) { return error_id; }
   
   return 0;
 }

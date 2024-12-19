@@ -30,6 +30,8 @@
       static method convert_to_wire_format : byte[] ($protocols : string[]);
       [After]
       static method convert_to_wire_format : string ($protocols : string[]);
+    * Remove all $arg argument in callback interfaces and callback setter methods.
+    
 0.030 2024-12-18
   [Bug Fix]
     * Fix bugs of Net::SSLeay#get_SSL_CTX method.

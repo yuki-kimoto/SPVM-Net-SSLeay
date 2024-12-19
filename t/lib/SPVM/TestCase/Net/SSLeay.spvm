@@ -69,7 +69,7 @@ class TestCase::Net::SSLeay {
     $ssl_ctx->use_certificate_chain_file("$FILE_DIR/simple-cert.certchain.pem");
     
     my $set_tlsext_servername_callback_result = [0];
-    $ssl_ctx->set_tlsext_servername_callback([$set_tlsext_servername_callback_result : int[]] method : int ($ssl : Net::SSLeay, $al_ref : int*, $arg : object) {
+    $ssl_ctx->set_tlsext_servername_callback([$set_tlsext_servername_callback_result : int[]] method : int ($ssl : Net::SSLeay, $al_ref : int*) {
       
       $set_tlsext_servername_callback_result->[0] = 1;
       
@@ -192,7 +192,7 @@ class TestCase::Net::SSLeay {
         
         my $ssl_ctx = $socket->ssl_ctx;
         
-        my $default_passwd_cb = [$that : Net::SSLeay::SSL_CTX = $ssl_ctx] method : int ($buf : mutable string, $size : int, $rwflag : int, $arg : object) {
+        my $default_passwd_cb = [$that : Net::SSLeay::SSL_CTX = $ssl_ctx] method : int ($buf : mutable string, $size : int, $rwflag : int) {
           
           my $password = "test";
           my $password_length = length $password;
@@ -218,9 +218,9 @@ class TestCase::Net::SSLeay {
         
         my $msg_callback_results = new object[10];
         
-        my $msg_callback = [$msg_callback_results : object[]]method : void ($write_p : int, $version : int, $content_type : int, $buf : string, $len : int, $ssl : Net::SSLeay, $arg : object) {          
+        my $msg_callback = [$msg_callback_results : object[]]method : void ($write_p : int, $version : int, $content_type : int, $buf : string, $len : int, $ssl : Net::SSLeay) {          
           unless ($msg_callback_results->[0]) {
-            warn "[Test Output]\$write_p:$write_p,\$version:$version,\$content_type:$content_type,\$buf:" . dump $buf . ",\$len:$len,\$ssl:" . type_name($ssl) . ",\$arg:" . $arg->(int);
+            warn "[Test Output]\$write_p:$write_p,\$version:$version,\$content_type:$content_type,\$buf:" . dump $buf . ",\$len:$len,\$ssl:" . type_name($ssl);
             
             $msg_callback_results->[0] = $write_p;
             $msg_callback_results->[1] = $version;
@@ -233,12 +233,9 @@ class TestCase::Net::SSLeay {
             $ssl_hash->weaken("ssl");
             
             $msg_callback_results->[5] = $ssl_hash;
-            $msg_callback_results->[6] = $arg;
             
           }
         };
-        
-        my $msg_callback_arg = Int->new(10);
         
         my $host_name = "localhost";
         
@@ -246,8 +243,8 @@ class TestCase::Net::SSLeay {
         
         $verify_param->set1_host($host_name);
         
-        $socket->add_before_connect_SSL_cb([$msg_callback : Net::SSLeay::Callback::Msg, $msg_callback_arg : object, $host_name : string] method : void ($ssl : Net::SSLeay) {
-          $ssl->set_msg_callback($msg_callback, $msg_callback_arg);
+        $socket->add_before_connect_SSL_cb([$msg_callback : Net::SSLeay::Callback::Msg, $host_name : string] method : void ($ssl : Net::SSLeay) {
+          $ssl->set_msg_callback($msg_callback);
           $ssl->set_tlsext_host_name($host_name);
         });
         
@@ -280,10 +277,6 @@ class TestCase::Net::SSLeay {
         }
         
         unless ($msg_callback_results->[5]->(Hash)->get("ssl") is_type Net::SSLeay) {
-          $success_ref->[0] = 0;
-        }
-        
-        unless ($msg_callback_results->[6]->(int) == 10) {
           $success_ref->[0] = 0;
         }
         

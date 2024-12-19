@@ -374,7 +374,7 @@ method get_SSL_CTX : Net::SSLeay::SSL_CTX ();
 
 =head2 set_msg_callback
 
-C<method set_msg_callback : void ($cb : L<Net::SSLeay::Callback::Msg|SPVM::Net::SSLeay::Callback::Msg>, $arg : object = undef);>
+C<method set_msg_callback : void ($cb : L<Net::SSLeay::Callback::Msg|SPVM::Net::SSLeay::Callback::Msg>);>
 
 Calls native L<SSL_set_msg_callback|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_msg_callback> function given the pointer value of the instance, $cb, $arg, and returns its return value.
 

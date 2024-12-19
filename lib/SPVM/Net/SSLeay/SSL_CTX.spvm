@@ -39,23 +39,15 @@ class Net::SSLeay::SSL_CTX : pointer {
   }
   
   # Fields
-  has ref_output_for_set_alpn_select_cb : string;
-  
   has verify_callback : Net::SSLeay::Callback::Verify;
-  
-  has verify_callback_arg : object;
   
   has default_passwd_cb : Net::SSLeay::Callback::PemPassword;
   
-  has default_passwd_cb_arg : object;
-  
   has alpn_select_cb : Net::SSLeay::Callback::AlpnSelect;
   
-  has alpn_select_cb_arg : object;
+  has ref_output_for_set_alpn_select_cb : string;
   
   has tlsext_servername_callback : Net::SSLeay::Callback::TlsextServername;
-  
-  has tlsext_servername_callback_arg : object;
   
   # Class Methods
   native static method new : Net::SSLeay::SSL_CTX ($method : Net::SSLeay::SSL_METHOD);
@@ -129,11 +121,11 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   native method add_extra_chain_cert : long ($x509 : Net::SSLeay::X509);
   
-  native method set_verify : void ($mode : int, $verify_callback : Net::SSLeay::Callback::Verify = undef, $arg : object = undef);
+  native method set_verify : void ($mode : int, $verify_callback : Net::SSLeay::Callback::Verify = undef);
   
-  native method set_default_passwd_cb : void ($cb : Net::SSLeay::Callback::PemPassword, $arg : object = undef);
+  native method set_default_passwd_cb : void ($cb : Net::SSLeay::Callback::PemPassword);
   
-  native method set_alpn_select_cb : void ($cb : Net::SSLeay::Callback::AlpnSelect, $arg : object = undef);
+  native method set_alpn_select_cb : void ($cb : Net::SSLeay::Callback::AlpnSelect);
   
   method set_alpn_select_cb_with_protocols : void ($protocols : string[]) {
     
@@ -141,7 +133,7 @@ class Net::SSLeay::SSL_CTX : pointer {
       die "The protocols \$protocols must be defined.";
     }
     
-    my $cb = [$protocols : string[]] method : int ($ssl : Net::SSLeay, $out_ref : string[], $outlen_ref : byte*, $in : string, $inlen : int, $arg : object) {
+    my $cb = [$protocols : string[]] method : int ($ssl : Net::SSLeay, $out_ref : string[], $outlen_ref : byte*, $in : string, $inlen : int) {
       
       my $wire_format = Net::SSLeay::Util->convert_to_wire_format($protocols);
       
@@ -158,7 +150,7 @@ class Net::SSLeay::SSL_CTX : pointer {
     $self->set_alpn_select_cb($cb);
   }
   
-  native method set_tlsext_servername_callback : long ($cb : Net::SSLeay::Callback::TlsextServername, $arg : object = undef);
+  native method set_tlsext_servername_callback : long ($cb : Net::SSLeay::Callback::TlsextServername);
   
   native method DESTROY : void ();
   
