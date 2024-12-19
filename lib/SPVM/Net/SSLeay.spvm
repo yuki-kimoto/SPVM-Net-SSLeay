@@ -52,7 +52,7 @@ class Net::SSLeay {
   native static method select_next_proto : int ($out_ref : string[], $outlen_ref : byte*, $server : string, $server_len : int, $client : string, $client_len : int);
   
   # Instance Methods
-  protected method init : void ($objects : object[] = undef) {
+  protected method init : void ($options : object[] = undef) {
     
     $self->_init_native;
   }

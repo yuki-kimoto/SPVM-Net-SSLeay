@@ -198,11 +198,13 @@ A callback set by L</"set_msg_callback"> method.
 
 =head2 new
 
-C<static method new : Net::SSLeay ($ssl_ctx : L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX>);>
+C<static method new : L<Net::SSLeay|SPVM::Net::SSLeay> ($ssl_ctx : L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX>);>
 
-Creates a new L<Net::SSLeay|SPVM::Net::SSLeay> object, creates a L<SSL|https://docs.openssl.org/master/man3/SSL_new/> object by calling native L<SSL_new|https://docs.openssl.org/master/man3/SSL_new/> function given the L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> object $ssl_ctx, sets the pointer value of the new L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> object to the return value of L<SSL_new|https://docs.openssl.org/master/man3/SSL_new/> function, and returns the new L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> object.
+Creates a new L<Net::SSLeay|SPVM::Net::SSLeay> object, calls native L<SSL_new|https://docs.openssl.org/master/man3/SSL_new/> function given the pointer value of $ssl_ctx, sets the pointer value of the new object to the return value of the native function.
 
-L</"ssl_ctx"> field is set to $ssl_ctx.
+And calls L</"init"> method.
+
+And returns the new L<Net::SSLeay|SPVM::Net::SSLeay> object.
 
 Exceptions:
 
@@ -239,6 +241,14 @@ Calls native L<SSL_select_next_proto|https://docs.openssl.org/3.0/man3/SSL_CTX_s
 If a string is returned in C<out_ref>, creates a new string from it and C<*outlen_ref>, sets C<$out_ref->[0]> to the string.
 
 =head1 Instance Methods
+
+=head2 init
+
+C<protected method init : void ($options : object[] = undef);>
+
+Initializes the instance given the options $options.
+
+Performes L<Initialization process described in Callback Hack|/"Callback Hack">.
 
 =head2 version
 
