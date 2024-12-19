@@ -22,6 +22,7 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   use Net::SSLeay::Util;
   use Net::SSLeay::X509_STORE_CTX;
+  use Net::SSLeay::Constant as SSL;
   
   use Sync::Mutex;
   use StringList;
@@ -144,9 +145,14 @@ class Net::SSLeay::SSL_CTX : pointer {
       
       my $wire_format = Net::SSLeay::Util->convert_to_wire_format($protocols);
       
-      Net::SSLeay->select_next_proto($out_ref, $outlen_ref, $in, $inlen, $wire_format, length $wire_format);
+      my $status_select_next_proto = Net::SSLeay->select_next_proto($out_ref, $outlen_ref, $in, $inlen, $wire_format, length $wire_format);
       
-      return 0;
+      my $status = SSL->SSL_TLSEXT_ERR_NOACK;
+      if ($status_select_next_proto == SSL->OPENSSL_NPN_NEGOTIATED) {
+        $status = SSL->SSL_TLSEXT_ERR_OK;
+      }
+      
+      return $status;
     };
     
     $self->set_alpn_select_cb($cb);
