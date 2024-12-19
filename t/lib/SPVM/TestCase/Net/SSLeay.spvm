@@ -192,15 +192,21 @@ class TestCase::Net::SSLeay {
         
         my $ssl_ctx = $socket->ssl_ctx;
         
-        $ssl_ctx->set_default_passwd_cb(method : int ($buf : mutable string, $size : int, $rwflag : int, $arg : object) {
+        my $default_passwd_cb = [$that : Net::SSLeay::SSL_CTX = $ssl_ctx] method : int ($buf : mutable string, $size : int, $rwflag : int, $arg : object) {
           
           my $password = "test";
           my $password_length = length $password;
           
           Fn->memcpy($buf, 0, $password, 0, $password_length);
           
+          $that->get_mode;
+          
           return $password_length;
-        });
+        };
+        
+        weaken $default_passwd_cb->{that};
+        
+        $ssl_ctx->set_default_passwd_cb($default_passwd_cb);
         
         $ssl_ctx->use_PrivateKey_file("$FILE_DIR/simple-cert.key.enc.pem");
         
