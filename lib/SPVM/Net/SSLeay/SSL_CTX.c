@@ -1209,6 +1209,8 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_default_passwd_cb(SPVM_ENV* env, SPVM_VA
   env->set_field_object_by_name(env, stack, obj_self, "default_passwd_cb_arg", obj_arg, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   
+  spvm_warn("%p", native_cb);
+  
   SSL_CTX_set_default_passwd_cb(self, native_cb);
   
   SSL_CTX_set_default_passwd_cb_userdata(self, self);
