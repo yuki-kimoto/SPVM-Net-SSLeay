@@ -68,6 +68,18 @@ class TestCase::Net::SSLeay {
     
     $ssl_ctx->use_certificate_chain_file("$FILE_DIR/simple-cert.certchain.pem");
     
+    my $set_tlsext_servername_callback_result = [0];
+    $ssl_ctx->set_tlsext_servername_callback([$set_tlsext_servername_callback_result : int[]] method : int ($ssl : Net::SSLeay, $al_ref : int*, $arg : object) {
+      
+      $set_tlsext_servername_callback_result->[0] = 1;
+      
+      warn "[Test Output][set_tlsext_servername_callback]\$ssl->get_servername:" . $ssl->get_servername(SSL->TLSEXT_NAMETYPE_host_name);
+      
+      warn "[Test Output][set_tlsext_servername_callback]\$\$al_ref:$$al_ref";
+      
+      return 1;
+    });
+    
     my $accepted_socket = $server_socket->accept;
     
     $accepted_socket->accept_SSL;
@@ -208,8 +220,15 @@ class TestCase::Net::SSLeay {
         
         my $msg_callback_arg = Int->new(10);
         
-        $socket->add_before_connect_SSL_cb([$msg_callback : Net::SSLeay::Callback::Msg, $msg_callback_arg : object] method : void ($ssl : Net::SSLeay) {
+        my $host_name = "localhost";
+        
+        my $verify_param = $ssl_ctx->get0_param;
+        
+        $verify_param->set1_host($host_name);
+        
+        $socket->add_before_connect_SSL_cb([$msg_callback : Net::SSLeay::Callback::Msg, $msg_callback_arg : object, $host_name : string] method : void ($ssl : Net::SSLeay) {
           $ssl->set_msg_callback($msg_callback, $msg_callback_arg);
+          $ssl->set_tlsext_host_name($host_name);
         });
         
         $socket->connect_SSL;
