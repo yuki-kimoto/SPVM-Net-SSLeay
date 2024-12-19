@@ -243,7 +243,7 @@ class TestCase::Net::SSLeay {
         
         $verify_param->set1_host($host_name);
         
-        $socket->add_before_connect_SSL_cb([$msg_callback : Net::SSLeay::Callback::Msg, $host_name : string] method : void ($ssl : Net::SSLeay) {
+        $socket->add_before_connect_SSL_cb([$msg_callback : Net::SSLeay::Callback::Msg, $host_name : string] method : void ($socket : TestUtil::Socket, $ssl : Net::SSLeay) {
           $ssl->set_msg_callback($msg_callback);
           $ssl->set_tlsext_host_name($host_name);
         });
