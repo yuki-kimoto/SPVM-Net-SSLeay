@@ -80,6 +80,10 @@ class TestCase::Net::SSLeay {
       return 1;
     });
     
+    my $protocols = ["spdy/1", "http/1.1"];
+    
+    $ssl_ctx->set_alpn_select_cb_with_protocols($protocols);
+    
     my $accepted_socket = $server_socket->accept;
     
     $accepted_socket->accept_SSL;
@@ -194,7 +198,8 @@ class TestCase::Net::SSLeay {
         
         $ssl_ctx->set_post_handshake_auth(1);
         
-        $ssl_ctx->set_alpn_protos_with_protocols(["http1.1"]);
+        $ssl_ctx->set_alpn_protos_with_protocols(["http/1.1"]);
+        
         
         my $msg_callback_results = new object[10];
         
@@ -304,6 +309,10 @@ class TestCase::Net::SSLeay {
         }
         
         my $alpn_selected_protocol = $ssl->get0_alpn_selected_return_string;
+        
+        unless ($alpn_selected_protocol eq "http/1.1") {
+          $success_ref->[0] = 0;
+        }
         
         my $cipher = $ssl->get_cipher;
         

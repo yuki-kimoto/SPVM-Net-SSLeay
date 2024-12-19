@@ -875,15 +875,16 @@ int32_t SPVM__Net__SSLeay__select_next_proto(SPVM_ENV* env, SPVM_VALUE* stack) {
     return env->die(env, stack, "$server must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
-  const char* server = env->get_pointer(env, stack, obj_server);
+  const char* server = env->get_chars(env, stack, obj_server);
   
   if (!obj_client) {
     return env->die(env, stack, "$client must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
-  const char* client = env->get_pointer(env, stack, obj_client);
+  const char* client = env->get_chars(env, stack, obj_client);
   
   unsigned char* out_tmp = NULL;
+  
   int32_t status = SSL_select_next_proto(&out_tmp, (unsigned char*)outlen_ref, server, server_len, client, client_len);
   
   if (out_tmp) {

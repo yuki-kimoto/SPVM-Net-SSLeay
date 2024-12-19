@@ -1048,6 +1048,7 @@ static int SPVM__Net__SSLeay__SSL_CTX__my__alpn_select_cb(SSL* ssl, const unsign
   stack[4].oval = obj_in;
   stack[5].ival = inlen;
   stack[6].oval = obj_arg;
+  
   env->call_instance_method_by_name(env, stack, "", 7, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) {
     env->print_exception_to_stderr(env, stack);
