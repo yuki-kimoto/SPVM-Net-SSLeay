@@ -6,21 +6,47 @@ our $VERSION = "0.031";
 
 =head1 Name
 
-SPVM::Net::SSLeay - OpenSSL Binding and SSL data strcuture.
+SPVM::Net::SSLeay - OpenSSL Binding to SPVM
 
 =head1 Description
 
-Net::SSLeay class in L<SPVM> is a binding for OpenSSL. This class itself represents L<SSL|https://docs.openssl.org/master/man3/SSL_new/> data structure.
+Net::SSLeay class in L<SPVM> is a OpenSSL binding to SPVM.
+
+This class itself represents L<SSL|https://docs.openssl.org/master/man3/SSL_new/> data structure in OpenSSL.
 
 B<Warnings:>
 
-B<The tests haven't been written yet. The features may be changed without notice.> 
+B<This class is highly experimental. Many features may be changed without warnings.> 
 
-=head1 Details
+=head1 Usage
 
-=head2 Requirement
+  use Net::SSLeay;
+  use Net::SSLeay::Net::SSLeay::SSL_METHOD;
+  use Net::SSLeay::Net::SSLeay::SSL_CTX;
+  use Net::SSLeay::Constant as SSL;
+  
+  my $ssl_method = Net::SSLeay::SSL_METHOD->TLS_method;
+  
+  my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
+  
+  $ssl_ctx->set_verify(SSL->SSL_VERIFY_PEER);
+  
+  my $ssl = Net::SSLeay->new($ssl_ctx);
+  
+  my $socket_fd = ...; # Get a socket file descriptor in some way.
+  
+  $ssl->set_fd($socket_fd);
+  
+  $ssl->connect;
+  
+  $ssl->write("foo");
+  
+  my $buffer = (mutable string)new_string_len 100;
+  $ssl->read($buffer);
+  
+  $ssl->shutdown;
 
-OpenSSL 1.1.1
+See also the source codes of L<IO::Socket::SSL|https://metacpan.org/pod/SPVM::IO::Socket::SSL> class to gets more examples.
 
 =head1 Modules
 
@@ -118,21 +144,33 @@ OpenSSL 1.1.1
 
 =back
 
-=head1 Usage
+=head1 Details
 
-  use Net::SSLeay;
-  use Net::SSLeay::Net::SSLeay::SSL_METHOD;
-  use Net::SSLeay::Net::SSLeay::SSL_CTX;
-  
-  my $ssl_method = Net::SSLeay::SSL_METHOD->TLS_method;
-  
-  my $ssl_ctx = Net::SSLeay::SSL_CTX->new($ssl_method);
-  
-  my $ssl = Net::SSLeay->new($ssl_ctx);
+=head2 Requirement
 
-=head1 Examples
+OpenSSL 1.1.1
 
-See source codes of L<IO::Socket::SSL|https://metacpan.org/pod/SPVM::IO::Socket::SSL> about examples of L<Net::SSLeay|SPVM::Net::SSLeay>.
+=head2 Porting
+
+This class is a Perl's L<Net::SSLeay> porting to L<SPVM>.
+
+=head2 Callback Hack
+
+OpenSSL uses a number of callback functions.
+
+These callbacks cannot receive a L<Net::SSLeay|SPVM::Net::SSLeay> object.
+
+So we use the following callback hack to get a L<Net::SSLeay|SPVM::Net::SSLeay> object.
+
+1. When a new native C<SSL> object and a new L<Net::SSLeay|SPVM::Net::SSLeay> object are created at once, the new Net::SSLeay object is stored in a global L<Hash|SPVM::Hash> object keyed by the hex string of the address of the native C<SSL> object.
+
+2. The callback gets a native SSL object from the information in the arguments. And the callback gets the L<Net::SSLeay|SPVM::Net::SSLeay> object from the global L<Hash|SPVM::Hash> object using the hex string of the address of the native C<SSL> object.
+
+The key-value pair is removed by L</"DESTROY"> method in L<Net::SSLeay|SPVM::Net::SSLeay> class.
+
+Access to the global L<Hash|SPVM::Hash> object is locked by a L<Sync::Mutex|SPVM::Sync::Mutex> object, so the access is thread-safe.
+
+This callback hack is also used in L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> class.
 
 =head1 Fields
 
@@ -400,9 +438,13 @@ L<SPVM::Net::SSLeay::ConfigBuilder>
 
 Yes.
 
-=head1 Porting
+=head1 See Also
 
-This class is a Perl's L<Net::SSLeay> porting to L<SPVM>.
+=over 2
+
+=item * L<IO::Socket::SSL|https://metacpan.org/pod/SPVM::IO::Socket::SSL>
+
+=back
 
 =head1 Repository
 
