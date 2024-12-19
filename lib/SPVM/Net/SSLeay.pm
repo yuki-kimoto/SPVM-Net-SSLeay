@@ -214,7 +214,7 @@ If SSL_new failed, an exception is thrown with C<eval_error_id> set to the basic
 
 C<static method alert_desc_string_long : string ($value : int);>
 
-Calls native L<SSL_alert_desc_string_long|https://docs.openssl.org/1.1.1/man3/SSL_alert_type_string/> function given the pointer value of the instance, $type, and returns its return value.
+Calls native L<SSL_alert_desc_string_long|https://docs.openssl.org/1.1.1/man3/SSL_alert_type_string/> function given $value, and returns a new string created by its return value.
 
 =head2 load_client_CA_file
 
