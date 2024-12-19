@@ -162,11 +162,19 @@ These callbacks cannot receive a L<Net::SSLeay|SPVM::Net::SSLeay> object.
 
 So we use the following callback hack to get a L<Net::SSLeay|SPVM::Net::SSLeay> object.
 
-1. When a new native C<SSL> object and a new L<Net::SSLeay|SPVM::Net::SSLeay> object are created at once, the new Net::SSLeay object is stored in a global L<Hash|SPVM::Hash> object keyed by the hex string of the address of the native C<SSL> object.
+Initialization:
 
-2. The callback gets a native SSL object from the information in the arguments. And the callback gets the L<Net::SSLeay|SPVM::Net::SSLeay> object from the global L<Hash|SPVM::Hash> object using the hex string of the address of the native C<SSL> object.
+When a new native C<SSL> object and a new L<Net::SSLeay|SPVM::Net::SSLeay> object are created at once, the new Net::SSLeay object is stored in a global L<Hash|SPVM::Hash> object keyed by the hex string of the address of the native C<SSL> object.
+
+Getting a L<Net::SSLeay|SPVM::Net::SSLeay> Object:
+
+The callback gets a native SSL object from the information in the arguments. And the callback gets the L<Net::SSLeay|SPVM::Net::SSLeay> object from the global L<Hash|SPVM::Hash> object using the hex string of the address of the native C<SSL> object.
+
+Cleanup:
 
 The key-value pair is removed by L</"DESTROY"> method in L<Net::SSLeay|SPVM::Net::SSLeay> class.
+
+Note:
 
 Access to the global L<Hash|SPVM::Hash> object is locked by a L<Sync::Mutex|SPVM::Sync::Mutex> object, so the access is thread-safe.
 
