@@ -180,6 +180,12 @@ C<has operation_error : ro int;>
 
 The place where the return value of L<SSL_get_error|https://docs.openssl.org/1.1.1/man3/SSL_get_error/> function is stored.
 
+=head2 msg_callback
+
+C<has msg_callback : ro L<Net::SSLeay::Callback::Msg|SPVM::Net::SSLeay::Callback::Msg>;>
+
+A callback set by L</"set_msg_callback"> method.
+
 =head1 Class Methods
 
 =head2 new
