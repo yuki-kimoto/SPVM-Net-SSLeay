@@ -134,7 +134,28 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   native method set_alpn_select_cb : void ($cb : Net::SSLeay::Callback::AlpnSelect, $arg : object = undef);
   
-  native method set_alpn_select_cb_with_protocols : void ($protocols : string[]);
+  method set_alpn_select_cb_with_protocols : void ($protocols : string[]) {
+    
+    unless ($protocols) {
+      die "The protocols \$protocols must be defined.";
+    }
+    
+    my $cb = [$protocols : string[], $that : Net::SSLeay::SSL_CTX = $self] method : int ($ssl : Net::SSLeay, $out_ref : string[], $outlen_ref : byte*, $in : string, $inlen : int, $arg : object) {
+      
+      my $wire_format = Net::SSLeay::Util->convert_to_wire_format($protocols);
+      
+      my $status = Net::SSLeay->select_next_proto($out_ref, $outlen_ref, $in, $inlen, $wire_format, length $wire_format);
+      
+      $that->{ref_output_for_set_alpn_select_cb} = $out_ref->[0];
+      
+      return $status;
+    };
+    
+    weaken $cb->{that};
+    
+    $self->set_alpn_select_cb($cb);
+    
+  }
   
   native method set_tlsext_servername_callback : long ($cb : Net::SSLeay::Callback::TlsextServername, $arg : object = undef);
   
