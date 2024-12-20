@@ -22,7 +22,7 @@ Net::SSLeay::EVP_MD class in L<SPVM> represents C<EVP_MD> data structure in Open
 
 C<method DESTROY : void ();>
 
-Calls native L<EVP_MD_free|https://docs.openssl.org/master/man3/EVP_MD_free/> function given the pointer value of the instance unless C<no_free> flag of the instance is a true value.
+Calls native L<EVP_MD_free|https://docs.openssl.org/master/man3/EVP_MD_free> function given the pointer value of the instance unless C<no_free> flag of the instance is a true value.
 
 Requirement:
 

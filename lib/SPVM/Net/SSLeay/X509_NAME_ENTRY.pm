@@ -22,7 +22,7 @@ Net::SSLeay::X509_NAME_ENTRY class in L<SPVM> represents C<X509_NAME_ENTRY> data
 
 C<static method new : L<Net::SSLeay::X509_NAME_ENTRY|SPVM::Net::SSLeay::X509_NAME_ENTRY> ();>
 
-Calls native L<X509_NAME_ENTRY_new|https://docs.openssl.org/master/man3/X509_NAME_ENTRY_new/> function, creates a new  L<Net::SSLeay::X509_NAME_ENTRY|SPVM::Net::SSLeay::X509_NAME_ENTRY> object, sets the pointer value of the object to the return value of the native function, and returns the new object.
+Calls native L<X509_NAME_ENTRY_new|https://docs.openssl.org/master/man3/X509_NAME_ENTRY_new> function, creates a new  L<Net::SSLeay::X509_NAME_ENTRY|SPVM::Net::SSLeay::X509_NAME_ENTRY> object, sets the pointer value of the object to the return value of the native function, and returns the new object.
 
 Exceptions:
 

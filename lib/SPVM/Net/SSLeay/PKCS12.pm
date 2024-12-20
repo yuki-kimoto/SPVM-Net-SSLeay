@@ -34,7 +34,7 @@ If PKCS12_new failed, an exception is thrown with C<eval_error_id> set to the ba
 
 C<method parse : int ($pass : string, $pkey_ref : L<Net::SSLeay::EVP_PKEY|SPVM::Net::SSLeay::EVP_PKEY>[], $cert_ref : L<Net::SSLeay::X509[]|SPVM::Net::SSLeay::X509>, $cas_ref : L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509>[][] = undef);>
 
-Calls native L<PKCS12_parse|https://docs.openssl.org/master/man3/PKCS12_parse/> function given $pass, apprepriate arguments for rest arguments.
+Calls native L<PKCS12_parse|https://docs.openssl.org/master/man3/PKCS12_parse> function given $pass, apprepriate arguments for rest arguments.
 
 And creates a new L<Net::SSLeay::EVP_PKEY|SPVM::Net::SSLeay::EVP_PKEY>, sets the pointer value of the new object to the value of the corresponding output argument of the native function, sets C<$pkey_ref->[0]> to the new object.
 
@@ -58,7 +58,7 @@ If PKCS12_parse failed, an exception is thrown with C<eval_error_id> set to the 
 
 C<method DESTROY : void ();>
 
-Calls native L<PKCS12_free|https://docs.openssl.org/master/man3/X509_dup/> function given the pointer value of the instance unless C<no_free> flag of the instance is a true value.
+Calls native L<PKCS12_free|https://docs.openssl.org/master/man3/PKCS12_free> function given the pointer value of the instance unless C<no_free> flag of the instance is a true value.
 
 =head1 See Also
 

@@ -192,7 +192,7 @@ The classes binding to OpenSSL data structures are configured by L<SPVM::Net::SS
 
 C<has operation_error : ro int;>
 
-The place where the return value of L<SSL_get_error|https://docs.openssl.org/master/man3/SSL_get_error/> function is stored.
+The place where the return value of L<SSL_get_error|https://docs.openssl.org/master/man3/SSL_get_error> function is stored.
 
 =head2 msg_callback
 
@@ -206,7 +206,7 @@ A callback set by L</"set_msg_callback"> method.
 
 C<static method new : L<Net::SSLeay|SPVM::Net::SSLeay> ($ssl_ctx : L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX>);>
 
-Creates a new L<Net::SSLeay|SPVM::Net::SSLeay> object, calls native L<SSL_new|https://docs.openssl.org/master/man3/SSL_new/> function given the pointer value of $ssl_ctx, sets the pointer value of the new object to the return value of the native function.
+Creates a new L<Net::SSLeay|SPVM::Net::SSLeay> object, calls native L<SSL_new|https://docs.openssl.org/master/man3/SSL_new> function given the pointer value of $ssl_ctx, sets the pointer value of the new object to the return value of the native function.
 
 And calls L</"init"> method.
 
@@ -220,17 +220,17 @@ If SSL_new failed, an exception is thrown with C<eval_error_id> set to the basic
 
 C<static method alert_desc_string_long : string ($value : int);>
 
-Calls native L<SSL_alert_desc_string_long|https://docs.openssl.org/master/man3/SSL_alert_type_string/> function given $value, and returns a new string created by its return value.
+Calls native L<SSL_alert_desc_string_long|https://docs.openssl.org/master/man3/SSL_alert_desc_string_long> function given $value, and returns a new string created by its return value.
 
 =head2 load_client_CA_file
 
 C<static method load_client_CA_file : L<Net::SSLeay::X509_NAME|SPVM::Net::SSLeay::X509_NAME>[] ($file : string);>
 
-Calls native L<SSL_load_client_CA_file|https://docs.openssl.org/master/man3/SSL_load_client_CA_file/> function given $file.
+Calls native L<SSL_load_client_CA_file|https://docs.openssl.org/master/man3/SSL_load_client_CA_file> function given $file.
 
 And creates a new L<Net::SSLeay::X509_NAME|SPVM::Net::SSLeay::X509_NAME> array,
 
-And performs the following loop: copies the element at index $i of the return value(C<STACK_OF(X509_NAME)>) of the native function using native L<X509_NAME_dup|https://docs.openssl.org/master/man3/X509_NAME_dup/>, creates a new L<Net::SSLeay::X509_NAME|SPVM::Net::SSLeay::X509_NAME> object, sets the pointer value of the new object to the native copied value, and puses the new object to the new array.
+And performs the following loop: copies the element at index $i of the return value(C<STACK_OF(X509_NAME)>) of the native function using native L<X509_NAME_dup|https://docs.openssl.org/master/man3/X509_NAME_dup>, creates a new L<Net::SSLeay::X509_NAME|SPVM::Net::SSLeay::X509_NAME> object, sets the pointer value of the new object to the native copied value, and puses the new object to the new array.
 
 And returns the new array;
 
@@ -296,7 +296,7 @@ Calls native L<SSL_set_mode|https://docs.openssl.org/master/man3/SSL_set_mode> f
 
 C<method clear_mode : long ($mode : long);>
 
-Calls native L<SSL_clear_mode|https://docs.openssl.org/master/man3/SSL_clear_mode/> function given the pointer value of the instance, $mode, and returns its return value.
+Calls native L<SSL_clear_mode|https://docs.openssl.org/master/man3/SSL_clear_mode> function given the pointer value of the instance, $mode, and returns its return value.
 
 =head2 set_tlsext_host_name
 
@@ -324,17 +324,17 @@ Otherwise returns the new string created from its return value.
 
 C<method get_SSL_CTX : L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> ();>
 
-Calls native L<SSL_get_SSL_CTX|https://docs.openssl.org/master/man3/SSL_get_SSL_CTX/> function given the pointer value of the instance, creates a new L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> object, calls native L<SSL_CTX_up_ref|https://docs.openssl.org/master/man3/SSL_CTX_up_ref> function on the return value of the native function, sets the pointer value of the new object to the return value of the native function, and returns the new object.
+Calls native L<SSL_get_SSL_CTX|https://docs.openssl.org/master/man3/SSL_get_SSL_CTX> function given the pointer value of the instance, creates a new L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> object, calls native L<SSL_CTX_up_ref|https://docs.openssl.org/master/man3/SSL_CTX_up_ref> function on the return value of the native function, sets the pointer value of the new object to the return value of the native function, and returns the new object.
 
 =head2 set_SSL_CTX
 
 C<method set_SSL_CTX : void ($ssl_ctx : L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX>);>
 
-If the pointer value of $ssl_ctx is the same as the return value(named C<current_ssl_ctx>) of native L<SSL_get_SSL_CTX|https://docs.openssl.org/master/man3/SSL_get_SSL_CTX/> given the pointer value of instance, does nothing.
+If the pointer value of $ssl_ctx is the same as the return value(named C<current_ssl_ctx>) of native L<SSL_get_SSL_CTX|https://docs.openssl.org/master/man3/SSL_get_SSL_CTX> given the pointer value of instance, does nothing.
 
-Otherwise calls L<SSL_CTX_up_ref|https://docs.openssl.org/master/man3/SSL_CTX_up_ref/> given C<current_ssl_ctx>, calls native L<SSL_set_SSL_CTX(currently not documented)|https://docs.openssl.org/master/man3/SSL_set_SSL_CTX/> function given the pointer value of the instance, the pointer value of $ssl_ctx.
+Otherwise calls L<SSL_CTX_up_ref|https://docs.openssl.org/master/man3/SSL_CTX_up_ref> given C<current_ssl_ctx>, calls native L<SSL_set_SSL_CTX(currently not documented)|https://docs.openssl.org/master/man3/SSL_set_SSL_CTX/> function given the pointer value of the instance, the pointer value of $ssl_ctx.
 
-If SSL_set_SSL_CTX failed, calls native L<SSL_CTX_free|https://docs.openssl.org/master/man3/SSL_CTX_free/> function on C<current_ssl_ctx>.
+If SSL_set_SSL_CTX failed, calls native L<SSL_CTX_free|https://docs.openssl.org/master/man3/SSL_CTX_free> function on C<current_ssl_ctx>.
 
 Note:
 
@@ -352,7 +352,7 @@ If SSL_set_SSL_CTX failed, an exception is thrown with C<eval_error_id> set to t
 
 C<method set_fd : int ($fd : int);>
 
-Calls native L<SSL_set_fd|https://docs.openssl.org/master/man3/SSL_set_fd/> function given the pointer value of the instance, $fd, and returns its return value.
+Calls native L<SSL_set_fd|https://docs.openssl.org/master/man3/SSL_set_fd> function given the pointer value of the instance, $fd, and returns its return value.
 
 Exceptions:
 
@@ -364,11 +364,11 @@ C<method connect : int ();>
 
 Calls native L<ERR_clear_error|https://docs.openssl.org/master/man3/ERR_clear_error> function.
 
-And calls native L<SSL_connect|https://docs.openssl.org/master/man3/SSL_connect/> function given the pointer value of the instance.
+And calls native L<SSL_connect|https://docs.openssl.org/master/man3/SSL_connect> function given the pointer value of the instance.
 
-If SSL_connect failed, L</"operation_error"> field is set to the return vlaue(named C<ssl_operation_error>) of L<SSL_get_error|https://docs.openssl.org/master/man3/SSL_get_error/> function given the return value of the native L<SSL_connect|https://docs.openssl.org/master/man3/SSL_connect/> function.
+If SSL_connect failed, L</"operation_error"> field is set to the return vlaue(named C<ssl_operation_error>) of L<SSL_get_error|https://docs.openssl.org/master/man3/SSL_get_error> function given the return value of the native L<SSL_connect|https://docs.openssl.org/master/man3/SSL_connect> function.
 
-And returns the return value of the native L<SSL_connect|https://docs.openssl.org/master/man3/SSL_connect/> function.
+And returns the return value of the native L<SSL_connect|https://docs.openssl.org/master/man3/SSL_connect> function.
 
 Exceptions:
 
@@ -386,11 +386,11 @@ C<method accept : int ();>
 
 Calls native L<ERR_clear_error|https://docs.openssl.org/master/man3/ERR_clear_error> function.
 
-And calls native L<SSL_accept|https://docs.openssl.org/master/man3/SSL_accept/> function given the pointer value of the instance.
+And calls native L<SSL_accept|https://docs.openssl.org/master/man3/SSL_accept> function given the pointer value of the instance.
 
-If SSL_accept failed, L</"operation_error"> field is set to the return vlaue(named C<ssl_operation_error>) of L<SSL_get_error|https://docs.openssl.org/master/man3/SSL_get_error/> function given the return value of the native L<SSL_accept|https://docs.openssl.org/master/man3/SSL_accept/> function.
+If SSL_accept failed, L</"operation_error"> field is set to the return vlaue(named C<ssl_operation_error>) of L<SSL_get_error|https://docs.openssl.org/master/man3/SSL_get_error> function given the return value of the native L<SSL_accept|https://docs.openssl.org/master/man3/SSL_accept> function.
 
-And returns the return value of the native L<SSL_accept|https://docs.openssl.org/master/man3/SSL_accept/> function.
+And returns the return value of the native L<SSL_accept|https://docs.openssl.org/master/man3/SSL_accept> function.
 
 Exceptions:
 
@@ -408,11 +408,11 @@ C<method read : int ($buf : mutable string, $num : int = -1, $offset : int = 0);
 
 Calls native L<ERR_clear_error|https://docs.openssl.org/master/man3/ERR_clear_error> function.
 
-And calls native L<SSL_read|https://docs.openssl.org/master/man3/SSL_read/> function given the pointer value of the instance, $buf at the offest $offset, $num.
+And calls native L<SSL_read|https://docs.openssl.org/master/man3/SSL_read> function given the pointer value of the instance, $buf at the offest $offset, $num.
 
-If SSL_read failed, L</"operation_error"> field is set to the return vlaue(named C<ssl_operation_error>) of L<SSL_get_error|https://docs.openssl.org/master/man3/SSL_get_error/> function given the return value of the native L<SSL_read|https://docs.openssl.org/master/man3/SSL_read/> function.
+If SSL_read failed, L</"operation_error"> field is set to the return vlaue(named C<ssl_operation_error>) of L<SSL_get_error|https://docs.openssl.org/master/man3/SSL_get_error> function given the return value of the native L<SSL_read|https://docs.openssl.org/master/man3/SSL_read> function.
 
-And returns the return value of the native L<SSL_read|https://docs.openssl.org/master/man3/SSL_read/> function.
+And returns the return value of the native L<SSL_read|https://docs.openssl.org/master/man3/SSL_read> function.
 
 Exceptions:
 
@@ -436,11 +436,11 @@ C<method write : int ($buf : string, $num : int = -1, $offset : int = 0);>
 
 Calls native L<ERR_clear_error|https://docs.openssl.org/master/man3/ERR_clear_error> function.
 
-And calls native L<SSL_write|https://docs.openssl.org/master/man3/SSL_write/> function given the pointer value of the instance, $buf at the offest $offset, $num.
+And calls native L<SSL_write|https://docs.openssl.org/master/man3/SSL_write> function given the pointer value of the instance, $buf at the offest $offset, $num.
 
-If SSL_write failed, L</"operation_error"> field is set to the return vlaue(named C<ssl_operation_error>) of L<SSL_get_error|https://docs.openssl.org/master/man3/SSL_get_error/> function given the return value of the native L<SSL_write|https://docs.openssl.org/master/man3/SSL_write/> function.
+If SSL_write failed, L</"operation_error"> field is set to the return vlaue(named C<ssl_operation_error>) of L<SSL_get_error|https://docs.openssl.org/master/man3/SSL_get_error> function given the return value of the native L<SSL_write|https://docs.openssl.org/master/man3/SSL_write> function.
 
-And returns the return value of the native L<SSL_write|https://docs.openssl.org/master/man3/SSL_write/> function.
+And returns the return value of the native L<SSL_write|https://docs.openssl.org/master/man3/SSL_write> function.
 
 Exceptions:
 
@@ -464,11 +464,11 @@ C<method shutdown : int ();>
 
 Calls native L<ERR_clear_error|https://docs.openssl.org/master/man3/ERR_clear_error> function.
 
-And calls native L<SSL_shutdown|https://docs.openssl.org/master/man3/SSL_shutdown/> function given the pointer value of the instance.
+And calls native L<SSL_shutdown|https://docs.openssl.org/master/man3/SSL_shutdown> function given the pointer value of the instance.
 
-If SSL_shutdown failed, L</"operation_error"> field is set to the return vlaue(named C<ssl_operation_error>) of L<SSL_get_error|https://docs.openssl.org/master/man3/SSL_get_error/> function given the return value of the native L<SSL_shutdown|https://docs.openssl.org/master/man3/SSL_shutdown/> function.
+If SSL_shutdown failed, L</"operation_error"> field is set to the return vlaue(named C<ssl_operation_error>) of L<SSL_get_error|https://docs.openssl.org/master/man3/SSL_get_error> function given the return value of the native L<SSL_shutdown|https://docs.openssl.org/master/man3/SSL_shutdown> function.
 
-And returns the return value of the native L<SSL_shutdown|https://docs.openssl.org/master/man3/SSL_shutdown/> function.
+And returns the return value of the native L<SSL_shutdown|https://docs.openssl.org/master/man3/SSL_shutdown> function.
 
 Exceptions:
 
@@ -484,13 +484,13 @@ C<ssl_operation_error> is any other value, C<eval_error_id> is set to the basic 
 
 C<method get_shutdown : int ();>
 
-Calls native L<SSL_get_shutdown|https://docs.openssl.org/master/man3/SSL_get_shutdown/> function, and returns its return value.
+Calls native L<SSL_get_shutdown|https://docs.openssl.org/master/man3/SSL_get_shutdown> function, and returns its return value.
 
 =head2 get_cipher
 
 C<method get_cipher : string ();>
 
-Calls native L<SSL_get_cipher|https://docs.openssl.org/master/man3/SSL_get_current_cipher/> function, and returns the string created from its return value.
+Calls native L<SSL_get_cipher|https://docs.openssl.org/master/man3/SSL_get_cipher> function, and returns the string created from its return value.
 
 =head2 get_certificate
 

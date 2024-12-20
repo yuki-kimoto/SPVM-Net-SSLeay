@@ -22,7 +22,7 @@ Net::SSLeay::ERR class in L<SPVM> has represents C<ERR> name space in OpenSSL.
 
 C<static method error_string_n : void ($e : long, $buf : mutable string, $len : int = -1);>
 
-Calls native L<ERR_error_string_n|https://docs.openssl.org/master/man3/ERR_error_string_n/> function.
+Calls native L<ERR_error_string_n|https://docs.openssl.org/master/man3/ERR_error_string_n> function.
 
 Exceptions:
 

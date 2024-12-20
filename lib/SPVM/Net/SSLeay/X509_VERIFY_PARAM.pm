@@ -66,13 +66,13 @@ Calls native L<X509_VERIFY_PARAM_get_hostflags|https://docs.openssl.org/master/m
 
 C<method set_hostflags : void ($flags : int);>
 
-Calls native L<X509_VERIFY_PARAM_set_hostflags|https://docs.openssl.org/master/man3/X509_VERIFY_PARAM_set_hostflags/> function given the pointer value of the instance, $flags.
+Calls native L<X509_VERIFY_PARAM_set_hostflags|https://docs.openssl.org/master/man3/X509_VERIFY_PARAM_set_hostflags> function given the pointer value of the instance, $flags.
 
 =head2 set1_host
 
 C<method set1_host : int ($name : string, $namelen : int = -1);>
 
-Calls native L<X509_VERIFY_PARAM_set1_host|https://docs.openssl.org/master/man3/X509_VERIFY_PARAM_set1_host/> function given the pointer value of the instance, $name, $namelen, and returns its return value.
+Calls native L<X509_VERIFY_PARAM_set1_host|https://docs.openssl.org/master/man3/X509_VERIFY_PARAM_set1_host> function given the pointer value of the instance, $name, $namelen, and returns its return value.
 
 If $namelen is less than 0, it is set to the length of $name.
 
@@ -88,7 +88,7 @@ If X509_VERIFY_PARAM_set1_host failed, an exception is thrown with C<eval_error_
 
 C<method set1_ip_asc : int ($ipasc : string);>
 
-Calls native L<X509_VERIFY_PARAM_set1_ip_asc|https://docs.openssl.org/master/man3/X509_VERIFY_PARAM_set1_ip_asc/> function given the pointer value of the instance, $ipasc, and returns its return value.
+Calls native L<X509_VERIFY_PARAM_set1_ip_asc|https://docs.openssl.org/master/man3/X509_VERIFY_PARAM_set1_ip_asc> function given the pointer value of the instance, $ipasc, and returns its return value.
 
 Exceptions:
 
@@ -116,7 +116,7 @@ If X509_VERIFY_PARAM_set1_email failed, an exception is thrown with C<eval_error
 
 C<method DESTROY : void ();>
 
-Calls native L<X509_VERIFY_PARAM_free|https://docs.openssl.org/master/man3/X509_VERIFY_PARAM_free/> function given the pointer value of the instance unless C<no_free> flag of the instance is a true value.
+Calls native L<X509_VERIFY_PARAM_free|https://docs.openssl.org/master/man3/X509_VERIFY_PARAM_free> function given the pointer value of the instance unless C<no_free> flag of the instance is a true value.
 
 =head1 See Also
 

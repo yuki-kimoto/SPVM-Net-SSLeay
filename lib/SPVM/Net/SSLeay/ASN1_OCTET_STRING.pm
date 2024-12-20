@@ -22,7 +22,7 @@ Net::SSLeay::ASN1_OCTET_STRING class in L<SPVM> represents C<ASN1_OCTET_STRING> 
 
 C<static method new : L<Net::SSLeay::ASN1_OCTET_STRING|SPVM::Net::SSLeay::ASN1_OCTET_STRING> ();>
 
-Calls native L<ASN1_OCTET_STRING_new|https://docs.openssl.org/master/man3/ASN1_OCTET_STRING_new/> function, creates a new  L<Net::SSLeay::ASN1_OCTET_STRING|SPVM::Net::SSLeay::ASN1_OCTET_STRING> object, sets the pointer value of the object to the return value of the native function, and returns the new object.
+Calls native L<ASN1_OCTET_STRING_new|https://docs.openssl.org/master/man3/ASN1_OCTET_STRING_new> function, creates a new  L<Net::SSLeay::ASN1_OCTET_STRING|SPVM::Net::SSLeay::ASN1_OCTET_STRING> object, sets the pointer value of the object to the return value of the native function, and returns the new object.
 
 Exceptions:
 
@@ -46,7 +46,7 @@ Calls native L<ASN1_STRING_get0_data|https://docs.openssl.org/master/man3/ASN1_S
 
 C<method set : void ($data : string, $len : int = -1);>
 
-Calls native L<ASN1_STRING_set|https://docs.openssl.org/master/man3/ASN1_STRING_length/> function given the pointer value of the instance, $data, $len,.
+Calls native L<ASN1_STRING_set|https://docs.openssl.org/master/man3/ASN1_STRING_set> function given the pointer value of the instance, $data, $len,.
 
 =head2 DESTROY
 
