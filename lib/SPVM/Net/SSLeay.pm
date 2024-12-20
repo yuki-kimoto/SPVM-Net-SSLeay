@@ -238,9 +238,19 @@ If SSL_load_client_CA_file failed, an exception is thrown with C<eval_error_id> 
 
 C<static method select_next_proto : int ($out_ref : string[], $outlen_ref : byte*, $server : string, $server_len : int, $client : string, $client_len : int);>
 
-Calls native L<SSL_select_next_proto|https://docs.openssl.org/3.0/man3/SSL_CTX_set_alpn_select_cb> function given the pointer value of the instance, the pointer of a native temporary variable C<out_ref>, $outlen_ref, $server, $server_len, $client, $client_len, and returns its return value.
+Calls native L<SSL_select_next_proto|https://docs.openssl.org/3.0/man3/SSL_CTX_set_alpn_select_cb> function given the pointer of a native temporary variable C<out_ref>, $outlen_ref, $server, $server_len, $client, $client_len.
 
-If a string is returned in C<out_ref>, creates a new string from it and C<*outlen_ref>, sets C<$out_ref->[0]> to the string.
+If a native string is returned in C<*out_ref>, creates a new string from C<*out_ref> and C<$$outlen_ref>, sets C<$out_ref-E<gt>[0]> to the new string.
+
+And returns the return value of the native function.
+
+Exceptions:
+
+The output reference $out_ref must be 1-length array. Otherwise an exception is thrown.
+
+$server must be defined. Otherwise an exception is thrown.
+
+$client must be defined. Otherwise an exception is thrown.
 
 =head1 Instance Methods
 
