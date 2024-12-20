@@ -10,7 +10,7 @@ SPVM::Net::SSLeay::GENERAL_NAME - GENERAL_NAME Data Structure in OpenSSL
 
 =head1 Description
 
-Net::SSLeay::GENERAL_NAME class in L<SPVM> represents L<GENERAL_NAME|https://docs.openssl.org/master/man3/GENERAL_NAME_new/> data structure in OpenSSL
+Net::SSLeay::GENERAL_NAME class in L<SPVM> represents C<GENERAL_NAME> data structure in OpenSSL
 
 =head1 Usage
 

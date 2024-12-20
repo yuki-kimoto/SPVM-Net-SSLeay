@@ -10,7 +10,7 @@ SPVM::Net::SSLeay::ASN1_OBJECT - ASN1_OBJECT Data Structure in OpenSSL
 
 =head1 Description
 
-Net::SSLeay::ASN1_OBJECT class in L<SPVM> represents L<ASN1_OBJECT|https://docs.openssl.org/master/man3/ASN1_OBJECT> data structure in OpenSSL.
+Net::SSLeay::ASN1_OBJECT class in L<SPVM> represents C<ASN1_OBJECT> data structure in OpenSSL.
 
 =head1 Usage
 
@@ -34,7 +34,7 @@ If ASN1_OBJECT_new failed, an exception is thrown with C<eval_error_id> set to t
 
 C<method DESTROY : void ();>
 
-Calls native L<ASN1_OBJECT_free|https://docs.openssl.org/master/man3/ASN1_OBJECT_new/> function given the pointer value of the instance if C<no_free> flag of the instance is not a true value.
+Calls native L<ASN1_OBJECT_free|https://docs.openssl.org/master/man3/ASN1_OBJECT_free/> function given the pointer value of the instance if C<no_free> flag of the instance is not a true value.
 
 =head1 See Also
 

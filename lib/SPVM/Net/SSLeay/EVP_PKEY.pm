@@ -10,7 +10,7 @@ SPVM::Net::SSLeay::EVP_PKEY - EVP_PKEY Data Structure in OpenSSL
 
 =head1 Description
 
-Net::SSLeay::EVP_PKEY class in L<SPVM> represents L<EVP_PKEY|https://docs.openssl.org/master/man3/EVP_PKEY_new/> data structure in OpenSSL.
+Net::SSLeay::EVP_PKEY class in L<SPVM> represents C<EVP_PKEY> data structure in OpenSSL.
 
 =head1 Usage
 

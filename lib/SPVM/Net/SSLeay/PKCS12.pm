@@ -10,7 +10,7 @@ SPVM::Net::SSLeay::PKCS12 - PKCS12 Data Structure in OpenSSL
 
 =head1 Description
 
-Net::SSLeay::PKCS12 class in L<SPVM> represents L<PKCS12|https://docs.openssl.org/master/man3/PKCS12> data structure in OpenSSL.
+Net::SSLeay::PKCS12 class in L<SPVM> represents C<PKCS12> data structure in OpenSSL.
 
 =head1 Usage
 

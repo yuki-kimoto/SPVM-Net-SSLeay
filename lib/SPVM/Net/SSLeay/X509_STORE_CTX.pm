@@ -10,7 +10,7 @@ SPVM::Net::SSLeay::X509_STORE_CTX - X509_STORE_CTX Data Structure in OpenSSL
 
 =head1 Description
 
-Net::SSLeay::X509_STORE_CTX class in L<SPVM> represents L<X509_STORE_CTX|https://docs.openssl.org/master/man3/X509_STORE_CTX_new/> data structure in OpenSSL.
+Net::SSLeay::X509_STORE_CTX class in L<SPVM> represents C<X509_STORE_CTX> data structure in OpenSSL.
 
 =head1 Usage
 

@@ -6,11 +6,11 @@ package SPVM::Net::SSLeay::DER;
 
 =head1 Name
 
-SPVM::Net::SSLeay::DER - Name Space for Data Conversion Functions between DER Format and Internal Data Structure in OpenSSL
+SPVM::Net::SSLeay::DER - Name Space for d2i_TYPE and i2d_TYPE functions in OpenSSL
 
 =head1 Description
 
-Net::SSLeay::DER class in L<SPVM> represents a name space for data conversion functions between DER format and internal data structure, such as C<d2i_TYPE>, C<i2d_TYPE> functions in OpenSSL.
+Net::SSLeay::DER class in L<SPVM> represents a name space for C<d2i_TYPE> and C<i2d_TYPE> functions in OpenSSL.
 
 =head1 Usage
 

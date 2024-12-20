@@ -10,7 +10,7 @@ SPVM::Net::SSLeay::SSL_METHOD - OpenSSL SSL_METHOD data structure
 
 =head1 Description
 
-Net::SSLeay::SSL_METHOD class in L<SPVM> represents OpenSSL L<SSL_METHOD|https://docs.openssl.org/master/man3/SSL_CTX_new/> data structure.
+Net::SSLeay::SSL_METHOD class in L<SPVM> represents C<SSL_METHOD> data structure in OpenSSL.
 
 =head1 Usage
 

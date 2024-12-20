@@ -10,7 +10,7 @@ SPVM::Net::SSLeay::OPENSSL_INIT_SETTINGS - OPENSSL_INIT_SETTINGS Data Structure 
 
 =head1 Description
 
-Net::SSLeay::OPENSSL_INIT_SETTINGS class in L<SPVM> represents L<OPENSSL_INIT_SETTINGS|https://docs.openssl.org/master/man3/OPENSSL_INIT_SETTINGS> data structure in OpenSSL.
+Net::SSLeay::OPENSSL_INIT_SETTINGS class in L<SPVM> represents C<OPENSSL_INIT_SETTINGS> data structure in OpenSSL.
 
 =head1 Usage
 

@@ -10,7 +10,7 @@ SPVM::Net::SSLeay::X509_VERIFY_PARAM - X509_VERIFY_PARAM Data Structure in OpenS
 
 =head1 Description
 
-Net::SSLeay::X509_VERIFY_PARAM class in L<SPVM> represents L<X509_VERIFY_PARAM|https://docs.openssl.org/master/man3/X509_VERIFY_PARAM> data structure in OpenSSL.
+Net::SSLeay::X509_VERIFY_PARAM class in L<SPVM> represents C<X509_VERIFY_PARAM> data structure in OpenSSL.
 
 =head1 Usage
 

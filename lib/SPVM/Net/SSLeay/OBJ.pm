@@ -10,7 +10,7 @@ SPVM::Net::SSLeay::OBJ - OBJ Name Space in OpenSSL
 
 =head1 Description
 
-Net::SSLeay::OBJ class in L<SPVM> represents OBJ name space in OpenSSL
+Net::SSLeay::OBJ class in L<SPVM> represents C<OBJ> name space in OpenSSL
 
 =head1 Usage
 

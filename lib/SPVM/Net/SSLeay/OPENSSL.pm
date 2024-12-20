@@ -10,7 +10,7 @@ SPVM::Net::SSLeay::OPENSSL - OPENSSL(or OpenSSL) Name Space in OpenSSL
 
 =head1 Description
 
-Net::SSLeay::OPENSSL class in L<SPVM> represetns L<OPENSSL|https://docs.openssl.org/master/man3/OPENSSL>(or OpenSSL) Name Space in OpenSSL.
+Net::SSLeay::OPENSSL class in L<SPVM> represetns C<OPENSSL> and C<OpenSSL> name space in OpenSSL.
 
 =head1 Usage
 

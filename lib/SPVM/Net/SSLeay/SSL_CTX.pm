@@ -10,7 +10,7 @@ SPVM::Net::SSLeay::SSL_CTX - SSL_CTX data structure in OpenSSL
 
 =head1 Description
 
-Net::SSLeay::SSL_CTX class in L<SPVM> represents L<SSL_CTX|https://docs.openssl.org/master/man3/SSL_CTX_new/> data structure in OpenSSL.
+Net::SSLeay::SSL_CTX class in L<SPVM> represents C<SSL_CTX> data structure in OpenSSL.
 
 =head1 Usage
 

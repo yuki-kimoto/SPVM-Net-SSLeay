@@ -10,7 +10,7 @@ SPVM::Net::SSLeay::ASN1_TIME - ASN1_TIME Data Structure in OpenSSL
 
 =head1 Description
 
-Net::SSLeay::ASN1_TIME class in L<SPVM> represents L<ASN1_TIME|https://docs.openssl.org/master/man3/ASN1_TIME> data structure in OpenSSL
+Net::SSLeay::ASN1_TIME class in L<SPVM> represents C<ASN1_TIME> data structure in OpenSSL
 
 =head1 Usage
 

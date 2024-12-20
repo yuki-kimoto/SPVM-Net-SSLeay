@@ -10,7 +10,7 @@ SPVM::Net::SSLeay::X509_CRL - X509_CRL data structure in OpenSSL
 
 =head1 Description
 
-Net::SSLeay::X509_CRL class in L<SPVM> represents L<X509_CRL|https://docs.openssl.org/master/man3/X509_CRL_new/> data structure in OpenSSL
+Net::SSLeay::X509_CRL class in L<SPVM> represents C<X509_CRL> data structure in OpenSSL
 
 =head1 Usage
 
@@ -22,7 +22,7 @@ Net::SSLeay::X509_CRL class in L<SPVM> represents L<X509_CRL|https://docs.openss
 
 C<static method new : L<Net::SSLeay::X509_CRL|SPVM::Net::SSLeay::X509_CRL> ();>
 
-Calls native L<X509_CRL_new|https://docs.openssl.org/master/man3/X509_dup/> function, creates a new  L<Net::SSLeay::X509_CRL|SPVM::Net::SSLeay::X509_CRL> object, sets the pointer value of the object to the return value of the native function, and returns the new object.
+Calls native L<X509_CRL_new|https://docs.openssl.org/master/man3/X509_CRL_new/> function, creates a new  L<Net::SSLeay::X509_CRL|SPVM::Net::SSLeay::X509_CRL> object, sets the pointer value of the object to the return value of the native function, and returns the new object.
 
 Exceptions:
 

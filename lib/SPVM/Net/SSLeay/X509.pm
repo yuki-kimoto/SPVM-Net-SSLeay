@@ -10,7 +10,7 @@ SPVM::Net::SSLeay::X509 - X509 data structure in OpenSSL
 
 =head1 Description
 
-Net::SSLeay::X509 class in L<SPVM> represents L<X509|https://docs.openssl.org/master/man3/X509_new/> data structure in OpenSSL.
+Net::SSLeay::X509 class in L<SPVM> represents C<X509> data structure in OpenSSL.
 
 =head1 Usage
 

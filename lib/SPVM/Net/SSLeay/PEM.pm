@@ -10,7 +10,7 @@ SPVM::Net::SSLeay::PEM - OpenSSL PEM data structure
 
 =head1 Description
 
-Net::SSLeay::PEM class in L<SPVM> represents OpenSSL PEM data structure.
+Net::SSLeay::PEM class in L<SPVM> represents C<PEM> name space in OpenSSL.
 
 =head1 Usage
 

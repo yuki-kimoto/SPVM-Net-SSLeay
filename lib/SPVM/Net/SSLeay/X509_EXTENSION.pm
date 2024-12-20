@@ -10,7 +10,7 @@ SPVM::Net::SSLeay::X509_EXTENSION - X509_EXTENSION Data Structure in OpenSSL
 
 =head1 Description
 
-Net::SSLeay::X509_EXTENSION class in L<SPVM> represents L<X509_EXTENSION|https://docs.openssl.org/master/man3/X509_dup/> data structure in OpenSSL
+Net::SSLeay::X509_EXTENSION class in L<SPVM> represents C<X509_EXTENSION> data structure in OpenSSL
 
 =head1 Usage
 
@@ -22,7 +22,7 @@ Net::SSLeay::X509_EXTENSION class in L<SPVM> represents L<X509_EXTENSION|https:/
 
 C<static method new : L<Net::SSLeay::X509_EXTENSION|SPVM::Net::SSLeay::X509_EXTENSION> ();>
 
-Calls native L<X509_EXTENSION_new|https://docs.openssl.org/master/man3/X509_dup/> function, creates a new  L<Net::SSLeay::X509_EXTENSION|SPVM::Net::SSLeay::X509_EXTENSION> object, sets the pointer value of the object to the return value of the native function, and returns the new object.
+Calls native L<X509_EXTENSION_new|https://docs.openssl.org/master/man3/X509_EXTENSION_new/> function, creates a new  L<Net::SSLeay::X509_EXTENSION|SPVM::Net::SSLeay::X509_EXTENSION> object, sets the pointer value of the object to the return value of the native function, and returns the new object.
 
 Exceptions:
 
@@ -70,7 +70,7 @@ Calls native L<X509_EXTENSION_set_data|https://docs.openssl.org/master/man3/X509
 
 C<method DESTROY : void ();>
 
-Calls native L<X509_EXTENSION_free|https://docs.openssl.org/master/man3/X509_dup/> function given the pointer value of the instance if C<no_free> flag of the instance is not a true value.
+Calls native L<X509_EXTENSION_free|https://docs.openssl.org/master/man3/X509_dup/> function given the pointer value of the instance unless C<no_free> flag of the instance is a true value.
 
 =head1 See Also
 

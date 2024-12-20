@@ -10,7 +10,7 @@ SPVM::Net::SSLeay::RAND - RAND Name Space in OpenSSL
 
 =head1 Description
 
-Net::SSLeay::RAND class in L<SPVM> represents RAND name space in OpenSSL.
+Net::SSLeay::RAND class in L<SPVM> represents C<RAND> name space in OpenSSL.
 
 =head1 Usage
 

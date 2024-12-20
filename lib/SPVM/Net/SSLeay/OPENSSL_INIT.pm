@@ -10,7 +10,7 @@ SPVM::Net::SSLeay::OPENSSL_INIT - OPENSSL_INIT Name Space in OpenSSL
 
 =head1 Description
 
-Net::SSLeay::OPENSSL_INIT class in L<SPVM> represents L<OPENSSL_INIT|https://docs.openssl.org/master/man3/OPENSSL_init_crypto/> name space in OpenSSL
+Net::SSLeay::OPENSSL_INIT class in L<SPVM> represents C<OPENSSL_INIT> name space in OpenSSL
 
 =head1 Usage
 
@@ -22,7 +22,7 @@ Net::SSLeay::OPENSSL_INIT class in L<SPVM> represents L<OPENSSL_INIT|https://doc
 
 C<static method new : L<Net::SSLeay::OPENSSL_INIT_SETTINGS|SPVM::Net::SSLeay::OPENSSL_INIT_SETTINGS> ();>
 
-Calls native L<OPENSSL_INIT_new|> function, creates a L<Net::SSLeay::OPENSSL_INIT_SETTINGS|SPVM::Net::SSLeay::OPENSSL_INIT_SETTINGS> object, sets the pointer value of the new object to the return value of the native function, and returns the new object.
+Calls native L<OPENSSL_INIT_new|https://docs.openssl.org/master/man3/OPENSSL_INIT_new> function, creates a L<Net::SSLeay::OPENSSL_INIT_SETTINGS|SPVM::Net::SSLeay::OPENSSL_INIT_SETTINGS> object, sets the pointer value of the new object to the return value of the native function, and returns the new object.
 
 =head2 set_config_filename
 

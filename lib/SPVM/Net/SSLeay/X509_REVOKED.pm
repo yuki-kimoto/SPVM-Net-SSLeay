@@ -10,7 +10,7 @@ SPVM::Net::SSLeay::X509_REVOKED - X509_REVOKED Data Strucuture in OpenSSL
 
 =head1 Description
 
-Net::SSLeay::X509_REVOKED class in L<SPVM> represents L<X509_REVOKED|https://docs.openssl.org/master/man3/X509_REVOKED> data strucuture in OpenSSL.
+Net::SSLeay::X509_REVOKED class in L<SPVM> represents C<X509_REVOKED> data strucuture in OpenSSL.
 
 =head1 Usage
 
@@ -22,7 +22,7 @@ Net::SSLeay::X509_REVOKED class in L<SPVM> represents L<X509_REVOKED|https://doc
 
 C<static method new : L<Net::SSLeay::X509_REVOKED|SPVM::Net::SSLeay::X509_REVOKED> ();>
 
-Calls native L<X509_REVOKED_new|https://docs.openssl.org/master/man3/X509_dup/> function, creates a new  L<Net::SSLeay::X509_REVOKED|SPVM::Net::SSLeay::X509_REVOKED> object, sets the pointer value of the object to the return value of the native function, and returns the new object.
+Calls native L<X509_REVOKED_new|https://docs.openssl.org/master/man3/X509_REVOKED_new/> function, creates a new  L<Net::SSLeay::X509_REVOKED|SPVM::Net::SSLeay::X509_REVOKED> object, sets the pointer value of the object to the return value of the native function, and returns the new object.
 
 Exceptions:
 
@@ -46,7 +46,7 @@ Calls native L<X509_REVOKED_get0_revocationDate|https://docs.openssl.org/master/
 
 C<method DESTROY : void ();>
 
-Calls native L<X509_REVOKED_free|https://docs.openssl.org/master/man3/X509_dup/> function given the pointer value of the instance if C<no_free> flag of the instance is not a true value.
+Calls native L<X509_REVOKED_free|https://docs.openssl.org/master/man3/X509_dup/> function given the pointer value of the instance unless C<no_free> flag of the instance is a true value.
 
 =head1 See Also
 
