@@ -106,7 +106,7 @@ The value of type member variable is invalid, an exception is thrown.
 
 C<method DESTROY : void ();>
 
-Calls native L<GENERAL_NAME_free|https://docs.openssl.org/master/man3/GENERAL_NAME_new/> function given the pointer value of the instance if C<no_free> flag of the instance is not a true value.
+Calls native L<GENERAL_NAME_free|https://docs.openssl.org/master/man3/GENERAL_NAME_new/> function given the pointer value of the instance unless C<no_free> flag of the instance is a true value.
 
 =head1 See Also
 

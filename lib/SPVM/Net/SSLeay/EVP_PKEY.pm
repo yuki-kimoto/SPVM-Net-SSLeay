@@ -34,7 +34,7 @@ If EVP_PKEY_new failed, an exception is thrown with C<eval_error_id> set to the 
 
 C<method DESTROY : void ();>
 
-Calls native L<EVP_PKEY_free|https://docs.openssl.org/master/man3/EVP_PKEY_new/> function given the pointer value of the instance if C<no_free> flag of the instance is not a true value.
+Calls native L<EVP_PKEY_free|https://docs.openssl.org/master/man3/EVP_PKEY_new/> function given the pointer value of the instance unless C<no_free> flag of the instance is a true value.
 
 =head1 See Also
 

@@ -46,7 +46,7 @@ And returns the new array.
 
 C<method DESTROY : void ();>
 
-Calls native L<X509_CRL_free|https://docs.openssl.org/master/man3/X509_CRL_free/> function given the pointer value of the instance if C<no_free> flag of the instance is not a true value.
+Calls native L<X509_CRL_free|https://docs.openssl.org/master/man3/X509_CRL_free/> function given the pointer value of the instance unless C<no_free> flag of the instance is a true value.
 
 =head1 FAQ
 

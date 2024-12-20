@@ -49,7 +49,7 @@ If ASN1_INTEGER_set_int64 failed, an exception is thrown with C<eval_error_id> s
 
 C<method DESTROY : void ();>
 
-Calls native L<ASN1_INTEGER_free|https://docs.openssl.org/master/man3/ASN1_INTEGER_free> function given the pointer value of the instance if C<no_free> flag of the instance is not a true value.
+Calls native L<ASN1_INTEGER_free|https://docs.openssl.org/master/man3/ASN1_INTEGER_free> function given the pointer value of the instance unless C<no_free> flag of the instance is a true value.
 
 =head1 See Also
 

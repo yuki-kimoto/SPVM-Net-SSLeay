@@ -58,7 +58,7 @@ If PKCS12_parse failed, an exception is thrown with C<eval_error_id> set to the 
 
 C<method DESTROY : void ();>
 
-Calls native L<PKCS12_free|https://docs.openssl.org/master/man3/X509_dup/> function given the pointer value of the instance if C<no_free> flag of the instance is not a true value.
+Calls native L<PKCS12_free|https://docs.openssl.org/master/man3/X509_dup/> function given the pointer value of the instance unless C<no_free> flag of the instance is a true value.
 
 =head1 See Also
 

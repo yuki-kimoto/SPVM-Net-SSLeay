@@ -292,7 +292,7 @@ $arg is expected to be passed to native L<SSL_CTX_set_tlsext_servername_arg|http
 
 C<method DESTROY : void ();>
 
-Calls native L<SSL_CTX_free|https://docs.openssl.org/master/man3/SSL_CTX_free/> function given the pointer value of the instance if C<no_free> flag of the instance is not a true value.
+Calls native L<SSL_CTX_free|https://docs.openssl.org/master/man3/SSL_CTX_free/> function given the pointer value of the instance unless C<no_free> flag of the instance is a true value.
 
 =head1 See Also
 

@@ -80,7 +80,7 @@ If ASN1_TIME_to_generalizedtime failed, an exception is thrown with C<eval_error
 
 C<method DESTROY : void ();>
 
-Calls native L<ASN1_TIME_free|https://pub.sortix.org/sortix/release/nightly/man/man3/ASN1_TIME_free.3.html> function given the pointer value of the instance if C<no_free> flag of the instance is not a true value.
+Calls native L<ASN1_TIME_free|https://pub.sortix.org/sortix/release/nightly/man/man3/ASN1_TIME_free.3.html> function given the pointer value of the instance unless C<no_free> flag of the instance is a true value.
 
 =head1 See Also
 
