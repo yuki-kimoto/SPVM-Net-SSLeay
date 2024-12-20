@@ -5,6 +5,7 @@
     * Add tests for Net::SSLeay.
   [Document Improvement]
     * Improve docs for Net::SSLeay.
+    * Fix links to OpenSSL document.
   
   [Bug Fix]
     * Fix a bug of reference counting of Net::SSLeay#set_SSL_CTX method.
