@@ -180,7 +180,13 @@ If SSL_CTX_use_PrivateKey_file failed, an exception is thrown with C<eval_error_
 
 C<method use_PrivateKey : int ($pkey : L<Net::SSLeay::EVP_PKEY|SPVM::Net::SSLeay::EVP_PKEY>);>
 
-Calls native L<SSL_CTX_use_PrivateKey|https://docs.openssl.org/master/man3/SSL_CTX_use_PrivateKey> function given the pointer value of the instance, $pkey, pushes $pkey to the end of L</"pkeys_list"> field, and returns the return value of the native function.
+Calls native L<SSL_CTX_use_PrivateKey|https://docs.openssl.org/master/man3/SSL_CTX_use_PrivateKey> function given the pointer value of the instance, and returns its return value.
+
+Exceptions:
+
+The EVP_PKEY object $pkey must be defined. Otherwise an exception is thrown.
+
+If SSL_CTX_use_PrivateKey failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
 =head2 set_cipher_list
 
@@ -210,7 +216,7 @@ If SSL_CTX_set_ciphersuites failed, an exception is thrown with C<eval_error_id>
 
 C<method get_cert_store : L<Net::SSLeay::X509_STORE|SPVM::Net::SSLeay::X509_STORE> ();>
 
-Calls native L<SSL_CTX_set_cert_store|https://docs.openssl.org/master/man3/SSL_CTX_set_cert_store> function, creates a new L<Net::SSLeay::X509_STORE|SPVM::Net::SSLeay::X509_STORE>, sets the pointer value of the new object to the return value of the native function, and returns the new object.
+Calls native L<SSL_CTX_set_cert_store|https://docs.openssl.org/master/man3/SSL_CTX_set_cert_store> function, creates a new L<Net::SSLeay::X509_STORE|SPVM::Net::SSLeay::X509_STORE>, sets the pointer value of the new object to the return value of the native function, calls L<X509_STORE_up_ref|https://docs.openssl.org/master/man3/X509_STORE_up_ref> function on the return value of the native function, and returns the new object.
 
 =head2 set_options
 
@@ -222,7 +228,7 @@ Calls native L<SSL_CTX_set_options|https://docs.openssl.org/master/man3/SSL_CTX_
 
 C<method get_options : long ();>
 
-Calls native L<SSL_CTX_get_options|https://docs.openssl.org/master/man3/SSL_CTX_get_options> function, and returns its return value.
+Calls native L<SSL_CTX_get_options|https://docs.openssl.org/master/man3/SSL_CTX_get_options> function given the pointer value of the instance, and returns its return value.
 
 =head2 clear_options
 
@@ -234,7 +240,7 @@ Calls native L<SSL_CTX_clear_options|https://docs.openssl.org/master/man3/SSL_CT
 
 C<method set_alpn_protos : int ($protos : string, $protos_len : int = -1);>
 
-Calls native L<SSL_CTX_set_alpn_protos|https://docs.openssl.org/master/man3/SSL_CTX_set_alpn_protos> function given the protocals $ptotos and the length $protos_len, and returns its return value.
+Calls native L<SSL_CTX_set_alpn_protos|https://docs.openssl.org/master/man3/SSL_CTX_set_alpn_protos> function given $ptotos, $protos_len, and returns its return value.
 
 If $protos_len is less than 0, it is set to the length of $protos.
 

@@ -325,7 +325,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__use_certificate_chain_file(SPVM_ENV* env, SP
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die(env, stack, "[OpenSSL Error]SSL_CTX_use_certificate_chain_file failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    env->die(env, stack, "[OpenSSL Error]SSL_CTX_use_certificate_chain_file failed:%s. $file:%s", ssl_error_string, file, __func__, FILE_NAME, __LINE__);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -352,7 +352,6 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__use_PrivateKey_file(SPVM_ENV* env, SPVM_VALU
   }
   
   char* file = (char*)env->get_chars(env, stack, obj_file);
-  int32_t file_length = env->length(env, stack, obj_file);
   
   int32_t type = stack[2].ival;
   
@@ -579,6 +578,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_options(SPVM_ENV* env, SPVM_VALUE* stack
   int32_t error_id = 0;
   
   void* obj_self = stack[0].oval;
+  
   SSL_CTX* self = env->get_pointer(env, stack, obj_self);
   
   int64_t options = stack[1].lval;
@@ -595,6 +595,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__get_options(SPVM_ENV* env, SPVM_VALUE* stack
   int32_t error_id = 0;
   
   void* obj_self = stack[0].oval;
+  
   SSL_CTX* self = env->get_pointer(env, stack, obj_self);
   
   int64_t ret = SSL_CTX_get_options(self);
@@ -609,6 +610,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__clear_options(SPVM_ENV* env, SPVM_VALUE* sta
   int32_t error_id = 0;
   
   void* obj_self = stack[0].oval;
+  
   SSL_CTX* self = env->get_pointer(env, stack, obj_self);
   
   int64_t options = stack[1].lval;
@@ -632,7 +634,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_alpn_protos(SPVM_ENV* env, SPVM_VALUE* s
     return env->die(env, stack, "The protocols $protos must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
-  const char* protos = (const char*)env->get_elems_byte(env, stack, obj_protos);
+  const char* protos = (const char*)env->get_chars(env, stack, obj_protos);
   
   int32_t protos_len = stack[2].ival;
   
@@ -680,7 +682,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set1_groups_list(SPVM_ENV* env, SPVM_VALUE* 
   
   SSL_CTX* self = env->get_pointer(env, stack, obj_self);
   
-  int64_t status = SSL_CTX_set1_groups_list(self, list);
+  int32_t status = SSL_CTX_set1_groups_list(self, list);
   
   if (!(status == 1)) {
     int64_t ssl_error = ERR_peek_last_error();
@@ -697,7 +699,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set1_groups_list(SPVM_ENV* env, SPVM_VALUE* 
     return error_id;
   }
   
-  stack[0].lval = status;
+  stack[0].ival = status;
   
   return 0;
 }
