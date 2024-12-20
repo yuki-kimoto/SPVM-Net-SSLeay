@@ -34,7 +34,7 @@ If X509_EXTENSION_new failed, an exception is thrown with C<eval_error_id> set t
 
 C<method get_data : L<Net::SSLeay::ASN1_OCTET_STRING|SPVM::Net::SSLeay::ASN1_OCTET_STRING> ();>
 
-Calls native L<X509_EXTENSION_get_data|https://docs.openssl.org/master/man3/X509_EXTENSION_get_object> functions given the pointer value of the instance, copies the return value of the native function, creates a new L<Net::SSLeay::ASN1_OCTET_STRING|SPVM::Net::SSLeay::ASN1_OCTET_STRING> object, sets the pointer value of the new object to the copied value, and returns the new object.
+Calls native L<X509_EXTENSION_get_data|https://docs.openssl.org/master/man3/X509_EXTENSION_get_data> functions given the pointer value of the instance, copies the return value of the native function, creates a new L<Net::SSLeay::ASN1_OCTET_STRING|SPVM::Net::SSLeay::ASN1_OCTET_STRING> object, sets the pointer value of the new object to the copied value, and returns the new object.
 
 =head2 get_object
 
@@ -46,25 +46,25 @@ Calls native L<X509_EXTENSION_get_object|https://docs.openssl.org/master/man3/X5
 
 C<method get_critical : int ();>
 
-Calls native L<X509_EXTENSION_get_critical|https://docs.openssl.org/master/man3/X509_EXTENSION_get_object> functions given the pointer value of the instance, and returns its return value.
+Calls native L<X509_EXTENSION_get_critical|https://docs.openssl.org/master/man3/X509_EXTENSION_get_critical> functions given the pointer value of the instance, and returns its return value.
 
 =head2 set_object
 
 C<method set_object : int ($obj : L<Net::SSLeay::ASN1_OBJECT|SPVM::Net::SSLeay::ASN1_OBJECT>);>
 
-Calls native L<X509_EXTENSION_set_object|https://docs.openssl.org/master/man3/X509_EXTENSION_get_object> functions given the pointer value of the instance, the pointer value of $obj, and returns its return value.
+Calls native L<X509_EXTENSION_set_object|https://docs.openssl.org/master/man3/X509_EXTENSION_set_object> functions given the pointer value of the instance, the pointer value of $obj, and returns its return value.
 
 =head2 set_critical
 
 C<method set_critical : int ($crit ; int);>
 
-Calls native L<X509_EXTENSION_set_critical|https://docs.openssl.org/master/man3/X509_EXTENSION_get_object> functions given the pointer value of the instance, $crit, and returns its return value.
+Calls native L<X509_EXTENSION_set_critical|https://docs.openssl.org/master/man3/X509_EXTENSION_set_critical> functions given the pointer value of the instance, $crit, and returns its return value.
 
 =head2 set_data
 
 C<method set_data : int ($data : L<Net::SSLeay::ASN1_OCTET_STRING|SPVM::Net::SSLeay::ASN1_OCTET_STRING>);>
 
-Calls native L<X509_EXTENSION_set_data|https://docs.openssl.org/master/man3/X509_EXTENSION_get_object> functions given the pointer value of the instance, the pointer value of $data, and returns its return value.
+Calls native L<X509_EXTENSION_set_data|https://docs.openssl.org/master/man3/X509_EXTENSION_set_data> functions given the pointer value of the instance, the pointer value of $data, and returns its return value.
 
 =head2 DESTROY
 

@@ -40,7 +40,7 @@ Calls native L<ASN1_STRING_length|https://docs.openssl.org/master/man3/ASN1_STRI
 
 C<method get0_data : string ();>
 
-Calls native L<ASN1_STRING_get0_data|https://docs.openssl.org/master/man3/ASN1_STRING_length> function given the pointer value of the instance, converts its return value to a string which length is the return value of native L<ASN1_STRING_length|https://docs.openssl.org/master/man3/ASN1_STRING_length> function, and returns the string.
+Calls native L<ASN1_STRING_get0_data|https://docs.openssl.org/master/man3/ASN1_STRING_get0_data> function given the pointer value of the instance, converts its return value to a string which length is the return value of native L<ASN1_STRING_length|https://docs.openssl.org/master/man3/ASN1_STRING_length> function, and returns the string.
 
 =head2 set
 

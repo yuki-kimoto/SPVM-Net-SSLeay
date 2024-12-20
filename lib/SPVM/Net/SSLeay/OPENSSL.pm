@@ -10,7 +10,7 @@ SPVM::Net::SSLeay::OPENSSL - OPENSSL(or OpenSSL) Name Space in OpenSSL
 
 =head1 Description
 
-Net::SSLeay::OPENSSL class in L<SPVM> represetns L<OPENSSL|https://docs.openssl.org/master/man3/OPENSSL_init_ssl>(or OpenSSL) Name Space in OpenSSL.
+Net::SSLeay::OPENSSL class in L<SPVM> represetns L<OPENSSL|https://docs.openssl.org/master/man3/OPENSSL>(or OpenSSL) Name Space in OpenSSL.
 
 =head1 Usage
 
@@ -22,19 +22,19 @@ Net::SSLeay::OPENSSL class in L<SPVM> represetns L<OPENSSL|https://docs.openssl.
 
 C<static method add_ssl_algorithms : int ();>
 
-Calls native L<OpenSSL_add_ssl_algorithms|https://docs.openssl.org/master/man3/SSL_library_init> function.
+Calls native L<OpenSSL_add_ssl_algorithms|https://docs.openssl.org/master/man3/OpenSSL_add_ssl_algorithms> function.
 
 =head2 add_all_algorithms
 
 C<add_all_algorithms : void();>
 
-Calls native L<OpenSSL_add_all_algorithms|https://docs.openssl.org/master/man3/OPENSSL_init_crypto> function.
+Calls native L<OpenSSL_add_all_algorithms|https://docs.openssl.org/master/man3/OpenSSL_add_all_algorithms> function.
 
 =head2 init_crypto
 
 C<static method init_crypto : int ($opts : long, $settings : L<Net::SSLeay::OPENSSL_INIT_SETTINGS|SPVM::Net::SSLeay::OPENSSL_INIT_SETTINGS>);>
 
-Calls native L<OpenSSL_init_crypto|https://docs.openssl.org/master/man3/SSL_library_init> function, and returns its return value.
+Calls native L<OpenSSL_init_crypto|https://docs.openssl.org/master/man3/OpenSSL_init_crypto> function, and returns its return value.
 
 Exceptions:
 

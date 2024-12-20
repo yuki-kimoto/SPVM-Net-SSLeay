@@ -10,7 +10,7 @@ SPVM::Net::SSLeay::ASN1_OBJECT - ASN1_OBJECT Data Structure in OpenSSL
 
 =head1 Description
 
-Net::SSLeay::ASN1_OBJECT class in L<SPVM> represents L<ASN1_OBJECT|https://docs.openssl.org/master/man3/ASN1_OBJECT_new> data structure in OpenSSL.
+Net::SSLeay::ASN1_OBJECT class in L<SPVM> represents L<ASN1_OBJECT|https://docs.openssl.org/master/man3/ASN1_OBJECT> data structure in OpenSSL.
 
 =head1 Usage
 

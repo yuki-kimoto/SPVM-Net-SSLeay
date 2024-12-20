@@ -10,7 +10,7 @@ SPVM::Net::SSLeay::PKCS12 - PKCS12 Data Structure in OpenSSL
 
 =head1 Description
 
-Net::SSLeay::PKCS12 class in L<SPVM> represents L<PKCS12|https://docs.openssl.org/master/man3/X509_dup> data structure in OpenSSL.
+Net::SSLeay::PKCS12 class in L<SPVM> represents L<PKCS12|https://docs.openssl.org/master/man3/PKCS12> data structure in OpenSSL.
 
 =head1 Usage
 
@@ -22,7 +22,7 @@ Net::SSLeay::PKCS12 class in L<SPVM> represents L<PKCS12|https://docs.openssl.or
 
 C<static method new : L<Net::SSLeay::PKCS12|SPVM::Net::SSLeay::PKCS12> ();>
 
-Calls native L<PKCS12_new|https://docs.openssl.org/master/man3/X509_dup> function, creates a new  L<Net::SSLeay::PKCS12|SPVM::Net::SSLeay::PKCS12> object, sets the pointer value of the object to the return value of the native function, and returns the new object.
+Calls native L<PKCS12_new|https://docs.openssl.org/master/man3/PKCS12_new> function, creates a new  L<Net::SSLeay::PKCS12|SPVM::Net::SSLeay::PKCS12> object, sets the pointer value of the object to the return value of the native function, and returns the new object.
 
 Exceptions:
 

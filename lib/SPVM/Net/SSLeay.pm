@@ -12,7 +12,7 @@ SPVM::Net::SSLeay - OpenSSL Binding to SPVM
 
 Net::SSLeay class in L<SPVM> is a OpenSSL binding to SPVM.
 
-This class itself represents L<SSL|https://docs.openssl.org/master/man3/SSL_new> data structure in OpenSSL.
+This class itself represents L<SSL|https://docs.openssl.org/master/man3/SSL> data structure in OpenSSL.
 
 B<Warnings:>
 
@@ -244,7 +244,7 @@ If SSL_load_client_CA_file failed, an exception is thrown with C<eval_error_id> 
 
 C<static method select_next_proto : int ($out_ref : string[], $outlen_ref : byte*, $server : string, $server_len : int, $client : string, $client_len : int);>
 
-Calls native L<SSL_select_next_proto|https://docs.openssl.org/master/man3/SSL_CTX_set_alpn_select_cb> function given the address of a native temporary variable C<out_ref>, $outlen_ref, $server, $server_len, $client, $client_len.
+Calls native L<SSL_select_next_proto|https://docs.openssl.org/master/man3/SSL_select_next_proto> function given the address of a native temporary variable C<out_ref>, $outlen_ref, $server, $server_len, $client, $client_len.
 
 If a native string is returned in C<*out_ref>, creates a new string from C<*out_ref> and C<$$outlen_ref>, sets C<$out_ref-E<gt>[0]> to the new string.
 
@@ -530,7 +530,7 @@ And returns the new array.
 
 C<method get0_alpn_selected : void ($data_ref : string[], $len_ref : int*);>
 
-Calls native L<SSL_get0_alpn_selected|https://docs.openssl.org/master/man3/SSL_CTX_set_alpn_select_cb> function given the pointer value of the instance, the address of a native temporary variable C<data_ref>, $len_ref.
+Calls native L<SSL_get0_alpn_selected|https://docs.openssl.org/master/man3/SSL_get0_alpn_selected> function given the pointer value of the instance, the address of a native temporary variable C<data_ref>, $len_ref.
 
 If a native string is returned in C<*data_ref>, creates a new string from C<*data_ref> and C<$$len_ref>, sets C<$data_ref-E<gt>[0]> to the new string.
 
@@ -560,7 +560,7 @@ C<method set_msg_callback : void ($cb : L<Net::SSLeay::Callback::Msg|SPVM::Net::
 
 If the callback $cb is defined, A native variable C<native_cb> is set to a function pointer of the native callback funcion described below, otherwise C<native_cb> is set to NULL.
 
-And calls native L<SSL_set_msg_callback|https://docs.openssl.org/master/man3/SSL_CTX_set_msg_callback> function given the pointer value of the instance, C<native_cb>.
+And calls native L<SSL_set_msg_callback|https://docs.openssl.org/master/man3/SSL_set_msg_callback> function given the pointer value of the instance, C<native_cb>.
 
 And sets L</"msg_callback"> field to $cb.
 

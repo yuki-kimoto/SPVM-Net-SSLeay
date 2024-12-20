@@ -10,7 +10,7 @@ SPVM::Net::SSLeay::EVP - EVP Name Space in OpenSSL
 
 =head1 Description
 
-Net::SSLeay::EVP class in L<SPVM> represents L<EVP|https://docs.openssl.org/master/man3/EVP_DigestInit> Name Space in OpenSSL.
+Net::SSLeay::EVP class in L<SPVM> represents L<EVP|https://docs.openssl.org/master/man3/EVP> Name Space in OpenSSL.
 
 =head1 Usage
 

@@ -34,7 +34,7 @@ If X509_NAME_ENTRY_new failed, an exception is thrown with C<eval_error_id> set 
 
 C<method get_data : L<Net::SSLeay::X509_NAME_ENTRY|SPVM::Net::SSLeay::X509_NAME_ENTRY> ();>
 
-Calls native L<X509_NAME_ENTRY_get_data|https://docs.openssl.org/master/man3/X509_NAME_ENTRY_get_object> functions given the pointer value of the instance, copies the return value of the native function, creates a new L<Net::SSLeay::X509_NAME_ENTRY|SPVM::Net::SSLeay::X509_NAME_ENTRY> object, sets the pointer value of the new object to the copied value, and returns the new object.
+Calls native L<X509_NAME_ENTRY_get_data|https://docs.openssl.org/master/man3/X509_NAME_ENTRY_get_data> functions given the pointer value of the instance, copies the return value of the native function, creates a new L<Net::SSLeay::X509_NAME_ENTRY|SPVM::Net::SSLeay::X509_NAME_ENTRY> object, sets the pointer value of the new object to the copied value, and returns the new object.
 
 =head2 get_object
 
@@ -46,7 +46,7 @@ Calls native L<X509_NAME_ENTRY_get_object|https://docs.openssl.org/master/man3/X
 
 C<method DESTROY : void ();>
 
-Calls native L<X509_free|https://docs.openssl.org/master/man3/X509_new> function given the pointer value of the instance if C<no_free> flag of the instance is not a true value.
+Calls native L<X509_free|https://docs.openssl.org/master/man3/X509_free> function given the pointer value of the instance if C<no_free> flag of the instance is not a true value.
 
 =head1 FAQ
 

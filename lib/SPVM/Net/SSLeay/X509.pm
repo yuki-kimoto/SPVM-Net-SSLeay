@@ -52,7 +52,7 @@ Calls native L<X509_get_serialNumber|https://docs.openssl.org/master/man3/X509_g
 
 C<method get_issuer_name : L<Net::SSLeay::X509_NAME|SPVM::Net::SSLeay::X509_NAME> ();>
 
-Calls native L<X509_get_issuer_name|https://docs.openssl.org/master/man3/X509_get_subject_name> function given the pointer value of the instance, copies its return value using native L<X509_NAME_dup|https://docs.openssl.org/master/man3/X509_dup/> function, creates a new L<Net::SSLeay::X509_NAME|SPVM::Net::SSLeay::X509_NAME> object, sets the pointer value of the new object to the native copied value, and returns the new object.
+Calls native L<X509_get_issuer_name|https://docs.openssl.org/master/man3/X509_get_issuer_name> function given the pointer value of the instance, copies its return value using native L<X509_NAME_dup|https://docs.openssl.org/master/man3/X509_dup/> function, creates a new L<Net::SSLeay::X509_NAME|SPVM::Net::SSLeay::X509_NAME> object, sets the pointer value of the new object to the native copied value, and returns the new object.
 
 =head2 get_subject_name
 
@@ -96,7 +96,7 @@ Calls L</"pubkey_digest"> method given appropriate arguments, and returns the ou
 
 C<method get_ext_by_NID : int ($nid : int, $lastpos : int);>
 
-Calls native L<X509_get_ext_by_NID|https://docs.openssl.org/master/man3/X509v3_get_ext_by_NID> function given the pointer value of the instance, $nid, $lastpos, and returns its return value.
+Calls native L<X509_get_ext_by_NID|https://docs.openssl.org/master/man3/X509_get_ext_by_NID> function given the pointer value of the instance, $nid, $lastpos, and returns its return value.
 
 Exceptions:
 
@@ -106,13 +106,13 @@ If X509_get_ext_by_NID failed, an exception is thrown with C<eval_error_id> set 
 
 C<method get_ext_count : int ();>
 
-Calls native L<X509_get_ext_count|https://docs.openssl.org/master/man3/X509v3_get_ext_by_NID> function given the pointer value of the instance, and returns its return value.
+Calls native L<X509_get_ext_count|https://docs.openssl.org/master/man3/X509_get_ext_count> function given the pointer value of the instance, and returns its return value.
 
 =head2 get_ext
 
 C<method get_ext : L<Net::SSLeay::X509_EXTENSION|SPVM::Net::SSLeay::X509_EXTENSION> ($loc : int);>
 
-Calls native L<X509_get_ext|https://docs.openssl.org/master/man3/X509v3_get_ext_by_NID> function given the pointer value of the instance, $loc, copies its return value using native L<X509_EXTENSION_dup|https://docs.openssl.org/master/man3/X509_dup/> function, creates a new L<Net::SSLeay::X509_EXTENSION|SPVM::Net::SSLeay::X509_EXTENSION> object, sets the pointer value of the new object to the native copied value, and returns the new object.
+Calls native L<X509_get_ext|https://docs.openssl.org/master/man3/X509_get_ext> function given the pointer value of the instance, $loc, copies its return value using native L<X509_EXTENSION_dup|https://docs.openssl.org/master/man3/X509_dup/> function, creates a new L<Net::SSLeay::X509_EXTENSION|SPVM::Net::SSLeay::X509_EXTENSION> object, sets the pointer value of the new object to the native copied value, and returns the new object.
 
 Exceptions:
 

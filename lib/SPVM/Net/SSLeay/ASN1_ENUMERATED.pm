@@ -30,7 +30,7 @@ Calls native L<ASN1_ENUMERATED_new|https://github.com/google/boringssl/blob/mast
 
 C<method get_int64 : long ();>
 
-Calls native L<ASN1_ENUMERATED_get_int64|https://docs.openssl.org/master/man3/ASN1_INTEGER_get_int64> function given an appropriate argument, the pointer value of the instance, and returns the output value of the first argument.
+Calls native L<ASN1_ENUMERATED_get_int64|https://docs.openssl.org/master/man3/ASN1_ENUMERATED_get_int64> function given an appropriate argument, the pointer value of the instance, and returns the output value of the first argument.
 
 Exceptions:
 
@@ -40,7 +40,7 @@ If ASN1_ENUMERATED_get_int64 failed, an exception is thrown with C<eval_error_id
 
 C<method set_int64 : void ($r : long);>
 
-Calls native L<ASN1_ENUMERATED_set_int64|https://docs.openssl.org/master/man3/ASN1_INTEGER_get_int64> function given the pointer value of the instance, $r.
+Calls native L<ASN1_ENUMERATED_set_int64|https://docs.openssl.org/master/man3/ASN1_ENUMERATED_set_int64> function given the pointer value of the instance, $r.
 
 Exceptions:
 

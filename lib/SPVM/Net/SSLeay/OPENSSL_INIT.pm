@@ -28,7 +28,7 @@ Calls native L<OPENSSL_INIT_new|> function, creates a L<Net::SSLeay::OPENSSL_INI
 
 C<static method set_config_filename : int ($init : L<Net::SSLeay::OPENSSL_INIT_SETTINGS|SPVM::Net::SSLeay::OPENSSL_INIT_SETTINGS>, $filename : string);>
 
-Calls native L<OPENSSL_INIT_set_config_filename|https://docs.openssl.org/master/man3/OPENSSL_init_crypto> function given $filename, and returns its return value.
+Calls native L<OPENSSL_INIT_set_config_filename|https://docs.openssl.org/master/man3/OPENSSL_INIT_set_config_filename> function given $filename, and returns its return value.
 
 Requirement:
 
@@ -44,7 +44,7 @@ The file name $filename must be defined. Otherwise an exception is thrown.
 
 C<static method set_config_file_flags : void ($init : L<Net::SSLeay::OPENSSL_INIT_SETTINGS|SPVM::Net::SSLeay::OPENSSL_INIT_SETTINGS>, $flags : long);>
 
-Calls native L<OPENSSL_INIT_set_config_file_flags|https://docs.openssl.org/master/man3/OPENSSL_init_crypto> function given $filename.
+Calls native L<OPENSSL_INIT_set_config_file_flags|https://docs.openssl.org/master/man3/OPENSSL_INIT_set_config_file_flags> function given $filename.
 
 Requirement:
 
@@ -56,7 +56,7 @@ Not LibreSSL
 
 C<static method set_config_appname : int ($init : L<Net::SSLeay::OPENSSL_INIT_SETTINGS|SPVM::Net::SSLeay::OPENSSL_INIT_SETTINGS>, $name : string);>
 
-Calls native L<OPENSSL_INIT_set_config_appname|https://docs.openssl.org/master/man3/OPENSSL_init_crypto> function given $filename, and returns its return value.
+Calls native L<OPENSSL_INIT_set_config_appname|https://docs.openssl.org/master/man3/OPENSSL_INIT_set_config_appname> function given $filename, and returns its return value.
 
 Requirement:
 

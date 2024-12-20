@@ -10,7 +10,7 @@ SPVM::Net::SSLeay::BIO - BIO Data Strucutre in OpenSSL
 
 =head1 Description
 
-Net::SSLeay::BIO class of L<SPVM> represents L<BIO|https://docs.openssl.org/master/man3/BIO_new> data structure in OpenSSL.
+Net::SSLeay::BIO class of L<SPVM> represents L<BIO|https://docs.openssl.org/master/man3/BIO> data structure in OpenSSL.
 
 =head1 Usage
 

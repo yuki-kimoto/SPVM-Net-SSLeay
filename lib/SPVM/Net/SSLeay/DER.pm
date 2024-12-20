@@ -24,7 +24,7 @@ The following methods are template methods for only descriptions. They do not ex
 
 C<static method d2i_TYPE : C<Net::SSLeay::TYPE> ($a_ref : C<Net::SSLeay::TYPE>[], $ppin_ref : string[], $length : long);>
 
-Calls native L<d2i_TYPE|https://docs.openssl.org/master/man3/d2i_X509> function given $a_ref, $ppin_ref, $length, and creates a new C<Net::SSLeay::TYPE> object, sets the pointer value of the new object to the return value of the native function, and returns the new object.
+Calls native L<d2i_TYPE|https://docs.openssl.org/master/man3/d2i_TYPE> function given $a_ref, $ppin_ref, $length, and creates a new C<Net::SSLeay::TYPE> object, sets the pointer value of the new object to the return value of the native function, and returns the new object.
 
 Exceptions:
 
@@ -42,7 +42,7 @@ If d2i_TYPE failed, an exception is thrown with C<eval_error_id> set to the basi
 
 C<static method i2d_TYPE : int ($a : C<Net::SSLeay::TYPE>, $ppout_ref : string[]);>
 
-Calls native L<i2d_TYPE|https://docs.openssl.org/master/man3/d2i_X509> function given $a_ref, $ppin_ref, $length, and returns its return value.
+Calls native L<i2d_TYPE|https://docs.openssl.org/master/man3/i2d_TYPE> function given $a_ref, $ppin_ref, $length, and returns its return value.
 
 Exceptions:
 
@@ -58,7 +58,7 @@ If i2d_TYPE failed, an exception is thrown with C<eval_error_id> set to the basi
 
 C<static method d2i_TYPE_bio : C<Net::SSLeay::TYPE_bio> ($bp : L<Net::SSLeay::BIO|SPVM::Net::SSLeay::BIO>);>
 
-Calls native L<d2i_TYPE_bio|https://docs.openssl.org/master/man3/d2i_X509_bio> function given the pointer object of $bp, NULL, and creates a new C<Net::SSLeay::TYPE_bio> object, sets the pointer value of the new object to the return value of the native function, and returns the new object.
+Calls native L<d2i_TYPE_bio|https://docs.openssl.org/master/man3/d2i_TYPE_bio> function given the pointer object of $bp, NULL, and creates a new C<Net::SSLeay::TYPE_bio> object, sets the pointer value of the new object to the return value of the native function, and returns the new object.
 
 Exceptions:
 

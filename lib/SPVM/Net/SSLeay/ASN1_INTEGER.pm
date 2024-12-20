@@ -39,7 +39,7 @@ If ASN1_INTEGER_get_int64 failed, an exception is thrown with C<eval_error_id> s
 
 C<method set_int64 : void ($r : long);>
 
-Calls native L<ASN1_INTEGER_set_int64|https://docs.openssl.org/master/man3/ASN1_INTEGER_get_int64> function given the pointer value of the instance, $r.
+Calls native L<ASN1_INTEGER_set_int64|https://docs.openssl.org/master/man3/ASN1_INTEGER_set_int64> function given the pointer value of the instance, $r.
 
 Exceptions:
 
