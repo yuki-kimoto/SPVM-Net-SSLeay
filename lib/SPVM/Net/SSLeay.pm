@@ -180,7 +180,7 @@ Note:
 
 Access to the global L<Hash|SPVM::Hash> object is locked by a L<Sync::Mutex|SPVM::Sync::Mutex> object, so the access is thread-safe.
 
-This callback hack is also used in L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> class. In this case, native C<SSL> object is replaced with native C<SSL_CTX> object. And L<Net::SSLeay|SPVM::Net::SSLeay> object is replaced with L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> object.
+This callback hack is also used in L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> class. In this case, native C<SSL> object in the document is replaced with native C<SSL_CTX> object. And L<Net::SSLeay|SPVM::Net::SSLeay> object in the document is replaced with L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> object.
 
 =head2 Config Builder
 

@@ -16,13 +16,17 @@ Net::SSLeay::SSL_CTX class in L<SPVM> represents C<SSL_CTX> data structure in Op
 
   use Net::SSLeay::SSL_CTX;
 
-=hea1 Detais
+=head1 Detais
 
 =head2 Callback Hack
 
-See L<Callback Hack|SPVM::Net::SSLeay/"Callback Hack">.
+C<SSL_CTX> uses a number of callback functions.
 
-In this case, a native C<SSL> object is replaced with a native C<SSL_CTX> object, and L<Net::SSLeay|SPVM::Net::SSLeay> object is replaced with L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> object.
+These callbacks cannot receive a L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> object.
+
+See L<Callback Hack|SPVM::Net::SSLeay/"Callback Hack"> about the way resolving this problem.
+
+In this case, a native C<SSL> object in the documentis replaced with a native C<SSL_CTX> object, and L<Net::SSLeay|SPVM::Net::SSLeay> object in the document is replaced with L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> object.
 
 =head1 Fields
 
@@ -30,7 +34,7 @@ In this case, a native C<SSL> object is replaced with a native C<SSL_CTX> object
 
 C<has verify_callback : ro L<Net::SSLeay::Callback::Verify|SPVM::Net::SSLeay::Callback::Verify>;>
 
-A callback set by L</"set_verify_callback"> method.
+A callback set by L</"set_verify"> method.
 
 =head2 default_passwd_cb
 
@@ -73,6 +77,8 @@ Exceptions:
 If SSL_CTX_new failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
 =head1 Instance Methods
+
+=head2 init
 
 C<protected method init : void ($options : object[] = undef);>
 
@@ -180,7 +186,7 @@ If SSL_CTX_use_PrivateKey_file failed, an exception is thrown with C<eval_error_
 
 C<method use_PrivateKey : int ($pkey : L<Net::SSLeay::EVP_PKEY|SPVM::Net::SSLeay::EVP_PKEY>);>
 
-Calls native L<SSL_CTX_use_PrivateKey|https://docs.openssl.org/master/man3/SSL_CTX_use_PrivateKey> function given the pointer value of the instance, and returns its return value.
+Calls native L<SSL_CTX_use_PrivateKey|https://docs.openssl.org/master/man3/SSL_CTX_use_PrivateKey> function given the pointer value of the instance, the pointer value of $pkey, and returns its return value.
 
 Exceptions:
 
@@ -288,7 +294,11 @@ If SSL_CTX_set_min_proto_version failed, an exception is thrown with C<eval_erro
 
 C<method set_client_CA_list : void ($list : L<X509_NAME|SPVM::X509_NAME>[]);>
 
-Calls native L<SSL_CTX_set_client_CA_list|https://docs.openssl.org/master/man3/SSL_CTX_set_client_CA_list> function given the pointer value of the instance, $list.
+Creates a new native C<STACK_OF(X509_NAME)> object(named C<x509_names_stack>).
+
+And performs the following loop:copies the element at index $i using native L<X509_NAME_dup|https://docs.openssl.org/master/man3/X509_NAME_dup>, pushes the copied value to C<x509_names_stack>.
+
+And calls native L<SSL_CTX_set_client_CA_list|https://docs.openssl.org/master/man3/SSL_CTX_set_client_CA_list> function given the pointer value of the instance, C<x509_names_stack>.
 
 Exceptions:
 
