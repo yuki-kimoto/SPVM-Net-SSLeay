@@ -382,11 +382,23 @@ C<ssl_operation_error> is any other value, C<eval_error_id> is set to the basic 
 
 C<method accept : int ();>
 
-Calls native L<SSL_accept|https://docs.openssl.org/master/man3/SSL_accept/> function, and returns its return value.
+Calls native L<ERR_clear_error|https://docs.openssl.org/master/man3/ERR_clear_error> function.
+
+And calls native L<SSL_accept|https://docs.openssl.org/master/man3/SSL_accept/> function given the pointer value of the instance.
+
+If SSL_accept failed, L</"operation_error"> field is set to the return vlaue(named C<ssl_operation_error>) of L<SSL_get_error|https://docs.openssl.org/master/man3/SSL_get_error/> function given the return value of the native L<SSL_accept|https://docs.openssl.org/master/man3/SSL_accept/> function.
+
+And returns the return value of the native L<SSL_accept|https://docs.openssl.org/master/man3/SSL_accept/> function.
 
 Exceptions:
 
-If SSL_accept failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class and with L</"operation_error"> field set to the return vlaue of L<SSL_get_error|https://docs.openssl.org/master/man3/SSL_get_error/> function given the return value of L<SSL_accept|https://docs.openssl.org/master/man3/SSL_accept/> function.
+If SSL_accept failed, an exception is thrown with C<eval_error_id> set to the folowing value according to the error.
+
+C<ssl_operation_error> is C<SSL_ERROR_WANT_READ>, C<eval_error_id> is set to the basic type ID of L<Net::SSLeay::Error::SSL_ERROR_WANT_READ|SPVM::Net::SSLeay::Error::SSL_ERROR_WANT_READ>.
+
+C<ssl_operation_error> is C<SSL_ERROR_WANT_WRITE>, C<eval_error_id> is set to the basic type ID of L<Net::SSLeay::Error::SSL_ERROR_WANT_WRITE|SPVM::Net::SSLeay::Error::SSL_ERROR_WANT_WRITE>.
+
+C<ssl_operation_error> is any other value, C<eval_error_id> is set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error>.
 
 =head2 read
 
