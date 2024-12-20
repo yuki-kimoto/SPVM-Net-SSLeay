@@ -266,7 +266,7 @@ Performes L<Initialization process described in Callback Hack|/"Callback Hack">.
 
 C<native method version : int ();>
 
-Calls native L<version|https://docs.openssl.org/master/man3/SSL_get_version> function, and returns its return value.
+Calls native L<version|https://docs.openssl.org/master/man3/SSL_version> function, and returns its return value.
 
 =head2 get_mode
 
