@@ -358,13 +358,14 @@ int32_t SPVM__Net__SSLeay__get_SSL_CTX(SPVM_ENV* env, SPVM_VALUE* stack) {
     return error_id;
   }
   
+  SSL_CTX_up_ref(ssl_ctx);
+  
   void* obj_address_ssl_ctx = env->new_pointer_object_by_name(env, stack, "Address", ssl_ctx, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   stack[0].oval = obj_address_ssl_ctx;
   env->call_class_method_by_name(env, stack, "Net::SSLeay::SSL_CTX", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   void* obj_ssl_ctx = stack[0].oval;
-  SSL_CTX_up_ref(ssl_ctx);
   
   return 0;
 }
@@ -379,15 +380,14 @@ int32_t SPVM__Net__SSLeay__set_SSL_CTX(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   SSL* self = env->get_pointer(env, stack, obj_self);
   
-  SSL_CTX* ctx = env->get_pointer(env, stack, obj_ssl_ctx);
-  
-  SSL_CTX_up_ref(ctx);
+  SSL_CTX* ssl_ctx = env->get_pointer(env, stack, obj_ssl_ctx);
   
   // The reference count of ctx is decremented if this function succeed.
-  void* ret_ctx = SSL_set_SSL_CTX(self, ctx);
+  SSL_CTX_up_ref(ssl_ctx);
+  void* ret_ssl_ctx = SSL_set_SSL_CTX(self, ssl_ctx);
   
-  if (!ret_ctx) {
-    SSL_CTX_free(ctx);
+  if (!ret_ssl_ctx) {
+    SSL_CTX_free(ssl_ctx);
     
     int64_t ssl_error = ERR_peek_last_error();
     
@@ -403,12 +403,12 @@ int32_t SPVM__Net__SSLeay__set_SSL_CTX(SPVM_ENV* env, SPVM_VALUE* stack) {
     return error_id;
   }
   
-  void* obj_address_ret_ctx = env->new_pointer_object_by_name(env, stack, "Address", ret_ctx, &error_id, __func__, FILE_NAME, __LINE__);
+  void* obj_address_ret_ssl_ctx = env->new_pointer_object_by_name(env, stack, "Address", ret_ssl_ctx, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
-  stack[0].oval = obj_address_ret_ctx;
+  stack[0].oval = obj_address_ret_ssl_ctx;
   env->call_class_method_by_name(env, stack, "Net::SSLeay::SSL_CTX", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
-  void* obj_ret_ctx = stack[0].oval;
+  void* obj_ret_ssl_ctx = stack[0].oval;
   
   return 0;
 }

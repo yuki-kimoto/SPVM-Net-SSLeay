@@ -300,7 +300,7 @@ Calls native L<SSL_clear_mode|https://docs.openssl.org/master/man3/SSL_clear_mod
 
 C<method set_tlsext_host_name : int ($name : string);>
 
-Calls native L<SSL_set_tlsext_host_name|https://docs.openssl.org/master/man3/SSL_set_tlsext_host_name> function given the host name $name, and returns its return value.
+Calls native L<SSL_set_tlsext_host_name|https://docs.openssl.org/master/man3/SSL_set_tlsext_host_name> function given the pointer value of the instance, the host name $name, and returns its return value.
 
 Exceptions:
 
@@ -312,17 +312,21 @@ If SSL_set_tlsext_host_name failed, an exception is thrown with C<eval_error_id>
 
 C<method get_servername : string ($type : int);>
 
-Calls native L<SSL_get_servername|https://docs.openssl.org/master/man3/SSL_get_servername> function given the pointer value of the instance, $type, and returns its return value.
+Calls native L<SSL_get_servername|https://docs.openssl.org/master/man3/SSL_get_servername> function given the pointer value of the instance, $type.
+
+If its return value is NULL, returns undef.
+
+Otherwise returns the new string created from its return value.
 
 =head2 get_SSL_CTX
 
 C<method get_SSL_CTX : L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> ();>
 
-Calls native L<SSL_get_SSL_CTX|https://docs.openssl.org/master/man3/SSL_get_SSL_CTX/> function given the pointer value of the instance, creates a new L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> object, sets the pointer value of the new object to the return value of the native function, sets C<no_free> flag of the new object to 1, creates a reference from the new object to the instance, and returns the new object.
+Calls native L<SSL_get_SSL_CTX|https://docs.openssl.org/master/man3/SSL_get_SSL_CTX/> function given the pointer value of the instance, creates a new L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> object, calls native L<SSL_CTX_up_ref|https://docs.openssl.org/master/man3/SSL_CTX_up_ref> function on the return value of the native function, sets the pointer value of the new object to the return value of the native function, and returns the new object.
 
 =head2 set_SSL_CTX
 
-C<method set_SSL_CTX : Net::SSLeay::SSL_CTX ($ctx : Net::SSLeay::SSL_CTX);>
+C<method set_SSL_CTX : L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> ($ctx : L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX>);>
 
 Calls native L<SSL_set_SSL_CTX(currently not documented)|https://docs.openssl.org/master/man3/SSL_set_SSL_CTX/> function given the pointer value of the instance, creates a new L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> object, sets the pointer value of the new object to the return value of the native function, sets C<no_free> flag of the new object to 1, creates a reference from the new object to the instance, and returns the new object.
 
