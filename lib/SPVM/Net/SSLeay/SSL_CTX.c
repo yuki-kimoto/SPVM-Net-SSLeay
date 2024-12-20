@@ -132,6 +132,8 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__get0_param(SPVM_ENV* env, SPVM_VALUE* stack)
   
   X509_VERIFY_PARAM* x509_verify_param = SSL_CTX_get0_param(self);
   
+  assert(x509_verify_param);
+  
   void* obj_address_x509_verify_param = env->new_pointer_object_by_name(env, stack, "Address", x509_verify_param, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   stack[0].oval = obj_address_x509_verify_param;
@@ -139,7 +141,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__get0_param(SPVM_ENV* env, SPVM_VALUE* stack)
   if (error_id) { return error_id; }
   void* obj_x509_verify_param = stack[0].oval;
   
-  // X509_VERIFY_PARAM_up_ref, X509_VERIFY_PARAM_dup does not exists.
+  // The native object must be a internal pointer, but X509_VERIFY_PARAM_up_ref does not exists.
   env->set_no_free(env, stack, obj_x509_verify_param, 1);
   env->set_field_object_by_name(env, stack, obj_x509_verify_param, "ref_ssl_ctx", obj_self, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
@@ -508,23 +510,23 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__load_verify_locations(SPVM_ENV* env, SPVM_VA
   
   void* obj_self = stack[0].oval;
   
-  void* obj_file = stack[1].oval;
+  void* obj_CAfile = stack[1].oval;
   
-  void* obj_path = stack[2].oval;
+  void* obj_CApath = stack[2].oval;
   
   SSL_CTX* self = env->get_pointer(env, stack, obj_self);
   
-  const char* file = NULL;
-  if (obj_file) {
-    file = env->get_chars(env, stack, obj_file);
+  const char* CAfile = NULL;
+  if (obj_CAfile) {
+    CAfile = env->get_chars(env, stack, obj_CAfile);
   }
   
-  const char* path = NULL;
-  if (obj_path) {
-    path = env->get_chars(env, stack, obj_path);
+  const char* CApath = NULL;
+  if (obj_CApath) {
+    CApath = env->get_chars(env, stack, obj_CApath);
   }
   
-  int32_t status = SSL_CTX_load_verify_locations(self, file, path);
+  int32_t status = SSL_CTX_load_verify_locations(self, CAfile, CApath);
   
   if (!(status == 1)) {
     int64_t ssl_error = ERR_peek_last_error();
@@ -532,7 +534,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__load_verify_locations(SPVM_ENV* env, SPVM_VA
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die(env, stack, "[OpenSSL Error]SSL_CTX_load_verify_locations failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    env->die(env, stack, "[OpenSSL Error]SSL_CTX_load_verify_locations failed:%s. $CAfile:%s. $CApath:%s", ssl_error_string, CAfile, CApath, __func__, FILE_NAME, __LINE__);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }

@@ -62,15 +62,23 @@ A callback set by L</"set_tlsext_servername_callback"> method.
 
 C<static method new : L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> ($method : L<Net::SSLeay::SSL_METHOD|SPVM::Net::SSLeay::SSL_METHOD>);>
 
-Calls native L<SSL_CTX_new|https://docs.openssl.org/master/man3/SSL_CTX_new> function given the pointer value of $method, creates a new L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> object, sets the pointer value of the new object to the return value of the native function, and returns the new object.
+Calls native L<SSL_CTX_new|https://docs.openssl.org/master/man3/SSL_CTX_new> function given the pointer value of $method, enables C<SSL_MODE_AUTO_RETRY> mode, creates a new L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> object, sets the pointer value of the new object to the return value of the native function.
 
-C<SSL_MODE_AUTO_RETRY> mode is enabled.
+And calls L</"init"> method.
+
+And returns the new object.
 
 Exceptions:
 
 If SSL_CTX_new failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
 =head1 Instance Methods
+
+C<protected method init : void ($options : object[] = undef);>
+
+Initializes the instance given the options $options.
+
+Performes L<Initialization process described in Callback Hack|/"Callback Hack">.
 
 =head2 get_mode
 
@@ -88,7 +96,7 @@ Calls native L<SSL_CTX_set_mode|https://docs.openssl.org/master/man3/SSL_CTX_set
 
 C<method get0_param : L<Net::SSLeay::X509_VERIFY_PARAM|SPVM::Net::SSLeay::X509_VERIFY_PARAM> ();>
 
-Calls native L<SSL_CTX_get0_param|https://docs.openssl.org/master/man3/SSL_CTX_get0_param> function, creates a L<Net::SSLeay::X509_VERIFY_PARAM|SPVM::Net::SSLeay::X509_VERIFY_PARAM> object, sets the pointer value of the new object to the return value of the native function, and returns the new object.
+Calls native L<SSL_CTX_get0_param|https://docs.openssl.org/master/man3/SSL_CTX_get0_param> function, creates a L<Net::SSLeay::X509_VERIFY_PARAM|SPVM::Net::SSLeay::X509_VERIFY_PARAM> object, sets the pointer value of the new object to the return value of the native function, sets C<no_free> flag of the new object to 1, creates a reference from the new object to the instance, and returns the new object.
 
 =head2 load_verify_locations
 
