@@ -242,7 +242,7 @@ If SSL_load_client_CA_file failed, an exception is thrown with C<eval_error_id> 
 
 C<static method select_next_proto : int ($out_ref : string[], $outlen_ref : byte*, $server : string, $server_len : int, $client : string, $client_len : int);>
 
-Calls native L<SSL_select_next_proto|https://docs.openssl.org/3.0/man3/SSL_CTX_set_alpn_select_cb> function given the pointer of a native temporary variable C<out_ref>, $outlen_ref, $server, $server_len, $client, $client_len.
+Calls native L<SSL_select_next_proto|https://docs.openssl.org/3.0/man3/SSL_CTX_set_alpn_select_cb> function given the address of a native temporary variable C<out_ref>, $outlen_ref, $server, $server_len, $client, $client_len.
 
 If a native string is returned in C<*out_ref>, creates a new string from C<*out_ref> and C<$$outlen_ref>, sets C<$out_ref-E<gt>[0]> to the new string.
 
@@ -488,7 +488,7 @@ Calls native L<SSL_get_shutdown|https://docs.openssl.org/master/man3/SSL_get_shu
 
 C<method get_cipher : string ();>
 
-Calls native L<SSL_get_cipher|https://docs.openssl.org/master/man3/SSL_get_current_cipher/> function, and returns its return value.
+Calls native L<SSL_get_cipher|https://docs.openssl.org/master/man3/SSL_get_current_cipher/> function, and returns the string created from its return value.
 
 =head2 get_certificate
 
@@ -498,9 +498,7 @@ Calls native L<SSL_get_certificate|https://docs.openssl.org/master/man3/SSL_get_
 
 If the return value of the native function is NULL, returns undef.
 
-Otherwise, creates a new L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> object, sets the pointer value of the new object to the return value of the native function, and returns the new object.
-
-C<no_free> flag of the new object is set to 1.
+Otherwise, creates a new L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> object, sets the pointer value of the new object to the return value of the native function, calls native L<X509_up_ref|https://docs.openssl.org/master/man3/X509_up_ref> function on the return value of the native function, and returns the new object.
 
 =head2 get_peer_certificate
 
@@ -512,18 +510,6 @@ If the return value of the native function is NULL, returns undef.
 
 Otherwise, creates a new L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> object, sets the pointer value of the new object to the return value of the native function, and returns the new object.
 
-=head2 get0_alpn_selected
-
-C<method get0_alpn_selected : void ($data_ref : string[], $len_ref : int*);>
-
-Calls native L<SSL_get0_alpn_selected|https://docs.openssl.org/master/man3/SSL_CTX_set_alpn_select_cb> function given the pointer value of the instance, $data_ref, $len_ref.
-
-=head2 get0_alpn_selected_return_string
-
-C<method get0_alpn_selected_return_string : string ()>
-
-Calls L</"get0_alpn_selected"> method given appropriate arguments, and returns the output string.
-
 =head2 get_peer_cert_chain
 
 C<method get_peer_cert_chain : L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509>[] ();>
@@ -532,9 +518,29 @@ Calls native L<SSL_get_peer_cert_chain|https://docs.openssl.org/master/man3/SSL_
 
 If its return value is NULL, returns undef.
 
-Ohterwise, converts its return value to the array of L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509>, and returns the array.
+Otherwise creates a new L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> array,
 
-method get_SSL_CTX : Net::SSLeay::SSL_CTX ();
+And performs the following loop: creates a new L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> object, calls native L<X509_up_ref|https://docs.openssl.org/master/man3/X509_up_ref> function on the element at index $i of the return value(C<STACK_OF(X509)>) of the native function, and puses the new object to the new array.
+
+And returns the new array.
+
+=head2 get0_alpn_selected
+
+C<method get0_alpn_selected : void ($data_ref : string[], $len_ref : int*);>
+
+Calls native L<SSL_get0_alpn_selected|https://docs.openssl.org/master/man3/SSL_CTX_set_alpn_select_cb> function given the pointer value of the instance, the address of a native temporary variable C<data_ref>, $len_ref.
+
+If a native string is returned in C<*data_ref>, creates a new string from C<*data_ref> and C<$$len_ref>, sets C<$data_ref-E<gt>[0]> to the new string.
+
+Exceptions:
+
+The data reference $data_ref must be 1-length array. Otherwise an exception is thrown.
+
+=head2 get0_alpn_selected_return_string
+
+C<method get0_alpn_selected_return_string : string ()>
+
+Calls L</"get0_alpn_selected"> method given appropriate arguments, and returns C<$data_ref-E<gt>[0]>.
 
 =head2 set_msg_callback
 
@@ -546,13 +552,19 @@ Calls native L<SSL_set_msg_callback|https://docs.openssl.org/master/man3/SSL_CTX
 
 C<static method dump_peer_certificate : string ();>
 
-Returns the same output of Perl's L<Net::SSLeay#dump_peer_certificate|https://metacpan.org/dist/Net-SSLeay/view/lib/Net/SSLeay.pod#Convenience-routines> function.
+Returns the same value of the return value of Perl's L<Net::SSLeay#dump_peer_certificate|https://metacpan.org/dist/Net-SSLeay/view/lib/Net/SSLeay.pod#Convenience-routines> function.
+
+Exceptions:
+
+The return value of get_peer_certificate method must be defined. Otherwise an exception is thrown.
 
 =head2 DESTROY
 
 C<method DESTROY : void ();>
 
-Calls native L<SSL_free|https://docs.openssl.org/master/man3/SSL_free> function given the pointer value of the instance unless C<no_free> flag of the instance is a true value.
+Performes L<Cleanup process described in Callback Hack|/"Callback Hack">.
+
+And calls native L<SSL_free|https://docs.openssl.org/master/man3/SSL_free> function given the pointer value of the instance unless C<no_free> flag of the instance is a true value.
 
 =head1 FAQ
 

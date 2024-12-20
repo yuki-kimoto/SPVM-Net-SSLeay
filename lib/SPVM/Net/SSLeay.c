@@ -358,14 +358,14 @@ int32_t SPVM__Net__SSLeay__get_SSL_CTX(SPVM_ENV* env, SPVM_VALUE* stack) {
     return error_id;
   }
   
-  SSL_CTX_up_ref(ssl_ctx);
-  
   void* obj_address_ssl_ctx = env->new_pointer_object_by_name(env, stack, "Address", ssl_ctx, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   stack[0].oval = obj_address_ssl_ctx;
   env->call_class_method_by_name(env, stack, "Net::SSLeay::SSL_CTX", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   void* obj_ssl_ctx = stack[0].oval;
+  
+  SSL_CTX_up_ref(ssl_ctx);
   
   return 0;
 }
@@ -862,7 +862,6 @@ int32_t SPVM__Net__SSLeay__get_peer_cert_chain(SPVM_ENV* env, SPVM_VALUE* stack)
     obj_x509s = env->new_object_array_by_name(env, stack, "Net::SSLeay::X509", length, &error_id, __func__, FILE_NAME, __LINE__);
     for (int32_t i = 0; i < length; i++) {
       X509* x509 = sk_X509_value(x509s_stack, i);
-      X509_up_ref(x509);
       
       void* obj_address_x509 = env->new_pointer_object_by_name(env, stack, "Address", x509, &error_id, __func__, FILE_NAME, __LINE__);
       if (error_id) { return error_id; }
@@ -870,6 +869,8 @@ int32_t SPVM__Net__SSLeay__get_peer_cert_chain(SPVM_ENV* env, SPVM_VALUE* stack)
       env->call_class_method_by_name(env, stack, "Net::SSLeay::X509", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
       if (error_id) { return error_id; }
       void* obj_x509 = stack[0].oval;
+      
+      X509_up_ref(x509);
       
       env->set_elem_object(env, stack, obj_x509s, i, obj_x509);
     }
@@ -892,27 +893,21 @@ int32_t SPVM__Net__SSLeay__get0_alpn_selected(SPVM_ENV* env, SPVM_VALUE* stack) 
   
   SSL* self = env->get_pointer(env, stack, obj_self);
   
-  if (!obj_data_ref) {
-    return env->die(env, stack, "The data reference $data_ref must be defined.", __func__, FILE_NAME, __LINE__);
+  if (!(obj_data_ref &&  env->length(env, stack, obj_data_ref) == 1)) {
+    return env->die(env, stack, "The data reference $data_ref must be 1-length array.", __func__, FILE_NAME, __LINE__);
   }
   
-  int32_t data_ref_length = env->length(env, stack, obj_data_ref);
+  const unsigned char* data_tmp = NULL;
+  unsigned int len_tmp = -1;
+  SSL_get0_alpn_selected(self, &data_tmp, &len_tmp);
   
-  if (!(data_ref_length == 1)) {
-    return env->die(env, stack, "The length of the data reference $data_ref must be 1.", __func__, FILE_NAME, __LINE__);
-  }
-  
-  const unsigned char* data_ref_tmp[1] = {0};
-  unsigned int len_ref_tmp = -1;
-  SSL_get0_alpn_selected(self, data_ref_tmp, &len_ref_tmp);
-  
-  if (data_ref_tmp[0]) {
-    void* obj_data = env->new_string_nolen(env, stack, data_ref_tmp[0]);
+  if (data_tmp) {
+    void* obj_data = env->new_string_nolen(env, stack, data_tmp);
     
     env->set_elem_object(env, stack, obj_data_ref, 0, obj_data);
   }
   
-  *len_ref = len_ref_tmp;
+  *len_ref = len_tmp;
   
   return 0;
 }

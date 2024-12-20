@@ -134,7 +134,7 @@ Gets C<STACK_OF(GENERAL_NAME)> data by the following native C codes. C<self> is 
 
 And creates a new L<Net::SSLeay::GENERAL_NAME|SPVM::Net::SSLeay::GENERAL_NAME> array,
 
-And runs the following loop: copies the element at index $i of the return value(C<STACK_OF(GENERAL_NAME)>) of the native function using native L<GENERAL_NAME_dup|https://docs.openssl.org/1.1.1/man3/X509_dup/>, creates a new L<Net::SSLeay::GENERAL_NAME|SPVM::Net::SSLeay::GENERAL_NAME> object, sets the pointer value of the new object to the native copied value, and puses the new object to the new array.
+And performs the following loop: copies the element at index $i of the return value(C<STACK_OF(GENERAL_NAME)>) of the native function using native L<GENERAL_NAME_dup|https://docs.openssl.org/1.1.1/man3/X509_dup/>, creates a new L<Net::SSLeay::GENERAL_NAME|SPVM::Net::SSLeay::GENERAL_NAME> object, sets the pointer value of the new object to the native copied value, and puses the new object to the new array.
 
 And returns the new array.
 

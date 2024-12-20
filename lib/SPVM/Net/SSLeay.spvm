@@ -124,7 +124,7 @@ class Net::SSLeay {
     my $cert = $self->get_peer_certificate;
     
     unless ($cert) {
-      die "No cert is defined.";
+      die "The return value of get_peer_certificate method must be defined.";
     }
     
     my $subject_name = $cert->get_subject_name->oneline;
