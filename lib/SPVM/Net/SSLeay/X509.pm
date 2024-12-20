@@ -172,12 +172,6 @@ C<method DESTROY : void ();>
 
 Calls native L<X509_free|https://docs.openssl.org/master/man3/X509_free> function given the pointer value of the instance unless C<no_free> flag of the instance is a true value.
 
-=head1 FAQ
-
-=head2 How to create a new Net::SSLeay::X509 object?
-
-A way is reading PEM file by calling native L<Net::SSLeay::PEM#read_bio_X509|SPVM::Net::SSLeay::PEM/"read_bio_X509"> method.
-
 =head1 See Also
 
 =over 2

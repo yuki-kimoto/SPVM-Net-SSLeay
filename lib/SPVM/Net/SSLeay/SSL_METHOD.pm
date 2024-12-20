@@ -6,7 +6,7 @@ package SPVM::Net::SSLeay::SSL_METHOD;
 
 =head1 Name
 
-SPVM::Net::SSLeay::SSL_METHOD - OpenSSL SSL_METHOD data structure
+SPVM::Net::SSLeay::SSL_METHOD - SSL_METHOD data structure in OpenSSL
 
 =head1 Description
 

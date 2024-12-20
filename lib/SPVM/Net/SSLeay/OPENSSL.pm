@@ -34,7 +34,7 @@ Calls native L<OpenSSL_add_all_algorithms|https://docs.openssl.org/master/man3/O
 
 C<static method init_crypto : int ($opts : long, $settings : L<Net::SSLeay::OPENSSL_INIT_SETTINGS|SPVM::Net::SSLeay::OPENSSL_INIT_SETTINGS>);>
 
-Calls native L<OpenSSL_init_crypto|https://docs.openssl.org/master/man3/OpenSSL_init_crypto> function, and returns its return value.
+Calls native L<OPENSSL_init_crypto|https://docs.openssl.org/master/man3/OPENSSL_init_crypto> function, and returns its return value.
 
 Exceptions:
 
@@ -44,7 +44,7 @@ If OpenSSL_init_crypto failed, an exception is thrown with C<eval_error_id> set 
 
 C<static method init_ssl : int ($opts : long, $settings : L<Net::SSLeay::OPENSSL_INIT_SETTINGS|SPVM::Net::SSLeay::OPENSSL_INIT_SETTINGS>);>
 
-Calls native L<OpenSSL_init_ssl|https://docs.openssl.org/master/man3/OpenSSL_init_ssl> function, and returns its return value.
+Calls native L<OPENSSL_init_ssl|https://docs.openssl.org/master/man3/OPENSSL_init_ssl> function, and returns its return value.
 
 Exceptions:
 

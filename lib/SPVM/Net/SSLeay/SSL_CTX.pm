@@ -66,7 +66,7 @@ If SSL_CTX_load_verify_locations failed, an exception is thrown with C<eval_erro
 
 C<method set_default_verify_paths : int ();>
 
-Calls native L<set_default_verify_paths|https://docs.openssl.org/master/man3/set_default_verify_paths> function, and returns its return value.
+Calls native L<SSL_CTX_set_default_verify_paths|https://docs.openssl.org/master/man3/SSL_CTX_set_default_verify_paths> function, and returns its return value.
 
 Exceptions:
 
@@ -84,7 +84,7 @@ L<https://stackoverflow.com/questions/9507184/can-openssl-on-windows-use-the-sys
 
 C<method use_certificate_file : int ($file : string, $type : int = -1);>
 
-Calls native L<use_certificate_file|https://docs.openssl.org/master/man3/use_certificate_file> function given the pointer value of the instance, $file, $type, and returns its return value.
+Calls native L<SSL_CTX_use_certificate_file|https://docs.openssl.org/master/man3/SSL_CTX_use_certificate_file> function given the pointer value of the instance, $file, $type, and returns its return value.
 
 If $type is a negative integer, $type is set to C<SSL_FILETYPE_PEM>.
 
@@ -98,7 +98,7 @@ If SSL_CTX_use_certificate_file failed, an exception is thrown with C<eval_error
 
 C<method use_certificate_chain_file : int ($file : string);>
 
-Calls native L<use_certificate_chain_file|https://docs.openssl.org/master/man3/use_certificate_chain_file> function given the pointer value of the instance, $file, and returns its return value.
+Calls native L<SSL_CTX_use_certificate_chain_file|https://docs.openssl.org/master/man3/SSL_CTX_use_certificate_chain_file> function given the pointer value of the instance, $file, and returns its return value.
  
 Exceptions:
 
@@ -108,7 +108,7 @@ If SSL_CTX_use_certificate_chain_file failed, an exception is thrown with C<eval
 
 C<method use_PrivateKey_file : int ($file : string, $type : int = -1);>
 
-Calls native L<use_PrivateKey_file|https://docs.openssl.org/master/man3/use_PrivateKey_file> function given the pointer value of the instance, $file, $type, and returns its return value.
+Calls native L<SSL_CTX_use_PrivateKey_file|https://docs.openssl.org/master/man3/SSL_CTX_use_PrivateKey_file> function given the pointer value of the instance, $file, $type, and returns its return value.
 
 If $type is a negative integer, $type is set to C<SSL_FILETYPE_PEM>.
 
@@ -128,7 +128,7 @@ Calls native L<SSL_CTX_use_PrivateKey|https://docs.openssl.org/master/man3/SSL_C
 
 C<method set_cipher_list : int ($str : string);>
 
-Calls native L<set_cipher_list|https://docs.openssl.org/master/man3/set_cipher_list> function given the pointer value of the instance, $str, and returns its return value.
+Calls native L<SSL_CTX_set_cipher_list|https://docs.openssl.org/master/man3/SSL_CTX_set_cipher_list> function given the pointer value of the instance, $str, and returns its return value.
 
 Exceptions:
 
@@ -140,7 +140,7 @@ If SSL_CTX_set_cipher_list failed, an exception is thrown with C<eval_error_id> 
 
 C<method set_ciphersuites : int ($str : string);>
 
-Calls native L<set_ciphersuites|https://docs.openssl.org/master/man3/set_ciphersuites> function given the pointer value of the instance, $str, and returns its return value.
+Calls native L<SSL_CTX_set_ciphersuites|https://docs.openssl.org/master/man3/SSL_CTX_set_ciphersuites> function given the pointer value of the instance, $str, and returns its return value.
 
 Exceptions:
 
@@ -158,7 +158,7 @@ Calls native L<SSL_CTX_set_cert_store|https://docs.openssl.org/master/man3/SSL_C
 
 C<method set_options : long ($options : long);>
 
-Calls native L<set_options|https://docs.openssl.org/master/man3/set_options> function given the pointer value of the instance, $options, and returns its return value.
+Calls native L<SSL_CTX_set_options|https://docs.openssl.org/master/man3/SSL_CTX_set_options> function given the pointer value of the instance, $options, and returns its return value.
 
 =head2 get_options
 

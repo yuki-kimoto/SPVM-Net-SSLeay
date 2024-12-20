@@ -22,7 +22,7 @@ Net::SSLeay::EVP class in L<SPVM> represents C<EVP> name space in OpenSSL.
 
 C<static method get_digestbyname : L<Net::SSLeay::EVP_MD|SPVM::Net::SSLeay::EVP_MD> ($name : string);>
 
-Calls native L<EVP_get_digestbyname|https://docs.openssl.org/master/man3EVP_get_digestbyname/> function given $name.
+Calls native L<EVP_get_digestbyname|https://docs.openssl.org/master/man3/EVP_get_digestbyname/> function given $name.
 
 If the return value is not NULL, returns undef.
 

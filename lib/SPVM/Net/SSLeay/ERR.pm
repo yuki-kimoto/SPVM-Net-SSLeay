@@ -6,7 +6,7 @@ package SPVM::Net::SSLeay::ERR;
 
 =head1 Name
 
-SPVM::Net::SSLeay::ERR - OpenSSL Errors
+SPVM::Net::SSLeay::ERR - ERR Name Space in OpenSSL
 
 =head1 Description
 
