@@ -1049,7 +1049,7 @@ static int SPVM__Net__SSLeay__SSL_CTX__my__alpn_select_cb(SSL* ssl, const unsign
   const char* out = env->get_chars(env, stack, obj_out);
   *out_ref = out;
   
-  env->set_field_string_by_name(env, stack, obj_self, "ref_output_for_set_alpn_select_cb", obj_out, &error_id, __func__, FILE_NAME, __LINE__);
+  env->set_field_string_by_name(env, stack, obj_self, "alpn_select_cb_output", obj_out, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) {
     env->print_exception_to_stderr(env, stack);
     goto END_OF_FUNC;

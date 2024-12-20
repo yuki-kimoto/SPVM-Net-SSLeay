@@ -45,7 +45,7 @@ class Net::SSLeay::SSL_CTX : pointer {
   
   has alpn_select_cb : ro Net::SSLeay::Callback::AlpnSelect;
   
-  has ref_output_for_set_alpn_select_cb : string;
+  has alpn_select_cb_output : string;
   
   has tlsext_servername_callback : ro Net::SSLeay::Callback::TlsextServername;
   
