@@ -1,3 +1,11 @@
+0.032 2024-12-20
+  [New Features]
+    * Add Net::SSLeay#get_version method.
+  [Test Improvment]
+    * Add tests for Net::SSLeay.
+  [Document Improvement]
+    * Improve docs for Net::SSLeay.
+
 0.031 2024-12-19
   [New Features]
     * Add Net::SSLeay#select_next_proto method.

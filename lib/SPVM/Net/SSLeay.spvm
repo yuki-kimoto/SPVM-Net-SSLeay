@@ -61,6 +61,8 @@ class Net::SSLeay {
   
   native method version : int ();
   
+  native method get_version : string ();
+  
   native method get_mode : long ();
   
   native method set_mode : long ($mode : long);

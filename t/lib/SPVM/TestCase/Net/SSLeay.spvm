@@ -252,6 +252,14 @@ class TestCase::Net::SSLeay {
         
         my $ssl = $socket->ssl;
         
+        my $version = $ssl->version;
+        
+        warn "[Test Output][Net::SSLeay#version]$version";
+        
+        my $version_string = $ssl->get_version;
+        
+        warn "[Test Output][Net::SSLeay#get_version]$version_string";
+        
         $ssl = $socket->ssl;
         
         $ssl->set_msg_callback(undef);
