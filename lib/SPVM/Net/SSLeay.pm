@@ -220,17 +220,19 @@ Calls native L<SSL_alert_desc_string_long|https://docs.openssl.org/1.1.1/man3/SS
 
 C<static method load_client_CA_file : L<Net::SSLeay::X509_NAME|SPVM::Net::SSLeay::X509_NAME>[] ($file : string);>
 
-Calls native L<SSL_load_client_CA_file|https://docs.openssl.org/3.0/man3/SSL_load_client_CA_file/> function,.
+Calls native L<SSL_load_client_CA_file|https://docs.openssl.org/3.0/man3/SSL_load_client_CA_file/> function given $file.
 
-If its return value is NULL, returns undef.
+And creates a new L<Net::SSLeay::X509_NAME|SPVM::Net::SSLeay::X509_NAME> array,
 
-Ohterwise, converts its return value to the array of L<Net::SSLeay::X509_NAME|SPVM::Net::SSLeay::X509_NAME>, and returns the array.
+And performs the following loop: copies the element at index $i of the return value(C<STACK_OF(X509_NAME)>) of the native function using native L<X509_NAME_dup|https://docs.openssl.org/1.1.1/man3/X509_dup/>, creates a new L<Net::SSLeay::X509_NAME|SPVM::Net::SSLeay::X509_NAME> object, sets the pointer value of the new object to the native copied value, and puses the new object to the new array.
+
+And returns the new array;
 
 Exceptions:
 
 The file $file must be defined. Otherwise an exception is thrown.
 
-If load_client_CA_file failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
+If SSL_load_client_CA_file failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
 =head2 select_next_proto
 
