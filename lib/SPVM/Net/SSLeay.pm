@@ -164,6 +164,8 @@ So we use the following callback hack to get a L<Net::SSLeay|SPVM::Net::SSLeay> 
 
 Initialization:
 
+A thread variable C<thread_env> is set to the current runtime environment.
+
 When a new native C<SSL> object and a new L<Net::SSLeay|SPVM::Net::SSLeay> object are created at once, the new Net::SSLeay object is stored in a global L<Hash|SPVM::Hash> object keyed by the hex string of the address of the native C<SSL> object.
 
 Getting a L<Net::SSLeay|SPVM::Net::SSLeay> Object:
@@ -542,12 +544,6 @@ C<method get0_alpn_selected_return_string : string ()>
 
 Calls L</"get0_alpn_selected"> method given appropriate arguments, and returns C<$data_ref-E<gt>[0]>.
 
-=head2 set_msg_callback
-
-C<method set_msg_callback : void ($cb : L<Net::SSLeay::Callback::Msg|SPVM::Net::SSLeay::Callback::Msg>);>
-
-Calls native L<SSL_set_msg_callback|https://docs.openssl.org/master/man3/SSL_CTX_set_msg_callback> function given the pointer value of the instance, $cb, $arg, and returns its return value.
-
 =head2 dump_peer_certificate
 
 C<static method dump_peer_certificate : string ();>
@@ -557,6 +553,76 @@ Returns the same value of the return value of Perl's L<Net::SSLeay#dump_peer_cer
 Exceptions:
 
 The return value of get_peer_certificate method must be defined. Otherwise an exception is thrown.
+
+=head2 set_msg_callback
+
+C<method set_msg_callback : void ($cb : L<Net::SSLeay::Callback::Msg|SPVM::Net::SSLeay::Callback::Msg>);>
+
+If the callback $cb is defined, A native variable C<native_cb> is set to a function pointer of the native callback funcion described below, otherwise C<native_cb> is set to NULL.
+
+And calls native L<SSL_set_msg_callback|https://docs.openssl.org/master/man3/SSL_CTX_set_msg_callback> function given the pointer value of the instance, C<native_cb>.
+
+And sets L</"msg_callback"> field to $cb.
+
+Native Callback Funcion:
+
+The native callback function is defined by the following native code:
+
+  static void SPVM__Net__SSLeay__my__msg_callback(int write_p, int version, int content_type, const void* buf, size_t len, SSL* ssl, void* native_arg) {
+    
+    int32_t error_id = 0;
+    
+    SPVM_ENV* env = thread_env;
+    
+    SPVM_VALUE* stack = env->new_stack(env);
+    
+    int32_t scope_id = env->enter_scope(env, stack);
+    
+    char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
+    snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", ssl);
+    stack[0].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
+    env->call_class_method_by_name(env, stack, "Net::SSLeay", "GET_INSTANCE", 1, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) {
+      env->print_exception_to_stderr(env, stack);
+      
+      goto END_OF_FUNC;
+    }
+    void* obj_self = stack[0].oval;
+    
+    assert(obj_self);
+    
+    void* obj_cb = env->get_field_object_by_name(env, stack, obj_self, "msg_callback", &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) {
+      env->print_exception_to_stderr(env, stack);
+      
+      goto END_OF_FUNC;
+    }
+    
+    void* obj_buf = env->new_string(env, stack, buf, len);
+    
+    stack[0].oval = obj_cb;
+    stack[1].ival = write_p;
+    stack[2].ival = version;
+    stack[3].ival = content_type;
+    stack[4].oval = obj_buf;
+    stack[5].ival = len;
+    stack[6].oval = obj_self;
+    env->call_instance_method_by_name(env, stack, "", 7, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) {
+      env->print_exception_to_stderr(env, stack);
+      
+      goto END_OF_FUNC;
+    }
+    int32_t ret = stack[0].ival;
+    
+    END_OF_FUNC:
+    
+    env->leave_scope(env, stack, scope_id);
+    
+    env->free_stack(env, stack);
+    
+    return;
+  }
 
 =head2 DESTROY
 
