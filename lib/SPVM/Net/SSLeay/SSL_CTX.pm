@@ -38,13 +38,13 @@ If SSL_CTX_new failed, an exception is thrown with C<eval_error_id> set to the b
 
 C<method get_mode : long ();>
 
-Calls native L<SSL_CTX_get_mode|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_mode> function given the pointer value of the instance, and returns its return value.
+Calls native L<SSL_CTX_get_mode|https://docs.openssl.org/master/man3/SSL_CTX_set_mode> function given the pointer value of the instance, and returns its return value.
 
 =head2 set_mode
 
 C<method set_mode : long ($mode : long);>
 
-Calls native L<SSL_CTX_set_mode|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_mode> function given the pointer value of the instance, $mode, and returns its return value.
+Calls native L<SSL_CTX_set_mode|https://docs.openssl.org/master/man3/SSL_CTX_set_mode> function given the pointer value of the instance, $mode, and returns its return value.
 
 =head2 get0_param
 
@@ -98,7 +98,7 @@ If SSL_CTX_use_certificate_file failed, an exception is thrown with C<eval_error
 
 C<method use_certificate_chain_file : int ($file : string);>
 
-Calls native L<use_certificate_chain_file|https://docs.openssl.org/1.1.1/man3/SSL_CTX_use_certificate/> function given the pointer value of the instance, $file, and returns its return value.
+Calls native L<use_certificate_chain_file|https://docs.openssl.org/master/man3/SSL_CTX_use_certificate/> function given the pointer value of the instance, $file, and returns its return value.
  
 Exceptions:
 
@@ -108,7 +108,7 @@ If SSL_CTX_use_certificate_chain_file failed, an exception is thrown with C<eval
 
 C<method use_PrivateKey_file : int ($file : string, $type : int = -1);>
 
-Calls native L<use_PrivateKey_file|https://docs.openssl.org/3.1/man3/SSL_CTX_use_certificate> function given the pointer value of the instance, $file, $type, and returns its return value.
+Calls native L<use_PrivateKey_file|https://docs.openssl.org/master/man3/SSL_CTX_use_certificate> function given the pointer value of the instance, $file, $type, and returns its return value.
 
 If $type is a negative integer, $type is set to C<SSL_FILETYPE_PEM>.
 
@@ -158,25 +158,25 @@ Calls native L<SSL_CTX_set_cert_store|https://docs.openssl.org/master/man3/SSL_C
 
 C<method set_options : long ($options : long);>
 
-Calls native L<set_options|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_options> function given the pointer value of the instance, $options, and returns its return value.
+Calls native L<set_options|https://docs.openssl.org/master/man3/SSL_CTX_set_options> function given the pointer value of the instance, $options, and returns its return value.
 
 =head2 get_options
 
 C<method get_options : long ();>
 
-Calls native L<SSL_CTX_get_options|https://docs.openssl.org/3.1/man3/SSL_CTX_set_options/> function, and returns its return value.
+Calls native L<SSL_CTX_get_options|https://docs.openssl.org/master/man3/SSL_CTX_set_options/> function, and returns its return value.
 
 =head2 clear_options
 
 C<method clear_options : long ($options : long);>
 
-Calls native L<SSL_CTX_clear_options|https://docs.openssl.org/3.1/man3/SSL_CTX_set_options/> function given the pointer value of the instance, $options, and returns its return value.
+Calls native L<SSL_CTX_clear_options|https://docs.openssl.org/master/man3/SSL_CTX_set_options/> function given the pointer value of the instance, $options, and returns its return value.
 
 =head2 set_alpn_protos
 
 C<method set_alpn_protos : int ($protos : string, $protos_len : int = -1);>
 
-Calls native L<SSL_CTX_set_alpn_protos|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_alpn_select_cb> function given the protocals $ptotos and the length $protos_len, and returns its return value.
+Calls native L<SSL_CTX_set_alpn_protos|https://docs.openssl.org/master/man3/SSL_CTX_set_alpn_select_cb> function given the protocals $ptotos and the length $protos_len, and returns its return value.
 
 If $protos_len is less than 0, it is set to the length of $protos.
 
@@ -196,7 +196,7 @@ Calls L<Net::SSLeay::Util#convert_to_wire_format|SPVM::Net::SSLeay::Util/"conver
 
 C<method set1_groups_list : int ($list : string);>
 
-Calls native L<SSL_CTX_set1_groups_list|https://docs.openssl.org/3.1/man3/SSL_CTX_set1_curves> function given the group list $list, and returns its return value.
+Calls native L<SSL_CTX_set1_groups_list|https://docs.openssl.org/master/man3/SSL_CTX_set1_curves> function given the group list $list, and returns its return value.
 
 Exceptions:
 
@@ -208,7 +208,7 @@ If set1_groups_list failed, an exception is thrown with C<eval_error_id> set to 
 
 C<method set_post_handshake_auth : void ($val : int);>
 
-Calls native L<SSL_CTX_set_post_handshake_auth|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_verify> function given the pointer value of the instance, $val.
+Calls native L<SSL_CTX_set_post_handshake_auth|https://docs.openssl.org/master/man3/SSL_CTX_set_verify> function given the pointer value of the instance, $val.
 
 =head2 set_min_proto_version
 
@@ -224,7 +224,7 @@ If SSL_CTX_set_min_proto_version failed, an exception is thrown with C<eval_erro
 
 C<method set_client_CA_list : void ($list : L<X509_NAME|SPVM::X509_NAME>[]);>
 
-Calls native L<SSL_CTX_set_client_CA_list|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_client_CA_list> function given the pointer value of the instance, $list.
+Calls native L<SSL_CTX_set_client_CA_list|https://docs.openssl.org/master/man3/SSL_CTX_set_client_CA_list> function given the pointer value of the instance, $list.
 
 Exceptions:
 
@@ -246,7 +246,7 @@ If add_client_CA failed, an exception is thrown with C<eval_error_id> set to the
 
 C<method add_extra_chain_cert : long ($x509 : L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509>);>
 
-Calls native L<SSL_CTX_add_extra_chain_cert|https://docs.openssl.org/1.1.1/man3/SSL_CTX_add_extra_chain_cert/> function given the pointer value of the instance, $x509, sets the C<no_free> flag of $x509 is set to 1, and returns its return value.
+Calls native L<SSL_CTX_add_extra_chain_cert|https://docs.openssl.org/master/man3/SSL_CTX_add_extra_chain_cert/> function given the pointer value of the instance, $x509, sets the C<no_free> flag of $x509 is set to 1, and returns its return value.
 
 Exceptions:
 
@@ -264,35 +264,35 @@ Calls native L<SSL_CTX_set_verify|https://docs.openssl.org/master/man3/SSL_CTX_s
 
 C<method set_alpn_select_cb : void ($cb : Net::SSLeay::Callback::AlpnSelect);>
 
-Calls native L<SSL_CTX_set_alpn_select_cb|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_alpn_select_cb> function given $cb, NULL.
+Calls native L<SSL_CTX_set_alpn_select_cb|https://docs.openssl.org/master/man3/SSL_CTX_set_alpn_select_cb> function given $cb, NULL.
 
 =head2 set_alpn_select_cb_with_protocols
 
 C<method set_alpn_select_cb_with_protocols : void ($protocols : string[]);>
 
-Calls native L<SSL_CTX_set_alpn_select_cb|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_alpn_select_cb> function defined to select $protocols.
+Calls native L<SSL_CTX_set_alpn_select_cb|https://docs.openssl.org/master/man3/SSL_CTX_set_alpn_select_cb> function defined to select $protocols.
 
 =head2 set_default_passwd_cb
 
 C<method set_default_passwd_cb : void ($cb : L<Net::SSLeay::Callback::PemPassword|SPVM::Net::SSLeay::Callback::PemPassword>);>
 
-Calls native L<SSL_CTX_set_default_passwd_cb|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_default_passwd_cb> function given $cb, NULL, and returns its return value.
+Calls native L<SSL_CTX_set_default_passwd_cb|https://docs.openssl.org/master/man3/SSL_CTX_set_default_passwd_cb> function given $cb, NULL, and returns its return value.
 
-$arg is expected to be passed to native L<SSL_CTX_set_default_passwd_cb_userdata|https://docs.openssl.org/1.0.2/man3/SSL_CTX_set_default_passwd_cb> function.
+$arg is expected to be passed to native L<SSL_CTX_set_default_passwd_cb_userdata|https://docs.openssl.org/master/man3/SSL_CTX_set_default_passwd_cb> function.
 
 =head2 set_tlsext_servername_callback
 
 C<method set_tlsext_servername_callback : long ($cb : L<Net::SSLeay::Callback::TlsextServername|SPVM::Net::SSLeay::Callback::TlsextServername>);>
 
-Calls native L<SSL_CTX_set_tlsext_servername_callback|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_tlsext_servername_callback> function given $cb, NULL, and returns its return value.
+Calls native L<SSL_CTX_set_tlsext_servername_callback|https://docs.openssl.org/master/man3/SSL_CTX_set_tlsext_servername_callback> function given $cb, NULL, and returns its return value.
 
-$arg is expected to be passed to native L<SSL_CTX_set_tlsext_servername_arg|https://docs.openssl.org/1.1.1/man3/SSL_CTX_set_tlsext_servername_callback> function.
+$arg is expected to be passed to native L<SSL_CTX_set_tlsext_servername_arg|https://docs.openssl.org/master/man3/SSL_CTX_set_tlsext_servername_callback> function.
 
 =head2 DESTROY
 
 C<method DESTROY : void ();>
 
-Calls native L<SSL_CTX_free|https://docs.openssl.org/3.1/man3/SSL_CTX_free/> function given the pointer value of the instance if C<no_free> flag of the instance is not a true value.
+Calls native L<SSL_CTX_free|https://docs.openssl.org/master/man3/SSL_CTX_free/> function given the pointer value of the instance if C<no_free> flag of the instance is not a true value.
 
 =head1 See Also
 

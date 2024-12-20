@@ -10,7 +10,7 @@ SPVM::Net::SSLeay::EVP_MD - EVP_MD Data Structure in OpenSSL
 
 =head1 Description
 
-Net::SSLeay::EVP_MD class in L<SPVM> represents L<EVP_MD|https://docs.openssl.org/3.0/man3/EVP_sha224/> Data Structure in OpenSSL
+Net::SSLeay::EVP_MD class in L<SPVM> represents L<EVP_MD|https://docs.openssl.org/master/man3/EVP_sha224/> Data Structure in OpenSSL
 
 =head1 Usage
 

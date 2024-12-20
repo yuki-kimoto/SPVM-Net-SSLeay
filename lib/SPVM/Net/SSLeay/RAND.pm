@@ -22,7 +22,7 @@ Net::SSLeay::RAND class in L<SPVM> represents RAND name space in OpenSSL.
 
 C<static method seed : void ($buf : string, $num : int);>
 
-Calls native L<RAND_seed|https://docs.openssl.org/3.0/man3/RAND_add/> function.
+Calls native L<RAND_seed|https://docs.openssl.org/master/man3/RAND_add/> function.
 
 Exceptions:
 
@@ -32,7 +32,7 @@ The buffer $buf must be defined. Otherwise an exception is thrown.
 
 C<static method poll : int ();>
 
-Calls native L<RAND_poll|https://docs.openssl.org/3.0/man3/RAND_add/> function.
+Calls native L<RAND_poll|https://docs.openssl.org/master/man3/RAND_add/> function.
 
 =head2 load_file
 

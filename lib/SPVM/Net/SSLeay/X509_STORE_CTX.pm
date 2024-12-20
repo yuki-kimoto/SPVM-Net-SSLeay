@@ -10,7 +10,7 @@ SPVM::Net::SSLeay::X509_STORE_CTX - X509_STORE_CTX Data Structure in OpenSSL
 
 =head1 Description
 
-Net::SSLeay::X509_STORE_CTX class in L<SPVM> represents L<X509_STORE_CTX|https://docs.openssl.org/3.1/man3/X509_STORE_CTX_new/> data structure in OpenSSL.
+Net::SSLeay::X509_STORE_CTX class in L<SPVM> represents L<X509_STORE_CTX|https://docs.openssl.org/master/man3/X509_STORE_CTX_new/> data structure in OpenSSL.
 
 =head1 Usage
 
@@ -66,7 +66,7 @@ Calls native L<X509_STORE_CTX_get_current_cert|https://docs.openssl.org/master/m
 
 If its return value is NULL, returns undef.
 
-Otherwise, increments the refernece count of its return value using native L<X509_up_ref|https://docs.openssl.org/3.0/man3/X509_new/> function, creates a new L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> object, sets the pointer value of the new object to the return value of the native function, and returns the new object.
+Otherwise, increments the refernece count of its return value using native L<X509_up_ref|https://docs.openssl.org/master/man3/X509_new/> function, creates a new L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509> object, sets the pointer value of the new object to the return value of the native function, and returns the new object.
 
 =head1 See Also
 

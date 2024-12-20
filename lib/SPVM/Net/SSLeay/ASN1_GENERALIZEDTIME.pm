@@ -34,7 +34,7 @@ If ASN1_GENERALIZEDTIME_new failed, an exception is thrown with C<eval_error_id>
 
 C<static method set : void ($t : long);>
 
-Calls native L<ASN1_GENERALIZEDTIME_set|https://docs.openssl.org/1.1.1/man3/ASN1_GENERALIZEDTIME_set> function given the pointer value of the instance, $t.
+Calls native L<ASN1_GENERALIZEDTIME_set|https://docs.openssl.org/master/man3/ASN1_GENERALIZEDTIME_set> function given the pointer value of the instance, $t.
 
 Exceptions:
 
@@ -44,13 +44,13 @@ If ASN1_GENERALIZEDTIME_new failed, an exception is thrown with C<eval_error_id>
 
 C<method check : int ();>
 
-Calls native L<ASN1_GENERALIZEDTIME_check|https://docs.openssl.org/1.1.1/man3/ASN1_GENERALIZEDTIME_set> function given the pointer value of the instance, and returns its return value.
+Calls native L<ASN1_GENERALIZEDTIME_check|https://docs.openssl.org/master/man3/ASN1_GENERALIZEDTIME_set> function given the pointer value of the instance, and returns its return value.
 
 =head2 print
 
 C<method print : int ($b : L<Net::SSLeay::BIO|SPVM::Net::SSLeay::BIO>);>
 
-Calls native L<ASN1_GENERALIZEDTIME_print|https://docs.openssl.org/1.1.1/man3/ASN1_GENERALIZEDTIME_set> function given $b, the pointer value of the instance.
+Calls native L<ASN1_GENERALIZEDTIME_print|https://docs.openssl.org/master/man3/ASN1_GENERALIZEDTIME_set> function given $b, the pointer value of the instance.
 
 Exceptions:
 
