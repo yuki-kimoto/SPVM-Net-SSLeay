@@ -404,7 +404,13 @@ C<ssl_operation_error> is any other value, C<eval_error_id> is set to the basic 
 
 C<method read : int ($buf : mutable string, $num : int = -1, $offset : int = 0);>
 
-Calls native L<SSL_read|https://docs.openssl.org/master/man3/SSL_read/> function given the pointer value of the instance, $buf at the offest $offset, $num, and returns its return value.
+Calls native L<ERR_clear_error|https://docs.openssl.org/master/man3/ERR_clear_error> function.
+
+And calls native L<SSL_read|https://docs.openssl.org/master/man3/SSL_read/> function given the pointer value of the instance, $buf at the offest $offset, $num.
+
+If SSL_read failed, L</"operation_error"> field is set to the return vlaue(named C<ssl_operation_error>) of L<SSL_get_error|https://docs.openssl.org/master/man3/SSL_get_error/> function given the return value of the native L<SSL_read|https://docs.openssl.org/master/man3/SSL_read/> function.
+
+And returns the return value of the native L<SSL_read|https://docs.openssl.org/master/man3/SSL_read/> function.
 
 Exceptions:
 
@@ -414,13 +420,25 @@ The offset $offset must be greater than or equal to 0. Otherwise an exception is
 
 The offset $offset + $num must be lower than or equal to the length of the buffer $buf. Otherwise an exception is thrown.
 
-If SSL_read failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class and with L</"operation_error"> field set to the return vlaue of L<SSL_get_error|https://docs.openssl.org/master/man3/SSL_get_error/> function given the return value of L<SSL_read|https://docs.openssl.org/master/man3/SSL_read/> function.
+If SSL_read failed, an exception is thrown with C<eval_error_id> set to the folowing value according to the error.
+
+C<ssl_operation_error> is C<SSL_ERROR_WANT_READ>, C<eval_error_id> is set to the basic type ID of L<Net::SSLeay::Error::SSL_ERROR_WANT_READ|SPVM::Net::SSLeay::Error::SSL_ERROR_WANT_READ>.
+
+C<ssl_operation_error> is C<SSL_ERROR_WANT_WRITE>, C<eval_error_id> is set to the basic type ID of L<Net::SSLeay::Error::SSL_ERROR_WANT_WRITE|SPVM::Net::SSLeay::Error::SSL_ERROR_WANT_WRITE>.
+
+C<ssl_operation_error> is any other value, C<eval_error_id> is set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error>.
 
 =head2 write
 
 C<method write : int ($buf : string, $num : int = -1, $offset : int = 0);>
 
-Calls native L<SSL_write|https://docs.openssl.org/master/man3/SSL_write/> function, given the pointer value of the instance, $buf at the offset $offset, $num, and returns its return value.
+Calls native L<ERR_clear_error|https://docs.openssl.org/master/man3/ERR_clear_error> function.
+
+And calls native L<SSL_write|https://docs.openssl.org/master/man3/SSL_write/> function given the pointer value of the instance, $buf at the offest $offset, $num.
+
+If SSL_write failed, L</"operation_error"> field is set to the return vlaue(named C<ssl_operation_error>) of L<SSL_get_error|https://docs.openssl.org/master/man3/SSL_get_error/> function given the return value of the native L<SSL_write|https://docs.openssl.org/master/man3/SSL_write/> function.
+
+And returns the return value of the native L<SSL_write|https://docs.openssl.org/master/man3/SSL_write/> function.
 
 Exceptions:
 
@@ -430,17 +448,35 @@ The offset $offset must be greater than or equal to 0. Otherwise an exception is
 
 The offset $offset + $num must be lower than or equal to the length of the buffer $buf. Otherwise an exception is thrown.
 
-If SSL_write failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class and with L</"operation_error"> field set to the return vlaue of L<SSL_get_error|https://docs.openssl.org/master/man3/SSL_get_error/> function given the return value of L<SSL_write|https://docs.openssl.org/master/man3/SSL_write/> function.
+If SSL_write failed, an exception is thrown with C<eval_error_id> set to the folowing value according to the error.
+
+C<ssl_operation_error> is C<SSL_ERROR_WANT_READ>, C<eval_error_id> is set to the basic type ID of L<Net::SSLeay::Error::SSL_ERROR_WANT_READ|SPVM::Net::SSLeay::Error::SSL_ERROR_WANT_READ>.
+
+C<ssl_operation_error> is C<SSL_ERROR_WANT_WRITE>, C<eval_error_id> is set to the basic type ID of L<Net::SSLeay::Error::SSL_ERROR_WANT_WRITE|SPVM::Net::SSLeay::Error::SSL_ERROR_WANT_WRITE>.
+
+C<ssl_operation_error> is any other value, C<eval_error_id> is set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error>.
 
 =head2 shutdown
 
 C<method shutdown : int ();>
 
-Calls native L<SSL_shutdown|https://docs.openssl.org/master/man3/SSL_shutdown/> function, and returns its return value.
+Calls native L<ERR_clear_error|https://docs.openssl.org/master/man3/ERR_clear_error> function.
+
+And calls native L<SSL_shutdown|https://docs.openssl.org/master/man3/SSL_shutdown/> function given the pointer value of the instance.
+
+If SSL_shutdown failed, L</"operation_error"> field is set to the return vlaue(named C<ssl_operation_error>) of L<SSL_get_error|https://docs.openssl.org/master/man3/SSL_get_error/> function given the return value of the native L<SSL_shutdown|https://docs.openssl.org/master/man3/SSL_shutdown/> function.
+
+And returns the return value of the native L<SSL_shutdown|https://docs.openssl.org/master/man3/SSL_shutdown/> function.
 
 Exceptions:
 
-If SSL_shutdown failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class and with L</"operation_error"> field set to the return vlaue of L<SSL_get_error|https://docs.openssl.org/master/man3/SSL_get_error/> function given the return value of L<SSL_shutdown|https://docs.openssl.org/master/man3/SSL_shutdown/> function.
+If SSL_shutdown failed, an exception is thrown with C<eval_error_id> set to the folowing value according to the error.
+
+C<ssl_operation_error> is C<SSL_ERROR_WANT_READ>, C<eval_error_id> is set to the basic type ID of L<Net::SSLeay::Error::SSL_ERROR_WANT_READ|SPVM::Net::SSLeay::Error::SSL_ERROR_WANT_READ>.
+
+C<ssl_operation_error> is C<SSL_ERROR_WANT_WRITE>, C<eval_error_id> is set to the basic type ID of L<Net::SSLeay::Error::SSL_ERROR_WANT_WRITE|SPVM::Net::SSLeay::Error::SSL_ERROR_WANT_WRITE>.
+
+C<ssl_operation_error> is any other value, C<eval_error_id> is set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error>.
 
 =head2 get_shutdown
 
