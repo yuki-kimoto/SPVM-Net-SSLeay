@@ -39,15 +39,15 @@ class Net::SSLeay::SSL_CTX : pointer {
   }
   
   # Fields
-  has verify_callback : Net::SSLeay::Callback::Verify;
+  has verify_callback : ro Net::SSLeay::Callback::Verify;
   
-  has default_passwd_cb : Net::SSLeay::Callback::PemPassword;
+  has default_passwd_cb : ro Net::SSLeay::Callback::PemPassword;
   
-  has alpn_select_cb : Net::SSLeay::Callback::AlpnSelect;
+  has alpn_select_cb : ro Net::SSLeay::Callback::AlpnSelect;
   
   has ref_output_for_set_alpn_select_cb : string;
   
-  has tlsext_servername_callback : Net::SSLeay::Callback::TlsextServername;
+  has tlsext_servername_callback : ro Net::SSLeay::Callback::TlsextServername;
   
   # Class Methods
   native static method new : Net::SSLeay::SSL_CTX ($method : Net::SSLeay::SSL_METHOD);

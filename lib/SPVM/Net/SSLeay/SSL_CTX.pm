@@ -16,7 +16,39 @@ Net::SSLeay::SSL_CTX class in L<SPVM> represents C<SSL_CTX> data structure in Op
 
   use Net::SSLeay::SSL_CTX;
 
+=hea1 Detais
+
+=head2 Callback Hack
+
+See L<Callback Hack|SPVM::Net::SSLeay/"Callback Hack">.
+
+In this case, a native C<SSL> object is replaced with a native C<SSL_CTX> object, and L<Net::SSLeay|SPVM::Net::SSLeay> object is replaced with L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> object.
+
 =head1 Fields
+
+=head2 verify_callback
+
+C<has verify_callback : ro L<Net::SSLeay::Callback::Verify|SPVM::Net::SSLeay::Callback::Verify>;>
+
+A callback set by L</"set_verify_callback"> method.
+
+=head2 default_passwd_cb
+
+C<has default_passwd_cb : ro L<Net::SSLeay::Callback::PemPassword|SPVM::Net::SSLeay::Callback::PemPassword>;>
+
+A callback set by L</"set_default_passwd_cb"> method.
+
+=head2 alpn_select_cb
+
+C<has alpn_select_cb : ro L<Net::SSLeay::Callback::AlpnSelect|SPVM::Net::SSLeay::Callback::AlpnSelect>;>
+
+A callback set by L</"set_alpn_select_cb"> method.
+
+=head2 tlsext_servername_callback
+
+C<has tlsext_servername_callback : ro L<Net::SSLeay::Callback::TlsextServername|SPVM::Net::SSLeay::Callback::TlsextServername>;>
+
+A callback set by L</"set_tlsext_servername_callback"> method.
 
 =head1 Class Methods
 
