@@ -378,16 +378,29 @@ int32_t SPVM__Net__SSLeay__set_SSL_CTX(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   void* obj_ssl_ctx = stack[1].oval;
   
+  if (!obj_ssl_ctx) {
+    return env->die(env, stack, "The SSL_CTX object $ssl_ctx must be defined(Currently undef is not allowed).", __func__, FILE_NAME, __LINE__);
+  }
+  
   SSL* self = env->get_pointer(env, stack, obj_self);
   
   SSL_CTX* ssl_ctx = env->get_pointer(env, stack, obj_ssl_ctx);
   
-  // The reference count of ctx is decremented if this function succeed.
-  SSL_CTX_up_ref(ssl_ctx);
+  SSL_CTX* current_ssl_ctx = SSL_get_SSL_CTX(self);
+  
+  if (ssl_ctx == current_ssl_ctx) {
+    return 0;
+  }
+  
+  // The reference count of current ssl_ctx is decremented if SSL_set_SSL_CTX succeeds.
+  SSL_CTX_up_ref(current_ssl_ctx);
+  
+  // The reference count of ssl_ctx is incremented.
   void* ret_ssl_ctx = SSL_set_SSL_CTX(self, ssl_ctx);
   
   if (!ret_ssl_ctx) {
-    SSL_CTX_free(ssl_ctx);
+    
+    SSL_CTX_free(current_ssl_ctx);
     
     int64_t ssl_error = ERR_peek_last_error();
     
@@ -402,13 +415,6 @@ int32_t SPVM__Net__SSLeay__set_SSL_CTX(SPVM_ENV* env, SPVM_VALUE* stack) {
     
     return error_id;
   }
-  
-  void* obj_address_ret_ssl_ctx = env->new_pointer_object_by_name(env, stack, "Address", ret_ssl_ctx, &error_id, __func__, FILE_NAME, __LINE__);
-  if (error_id) { return error_id; }
-  stack[0].oval = obj_address_ret_ssl_ctx;
-  env->call_class_method_by_name(env, stack, "Net::SSLeay::SSL_CTX", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
-  if (error_id) { return error_id; }
-  void* obj_ret_ssl_ctx = stack[0].oval;
   
   return 0;
 }

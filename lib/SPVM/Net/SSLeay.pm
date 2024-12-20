@@ -326,9 +326,15 @@ Calls native L<SSL_get_SSL_CTX|https://docs.openssl.org/master/man3/SSL_get_SSL_
 
 =head2 set_SSL_CTX
 
-C<method set_SSL_CTX : L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> ($ctx : L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX>);>
+C<method set_SSL_CTX : void ($ssl_ctx : L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX>);>
 
 Calls native L<SSL_set_SSL_CTX(currently not documented)|https://docs.openssl.org/master/man3/SSL_set_SSL_CTX/> function given the pointer value of the instance, creates a new L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> object, sets the pointer value of the new object to the return value of the native function, sets C<no_free> flag of the new object to 1, creates a reference from the new object to the instance, and returns the new object.
+
+Note:
+
+Native SSL_set_SSL_CTX allows $ssl_ctx to be NULL, but currently L</"set_SSL_CTX"> method does not allow undef because SSL_set_SSL_CTX is undocumented and I'm not sure how it handles reference count.
+
+Native SSL_set_SSL_CTX returns a native C<SSL> object, but currently the return type of L</"set_SSL_CTX"> method SSL_set_SSL_CTX is undocumented and I'm not sure how it handles reference count.
 
 =head2 set_fd
 

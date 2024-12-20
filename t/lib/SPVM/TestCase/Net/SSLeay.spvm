@@ -123,11 +123,18 @@ class TestCase::Net::SSLeay {
           return 0;
         }
         
+        $ssl->set_SSL_CTX($ssl_ctx1);
+        
+        unless (Fn->eq_pointer($ssl->get_SSL_CTX, $ssl_ctx1)) {
+          return 0;
+        }
+        
         $ssl->set_SSL_CTX($ssl_ctx2);
         
         unless (Fn->eq_pointer($ssl->get_SSL_CTX, $ssl_ctx2)) {
           return 0;
         }
+        
       }
     }
     

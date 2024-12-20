@@ -75,7 +75,7 @@ class Net::SSLeay {
   
   native method get_SSL_CTX : Net::SSLeay::SSL_CTX ();
   
-  native method set_SSL_CTX : Net::SSLeay::SSL_CTX ($ctx : Net::SSLeay::SSL_CTX);
+  native method set_SSL_CTX : void ($ssl_ctx : Net::SSLeay::SSL_CTX);
   
   native method set_fd : int ($fd : int);
   
