@@ -122,10 +122,22 @@ If SSL_CTX_set_default_verify_paths failed, an exception is thrown with C<eval_e
 
 C<method set_default_verify_paths_windows : void ();>
 
-It behaves as if L</"set_default_verify_paths"> had been invoked in Windows using the way described below.
+It behaves as if L</"set_default_verify_paths"> is performed in Windows using the way described below.
 
 L<https://stackoverflow.com/questions/9507184/can-openssl-on-windows-use-the-system-certificate-store>
 
+Requirement:
+
+Windows
+
+Exceptions:
+
+If CertOpenSystemStore failed, an exception is thrown.
+
+d2i_X509 failed, an exception is thrown.
+
+X509_STORE_add_cert failed, an exception is thrown.
+      
 =head2 use_certificate_file
 
 C<method use_certificate_file : int ($file : string, $type : int = -1);>
