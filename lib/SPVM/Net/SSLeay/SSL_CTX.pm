@@ -44,6 +44,12 @@ C<has alpn_select_cb : ro L<Net::SSLeay::Callback::AlpnSelect|SPVM::Net::SSLeay:
 
 A callback set by L</"set_alpn_select_cb"> method.
 
+=head2 alpn_select_cb_output
+
+C<has alpn_select_cb_output : string;>
+
+An output string returned by calling the callback in L</"alpn_select_cb"> field.
+
 =head2 tlsext_servername_callback
 
 C<has tlsext_servername_callback : ro L<Net::SSLeay::Callback::TlsextServername|SPVM::Net::SSLeay::Callback::TlsextServername>;>

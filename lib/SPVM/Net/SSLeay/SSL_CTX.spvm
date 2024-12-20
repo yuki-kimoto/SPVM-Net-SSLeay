@@ -58,12 +58,17 @@ class Net::SSLeay::SSL_CTX : pointer {
     
     Fn->set_pointer($self, $pointer);
     
+    $self->init($options);
+    
     return $self;
   }
   
   protected method init : void ($options : object[] = undef) {
     
+    $self->_init_native;
   }
+  
+  native private method _init_native : void ($objects : object[] = undef);
   
   # Instance Methods
   native method get_mode : long ();

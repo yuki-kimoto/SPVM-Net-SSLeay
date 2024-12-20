@@ -64,7 +64,18 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__new(SPVM_ENV* env, SPVM_VALUE* stack) {
   env->call_instance_method_by_name(env, stack, "init", 0, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   
-  thread_env = env;
+  stack[0].oval = obj_self;
+  
+  return 0;
+}
+
+int32_t SPVM__Net__SSLeay__SSL_CTX___init_native(SPVM_ENV* env, SPVM_VALUE* stack) {
+  
+  int32_t error_id = 0;
+  
+  void* obj_self = stack[0].oval;
+  
+  SSL* self = env->get_pointer(env, stack, obj_self);
   
   thread_env = env;
   
@@ -75,8 +86,6 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__new(SPVM_ENV* env, SPVM_VALUE* stack) {
   stack[1].oval = obj_self;
   env->call_class_method_by_name(env, stack, "Net::SSLeay::SSL_CTX", "INIT_INSTANCE", 2, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
-  
-  stack[0].oval = obj_self;
   
   return 0;
 }
