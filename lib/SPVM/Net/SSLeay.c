@@ -289,8 +289,6 @@ int32_t SPVM__Net__SSLeay__set_tlsext_host_name(SPVM_ENV* env, SPVM_VALUE* stack
   
   SSL* self = env->get_pointer(env, stack, obj_self);
   
-  ERR_clear_error();
-  
   int32_t status = SSL_set_tlsext_host_name(self, name);
   
   if (!(status == 1)) {
@@ -424,8 +422,6 @@ int32_t SPVM__Net__SSLeay__set_fd(SPVM_ENV* env, SPVM_VALUE* stack) {
   int32_t fd = stack[1].ival;
   
   SSL* self = env->get_pointer(env, stack, obj_self);
-  
-  ERR_clear_error();
   
   int32_t status = SSL_set_fd(self, fd);
   
