@@ -328,13 +328,23 @@ Calls native L<SSL_get_SSL_CTX|https://docs.openssl.org/master/man3/SSL_get_SSL_
 
 C<method set_SSL_CTX : void ($ssl_ctx : L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX>);>
 
-Calls native L<SSL_set_SSL_CTX(currently not documented)|https://docs.openssl.org/master/man3/SSL_set_SSL_CTX/> function given the pointer value of the instance, creates a new L<Net::SSLeay::SSL_CTX|SPVM::Net::SSLeay::SSL_CTX> object, sets the pointer value of the new object to the return value of the native function, sets C<no_free> flag of the new object to 1, creates a reference from the new object to the instance, and returns the new object.
+If the pointer value of $ssl_ctx is the same as the return value(named C<current_ssl_ctx>) of native L<SSL_get_SSL_CTX|https://docs.openssl.org/master/man3/SSL_get_SSL_CTX/> given the pointer value of instance, does nothing.
+
+Otherwise calls L<SSL_CTX_up_ref|https://docs.openssl.org/master/man3/SSL_CTX_up_ref/> given C<current_ssl_ctx>, calls native L<SSL_set_SSL_CTX(currently not documented)|https://docs.openssl.org/master/man3/SSL_set_SSL_CTX/> function given the pointer value of the instance, the pointer value of $ssl_ctx.
+
+If SSL_set_SSL_CTX failed, calls native L<SSL_CTX_free|https://docs.openssl.org/master/man3/SSL_CTX_free/> function on C<current_ssl_ctx>.
 
 Note:
 
-Native SSL_set_SSL_CTX allows $ssl_ctx to be NULL, but currently L</"set_SSL_CTX"> method does not allow undef because SSL_set_SSL_CTX is undocumented and I'm not sure how it handles reference count.
+Native SSL_set_SSL_CTX function allows $ssl_ctx to be NULL, but currently L</"set_SSL_CTX"> method does not allow undef because SSL_set_SSL_CTX is undocumented and I'm not sure how it handles reference count.
 
-Native SSL_set_SSL_CTX returns a native C<SSL> object, but currently the return type of L</"set_SSL_CTX"> method SSL_set_SSL_CTX is undocumented and I'm not sure how it handles reference count.
+Native SSL_set_SSL_CTX function returns a native C<SSL> object, but currently the return type of L</"set_SSL_CTX"> method SSL_set_SSL_CTX is undocumented and I'm not sure how it handles reference count.
+
+Exceptions:
+
+The SSL_CTX object $ssl_ctx must be defined. Otherwise an exception is thrown.
+
+If SSL_set_SSL_CTX failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
 =head2 set_fd
 
