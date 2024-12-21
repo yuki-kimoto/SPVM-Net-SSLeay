@@ -308,7 +308,7 @@ The list $list must be defined. Otherwise an exception is thrown.
 
 C<method add_client_CA : int ($cacert : L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509>);>
 
-Calls native L<SSL_CTX_add_client_CA|https://docs.openssl.org/master/man3/SSL_CTX_add_client_CA> function given the pointer value of the instance, $cacert, and returns its return value.
+Calls native L<SSL_CTX_add_client_CA|https://docs.openssl.org/master/man3/SSL_CTX_add_client_CA> function given the pointer value of the instance, the pointer value of $cacert, and returns its return value.
 
 Exceptions:
 
@@ -320,7 +320,7 @@ If add_client_CA failed, an exception is thrown with C<eval_error_id> set to the
 
 C<method add_extra_chain_cert : long ($x509 : L<Net::SSLeay::X509|SPVM::Net::SSLeay::X509>);>
 
-Calls native L<SSL_CTX_add_extra_chain_cert|https://docs.openssl.org/master/man3/SSL_CTX_add_extra_chain_cert> function given the pointer value of the instance, $x509, sets the C<no_free> flag of $x509 is set to 1, and returns its return value.
+Calls native L<SSL_CTX_add_extra_chain_cert|https://docs.openssl.org/master/man3/SSL_CTX_add_extra_chain_cert> function given the pointer value of the instance, the pointer value of $x509, calls native L<X509_up_ref|https://docs.openssl.org/master/man3/X509_up_ref> function on the pointer value of $x509, and returns its return value.
 
 Exceptions:
 
@@ -332,41 +332,421 @@ If SSL_CTX_add_extra_chain_cert failed, an exception is thrown with C<eval_error
 
 C<method set_verify : void ($mode : int, $verify_callback : L<Net::SSLeay::Callback::Verify|SPVM::Net::SSLeay::Callback::Verify> = undef);>
 
-Calls native L<SSL_CTX_set_verify|https://docs.openssl.org/master/man3/SSL_CTX_set_verify> function given the pointer value of the instance, $mode, $verify_callback.
+If the callback $verify_callback is defined, A native variable C<native_cb> is set to a function pointer of the native callback funcion described below, otherwise C<native_cb> is set to NULL.
+
+And calls native L<SSL_CTX_set_verify|https://docs.openssl.org/master/man3/SSL_CTX_set_verify> function given the pointer value of the instance, C<native_cb>.
+
+And sets L</"verify_callback"> field to $verify_callback.
+
+Native Callback Function:
+
+The native callback function is defined by the following native code:
+
+  static int SPVM__Net__SSLeay__SSL_CTX__my__verify_callback(int preverify_ok, X509_STORE_CTX* x509_store_ctx) {
+    
+    int32_t error_id = 0;
+    
+    int32_t ret_status = 0;
+    
+    SPVM_ENV* env = thread_env;
+    
+    SPVM_VALUE* stack = env->new_stack(env);
+    
+    int32_t scope_id = env->enter_scope(env, stack);
+    
+    SSL* ssl = (SSL*)X509_STORE_CTX_get_ex_data(x509_store_ctx, SSL_get_ex_data_X509_STORE_CTX_idx());
+    
+    if (!ssl) {
+      env->die(env, stack, "X509_STORE_CTX_get_ex_data(x509_store_ctx, SSL_get_ex_data_X509_STORE_CTX_idx()) failed.", __func__, FILE_NAME, __LINE__);
+      
+      env->print_exception_to_stderr(env, stack);
+      
+      goto END_OF_FUNC;
+    }
+    
+    SSL_CTX* self = SSL_get_SSL_CTX(ssl);
+    
+    if (!self) {
+      env->die(env, stack, "SSL_get_SSL_CTX(ssl) failed.", __func__, FILE_NAME, __LINE__);
+      
+      env->print_exception_to_stderr(env, stack);
+      
+      goto END_OF_FUNC;
+    }
+    
+    char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
+    snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);
+    stack[0].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
+    env->call_class_method_by_name(env, stack, "Net::SSLeay::SSL_CTX", "GET_INSTANCE", 1, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) {
+      env->print_exception_to_stderr(env, stack);
+      
+      goto END_OF_FUNC;
+    }
+    void* obj_self = stack[0].oval;
+    
+    void* obj_cb = env->get_field_object_by_name(env, stack, obj_self, "verify_callback", &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) {
+      env->print_exception_to_stderr(env, stack);
+      goto END_OF_FUNC;
+    }
+    
+    if (!obj_cb) {
+      env->die(env, stack, "verify_callback field must be defined.", __func__, FILE_NAME, __LINE__);
+      
+      env->print_exception_to_stderr(env, stack);
+      goto END_OF_FUNC;
+    }
+    
+    void* obj_address_x509_store_ctx = env->new_pointer_object_by_name(env, stack, "Address", x509_store_ctx, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) {
+      env->print_exception_to_stderr(env, stack);
+      goto END_OF_FUNC;
+    }
+    stack[0].oval = obj_address_x509_store_ctx;
+    env->call_class_method_by_name(env, stack, "Net::SSLeay::X509_STORE_CTX", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) {
+      env->print_exception_to_stderr(env, stack);
+      goto END_OF_FUNC;
+    }
+    void* obj_x509_store_ctx = stack[0].oval;
+    env->set_no_free(env, stack, obj_x509_store_ctx, 1);
+    
+    stack[0].oval = obj_cb;
+    stack[1].ival = preverify_ok;
+    stack[2].oval = obj_x509_store_ctx;
+    
+    env->call_instance_method_by_name(env, stack, "", 3, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) {
+      env->print_exception_to_stderr(env, stack);
+      
+      goto END_OF_FUNC;
+    }
+    ret_status = stack[0].ival;
+    
+    END_OF_FUNC:
+    
+    env->leave_scope(env, stack, scope_id);
+    
+    env->free_stack(env, stack);
+    
+    return ret_status;
+  }
 
 =head2 set_alpn_select_cb
 
 C<method set_alpn_select_cb : void ($cb : Net::SSLeay::Callback::AlpnSelect);>
 
-Calls native L<SSL_CTX_set_alpn_select_cb|https://docs.openssl.org/master/man3/SSL_CTX_set_alpn_select_cb> function given $cb, NULL.
+If the callback $cb is defined, A native variable C<native_cb> is set to a function pointer of the native callback funcion described below, otherwise C<native_cb> is set to NULL.
+
+And calls native L<SSL_CTX_set_alpn_select_cb|https://docs.openssl.org/master/man3/SSL_CTX_set_alpn_select_cb> function given the pointer value of the instance, C<native_cb>, NULL.
+
+And sets L</"alpn_select_cb"> field to $cb.
+
+Native Callback Function:
+
+The native callback function is defined by the following native code:
+
+  static int SPVM__Net__SSLeay__SSL_CTX__my__alpn_select_cb(SSL* ssl, const unsigned char** out_ref, unsigned char* outlen_ref, const unsigned char* in, unsigned int inlen, void* native_arg) {
+    
+    int32_t error_id = 0;
+    
+    int32_t ret_status = SSL_TLSEXT_ERR_NOACK;
+    
+    void** native_args = (void**)native_arg;
+    
+    SPVM_ENV* env = thread_env;
+    
+    SPVM_VALUE* stack = env->new_stack(env);
+    
+    int32_t scope_id = env->enter_scope(env, stack);
+    
+    SSL_CTX* self = SSL_get_SSL_CTX(ssl);
+    
+    char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
+    snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);
+    stack[0].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
+    env->call_class_method_by_name(env, stack, "Net::SSLeay::SSL_CTX", "GET_INSTANCE", 1, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) {
+      env->print_exception_to_stderr(env, stack);
+      
+      goto END_OF_FUNC;
+    }
+    void* obj_self = stack[0].oval;
+    
+    void* obj_cb = env->get_field_object_by_name(env, stack, obj_self, "alpn_select_cb", &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) {
+      env->print_exception_to_stderr(env, stack);
+      goto END_OF_FUNC;
+    }
+    
+    if (!obj_cb) {
+      env->die(env, stack, "alpn_select_cb field must be defined.", __func__, FILE_NAME, __LINE__);
+      
+      env->print_exception_to_stderr(env, stack);
+      goto END_OF_FUNC;
+    }
+    
+    void* obj_address_ssl = env->new_pointer_object_by_name(env, stack, "Address", ssl, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) {
+      env->print_exception_to_stderr(env, stack);
+      goto END_OF_FUNC;
+    }
+    snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", ssl);
+    stack[0].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
+    env->call_class_method_by_name(env, stack, "Net::SSLeay", "GET_INSTANCE", 1, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) {
+      env->print_exception_to_stderr(env, stack);
+      
+      goto END_OF_FUNC;
+    }
+    void* obj_ssl = stack[0].oval;
+    
+    void* obj_out_ref = env->new_string_array(env, stack, 1);
+    
+    void* obj_in = env->new_string(env, stack, in, inlen);
+    
+    stack[0].oval = obj_cb;
+    stack[1].oval = obj_ssl;
+    stack[2].oval = obj_out_ref;
+    stack[3].bref = outlen_ref;
+    stack[4].oval = obj_in;
+    stack[5].ival = inlen;
+    
+    env->call_instance_method_by_name(env, stack, "", 6, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) {
+      env->print_exception_to_stderr(env, stack);
+      goto END_OF_FUNC;
+    }
+    ret_status = stack[0].ival;
+    
+    void* obj_out = env->get_elem_object(env, stack, obj_out_ref, 0);
+    
+    if (!obj_out) {
+      env->die(env, stack, "An output string for set_alpn_select_cb is not set.", __func__, FILE_NAME, __LINE__);
+      
+      env->print_exception_to_stderr(env, stack);
+      goto END_OF_FUNC;
+    }
+    
+    const char* out = env->get_chars(env, stack, obj_out);
+    *out_ref = out;
+    
+    env->set_field_string_by_name(env, stack, obj_self, "alpn_select_cb_output", obj_out, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) {
+      env->print_exception_to_stderr(env, stack);
+      goto END_OF_FUNC;
+    }
+    
+    END_OF_FUNC:
+    
+    env->leave_scope(env, stack, scope_id);
+    
+    env->free_stack(env, stack);
+    
+    return ret_status;
+  }
 
 =head2 set_alpn_select_cb_with_protocols
 
 C<method set_alpn_select_cb_with_protocols : void ($protocols : string[]);>
 
-Calls native L<SSL_CTX_set_alpn_select_cb|https://docs.openssl.org/master/man3/SSL_CTX_set_alpn_select_cb> function defined to select $protocols.
+Calls L</"set_alpn_select_cb"> method given the following anon method.
+
+  my $cb = [$protocols : string[]] method : int ($ssl : Net::SSLeay, $out_ref : string[], $outlen_ref : byte*, $in : string, $inlen : int) {
+    
+    my $wire_format = Net::SSLeay::Util->convert_to_wire_format($protocols);
+    
+    my $status_select_next_proto = Net::SSLeay->select_next_proto($out_ref, $outlen_ref, $in, $inlen, $wire_format, length $wire_format);
+    
+    my $status = SSL->SSL_TLSEXT_ERR_NOACK;
+    if ($status_select_next_proto == SSL->OPENSSL_NPN_NEGOTIATED) {
+      $status = SSL->SSL_TLSEXT_ERR_OK;
+    }
+    
+    return $status;
+  };
 
 =head2 set_default_passwd_cb
 
 C<method set_default_passwd_cb : void ($cb : L<Net::SSLeay::Callback::PemPassword|SPVM::Net::SSLeay::Callback::PemPassword>);>
 
-Calls native L<SSL_CTX_set_default_passwd_cb|https://docs.openssl.org/master/man3/SSL_CTX_set_default_passwd_cb> function given $cb, NULL, and returns its return value.
+If the callback $cb is defined, A native variable C<native_cb> is set to a function pointer of the native callback funcion described below, otherwise C<native_cb> is set to NULL.
 
-$arg is expected to be passed to native L<SSL_CTX_set_default_passwd_cb_userdata|https://docs.openssl.org/master/man3/SSL_CTX_set_default_passwd_cb_userdata> function.
+And calls native L<SSL_CTX_set_default_passwd_cb|https://docs.openssl.org/master/man3/SSL_CTX_set_default_passwd_cb> function given the pointer value of the instance, C<native_cb>, the pointer of the instance, and calls L<SSL_CTX_set_default_passwd_cb_userdata|https://docs.openssl.org/master/man3/SSL_CTX_set_default_passwd_cb_userdata> given the pointer of the instance.
+
+And sets L</"default_passwd_cb"> field to $cb.
+
+Native Callback Function:
+
+The native callback function is defined by the following native code:
+
+  static int SPVM__Net__SSLeay__SSL_CTX__my__default_passwd_cb(char* buf, int size, int rwflag, void* native_arg) {
+    
+    int32_t error_id = 0;
+    
+    int32_t ret_buf_length = 0;
+    
+    SPVM_ENV* env = thread_env;
+    
+    SPVM_VALUE* stack = env->new_stack(env);
+    
+    int32_t scope_id = env->enter_scope(env, stack);
+    
+    SSL_CTX* self = (SSL_CTX*)native_arg;
+    
+    char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
+    snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);
+    stack[0].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
+    env->call_class_method_by_name(env, stack, "Net::SSLeay::SSL_CTX", "GET_INSTANCE", 1, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) {
+      env->print_exception_to_stderr(env, stack);
+      
+      goto END_OF_FUNC;
+    }
+    void* obj_self = stack[0].oval;
+    
+    assert(obj_self);
+    
+    void* obj_cb = env->get_field_object_by_name(env, stack, obj_self, "default_passwd_cb", &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) {
+      env->print_exception_to_stderr(env, stack);
+      goto END_OF_FUNC;
+    }
+    
+    if (!obj_cb) {
+      env->die(env, stack, "default_passwd_cb field must be defined.", __func__, FILE_NAME, __LINE__);
+      
+      env->print_exception_to_stderr(env, stack);
+      goto END_OF_FUNC;
+    }
+    
+    void* obj_buf = env->new_string(env, stack, buf, size);
+    
+    stack[0].oval = obj_cb;
+    stack[1].oval = obj_buf;
+    stack[2].ival = size;
+    stack[3].ival = rwflag;
+    
+    env->call_instance_method_by_name(env, stack, "", 4, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) {
+      env->print_exception_to_stderr(env, stack);
+      
+      goto END_OF_FUNC;
+    }
+    ret_buf_length = stack[0].ival;
+    
+    memcpy(buf, env->get_chars(env, stack, obj_buf), size);
+    
+    END_OF_FUNC:
+    
+    env->leave_scope(env, stack, scope_id);
+    
+    env->free_stack(env, stack);
+    
+    return ret_buf_length;
+  }
 
 =head2 set_tlsext_servername_callback
 
-C<method set_tlsext_servername_callback : long ($cb : L<Net::SSLeay::Callback::TlsextServername|SPVM::Net::SSLeay::Callback::TlsextServername>);>
+C<method set_tlsext_servername_callback : long ($callback : L<Net::SSLeay::Callback::TlsextServername|SPVM::Net::SSLeay::Callback::TlsextServername>);>
 
 Calls native L<SSL_CTX_set_tlsext_servername_callback|https://docs.openssl.org/master/man3/SSL_CTX_set_tlsext_servername_callback> function given $cb, NULL, and returns its return value.
 
-$arg is expected to be passed to native L<SSL_CTX_set_tlsext_servername_arg|https://docs.openssl.org/master/man3/SSL_CTX_set_tlsext_servername_arg> function.
+If the callback $callback is defined, A native variable C<native_cb> is set to a function pointer of the native callback funcion described below, otherwise C<native_cb> is set to NULL.
+
+And calls native L<SSL_CTX_set_tlsext_servername_callback|https://docs.openssl.org/master/man3/SSL_CTX_set_tlsext_servername_callback> function given the pointer value of the instance, C<native_cb>.
+
+And sets L</"alpn_select_cb"> field to $callback.
+
+And retunrs the return value of native L<SSL_CTX_set_tlsext_servername_callback|https://docs.openssl.org/master/man3/SSL_CTX_set_tlsext_servername_callback> function.
+
+Native Callback Function:
+
+The native callback function is defined by the following native code:
+
+  static int SPVM__Net__SSLeay__SSL_CTX__my__tlsext_servername_callback(SSL* ssl, int* al, void* native_arg) {
+    
+    int32_t error_id = 0;
+    
+    int32_t ret_status = SSL_TLSEXT_ERR_NOACK;
+    
+    SPVM_ENV* env = thread_env;
+    
+    SPVM_VALUE* stack = env->new_stack(env);
+    
+    int32_t scope_id = env->enter_scope(env, stack);
+    
+    SSL_CTX* self = SSL_get_SSL_CTX(ssl);
+    
+    char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
+    snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);
+    stack[0].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
+    env->call_class_method_by_name(env, stack, "Net::SSLeay::SSL_CTX", "GET_INSTANCE", 1, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) {
+      env->print_exception_to_stderr(env, stack);
+      
+      goto END_OF_FUNC;
+    }
+    void* obj_self = stack[0].oval;
+    
+    void* obj_cb = env->get_field_object_by_name(env, stack, obj_self, "tlsext_servername_callback", &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) {
+      env->print_exception_to_stderr(env, stack);
+      goto END_OF_FUNC;
+    }
+    
+    if (!obj_cb) {
+      env->die(env, stack, "tlsext_servername_callback field must be defined.", __func__, FILE_NAME, __LINE__);
+      
+      env->print_exception_to_stderr(env, stack);
+      goto END_OF_FUNC;
+    }
+    
+    snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", ssl);
+    stack[0].oval = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
+    env->call_class_method_by_name(env, stack, "Net::SSLeay", "GET_INSTANCE", 1, &error_id, __func__, FILE_NAME, __LINE__);
+    if (error_id) {
+      env->print_exception_to_stderr(env, stack);
+      
+      goto END_OF_FUNC;
+    }
+    void* obj_ssl = stack[0].oval;
+    
+    assert(obj_ssl);
+    
+    stack[0].oval = obj_cb;
+    stack[1].oval = obj_ssl;
+    int32_t al_tmp = 0;
+    stack[2].iref = &al_tmp;
+    
+    env->call_instance_method_by_name(env, stack, "", 3, &error_id, __func__, FILE_NAME, __LINE__);
+    ret_status = stack[0].ival;
+    
+    *al = al_tmp;
+    
+    if (error_id) {
+      env->print_exception_to_stderr(env, stack);
+      
+      goto END_OF_FUNC;
+    }
+    
+    END_OF_FUNC:
+    
+    env->leave_scope(env, stack, scope_id);
+    
+    env->free_stack(env, stack);
+    
+    return ret_status;
+  }
 
 =head2 DESTROY
 
 C<method DESTROY : void ();>
 
-Calls native L<SSL_CTX_free|https://docs.openssl.org/master/man3/SSL_CTX_free> function given the pointer value of the instance unless C<no_free> flag of the instance is a true value.
+Performes L<Cleanup process described in Callback Hack|/"Callback Hack">.
+
+And calls native L<SSL_CTX_free|https://docs.openssl.org/master/man3/SSL_CTX_free> function given the pointer value of the instance unless C<no_free> flag of the instance is a true value.
 
 =head1 See Also
 

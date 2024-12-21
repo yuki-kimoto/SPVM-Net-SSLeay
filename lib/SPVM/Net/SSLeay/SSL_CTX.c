@@ -836,7 +836,8 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__add_extra_chain_cert(SPVM_ENV* env, SPVM_VAL
   
   X509* x509 = env->get_pointer(env, stack, obj_x509);
   
-  // SSL_CTX destructor calls X509_free on x509.
+  // The x509 certificate provided to SSL_CTX_add_extra_chain_cert() will be freed by the library when the SSL_CTX is destroyed.
+  // An application should not free the x509 object.
   int32_t status = SSL_CTX_add_extra_chain_cert(self, x509);
   
   if (!(status == 1)) {
@@ -861,7 +862,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__add_extra_chain_cert(SPVM_ENV* env, SPVM_VAL
   return 0;
 }
 
-static int SPVM__Net__SSLeay__SSL_CTX__my__verify_cb(int preverify_ok, X509_STORE_CTX* x509_store_ctx) {
+static int SPVM__Net__SSLeay__SSL_CTX__my__verify_callback(int preverify_ok, X509_STORE_CTX* x509_store_ctx) {
   
   int32_t error_id = 0;
   
@@ -966,7 +967,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_verify(SPVM_ENV* env, SPVM_VALUE* stack)
   
   SSL_verify_cb native_cb = NULL;
   if (obj_cb) {
-    native_cb = &SPVM__Net__SSLeay__SSL_CTX__my__verify_cb;
+    native_cb = &SPVM__Net__SSLeay__SSL_CTX__my__verify_callback;
     
     env->set_field_object_by_name(env, stack, obj_self, "verify_callback", obj_cb, &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -1096,7 +1097,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_alpn_select_cb(SPVM_ENV* env, SPVM_VALUE
     if (error_id) { return error_id; }
   }
   
-  SSL_CTX_set_alpn_select_cb(self, native_cb, self);
+  SSL_CTX_set_alpn_select_cb(self, native_cb, NULL);
   
   return 0;
 }

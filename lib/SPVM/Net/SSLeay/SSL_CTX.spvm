@@ -155,7 +155,7 @@ class Net::SSLeay::SSL_CTX : pointer {
     $self->set_alpn_select_cb($cb);
   }
   
-  native method set_tlsext_servername_callback : long ($cb : Net::SSLeay::Callback::TlsextServername);
+  native method set_tlsext_servername_callback : long ($callback : Net::SSLeay::Callback::TlsextServername);
   
   native method DESTROY : void ();
   
