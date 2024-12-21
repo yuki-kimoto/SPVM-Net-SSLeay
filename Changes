@@ -1,5 +1,7 @@
 0.033 2024-12-20
   
+  [Stability Improvement]
+    * Unit tests and documentation are finised.
   [New Features]
     * Add the following fields to Net::SSLeay::SSL_CTX.
     
