@@ -14,10 +14,6 @@ Net::SSLeay class in L<SPVM> is a OpenSSL binding to SPVM.
 
 This class itself represents L<SSL|https://docs.openssl.org/master/man3/SSL> data structure in OpenSSL.
 
-B<Warnings:>
-
-B<This class is highly experimental. Many features may be changed without warnings.> 
-
 =head1 Usage
 
   use Net::SSLeay;
