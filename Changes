@@ -1,3 +1,7 @@
+0.035 2025-01-16
+  [Internal Changes]
+    * Update .gitignore and MANIFEST.SKIP.
+    
 0.034001 2025-01-02
   [Bug Fix]
     * Fix a potential bug that the argument width on a method call is wrong.
