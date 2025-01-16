@@ -2,6 +2,7 @@
 # MIT License
 
 class Net::SSLeay::EVP_PKEY : pointer {
+  version_from Net::SSLeay;
   
   use Fn;
   use Net::SSLeay::EVP_PKEY;

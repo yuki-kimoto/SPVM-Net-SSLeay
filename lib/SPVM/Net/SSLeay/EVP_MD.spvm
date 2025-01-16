@@ -2,6 +2,7 @@
 # MIT License
 
 class Net::SSLeay::EVP_MD : pointer {
+  version_from Net::SSLeay;
   
   # Instance Methods
   native method DESTROY : void ();

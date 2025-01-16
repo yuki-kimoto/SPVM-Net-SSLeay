@@ -2,6 +2,7 @@
 # MIT License
 
 class Net::SSLeay::X509_VERIFY_PARAM : pointer {
+  version_from Net::SSLeay;
   allow Net::SSLeay::SSL_CTX;
   
   use Net::SSLeay::Error;

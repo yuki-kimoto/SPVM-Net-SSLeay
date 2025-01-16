@@ -2,6 +2,7 @@
 # MIT License
 
 class Net::SSLeay::Callback::AlpnSelect : interface_t {
+  version_from Net::SSLeay;
   use Net::SSLeay;
   
   required method : int ($ssl : Net::SSLeay, $out_ref : string[], $outlen_ref : byte*, $in : string, $inlen : int);

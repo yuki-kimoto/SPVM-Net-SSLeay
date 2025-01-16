@@ -2,6 +2,7 @@
 # MIT License
 
 class Net::SSLeay::PEM {
+  version_from Net::SSLeay;
   
   use Net::SSLeay::Error;
   use Net::SSLeay::Error::PEM_R_NO_START_LINE;

@@ -2,6 +2,7 @@
 # MIT License
 
 class Net::SSLeay::Util {
+  version_from Net::SSLeay;
   
   # Class Methods
   native static method convert_to_wire_format : string ($protocols : string[]);

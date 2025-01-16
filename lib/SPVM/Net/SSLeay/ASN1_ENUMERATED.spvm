@@ -2,6 +2,7 @@
 # MIT License
 
 class Net::SSLeay::ASN1_ENUMERATED : pointer {
+  version_from Net::SSLeay;
   
   # Class Methods
   native static method new : Net::SSLeay::ASN1_ENUMERATED ();

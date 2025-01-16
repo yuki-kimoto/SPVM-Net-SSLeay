@@ -2,6 +2,7 @@
 # MIT License
 
 class Net::SSLeay::BIO : pointer {
+  version_from Net::SSLeay;
   
   use Net::SSLeay::Error;
   

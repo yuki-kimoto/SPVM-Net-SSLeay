@@ -2,6 +2,7 @@
 # MIT License
 
 class Net::SSLeay::Callback::Msg : interface_t {
+  version_from Net::SSLeay;
   use Net::SSLeay;
   
   # Interface Methods

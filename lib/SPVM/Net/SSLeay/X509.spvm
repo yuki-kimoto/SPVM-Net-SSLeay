@@ -2,6 +2,7 @@
 # MIT License
 
 class Net::SSLeay::X509 : pointer {
+  version_from Net::SSLeay;
   allow Net::SSLeay::PEM;
   
   use Net::SSLeay::Error;

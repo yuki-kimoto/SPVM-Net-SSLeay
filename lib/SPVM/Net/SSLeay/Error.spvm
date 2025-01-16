@@ -2,5 +2,6 @@
 # MIT License
 
 class Net::SSLeay::Error extends Error {
+  version_from Net::SSLeay;
   
 }

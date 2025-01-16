@@ -2,6 +2,7 @@
 # MIT License
 
 class Net::SSLeay::X509_STORE_CTX : pointer {
+  version_from Net::SSLeay;
   
   use Net::SSLeay::Error;
   use Net::SSLeay::X509;

@@ -2,6 +2,7 @@
 # MIT License
 
 class Net::SSLeay::OBJ {
+  version_from Net::SSLeay;
   
   use Net::SSLeay::ASN1_OBJECT;
   

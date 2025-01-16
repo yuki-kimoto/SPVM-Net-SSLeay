@@ -2,6 +2,7 @@
 # MIT License
 
 class Net::SSLeay::PKCS12 {
+  version_from Net::SSLeay;
   
   use Fn;
   

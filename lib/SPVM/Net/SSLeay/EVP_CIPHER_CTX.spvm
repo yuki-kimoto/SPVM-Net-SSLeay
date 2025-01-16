@@ -2,6 +2,7 @@
 # MIT License
 
 class Net::SSLeay::EVP_CIPHER_CTX {
+  version_from Net::SSLeay;
   
   use Fn;
   

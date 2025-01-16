@@ -2,6 +2,7 @@
 # MIT License
 
 class Net::SSLeay::ASN1_GENERALIZEDTIME : pointer {
+  version_from Net::SSLeay;
   
   use Net::SSLeay::BIO;
   use Fn;

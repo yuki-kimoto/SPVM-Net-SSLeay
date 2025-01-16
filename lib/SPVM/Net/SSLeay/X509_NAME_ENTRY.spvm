@@ -2,6 +2,7 @@
 # MIT License
 
 class Net::SSLeay::X509_NAME_ENTRY {
+  version_from Net::SSLeay;
   
   use Net::SSLeay::X509_NAME;
   use Net::SSLeay::ASN1_STRING;

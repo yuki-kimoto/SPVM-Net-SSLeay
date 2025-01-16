@@ -2,6 +2,7 @@
 # MIT License
 
 class Net::SSLeay::Constant {
+  version_from Net::SSLeay;
   
   use Net::SSLeay::Error;
   

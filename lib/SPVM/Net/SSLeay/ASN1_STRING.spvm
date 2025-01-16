@@ -2,6 +2,7 @@
 # MIT License
 
 class Net::SSLeay::ASN1_STRING : pointer {
+  version_from Net::SSLeay;
   
   use Fn;
   

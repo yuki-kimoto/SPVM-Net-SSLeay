@@ -2,6 +2,7 @@
 # MIT License
 
 class Net::SSLeay::OPENSSL_INIT_SETTINGS {
+  version_from Net::SSLeay;
   
   allow Net::SSLeay::OPENSSL_INIT;
   
