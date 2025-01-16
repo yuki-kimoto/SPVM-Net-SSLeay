@@ -901,6 +901,10 @@ int32_t SPVM__Net__SSLeay__get0_alpn_selected(SPVM_ENV* env, SPVM_VALUE* stack) 
     return env->die(env, stack, "The data reference $data_ref must be 1-length array.", __func__, FILE_NAME, __LINE__);
   }
   
+  if (!len_ref) {
+    return env->die(env, stack, "The reference of the length $len_ref must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
   const unsigned char* data_tmp = NULL;
   unsigned int len_tmp = -1;
   SSL_get0_alpn_selected(self, &data_tmp, &len_tmp);

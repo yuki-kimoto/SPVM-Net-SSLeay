@@ -536,6 +536,8 @@ Exceptions:
 
 The data reference $data_ref must be 1-length array. Otherwise an exception is thrown.
 
+The reference of the length $len_ref must be defined. Otherwise an exception is thrown.
+
 =head2 get0_alpn_selected_return_string
 
 C<method get0_alpn_selected_return_string : string ()>
