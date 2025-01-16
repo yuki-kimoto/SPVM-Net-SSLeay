@@ -4,7 +4,8 @@
   [Exception Changes]
     * SSLeay#select_next_proto method throws an exception if $outlen_ref is not defined.
     * SSLeay#get0_alpn_selected method throws an exception if $len_ref is not defined.
-    
+    * Net::SSLeay::X509#pubkey_digest method throws an exception if $len_ref is not defined.
+    * Net::SSLeay::X509#digest method throws an exception if $len_ref is not defined.
 0.034001 2025-01-02
   [Bug Fix]
     * Fix a potential bug that the argument width on a method call is wrong.

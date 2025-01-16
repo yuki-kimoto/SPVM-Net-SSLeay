@@ -213,6 +213,10 @@ int32_t SPVM__Net__SSLeay__X509__pubkey_digest(SPVM_ENV* env, SPVM_VALUE* stack)
     return env->die(env, stack, "The length of output buffer $md must be greater than or equal to EVP_MAX_MD_SIZE.", __func__, FILE_NAME, __LINE__);
   }
   
+  if (!len_ref) {
+    return env->die(env, stack, "The reference of the length $len_ref must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
   char* md = (char*)env->get_chars(env, stack, obj_md);
   
   unsigned int len_tmp = 0;
@@ -395,6 +399,10 @@ int32_t SPVM__Net__SSLeay__X509__digest(SPVM_ENV* env, SPVM_VALUE* stack) {
   int32_t md_length = env->length(env, stack, obj_md);
   if (!(md_length >= EVP_MAX_MD_SIZE)) {
     return env->die(env, stack, "The length of output buffer $md must be greater than or equal to EVP_MAX_MD_SIZE.", __func__, FILE_NAME, __LINE__);
+  }
+  
+  if (!len_ref) {
+    return env->die(env, stack, "The reference of the length $len_ref must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   char* md = (char*)env->get_chars(env, stack, obj_md);

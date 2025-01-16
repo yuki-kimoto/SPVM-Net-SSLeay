@@ -84,6 +84,8 @@ The output buffer $md must be defined. Otherwise an exception is thrown.
 
 The length of output buffer $md must be greater than or equal to EVP_MAX_MD_SIZE. Otherwise an exception is thrown.
 
+The reference of the length $len_ref must be defined. Otherwise an exception is thrown.
+
 If X509_pubkey_digest failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
 =head2 pubkey_digest_return_string
@@ -151,6 +153,8 @@ The digest type $type must be defined. Otherwise an exception is thrown.
 The output buffer $md must be defined. Otherwise an exception is thrown.
 
 The length of output buffer $md must be greater than or equal to EVP_MAX_MD_SIZE. Otherwise an exception is thrown.
+
+The reference of the length $len_ref must be defined. Otherwise an exception is thrown.
 
 If X509_digest failed, an exception is thrown with C<eval_error_id> set to the basic type ID of L<Net::SSLeay::Error|SPVM::Net::SSLeay::Error> class.
 
