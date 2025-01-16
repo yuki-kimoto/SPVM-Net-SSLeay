@@ -144,6 +144,10 @@ int32_t SPVM__Net__SSLeay__select_next_proto(SPVM_ENV* env, SPVM_VALUE* stack) {
     return env->die(env, stack, "The output reference $out_ref must be 1-length array.", __func__, FILE_NAME, __LINE__);
   }
   
+  if (!outlen_ref) {
+    return env->die(env, stack, "The reference of the output length $outlen_ref must be defined.", __func__, FILE_NAME, __LINE__);
+  }
+  
   if (!obj_server) {
     return env->die(env, stack, "$server must be defined.", __func__, FILE_NAME, __LINE__);
   }

@@ -250,6 +250,8 @@ Exceptions:
 
 The output reference $out_ref must be 1-length array. Otherwise an exception is thrown.
 
+The reference of the output length $outlen_ref must be defined. Otherwise an exception is thrown.
+
 $server must be defined. Otherwise an exception is thrown.
 
 $client must be defined. Otherwise an exception is thrown.
