@@ -1,3 +1,7 @@
+0.037 2025-10-13
+  [Internal Changes]
+    * Refactor tests.
+    
 0.036 2025-01-28
   [Requirement Changes]
     * Require SPVM 0.990042.
