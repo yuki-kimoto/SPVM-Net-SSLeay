@@ -135,7 +135,7 @@ class TestCase::Net::SSLeay::Online {
         my $again = Sys::Socket::Errno->is_read_again(Sys::Socket::Errno->errno);
         
         if ($again) {
-          Go->gosched_io_read($fd, $timeout);
+          Go->gosched_io_read_sec($fd, $timeout);
           next;
         }
         else {

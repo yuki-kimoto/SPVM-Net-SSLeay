@@ -53,6 +53,7 @@ WriteMakefile(
     'SPVM::Mozilla::CA' => '0.001',
     'SPVM::IO' => '0.204003',
     'SPVM::FindBin' => '0.031',
+    'SPVM::Go' => '0.022',
   },
 );
 

@@ -1,3 +1,7 @@
+0.038 2026-01-27
+  [Test Fix]
+    * Fix test for latest SPVM::Go.
+    
 0.037 2025-10-13
   [Internal Changes]
     * Refactor tests.
