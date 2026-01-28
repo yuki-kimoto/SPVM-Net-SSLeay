@@ -20,7 +20,7 @@ int32_t SPVM__Net__SSLeay__X509_VERIFY_PARAM__new(SPVM_ENV* env, SPVM_VALUE* sta
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die(env, stack, "[OpenSSL Error]X509_VERIFY_PARAM_new failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    env->die_v2(env, stack, "[OpenSSL Error]X509_VERIFY_PARAM_new failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -70,7 +70,7 @@ int32_t SPVM__Net__SSLeay__X509_VERIFY_PARAM__set_flags(SPVM_ENV* env, SPVM_VALU
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die(env, stack, "[OpenSSL Error]X509_VERIFY_PARAM_set_flags failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    env->die_v2(env, stack, "[OpenSSL Error]X509_VERIFY_PARAM_set_flags failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -102,7 +102,7 @@ int32_t SPVM__Net__SSLeay__X509_VERIFY_PARAM__clear_flags(SPVM_ENV* env, SPVM_VA
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die(env, stack, "[OpenSSL Error]X509_VERIFY_PARAM_clear_flags failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    env->die_v2(env, stack, "[OpenSSL Error]X509_VERIFY_PARAM_clear_flags failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -155,7 +155,7 @@ int32_t SPVM__Net__SSLeay__X509_VERIFY_PARAM__set1_host(SPVM_ENV* env, SPVM_VALU
   void* obj_name = stack[1].oval;
   
   if (!obj_name) {
-    return env->die(env, stack, "The host name $name must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die_v2(env, stack, "The host name $name must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   int32_t namelen = stack[2].ival;
@@ -167,7 +167,7 @@ int32_t SPVM__Net__SSLeay__X509_VERIFY_PARAM__set1_host(SPVM_ENV* env, SPVM_VALU
   }
   
   if (!(namelen <= name_length)) {
-    return env->die(env, stack, "The length $namelen must be greater than or equal to the length of the host name $name.", __func__, FILE_NAME, __LINE__);
+    return env->die_v2(env, stack, "The length $namelen must be greater than or equal to the length of the host name $name.", __func__, FILE_NAME, __LINE__);
   }
   
   const char* name = env->get_chars(env, stack, obj_name);
@@ -182,7 +182,7 @@ int32_t SPVM__Net__SSLeay__X509_VERIFY_PARAM__set1_host(SPVM_ENV* env, SPVM_VALU
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die(env, stack, "[OpenSSL Error]X509_VERIFY_PARAM_set1_host failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    env->die_v2(env, stack, "[OpenSSL Error]X509_VERIFY_PARAM_set1_host failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -203,7 +203,7 @@ int32_t SPVM__Net__SSLeay__X509_VERIFY_PARAM__set1_ip_asc(SPVM_ENV* env, SPVM_VA
   void* obj_ipasc = stack[1].oval;
   
   if (!obj_ipasc) {
-    return env->die(env, stack, "The IP address $ip_asc must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die_v2(env, stack, "The IP address $ip_asc must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   int32_t ipasc_length = env->length(env, stack, obj_ipasc);
@@ -220,7 +220,7 @@ int32_t SPVM__Net__SSLeay__X509_VERIFY_PARAM__set1_ip_asc(SPVM_ENV* env, SPVM_VA
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die(env, stack, "[OpenSSL Error]X509_VERIFY_PARAM_set1_ip_asc failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    env->die_v2(env, stack, "[OpenSSL Error]X509_VERIFY_PARAM_set1_ip_asc failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -241,7 +241,7 @@ int32_t SPVM__Net__SSLeay__X509_VERIFY_PARAM__set1_email(SPVM_ENV* env, SPVM_VAL
   void* obj_name = stack[1].oval;
   
   if (!obj_name) {
-    return env->die(env, stack, "The email $email must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die_v2(env, stack, "The email $email must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   int32_t namelen = stack[2].ival;
@@ -253,7 +253,7 @@ int32_t SPVM__Net__SSLeay__X509_VERIFY_PARAM__set1_email(SPVM_ENV* env, SPVM_VAL
   }
   
   if (!(namelen <= name_length)) {
-    return env->die(env, stack, "The length $emaillen must be greater than or equal to the length of the email name $name.", __func__, FILE_NAME, __LINE__);
+    return env->die_v2(env, stack, "The length $emaillen must be greater than or equal to the length of the email name $name.", __func__, FILE_NAME, __LINE__);
   }
   
   const char* name = env->get_chars(env, stack, obj_name);
@@ -268,7 +268,7 @@ int32_t SPVM__Net__SSLeay__X509_VERIFY_PARAM__set1_email(SPVM_ENV* env, SPVM_VAL
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die(env, stack, "[OpenSSL Error]X509_VERIFY_PARAM_set1_email failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    env->die_v2(env, stack, "[OpenSSL Error]X509_VERIFY_PARAM_set1_email failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }

@@ -22,7 +22,7 @@ int32_t SPVM__Net__SSLeay__ASN1_GENERALIZEDTIME__new(SPVM_ENV* env, SPVM_VALUE* 
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die(env, stack, "[OpenSSL Error]ASN1_GENERALIZEDTIME_new failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    env->die_v2(env, stack, "[OpenSSL Error]ASN1_GENERALIZEDTIME_new failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -57,7 +57,7 @@ int32_t SPVM__Net__SSLeay__ASN1_GENERALIZEDTIME__set(SPVM_ENV* env, SPVM_VALUE* 
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die(env, stack, "[OpenSSL Error]ASN1_GENERALIZEDTIME_set failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    env->die_v2(env, stack, "[OpenSSL Error]ASN1_GENERALIZEDTIME_set failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -93,7 +93,7 @@ int32_t SPVM__Net__SSLeay__ASN1_GENERALIZEDTIME__print(SPVM_ENV* env, SPVM_VALUE
   void* obj_b = stack[1].oval;
   
   if (!obj_b) {
-    return env->die(env, stack, "The BIO object $b must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die_v2(env, stack, "The BIO object $b must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   ASN1_GENERALIZEDTIME* self = env->get_pointer(env, stack, obj_self);
@@ -108,7 +108,7 @@ int32_t SPVM__Net__SSLeay__ASN1_GENERALIZEDTIME__print(SPVM_ENV* env, SPVM_VALUE
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die(env, stack, "[OpenSSL Error]ASN1_GENERALIZEDTIME_print failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    env->die_v2(env, stack, "[OpenSSL Error]ASN1_GENERALIZEDTIME_print failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }

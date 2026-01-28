@@ -32,7 +32,7 @@ int32_t SPVM__Net__SSLeay__new(SPVM_ENV* env, SPVM_VALUE* stack) {
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die(env, stack, "[OpenSSL Error]SSL_new failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    env->die_v2(env, stack, "[OpenSSL Error]SSL_new failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -79,7 +79,7 @@ int32_t SPVM__Net__SSLeay__load_client_CA_file(SPVM_ENV* env, SPVM_VALUE* stack)
   void* obj_file = stack[0].oval;
   
   if (!obj_file) {
-    return env->die(env, stack, "The file $file must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die_v2(env, stack, "The file $file must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   const char* file = env->get_chars(env, stack, obj_file);
@@ -92,7 +92,7 @@ int32_t SPVM__Net__SSLeay__load_client_CA_file(SPVM_ENV* env, SPVM_VALUE* stack)
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die(env, stack, "[OpenSSL Error]SSL_load_client_CA_file failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    env->die_v2(env, stack, "[OpenSSL Error]SSL_load_client_CA_file failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -141,21 +141,21 @@ int32_t SPVM__Net__SSLeay__select_next_proto(SPVM_ENV* env, SPVM_VALUE* stack) {
   int32_t client_len = stack[5].ival;
   
   if (!(obj_out_ref && env->length(env, stack, obj_out_ref) == 1)) {
-    return env->die(env, stack, "The output reference $out_ref must be 1-length array.", __func__, FILE_NAME, __LINE__);
+    return env->die_v2(env, stack, "The output reference $out_ref must be 1-length array.", __func__, FILE_NAME, __LINE__);
   }
   
   if (!outlen_ref) {
-    return env->die(env, stack, "The reference of the output length $outlen_ref must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die_v2(env, stack, "The reference of the output length $outlen_ref must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   if (!obj_server) {
-    return env->die(env, stack, "$server must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die_v2(env, stack, "$server must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   const char* server = env->get_chars(env, stack, obj_server);
   
   if (!obj_client) {
-    return env->die(env, stack, "$client must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die_v2(env, stack, "$client must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   const char* client = env->get_chars(env, stack, obj_client);
@@ -286,7 +286,7 @@ int32_t SPVM__Net__SSLeay__set_tlsext_host_name(SPVM_ENV* env, SPVM_VALUE* stack
   void* obj_name = stack[1].oval;
   
   if (!obj_name) {
-    return env->die(env, stack, "The host name $name must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die_v2(env, stack, "The host name $name must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   const char* name = env->get_chars(env, stack, obj_name);
@@ -301,7 +301,7 @@ int32_t SPVM__Net__SSLeay__set_tlsext_host_name(SPVM_ENV* env, SPVM_VALUE* stack
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die(env, stack, "[OpenSSL Error]SSL_set_tlsext_host_name failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    env->die_v2(env, stack, "[OpenSSL Error]SSL_set_tlsext_host_name failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -353,7 +353,7 @@ int32_t SPVM__Net__SSLeay__get_SSL_CTX(SPVM_ENV* env, SPVM_VALUE* stack) {
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die(env, stack, "[OpenSSL Error]SSL_set_SSL_CTX failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    env->die_v2(env, stack, "[OpenSSL Error]SSL_set_SSL_CTX failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -383,7 +383,7 @@ int32_t SPVM__Net__SSLeay__set_SSL_CTX(SPVM_ENV* env, SPVM_VALUE* stack) {
   void* obj_ssl_ctx = stack[1].oval;
   
   if (!obj_ssl_ctx) {
-    return env->die(env, stack, "The SSL_CTX object $ssl_ctx must be defined(Currently undef is not allowed).", __func__, FILE_NAME, __LINE__);
+    return env->die_v2(env, stack, "The SSL_CTX object $ssl_ctx must be defined(Currently undef is not allowed).", __func__, FILE_NAME, __LINE__);
   }
   
   SSL* self = env->get_pointer(env, stack, obj_self);
@@ -411,7 +411,7 @@ int32_t SPVM__Net__SSLeay__set_SSL_CTX(SPVM_ENV* env, SPVM_VALUE* stack) {
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die(env, stack, "[OpenSSL Error]SSL_set_SSL_CTX failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    env->die_v2(env, stack, "[OpenSSL Error]SSL_set_SSL_CTX failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -441,7 +441,7 @@ int32_t SPVM__Net__SSLeay__set_fd(SPVM_ENV* env, SPVM_VALUE* stack) {
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die(env, stack, "[OpenSSL Error]SSL_set_fd failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    env->die_v2(env, stack, "[OpenSSL Error]SSL_set_fd failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -480,7 +480,7 @@ int32_t SPVM__Net__SSLeay__connect(SPVM_ENV* env, SPVM_VALUE* stack) {
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die(env, stack, "[OpenSSL Error]SSL_connect failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    env->die_v2(env, stack, "[OpenSSL Error]SSL_connect failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     if (ssl_operation_error == SSL_ERROR_WANT_READ) {
       int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error::SSL_ERROR_WANT_READ", &error_id, __func__, FILE_NAME, __LINE__);
@@ -531,7 +531,7 @@ int32_t SPVM__Net__SSLeay__accept(SPVM_ENV* env, SPVM_VALUE* stack) {
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die(env, stack, "[OpenSSL Error]SSL_accept failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    env->die_v2(env, stack, "[OpenSSL Error]SSL_accept failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     if (ssl_operation_error == SSL_ERROR_WANT_READ) {
       int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error::SSL_ERROR_WANT_READ", &error_id, __func__, FILE_NAME, __LINE__);
@@ -566,7 +566,7 @@ int32_t SPVM__Net__SSLeay__read(SPVM_ENV* env, SPVM_VALUE* stack) {
   void* obj_buf = stack[1].oval;
   
   if (!obj_buf) {
-    return env->die(env, stack, "The buffer $buf must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die_v2(env, stack, "The buffer $buf must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   char* buf = (char*)env->get_chars(env, stack, obj_buf);
@@ -581,11 +581,11 @@ int32_t SPVM__Net__SSLeay__read(SPVM_ENV* env, SPVM_VALUE* stack) {
   int32_t offset = stack[3].ival;
   
   if (!(offset >= 0)) {
-    return env->die(env, stack, "The offset $offset must be greater than or equal to 0.", __func__, FILE_NAME, __LINE__);
+    return env->die_v2(env, stack, "The offset $offset must be greater than or equal to 0.", __func__, FILE_NAME, __LINE__);
   }
   
   if (!(offset + num <= buf_length)) {
-    return env->die(env, stack, "The offset $offset + $num must be lower than or equal to the length of the buffer $buf.", __func__, FILE_NAME, __LINE__);
+    return env->die_v2(env, stack, "The offset $offset + $num must be lower than or equal to the length of the buffer $buf.", __func__, FILE_NAME, __LINE__);
   }
   
   SSL* self = env->get_pointer(env, stack, obj_self);
@@ -607,7 +607,7 @@ int32_t SPVM__Net__SSLeay__read(SPVM_ENV* env, SPVM_VALUE* stack) {
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die(env, stack, "[OpenSSL Error]SSL_read failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    env->die_v2(env, stack, "[OpenSSL Error]SSL_read failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     if (ssl_operation_error == SSL_ERROR_WANT_READ) {
       int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error::SSL_ERROR_WANT_READ", &error_id, __func__, FILE_NAME, __LINE__);
@@ -642,7 +642,7 @@ int32_t SPVM__Net__SSLeay__write(SPVM_ENV* env, SPVM_VALUE* stack) {
   void* obj_buf = stack[1].oval;
   
   if (!obj_buf) {
-    return env->die(env, stack, "The buffer $buf must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die_v2(env, stack, "The buffer $buf must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   char* buf = (char*)env->get_chars(env, stack, obj_buf);
@@ -657,11 +657,11 @@ int32_t SPVM__Net__SSLeay__write(SPVM_ENV* env, SPVM_VALUE* stack) {
   int32_t offset = stack[3].ival;
   
   if (!(offset >= 0)) {
-    return env->die(env, stack, "The offset $offset must be greater than or equal to 0.", __func__, FILE_NAME, __LINE__);
+    return env->die_v2(env, stack, "The offset $offset must be greater than or equal to 0.", __func__, FILE_NAME, __LINE__);
   }
   
   if (!(offset + num <= buf_length)) {
-    return env->die(env, stack, "The offset $offset + $num must be lower than or equal to the length of the buffer $buf.", __func__, FILE_NAME, __LINE__);
+    return env->die_v2(env, stack, "The offset $offset + $num must be lower than or equal to the length of the buffer $buf.", __func__, FILE_NAME, __LINE__);
   }
   
   SSL* self = env->get_pointer(env, stack, obj_self);
@@ -683,7 +683,7 @@ int32_t SPVM__Net__SSLeay__write(SPVM_ENV* env, SPVM_VALUE* stack) {
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die(env, stack, "[OpenSSL Error]SSL_write failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    env->die_v2(env, stack, "[OpenSSL Error]SSL_write failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     if (ssl_operation_error == SSL_ERROR_WANT_READ) {
       int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error::SSL_ERROR_WANT_READ", &error_id, __func__, FILE_NAME, __LINE__);
@@ -734,7 +734,7 @@ int32_t SPVM__Net__SSLeay__shutdown(SPVM_ENV* env, SPVM_VALUE* stack) {
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die(env, stack, "[OpenSSL Error]SSL_shutdown failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    env->die_v2(env, stack, "[OpenSSL Error]SSL_shutdown failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     if (ssl_operation_error == SSL_ERROR_WANT_READ) {
       int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error::SSL_ERROR_WANT_READ", &error_id, __func__, FILE_NAME, __LINE__);
@@ -898,11 +898,11 @@ int32_t SPVM__Net__SSLeay__get0_alpn_selected(SPVM_ENV* env, SPVM_VALUE* stack) 
   SSL* self = env->get_pointer(env, stack, obj_self);
   
   if (!(obj_data_ref &&  env->length(env, stack, obj_data_ref) == 1)) {
-    return env->die(env, stack, "The data reference $data_ref must be 1-length array.", __func__, FILE_NAME, __LINE__);
+    return env->die_v2(env, stack, "The data reference $data_ref must be 1-length array.", __func__, FILE_NAME, __LINE__);
   }
   
   if (!len_ref) {
-    return env->die(env, stack, "The reference of the length $len_ref must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die_v2(env, stack, "The reference of the length $len_ref must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   const unsigned char* data_tmp = NULL;

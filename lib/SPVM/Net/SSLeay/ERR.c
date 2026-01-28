@@ -17,7 +17,7 @@ int32_t SPVM__Net__SSLeay__ERR__error_string_n(SPVM_ENV* env, SPVM_VALUE* stack)
   void* obj_buf = stack[1].oval;
   
   if (!obj_buf) {
-    return env->die(env, stack, "The buffer $buf must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die_v2(env, stack, "The buffer $buf must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   char* buf = (char*)env->get_chars(env, stack, obj_buf);
@@ -30,7 +30,7 @@ int32_t SPVM__Net__SSLeay__ERR__error_string_n(SPVM_ENV* env, SPVM_VALUE* stack)
   }
   
   if (!(len <= buf_length)) {
-    return env->die(env, stack, "The length $len must be less than or equal to the length of the buffer $buf.", __func__, FILE_NAME, __LINE__);
+    return env->die_v2(env, stack, "The length $len must be less than or equal to the length of the buffer $buf.", __func__, FILE_NAME, __LINE__);
   }
   
   ERR_error_string_n(e, buf, len);

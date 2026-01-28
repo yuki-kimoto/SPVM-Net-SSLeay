@@ -20,7 +20,7 @@ int32_t SPVM__Net__SSLeay__BIO__new(SPVM_ENV* env, SPVM_VALUE* stack) {
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die(env, stack, "[OpenSSL Error]BIO_new failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    env->die_v2(env, stack, "[OpenSSL Error]BIO_new failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -46,7 +46,7 @@ int32_t SPVM__Net__SSLeay__BIO__read(SPVM_ENV* env, SPVM_VALUE* stack) {
   void* obj_data = stack[1].oval;
   
   if (!obj_data) {
-    return env->die(env, stack, "The data $data must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die_v2(env, stack, "The data $data must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   char* data = (char*)env->get_chars(env, stack, obj_data);
@@ -59,7 +59,7 @@ int32_t SPVM__Net__SSLeay__BIO__read(SPVM_ENV* env, SPVM_VALUE* stack) {
   }
   
   if (!(dlen <= data_length)) {
-    return env->die(env, stack, "The length $dlen must be lower than or equal to the length of the data $data.", __func__, FILE_NAME, __LINE__);
+    return env->die_v2(env, stack, "The length $dlen must be lower than or equal to the length of the data $data.", __func__, FILE_NAME, __LINE__);
   }
   
   BIO* self = env->get_pointer(env, stack, obj_self);
@@ -72,7 +72,7 @@ int32_t SPVM__Net__SSLeay__BIO__read(SPVM_ENV* env, SPVM_VALUE* stack) {
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die(env, stack, "[OpenSSL Error]BIO_read failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    env->die_v2(env, stack, "[OpenSSL Error]BIO_read failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -95,7 +95,7 @@ int32_t SPVM__Net__SSLeay__BIO__write(SPVM_ENV* env, SPVM_VALUE* stack) {
   void* obj_data = stack[1].oval;
   
   if (!obj_data) {
-    return env->die(env, stack, "The data $data must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die_v2(env, stack, "The data $data must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   char* data = (char*)env->get_chars(env, stack, obj_data);
@@ -108,7 +108,7 @@ int32_t SPVM__Net__SSLeay__BIO__write(SPVM_ENV* env, SPVM_VALUE* stack) {
   }
   
   if (!(dlen <= data_length)) {
-    return env->die(env, stack, "The length $dlen must be lower than or equal to the length of the data $data.", __func__, FILE_NAME, __LINE__);
+    return env->die_v2(env, stack, "The length $dlen must be lower than or equal to the length of the data $data.", __func__, FILE_NAME, __LINE__);
   }
   
   BIO* self = env->get_pointer(env, stack, obj_self);
@@ -121,7 +121,7 @@ int32_t SPVM__Net__SSLeay__BIO__write(SPVM_ENV* env, SPVM_VALUE* stack) {
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die(env, stack, "[OpenSSL Error]BIO_write failed:%s.", ssl_error_string, __func__, FILE_NAME, __LINE__);
+    env->die_v2(env, stack, "[OpenSSL Error]BIO_write failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -144,13 +144,13 @@ int32_t SPVM__Net__SSLeay__BIO__new_file(SPVM_ENV* env, SPVM_VALUE* stack) {
   void* obj_mode = stack[1].oval;
   
   if (!obj_filename) {
-    return env->die(env, stack, "The file name $filename must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die_v2(env, stack, "The file name $filename must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   const char* filename = env->get_chars(env, stack, obj_filename);
   
   if (!obj_mode) {
-    return env->die(env, stack, "The mode $mode must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die_v2(env, stack, "The mode $mode must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   const char* mode = env->get_chars(env, stack, obj_mode);
@@ -163,7 +163,7 @@ int32_t SPVM__Net__SSLeay__BIO__new_file(SPVM_ENV* env, SPVM_VALUE* stack) {
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die(env, stack, "[OpenSSL Error]BIO_new_file failed:%s. $filename:%s.", ssl_error_string, filename, __func__, FILE_NAME, __LINE__);
+    env->die_v2(env, stack, "[OpenSSL Error]BIO_new_file failed:%s. $filename:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string, filename);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
