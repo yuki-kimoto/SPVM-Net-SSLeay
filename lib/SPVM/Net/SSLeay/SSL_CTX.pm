@@ -369,7 +369,7 @@ The native callback function is defined by the following native code:
     SSL* ssl = (SSL*)X509_STORE_CTX_get_ex_data(x509_store_ctx, SSL_get_ex_data_X509_STORE_CTX_idx());
     
     if (!ssl) {
-      env->die_v2(env, stack, "X509_STORE_CTX_get_ex_data(x509_store_ctx, SSL_get_ex_data_X509_STORE_CTX_idx()) failed.", __func__, FILE_NAME, __LINE__);
+      env->die(env, stack, "X509_STORE_CTX_get_ex_data(x509_store_ctx, SSL_get_ex_data_X509_STORE_CTX_idx()) failed.", __func__, FILE_NAME, __LINE__);
       
       env->print_exception_to_stderr(env, stack);
       
@@ -379,7 +379,7 @@ The native callback function is defined by the following native code:
     SSL_CTX* self = SSL_get_SSL_CTX(ssl);
     
     if (!self) {
-      env->die_v2(env, stack, "SSL_get_SSL_CTX(ssl) failed.", __func__, FILE_NAME, __LINE__);
+      env->die(env, stack, "SSL_get_SSL_CTX(ssl) failed.", __func__, FILE_NAME, __LINE__);
       
       env->print_exception_to_stderr(env, stack);
       
@@ -404,7 +404,7 @@ The native callback function is defined by the following native code:
     }
     
     if (!obj_cb) {
-      env->die_v2(env, stack, "verify_callback field must be defined.", __func__, FILE_NAME, __LINE__);
+      env->die(env, stack, "verify_callback field must be defined.", __func__, FILE_NAME, __LINE__);
       
       env->print_exception_to_stderr(env, stack);
       goto END_OF_FUNC;
@@ -493,7 +493,7 @@ The native callback function is defined by the following native code:
     }
     
     if (!obj_cb) {
-      env->die_v2(env, stack, "alpn_select_cb field must be defined.", __func__, FILE_NAME, __LINE__);
+      env->die(env, stack, "alpn_select_cb field must be defined.", __func__, FILE_NAME, __LINE__);
       
       env->print_exception_to_stderr(env, stack);
       goto END_OF_FUNC;
@@ -535,7 +535,7 @@ The native callback function is defined by the following native code:
     void* obj_out = env->get_elem_object(env, stack, obj_out_ref, 0);
     
     if (!obj_out) {
-      env->die_v2(env, stack, "An output string for set_alpn_select_cb is not set.", __func__, FILE_NAME, __LINE__);
+      env->die(env, stack, "An output string for set_alpn_select_cb is not set.", __func__, FILE_NAME, __LINE__);
       
       env->print_exception_to_stderr(env, stack);
       goto END_OF_FUNC;
@@ -627,7 +627,7 @@ The native callback function is defined by the following native code:
     }
     
     if (!obj_cb) {
-      env->die_v2(env, stack, "default_passwd_cb field must be defined.", __func__, FILE_NAME, __LINE__);
+      env->die(env, stack, "default_passwd_cb field must be defined.", __func__, FILE_NAME, __LINE__);
       
       env->print_exception_to_stderr(env, stack);
       goto END_OF_FUNC;
@@ -709,7 +709,7 @@ The native callback function is defined by the following native code:
     }
     
     if (!obj_cb) {
-      env->die_v2(env, stack, "tlsext_servername_callback field must be defined.", __func__, FILE_NAME, __LINE__);
+      env->die(env, stack, "tlsext_servername_callback field must be defined.", __func__, FILE_NAME, __LINE__);
       
       env->print_exception_to_stderr(env, stack);
       goto END_OF_FUNC;

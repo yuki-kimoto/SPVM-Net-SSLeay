@@ -22,7 +22,7 @@ int32_t SPVM__Net__SSLeay__GENERAL_NAME__new(SPVM_ENV* env, SPVM_VALUE* stack) {
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die_v2(env, stack, "[OpenSSL Error]GENERAL_NAME_new failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
+    env->die(env, stack, "[OpenSSL Error]GENERAL_NAME_new failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -95,7 +95,7 @@ int32_t SPVM__Net__SSLeay__GENERAL_NAME__get_data_as_string(SPVM_ENV* env, SPVM_
       char buf[2501] = {0};
       int len = OBJ_obj2txt(buf, sizeof(buf), self->d.rid, 1);
       if (len < 0 || len > (int)((sizeof(buf) - 1))) {
-        return env->die_v2(env, stack, "The length of d.rid is invalid.", __func__, FILE_NAME, __LINE__);
+        return env->die(env, stack, "The length of d.rid is invalid.", __func__, FILE_NAME, __LINE__);
       }
       
       obj_data_as_string = env->new_string_nolen(env, stack, buf);
@@ -109,7 +109,7 @@ int32_t SPVM__Net__SSLeay__GENERAL_NAME__get_data_as_string(SPVM_ENV* env, SPVM_
       break;
     }
     default : {
-      return env->die_v2(env, stack, "The value of type member variable: %d.", __func__, FILE_NAME, __LINE__, self->type);
+      return env->die(env, stack, "The value of type member variable: %d.", __func__, FILE_NAME, __LINE__, self->type);
     }
   }
   

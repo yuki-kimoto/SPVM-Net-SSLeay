@@ -24,7 +24,7 @@ int32_t SPVM__Net__SSLeay__X509__new(SPVM_ENV* env, SPVM_VALUE* stack) {
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die_v2(env, stack, "[OpenSSL Error]X509_new failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
+    env->die(env, stack, "[OpenSSL Error]X509_new failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -50,13 +50,13 @@ int32_t SPVM__Net__SSLeay__X509__check_issued(SPVM_ENV* env, SPVM_VALUE* stack) 
   void* obj_subject = stack[1].oval;
   
   if (!obj_issuer) {
-    return env->die_v2(env, stack, "The X509 object $issuer must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "The X509 object $issuer must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   X509* issuer = env->get_pointer(env, stack, obj_issuer);
   
   if (!obj_subject) {
-    return env->die_v2(env, stack, "The X509 object $subject must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "The X509 object $subject must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   X509* subject = env->get_pointer(env, stack, obj_subject);
@@ -163,7 +163,7 @@ int32_t SPVM__Net__SSLeay__X509__get_pubkey(SPVM_ENV* env, SPVM_VALUE* stack) {
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die_v2(env, stack, "[OpenSSL Error]X509_get_pubkey failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
+    env->die(env, stack, "[OpenSSL Error]X509_get_pubkey failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -199,22 +199,22 @@ int32_t SPVM__Net__SSLeay__X509__pubkey_digest(SPVM_ENV* env, SPVM_VALUE* stack)
   X509* self = env->get_pointer(env, stack, obj_self);
   
   if (!obj_type) {
-    return env->die_v2(env, stack, "The digest type $type must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "The digest type $type must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   EVP_MD* type = env->get_pointer(env, stack, obj_type);
   
   if (!obj_md) {
-    return env->die_v2(env, stack, "The output buffer $md must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "The output buffer $md must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   int32_t md_length = env->length(env, stack, obj_md);
   if (!(md_length >= EVP_MAX_MD_SIZE)) {
-    return env->die_v2(env, stack, "The length of output buffer $md must be greater than or equal to EVP_MAX_MD_SIZE.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "The length of output buffer $md must be greater than or equal to EVP_MAX_MD_SIZE.", __func__, FILE_NAME, __LINE__);
   }
   
   if (!len_ref) {
-    return env->die_v2(env, stack, "The reference of the length $len_ref must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "The reference of the length $len_ref must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   char* md = (char*)env->get_chars(env, stack, obj_md);
@@ -228,7 +228,7 @@ int32_t SPVM__Net__SSLeay__X509__pubkey_digest(SPVM_ENV* env, SPVM_VALUE* stack)
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die_v2(env, stack, "[OpenSSL Error]X509_pubkey_digest failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
+    env->die(env, stack, "[OpenSSL Error]X509_pubkey_digest failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -265,7 +265,7 @@ int32_t SPVM__Net__SSLeay__X509__get_ext_by_NID(SPVM_ENV* env, SPVM_VALUE* stack
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die_v2(env, stack, "[OpenSSL Error]X509_get_ext_by_NID failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
+    env->die(env, stack, "[OpenSSL Error]X509_get_ext_by_NID failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -312,7 +312,7 @@ int32_t SPVM__Net__SSLeay__X509__get_ext(SPVM_ENV* env, SPVM_VALUE* stack) {
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die_v2(env, stack, "[OpenSSL Error]X509_get_ext failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
+    env->die(env, stack, "[OpenSSL Error]X509_get_ext failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -387,22 +387,22 @@ int32_t SPVM__Net__SSLeay__X509__digest(SPVM_ENV* env, SPVM_VALUE* stack) {
   X509* self = env->get_pointer(env, stack, obj_self);
   
   if (!obj_type) {
-    return env->die_v2(env, stack, "The digest type $type must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "The digest type $type must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   EVP_MD* type = env->get_pointer(env, stack, obj_type);
   
   if (!obj_md) {
-    return env->die_v2(env, stack, "The output buffer $md must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "The output buffer $md must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   int32_t md_length = env->length(env, stack, obj_md);
   if (!(md_length >= EVP_MAX_MD_SIZE)) {
-    return env->die_v2(env, stack, "The length of output buffer $md must be greater than or equal to EVP_MAX_MD_SIZE.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "The length of output buffer $md must be greater than or equal to EVP_MAX_MD_SIZE.", __func__, FILE_NAME, __LINE__);
   }
   
   if (!len_ref) {
-    return env->die_v2(env, stack, "The reference of the length $len_ref must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "The reference of the length $len_ref must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   char* md = (char*)env->get_chars(env, stack, obj_md);
@@ -416,7 +416,7 @@ int32_t SPVM__Net__SSLeay__X509__digest(SPVM_ENV* env, SPVM_VALUE* stack) {
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die_v2(env, stack, "[OpenSSL Error]X509_digest failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
+    env->die(env, stack, "[OpenSSL Error]X509_digest failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }

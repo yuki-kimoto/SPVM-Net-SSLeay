@@ -23,23 +23,23 @@ int32_t SPVM__Net__SSLeay__DER__d2i_PKCS12(SPVM_ENV* env, SPVM_VALUE* stack) {
   int64_t length = stack[2].lval;
   
   if (obj_a_ref) {
-    return env->die_v2(env, stack, "$a_ref must be undef. Currently reuse feature is not available.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "$a_ref must be undef. Currently reuse feature is not available.", __func__, FILE_NAME, __LINE__);
   }
   
   if (!obj_ppin_ref) {
-    return env->die_v2(env, stack, "$ppin_ref must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "$ppin_ref must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   int32_t ppin_ref_length = env->length(env, stack, obj_ppin_ref);
   
   if (!(ppin_ref_length == 1)) {
-    return env->die_v2(env, stack, "The length of $ppin_ref must be 1.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "The length of $ppin_ref must be 1.", __func__, FILE_NAME, __LINE__);
   }
   
   void* obj_ppin = env->get_elem_string(env, stack, obj_ppin_ref, 0);
   
   if (!obj_ppin) {
-    return env->die_v2(env, stack, "$ppin_ref at index 0 must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "$ppin_ref at index 0 must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   char* ppin = (char*)env->get_chars(env, stack, obj_ppin);
@@ -55,7 +55,7 @@ int32_t SPVM__Net__SSLeay__DER__d2i_PKCS12(SPVM_ENV* env, SPVM_VALUE* stack) {
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die_v2(env, stack, "[OpenSSL Error]d2i_PKCS12 failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
+    env->die(env, stack, "[OpenSSL Error]d2i_PKCS12 failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     
@@ -81,19 +81,19 @@ int32_t SPVM__Net__SSLeay__DER__i2d_PKCS12(SPVM_ENV* env, SPVM_VALUE* stack) {
   int64_t length = stack[2].lval;
   
   if (!obj_a) {
-    return env->die_v2(env, stack, "$a must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "$a must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   PKCS12* a = env->get_pointer(env, stack, obj_a);
   
   if (!obj_ppout_ref) {
-    return env->die_v2(env, stack, "$ppout_ref must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "$ppout_ref must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   int32_t ppout_ref_length = env->length(env, stack, obj_ppout_ref);
   
   if (!(ppout_ref_length == 1)) {
-    return env->die_v2(env, stack, "The length of $ppout_ref must be 1.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "The length of $ppout_ref must be 1.", __func__, FILE_NAME, __LINE__);
   }
   
   unsigned char* ppout_ref_tmp[1] = {0};
@@ -105,7 +105,7 @@ int32_t SPVM__Net__SSLeay__DER__i2d_PKCS12(SPVM_ENV* env, SPVM_VALUE* stack) {
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die_v2(env, stack, "[OpenSSL Error]i2d_PKCS12 failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
+    env->die(env, stack, "[OpenSSL Error]i2d_PKCS12 failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     
@@ -128,7 +128,7 @@ int32_t SPVM__Net__SSLeay__DER__d2i_PKCS12_bio(SPVM_ENV* env, SPVM_VALUE* stack)
   void* obj_bio = stack[0].oval;
   
   if (!obj_bio) {
-    return env->die_v2(env, stack, "The BIO object $bio must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "The BIO object $bio must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   BIO* bio = env->get_pointer(env, stack, obj_bio);
@@ -141,7 +141,7 @@ int32_t SPVM__Net__SSLeay__DER__d2i_PKCS12_bio(SPVM_ENV* env, SPVM_VALUE* stack)
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die_v2(env, stack, "[OpenSSL Error]d2i_PKCS12_bio failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
+    env->die(env, stack, "[OpenSSL Error]d2i_PKCS12_bio failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     

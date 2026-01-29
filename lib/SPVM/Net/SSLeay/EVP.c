@@ -17,7 +17,7 @@ int32_t SPVM__Net__SSLeay__EVP__get_digestbyname(SPVM_ENV* env, SPVM_VALUE* stac
   void* obj_name = stack[0].oval;
   
   if (!obj_name) {
-    return env->die_v2(env, stack, "The name $name must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "The name $name must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   const char* name = (char*)env->get_chars(env, stack, obj_name);

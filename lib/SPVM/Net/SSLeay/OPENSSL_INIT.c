@@ -34,7 +34,7 @@ int32_t SPVM__Net__SSLeay__OPENSSL_INIT__new(SPVM_ENV* env, SPVM_VALUE* stack) {
 
 int32_t SPVM__Net__SSLeay__OPENSSL_INIT__set_config_filename(SPVM_ENV* env, SPVM_VALUE* stack) {
 #if !(OPENSSL_VERSION_NUMBER >= 0x1010102fL && !defined(LIBRESSL_VERSION_NUMBER))
-  env->die_v2(env, stack, "Net::SSLeay::OPENSSL_INIT#set_config_filename method is not supported on this system(!(OPENSSL_VERSION_NUMBER >= 0x1010102fL && !defined(LIBRESSL_VERSION_NUMBER)))", __func__, FILE_NAME, __LINE__);
+  env->die(env, stack, "Net::SSLeay::OPENSSL_INIT#set_config_filename method is not supported on this system(!(OPENSSL_VERSION_NUMBER >= 0x1010102fL && !defined(LIBRESSL_VERSION_NUMBER)))", __func__, FILE_NAME, __LINE__);
   return SPVM_NATIVE_C_BASIC_TYPE_ID_ERROR_NOT_SUPPORTED_CLASS;
 #else
   int32_t error_id = 0;
@@ -44,13 +44,13 @@ int32_t SPVM__Net__SSLeay__OPENSSL_INIT__set_config_filename(SPVM_ENV* env, SPVM
   void* obj_filename = stack[1].oval;
   
   if (!obj_self) {
-    return env->die_v2(env, stack, "The OPENSSL_INIT_SETTINGS object $init must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "The OPENSSL_INIT_SETTINGS object $init must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   OPENSSL_INIT_SETTINGS* self = env->get_pointer(env, stack, obj_self);
   
   if (!obj_filename) {
-    return env->die_v2(env, stack, "The file name $filename must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "The file name $filename must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   const char* filename = env->get_chars(env, stack, obj_filename);
@@ -63,7 +63,7 @@ int32_t SPVM__Net__SSLeay__OPENSSL_INIT__set_config_filename(SPVM_ENV* env, SPVM
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die_v2(env, stack, "[OpenSSL Error]OPENSSL_INIT_set_config_filename failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
+    env->die(env, stack, "[OpenSSL Error]OPENSSL_INIT_set_config_filename failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -80,7 +80,7 @@ int32_t SPVM__Net__SSLeay__OPENSSL_INIT__set_config_filename(SPVM_ENV* env, SPVM
 
 int32_t SPVM__Net__SSLeay__OPENSSL_INIT__set_config_file_flags(SPVM_ENV* env, SPVM_VALUE* stack) {
 #if !(OPENSSL_VERSION_NUMBER >= 0x30000000L && !defined(LIBRESSL_VERSION_NUMBER))
-  env->die_v2(env, stack, "Net::SSLeay::OPENSSL_INIT#set_config_file_flags method is not supported on this system(!(OPENSSL_VERSION_NUMBER >= 0x30000000L && !defined(LIBRESSL_VERSION_NUMBER)))", __func__, FILE_NAME, __LINE__);
+  env->die(env, stack, "Net::SSLeay::OPENSSL_INIT#set_config_file_flags method is not supported on this system(!(OPENSSL_VERSION_NUMBER >= 0x30000000L && !defined(LIBRESSL_VERSION_NUMBER)))", __func__, FILE_NAME, __LINE__);
   return SPVM_NATIVE_C_BASIC_TYPE_ID_ERROR_NOT_SUPPORTED_CLASS;
 #else
   int32_t error_id = 0;
@@ -90,7 +90,7 @@ int32_t SPVM__Net__SSLeay__OPENSSL_INIT__set_config_file_flags(SPVM_ENV* env, SP
   int64_t flags = stack[1].lval;
   
   if (!obj_self) {
-    return env->die_v2(env, stack, "The OPENSSL_INIT_SETTINGS object $init must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "The OPENSSL_INIT_SETTINGS object $init must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   OPENSSL_INIT_SETTINGS* self = env->get_pointer(env, stack, obj_self);
@@ -103,7 +103,7 @@ int32_t SPVM__Net__SSLeay__OPENSSL_INIT__set_config_file_flags(SPVM_ENV* env, SP
 
 int32_t SPVM__Net__SSLeay__OPENSSL_INIT__set_config_appname(SPVM_ENV* env, SPVM_VALUE* stack) {
 #if !(OPENSSL_VERSION_NUMBER >= 0x1010102fL && !defined(LIBRESSL_VERSION_NUMBER))
-  env->die_v2(env, stack, "Net::SSLeay::OPENSSL_INIT#set_config_filename method is not supported on this system(!(OPENSSL_VERSION_NUMBER >= 0x1010102fL && !defined(LIBRESSL_VERSION_NUMBER)))", __func__, FILE_NAME, __LINE__);
+  env->die(env, stack, "Net::SSLeay::OPENSSL_INIT#set_config_filename method is not supported on this system(!(OPENSSL_VERSION_NUMBER >= 0x1010102fL && !defined(LIBRESSL_VERSION_NUMBER)))", __func__, FILE_NAME, __LINE__);
   return SPVM_NATIVE_C_BASIC_TYPE_ID_ERROR_NOT_SUPPORTED_CLASS;
 #else
   int32_t error_id = 0;
@@ -113,13 +113,13 @@ int32_t SPVM__Net__SSLeay__OPENSSL_INIT__set_config_appname(SPVM_ENV* env, SPVM_
   void* obj_name = stack[1].oval;
   
   if (!obj_self) {
-    return env->die_v2(env, stack, "The OPENSSL_INIT_SETTINGS object $init must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "The OPENSSL_INIT_SETTINGS object $init must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   OPENSSL_INIT_SETTINGS* self = env->get_pointer(env, stack, obj_self);
   
   if (!obj_name) {
-    return env->die_v2(env, stack, "The app name $name must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "The app name $name must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   const char* name = env->get_chars(env, stack, obj_name);
@@ -132,7 +132,7 @@ int32_t SPVM__Net__SSLeay__OPENSSL_INIT__set_config_appname(SPVM_ENV* env, SPVM_
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die_v2(env, stack, "[OpenSSL Error]OPENSSL_INIT_set_config_appname failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
+    env->die(env, stack, "[OpenSSL Error]OPENSSL_INIT_set_config_appname failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }

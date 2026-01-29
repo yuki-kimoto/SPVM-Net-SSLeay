@@ -20,7 +20,7 @@ int32_t SPVM__Net__SSLeay__X509_NAME__new(SPVM_ENV* env, SPVM_VALUE* stack) {
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die_v2(env, stack, "[OpenSSL Error]X509_NAME_new failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
+    env->die(env, stack, "[OpenSSL Error]X509_NAME_new failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -53,7 +53,7 @@ int32_t SPVM__Net__SSLeay__X509_NAME__oneline(SPVM_ENV* env, SPVM_VALUE* stack) 
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die_v2(env, stack, "[OpenSSL Error]X509_NAME_oneline failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
+    env->die(env, stack, "[OpenSSL Error]X509_NAME_oneline failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -89,7 +89,7 @@ int32_t SPVM__Net__SSLeay__X509_NAME__get_entry(SPVM_ENV* env, SPVM_VALUE* stack
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die_v2(env, stack, "[OpenSSL Error]X509_NAME_get_entry failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
+    env->die(env, stack, "[OpenSSL Error]X509_NAME_get_entry failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -171,7 +171,7 @@ int32_t SPVM__Net__SSLeay__X509_NAME__add_entry_by_NID(SPVM_ENV* env, SPVM_VALUE
   X509_NAME* self = env->get_pointer(env, stack, obj_self);
   
   if (!obj_bytes) {
-    return env->die_v2(env, stack, "The bytes $bytes must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "The bytes $bytes must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   int32_t bytes_length = env->length(env, stack, obj_bytes);
@@ -190,7 +190,7 @@ int32_t SPVM__Net__SSLeay__X509_NAME__add_entry_by_NID(SPVM_ENV* env, SPVM_VALUE
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die_v2(env, stack, "[OpenSSL Error]X509_NAME_add_entry_by_NID failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
+    env->die(env, stack, "[OpenSSL Error]X509_NAME_add_entry_by_NID failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
@@ -222,7 +222,7 @@ int32_t SPVM__Net__SSLeay__X509_NAME__delete_entry(SPVM_ENV* env, SPVM_VALUE* st
     char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
     ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
     
-    env->die_v2(env, stack, "[OpenSSL Error]X509_NAME_delete_entry failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
+    env->die(env, stack, "[OpenSSL Error]X509_NAME_delete_entry failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
     
     int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }

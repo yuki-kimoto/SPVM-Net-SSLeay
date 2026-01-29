@@ -78,7 +78,7 @@ The following codes are native C codes to create a string corresponding to the t
       char buf[2501] = {0};
       int len = OBJ_obj2txt(buf, sizeof(buf), self->d.rid, 1);
       if (len < 0 || len > (int)((sizeof(buf) - 1))) {
-        return env->die_v2(env, stack, "The length of d.rid is invalid.", __func__, FILE_NAME, __LINE__);
+        return env->die(env, stack, "The length of d.rid is invalid.", __func__, FILE_NAME, __LINE__);
       }
       
       obj_data_as_string = env->new_string_nolen(env, stack, buf);
@@ -92,7 +92,7 @@ The following codes are native C codes to create a string corresponding to the t
       break;
     }
     default : {
-      return env->die_v2(env, stack, "The value of type member variable: %d.", self->type, __func__, FILE_NAME, __LINE__);
+      return env->die(env, stack, "The value of type member variable: %d.", self->type, __func__, FILE_NAME, __LINE__);
     }
   }
 

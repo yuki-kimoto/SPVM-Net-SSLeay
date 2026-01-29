@@ -20,7 +20,7 @@ int32_t SPVM__Net__SSLeay__EVP_MD__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   if (!env->no_free(env, stack, obj_self)) {
 #if !(OPENSSL_VERSION_NUMBER >= 0x30000000L)
-    env->die_v2(env, stack, "Native EVP_MD_free function is not supported in this system(!(OPENSSL_VERSION_NUMBER >= 0x30000000L))", __func__, FILE_NAME, __LINE__);
+    env->die(env, stack, "Native EVP_MD_free function is not supported in this system(!(OPENSSL_VERSION_NUMBER >= 0x30000000L))", __func__, FILE_NAME, __LINE__);
     return SPVM_NATIVE_C_BASIC_TYPE_ID_ERROR_NOT_SUPPORTED_CLASS;
 #else
     EVP_MD_free(self);

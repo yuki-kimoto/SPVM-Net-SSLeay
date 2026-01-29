@@ -13,7 +13,7 @@ int32_t SPVM__Net__SSLeay__Util__convert_to_wire_format(SPVM_ENV* env, SPVM_VALU
   void* obj_protocols = stack[0].oval;
   
   if (!obj_protocols) {
-    return env->die_v2(env, stack, "The protocols $protocols must be defined.", __func__, FILE_NAME, __LINE__);
+    return env->die(env, stack, "The protocols $protocols must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
   int32_t wire_format_index = 0;
@@ -23,11 +23,11 @@ int32_t SPVM__Net__SSLeay__Util__convert_to_wire_format(SPVM_ENV* env, SPVM_VALU
     void* obj_protocol = env->get_elem_string(env, stack, obj_protocols, i);
     
     if (!obj_protocol) {
-      return env->die_v2(env, stack, "The element of the protocols $protocols at index $i must be defined.", __func__, FILE_NAME, __LINE__);
+      return env->die(env, stack, "The element of the protocols $protocols at index $i must be defined.", __func__, FILE_NAME, __LINE__);
     }
     
     if (!obj_protocol) {
-      return env->die_v2(env, stack, "The element of the protocols $protocols at index $i must be defined.", __func__, FILE_NAME, __LINE__);
+      return env->die(env, stack, "The element of the protocols $protocols at index $i must be defined.", __func__, FILE_NAME, __LINE__);
     }
     
     const char *protocol = env->get_chars(env, stack, obj_protocol);
@@ -35,11 +35,11 @@ int32_t SPVM__Net__SSLeay__Util__convert_to_wire_format(SPVM_ENV* env, SPVM_VALU
     int32_t protocol_length = env->length(env, stack, obj_protocol);
     
     if (!(protocol_length > 0)) {
-      return env->die_v2(env, stack, "The element of the protocols $protocols at index $i must be a non-empty string.", __func__, FILE_NAME, __LINE__);
+      return env->die(env, stack, "The element of the protocols $protocols at index $i must be a non-empty string.", __func__, FILE_NAME, __LINE__);
     }
     
     if (!(protocol_length <= 255)) {
-      return env->die_v2(env, stack, "The string lenght of the element of the protocols $protocols at index $i must be less than or equal to 255.", __func__, FILE_NAME, __LINE__);
+      return env->die(env, stack, "The string lenght of the element of the protocols $protocols at index $i must be less than or equal to 255.", __func__, FILE_NAME, __LINE__);
     }
     
     wire_format_index += 1 + protocol_length;
