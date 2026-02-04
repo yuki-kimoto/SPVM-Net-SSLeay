@@ -1,4 +1,4 @@
-0.041 2026-01-30
+0.041 2026-02-05
   [Bug Fix]
     * Fix a bug where SSL_read failed on clean SSL shutdowns by handling SSL_ERROR_ZERO_RETURN.
   [New Features]
