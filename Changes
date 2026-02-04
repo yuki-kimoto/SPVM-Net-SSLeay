@@ -1,3 +1,11 @@
+0.041 2026-01-30
+  [Bug Fix]
+    * Fix a bug where SSL_read failed on clean SSL shutdowns by handling SSL_ERROR_ZERO_RETURN.
+  [New Features]
+    * Add the Net::SSLeay::Error::SSL_ERROR_ZERO_RETURN error class to represent a clean SSL shutdown as an SPVM exception.
+  [Test Improvement]
+    * Improve online tests by switching to httpbin.org, ensuring proper EOF detection in read loops, and adding pre-test connectivity checks.
+
 0.040 2026-01-30
   [Requirement Changes]
     * Require SPVM 0.990120.

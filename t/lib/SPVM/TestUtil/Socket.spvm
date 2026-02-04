@@ -162,9 +162,7 @@ class TestUtil::Socket extends IO::Socket::IP  {
   method read : int ($buffer : mutable string, $length : int = -1, $offset : int = 0) {
     
     my $ssl = $self->{ssl};
-    
     my $fd = $self->{FD};
-    
     my $timeout = $self->{Timeout};
     
     my $read_length = -1;
@@ -172,9 +170,12 @@ class TestUtil::Socket extends IO::Socket::IP  {
       eval { $read_length = $ssl->read($buffer, $length, $offset); }
       
       if ($@) {
+        # Check if the error is a retry request
         my $again_read = eval_error_id isa_error Net::SSLeay::Error::SSL_ERROR_WANT_READ;
-        
         my $again_write = eval_error_id isa_error Net::SSLeay::Error::SSL_ERROR_WANT_WRITE;
+        
+        # Check if the error is a clean SSL shutdown (EOF)
+        my $is_eof = eval_error_id isa_error Net::SSLeay::Error::SSL_ERROR_ZERO_RETURN;
         
         if ($again_read) {
           Go->gosched_io_read_sec($fd, $timeout);
@@ -184,11 +185,18 @@ class TestUtil::Socket extends IO::Socket::IP  {
           Go->gosched_io_write_sec($fd, $timeout);
           next;
         }
+        elsif ($is_eof) {
+          # Cleanly closed by the peer
+          $read_length = 0;
+          last;
+        }
         else {
+          # Real error happened
           die $@;
         }
       }
       else {
+        # Successful read (could be > 0 or 0 for TCP FIN)
         last;
       }
     }

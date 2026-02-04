@@ -562,7 +562,6 @@ int32_t SPVM__Net__SSLeay__read(SPVM_ENV* env, SPVM_VALUE* stack) {
   int32_t error_id = 0;
   
   void* obj_self = stack[0].oval;
-  
   void* obj_buf = stack[1].oval;
   
   if (!obj_buf) {
@@ -573,7 +572,6 @@ int32_t SPVM__Net__SSLeay__read(SPVM_ENV* env, SPVM_VALUE* stack) {
   int32_t buf_length = env->length(env, stack, obj_buf);
   
   int32_t num = stack[2].ival;
-  
   if (num < 0) {
     num = buf_length;
   }
@@ -594,40 +592,41 @@ int32_t SPVM__Net__SSLeay__read(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t read_length = SSL_read(self, buf + offset, num);
   
-  if (!(read_length > 0)) {
+  // Handling non-positive return values (error or EOF)
+  if (read_length <= 0) {
     int32_t ssl_operation_error = SSL_get_error(self, read_length);
     
     assert(ssl_operation_error != SSL_ERROR_NONE);
     
+    // Store the operation error for the user to inspect if needed
     env->set_field_int_by_name(env, stack, obj_self, "operation_error", ssl_operation_error, &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
     
-    int64_t ssl_error = ERR_peek_last_error();
-    
-    char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
-    ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
-    
-    env->die(env, stack, "[OpenSSL Error]SSL_read failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
-    
+    // Select the appropriate SPVM error class based on the SSL operation error
     if (ssl_operation_error == SSL_ERROR_WANT_READ) {
-      int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error::SSL_ERROR_WANT_READ", &error_id, __func__, FILE_NAME, __LINE__);
-      if (error_id) { return error_id; }
-      error_id = tmp_error_id;
+      error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error::SSL_ERROR_WANT_READ", &error_id, __func__, FILE_NAME, __LINE__);
     }
     else if (ssl_operation_error == SSL_ERROR_WANT_WRITE) {
-      int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error::SSL_ERROR_WANT_WRITE", &error_id, __func__, FILE_NAME, __LINE__);
-      if (error_id) { return error_id; }
-      error_id = tmp_error_id;
+      error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error::SSL_ERROR_WANT_WRITE", &error_id, __func__, FILE_NAME, __LINE__);
+    }
+    else if (ssl_operation_error == SSL_ERROR_ZERO_RETURN) {
+      error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error::SSL_ERROR_ZERO_RETURN", &error_id, __func__, FILE_NAME, __LINE__);
     }
     else {
-      int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
-      if (error_id) { return error_id; }
-      error_id = tmp_error_id;
+      // For other serious errors, get the error string and die
+      unsigned long ssl_error = ERR_peek_last_error();
+      char* ssl_error_string = env->get_stack_tmp_buffer(env, stack);
+      ERR_error_string_n(ssl_error, ssl_error_string, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE);
+      
+      env->die(env, stack, "[OpenSSL Error]SSL_read failed:%s.", __func__, FILE_NAME, __LINE__, ssl_error_string);
+      
+      error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
     }
     
     return error_id;
   }
   
+  // Return the actual number of bytes read
   stack[0].ival = read_length;
   
   return 0;

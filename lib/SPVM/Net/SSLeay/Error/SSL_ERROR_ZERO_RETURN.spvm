@@ -1,0 +1,6 @@
+# Copyright (c) 2026 Yuki Kimoto
+# MIT License
+
+class Net::SSLeay::Error::SSL_ERROR_ZERO_RETURN extends Error {
+  version_from Net::SSLeay;
+}

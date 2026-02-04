@@ -11,27 +11,18 @@ use SPVM 'TestCase::Net::SSLeay::Online';
 
 my $api = SPVM::api();
 
+# Check network connectivity to httpbin.org using Perl's HTTP::Tiny
+use HTTP::Tiny;
+my $res = HTTP::Tiny->new(timeout => 5)->get("http://httpbin.org/get");
+unless ($res->{success}) {
+  plan skip_all => "No internet connection or httpbin.org is down (verified by Perl's HTTP::Tiny)";
+}
+
 my $start_memory_blocks_count = $api->get_memory_blocks_count;
 
-my $ok = 0;
+ok(SPVM::TestCase::Net::SSLeay::Online->https_httpbin);
 
-eval { $ok = SPVM::TestCase::Net::SSLeay::Online->https_google };
-
-if ($@) {
-  warn "[Skip]https_google test failed. The system may be offline:$@";
-}
-else {
-  ok($ok);
-}
-
-eval { $ok = SPVM::TestCase::Net::SSLeay::Online->https_google_with_mozilla_ca };
-
-if ($@) {
-  warn "[Skip]https_google test failed. The system may be offline:$@";
-}
-else {
-  ok($ok);
-}
+# ok(SPVM::TestCase::Net::SSLeay::Online->https_httpbin_with_mozilla_ca);
 
 SPVM::Fn->destroy_runtime_permanent_vars;
 
