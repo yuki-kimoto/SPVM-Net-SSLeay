@@ -77,6 +77,8 @@ lib/SPVM/Net/SSLeay/Error/SSL_ERROR_WANT_READ.pm
 lib/SPVM/Net/SSLeay/Error/SSL_ERROR_WANT_READ.spvm
 lib/SPVM/Net/SSLeay/Error/SSL_ERROR_WANT_WRITE.pm
 lib/SPVM/Net/SSLeay/Error/SSL_ERROR_WANT_WRITE.spvm
+lib/SPVM/Net/SSLeay/Error/SSL_ERROR_ZERO_RETURN.pm
+lib/SPVM/Net/SSLeay/Error/SSL_ERROR_ZERO_RETURN.spvm
 lib/SPVM/Net/SSLeay/EVP.c
 lib/SPVM/Net/SSLeay/EVP.config
 lib/SPVM/Net/SSLeay/EVP.pm
