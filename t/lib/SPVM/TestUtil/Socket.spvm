@@ -260,6 +260,10 @@ class TestUtil::Socket extends IO::Socket::IP  {
         
         my $again_write = eval_error_id isa_error Net::SSLeay::Error::SSL_ERROR_WANT_WRITE;
         
+        # Check if the peer has already closed the connection.
+        # If so, we consider the shutdown effectively finished.
+        my $is_eof = eval_error_id isa_error Net::SSLeay::Error::SSL_ERROR_ZERO_RETURN;
+        
         if ($again_read) {
           Go->gosched_io_read_sec($fd, $timeout);
           next;
@@ -268,11 +272,17 @@ class TestUtil::Socket extends IO::Socket::IP  {
           Go->gosched_io_write_sec($fd, $timeout);
           next;
         }
+        elsif ($is_eof) {
+          # Peer already closed the connection, so we are done.
+          last;
+        }
         else {
           die $@;
         }
       }
       else {
+        # Successfully sent close_notify (status 0) or finished bidirectional shutdown (status 1).
+        # We don't wait for the peer's response to avoid potential hangs.
         last;
       }
     }
