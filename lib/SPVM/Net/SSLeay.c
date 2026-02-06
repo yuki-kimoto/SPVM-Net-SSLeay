@@ -492,10 +492,6 @@ int32_t SPVM__Net__SSLeay__connect(SPVM_ENV* env, SPVM_VALUE* stack) {
       if (error_id) { return error_id; }
       error_id = tmp_error_id;
     }
-    // Added ZERO_RETURN for consistency with read/write
-    else if (ssl_operation_error == SSL_ERROR_ZERO_RETURN) {
-      error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error::SSL_ERROR_ZERO_RETURN", &error_id, __func__, FILE_NAME, __LINE__);
-    }
     else {
       int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
       if (error_id) { return error_id; }
@@ -547,9 +543,6 @@ int32_t SPVM__Net__SSLeay__accept(SPVM_ENV* env, SPVM_VALUE* stack) {
       if (error_id) { return error_id; }
       error_id = tmp_error_id;
     }
-    else if (ssl_operation_error == SSL_ERROR_ZERO_RETURN) {
-      error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error::SSL_ERROR_ZERO_RETURN", &error_id, __func__, FILE_NAME, __LINE__);
-    }
     else {
       int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
       if (error_id) { return error_id; }
@@ -600,7 +593,7 @@ int32_t SPVM__Net__SSLeay__read(SPVM_ENV* env, SPVM_VALUE* stack) {
   int32_t read_length = SSL_read(self, buf + offset, num);
   
   // Handling non-positive return values (error or EOF)
-  if (read_length <= 0) {
+  if (!(read_length >= 0)) {
     int32_t ssl_operation_error = SSL_get_error(self, read_length);
     
     assert(ssl_operation_error != SSL_ERROR_NONE);
@@ -615,9 +608,6 @@ int32_t SPVM__Net__SSLeay__read(SPVM_ENV* env, SPVM_VALUE* stack) {
     }
     else if (ssl_operation_error == SSL_ERROR_WANT_WRITE) {
       error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error::SSL_ERROR_WANT_WRITE", &error_id, __func__, FILE_NAME, __LINE__);
-    }
-    else if (ssl_operation_error == SSL_ERROR_ZERO_RETURN) {
-      error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error::SSL_ERROR_ZERO_RETURN", &error_id, __func__, FILE_NAME, __LINE__);
     }
     else {
       // For other serious errors, get the error string and die
@@ -676,7 +666,7 @@ int32_t SPVM__Net__SSLeay__write(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t write_length = SSL_write(self, buf + offset, num);
   
-  if (!(write_length > 0)) {
+  if (!(write_length >= 0)) {
     int32_t ssl_operation_error = SSL_get_error(self, write_length);
     
     assert(ssl_operation_error != SSL_ERROR_NONE);
@@ -700,9 +690,6 @@ int32_t SPVM__Net__SSLeay__write(SPVM_ENV* env, SPVM_VALUE* stack) {
       int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error::SSL_ERROR_WANT_WRITE", &error_id, __func__, FILE_NAME, __LINE__);
       if (error_id) { return error_id; }
       error_id = tmp_error_id;
-    }
-    else if (ssl_operation_error == SSL_ERROR_ZERO_RETURN) {
-      error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error::SSL_ERROR_ZERO_RETURN", &error_id, __func__, FILE_NAME, __LINE__);
     }
     else {
       int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);
@@ -754,9 +741,6 @@ int32_t SPVM__Net__SSLeay__shutdown(SPVM_ENV* env, SPVM_VALUE* stack) {
       int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error::SSL_ERROR_WANT_WRITE", &error_id, __func__, FILE_NAME, __LINE__);
       if (error_id) { return error_id; }
       error_id = tmp_error_id;
-    }
-    else if (ssl_operation_error == SSL_ERROR_ZERO_RETURN) {
-      error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error::SSL_ERROR_ZERO_RETURN", &error_id, __func__, FILE_NAME, __LINE__);
     }
     else {
       int32_t tmp_error_id = env->get_basic_type_id_by_name(env, stack, "Net::SSLeay::Error", &error_id, __func__, FILE_NAME, __LINE__);

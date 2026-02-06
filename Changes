@@ -1,3 +1,7 @@
+0.042 2026-02-06
+  [Incompatible Changes]
+    * Remove SSL_ERROR_ZERO_RETURN and treat return value 0 as EOF in read/write/shutdown for consistency with IO::Socket and modern TLS practices.
+
 0.041 2026-02-05
   [Bug Fix]
     * Fix a bug where SSL_read failed on clean SSL shutdowns by handling SSL_ERROR_ZERO_RETURN.
