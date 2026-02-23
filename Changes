@@ -1,3 +1,6 @@
+0.043 2025-02-24
+  [Changes]
+    * Change the C language standard from GNU99 to C99 to improve portability.
 0.042 2026-02-06
   [Incompatible Changes]
     * Remove SSL_ERROR_ZERO_RETURN and treat return value 0 as EOF in read/write/shutdown for consistency with IO::Socket and modern TLS practices.
