@@ -31,7 +31,7 @@ int32_t SPVM__Net__SSLeay__ASN1_INTEGER__new(SPVM_ENV* env, SPVM_VALUE* stack) {
     return error_id;
   }
   
-  void* obj_self = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::ASN1_INTEGER", self, &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_self = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::ASN1_INTEGER", self, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   
   stack[0].oval = obj_self;
@@ -43,7 +43,7 @@ int32_t SPVM__Net__SSLeay__ASN1_INTEGER__get_int64(SPVM_ENV* env, SPVM_VALUE* st
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   ASN1_INTEGER* self = env->get_pointer(env, stack, obj_self);
   
@@ -74,7 +74,7 @@ int32_t SPVM__Net__SSLeay__ASN1_INTEGER__set_int64(SPVM_ENV* env, SPVM_VALUE* st
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   int64_t r = stack[1].lval;
   
@@ -106,7 +106,7 @@ int32_t SPVM__Net__SSLeay__ASN1_INTEGER__DESTROY(SPVM_ENV* env, SPVM_VALUE* stac
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   ASN1_INTEGER* self = env->get_pointer(env, stack, obj_self);
   

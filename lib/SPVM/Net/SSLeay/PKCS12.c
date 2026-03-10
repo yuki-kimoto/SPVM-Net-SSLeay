@@ -31,7 +31,7 @@ int32_t SPVM__Net__SSLeay__PKCS12__new(SPVM_ENV* env, SPVM_VALUE* stack) {
     return error_id;
   }
   
-  void* obj_self = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::PKCS12", self, &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_self = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::PKCS12", self, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   
   stack[0].oval = obj_self;
@@ -42,15 +42,15 @@ int32_t SPVM__Net__SSLeay__PKCS12__new(SPVM_ENV* env, SPVM_VALUE* stack) {
 int32_t SPVM__Net__SSLeay__PKCS12__parse(SPVM_ENV* env, SPVM_VALUE* stack) {
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
-  void* obj_pass = stack[1].oval;
+  SPVM_OBJ* obj_pass = stack[1].oval;
   
-  void* obj_pkey_ref = stack[2].oval;
+  SPVM_OBJ* obj_pkey_ref = stack[2].oval;
   
-  void* obj_cert_ref = stack[3].oval;
+  SPVM_OBJ* obj_cert_ref = stack[3].oval;
   
-  void* obj_cas_ref = stack[4].oval;
+  SPVM_OBJ* obj_cas_ref = stack[4].oval;
   
   PKCS12* self = env->get_pointer(env, stack, obj_self);
   
@@ -94,11 +94,11 @@ int32_t SPVM__Net__SSLeay__PKCS12__parse(SPVM_ENV* env, SPVM_VALUE* stack) {
     return error_id;
   }
   
-  void* obj_pkey = NULL;
+  SPVM_OBJ* obj_pkey = NULL;
   if (pkey_tmp) {
     EVP_PKEY_up_ref(pkey_tmp);
     
-    void* obj_address_pkey = env->new_pointer_object_by_name(env, stack, "Address", pkey_tmp, &error_id, __func__, FILE_NAME, __LINE__);
+    SPVM_OBJ* obj_address_pkey = env->new_pointer_object_by_name(env, stack, "Address", pkey_tmp, &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
     stack[0].oval = obj_address_pkey;
     env->call_class_method_by_name(env, stack, "Net::SSLeay::EVP_PKEY", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
@@ -107,11 +107,11 @@ int32_t SPVM__Net__SSLeay__PKCS12__parse(SPVM_ENV* env, SPVM_VALUE* stack) {
   }
   env->set_elem_object(env, stack, obj_pkey_ref, 0, obj_pkey);
   
-  void* obj_cert = NULL;
+  SPVM_OBJ* obj_cert = NULL;
   if (cert_tmp) {
     X509_up_ref(cert_tmp);
     
-    void* obj_address_cert = env->new_pointer_object_by_name(env, stack, "Address", cert_tmp, &error_id, __func__, FILE_NAME, __LINE__);
+    SPVM_OBJ* obj_address_cert = env->new_pointer_object_by_name(env, stack, "Address", cert_tmp, &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
     stack[0].oval = obj_address_cert;
     env->call_class_method_by_name(env, stack, "Net::SSLeay::X509", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
@@ -122,18 +122,18 @@ int32_t SPVM__Net__SSLeay__PKCS12__parse(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   if (obj_cas_ref) {
     int32_t length = cas_stack ? sk_X509_num(cas_stack) : 0;
-    void* obj_cas = env->new_object_array_by_name(env, stack, "Net::SSLeay::X509", length, &error_id, __func__, FILE_NAME, __LINE__);
+    SPVM_OBJ* obj_cas = env->new_object_array_by_name(env, stack, "Net::SSLeay::X509", length, &error_id, __func__, FILE_NAME, __LINE__);
     
     for (int32_t i = 0; i < length; i++) {
       X509* ca = sk_X509_value(cas_stack, i);
       X509_up_ref(ca);
       
-      void* obj_address_ca = env->new_pointer_object_by_name(env, stack, "Address", ca, &error_id, __func__, FILE_NAME, __LINE__);
+      SPVM_OBJ* obj_address_ca = env->new_pointer_object_by_name(env, stack, "Address", ca, &error_id, __func__, FILE_NAME, __LINE__);
       if (error_id) { return error_id; }
       stack[0].oval = obj_address_ca;
       env->call_class_method_by_name(env, stack, "Net::SSLeay::X509", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
       if (error_id) { return error_id; }
-      void* obj_ca = stack[0].oval;
+      SPVM_OBJ* obj_ca = stack[0].oval;
       
       env->set_elem_object(env, stack, obj_cas, i, obj_ca);
     }
@@ -147,7 +147,7 @@ int32_t SPVM__Net__SSLeay__PKCS12__parse(SPVM_ENV* env, SPVM_VALUE* stack) {
 int32_t SPVM__Net__SSLeay__PKCS12__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   PKCS12* self = env->get_pointer(env, stack, obj_self);
   

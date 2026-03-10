@@ -14,7 +14,7 @@ int32_t SPVM__Net__SSLeay__ERR__error_string_n(SPVM_ENV* env, SPVM_VALUE* stack)
   
   int64_t e = stack[0].lval;
   
-  void* obj_buf = stack[1].oval;
+  SPVM_OBJ* obj_buf = stack[1].oval;
   
   if (!obj_buf) {
     return env->die(env, stack, "The buffer $buf must be defined.", __func__, FILE_NAME, __LINE__);

@@ -20,7 +20,7 @@ int32_t SPVM__Net__SSLeay__new(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_ssl_ctx = stack[0].oval;
+  SPVM_OBJ* obj_ssl_ctx = stack[0].oval;
   
   SSL_CTX* ssl_ctx = env->get_pointer(env, stack, obj_ssl_ctx);
   
@@ -41,7 +41,7 @@ int32_t SPVM__Net__SSLeay__new(SPVM_ENV* env, SPVM_VALUE* stack) {
     return error_id;
   }
   
-  void* obj_self = env->new_pointer_object_by_name(env, stack, "Net::SSLeay", self, &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_self = env->new_pointer_object_by_name(env, stack, "Net::SSLeay", self, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   
   stack[0].oval = obj_self;
@@ -65,7 +65,7 @@ int32_t SPVM__Net__SSLeay__alert_desc_string_long(SPVM_ENV* env, SPVM_VALUE* sta
   
   assert(desc);
   
-  void* obj_desc = env->new_string_nolen(env, stack, desc);
+  SPVM_OBJ* obj_desc = env->new_string_nolen(env, stack, desc);
   
   stack[0].oval = obj_desc;
   
@@ -76,7 +76,7 @@ int32_t SPVM__Net__SSLeay__load_client_CA_file(SPVM_ENV* env, SPVM_VALUE* stack)
   
   int32_t error_id = 0;
   
-  void* obj_file = stack[0].oval;
+  SPVM_OBJ* obj_file = stack[0].oval;
   
   if (!obj_file) {
     return env->die(env, stack, "The file $file must be defined.", __func__, FILE_NAME, __LINE__);
@@ -102,19 +102,19 @@ int32_t SPVM__Net__SSLeay__load_client_CA_file(SPVM_ENV* env, SPVM_VALUE* stack)
   }
   
   int32_t length = sk_X509_NAME_num(x509_names_stack);
-  void* obj_x509_names = env->new_object_array_by_name(env, stack, "Net::SSLeay::X509_NAME", length, &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_x509_names = env->new_object_array_by_name(env, stack, "Net::SSLeay::X509_NAME", length, &error_id, __func__, FILE_NAME, __LINE__);
   
   for (int32_t i = 0; i < length; i++) {
     X509_NAME* x509_name_tmp = sk_X509_NAME_value(x509_names_stack, i);
     
     X509_NAME* x509_name = X509_NAME_dup(x509_name_tmp);
     
-    void* obj_address_x509_name = env->new_pointer_object_by_name(env, stack, "Address", x509_name, &error_id, __func__, FILE_NAME, __LINE__);
+    SPVM_OBJ* obj_address_x509_name = env->new_pointer_object_by_name(env, stack, "Address", x509_name, &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
     stack[0].oval = obj_address_x509_name;
     env->call_class_method_by_name(env, stack, "Net::SSLeay::X509_NAME", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
-    void* obj_x509_name = stack[0].oval;
+    SPVM_OBJ* obj_x509_name = stack[0].oval;
     
     env->set_elem_object(env, stack, obj_x509_names, i, obj_x509_name);
   }
@@ -128,15 +128,15 @@ int32_t SPVM__Net__SSLeay__select_next_proto(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_out_ref = stack[0].oval;
+  SPVM_OBJ* obj_out_ref = stack[0].oval;
   
   int8_t* outlen_ref = stack[1].bref;
   
-  void* obj_server = stack[2].oval;
+  SPVM_OBJ* obj_server = stack[2].oval;
   
   int32_t server_len = stack[3].ival;
   
-  void* obj_client = stack[4].oval;
+  SPVM_OBJ* obj_client = stack[4].oval;
   
   int32_t client_len = stack[5].ival;
   
@@ -165,7 +165,7 @@ int32_t SPVM__Net__SSLeay__select_next_proto(SPVM_ENV* env, SPVM_VALUE* stack) {
   int32_t status = SSL_select_next_proto(&out_tmp, (unsigned char*)outlen_ref, server, server_len, client, client_len);
   
   if (out_tmp) {
-    void* obj_data = env->new_string(env, stack, out_tmp, *outlen_ref);
+    SPVM_OBJ* obj_data = env->new_string(env, stack, out_tmp, *outlen_ref);
     
     env->set_elem_object(env, stack, obj_out_ref, 0, obj_data);
   }
@@ -179,7 +179,7 @@ int32_t SPVM__Net__SSLeay___init_native(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   SSL* self = env->get_pointer(env, stack, obj_self);
   
@@ -187,7 +187,7 @@ int32_t SPVM__Net__SSLeay___init_native(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
   snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);
-  void* obj_address = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
+  SPVM_OBJ* obj_address = env->new_string(env, stack, tmp_buffer, strlen(tmp_buffer));
   stack[0].oval = obj_address;
   stack[1].oval = obj_self;
   env->call_class_method_by_name(env, stack, "Net::SSLeay", "INIT_INSTANCE", 2, &error_id, __func__, FILE_NAME, __LINE__);
@@ -200,7 +200,7 @@ int32_t SPVM__Net__SSLeay__version(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   SSL* self = env->get_pointer(env, stack, obj_self);
   
@@ -215,13 +215,13 @@ int32_t SPVM__Net__SSLeay__get_version(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   SSL* self = env->get_pointer(env, stack, obj_self);
   
   const char* version_string = SSL_get_version(self);
   
-  void* obj_version_string = env->new_string(env, stack, version_string, strlen(version_string));
+  SPVM_OBJ* obj_version_string = env->new_string(env, stack, version_string, strlen(version_string));
   
   stack[0].oval = obj_version_string;
   
@@ -232,7 +232,7 @@ int32_t SPVM__Net__SSLeay__get_mode(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   SSL* self = env->get_pointer(env, stack, obj_self);
   
@@ -247,7 +247,7 @@ int32_t SPVM__Net__SSLeay__set_mode(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   SSL* self = env->get_pointer(env, stack, obj_self);
   
@@ -264,7 +264,7 @@ int32_t SPVM__Net__SSLeay__clear_mode(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   SSL* self = env->get_pointer(env, stack, obj_self);
   
@@ -281,9 +281,9 @@ int32_t SPVM__Net__SSLeay__set_tlsext_host_name(SPVM_ENV* env, SPVM_VALUE* stack
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
-  void* obj_name = stack[1].oval;
+  SPVM_OBJ* obj_name = stack[1].oval;
   
   if (!obj_name) {
     return env->die(env, stack, "The host name $name must be defined.", __func__, FILE_NAME, __LINE__);
@@ -319,7 +319,7 @@ int32_t SPVM__Net__SSLeay__get_servername(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   int32_t type = stack[1].ival;
   
@@ -327,7 +327,7 @@ int32_t SPVM__Net__SSLeay__get_servername(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   const char* servername = SSL_get_servername(self, type);
   
-  void* obj_servername = NULL;
+  SPVM_OBJ* obj_servername = NULL;
   if (servername) {
     obj_servername = env->new_string_nolen(env , stack, servername);
   }
@@ -341,7 +341,7 @@ int32_t SPVM__Net__SSLeay__get_SSL_CTX(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   SSL* self = env->get_pointer(env, stack, obj_self);
   
@@ -362,12 +362,12 @@ int32_t SPVM__Net__SSLeay__get_SSL_CTX(SPVM_ENV* env, SPVM_VALUE* stack) {
     return error_id;
   }
   
-  void* obj_address_ssl_ctx = env->new_pointer_object_by_name(env, stack, "Address", ssl_ctx, &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_address_ssl_ctx = env->new_pointer_object_by_name(env, stack, "Address", ssl_ctx, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   stack[0].oval = obj_address_ssl_ctx;
   env->call_class_method_by_name(env, stack, "Net::SSLeay::SSL_CTX", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
-  void* obj_ssl_ctx = stack[0].oval;
+  SPVM_OBJ* obj_ssl_ctx = stack[0].oval;
   
   SSL_CTX_up_ref(ssl_ctx);
   
@@ -378,9 +378,9 @@ int32_t SPVM__Net__SSLeay__set_SSL_CTX(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
-  void* obj_ssl_ctx = stack[1].oval;
+  SPVM_OBJ* obj_ssl_ctx = stack[1].oval;
   
   if (!obj_ssl_ctx) {
     return env->die(env, stack, "The SSL_CTX object $ssl_ctx must be defined(Currently undef is not allowed).", __func__, FILE_NAME, __LINE__);
@@ -427,7 +427,7 @@ int32_t SPVM__Net__SSLeay__set_fd(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   int32_t fd = stack[1].ival;
   
@@ -459,7 +459,7 @@ int32_t SPVM__Net__SSLeay__connect(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   SSL* self = env->get_pointer(env, stack, obj_self);
   
@@ -510,7 +510,7 @@ int32_t SPVM__Net__SSLeay__accept(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   SSL* self = env->get_pointer(env, stack, obj_self);
   
@@ -561,8 +561,8 @@ int32_t SPVM__Net__SSLeay__read(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
-  void* obj_buf = stack[1].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_buf = stack[1].oval;
   
   if (!obj_buf) {
     return env->die(env, stack, "The buffer $buf must be defined.", __func__, FILE_NAME, __LINE__);
@@ -633,9 +633,9 @@ int32_t SPVM__Net__SSLeay__write(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
-  void* obj_buf = stack[1].oval;
+  SPVM_OBJ* obj_buf = stack[1].oval;
   
   if (!obj_buf) {
     return env->die(env, stack, "The buffer $buf must be defined.", __func__, FILE_NAME, __LINE__);
@@ -709,7 +709,7 @@ int32_t SPVM__Net__SSLeay__shutdown(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   SSL* self = env->get_pointer(env, stack, obj_self);
   
@@ -760,7 +760,7 @@ int32_t SPVM__Net__SSLeay__get_shutdown(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   SSL* self = env->get_pointer(env, stack, obj_self);
   
@@ -775,7 +775,7 @@ int32_t SPVM__Net__SSLeay__get_cipher(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   SSL* self = env->get_pointer(env, stack, obj_self);
   
@@ -783,7 +783,7 @@ int32_t SPVM__Net__SSLeay__get_cipher(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   assert(name);
   
-  void* obj_name = env->new_string_nolen(env, stack, name);
+  SPVM_OBJ* obj_name = env->new_string_nolen(env, stack, name);
   
   stack[0].oval = obj_name;
   
@@ -794,17 +794,17 @@ int32_t SPVM__Net__SSLeay__get_certificate(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   SSL* self = env->get_pointer(env, stack, obj_self);
   
   // The increment count of the retrun value is not incremented.
   X509* x509 = SSL_get_certificate(self);
   
-  void* obj_x509 = NULL;
+  SPVM_OBJ* obj_x509 = NULL;
   
   if (x509) {
-    void* obj_address_x509 = env->new_pointer_object_by_name(env, stack, "Address", x509, &error_id, __func__, FILE_NAME, __LINE__);
+    SPVM_OBJ* obj_address_x509 = env->new_pointer_object_by_name(env, stack, "Address", x509, &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
     stack[0].oval = obj_address_x509;
     env->call_class_method_by_name(env, stack, "Net::SSLeay::X509", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
@@ -823,17 +823,17 @@ int32_t SPVM__Net__SSLeay__get_peer_certificate(SPVM_ENV* env, SPVM_VALUE* stack
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   SSL* self = env->get_pointer(env, stack, obj_self);
   
   // The reference count of the return value is incremented.
   X509* x509 = SSL_get_peer_certificate(self);
   
-  void* obj_x509 = NULL;
+  SPVM_OBJ* obj_x509 = NULL;
   
   if (x509) {
-    void* obj_address_x509 = env->new_pointer_object_by_name(env, stack, "Address", x509, &error_id, __func__, FILE_NAME, __LINE__);
+    SPVM_OBJ* obj_address_x509 = env->new_pointer_object_by_name(env, stack, "Address", x509, &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
     stack[0].oval = obj_address_x509;
     env->call_class_method_by_name(env, stack, "Net::SSLeay::X509", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
@@ -850,25 +850,25 @@ int32_t SPVM__Net__SSLeay__get_peer_cert_chain(SPVM_ENV* env, SPVM_VALUE* stack)
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   SSL* self = env->get_pointer(env, stack, obj_self);
   
   STACK_OF(X509)* x509s_stack = SSL_get_peer_cert_chain(self);
   
-  void* obj_x509s = NULL;
+  SPVM_OBJ* obj_x509s = NULL;
   if (x509s_stack) {
     int32_t length = sk_X509_num(x509s_stack);
     obj_x509s = env->new_object_array_by_name(env, stack, "Net::SSLeay::X509", length, &error_id, __func__, FILE_NAME, __LINE__);
     for (int32_t i = 0; i < length; i++) {
       X509* x509 = sk_X509_value(x509s_stack, i);
       
-      void* obj_address_x509 = env->new_pointer_object_by_name(env, stack, "Address", x509, &error_id, __func__, FILE_NAME, __LINE__);
+      SPVM_OBJ* obj_address_x509 = env->new_pointer_object_by_name(env, stack, "Address", x509, &error_id, __func__, FILE_NAME, __LINE__);
       if (error_id) { return error_id; }
       stack[0].oval = obj_address_x509;
       env->call_class_method_by_name(env, stack, "Net::SSLeay::X509", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
       if (error_id) { return error_id; }
-      void* obj_x509 = stack[0].oval;
+      SPVM_OBJ* obj_x509 = stack[0].oval;
       
       X509_up_ref(x509);
       
@@ -885,9 +885,9 @@ int32_t SPVM__Net__SSLeay__get0_alpn_selected(SPVM_ENV* env, SPVM_VALUE* stack) 
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
-  void* obj_data_ref = stack[1].oval;
+  SPVM_OBJ* obj_data_ref = stack[1].oval;
   
   int32_t* len_ref = stack[2].iref;
   
@@ -906,7 +906,7 @@ int32_t SPVM__Net__SSLeay__get0_alpn_selected(SPVM_ENV* env, SPVM_VALUE* stack) 
   SSL_get0_alpn_selected(self, &data_tmp, &len_tmp);
   
   if (data_tmp) {
-    void* obj_data = env->new_string_nolen(env, stack, data_tmp);
+    SPVM_OBJ* obj_data = env->new_string_nolen(env, stack, data_tmp);
     
     env->set_elem_object(env, stack, obj_data_ref, 0, obj_data);
   }
@@ -935,18 +935,18 @@ static void SPVM__Net__SSLeay__my__msg_callback(int write_p, int version, int co
     
     goto END_OF_FUNC;
   }
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   assert(obj_self);
   
-  void* obj_cb = env->get_field_object_by_name(env, stack, obj_self, "msg_callback", &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_cb = env->get_field_object_by_name(env, stack, obj_self, "msg_callback", &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) {
     env->print_exception_to_stderr(env, stack);
     
     goto END_OF_FUNC;
   }
   
-  void* obj_buf = env->new_string(env, stack, buf, len);
+  SPVM_OBJ* obj_buf = env->new_string(env, stack, buf, len);
   
   stack[0].oval = obj_cb;
   stack[1].ival = write_p;
@@ -976,9 +976,9 @@ int32_t SPVM__Net__SSLeay__set_msg_callback(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
-  void* obj_cb = stack[1].oval;
+  SPVM_OBJ* obj_cb = stack[1].oval;
   
   SSL* self = env->get_pointer(env, stack, obj_self);
   
@@ -1000,7 +1000,7 @@ int32_t SPVM__Net__SSLeay__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   SSL* self = env->get_pointer(env, stack, obj_self);
   

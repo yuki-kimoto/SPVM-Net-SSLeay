@@ -29,7 +29,7 @@ int32_t SPVM__Net__SSLeay__X509_NAME__new(SPVM_ENV* env, SPVM_VALUE* stack) {
     return error_id;
   }
   
-  void* obj_self = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::X509_NAME", self, &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_self = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::X509_NAME", self, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   
   stack[0].oval = obj_self;
@@ -41,7 +41,7 @@ int32_t SPVM__Net__SSLeay__X509_NAME__oneline(SPVM_ENV* env, SPVM_VALUE* stack) 
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   X509_NAME* self = env->get_pointer(env, stack, obj_self);
   
@@ -62,7 +62,7 @@ int32_t SPVM__Net__SSLeay__X509_NAME__oneline(SPVM_ENV* env, SPVM_VALUE* stack) 
     return error_id;
   }
   
-  void* obj_ret = env->new_string_nolen(env, stack, ret);
+  SPVM_OBJ* obj_ret = env->new_string_nolen(env, stack, ret);
   
   OPENSSL_free(ret);
   
@@ -75,7 +75,7 @@ int32_t SPVM__Net__SSLeay__X509_NAME__get_entry(SPVM_ENV* env, SPVM_VALUE* stack
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   int32_t loc = stack[1].ival;
   
@@ -100,12 +100,12 @@ int32_t SPVM__Net__SSLeay__X509_NAME__get_entry(SPVM_ENV* env, SPVM_VALUE* stack
   
   X509_NAME_ENTRY* name_entry = X509_NAME_ENTRY_dup(name_entry_tmp);
   
-  void* obj_address_name_entry = env->new_pointer_object_by_name(env, stack, "Address", name_entry, &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_address_name_entry = env->new_pointer_object_by_name(env, stack, "Address", name_entry, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   stack[0].oval = obj_address_name_entry;
   env->call_class_method_by_name(env, stack, "Net::SSLeay::X509_NAME_ENTRY", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);  
   if (error_id) { return error_id; }
-  void* obj_name_entry = stack[0].oval;
+  SPVM_OBJ* obj_name_entry = stack[0].oval;
   
   stack[0].oval = obj_name_entry;
   
@@ -116,7 +116,7 @@ int32_t SPVM__Net__SSLeay__X509_NAME__get_index_by_NID(SPVM_ENV* env, SPVM_VALUE
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   int32_t nid = stack[1].ival;
   
@@ -135,7 +135,7 @@ int32_t SPVM__Net__SSLeay__X509_NAME__entry_count(SPVM_ENV* env, SPVM_VALUE* sta
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   int32_t nid = stack[1].ival;
   
@@ -154,13 +154,13 @@ int32_t SPVM__Net__SSLeay__X509_NAME__add_entry_by_NID(SPVM_ENV* env, SPVM_VALUE
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   int32_t nid = stack[1].ival;
   
   int32_t type = stack[2].ival;
   
-  void* obj_bytes = stack[3].oval;
+  SPVM_OBJ* obj_bytes = stack[3].oval;
   
   int32_t len = stack[4].ival;
   
@@ -208,7 +208,7 @@ int32_t SPVM__Net__SSLeay__X509_NAME__delete_entry(SPVM_ENV* env, SPVM_VALUE* st
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   int32_t loc = stack[1].ival;
   
@@ -231,12 +231,12 @@ int32_t SPVM__Net__SSLeay__X509_NAME__delete_entry(SPVM_ENV* env, SPVM_VALUE* st
     return error_id;
   }
   
-  void* obj_address_name_entry = env->new_pointer_object_by_name(env, stack, "Address", name_entry, &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_address_name_entry = env->new_pointer_object_by_name(env, stack, "Address", name_entry, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   stack[0].oval = obj_address_name_entry;
   env->call_class_method_by_name(env, stack, "Net::SSLeay::X509_NAME_ENTRY", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);  
   if (error_id) { return error_id; }
-  void* obj_name_entry = stack[0].oval;
+  SPVM_OBJ* obj_name_entry = stack[0].oval;
   
   stack[0].oval = obj_name_entry;
   
@@ -247,7 +247,7 @@ int32_t SPVM__Net__SSLeay__X509_NAME__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) 
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   X509_NAME* self = env->get_pointer(env, stack, obj_self);
   

@@ -29,7 +29,7 @@ int32_t SPVM__Net__SSLeay__ASN1_OCTET_STRING__new(SPVM_ENV* env, SPVM_VALUE* sta
     return error_id;
   }
   
-  void* obj_self = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::ASN1_OCTET_STRING", self, &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_self = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::ASN1_OCTET_STRING", self, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   
   stack[0].oval = obj_self;
@@ -41,7 +41,7 @@ int32_t SPVM__Net__SSLeay__ASN1_OCTET_STRING__length(SPVM_ENV* env, SPVM_VALUE* 
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   ASN1_OCTET_STRING* self = env->get_pointer(env, stack, obj_self);
   
@@ -56,7 +56,7 @@ int32_t SPVM__Net__SSLeay__ASN1_OCTET_STRING__get0_data(SPVM_ENV* env, SPVM_VALU
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   ASN1_OCTET_STRING* self = env->get_pointer(env, stack, obj_self);
   
@@ -64,7 +64,7 @@ int32_t SPVM__Net__SSLeay__ASN1_OCTET_STRING__get0_data(SPVM_ENV* env, SPVM_VALU
   
   int32_t length = ASN1_STRING_length(self);
   
-  void* obj_string = env->new_string(env, stack, string, length);
+  SPVM_OBJ* obj_string = env->new_string(env, stack, string, length);
   
   stack[0].oval = obj_string;
   
@@ -75,9 +75,9 @@ int32_t SPVM__Net__SSLeay__ASN1_OCTET_STRING__set(SPVM_ENV* env, SPVM_VALUE* sta
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
-  void* obj_data = stack[1].oval;
+  SPVM_OBJ* obj_data = stack[1].oval;
   
   int32_t len = stack[2].ival;
   
@@ -113,7 +113,7 @@ int32_t SPVM__Net__SSLeay__ASN1_OCTET_STRING__DESTROY(SPVM_ENV* env, SPVM_VALUE*
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   ASN1_OCTET_STRING* self = env->get_pointer(env, stack, obj_self);
   

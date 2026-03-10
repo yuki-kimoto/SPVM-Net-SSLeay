@@ -44,7 +44,7 @@ int32_t SPVM__Net__SSLeay__OPENSSL__init_crypto(SPVM_ENV* env, SPVM_VALUE* stack
   
   int64_t opts = stack[0].lval;
   
-  void* obj_settings = stack[1].oval;
+  SPVM_OBJ* obj_settings = stack[1].oval;
   
   OPENSSL_INIT_SETTINGS* settings = NULL;
   if (obj_settings) {
@@ -74,7 +74,7 @@ int32_t SPVM__Net__SSLeay__OPENSSL__init_ssl(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int64_t opts = stack[0].lval;
   
-  void* obj_settings = stack[1].oval;
+  SPVM_OBJ* obj_settings = stack[1].oval;
   
   OPENSSL_INIT_SETTINGS* settings = NULL;
   if (obj_settings) {

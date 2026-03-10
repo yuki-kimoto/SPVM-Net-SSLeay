@@ -14,7 +14,7 @@ int32_t SPVM__Net__SSLeay__EVP__get_digestbyname(SPVM_ENV* env, SPVM_VALUE* stac
   
   int32_t error_id = 0;
   
-  void* obj_name = stack[0].oval;
+  SPVM_OBJ* obj_name = stack[0].oval;
   
   if (!obj_name) {
     return env->die(env, stack, "The name $name must be defined.", __func__, FILE_NAME, __LINE__);
@@ -24,7 +24,7 @@ int32_t SPVM__Net__SSLeay__EVP__get_digestbyname(SPVM_ENV* env, SPVM_VALUE* stac
   
   const EVP_MD* evp_md = EVP_get_digestbyname(name);
   
-  void* obj_evp_md = NULL;
+  SPVM_OBJ* obj_evp_md = NULL;
   
   if (evp_md) {
     obj_evp_md = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::EVP_MD", (void*)evp_md, &error_id, __func__, FILE_NAME, __LINE__);
@@ -46,7 +46,7 @@ int32_t SPVM__Net__SSLeay__EVP__sha1(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   assert(evp_md);
   
-  void* obj_evp_md = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::EVP_MD", (void*)evp_md, &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_evp_md = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::EVP_MD", (void*)evp_md, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   env->set_no_free(env, stack, obj_evp_md, 1);
   
@@ -63,7 +63,7 @@ int32_t SPVM__Net__SSLeay__EVP__sha256(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   assert(evp_md);
   
-  void* obj_evp_md = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::EVP_MD", (void*)evp_md, &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_evp_md = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::EVP_MD", (void*)evp_md, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   env->set_no_free(env, stack, obj_evp_md, 1);
   
@@ -80,7 +80,7 @@ int32_t SPVM__Net__SSLeay__EVP__sha512(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   assert(evp_md);
   
-  void* obj_evp_md = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::EVP_MD", (void*)evp_md, &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_evp_md = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::EVP_MD", (void*)evp_md, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   env->set_no_free(env, stack, obj_evp_md, 1);
   

@@ -14,7 +14,7 @@ int32_t SPVM__Net__SSLeay__RAND__seed(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_buf = stack[0].oval;
+  SPVM_OBJ* obj_buf = stack[0].oval;
   
   int32_t num = stack[1].ival;
   
@@ -42,7 +42,7 @@ int32_t SPVM__Net__SSLeay__RAND__load_file(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_filename = stack[0].oval;
+  SPVM_OBJ* obj_filename = stack[0].oval;
   
   int64_t max_bytes = stack[1].lval;
   

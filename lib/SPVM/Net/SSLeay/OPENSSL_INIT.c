@@ -20,12 +20,12 @@ int32_t SPVM__Net__SSLeay__OPENSSL_INIT__new(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   assert(self);
   
-  void* obj_address_self = env->new_pointer_object_by_name(env, stack, "Address", self, &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_address_self = env->new_pointer_object_by_name(env, stack, "Address", self, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   stack[0].oval = obj_address_self;
   env->call_class_method_by_name(env, stack, "Net::SSLeay::OPENSSL_INIT_SETTINGS", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   stack[0].oval = obj_self;
   
@@ -39,9 +39,9 @@ int32_t SPVM__Net__SSLeay__OPENSSL_INIT__set_config_filename(SPVM_ENV* env, SPVM
 #else
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
-  void* obj_filename = stack[1].oval;
+  SPVM_OBJ* obj_filename = stack[1].oval;
   
   if (!obj_self) {
     return env->die(env, stack, "The OPENSSL_INIT_SETTINGS object $init must be defined.", __func__, FILE_NAME, __LINE__);
@@ -85,7 +85,7 @@ int32_t SPVM__Net__SSLeay__OPENSSL_INIT__set_config_file_flags(SPVM_ENV* env, SP
 #else
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   int64_t flags = stack[1].lval;
   
@@ -108,9 +108,9 @@ int32_t SPVM__Net__SSLeay__OPENSSL_INIT__set_config_appname(SPVM_ENV* env, SPVM_
 #else
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
-  void* obj_name = stack[1].oval;
+  SPVM_OBJ* obj_name = stack[1].oval;
   
   if (!obj_self) {
     return env->die(env, stack, "The OPENSSL_INIT_SETTINGS object $init must be defined.", __func__, FILE_NAME, __LINE__);

@@ -31,7 +31,7 @@ int32_t SPVM__Net__SSLeay__GENERAL_NAME__new(SPVM_ENV* env, SPVM_VALUE* stack) {
     return error_id;
   }
   
-  void* obj_self = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::GENERAL_NAME", self, &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_self = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::GENERAL_NAME", self, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   
   stack[0].oval = obj_self;
@@ -43,7 +43,7 @@ int32_t SPVM__Net__SSLeay__GENERAL_NAME__get_type(SPVM_ENV* env, SPVM_VALUE* sta
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   GENERAL_NAME* self = env->get_pointer(env, stack, obj_self);
   
@@ -58,11 +58,11 @@ int32_t SPVM__Net__SSLeay__GENERAL_NAME__get_data_as_string(SPVM_ENV* env, SPVM_
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   GENERAL_NAME* self = env->get_pointer(env, stack, obj_self);
   
-  void* obj_data_as_string = NULL;
+  SPVM_OBJ* obj_data_as_string = NULL;
   switch (self->type) {
     case GEN_OTHERNAME: {
       ASN1_STRING* data_asn1_string = self->d.otherName->value->value.utf8string;
@@ -122,7 +122,7 @@ int32_t SPVM__Net__SSLeay__GENERAL_NAME__DESTROY(SPVM_ENV* env, SPVM_VALUE* stac
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   GENERAL_NAME* self = env->get_pointer(env, stack, obj_self);
   

@@ -29,7 +29,7 @@ int32_t SPVM__Net__SSLeay__X509_VERIFY_PARAM__new(SPVM_ENV* env, SPVM_VALUE* sta
     return error_id;
   }
   
-  void* obj_self = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::X509_VERIFY_PARAM", self, &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_self = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::X509_VERIFY_PARAM", self, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   
   stack[0].oval = obj_self;
@@ -41,7 +41,7 @@ int32_t SPVM__Net__SSLeay__X509_VERIFY_PARAM__get_flags(SPVM_ENV* env, SPVM_VALU
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   X509_VERIFY_PARAM* self = env->get_pointer(env, stack, obj_self);
   
@@ -56,7 +56,7 @@ int32_t SPVM__Net__SSLeay__X509_VERIFY_PARAM__set_flags(SPVM_ENV* env, SPVM_VALU
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   int64_t flags = stack[1].lval;
   
@@ -88,7 +88,7 @@ int32_t SPVM__Net__SSLeay__X509_VERIFY_PARAM__clear_flags(SPVM_ENV* env, SPVM_VA
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   int64_t flags = stack[1].lval;
   
@@ -120,7 +120,7 @@ int32_t SPVM__Net__SSLeay__X509_VERIFY_PARAM__get_hostflags(SPVM_ENV* env, SPVM_
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   X509_VERIFY_PARAM* self = env->get_pointer(env, stack, obj_self);
   
@@ -135,7 +135,7 @@ int32_t SPVM__Net__SSLeay__X509_VERIFY_PARAM__set_hostflags(SPVM_ENV* env, SPVM_
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   int32_t flags = stack[1].ival;
   
@@ -150,9 +150,9 @@ int32_t SPVM__Net__SSLeay__X509_VERIFY_PARAM__set1_host(SPVM_ENV* env, SPVM_VALU
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
-  void* obj_name = stack[1].oval;
+  SPVM_OBJ* obj_name = stack[1].oval;
   
   if (!obj_name) {
     return env->die(env, stack, "The host name $name must be defined.", __func__, FILE_NAME, __LINE__);
@@ -198,9 +198,9 @@ int32_t SPVM__Net__SSLeay__X509_VERIFY_PARAM__set1_ip_asc(SPVM_ENV* env, SPVM_VA
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
-  void* obj_ipasc = stack[1].oval;
+  SPVM_OBJ* obj_ipasc = stack[1].oval;
   
   if (!obj_ipasc) {
     return env->die(env, stack, "The IP address $ip_asc must be defined.", __func__, FILE_NAME, __LINE__);
@@ -236,9 +236,9 @@ int32_t SPVM__Net__SSLeay__X509_VERIFY_PARAM__set1_email(SPVM_ENV* env, SPVM_VAL
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
-  void* obj_name = stack[1].oval;
+  SPVM_OBJ* obj_name = stack[1].oval;
   
   if (!obj_name) {
     return env->die(env, stack, "The email $email must be defined.", __func__, FILE_NAME, __LINE__);
@@ -283,7 +283,7 @@ int32_t SPVM__Net__SSLeay__X509_VERIFY_PARAM__set1_email(SPVM_ENV* env, SPVM_VAL
 int32_t SPVM__Net__SSLeay__X509_VERIFY_PARAM__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   X509_VERIFY_PARAM* self = env->get_pointer(env, stack, obj_self);
   

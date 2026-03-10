@@ -29,7 +29,7 @@ int32_t SPVM__Net__SSLeay__BIO__new(SPVM_ENV* env, SPVM_VALUE* stack) {
     return error_id;
   }
   
-  void* obj_self = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::BIO", self, &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_self = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::BIO", self, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   
   stack[0].oval = obj_self;
@@ -41,9 +41,9 @@ int32_t SPVM__Net__SSLeay__BIO__read(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
-  void* obj_data = stack[1].oval;
+  SPVM_OBJ* obj_data = stack[1].oval;
   
   if (!obj_data) {
     return env->die(env, stack, "The data $data must be defined.", __func__, FILE_NAME, __LINE__);
@@ -90,9 +90,9 @@ int32_t SPVM__Net__SSLeay__BIO__write(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
-  void* obj_data = stack[1].oval;
+  SPVM_OBJ* obj_data = stack[1].oval;
   
   if (!obj_data) {
     return env->die(env, stack, "The data $data must be defined.", __func__, FILE_NAME, __LINE__);
@@ -139,9 +139,9 @@ int32_t SPVM__Net__SSLeay__BIO__new_file(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_filename = stack[0].oval;
+  SPVM_OBJ* obj_filename = stack[0].oval;
   
-  void* obj_mode = stack[1].oval;
+  SPVM_OBJ* obj_mode = stack[1].oval;
   
   if (!obj_filename) {
     return env->die(env, stack, "The file name $filename must be defined.", __func__, FILE_NAME, __LINE__);
@@ -172,7 +172,7 @@ int32_t SPVM__Net__SSLeay__BIO__new_file(SPVM_ENV* env, SPVM_VALUE* stack) {
     return error_id;
   }
   
-  void* obj_self = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::BIO", self, &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_self = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::BIO", self, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   
   stack[0].oval = obj_self;
@@ -184,7 +184,7 @@ int32_t SPVM__Net__SSLeay__BIO__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   BIO* self = env->get_pointer(env, stack, obj_self);
   

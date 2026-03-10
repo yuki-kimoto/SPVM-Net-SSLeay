@@ -16,9 +16,9 @@ int32_t SPVM__Net__SSLeay__DER__d2i_PKCS12(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_a_ref = stack[0].oval;
+  SPVM_OBJ* obj_a_ref = stack[0].oval;
   
-  void* obj_ppin_ref = stack[1].oval;
+  SPVM_OBJ* obj_ppin_ref = stack[1].oval;
   
   int64_t length = stack[2].lval;
   
@@ -36,7 +36,7 @@ int32_t SPVM__Net__SSLeay__DER__d2i_PKCS12(SPVM_ENV* env, SPVM_VALUE* stack) {
     return env->die(env, stack, "The length of $ppin_ref must be 1.", __func__, FILE_NAME, __LINE__);
   }
   
-  void* obj_ppin = env->get_elem_string(env, stack, obj_ppin_ref, 0);
+  SPVM_OBJ* obj_ppin = env->get_elem_string(env, stack, obj_ppin_ref, 0);
   
   if (!obj_ppin) {
     return env->die(env, stack, "$ppin_ref at index 0 must be defined.", __func__, FILE_NAME, __LINE__);
@@ -62,7 +62,7 @@ int32_t SPVM__Net__SSLeay__DER__d2i_PKCS12(SPVM_ENV* env, SPVM_VALUE* stack) {
     return error_id;
   }
   
-  void* obj_ret = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::PKCS12", ret, &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_ret = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::PKCS12", ret, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   
   stack[0].oval = obj_ret;
@@ -74,9 +74,9 @@ int32_t SPVM__Net__SSLeay__DER__i2d_PKCS12(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_a = stack[0].oval;
+  SPVM_OBJ* obj_a = stack[0].oval;
   
-  void* obj_ppout_ref = stack[1].oval;
+  SPVM_OBJ* obj_ppout_ref = stack[1].oval;
   
   int64_t length = stack[2].lval;
   
@@ -112,7 +112,7 @@ int32_t SPVM__Net__SSLeay__DER__i2d_PKCS12(SPVM_ENV* env, SPVM_VALUE* stack) {
     return error_id;
   }
   
-  void* obj_ppout = env->new_string_nolen(env, stack, ppout_ref_tmp[0]);
+  SPVM_OBJ* obj_ppout = env->new_string_nolen(env, stack, ppout_ref_tmp[0]);
   
   env->set_elem_object(env, stack, obj_ppout_ref, 0, obj_ppout);
   
@@ -125,7 +125,7 @@ int32_t SPVM__Net__SSLeay__DER__d2i_PKCS12_bio(SPVM_ENV* env, SPVM_VALUE* stack)
   
   int32_t error_id = 0;
   
-  void* obj_bio = stack[0].oval;
+  SPVM_OBJ* obj_bio = stack[0].oval;
   
   if (!obj_bio) {
     return env->die(env, stack, "The BIO object $bio must be defined.", __func__, FILE_NAME, __LINE__);
@@ -148,7 +148,7 @@ int32_t SPVM__Net__SSLeay__DER__d2i_PKCS12_bio(SPVM_ENV* env, SPVM_VALUE* stack)
     return error_id;
   }
   
-  void* obj_ret = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::PKCS12", ret, &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_ret = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::PKCS12", ret, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   
   stack[0].oval = obj_ret;

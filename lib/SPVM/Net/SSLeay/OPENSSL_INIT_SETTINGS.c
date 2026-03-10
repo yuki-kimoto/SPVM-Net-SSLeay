@@ -12,7 +12,7 @@ int32_t SPVM__Net__SSLeay__OPENSSL_INIT_SETTINGS__DESTROY(SPVM_ENV* env, SPVM_VA
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   OPENSSL_INIT_SETTINGS* self = env->get_pointer(env, stack, obj_self);
   

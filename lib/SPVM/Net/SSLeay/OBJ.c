@@ -12,7 +12,7 @@ int32_t SPVM__Net__SSLeay__OBJ__txt2nid(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_s = stack[0].oval;
+  SPVM_OBJ* obj_s = stack[0].oval;
   
   if (!obj_s) {
     return env->die(env, stack, "The text string $s must be defined.", __func__, FILE_NAME, __LINE__);
@@ -66,12 +66,12 @@ int32_t SPVM__Net__SSLeay__OBJ__nid2obj(SPVM_ENV* env, SPVM_VALUE* stack) {
     return error_id;
   }
   
-  void* obj_address_oid = env->new_pointer_object_by_name(env, stack, "Address", oid, &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_address_oid = env->new_pointer_object_by_name(env, stack, "Address", oid, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   stack[0].oval = obj_address_oid;
   env->call_class_method_by_name(env, stack, "Net::SSLeay::ASN1_OBJECT", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);  
   if (error_id) { return error_id; }
-  void* obj_oid = stack[0].oval;
+  SPVM_OBJ* obj_oid = stack[0].oval;
   env->set_no_free(env, stack, obj_oid, 1);
   
   stack[0].oval = obj_oid;
@@ -83,7 +83,7 @@ int32_t SPVM__Net__SSLeay__OBJ__obj2nid(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_o = stack[0].oval;
+  SPVM_OBJ* obj_o = stack[0].oval;
   
   if (!obj_o) {
     return env->die(env, stack, "The ASN1_OBJECT object $o must be defined.", __func__, FILE_NAME, __LINE__);

@@ -12,11 +12,11 @@ int32_t SPVM__Net__SSLeay__X509_STORE_CTX__get1_issuer(SPVM_ENV* env, SPVM_VALUE
   
   int32_t error_id = 0;
   
-  void* obj_issuer_ref = stack[0].oval;
+  SPVM_OBJ* obj_issuer_ref = stack[0].oval;
   
-  void* obj_ctx = stack[1].oval;
+  SPVM_OBJ* obj_ctx = stack[1].oval;
   
-  void* obj_x = stack[2].oval;
+  SPVM_OBJ* obj_x = stack[2].oval;
   
   if (!(obj_issuer_ref && env->length(env, stack, obj_issuer_ref) == 1)) {
     return env->die(env, stack, "The output array of the Net::SSLeay::X509 $issuer_ref must be a 1-length array.", __func__, FILE_NAME, __LINE__);
@@ -56,12 +56,12 @@ int32_t SPVM__Net__SSLeay__X509_STORE_CTX__get1_issuer(SPVM_ENV* env, SPVM_VALUE
   
   if (found) {
     X509* issuer = issuer_ref_tmp[0];
-    void* obj_address_issuer = env->new_pointer_object_by_name(env, stack, "Address", issuer, &error_id, __func__, FILE_NAME, __LINE__);
+    SPVM_OBJ* obj_address_issuer = env->new_pointer_object_by_name(env, stack, "Address", issuer, &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
     stack[0].oval = obj_address_issuer;
     env->call_class_method_by_name(env, stack, "Net::SSLeay::X509", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
-    void* obj_issuer = stack[0].oval;
+    SPVM_OBJ* obj_issuer = stack[0].oval;
     env->set_elem_object(env, stack, obj_issuer_ref, 0, obj_issuer);
   }
   
@@ -74,7 +74,7 @@ int32_t SPVM__Net__SSLeay__X509_STORE_CTX__set_error(SPVM_ENV* env, SPVM_VALUE* 
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   int32_t s = stack[1].ival;
   
@@ -89,7 +89,7 @@ int32_t SPVM__Net__SSLeay__X509_STORE_CTX__get_error(SPVM_ENV* env, SPVM_VALUE* 
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   X509_STORE_CTX* self = env->get_pointer(env, stack, obj_self);
   
@@ -104,7 +104,7 @@ int32_t SPVM__Net__SSLeay__X509_STORE_CTX__get_error_depth(SPVM_ENV* env, SPVM_V
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   X509_STORE_CTX* self = env->get_pointer(env, stack, obj_self);
   
@@ -119,17 +119,17 @@ int32_t SPVM__Net__SSLeay__X509_STORE_CTX__get_current_cert(SPVM_ENV* env, SPVM_
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   X509_STORE_CTX* self = env->get_pointer(env, stack, obj_self);
   
   X509* x509 = X509_STORE_CTX_get_current_cert(self);
   
-  void* obj_x509 = NULL;
+  SPVM_OBJ* obj_x509 = NULL;
   
   if (x509) {
     X509_up_ref(x509);
-    void* obj_address_x509 = env->new_pointer_object_by_name(env, stack, "Address", x509, &error_id, __func__, FILE_NAME, __LINE__);
+    SPVM_OBJ* obj_address_x509 = env->new_pointer_object_by_name(env, stack, "Address", x509, &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
     stack[0].oval = obj_address_x509;
     env->call_class_method_by_name(env, stack, "Net::SSLeay::X509", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);  
@@ -146,7 +146,7 @@ int32_t SPVM__Net__SSLeay__X509_STORE_CTX__DESTROY(SPVM_ENV* env, SPVM_VALUE* st
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   X509_STORE_CTX* self = env->get_pointer(env, stack, obj_self);
   

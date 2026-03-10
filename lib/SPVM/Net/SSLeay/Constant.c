@@ -24,7 +24,7 @@ int32_t SPVM__Net__SSLeay__Constant__OPENSSL_VERSION_TEXT(SPVM_ENV* env, SPVM_VA
   
   char *version = OPENSSL_VERSION_TEXT;
   
-  void* obj_version = env->new_string_nolen(env, stack, version);
+  SPVM_OBJ* obj_version = env->new_string_nolen(env, stack, version);
   
   stack[0].oval = obj_version;
   

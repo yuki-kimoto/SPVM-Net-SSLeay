@@ -33,7 +33,7 @@ int32_t SPVM__Net__SSLeay__X509__new(SPVM_ENV* env, SPVM_VALUE* stack) {
     return error_id;
   }
   
-  void* obj_self = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::X509", self, &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_self = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::X509", self, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   
   stack[0].oval = obj_self;
@@ -45,9 +45,9 @@ int32_t SPVM__Net__SSLeay__X509__check_issued(SPVM_ENV* env, SPVM_VALUE* stack) 
   
   int32_t error_id = 0;
   
-  void* obj_issuer = stack[0].oval;
+  SPVM_OBJ* obj_issuer = stack[0].oval;
   
-  void* obj_subject = stack[1].oval;
+  SPVM_OBJ* obj_subject = stack[1].oval;
   
   if (!obj_issuer) {
     return env->die(env, stack, "The X509 object $issuer must be defined.", __func__, FILE_NAME, __LINE__);
@@ -72,7 +72,7 @@ int32_t SPVM__Net__SSLeay__X509__get_serialNumber(SPVM_ENV* env, SPVM_VALUE* sta
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   X509* self = env->get_pointer(env, stack, obj_self);
   
@@ -82,12 +82,12 @@ int32_t SPVM__Net__SSLeay__X509__get_serialNumber(SPVM_ENV* env, SPVM_VALUE* sta
   
   ASN1_INTEGER* serialNumber = ASN1_INTEGER_dup(serialNumber_tmp);
   
-  void* obj_address_serialNumber = env->new_pointer_object_by_name(env, stack, "Address", serialNumber, &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_address_serialNumber = env->new_pointer_object_by_name(env, stack, "Address", serialNumber, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   stack[0].oval = obj_address_serialNumber;
   env->call_class_method_by_name(env, stack, "Net::SSLeay::ASN1_INTEGER", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
-  void* obj_serialNumber = stack[0].oval;
+  SPVM_OBJ* obj_serialNumber = stack[0].oval;
   
   stack[0].oval = obj_serialNumber;
   
@@ -98,7 +98,7 @@ int32_t SPVM__Net__SSLeay__X509__get_issuer_name(SPVM_ENV* env, SPVM_VALUE* stac
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   X509* self = env->get_pointer(env, stack, obj_self);
   
@@ -108,12 +108,12 @@ int32_t SPVM__Net__SSLeay__X509__get_issuer_name(SPVM_ENV* env, SPVM_VALUE* stac
   
   X509_NAME* x509_name = X509_NAME_dup(x509_name_tmp);
   
-  void* obj_address_x509_name = env->new_pointer_object_by_name(env, stack, "Address", x509_name, &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_address_x509_name = env->new_pointer_object_by_name(env, stack, "Address", x509_name, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   stack[0].oval = obj_address_x509_name;
   env->call_class_method_by_name(env, stack, "Net::SSLeay::X509_NAME", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
-  void* obj_x509_name = stack[0].oval;
+  SPVM_OBJ* obj_x509_name = stack[0].oval;
   
   stack[0].oval = obj_x509_name;
   
@@ -124,7 +124,7 @@ int32_t SPVM__Net__SSLeay__X509__get_subject_name(SPVM_ENV* env, SPVM_VALUE* sta
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   X509* self = env->get_pointer(env, stack, obj_self);
   
@@ -134,12 +134,12 @@ int32_t SPVM__Net__SSLeay__X509__get_subject_name(SPVM_ENV* env, SPVM_VALUE* sta
   
   X509_NAME* x509_name = X509_NAME_dup(x509_name_tmp);
   
-  void* obj_address_x509_name = env->new_pointer_object_by_name(env, stack, "Address", x509_name, &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_address_x509_name = env->new_pointer_object_by_name(env, stack, "Address", x509_name, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   stack[0].oval = obj_address_x509_name;
   env->call_class_method_by_name(env, stack, "Net::SSLeay::X509_NAME", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
-  void* obj_x509_name = stack[0].oval;
+  SPVM_OBJ* obj_x509_name = stack[0].oval;
   
   stack[0].oval = obj_x509_name;
   
@@ -150,7 +150,7 @@ int32_t SPVM__Net__SSLeay__X509__get_pubkey(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   X509* self = env->get_pointer(env, stack, obj_self);
   
@@ -172,12 +172,12 @@ int32_t SPVM__Net__SSLeay__X509__get_pubkey(SPVM_ENV* env, SPVM_VALUE* stack) {
     return error_id;
   }
   
-  void* obj_address_pubkey = env->new_pointer_object_by_name(env, stack, "Address", pubkey, &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_address_pubkey = env->new_pointer_object_by_name(env, stack, "Address", pubkey, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   stack[0].oval = obj_address_pubkey;
   env->call_class_method_by_name(env, stack, "Net::SSLeay::EVP_PKEY", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
-  void* obj_pubkey = stack[0].oval;
+  SPVM_OBJ* obj_pubkey = stack[0].oval;
   
   stack[0].oval = obj_pubkey;
   
@@ -188,11 +188,11 @@ int32_t SPVM__Net__SSLeay__X509__pubkey_digest(SPVM_ENV* env, SPVM_VALUE* stack)
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
-  void* obj_type = stack[1].oval;
+  SPVM_OBJ* obj_type = stack[1].oval;
   
-  void* obj_md = stack[2].oval;
+  SPVM_OBJ* obj_md = stack[2].oval;
   
   int32_t* len_ref = stack[3].iref;
   
@@ -248,7 +248,7 @@ int32_t SPVM__Net__SSLeay__X509__get_ext_by_NID(SPVM_ENV* env, SPVM_VALUE* stack
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   int32_t nid = stack[1].ival;
   
@@ -283,7 +283,7 @@ int32_t SPVM__Net__SSLeay__X509__get_ext_count(SPVM_ENV* env, SPVM_VALUE* stack)
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   X509* self = env->get_pointer(env, stack, obj_self);
   
@@ -298,7 +298,7 @@ int32_t SPVM__Net__SSLeay__X509__get_ext(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   int32_t loc = stack[1].ival;
   
@@ -323,12 +323,12 @@ int32_t SPVM__Net__SSLeay__X509__get_ext(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   X509_EXTENSION* x509_ext = X509_EXTENSION_dup(x509_ext_tmp);
   
-  void* obj_address_x509_ext = env->new_pointer_object_by_name(env, stack, "Address", x509_ext, &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_address_x509_ext = env->new_pointer_object_by_name(env, stack, "Address", x509_ext, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   stack[0].oval = obj_address_x509_ext;
   env->call_class_method_by_name(env, stack, "Net::SSLeay::X509_EXTENSION", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
-  void* obj_x509_ext = stack[0].oval;
+  SPVM_OBJ* obj_x509_ext = stack[0].oval;
   
   stack[0].oval = obj_x509_ext;
   
@@ -339,7 +339,7 @@ int32_t SPVM__Net__SSLeay__X509__get_subjectAltNames(SPVM_ENV* env, SPVM_VALUE* 
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   X509* self = env->get_pointer(env, stack, obj_self);
   
@@ -352,17 +352,17 @@ int32_t SPVM__Net__SSLeay__X509__get_subjectAltNames(SPVM_ENV* env, SPVM_VALUE* 
   }
   
   int32_t length = sans_stack ? sk_GENERAL_NAME_num(sans_stack) : 0;
-  void* obj_sans = env->new_object_array_by_name(env, stack, "Net::SSLeay::GENERAL_NAME", length, &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_sans = env->new_object_array_by_name(env, stack, "Net::SSLeay::GENERAL_NAME", length, &error_id, __func__, FILE_NAME, __LINE__);
   for (int32_t i = 0; i < length; i++) {
     GENERAL_NAME* san_tmp = sk_GENERAL_NAME_value(sans_stack, i);
     GENERAL_NAME* san = GENERAL_NAME_dup(san_tmp);
     
-    void* obj_address_san = env->new_pointer_object_by_name(env, stack, "Address", san, &error_id, __func__, FILE_NAME, __LINE__);
+    SPVM_OBJ* obj_address_san = env->new_pointer_object_by_name(env, stack, "Address", san, &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
     stack[0].oval = obj_address_san;
     env->call_class_method_by_name(env, stack, "Net::SSLeay::GENERAL_NAME", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
-    void* obj_san = stack[0].oval;
+    SPVM_OBJ* obj_san = stack[0].oval;
     
     env->set_elem_object(env, stack, obj_sans, i, obj_san);
   }
@@ -376,11 +376,11 @@ int32_t SPVM__Net__SSLeay__X509__digest(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
-  void* obj_type = stack[1].oval;
+  SPVM_OBJ* obj_type = stack[1].oval;
   
-  void* obj_md = stack[2].oval;
+  SPVM_OBJ* obj_md = stack[2].oval;
   
   int32_t* len_ref = stack[3].iref;
   
@@ -436,7 +436,7 @@ int32_t SPVM__Net__SSLeay__X509__dup(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   X509* self = env->get_pointer(env, stack, obj_self);
   
@@ -444,12 +444,12 @@ int32_t SPVM__Net__SSLeay__X509__dup(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   assert(x509_dup);
   
-  void* obj_address_x509_dup = env->new_pointer_object_by_name(env, stack, "Address", x509_dup, &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_address_x509_dup = env->new_pointer_object_by_name(env, stack, "Address", x509_dup, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   stack[0].oval = obj_address_x509_dup;
   env->call_class_method_by_name(env, stack, "Net::SSLeay::X509", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
-  void* obj_x509_dup = stack[0].oval;
+  SPVM_OBJ* obj_x509_dup = stack[0].oval;
   
   stack[0].oval = obj_x509_dup;
   
@@ -460,7 +460,7 @@ int32_t SPVM__Net__SSLeay__X509__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   X509* self = env->get_pointer(env, stack, obj_self);
   

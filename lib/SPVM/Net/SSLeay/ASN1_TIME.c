@@ -31,7 +31,7 @@ int32_t SPVM__Net__SSLeay__ASN1_TIME__new(SPVM_ENV* env, SPVM_VALUE* stack) {
     return error_id;
   }
   
-  void* obj_self = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::ASN1_TIME", self, &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_self = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::ASN1_TIME", self, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   
   stack[0].oval = obj_self;
@@ -43,7 +43,7 @@ int32_t SPVM__Net__SSLeay__ASN1_TIME__set(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   int64_t t = stack[1].lval;
   
@@ -73,7 +73,7 @@ int32_t SPVM__Net__SSLeay__ASN1_TIME__check(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   ASN1_TIME* self = env->get_pointer(env, stack, obj_self);
   
@@ -88,9 +88,9 @@ int32_t SPVM__Net__SSLeay__ASN1_TIME__print(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
-  void* obj_b = stack[1].oval;
+  SPVM_OBJ* obj_b = stack[1].oval;
   
   if (!obj_b) {
     return env->die(env, stack, "The BIO object $b must be defined.", __func__, FILE_NAME, __LINE__);
@@ -126,9 +126,9 @@ int32_t SPVM__Net__SSLeay__ASN1_TIME__to_tm(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
-  void* obj_tm = stack[1].oval;
+  SPVM_OBJ* obj_tm = stack[1].oval;
   
   if (!obj_tm) {
     return env->die(env, stack, "The Sys::Time::Tm object $tm must be defined.", __func__, FILE_NAME, __LINE__);
@@ -164,7 +164,7 @@ int32_t SPVM__Net__SSLeay__ASN1_TIME__to_generalizedtime(SPVM_ENV* env, SPVM_VAL
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   ASN1_TIME* self = env->get_pointer(env, stack, obj_self);
   
@@ -185,12 +185,12 @@ int32_t SPVM__Net__SSLeay__ASN1_TIME__to_generalizedtime(SPVM_ENV* env, SPVM_VAL
     return error_id;
   }
   
-  void* obj_address_gtime = env->new_pointer_object_by_name(env, stack, "Address", gtime, &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_address_gtime = env->new_pointer_object_by_name(env, stack, "Address", gtime, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   stack[0].oval = obj_address_gtime;
   env->call_class_method_by_name(env, stack, "Net::SSLeay::ASN1_GENERALIZEDTIME", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
-  void* obj_gtime = stack[0].oval;
+  SPVM_OBJ* obj_gtime = stack[0].oval;
   
   stack[0].oval = obj_gtime;
   
@@ -201,7 +201,7 @@ int32_t SPVM__Net__SSLeay__ASN1_TIME__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) 
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   ASN1_TIME* self = env->get_pointer(env, stack, obj_self);
   

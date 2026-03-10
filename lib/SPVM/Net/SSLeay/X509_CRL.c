@@ -31,7 +31,7 @@ int32_t SPVM__Net__SSLeay__X509_CRL__new(SPVM_ENV* env, SPVM_VALUE* stack) {
     return error_id;
   }
   
-  void* obj_self = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::X509_CRL", self, &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_self = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::X509_CRL", self, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   
   stack[0].oval = obj_self;
@@ -43,7 +43,7 @@ int32_t SPVM__Net__SSLeay__X509_CRL__get_REVOKED(SPVM_ENV* env, SPVM_VALUE* stac
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   X509_CRL* self = env->get_pointer(env, stack, obj_self);
   
@@ -53,19 +53,19 @@ int32_t SPVM__Net__SSLeay__X509_CRL__get_REVOKED(SPVM_ENV* env, SPVM_VALUE* stac
   
   int32_t length = sk_X509_REVOKED_num(stack_of_x509_revokeds);
   
-  void* obj_x509_revokeds = env->new_object_array_by_name(env, stack, "Net::SSLeay::X509_REVOKED", length, &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_x509_revokeds = env->new_object_array_by_name(env, stack, "Net::SSLeay::X509_REVOKED", length, &error_id, __func__, FILE_NAME, __LINE__);
   
   for (int32_t i = 0; i < length; i++) {
     X509_REVOKED* x509_revoked_tmp = sk_X509_REVOKED_value(stack_of_x509_revokeds, i);
     
     X509_REVOKED* x509_revoked = X509_REVOKED_dup(x509_revoked_tmp);
     
-    void* obj_address_x509_revoked = env->new_pointer_object_by_name(env, stack, "Address", x509_revoked, &error_id, __func__, FILE_NAME, __LINE__);
+    SPVM_OBJ* obj_address_x509_revoked = env->new_pointer_object_by_name(env, stack, "Address", x509_revoked, &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
     stack[0].oval = obj_address_x509_revoked;
     env->call_class_method_by_name(env, stack, "Net::SSLeay::X509_REVOKED", "new_with_pointer", 1, &error_id, __func__, FILE_NAME, __LINE__);
     if (error_id) { return error_id; }
-    void* obj_x509_revoked = stack[0].oval;
+    SPVM_OBJ* obj_x509_revoked = stack[0].oval;
     
     env->set_elem_object(env, stack, obj_x509_revokeds, i, obj_x509_revoked);
   }
@@ -79,7 +79,7 @@ int32_t SPVM__Net__SSLeay__X509_CRL__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   X509_CRL* self = env->get_pointer(env, stack, obj_self);
   

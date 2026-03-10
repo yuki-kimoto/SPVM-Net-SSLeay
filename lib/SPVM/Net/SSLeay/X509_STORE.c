@@ -29,7 +29,7 @@ int32_t SPVM__Net__SSLeay__X509_STORE__new(SPVM_ENV* env, SPVM_VALUE* stack) {
     return error_id;
   }
   
-  void* obj_self = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::X509_STORE", self, &error_id, __func__, FILE_NAME, __LINE__);
+  SPVM_OBJ* obj_self = env->new_pointer_object_by_name(env, stack, "Net::SSLeay::X509_STORE", self, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) { return error_id; }
   
   stack[0].oval = obj_self;
@@ -41,7 +41,7 @@ int32_t SPVM__Net__SSLeay__X509_STORE__set_flags(SPVM_ENV* env, SPVM_VALUE* stac
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   X509_STORE* self = env->get_pointer(env, stack, obj_self);
   
   int64_t flags = stack[1].lval;
@@ -70,10 +70,10 @@ int32_t SPVM__Net__SSLeay__X509_STORE__add_cert(SPVM_ENV* env, SPVM_VALUE* stack
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   X509_STORE* self = env->get_pointer(env, stack, obj_self);
   
-  void* obj_x509 = stack[1].oval;
+  SPVM_OBJ* obj_x509 = stack[1].oval;
   X509* x509 = env->get_pointer(env, stack, obj_x509);
   
   if (!obj_x509) {
@@ -106,10 +106,10 @@ int32_t SPVM__Net__SSLeay__X509_STORE__add_crl(SPVM_ENV* env, SPVM_VALUE* stack)
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   X509_STORE* self = env->get_pointer(env, stack, obj_self);
   
-  void* obj_x509_crl = stack[1].oval;
+  SPVM_OBJ* obj_x509_crl = stack[1].oval;
   X509_CRL* x509_crl = env->get_pointer(env, stack, obj_x509_crl);
   
   int32_t status = X509_STORE_add_crl(self, x509_crl);
@@ -138,7 +138,7 @@ int32_t SPVM__Net__SSLeay__X509_STORE__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack)
   
   int32_t error_id = 0;
   
-  void* obj_self = stack[0].oval;
+  SPVM_OBJ* obj_self = stack[0].oval;
   
   X509_STORE* self = env->get_pointer(env, stack, obj_self);
   
