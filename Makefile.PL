@@ -111,11 +111,13 @@ WriteMakefile(
   PREREQ_PM => {
     %configure_requires_and_prereq_pm,
     'SPVM::Sys' => '0.572',
+  },
+  TEST_REQUIRES => {
     'SPVM::Mozilla::CA' => '0.003',
     'SPVM::IO' => '0.249',
     'SPVM::FindBin' => '0.035',
     'SPVM::Go' => '0.030',
-  },
+  }
 );
 
 package MY {
