@@ -14,7 +14,7 @@ enum {
   SPVM__Net__SSLeay__my__NATIVE_ARGS_MAX_LENGTH = 16,
 };
 
-__thread SPVM_ENV* thread_env;
+_Thread_local SPVM_ENV* thread_env;
 
 int32_t SPVM__Net__SSLeay__new(SPVM_ENV* env, SPVM_VALUE* stack) {
   

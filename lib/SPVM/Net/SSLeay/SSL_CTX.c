@@ -27,7 +27,7 @@ enum {
 
 static const char* FILE_NAME = "Net/SSLeay/SSL_CTX.c";
 
-__thread SPVM_ENV* thread_env;
+_Thread_local SPVM_ENV* thread_env;
 
 int32_t SPVM__Net__SSLeay__SSL_CTX__new(SPVM_ENV* env, SPVM_VALUE* stack) {
   
