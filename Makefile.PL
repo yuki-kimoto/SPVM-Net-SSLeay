@@ -30,6 +30,42 @@ if ($meta) {
 my $build_dir = '.spvm_build';
 mkpath $build_dir;
 
+my $build_work_lib_dir;
+if ($msvc) {
+  local @INC = @INC;
+  push @INC, 'lib';
+  require SPVM::Net::SSLeay::ConfigBuilder;
+  require SPVM::Builder::Config;
+  require File::Copy;
+  my $config = SPVM::Builder::Config->new_c11;
+  my $config_builder = SPVM::Net::SSLeay::ConfigBuilder->new();
+  $config_builder->build_config($config);
+  
+  $build_work_lib_dir = '.spvm_build/work/lib';
+  mkpath $build_work_lib_dir;
+  
+  my $lib_dirs = $config->lib_dirs;
+  my $libs = $config->libs;
+  
+  for my $lib_name (@$libs) {
+    my $lib_filename_a = "lib$lib_name.a";
+    
+    for my $dir (@$lib_dirs) {
+      my $source_path = "$dir/$lib_filename_a";
+      
+      if (-f $source_path) {
+        my $dest_filename = "$lib_name.lib";
+        my $dest_path = "$build_work_lib_dir/$dest_filename";
+        
+        print "Copy: $source_path -> $dest_path\n";
+        File::Copy::copy($source_path, $dest_path) or die "Copy failed: $!";
+        
+        last;
+      }
+    }
+  }
+}
+
 my $config_global_file = '.spvm_build/global.config';
 generate_config_global_file($config_global_file, {
   cc            => $cc,
@@ -244,6 +280,12 @@ EOS
   for my $ldflag (@$ldflags) {
     $config_global_content .= <<"EOS";
 \$config_global->build_rule_any({'+ldflags' => ['$ldflag']});
+EOS
+  }
+  
+  if ($msvc) {
+    $config_global_content .= <<"EOS";
+\$config_global->build_rule_any({'+lib_dirs' => '$build_work_lib_dir'});
 EOS
   }
   
