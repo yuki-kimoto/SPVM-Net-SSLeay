@@ -45,13 +45,14 @@ if ($msvc) {
   mkpath $build_work_lib_dir;
   
   my $lib_dirs = $config->lib_dirs;
+  my $lib_dir = $lib_dirs && $lib_dirs->[0] ? $lib_dirs->[0] : undef;
   my $libs = $config->libs;
   
-  for my $lib_name (@$libs) {
-    my $lib_filename_a = "lib$lib_name.a";
-    
-    for my $dir (@$lib_dirs) {
-      my $source_path = "$dir/$lib_filename_a";
+  if ($lib_dir) {
+    for my $lib_name (@$libs) {
+      my $lib_filename_a = "lib$lib_name.a";
+      
+      my $source_path = "$lib_dir/$lib_filename_a";
       
       if (-f $source_path) {
         my $dest_filename = "$lib_name.lib";
@@ -59,8 +60,6 @@ if ($msvc) {
         
         print "Copy: $source_path -> $dest_path\n";
         File::Copy::copy($source_path, $dest_path) or die "Copy failed: $!";
-        
-        last;
       }
     }
   }
