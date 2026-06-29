@@ -1,6 +1,11 @@
 0.044 2026-06-29
   [Requirement Changes]
     * Require SPVM 0.990191.
+    * Require SPVM::Mozilla::CA 0.003.
+    * Require SPVM::IO 0.249.
+    * Require SPVM::FindBin 0.035.
+    * Require SPVM::Go 0.030.
+
   [Fix warnings]
     * Fix warnings for clang-cl.
   [Internal Changes]
