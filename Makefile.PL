@@ -30,6 +30,7 @@ if ($meta) {
 my $build_dir = '.spvm_build';
 mkpath $build_dir;
 
+# Copy and rename libraries from libxxx.a to xxx.lib for MSVC
 my $build_work_lib_dir;
 if ($msvc) {
   local @INC = @INC;
