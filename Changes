@@ -1,3 +1,19 @@
+0.044 2026-06-29
+  [Requirement Changes]
+    * Require SPVM 0.990191.
+  [Fix warnings]
+    * Fix warnings for clang-cl.
+  [Internal Changes]
+    Use _Thread_local instead of __thread for MSVC. Compile sources by using C11.
+  [Build Improvement]
+    * Use SPVM::Builder::Util::API::create_make_rule_parallel
+  [Test Improvement]
+    * Add CIs for MSVC.
+  [Support Improvement]
+    * Support MSVC.
+  [Bug Fix]
+    * Fix a leak.
+
 0.044 2026-03-10
   [Internal Changes]
     * Use native types in all places.
