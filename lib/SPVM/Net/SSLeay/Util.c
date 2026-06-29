@@ -1,6 +1,11 @@
 // Copyright (c) 2024 Yuki Kimoto
 // MIT License
 
+#ifdef _WIN32
+  // Suppress strncpy warning
+  #define _CRT_SECURE_NO_WARNINGS
+#endif
+
 #include "spvm_native.h"
 
 #include <openssl/ssl.h>
