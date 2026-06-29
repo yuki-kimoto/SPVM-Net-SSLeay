@@ -173,6 +173,7 @@ package MY {
         'Net::SSLeay::ASN1_OBJECT',
         'Net::SSLeay::ASN1_TIME',
         'Net::SSLeay::ASN1_OCTET_STRING',
+        'Net::SSLeay::ASN1_STRING',
         'Net::SSLeay::BIO',
         'Net::SSLeay::Constant',
         'Net::SSLeay::DER',
@@ -199,6 +200,7 @@ package MY {
         'Net::SSLeay::X509_STORE',
         'Net::SSLeay::X509_STORE_CTX',
         'Net::SSLeay::X509_VERIFY_PARAM',
+        'Net::SSLeay::X509_EXTENSION',
         'Net::SSLeay::Util',
       ];
       
