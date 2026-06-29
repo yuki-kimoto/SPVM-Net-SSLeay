@@ -906,7 +906,7 @@ int32_t SPVM__Net__SSLeay__get0_alpn_selected(SPVM_ENV* env, SPVM_VALUE* stack) 
   SSL_get0_alpn_selected(self, &data_tmp, &len_tmp);
   
   if (data_tmp) {
-    SPVM_OBJ* obj_data = env->new_string_nolen(env, stack, (const char*)data_tmp);
+    SPVM_OBJ* obj_data = env->new_string(env, stack, (const char*)data_tmp, (int32_t)len_tmp);
     
     env->set_elem_object(env, stack, obj_data_ref, 0, obj_data);
   }
