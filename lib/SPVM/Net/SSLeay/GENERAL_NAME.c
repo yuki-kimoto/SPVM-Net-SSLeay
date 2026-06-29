@@ -67,10 +67,10 @@ int32_t SPVM__Net__SSLeay__GENERAL_NAME__get_data_as_string(SPVM_ENV* env, SPVM_
     case GEN_OTHERNAME: {
       ASN1_STRING* data_asn1_string = self->d.otherName->value->value.utf8string;
       
-      const char* data = ASN1_STRING_get0_data(data_asn1_string);
+      const unsigned char* data = ASN1_STRING_get0_data(data_asn1_string);
       int32_t data_length = ASN1_STRING_length(data_asn1_string);
       
-      obj_data_as_string = env->new_string(env, stack, data, data_length);
+      obj_data_as_string = env->new_string(env, stack, (const char*)data, data_length);
       break;
     }
     case GEN_EMAIL:
@@ -79,10 +79,10 @@ int32_t SPVM__Net__SSLeay__GENERAL_NAME__get_data_as_string(SPVM_ENV* env, SPVM_
     {
       ASN1_STRING* data_asn1_string = self->d.ia5;
       
-      const char* data = ASN1_STRING_get0_data(data_asn1_string);
+      const unsigned char* data = ASN1_STRING_get0_data(data_asn1_string);
       int32_t data_length = ASN1_STRING_length(data_asn1_string);
       
-      obj_data_as_string = env->new_string(env, stack, data, data_length);
+      obj_data_as_string = env->new_string(env, stack, (const char*)data, data_length);
       break;
     }
     case GEN_DIRNAME: {
@@ -102,10 +102,10 @@ int32_t SPVM__Net__SSLeay__GENERAL_NAME__get_data_as_string(SPVM_ENV* env, SPVM_
       break;
     }
     case GEN_IPADD: {
-      const char* data = self->d.ip->data;
+      const unsigned char* data = self->d.ip->data;
       int32_t data_length = self->d.ip->length;
       
-      obj_data_as_string = env->new_string(env, stack, data, data_length);
+      obj_data_as_string = env->new_string(env, stack, (const char*)data, data_length);
       break;
     }
     default : {

@@ -217,10 +217,10 @@ int32_t SPVM__Net__SSLeay__X509__pubkey_digest(SPVM_ENV* env, SPVM_VALUE* stack)
     return env->die(env, stack, "The reference of the length $len_ref must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
-  char* md = (char*)env->get_chars(env, stack, obj_md);
+  const char* md = env->get_chars(env, stack, obj_md);
   
   unsigned int len_tmp = 0;
-  int32_t status = X509_pubkey_digest(self, type, md, &len_tmp);
+  int32_t status = X509_pubkey_digest(self, type, (unsigned char*)md, &len_tmp);
   
   if (!(status == 1)) {
     int64_t ssl_error = ERR_peek_last_error();
@@ -405,10 +405,10 @@ int32_t SPVM__Net__SSLeay__X509__digest(SPVM_ENV* env, SPVM_VALUE* stack) {
     return env->die(env, stack, "The reference of the length $len_ref must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
-  char* md = (char*)env->get_chars(env, stack, obj_md);
+  const char* md = env->get_chars(env, stack, obj_md);
   
   unsigned int len_tmp = 0;
-  int32_t status = X509_digest(self, type, md, &len_tmp);
+  int32_t status = X509_digest(self, type, (unsigned char*)md, &len_tmp);
   
   if (!(status == 1)) {
     int64_t ssl_error = ERR_peek_last_error();

@@ -182,7 +182,7 @@ int32_t SPVM__Net__SSLeay__X509_NAME__add_entry_by_NID(SPVM_ENV* env, SPVM_VALUE
   
   const char* bytes = env->get_chars(env, stack, obj_bytes);
   
-  int32_t status = X509_NAME_add_entry_by_NID(self, nid, type, bytes, len, loc, set);
+  int32_t status = X509_NAME_add_entry_by_NID(self, nid, type, (const unsigned char*)bytes, len, loc, set);
   
   if (!(status == 1)) {
     int64_t ssl_error = ERR_peek_last_error();

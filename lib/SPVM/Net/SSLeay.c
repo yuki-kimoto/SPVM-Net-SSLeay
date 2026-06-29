@@ -162,10 +162,10 @@ int32_t SPVM__Net__SSLeay__select_next_proto(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   unsigned char* out_tmp = NULL;
   
-  int32_t status = SSL_select_next_proto(&out_tmp, (unsigned char*)outlen_ref, server, server_len, client, client_len);
+  int32_t status = SSL_select_next_proto(&out_tmp, (unsigned char*)outlen_ref, (const unsigned char*)server, server_len, (const unsigned char*)client, client_len);
   
   if (out_tmp) {
-    SPVM_OBJ* obj_data = env->new_string(env, stack, out_tmp, *outlen_ref);
+    SPVM_OBJ* obj_data = env->new_string(env, stack, (const char*)out_tmp, *outlen_ref);
     
     env->set_elem_object(env, stack, obj_out_ref, 0, obj_data);
   }
@@ -906,7 +906,7 @@ int32_t SPVM__Net__SSLeay__get0_alpn_selected(SPVM_ENV* env, SPVM_VALUE* stack) 
   SSL_get0_alpn_selected(self, &data_tmp, &len_tmp);
   
   if (data_tmp) {
-    SPVM_OBJ* obj_data = env->new_string_nolen(env, stack, data_tmp);
+    SPVM_OBJ* obj_data = env->new_string_nolen(env, stack, (const char*)data_tmp);
     
     env->set_elem_object(env, stack, obj_data_ref, 0, obj_data);
   }

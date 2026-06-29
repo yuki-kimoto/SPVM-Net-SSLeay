@@ -205,8 +205,8 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_default_verify_paths_windows(SPVM_ENV* e
   
   PCCERT_CONTEXT pContext = NULL;
   
-  while (pContext = CertEnumCertificatesInStore(hStore, pContext)) {
-    char *encoded_cert = pContext->pbCertEncoded;
+  while ((pContext = CertEnumCertificatesInStore(hStore, pContext))) {
+    char *encoded_cert = (char*)pContext->pbCertEncoded;
     
     X509 *x509 = d2i_X509(NULL, (const unsigned char **)&encoded_cert, pContext->cbCertEncoded);
     
@@ -644,7 +644,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX__set_alpn_protos(SPVM_ENV* env, SPVM_VALUE* s
   
   SSL_CTX* self = env->get_pointer(env, stack, obj_self);
   
-  int32_t status = SSL_CTX_set_alpn_protos(self, protos, protos_len);
+  int32_t status = SSL_CTX_set_alpn_protos(self, (const unsigned char*)protos, protos_len);
   
   if (!(status == 0)) {
     int64_t ssl_error = ERR_peek_last_error();
@@ -1073,12 +1073,12 @@ static int SPVM__Net__SSLeay__SSL_CTX__my__alpn_select_cb(SSL* ssl, const unsign
   
   SPVM_OBJ* obj_out_ref = env->new_string_array(env, stack, 1);
   
-  SPVM_OBJ* obj_in = env->new_string(env, stack, in, inlen);
+  SPVM_OBJ* obj_in = env->new_string(env, stack, (const char*)in, inlen);
   
   stack[0].oval = obj_cb;
   stack[1].oval = obj_ssl;
   stack[2].oval = obj_out_ref;
-  stack[3].bref = outlen_ref;
+  stack[3].bref = (int8_t*)outlen_ref;
   stack[4].oval = obj_in;
   stack[5].ival = inlen;
   
@@ -1099,7 +1099,7 @@ static int SPVM__Net__SSLeay__SSL_CTX__my__alpn_select_cb(SSL* ssl, const unsign
   }
   
   const char* out = env->get_chars(env, stack, obj_out);
-  *out_ref = out;
+  *out_ref = (const unsigned char*)out;
   
   env->set_field_string_by_name(env, stack, obj_self, "alpn_select_cb_output", obj_out, &error_id, __func__, FILE_NAME, __LINE__);
   if (error_id) {

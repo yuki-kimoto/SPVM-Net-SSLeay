@@ -42,10 +42,10 @@ int32_t SPVM__Net__SSLeay__DER__d2i_PKCS12(SPVM_ENV* env, SPVM_VALUE* stack) {
     return env->die(env, stack, "$ppin_ref at index 0 must be defined.", __func__, FILE_NAME, __LINE__);
   }
   
-  char* ppin = (char*)env->get_chars(env, stack, obj_ppin);
+  const char* ppin = env->get_chars(env, stack, obj_ppin);
   
   const unsigned char* ppin_ref_tmp[1] = {0};
-  ppin_ref_tmp[0] = ppin;
+  ppin_ref_tmp[0] = (const unsigned char*)ppin;
   
   PKCS12* ret = d2i_PKCS12(NULL, ppin_ref_tmp, length);
   
@@ -112,7 +112,7 @@ int32_t SPVM__Net__SSLeay__DER__i2d_PKCS12(SPVM_ENV* env, SPVM_VALUE* stack) {
     return error_id;
   }
   
-  SPVM_OBJ* obj_ppout = env->new_string_nolen(env, stack, ppout_ref_tmp[0]);
+  SPVM_OBJ* obj_ppout = env->new_string_nolen(env, stack, (const char*)ppout_ref_tmp[0]);
   
   env->set_elem_object(env, stack, obj_ppout_ref, 0, obj_ppout);
   

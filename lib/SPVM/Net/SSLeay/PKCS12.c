@@ -68,7 +68,7 @@ int32_t SPVM__Net__SSLeay__PKCS12__parse(SPVM_ENV* env, SPVM_VALUE* stack) {
   }
   
   if (obj_cas_ref) {
-    if (!env->length(env, stack, obj_cas_ref) == 1) {
+    if (!(env->length(env, stack, obj_cas_ref) == 1)) {
       return env->die(env, stack, "The 1-length array $cas_ref for output for intermediate certificate must be defined if defined.", __func__, FILE_NAME, __LINE__);
     }
   }

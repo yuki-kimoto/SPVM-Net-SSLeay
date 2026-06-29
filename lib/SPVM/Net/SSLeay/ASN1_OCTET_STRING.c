@@ -64,7 +64,7 @@ int32_t SPVM__Net__SSLeay__ASN1_OCTET_STRING__get0_data(SPVM_ENV* env, SPVM_VALU
   
   int32_t length = ASN1_STRING_length(self);
   
-  SPVM_OBJ* obj_string = env->new_string(env, stack, string, length);
+  SPVM_OBJ* obj_string = env->new_string(env, stack, (const char*)string, length);
   
   stack[0].oval = obj_string;
   
