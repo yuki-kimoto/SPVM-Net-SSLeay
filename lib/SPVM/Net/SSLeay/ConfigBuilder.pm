@@ -55,6 +55,8 @@ sub build_config {
   
   $config->add_lib(@$lib_links);
   
+  $config->link_to('Net::SSLeay');
+  
   return $config;
 }
 

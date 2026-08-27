@@ -14,7 +14,7 @@ enum {
   SPVM__Net__SSLeay__my__NATIVE_ARGS_MAX_LENGTH = 16,
 };
 
-_Thread_local SPVM_ENV* thread_env;
+_Thread_local SPVM_ENV* SPVM__Net__SSLeay__thread_env;
 
 int32_t SPVM__Net__SSLeay__new(SPVM_ENV* env, SPVM_VALUE* stack) {
   
@@ -183,7 +183,7 @@ int32_t SPVM__Net__SSLeay___init_native(SPVM_ENV* env, SPVM_VALUE* stack) {
   
   SSL* self = env->get_pointer(env, stack, obj_self);
   
-  thread_env = env;
+  SPVM__Net__SSLeay__thread_env = env;
   
   char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
   snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);
@@ -920,7 +920,7 @@ static void SPVM__Net__SSLeay__my__msg_callback(int write_p, int version, int co
   
   int32_t error_id = 0;
   
-  SPVM_ENV* env = thread_env;
+  SPVM_ENV* env = SPVM__Net__SSLeay__thread_env;
   
   SPVM_VALUE* stack = env->new_stack(env);
   

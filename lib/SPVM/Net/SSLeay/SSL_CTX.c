@@ -27,7 +27,7 @@ enum {
 
 static const char* FILE_NAME = "Net/SSLeay/SSL_CTX.c";
 
-_Thread_local SPVM_ENV* thread_env;
+_Thread_local SPVM_ENV* SPVM__Net__SSLeay__SSL_CTX__thread_env;
 
 int32_t SPVM__Net__SSLeay__SSL_CTX__new(SPVM_ENV* env, SPVM_VALUE* stack) {
   
@@ -77,7 +77,7 @@ int32_t SPVM__Net__SSLeay__SSL_CTX___init_native(SPVM_ENV* env, SPVM_VALUE* stac
   
   SSL* self = env->get_pointer(env, stack, obj_self);
   
-  thread_env = env;
+  SPVM__Net__SSLeay__SSL_CTX__thread_env = env;
   
   char* tmp_buffer = env->get_stack_tmp_buffer(env, stack);
   snprintf(tmp_buffer, SPVM_NATIVE_C_STACK_TMP_BUFFER_SIZE, "%p", self);
@@ -906,7 +906,7 @@ static int SPVM__Net__SSLeay__SSL_CTX__my__verify_callback(int preverify_ok, X50
   
   int32_t ret_status = 0;
   
-  SPVM_ENV* env = thread_env;
+  SPVM_ENV* env = SPVM__Net__SSLeay__SSL_CTX__thread_env;
   
   SPVM_VALUE* stack = env->new_stack(env);
   
@@ -1024,7 +1024,7 @@ static int SPVM__Net__SSLeay__SSL_CTX__my__alpn_select_cb(SSL* ssl, const unsign
   
   void** native_args = (void**)native_arg;
   
-  SPVM_ENV* env = thread_env;
+  SPVM_ENV* env = SPVM__Net__SSLeay__SSL_CTX__thread_env;
   
   SPVM_VALUE* stack = env->new_stack(env);
   
@@ -1146,7 +1146,7 @@ static int SPVM__Net__SSLeay__SSL_CTX__my__default_passwd_cb(char* buf, int size
   
   int32_t ret_buf_length = 0;
   
-  SPVM_ENV* env = thread_env;
+  SPVM_ENV* env = SPVM__Net__SSLeay__SSL_CTX__thread_env;
   
   SPVM_VALUE* stack = env->new_stack(env);
   
@@ -1238,7 +1238,7 @@ static int SPVM__Net__SSLeay__SSL_CTX__my__tlsext_servername_callback(SSL* ssl, 
   
   int32_t ret_status = SSL_TLSEXT_ERR_NOACK;
   
-  SPVM_ENV* env = thread_env;
+  SPVM_ENV* env = SPVM__Net__SSLeay__SSL_CTX__thread_env;
   
   SPVM_VALUE* stack = env->new_stack(env);
   
