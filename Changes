@@ -1,3 +1,10 @@
+0.046 2026-08-27
+  [Requirement Changes]
+    * Require SPVM 0.990196.
+  [Internal Changes]
+    * Change config extension from .config to .build.
+    * DLL file becomes one file.
+    
 0.045 2026-06-29
   [Requirement Changes]
     * Require SPVM 0.990191.
