@@ -66,7 +66,7 @@ if ($msvc) {
   }
 }
 
-my $config_global_file = '.spvm_build/global.config';
+my $config_global_file = '.spvm_build/global.build';
 generate_config_global_file($config_global_file, {
   cc            => $cc,
   ccflags       => \@ccflags,
