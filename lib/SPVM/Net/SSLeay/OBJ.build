@@ -1,18 +1,8 @@
 # Copyright (c) 2023 Yuki Kimoto
 # MIT License
 
-use strict;
-use warnings;
-use Config;
-
-use SPVM::Builder::Config;
-
 use SPVM::Net::SSLeay::ConfigBuilder;
 
-my $config = SPVM::Builder::Config->new_c99;
-
-my $openssl_config_builder = SPVM::Net::SSLeay::ConfigBuilder->new;
-
-$openssl_config_builder->build_config($config);
+my $config = SPVM::Net::SSLeay::ConfigBuilder->new->build_config;
 
 $config;

@@ -1,5 +1,7 @@
 package SPVM::Net::SSLeay::ConfigBuilder;
 
+use parent 'SPVM::Builder::ConfigBuilder';
+
 # find_openssl_prefix function and ssleay_get_build_opts function are copied from Makefile.PL in Perl's Net::SSLeay.
 # Some parts are commented out with "=begin comment".
 
@@ -27,7 +29,9 @@ sub new {
 }
 
 sub build_config {
-  my ($self, $config) = @_;
+  my ($self) = @_;
+  
+  my $config = SPVM::Builder::Config->new_c11;
   
   my $openssl_prefix = &find_openssl_prefix();
   
@@ -50,6 +54,8 @@ sub build_config {
   $config->add_lib_dir(@$lib_paths);
   
   $config->add_lib(@$lib_links);
+  
+  return $config;
 }
 
 # According to http://cpanwiki.grango.org/wiki/CPANAuthorNotes, the ideal
