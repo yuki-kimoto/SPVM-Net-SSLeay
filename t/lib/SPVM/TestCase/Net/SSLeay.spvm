@@ -47,16 +47,19 @@ class TestCase::Net::SSLeay {
     $FILE_DIR = FindBin->Bin . "/file";
   }
   
-  static method run_echo_server_accept_once : void ($port : int) {
+  static method run_echo_server_accept_once : void ($port_ref : int[], $start_server_ch : Go::Channel) {
     
     my $localhost = "127.0.0.1";
     
     my $server_socket = TestUtil::Socket->new({
       LocalAddr => $localhost,
-      LocalPort => $port,
       Listen    => 5,
       ReuseAddr => 1,
     });
+    
+    $port_ref->[0] = $server_socket->sockport;
+    
+    $start_server_ch->write(1);
     
     my $ssl = $server_socket->ssl;
     
@@ -106,7 +109,7 @@ class TestCase::Net::SSLeay {
     }
   }
   
-  static method accept : int ($port : int) {
+  static method accept : int () {
     
     # set_SSL_CTX, get_SSL_CTX
     {
@@ -176,20 +179,31 @@ class TestCase::Net::SSLeay {
     
     $wg->add(2);
     
+    my $start_server_ch = Go->make;
+    my $port_ref = [-1];
+    
     # Run a echo server
     my $go_server_ref = [0];
-    Go->go([$go_server_ref : int[], $wg : Go::Sync::WaitGroup, $port : int] method : void () {
+    Go->go([$go_server_ref : int[], $wg : Go::Sync::WaitGroup, $port_ref : int[], $start_server_ch : Go::Channel] method : void () {
+      Fn->defer([$wg : Go::Sync::WaitGroup]method : void () {
+        $wg->done;
+      });
       
       $go_server_ref->[0] = 1;
       
-      &run_echo_server_accept_once($port);
+      &run_echo_server_accept_once($port_ref, $start_server_ch);
       
-      $wg->done;
     });
     
     # Tests
     my $go_tests_ref = [0];
-    Go->go([$go_tests_ref : int[], $wg : Go::Sync::WaitGroup, $success_ref : int[], $port : int] method : void () {
+    Go->go([$go_tests_ref : int[], $wg : Go::Sync::WaitGroup, $success_ref : int[], $port_ref : int[], $start_server_ch : Go::Channel] method : void () {
+      $start_server_ch->read;
+      my $port = $port_ref->[0];
+      
+      Fn->defer([$wg : Go::Sync::WaitGroup]method : void () {
+        $wg->done;
+      });
       
       $go_tests_ref->[0] = 1;
       
@@ -377,11 +391,7 @@ class TestCase::Net::SSLeay {
         
         $socket->shutdown_SSL;
       }
-      
-      $wg->done;
     });
-    
-    Go->gosched;
     
     $wg->wait;
     
