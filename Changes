@@ -1,3 +1,7 @@
+0.047 2026-10-07
+  [Test Improvement]
+    * Remove Test::SPVM::Sys::Socket::XXX classes from tests.
+      I've rewritten the server tests from the unreliable implementation using Perl's fork to a portable test suite using only SPVM::Go.
 0.046 2026-08-27
   [Requirement Changes]
     * Require SPVM 0.990196.
