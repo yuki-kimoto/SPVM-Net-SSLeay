@@ -2,9 +2,7 @@ use Test::More;
 
 use strict;
 use warnings;
-use FindBin;
-use lib "$FindBin::Bin/lib";
-BEGIN { $ENV{SPVM_BUILD_DIR} = "$FindBin::Bin/.spvm_build"; }
+use lib 't/lib';
 
 use SPVM 'TestCase::Net::SSLeay';
 use SPVM 'TestCase::Net::SSLeay::Util';
@@ -17,7 +15,6 @@ use Test::SPVM::Sys::Socket::Util;
 
 use SPVM 'Net::SSLeay';
 use SPVM::Net::SSLeay;
-use SPVM 'Fn';
 
 my $api = SPVM::api();
 
@@ -69,14 +66,14 @@ ok(SPVM::TestCase::Net::SSLeay->X509);
 
 ok(SPVM::TestCase::Net::SSLeay->X509_STORE);
 
-SPVM::Fn->destroy_runtime_permanent_vars;
+$api->destroy_runtime_permanent_vars;
 
 my $end_memory_blocks_count = $api->get_memory_blocks_count;
 is($end_memory_blocks_count, $start_memory_blocks_count);
 
 # Version
 {
-  my $version_string = SPVM::Fn->get_version_string("Net::SSLeay");
+  my $version_string = $api->get_version_string("Net::SSLeay");
   is($SPVM::Net::SSLeay::VERSION, $version_string);
 }
 
